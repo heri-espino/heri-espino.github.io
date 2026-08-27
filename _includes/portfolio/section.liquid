@@ -18,4 +18,7 @@
     {% endfor %}
   </div>
   <a class="portfolio-archive-cta" href="{{ include.index_url | relative_url }}">{{ include.bottom_link }} <span aria-hidden="true">→</span></a>
+  {% if include.additional_url %}
+    <a class="portfolio-section-profile-link" href="{{ include.additional_url }}" rel="external nofollow noopener" target="_blank">{{ include.additional_link }} <span aria-hidden="true">↗</span></a>
+  {% endif %}
 </section>

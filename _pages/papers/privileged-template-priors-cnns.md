@@ -1,8 +1,9 @@
 ---
 layout: portfolio-item
 permalink: /projects/cnn-primitive-bases.html
-portfolio_type: project
+portfolio_type: paper
 importance: 4
+card_kind: Software project
 title: Privileged Template Priors for Mechanistic Interpretability in CNNs
 label: Software Project
 status: In progress

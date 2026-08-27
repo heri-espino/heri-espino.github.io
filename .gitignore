@@ -16,3 +16,4 @@ output/playwright/
 test-results/
 vendor
 .codex-reference/
+*:Zone.Identifier

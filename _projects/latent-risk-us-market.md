@@ -6,6 +6,7 @@ importance: 2
 title: Latent Risk Estimation in the U.S. Market Using Representative Variables
 card_title: Latent U.S. Market Risk
 label: Course Project
+presentation_type: Poster
 status: Latent risk index
 authors: Heriberto Espino Montelongo, Owen Paredes Conde, and Pedro José García Guevara
 display_date: "2026"

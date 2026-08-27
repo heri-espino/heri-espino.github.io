@@ -5,8 +5,8 @@ portfolio_type: paper
 importance: 2
 nav: true
 nav_order: 21
-title: Volume Constants for Stepping–Stone Empty Regions in Rᵈ
-card_title: Volume Constants for Stepping–Stone Empty Regions in Rᵈ
+title: Geometry and Volume of Stepping-Stone Diversion Neighbourhoods in Euclidean Space
+card_title: Geometry and Volume of Stepping-Stone Diversion Neighbourhoods in Euclidean Space
 label: Working Paper
 status: Manuscript in progress
 authors: Heriberto Espino Montelongo and Héctor Maravillo

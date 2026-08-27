@@ -1,17 +1,70 @@
+/*
+ * Palette controls: edit these eight values to retheme the portfolio.
+ * Semantic site colors below intentionally reference only this palette.
+ */
+@font-face {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/helvetica-neue-regular.woff2") format("woff2");
+}
+
 :root {
-  --global-theme-color: #123b63;
-  --global-hover-color: #0a2742;
-  --global-hover-text-color: #fff;
-  --global-code-bg-color: #f1f5f9;
-  --portfolio-focus-color: #0a2742;
-  --portfolio-math-color: #34495e;
+  --portfolio-color-1: #ffffff; // background
+  --portfolio-color-2: #17212b; // primary text
+  --portfolio-color-3: #6b7d8d; // muted text
+  --portfolio-color-4: #d6e0e8; // dividers
+  --portfolio-color-5: #123b63; // primary blue
+  --portfolio-color-6: #0a2742; // interaction blue
+  --portfolio-color-7: #f1f5f9; // soft surface
+  --portfolio-color-8: #34495e; // mathematics
+
+  --portfolio-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --portfolio-motion-duration: 240ms;
+  --portfolio-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --portfolio-control-scale: 1.035;
+
+  --global-bg-color: var(--portfolio-color-1);
+  --global-card-bg-color: var(--portfolio-color-1);
+  --global-text-color: var(--portfolio-color-2);
+  --global-text-color-light: var(--portfolio-color-3);
+  --global-divider-color: var(--portfolio-color-4);
+  --global-theme-color: var(--portfolio-color-5);
+  --global-hover-color: var(--portfolio-color-6);
+  --global-hover-text-color: var(--portfolio-color-1);
+  --global-code-bg-color: var(--portfolio-color-7);
+  --portfolio-focus-color: var(--portfolio-color-6);
+  --portfolio-math-color: var(--portfolio-color-8);
+  --portfolio-primary-button-bg: var(--portfolio-color-5);
+  --portfolio-primary-button-hover-bg: var(--portfolio-color-6);
+  --portfolio-primary-button-text: var(--portfolio-color-1);
+  --portfolio-primary-button-hover-text: var(--portfolio-color-1);
 }
 
 html[data-theme="dark"] {
-  --global-theme-color: #8fb6d8;
-  --global-hover-color: #b8d2e8;
-  --global-hover-text-color: #0a2742;
-  --global-code-bg-color: #202b35;
-  --portfolio-focus-color: #8fb6d8;
-  --portfolio-math-color: #d2dce5;
+  --portfolio-color-1: #1c1c1d; // background
+  --portfolio-color-2: #e8eef3; // primary text
+  --portfolio-color-3: #a8b7c6; // muted text
+  --portfolio-color-4: #40505f; // dividers
+  --portfolio-color-5: #8fb6d8; // primary blue
+  --portfolio-color-6: #b8d2e8; // interaction blue
+  --portfolio-color-7: #202b35; // soft surface
+  --portfolio-color-8: #d2dce5; // mathematics
+
+  --global-bg-color: var(--portfolio-color-1);
+  --global-card-bg-color: var(--portfolio-color-1);
+  --global-text-color: var(--portfolio-color-2);
+  --global-text-color-light: var(--portfolio-color-3);
+  --global-divider-color: var(--portfolio-color-4);
+  --global-theme-color: var(--portfolio-color-5);
+  --global-hover-color: var(--portfolio-color-6);
+  --global-hover-text-color: var(--portfolio-color-1);
+  --global-code-bg-color: var(--portfolio-color-7);
+  --portfolio-focus-color: var(--portfolio-color-6);
+  --portfolio-math-color: var(--portfolio-color-8);
+  --portfolio-primary-button-bg: var(--portfolio-color-7);
+  --portfolio-primary-button-hover-bg: var(--portfolio-color-6);
+  --portfolio-primary-button-text: var(--portfolio-color-2);
+  --portfolio-primary-button-hover-text: var(--portfolio-color-1);
 }

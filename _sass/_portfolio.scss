@@ -1,3 +1,12 @@
+.portfolio-hero,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--portfolio-font-family);
+}
+
 .portfolio-hero {
   position: relative;
   max-width: 54rem;
@@ -153,14 +162,14 @@
   text-decoration: none;
   transform-origin: left center;
   transition:
-    color 180ms ease,
-    transform 180ms ease;
+    color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
 }
 
 .portfolio-section-title-link:hover,
 .portfolio-section-title-link:focus-visible {
   color: var(--global-theme-color);
-  transform: scale(1.035);
+  transform: scale(var(--portfolio-control-scale));
 }
 
 .portfolio-section-intro {
@@ -219,6 +228,25 @@
   color: var(--global-hover-text-color);
 }
 
+.portfolio-section-profile-link {
+  display: inline-flex;
+  gap: 0.55rem;
+  align-items: center;
+  max-width: 100%;
+  margin: 1rem 0 0;
+  color: var(--global-theme-color);
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.portfolio-section-profile-link:hover,
+.portfolio-section-profile-link:focus-visible {
+  color: var(--global-hover-color);
+}
+
 .portfolio-card {
   --card-accent-width: 3px;
   display: grid;
@@ -229,8 +257,8 @@
   background: transparent;
   transform-origin: center;
   transition:
-    border-color 180ms ease,
-    transform 180ms ease;
+    border-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
 }
 
 .portfolio-card--paper {
@@ -244,13 +272,13 @@
 
 .portfolio-card:hover {
   border-color: var(--global-theme-color);
-  transform: scale(1.035);
+  transform: scale(var(--portfolio-control-scale));
 }
 
 .portfolio-card:focus-within {
   outline: 3px solid var(--portfolio-focus-color);
   outline-offset: 4px;
-  transform: scale(1.035);
+  transform: scale(var(--portfolio-control-scale));
 }
 
 .portfolio-card-image {
@@ -273,7 +301,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 220ms ease;
+  transition: transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
 }
 
 .portfolio-card-kind {
@@ -334,6 +362,7 @@
   flex-wrap: wrap;
   gap: 0.35rem;
   margin-top: 1rem;
+  padding-bottom: 1.25rem;
 }
 
 .portfolio-tags span {
@@ -343,13 +372,13 @@
   color: var(--global-text-color-light);
   font-size: 0.7rem;
   transition:
-    border-color 180ms ease,
-    transform 180ms ease;
+    border-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
 }
 
 .portfolio-tags span:hover {
   border-color: var(--global-theme-color);
-  transform: scale(1.035);
+  transform: scale(var(--portfolio-control-scale));
 }
 
 .portfolio-formula {
@@ -363,8 +392,8 @@
   line-height: 1.65;
   transform-origin: left center;
   transition:
-    border-color 180ms ease,
-    transform 180ms ease;
+    border-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
 }
 
 .portfolio-formula:hover {
@@ -493,17 +522,17 @@
 .portfolio-button-primary,
 .portfolio-button-primary:link,
 .portfolio-button-primary:visited {
-  border-color: #123b63;
-  background: #123b63;
-  color: #fff;
+  border-color: var(--portfolio-primary-button-bg);
+  background: var(--portfolio-primary-button-bg);
+  color: var(--portfolio-primary-button-text);
 }
 
 .portfolio-button-primary:hover,
 .portfolio-button-primary:focus-visible,
 .portfolio-button-primary:active {
-  border-color: #0a2742;
-  background: #0a2742;
-  color: #fff;
+  border-color: var(--portfolio-primary-button-hover-bg);
+  background: var(--portfolio-primary-button-hover-bg);
+  color: var(--portfolio-primary-button-hover-text);
 }
 
 .portfolio-button-primary span {
@@ -568,14 +597,14 @@
   border-bottom: 1px solid var(--global-divider-color);
   transform-origin: center;
   transition:
-    border-color 180ms ease,
-    transform 180ms ease;
+    border-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
 }
 
 .repository-card:hover,
 .repository-card:focus-within {
   border-color: var(--global-theme-color);
-  transform: scale(1.035);
+  transform: scale(var(--portfolio-control-scale));
 }
 
 .repository-card h2 {
@@ -589,6 +618,26 @@
   color: var(--global-text-color-light);
   font-family: var(--global-font-family-monospace);
   font-size: 0.78rem;
+}
+
+/* Apply the shared interaction motion to every semantic clickable control. */
+a[href],
+button,
+input:not([type="hidden"]),
+select,
+summary,
+[role="button"] {
+  transform-origin: left center;
+  transition:
+    color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    background-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    border-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    box-shadow var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
+}
+
+a[href] {
+  display: inline-block;
 }
 
 .portfolio-contact {
@@ -682,6 +731,10 @@
   box-shadow: none;
 }
 
+button,
+.btn,
+.af-page-link,
+.pagination .page-link,
 #navbar a,
 #navbar button,
 .portfolio-hero-links a,
@@ -689,6 +742,8 @@
 .portfolio-section-title-link,
 .portfolio-section-link,
 .portfolio-archive-cta,
+.portfolio-section-profile-link,
+.portfolio-cv-link,
 .portfolio-card h3 a,
 .portfolio-button,
 .repository-card h2 a,
@@ -696,10 +751,22 @@
 .contact-page-link {
   transform-origin: left center;
   transition:
-    color 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+    color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    background-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    border-color var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    box-shadow var(--portfolio-motion-duration) var(--portfolio-motion-ease),
+    transform var(--portfolio-motion-duration) var(--portfolio-motion-ease);
+}
+
+#light-toggle {
+  --portfolio-button-offset-y: 0px;
+  transform: translateY(var(--portfolio-button-offset-y)) scale(1);
+}
+
+@media (min-width: 576px) {
+  #light-toggle {
+    --portfolio-button-offset-y: 4px;
+  }
 }
 
 .portfolio-hero-links a,
@@ -710,33 +777,67 @@
 }
 
 @media (hover: hover) {
+  a[href]:hover,
+  input:not([type="hidden"]):hover,
+  select:hover,
+  summary:hover,
+  [role="button"]:hover,
+  button:hover,
+  .btn:hover,
+  .af-page-link:hover,
+  .pagination .page-link:hover,
   #navbar a:hover,
   #navbar button:hover,
   .portfolio-hero-links a:hover,
   .portfolio-contact-links a:hover,
   .portfolio-section-link:hover,
   .portfolio-archive-cta:hover,
+  .portfolio-section-profile-link:hover,
+  .portfolio-cv-link:hover,
   .portfolio-card h3 a:hover,
   .portfolio-button:hover,
   .repository-card h2 a:hover,
   .repository-url:hover,
   .contact-page-link:hover {
-    transform: scale(1.035);
+    transform: translateY(var(--portfolio-button-offset-y, 0px)) scale(var(--portfolio-control-scale));
+  }
+
+  .portfolio-card .portfolio-card-image:hover,
+  .portfolio-card h3 a:hover,
+  .repository-card a:hover {
+    transform: none;
   }
 }
 
+a[href]:focus-visible,
+input:not([type="hidden"]):focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.af-page-link:focus-visible,
+.pagination .page-link:focus-visible,
 #navbar a:focus-visible,
 #navbar button:focus-visible,
 .portfolio-hero-links a:focus-visible,
 .portfolio-contact-links a:focus-visible,
 .portfolio-section-link:focus-visible,
 .portfolio-archive-cta:focus-visible,
+.portfolio-section-profile-link:focus-visible,
+.portfolio-cv-link:focus-visible,
 .portfolio-card h3 a:focus-visible,
 .portfolio-button:focus-visible,
 .repository-card h2 a:focus-visible,
 .repository-url:focus-visible,
 .contact-page-link:focus-visible {
-  transform: scale(1.035);
+  transform: translateY(var(--portfolio-button-offset-y, 0px)) scale(var(--portfolio-control-scale));
+}
+
+.portfolio-card .portfolio-card-image:focus-visible,
+.portfolio-card h3 a:focus-visible,
+.repository-card a:focus-visible {
+  transform: none;
 }
 
 a:focus-visible,
@@ -752,12 +853,23 @@ button:focus-visible {
   .portfolio-formula,
   .repository-card,
   .portfolio-section-title-link,
+  a[href],
+  button,
+  input:not([type="hidden"]),
+  select,
+  summary,
+  [role="button"],
+  .btn,
+  .af-page-link,
+  .pagination .page-link,
   #navbar a,
   #navbar button,
   .portfolio-hero-links a,
   .portfolio-contact-links a,
   .portfolio-section-link,
   .portfolio-archive-cta,
+  .portfolio-section-profile-link,
+  .portfolio-cv-link,
   .portfolio-card h3 a,
   .portfolio-button,
   .repository-card h2 a,
@@ -773,6 +885,12 @@ button:focus-visible {
     transform: none;
   }
 
+  a[href]:hover,
+  button:hover,
+  input:not([type="hidden"]):hover,
+  select:hover,
+  summary:hover,
+  [role="button"]:hover,
   .portfolio-card:hover,
   .portfolio-tags span:hover,
   .portfolio-formula:hover,

@@ -1,8 +1,9 @@
 ---
 layout: portfolio-item
 permalink: /projects/sp500-trend-comparison.html
-portfolio_type: project
+portfolio_type: paper
 importance: 3
+card_kind: Software project
 title: A Reproducible Comparison of Trend Estimation Methods on S&P 500 Log Prices
 card_title: Guerrero Penalized Trend Estimation
 label: Software Project

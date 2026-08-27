@@ -18,7 +18,11 @@ layout: default
     <aside class="portfolio-detail-aside">
       <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt }}" loading="eager">
       <div class="portfolio-actions">
-        <a class="portfolio-button portfolio-button-primary" href="{{ page.pdf | relative_url }}">Open PDF <span aria-hidden="true">↗</span></a>
+        {% if page.external_url %}
+          <a class="portfolio-button portfolio-button-primary" href="{{ page.external_url }}" rel="external nofollow noopener" target="_blank">{{ page.external_label | default: "Open documentation" }} <span aria-hidden="true">↗</span></a>
+        {% elsif page.pdf %}
+          <a class="portfolio-button portfolio-button-primary" href="{{ page.pdf | relative_url }}">Open PDF <span aria-hidden="true">↗</span></a>
+        {% endif %}
         {% if page.github %}
           <a class="portfolio-button portfolio-button-primary" href="{{ page.github }}">
             <span class="portfolio-button-label"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</span>
