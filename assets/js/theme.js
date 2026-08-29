@@ -59,8 +59,72 @@ let initTheme = () => {
   });
 };
 
+let initScrollMotion = () => {
+  const root = document.documentElement;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+
+  const selectors = [
+    ".portfolio-hero > *",
+    ".portfolio-section-heading",
+    ".portfolio-grid > .portfolio-card",
+    ".portfolio-archive-cta",
+    ".portfolio-section-profile-link",
+    ".portfolio-contact-links",
+    ".portfolio-detail-header",
+    ".portfolio-detail-aside",
+    ".portfolio-reading-section",
+    ".repository-card",
+    ".contact-page-intro",
+    ".contact-page-link",
+    ".post > .post-header",
+  ];
+  const targets = [...new Set(document.querySelectorAll(selectors.join(", ")))];
+
+  if (!targets.length) return;
+
+  root.classList.add("portfolio-scroll-motion");
+
+  const reveal = (element) => {
+    element.classList.add("is-visible");
+    element.addEventListener(
+      "animationend",
+      () => {
+        element.classList.remove("portfolio-scroll-reveal", "is-visible");
+        element.style.removeProperty("--portfolio-reveal-delay");
+      },
+      { once: true }
+    );
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        reveal(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+  );
+
+  targets.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+
+    // Leave above-the-fold content untouched so the initial render never flashes.
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) return;
+
+    element.classList.add("portfolio-scroll-reveal");
+    if (element.matches(".portfolio-card")) {
+      const cardIndex = [...element.parentElement.children].indexOf(element);
+      element.style.setProperty("--portfolio-reveal-delay", `${(cardIndex % 2) * 40}ms`);
+    }
+    observer.observe(element);
+  });
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("light-toggle");
   if (toggle) toggle.addEventListener("click", toggleThemeSetting);
   applyTheme();
+  initScrollMotion();
 });

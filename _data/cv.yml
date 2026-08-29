@@ -129,23 +129,68 @@ cv:
           - Standardized notation and visual assets for lectures on linear maps, eigenspaces, diagonalization, decompositions, and matrix factorizations for proof-based teaching.
 
     Schools:
-      - { name: XXIV School of Probability and Statistics, date: Mar 2026, organization: Centro de Investigación en Matemáticas, location: "Guanajuato, Mexico" }
-      - { name: IV School of Quantum Computing, date: Aug 2025, organization: Universidad Nacional Autónoma de México, location: "Mexico City, Mexico" }
+      - {
+          name: XXIV School of Probability and Statistics,
+          date: Mar 2026,
+          organization: Centro de Investigación en Matemáticas,
+          location: "Guanajuato, Mexico",
+        }
+      - {
+          name: IV School of Quantum Computing,
+          date: Aug 2025,
+          organization: Universidad Nacional Autónoma de México,
+          location: "Mexico City, Mexico",
+        }
 
     Leadership:
-      - { name: President of Pretty Good Quantum OE, date: Jan 2026 — Jun 2026, organization: Universidad de las Américas Puebla, location: On Campus }
-      - { name: Vice-President Bitwise Competitive Programming, date: Jan 2025 — Jun 2026, organization: Universidad de las Américas Puebla, location: On Campus }
+      - {
+          name: President of Pretty Good Quantum OE,
+          date: Jan 2026 — Jun 2026,
+          organization: Universidad de las Américas Puebla,
+          location: On Campus,
+        }
+      - {
+          name: Vice-President Bitwise Competitive Programming,
+          date: Jan 2025 — Jun 2026,
+          organization: Universidad de las Américas Puebla,
+          location: On Campus,
+        }
 
     Awards:
       - { name: 2nd Place Tech Puebla Capital Hack Summit, date: Oct 2025, organization: Government of Mexico, location: "National, Mexico" }
-      - { name: 3rd Place Datathon on II National Congress of Data Science, date: Oct 2025, organization: Universidad de las Américas Puebla, location: "National, Mexico" }
-      - { name: 4th Place on The 5th UDLAP Mathematics Olympiad, date: Apr 2025, organization: Universidad de las Américas Puebla, location: On Campus }
+      - {
+          name: 3rd Place Datathon on II National Congress of Data Science,
+          date: Oct 2025,
+          organization: Universidad de las Américas Puebla,
+          location: "National, Mexico",
+        }
+      - {
+          name: 4th Place on The 5th UDLAP Mathematics Olympiad,
+          date: Apr 2025,
+          organization: Universidad de las Américas Puebla,
+          location: On Campus,
+        }
       - { name: Top 10 on The 4th UDLAP Mathematics Olympiad, date: Oct 2024, organization: Universidad de las Américas Puebla, location: On Campus }
 
     Academic Activities:
-      - { name: Poster Presenter on XLI Colloquium Victor Neumann-Lara, date: Apr 2026, organization: Universidad Nacional Autónoma de México, location: "Morelia, Mexico" }
-      - { name: Poster Presenter on XXIV School of Probability and Statistics, date: Mar 2026, organization: Centro de Investigación en Matemáticas, location: "Guanajuato, Mexico" }
-      - { name: Poster Presenter on II National Congress of Data Science, date: Oct 2025, organization: Universidad de las Américas Puebla, location: "Puebla, Mexico" }
+      - {
+          name: Poster Presenter on XLI Colloquium Victor Neumann-Lara,
+          date: Apr 2026,
+          organization: Universidad Nacional Autónoma de México,
+          location: "Morelia, Mexico",
+        }
+      - {
+          name: Poster Presenter on XXIV School of Probability and Statistics,
+          date: Mar 2026,
+          organization: Centro de Investigación en Matemáticas,
+          location: "Guanajuato, Mexico",
+        }
+      - {
+          name: Poster Presenter on II National Congress of Data Science,
+          date: Oct 2025,
+          organization: Universidad de las Américas Puebla,
+          location: "Puebla, Mexico",
+        }
 
     Competitions & Activities:
       - { name: ExoData Challenge, date: May 2026, organization: Gobierno de Puebla, location: National }
@@ -154,38 +199,170 @@ cv:
       - { name: KN Hack Research Challenge, date: Jun 2026, organization: Kaxa Nuk, location: "National, Mexico" }
       - { name: BugaMap Challenge, date: Mar 2026, organization: MAPFRE, location: "National, Mexico" }
       - { name: Futures Trading Challenge, date: "Feb 2026, Mar 2026", organization: CME Group, location: International }
-      - { name: William Lowell Putnam Math Competition, date: "Dec 2024, Dec 2025", organization: Mathematical Association of America, location: North America }
-      - { name: Medication Errors Prevention Challenge, date: Nov 2025, organization: International Society of Pharmacovigilance, location: International }
+      - {
+          name: William Lowell Putnam Math Competition,
+          date: "Dec 2024, Dec 2025",
+          organization: Mathematical Association of America,
+          location: North America,
+        }
+      - {
+          name: Medication Errors Prevention Challenge,
+          date: Nov 2025,
+          organization: International Society of Pharmacovigilance,
+          location: International,
+        }
       - { name: Actinver Challenge, date: "Oct 2024, Oct 2025", organization: Actinver, location: "National, Mexico" }
-      - { name: Olimpiada Mexicana Universitaria de Matemáticas, date: Jun 2025, organization: Centro de Investigación en Matemáticas, location: "National, Mexico" }
+      - {
+          name: Olimpiada Mexicana Universitaria de Matemáticas,
+          date: Jun 2025,
+          organization: Centro de Investigación en Matemáticas,
+          location: "National, Mexico",
+        }
       - { name: Coppel Challenge, date: Mar 2025, organization: Coppel, location: "National, Mexico" }
 
     Courses & Certifications:
-      - { name: Central Banks and Monetary Policy, organization: University of Illinois Urbana-Champaign, date: Feb 2026, credential: 99GAKZMPU0XU, url: "https://www.coursera.org/account/accomplishments/certificate/99GAKZMPU0XU" }
-      - { name: ML for Trading Specialization, organization: New York Institute of Finance, date: Feb 2026, credential: DXHSQ1BF8268, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/DXHSQ1BF8268" }
-      - { name: Explainable AI (XAI) Specialization, organization: Duke University, date: Jan 2026, credential: YW2PTTQMN0Y1, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/YW2PTTQMN0Y1" }
-      - { name: Philosophy of Science, organization: University of Pennsylvania, date: Jan 2026, credential: S7X46JPJRQ6W, url: "https://www.coursera.org/account/accomplishments/certificate/S7X46JPJRQ6W" }
-      - { name: Fractals and Scaling, organization: Santa Fe Institute, date: Dec 2025, credential: "1150156803", url: "https://www.complexityexplorer.org/courses/187-fractals-and-scaling/certificates/1150156803" }
-      - { name: Narrative Economics, organization: Yale University, date: Dec 2025, credential: 6A388M507ZQW, url: "https://www.coursera.org/account/accomplishments/certificate/6A388M507ZQW" }
-      - { name: Machine Learning on Google Cloud Specialization, organization: Google, date: Dec 2025, credential: Y09J2GJXOZNE, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/Y09J2GJXOZNE" }
-      - { name: RAG for Generative AI Applications Specialization, organization: IBM, date: Dec 2025, credential: 0OGJ0RXG21O9, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/0OGJ0RXG21O9" }
-      - { name: Quantum Computing Specialization, organization: Packt, date: Dec 2025, credential: JWMR0UQE7WO5, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/JWMR0UQE7WO5" }
-      - { name: Spoken Language Processing in Python, organization: Data Camp, date: Nov 2025, credential: Statement of accomplishment, url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/fe0968fbf0b0e02fe69c2a46168bde207561edaf" }
-      - { name: Deep Learning with PyTorch, organization: Data Camp, date: Nov 2025, credential: Statement of accomplishment, url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/30e121f2a320b4a1682ccb67a51ab77173042a09" }
-      - { name: AI in Financial Services Specialization, organization: University of Oxford, date: Aug 2025, credential: 30UBXTRRBN1F, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/30UBXTRRBN1F" }
-      - { name: Generative AI for Software Developers Specialization, organization: Microsoft, date: Aug 2025, credential: HL4R3K5BLPVL, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/HL4R3K5BLPVL" }
-      - { name: "DevOps, Cloud, and Agile Foundations Specialization", organization: IBM, date: Aug 2025, credential: 3HFUXXSZM3D4, url: "https://www.coursera.org/account/accomplishments/specialization/certificate/3HFUXXSZM3D4" }
-      - { name: ML and RL in Finance Specialization, organization: New York University, date: In progress, credential: 47O3HLM8BODX, url: "https://www.coursera.org/account/accomplishments/certificate/47O3HLM8BODX" }
-      - { name: Bayesian Statistics Specialization, organization: UC Santa Cruz, date: In progress, credential: 4FAE9UY8ZIEJ, url: "https://www.coursera.org/account/accomplishments/certificate/4FAE9UY8ZIEJ" }
-      - { name: Financial Engineering and Risk Management Specialization, organization: Columbia University, date: In progress, credential: X45X58MF1V07, url: "https://www.coursera.org/account/accomplishments/certificate/X45X58MF1V07" }
-      - { name: TensorFlow 2 for Deep Learning Specialization, organization: Imperial College London, date: In progress, credential: XCI033EN2OJO, url: "https://www.coursera.org/account/accomplishments/certificate/XCI033EN2OJO" }
-      - { name: Practical Guide to Trading Specialization, organization: Interactive Brokers, date: In progress, credential: 92F6VOZC91R6, url: "https://www.coursera.org/account/accomplishments/certificate/92F6VOZC91R6" }
+      - {
+          name: Central Banks and Monetary Policy,
+          organization: University of Illinois Urbana-Champaign,
+          date: Feb 2026,
+          credential: 99GAKZMPU0XU,
+          url: "https://www.coursera.org/account/accomplishments/certificate/99GAKZMPU0XU",
+        }
+      - {
+          name: ML for Trading Specialization,
+          organization: New York Institute of Finance,
+          date: Feb 2026,
+          credential: DXHSQ1BF8268,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/DXHSQ1BF8268",
+        }
+      - {
+          name: Explainable AI (XAI) Specialization,
+          organization: Duke University,
+          date: Jan 2026,
+          credential: YW2PTTQMN0Y1,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/YW2PTTQMN0Y1",
+        }
+      - {
+          name: Philosophy of Science,
+          organization: University of Pennsylvania,
+          date: Jan 2026,
+          credential: S7X46JPJRQ6W,
+          url: "https://www.coursera.org/account/accomplishments/certificate/S7X46JPJRQ6W",
+        }
+      - {
+          name: Fractals and Scaling,
+          organization: Santa Fe Institute,
+          date: Dec 2025,
+          credential: "1150156803",
+          url: "https://www.complexityexplorer.org/courses/187-fractals-and-scaling/certificates/1150156803",
+        }
+      - {
+          name: Narrative Economics,
+          organization: Yale University,
+          date: Dec 2025,
+          credential: 6A388M507ZQW,
+          url: "https://www.coursera.org/account/accomplishments/certificate/6A388M507ZQW",
+        }
+      - {
+          name: Machine Learning on Google Cloud Specialization,
+          organization: Google,
+          date: Dec 2025,
+          credential: Y09J2GJXOZNE,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/Y09J2GJXOZNE",
+        }
+      - {
+          name: RAG for Generative AI Applications Specialization,
+          organization: IBM,
+          date: Dec 2025,
+          credential: 0OGJ0RXG21O9,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/0OGJ0RXG21O9",
+        }
+      - {
+          name: Quantum Computing Specialization,
+          organization: Packt,
+          date: Dec 2025,
+          credential: JWMR0UQE7WO5,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/JWMR0UQE7WO5",
+        }
+      - {
+          name: Spoken Language Processing in Python,
+          organization: Data Camp,
+          date: Nov 2025,
+          credential: Statement of accomplishment,
+          url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/fe0968fbf0b0e02fe69c2a46168bde207561edaf",
+        }
+      - {
+          name: Deep Learning with PyTorch,
+          organization: Data Camp,
+          date: Nov 2025,
+          credential: Statement of accomplishment,
+          url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/30e121f2a320b4a1682ccb67a51ab77173042a09",
+        }
+      - {
+          name: AI in Financial Services Specialization,
+          organization: University of Oxford,
+          date: Aug 2025,
+          credential: 30UBXTRRBN1F,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/30UBXTRRBN1F",
+        }
+      - {
+          name: Generative AI for Software Developers Specialization,
+          organization: Microsoft,
+          date: Aug 2025,
+          credential: HL4R3K5BLPVL,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/HL4R3K5BLPVL",
+        }
+      - {
+          name: "DevOps, Cloud, and Agile Foundations Specialization",
+          organization: IBM,
+          date: Aug 2025,
+          credential: 3HFUXXSZM3D4,
+          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/3HFUXXSZM3D4",
+        }
+      - {
+          name: ML and RL in Finance Specialization,
+          organization: New York University,
+          date: In progress,
+          credential: 47O3HLM8BODX,
+          url: "https://www.coursera.org/account/accomplishments/certificate/47O3HLM8BODX",
+        }
+      - {
+          name: Bayesian Statistics Specialization,
+          organization: UC Santa Cruz,
+          date: In progress,
+          credential: 4FAE9UY8ZIEJ,
+          url: "https://www.coursera.org/account/accomplishments/certificate/4FAE9UY8ZIEJ",
+        }
+      - {
+          name: Financial Engineering and Risk Management Specialization,
+          organization: Columbia University,
+          date: In progress,
+          credential: X45X58MF1V07,
+          url: "https://www.coursera.org/account/accomplishments/certificate/X45X58MF1V07",
+        }
+      - {
+          name: TensorFlow 2 for Deep Learning Specialization,
+          organization: Imperial College London,
+          date: In progress,
+          credential: XCI033EN2OJO,
+          url: "https://www.coursera.org/account/accomplishments/certificate/XCI033EN2OJO",
+        }
+      - {
+          name: Practical Guide to Trading Specialization,
+          organization: Interactive Brokers,
+          date: In progress,
+          credential: 92F6VOZC91R6,
+          url: "https://www.coursera.org/account/accomplishments/certificate/92F6VOZC91R6",
+        }
 
     Technical Skills:
       - { name: Programming, values: "Python · C++ · R · SQL · Java · Mosel · Excel/VBA" }
       - { name: Machine Learning, values: "PyTorch · TensorFlow · Scikit-Learn · Statsmodels · CatBoost · XGBoost · LangChain" }
       - { name: Data Processing, values: "NumPy · SciPy · Numba · Pandas · Polars · RAPIDS" }
-      - { name: Data Engineering, values: "Airflow (Cloud Composer) · PostgreSQL · MySQL · REST ingestion · Version-controlled ETL · MongoDB · Neo4J" }
+      - {
+          name: Data Engineering,
+          values: "Airflow (Cloud Composer) · PostgreSQL · MySQL · REST ingestion · Version-controlled ETL · MongoDB · Neo4J",
+        }
       - { name: Developer Tools, values: "Linux (Arch/Ubuntu) · WSL2 · Bash · Git · Conda · Docker/Compose" }
       - { name: Visualization, values: "Matplotlib · Plotly · Seaborn · LaTeX · Markdown · HTML · Power BI" }
       - { name: Specialized, values: "NetworkX · GeoPandas · Mesa · Solara · Qiskit · NetLogo · QGIS" }

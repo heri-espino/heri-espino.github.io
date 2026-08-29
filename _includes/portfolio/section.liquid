@@ -7,18 +7,31 @@
           <span>{{ include.title }}</span>
         </a>
       </h2>
-      {% if include.intro %}<p class="portfolio-section-intro">{{ include.intro }}</p>{% endif %}
-      {% if include.support %}<p class="portfolio-section-support">{{ include.support }}</p>{% endif %}
+      {% if include.intro %}
+        <p class="portfolio-section-intro">{{ include.intro }}</p>
+      {% endif %}
+      {% if include.support %}
+        <p class="portfolio-section-support">{{ include.support }}</p>
+      {% endif %}
     </div>
-    <a class="portfolio-section-link" href="{{ include.index_url | relative_url }}">{{ include.top_link }} <span aria-hidden="true">→</span></a>
+    <a class="portfolio-section-link" href="{{ include.index_url | relative_url }}">
+      {{- include.top_link }}
+      <span aria-hidden="true">→</span></a
+    >
   </div>
   <div class="portfolio-grid">
     {% for item in include.items %}
       {% include portfolio/card.liquid item=item %}
     {% endfor %}
   </div>
-  <a class="portfolio-archive-cta" href="{{ include.index_url | relative_url }}">{{ include.bottom_link }} <span aria-hidden="true">→</span></a>
+  <a class="portfolio-archive-cta" href="{{ include.index_url | relative_url }}">
+    {{- include.bottom_link }}
+    <span aria-hidden="true">→</span></a
+  >
   {% if include.additional_url %}
-    <a class="portfolio-section-profile-link" href="{{ include.additional_url }}" rel="external nofollow noopener" target="_blank">{{ include.additional_link }} <span aria-hidden="true">↗</span></a>
+    <a class="portfolio-section-profile-link" href="{{ include.additional_url }}" rel="external nofollow noopener" target="_blank">
+      {{- include.additional_link }}
+      <span aria-hidden="true">↗</span></a
+    >
   {% endif %}
 </section>

@@ -5,10 +5,24 @@
   {% assign item_destination = item.url | relative_url %}
 {% endif %}
 <article class="portfolio-card portfolio-card--{{ item.portfolio_type }}">
-  <a class="portfolio-card-image" href="{{ item_destination }}"{% if item.external_url %} rel="external nofollow noopener" target="_blank"{% endif %}>
+  <a
+    class="portfolio-card-image"
+    href="{{ item_destination }}"
+    {% if item.external_url %}
+      rel="external nofollow noopener" target="_blank"
+    {% endif %}
+  >
     <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt }}" loading="lazy">
     <span class="portfolio-card-kind">
-      {% if item.card_kind %}{{ item.card_kind }}{% elsif item.portfolio_type == "paper" %}Manuscript{% elsif item.portfolio_type == "note" %}Study notes{% else %}Applied / software{% endif %}
+      {% if item.card_kind -%}
+        {{- item.card_kind -}}
+      {%- elsif item.portfolio_type == 'paper' -%}
+        Manuscript
+      {%- elsif item.portfolio_type == 'note' -%}
+        Study notes
+      {%- else -%}
+        Applied / software
+      {%- endif %}
     </span>
   </a>
   <div class="portfolio-card-body">
@@ -16,13 +30,24 @@
       <span class="portfolio-label">{{ item.label }}</span>
       <span>{{ item.status }}</span>
     </div>
-    <h3><a href="{{ item_destination }}"{% if item.external_url %} rel="external nofollow noopener" target="_blank"{% endif %}>{{ item.card_title | default: item.title }}</a></h3>
+    <h3>
+      <a
+        href="{{ item_destination }}"
+        {% if item.external_url %}
+          rel="external nofollow noopener" target="_blank"
+        {% endif %}
+      >
+        {{- item.card_title | default: item.title -}}
+      </a>
+    </h3>
     <p>{{ item.summary }}</p>
-    {% if item.formula and item.portfolio_type == "note" %}
+    {% if item.formula and item.portfolio_type == 'note' %}
       <div class="portfolio-formula portfolio-math-display">$$ {{ item.formula }} $$</div>
     {% endif %}
     <div class="portfolio-tags" aria-label="Topics">
-      {% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}
+      {% for tag in item.tags -%}
+        <span>{{ tag }}</span>
+      {%- endfor %}
     </div>
   </div>
 </article>

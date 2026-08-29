@@ -8,6 +8,7 @@ nav_order: 3
 ---
 
 {% assign items = site.projects | sort: "importance" %}
+
 <div class="portfolio-grid">
   {% for item in items %}
     {% include portfolio/card.liquid item=item %}

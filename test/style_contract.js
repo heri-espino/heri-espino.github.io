@@ -6,6 +6,14 @@ const root = process.cwd();
 const read = (relPath) => fs.readFileSync(path.join(root, relPath), "utf8");
 const exists = (relPath) => fs.existsSync(path.join(root, relPath));
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const listFiles = (relPath) => {
+  if (!exists(relPath)) return [];
+
+  return fs.readdirSync(path.join(root, relPath), { withFileTypes: true }).flatMap((entry) => {
+    const childPath = path.posix.join(relPath, entry.name);
+    return entry.isDirectory() ? listFiles(childPath) : [childPath];
+  });
+};
 
 const failures = [];
 
@@ -61,7 +69,31 @@ if (/gem 'al_math',\s*:git =>/.test(gemfile)) {
   failures.push("`Gemfile` must not use git-branch pin for `al_math`; use released gem version.");
 }
 
-for (const forbiddenPath of ["_includes", "_layouts", "_sass", "_scripts", "assets/tailwind", "tailwind.config.js", "assets/webfonts"]) {
+// This personalized site intentionally owns a small, explicit set of local theme
+// overrides. Keep the allowlist narrow so copied core runtime files still fail CI.
+const allowedLocalOverrides = new Set([
+  "_includes/cv/render.liquid",
+  "_includes/header.liquid",
+  "_includes/portfolio/card.liquid",
+  "_includes/portfolio/section.liquid",
+  "_layouts/portfolio-item.liquid",
+  "_layouts/redirect.liquid",
+  "_sass/_academic-theme.scss",
+  "_sass/_cv.scss",
+  "_sass/_portfolio.scss",
+]);
+
+for (const overrideRoot of ["_includes", "_layouts", "_sass"]) {
+  for (const localFile of listFiles(overrideRoot)) {
+    if (!allowedLocalOverrides.has(localFile)) {
+      failures.push(
+        `Unreviewed local theme override \`${localFile}\`; add it to the site override allowlist after review or move shared runtime work to its owning gem.`
+      );
+    }
+  }
+}
+
+for (const forbiddenPath of ["_scripts", "assets/tailwind", "tailwind.config.js", "assets/webfonts"]) {
   if (exists(forbiddenPath)) {
     failures.push(`Starter must not own core component path \`${forbiddenPath}\`; move ownership to the corresponding gem.`);
   }

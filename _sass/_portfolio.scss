@@ -7,6 +7,34 @@ textarea {
   font-family: var(--portfolio-font-family);
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@keyframes portfolio-scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.7rem, 0) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+html.portfolio-scroll-motion .portfolio-scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 0.7rem, 0) scale(0.99);
+  transform-origin: left center;
+}
+
+html.portfolio-scroll-motion .portfolio-scroll-reveal.is-visible {
+  animation: portfolio-scroll-reveal var(--portfolio-motion-duration) var(--portfolio-motion-ease) var(--portfolio-reveal-delay, 0ms) both;
+  will-change: opacity, transform;
+}
+
 .portfolio-hero {
   position: relative;
   max-width: 54rem;
@@ -847,6 +875,17 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.portfolio-scroll-motion .portfolio-scroll-reveal,
+  html.portfolio-scroll-motion .portfolio-scroll-reveal.is-visible {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
   .portfolio-card,
   .portfolio-card-image img,
   .portfolio-tags span,

@@ -33,63 +33,63 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign featured_notes = notes | slice: 0, 2 %}
 
 {% if papers.size > featured_papers.size %}
-  {% assign papers_eyebrow = "Selected papers" %}
-  {% assign papers_support = "Selected working manuscripts and research notes; see the full archive for all paper records and materials." %}
-  {% assign papers_top_link = "Browse all papers" %}
-  {% assign papers_bottom_link = "Browse the complete papers archive" %}
+{% assign papers_eyebrow = "Selected papers" %}
+{% assign papers_support = "Selected working manuscripts and research notes; see the full archive for all paper records and materials." %}
+{% assign papers_top_link = "Browse all papers" %}
+{% assign papers_bottom_link = "Browse the complete papers archive" %}
 {% else %}
-  {% assign papers_eyebrow = "Papers" %}
-  {% assign papers_support = "All current paper records and materials are shown here and maintained in the papers archive." %}
-  {% assign papers_top_link = "Open papers archive" %}
-  {% assign papers_bottom_link = "Open papers archive" %}
+{% assign papers_eyebrow = "Papers" %}
+{% assign papers_support = "All current paper records and materials are shown here and maintained in the papers archive." %}
+{% assign papers_top_link = "Open papers archive" %}
+{% assign papers_bottom_link = "Open papers archive" %}
 {% endif %}
 
 {% if projects.size > featured_projects.size %}
-  {% assign projects_eyebrow = "Selected projects" %}
-  {% assign projects_support = "Selected research and software projects; see the full archive for every project and its materials." %}
-  {% assign projects_top_link = "Browse all projects" %}
-  {% assign projects_bottom_link = "Browse the complete projects archive" %}
+{% assign projects_eyebrow = "Selected projects" %}
+{% assign projects_support = "Selected research and software projects; see the full archive for every project and its materials." %}
+{% assign projects_top_link = "Browse all projects" %}
+{% assign projects_bottom_link = "Browse the complete projects archive" %}
 {% else %}
-  {% assign projects_eyebrow = "Projects" %}
-  {% assign projects_support = "All current research and software projects are shown here and maintained in the projects archive." %}
-  {% assign projects_top_link = "Open projects archive" %}
-  {% assign projects_bottom_link = "Open projects archive" %}
+{% assign projects_eyebrow = "Projects" %}
+{% assign projects_support = "All current research and software projects are shown here and maintained in the projects archive." %}
+{% assign projects_top_link = "Open projects archive" %}
+{% assign projects_bottom_link = "Open projects archive" %}
 {% endif %}
 
 {% if academic_projects.size > featured_academic_projects.size %}
-  {% assign academic_projects_eyebrow = "Selected academic projects" %}
-  {% assign academic_projects_support = "Selected course projects are shown here; visit LinkedIn for certifications, awards, and additional academic activity." %}
-  {% assign academic_projects_top_link = "Browse all projects" %}
-  {% assign academic_projects_bottom_link = "Browse the complete projects archive" %}
+{% assign academic_projects_eyebrow = "Selected academic projects" %}
+{% assign academic_projects_support = "Selected course projects are shown here; visit LinkedIn for certifications, awards, and additional academic activity." %}
+{% assign academic_projects_top_link = "Browse all projects" %}
+{% assign academic_projects_bottom_link = "Browse the complete projects archive" %}
 {% else %}
-  {% assign academic_projects_eyebrow = "Academic projects" %}
-  {% assign academic_projects_support = "Course projects developed through academic study; visit LinkedIn for certifications, awards, and additional academic activity." %}
-  {% assign academic_projects_top_link = "Open projects archive" %}
-  {% assign academic_projects_bottom_link = "Open projects archive" %}
+{% assign academic_projects_eyebrow = "Academic projects" %}
+{% assign academic_projects_support = "Course projects developed through academic study; visit LinkedIn for certifications, awards, and additional academic activity." %}
+{% assign academic_projects_top_link = "Open projects archive" %}
+{% assign academic_projects_bottom_link = "Open projects archive" %}
 {% endif %}
 
 {% if presentations.size > featured_presentations.size %}
-  {% assign presentations_eyebrow = "Selected posters & presentations" %}
-  {% assign presentations_support = "Selected visual academic materials are shown here; see the archive for all available posters and presentations." %}
-  {% assign presentations_top_link = "Browse all materials" %}
-  {% assign presentations_bottom_link = "Browse the complete posters & presentations archive" %}
+{% assign presentations_eyebrow = "Selected posters & presentations" %}
+{% assign presentations_support = "Selected visual academic materials are shown here; see the archive for all available posters and presentations." %}
+{% assign presentations_top_link = "Browse all materials" %}
+{% assign presentations_bottom_link = "Browse the complete posters & presentations archive" %}
 {% else %}
-  {% assign presentations_eyebrow = "Posters & presentations" %}
-  {% assign presentations_support = "Available poster and presentation materials from academic projects are collected in this archive." %}
-  {% assign presentations_top_link = "Open materials archive" %}
-  {% assign presentations_bottom_link = "Open posters & presentations archive" %}
+{% assign presentations_eyebrow = "Posters & presentations" %}
+{% assign presentations_support = "Available poster and presentation materials from academic projects are collected in this archive." %}
+{% assign presentations_top_link = "Open materials archive" %}
+{% assign presentations_bottom_link = "Open posters & presentations archive" %}
 {% endif %}
 
 {% if notes.size > featured_notes.size %}
-  {% assign notes_eyebrow = "Selected notes" %}
-  {% assign notes_support = "Selected notes are shown here; see the full archive for all available mathematical materials." %}
-  {% assign notes_top_link = "Browse all notes" %}
-  {% assign notes_bottom_link = "Browse the complete notes archive" %}
+{% assign notes_eyebrow = "Selected notes" %}
+{% assign notes_support = "Selected notes are shown here; see the full archive for all available mathematical materials." %}
+{% assign notes_top_link = "Browse all notes" %}
+{% assign notes_bottom_link = "Browse the complete notes archive" %}
 {% else %}
-  {% assign notes_eyebrow = "Notes" %}
-  {% assign notes_support = "All currently available mathematical notes are shown here and maintained in the notes archive." %}
-  {% assign notes_top_link = "Open notes archive" %}
-  {% assign notes_bottom_link = "Open notes archive" %}
+{% assign notes_eyebrow = "Notes" %}
+{% assign notes_support = "All currently available mathematical notes are shown here and maintained in the notes archive." %}
+{% assign notes_top_link = "Open notes archive" %}
+{% assign notes_bottom_link = "Open notes archive" %}
 {% endif %}
 
 {% include portfolio/section.liquid id="papers" title="Papers" eyebrow=papers_eyebrow intro="Research in stochastic geometry and empty-region proximity graphs." support=papers_support top_link=papers_top_link bottom_link=papers_bottom_link items=featured_papers index_url="/papers/" %}

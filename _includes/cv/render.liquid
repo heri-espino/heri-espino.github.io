@@ -38,13 +38,18 @@
         {% if title == 'Technical Skills' %}
           <dl class="cv-skills">
             {% for entry in entries %}
-              <div><dt>{{ entry.name }}</dt><dd>{{ entry.values }}</dd></div>
+              <div>
+                <dt>{{ entry.name }}</dt>
+                <dd>{{ entry.values }}</dd>
+              </div>
             {% endfor %}
           </dl>
         {% elsif title == 'Languages' %}
           <ul class="cv-inline-list">
             {% for entry in entries %}
-              <li><strong>{{ entry.name }}</strong> — {{ entry.values }}</li>
+              <li>
+                <strong>{{ entry.name }}</strong> — {{ entry.values }}
+              </li>
             {% endfor %}
           </ul>
         {% else %}
@@ -58,8 +63,12 @@
                       {{ entry.degree | default: entry.name }}
                       {% if entry.url %}</a>{% endif %}
                     </h3>
-                    {% if entry.institution %}<p class="cv-organization">{{ entry.institution }}</p>{% endif %}
-                    {% if entry.organization %}<p class="cv-organization">{{ entry.organization }}</p>{% endif %}
+                    {% if entry.institution %}
+                      <p class="cv-organization">{{ entry.institution }}</p>
+                    {% endif %}
+                    {% if entry.organization %}
+                      <p class="cv-organization">{{ entry.organization }}</p>
+                    {% endif %}
                     {% if entry.links %}
                       <p class="cv-links">
                         {% for link in entry.links %}
@@ -70,13 +79,21 @@
                   </div>
                   <p class="cv-meta">
                     {{ entry.date }}
-                    {% if entry.location %}<br>{{ entry.location }}{% endif %}
-                    {% if entry.credential %}<br>{{ entry.credential }}{% endif %}
+                    {% if entry.location -%}
+                      <br>
+                      {{ entry.location -}}
+                    {%- endif %}
+                    {% if entry.credential -%}
+                      <br>
+                      {{ entry.credential -}}
+                    {%- endif %}
                   </p>
                 </div>
                 {% if entry.highlights %}
                   <ul>
-                    {% for item in entry.highlights %}<li>{{ item }}</li>{% endfor %}
+                    {% for item in entry.highlights %}
+                      <li>{{ item }}</li>
+                    {% endfor %}
                   </ul>
                 {% endif %}
               </article>
@@ -85,7 +102,7 @@
         {% endif %}
 
         {% if expandable %}
-            </div>
+          </div>
           </details>
         {% endif %}
       </section>
