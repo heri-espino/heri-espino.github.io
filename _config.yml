@@ -202,6 +202,7 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_images"]
 exclude:
+  - Neue-Haas-Grotesk-Font/
   - AGENTS.md
   - CLAUDE.md
   - al-folio-upgrade-report.md

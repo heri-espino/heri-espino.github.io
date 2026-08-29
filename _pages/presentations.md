@@ -5,7 +5,7 @@ permalink: /presentations/
 description: Posters and presentation materials from academic projects.
 ---
 
-{% assign items = site.projects | where: "presentation_type", "Poster" | sort: "importance" %}
+{% assign items = site.projects | where_exp: "project", "project.presentation_type == 'Poster' or project.presentation_type == 'Presentation'" | sort: "importance" %}
 
 <div class="portfolio-grid">
   {% for item in items %}

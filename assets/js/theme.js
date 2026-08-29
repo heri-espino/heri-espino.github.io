@@ -116,7 +116,7 @@ let initScrollMotion = () => {
     element.classList.add("portfolio-scroll-reveal");
     if (element.matches(".portfolio-card")) {
       const cardIndex = [...element.parentElement.children].indexOf(element);
-      element.style.setProperty("--portfolio-reveal-delay", `${(cardIndex % 2) * 40}ms`);
+      element.style.setProperty("--portfolio-reveal-delay", `${(cardIndex % 2) * 70}ms`);
     }
     observer.observe(element);
   });

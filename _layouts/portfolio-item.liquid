@@ -19,7 +19,9 @@ layout: default
 
   <div class="portfolio-detail-grid">
     <aside class="portfolio-detail-aside">
-      <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt }}" loading="eager">
+      {% assign detail_image = page.detail_image | default: page.image %}
+      {% assign detail_image_alt = page.detail_image_alt | default: page.image_alt %}
+      <img class="portfolio-detail-preview" src="{{ detail_image | relative_url }}" alt="{{ detail_image_alt }}" loading="eager">
       <div class="portfolio-actions">
         {% if page.external_url %}
           <a class="portfolio-button portfolio-button-primary" href="{{ page.external_url }}" rel="external nofollow noopener" target="_blank">
@@ -27,7 +29,16 @@ layout: default
             <span aria-hidden="true">↗</span></a
           >
         {% elsif page.pdf %}
-          <a class="portfolio-button portfolio-button-primary" href="{{ page.pdf | relative_url }}">Open PDF <span aria-hidden="true">↗</span></a>
+          <a class="portfolio-button portfolio-button-primary" href="{{ page.pdf | relative_url }}">
+            {{- page.pdf_label | default: 'Open PDF' }}
+            <span aria-hidden="true">↗</span></a
+          >
+        {% endif %}
+        {% if page.secondary_pdf %}
+          <a class="portfolio-button portfolio-button-primary" href="{{ page.secondary_pdf | relative_url }}">
+            {{- page.secondary_pdf_label | default: 'Supporting PDF' }}
+            <span aria-hidden="true">↗</span></a
+          >
         {% endif %}
         {% if page.github %}
           <a class="portfolio-button portfolio-button-primary" href="{{ page.github }}">

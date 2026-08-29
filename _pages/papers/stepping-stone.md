@@ -15,8 +15,10 @@ summary: 'This manuscript gives a normalized one-dimensional integral for the \(
 formula: 'a_{d,\mathrm{SS}}(\alpha)=2\kappa_{d-1}\int_{2^{-1/\alpha}}^{1}y_\alpha(u)^{d-1}x_\alpha^{\prime}(u)\,du'
 framing: "The manuscript is framed as a dimension-lift of a planar empty-region computation: symmetry reduces the d-dimensional stepping-stone region to a one-dimensional quadrature over transverse ball slices."
 tags: [convex geometry, volume constants, empty regions, numerical quadrature]
-image: /assets/img/portfolio/stepping-stone-preview-800.webp
-image_alt: Preview of Volume Constants for Stepping–Stone Empty Regions in Rᵈ
+image: /assets/img/portfolio/stepping-stone-figure-preview-1200.webp
+image_alt: Planar and three-dimensional stepping-stone diversion neighborhoods for three parameter values
+detail_image: /assets/img/portfolio/stepping-stone-preview-800.webp
+detail_image_alt: First page of Geometry and Volume of Stepping-Stone Diversion Neighbourhoods in Euclidean Space
 pdf: /papers/stepping-stone-empty-regions.pdf
 contributions:
   - 'Defines the normalized stepping-stone region \(K_{\mathrm{SS},\alpha}\) and its volume constant \(a_{d,\mathrm{SS}}(\alpha)\).'

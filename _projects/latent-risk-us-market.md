@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /projects/latent-risk-us-market.html
 portfolio_type: project
-importance: 2
+importance: 3
+card_kind: Course project
 title: Latent Risk Estimation in the U.S. Market Using Representative Variables
 card_title: Latent U.S. Market Risk
 label: Course Project

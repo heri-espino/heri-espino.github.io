@@ -15,8 +15,10 @@ summary: 'A fixed-template empty-region rule assigns a Borel region \(S(p,q)\) t
 formula: '\lambda_d\!\left(S(p,q)\right)=\ell_{p,q}^{d}a_K,\qquad \mathbb{P}\!\left\{\Phi\!\left(S(p,q)\right)=0\right\}=\exp\!\left\{-\rho a_K\ell_{p,q}^{d}\right\}'
 framing: "The manuscript is framed as a local scalar reduction: once a candidate-pair region is a translated, rotated, and uniformly scaled copy of K, the stochastic calculations depend on geometry through a single finite-volume constant."
 tags: [stochastic geometry, proximity graphs, Palm theory, Poisson processes]
-image: /assets/img/portfolio/unit-region-preview-800.webp
-image_alt: Preview of Unit-Region Factorization for Empty-Region Proximity Graphs
+image: /assets/img/portfolio/unit-region-figure-preview-1200.webp
+image_alt: Numerical unit-region, mean out-degree, and Weibull simulation figure from Unit-Region Factorization for Empty-Region Proximity Graphs
+detail_image: /assets/img/portfolio/unit-region-preview-800.webp
+detail_image_alt: First page of Unit-Region Factorization for Empty-Region Proximity Graphs
 pdf: /papers/unit-region-factorization.pdf
 contributions:
   - Formalizes pairwise empty-region rules through a normalized Borel template K.

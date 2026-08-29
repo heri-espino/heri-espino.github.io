@@ -24,8 +24,8 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign projects = site.projects | sort: "importance" %}
 {% assign notes = site.pages | where: "portfolio_type", "note" | sort: "importance" %}
 {% assign software_projects = projects | where_exp: "project", "project.label == 'Software Project' or project.label == 'Software Library'" %}
-{% assign academic_projects = projects | where: "label", "Course Project" %}
-{% assign presentations = projects | where: "presentation_type", "Poster" | sort: "importance" %}
+{% assign academic_projects = projects | where_exp: "project", "project.label == 'Course Project' or project.academic_project" %}
+{% assign presentations = projects | where_exp: "project", "project.presentation_type == 'Poster' or project.presentation_type == 'Presentation'" | sort: "importance" %}
 {% assign featured_papers = papers | slice: 0, 2 %}
 {% assign featured_projects = software_projects | slice: 0, 2 %}
 {% assign featured_academic_projects = academic_projects | slice: 0, 2 %}
@@ -58,14 +58,14 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 
 {% if academic_projects.size > featured_academic_projects.size %}
 {% assign academic_projects_eyebrow = "Selected academic projects" %}
-{% assign academic_projects_support = "Selected course projects are shown here; visit LinkedIn for certifications, awards, and additional academic activity." %}
-{% assign academic_projects_top_link = "Browse all projects" %}
-{% assign academic_projects_bottom_link = "Browse the complete projects archive" %}
+{% assign academic_projects_support = "Selected academic and course projects are shown here; visit LinkedIn for certifications, awards, and additional academic activity." %}
+{% assign academic_projects_top_link = "Browse all academic projects" %}
+{% assign academic_projects_bottom_link = "Browse the complete academic projects archive" %}
 {% else %}
 {% assign academic_projects_eyebrow = "Academic projects" %}
-{% assign academic_projects_support = "Course projects developed through academic study; visit LinkedIn for certifications, awards, and additional academic activity." %}
-{% assign academic_projects_top_link = "Open projects archive" %}
-{% assign academic_projects_bottom_link = "Open projects archive" %}
+{% assign academic_projects_support = "Academic research software and course projects; visit LinkedIn for certifications, awards, and additional academic activity." %}
+{% assign academic_projects_top_link = "Open academic projects archive" %}
+{% assign academic_projects_bottom_link = "Open academic projects archive" %}
 {% endif %}
 
 {% if presentations.size > featured_presentations.size %}
@@ -94,7 +94,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 
 {% include portfolio/section.liquid id="papers" title="Papers" eyebrow=papers_eyebrow intro="Research in stochastic geometry and empty-region proximity graphs." support=papers_support top_link=papers_top_link bottom_link=papers_bottom_link items=featured_papers index_url="/papers/" %}
 {% include portfolio/section.liquid id="projects" title="Projects" eyebrow=projects_eyebrow intro="Applied work in reproducible data analysis and interpretable machine learning." support=projects_support top_link=projects_top_link bottom_link=projects_bottom_link items=featured_projects index_url="/projects/" %}
-{% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Course projects in financial risk, agent-based modeling, and quantitative methods." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects index_url="/projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View certifications and awards on LinkedIn" %}
+{% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Research software and course projects in stochastic geometry, financial risk, and quantitative methods." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View certifications and awards on LinkedIn" %}
 {% include portfolio/section.liquid id="presentations" title="Posters & Presentations" eyebrow=presentations_eyebrow intro="Visual academic materials from project work." support=presentations_support top_link=presentations_top_link bottom_link=presentations_bottom_link items=featured_presentations index_url="/presentations/" %}
 {% include portfolio/section.liquid id="notes" title="Notes" eyebrow=notes_eyebrow intro="Mathematical notes developed through independent study and research preparation." support=notes_support top_link=notes_top_link bottom_link=notes_bottom_link items=featured_notes index_url="/notes/" %}
 

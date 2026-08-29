@@ -31,14 +31,14 @@ html.portfolio-scroll-motion .portfolio-scroll-reveal {
 }
 
 html.portfolio-scroll-motion .portfolio-scroll-reveal.is-visible {
-  animation: portfolio-scroll-reveal var(--portfolio-motion-duration) var(--portfolio-motion-ease) var(--portfolio-reveal-delay, 0ms) both;
+  animation: portfolio-scroll-reveal var(--portfolio-scroll-motion-duration) var(--portfolio-motion-ease) var(--portfolio-reveal-delay, 0ms) both;
   will-change: opacity, transform;
 }
 
 .portfolio-hero {
   position: relative;
   max-width: 54rem;
-  padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(4rem, 8vw, 6.5rem);
+  padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
 .post > .post-header .post-title {
@@ -160,6 +160,10 @@ html.portfolio-scroll-motion .portfolio-scroll-reveal.is-visible {
 .portfolio-home-section {
   padding: clamp(2.5rem, 5vw, 4rem) 0;
   border-top: 0;
+}
+
+.portfolio-hero + .portfolio-home-section {
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .portfolio-home-section::before {
@@ -511,12 +515,21 @@ html.portfolio-scroll-motion .portfolio-scroll-reveal.is-visible {
 .portfolio-detail-aside {
   position: sticky;
   top: 6rem;
+  min-width: 0;
 }
 
 .portfolio-detail-aside img {
+  display: block;
   width: 100%;
-  border: 1px solid var(--global-divider-color);
+  max-width: 100%;
+  height: auto;
   border-radius: 0;
+}
+
+.portfolio-detail-aside .portfolio-detail-preview {
+  width: min(100%, 20rem);
+  max-width: 20rem;
+  margin-inline: auto;
 }
 
 .portfolio-actions {
@@ -940,7 +953,7 @@ button:focus-visible {
 
 @media (max-width: 720px) {
   .portfolio-hero {
-    padding: 3.5rem 0 3rem;
+    padding: 3.5rem 0 2rem;
   }
 
   .portfolio-hero::after {
@@ -953,6 +966,10 @@ button:focus-visible {
 
   .portfolio-home-section {
     padding: 2.5rem 0;
+  }
+
+  .portfolio-hero + .portfolio-home-section {
+    padding-top: 1.25rem;
   }
 
   .portfolio-hero-footer,

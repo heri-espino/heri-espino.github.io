@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /projects/systemic-liquidity-abm.html
 portfolio_type: project
-importance: 1
+importance: 2
+card_kind: Course project
 title: Systemic Liquidity-Crisis Agent-Based Model
 label: Course Project
 status: Agent-based modeling
