@@ -24,6 +24,27 @@
       {% include portfolio/card.liquid item=item %}
     {% endfor %}
   </div>
+  {% if include.preview_items and include.preview_items.size > 0 %}
+    <div class="portfolio-more-work">
+      <div class="portfolio-more-teaser">
+        {% for item in include.preview_items %}
+          <a
+            class="portfolio-more-teaser-card"
+            href="{{ include.index_url | relative_url }}"
+            aria-label="{{ include.bottom_link }} — {{ item.card_title | default: item.title }}"
+          >
+            <span class="portfolio-more-teaser-inner" aria-hidden="true">
+              <img src="{{ item.image | relative_url }}" alt="" loading="lazy">
+              <span class="portfolio-more-teaser-copy">
+                <span class="portfolio-label">{{ item.label }}</span>
+                <strong>{{ item.card_title | default: item.title }}</strong>
+              </span>
+            </span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
   <a class="portfolio-archive-cta" href="{{ include.index_url | relative_url }}">
     {{- include.bottom_link }}
     <span aria-hidden="true">→</span></a

@@ -31,10 +31,16 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign featured_academic_projects = academic_projects | slice: 0, 2 %}
 {% assign featured_presentations = presentations | slice: 0, 2 %}
 {% assign featured_notes = notes | slice: 0, 2 %}
+{% assign additional_projects = projects | where_exp: "project", "project.label != 'Software Project' and project.label != 'Software Library'" %}
+{% assign preview_papers = papers | slice: 2, 2 %}
+{% assign preview_projects = additional_projects | slice: 0, 2 %}
+{% assign preview_academic_projects = academic_projects | slice: 2, 2 %}
+{% assign preview_presentations = presentations | slice: 2, 2 %}
+{% assign preview_notes = notes | slice: 2, 2 %}
 
 {% if papers.size > featured_papers.size %}
 {% assign papers_eyebrow = "Selected papers" %}
-{% assign papers_support = "Selected working manuscripts and research notes; see the full archive for all paper records and materials." %}
+{% assign papers_support = "Selected manuscripts under review and research projects; see the full archive for all paper records and materials." %}
 {% assign papers_top_link = "Browse all papers" %}
 {% assign papers_bottom_link = "Browse the complete papers archive" %}
 {% else %}
@@ -92,11 +98,11 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign notes_bottom_link = "Open notes archive" %}
 {% endif %}
 
-{% include portfolio/section.liquid id="papers" title="Papers" eyebrow=papers_eyebrow intro="Research in stochastic geometry and empty-region proximity graphs." support=papers_support top_link=papers_top_link bottom_link=papers_bottom_link items=featured_papers index_url="/papers/" %}
-{% include portfolio/section.liquid id="projects" title="Projects" eyebrow=projects_eyebrow intro="Applied work in reproducible data analysis and interpretable machine learning." support=projects_support top_link=projects_top_link bottom_link=projects_bottom_link items=featured_projects index_url="/projects/" %}
-{% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Research software and course projects in stochastic geometry, financial risk, and quantitative methods." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View certifications and awards on LinkedIn" %}
-{% include portfolio/section.liquid id="presentations" title="Posters & Presentations" eyebrow=presentations_eyebrow intro="Visual academic materials from project work." support=presentations_support top_link=presentations_top_link bottom_link=presentations_bottom_link items=featured_presentations index_url="/presentations/" %}
-{% include portfolio/section.liquid id="notes" title="Notes" eyebrow=notes_eyebrow intro="Mathematical notes developed through independent study and research preparation." support=notes_support top_link=notes_top_link bottom_link=notes_bottom_link items=featured_notes index_url="/notes/" %}
+{% include portfolio/section.liquid id="papers" title="Papers" eyebrow=papers_eyebrow intro="Research in stochastic geometry and empty-region proximity graphs." support=papers_support top_link=papers_top_link bottom_link=papers_bottom_link items=featured_papers preview_items=preview_papers index_url="/papers/" %}
+{% include portfolio/section.liquid id="projects" title="Projects" eyebrow=projects_eyebrow intro="Applied work in reproducible data analysis and interpretable machine learning." support=projects_support top_link=projects_top_link bottom_link=projects_bottom_link items=featured_projects preview_items=preview_projects index_url="/projects/" %}
+{% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Research software and course projects in stochastic geometry, financial risk, and quantitative methods." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects preview_items=preview_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View certifications and awards on LinkedIn" %}
+{% include portfolio/section.liquid id="presentations" title="Posters & Presentations" eyebrow=presentations_eyebrow intro="Visual academic materials from project work." support=presentations_support top_link=presentations_top_link bottom_link=presentations_bottom_link items=featured_presentations preview_items=preview_presentations index_url="/presentations/" %}
+{% include portfolio/section.liquid id="notes" title="Notes" eyebrow=notes_eyebrow intro="Mathematical notes developed through independent study and research preparation." support=notes_support top_link=notes_top_link bottom_link=notes_bottom_link items=featured_notes preview_items=preview_notes index_url="/notes/" %}
 
 <section class="portfolio-section portfolio-home-section portfolio-contact" id="contact" aria-labelledby="contact-title">
   <div class="portfolio-section-heading">

@@ -202,6 +202,10 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_images"]
 exclude:
+  - .codex-local/
+  - .codex-preview/
+  - .codex-reference/
+  - updates/
   - Neue-Haas-Grotesk-Font/
   - AGENTS.md
   - CLAUDE.md

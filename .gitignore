@@ -19,3 +19,5 @@ vendor
 *:Zone.Identifier
 Neue-Haas-Grotesk-Font/
 .codex-preview/
+.codex-local/
+/updates/

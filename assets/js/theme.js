@@ -1,5 +1,9 @@
 // al-folio-compatible theme behavior with light as the first-visit default.
 
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.documentElement.classList.add("portfolio-page-enter-motion");
+}
+
 let determineThemeSetting = () => {
   const stored = localStorage.getItem("theme");
   return ["light", "dark", "system"].includes(stored) ? stored : "light";
@@ -67,6 +71,7 @@ let initScrollMotion = () => {
     ".portfolio-hero > *",
     ".portfolio-section-heading",
     ".portfolio-grid > .portfolio-card",
+    ".portfolio-more-work",
     ".portfolio-archive-cta",
     ".portfolio-section-profile-link",
     ".portfolio-contact-links",
@@ -116,7 +121,7 @@ let initScrollMotion = () => {
     element.classList.add("portfolio-scroll-reveal");
     if (element.matches(".portfolio-card")) {
       const cardIndex = [...element.parentElement.children].indexOf(element);
-      element.style.setProperty("--portfolio-reveal-delay", `${(cardIndex % 2) * 70}ms`);
+      element.style.setProperty("--portfolio-reveal-delay", `${(cardIndex % 2) * 130}ms`);
     }
     observer.observe(element);
   });

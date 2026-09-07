@@ -2,7 +2,7 @@
 layout: page
 title: Papers
 permalink: /papers/
-description: Working manuscripts in stochastic and computational geometry.
+description: Manuscripts under review and research projects in stochastic and computational geometry.
 nav: true
 nav_order: 2
 ---
