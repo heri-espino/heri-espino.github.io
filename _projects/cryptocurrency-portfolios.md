@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/cryptocurrency-portfolios.html
 portfolio_type: project
-importance: 11
+importance: 4
+portfolio_section: academic-projects
 academic_project: true
 card_kind: Course project
 title: Portafolios para Criptomonedas

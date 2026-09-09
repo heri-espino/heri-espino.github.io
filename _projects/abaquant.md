@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /projects/abaquant.html
 portfolio_type: project
-importance: 1
+importance: 2
+portfolio_section: projects
 title: AbaQuant
 label: Software Library
 status: Public documentation

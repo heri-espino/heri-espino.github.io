@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /projects/proximity-graphs.html
 portfolio_type: project
-importance: 2
+importance: 1
+portfolio_section: projects
 title: Proximity Graphs
 label: Software Library
 status: Public documentation

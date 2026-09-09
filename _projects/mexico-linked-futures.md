@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/mexico-linked-futures.html
 portfolio_type: project
-importance: 13
+importance: 5
+portfolio_section: academic-projects
 academic_project: true
 card_kind: Course project
 title: Mexico-Linked Futures

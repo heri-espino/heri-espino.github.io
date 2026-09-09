@@ -72,6 +72,8 @@ Current content sections are Papers, Projects, Academic Projects, Posters & Pres
 
 Only use “Selected” when more records exist than are shown. Sections with additional records show a blurred partial row of at most two more cards; each blurred card links directly to the section archive. Keep the top archive link, linked heading, teaser, and lower archive CTA consistent. Academic Projects also links to LinkedIn for certifications and awards.
 
+Project placement is explicit through `portfolio_section`: use `projects` for the three primary research/software projects, `academic-projects` for course projects, and `presentations` for posters or presentations. Archive and homepage ordering comes from `importance` within each section.
+
 ## Content Model
 
 - Papers are Markdown pages under `_pages/papers/` with `portfolio_type: paper`.

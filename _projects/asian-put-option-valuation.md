@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/asian-put-option-valuation.html
 portfolio_type: project
-importance: 14
+importance: 3
+portfolio_section: academic-projects
 academic_project: true
 card_kind: Course project
 title: Valuación de Opciones Asiáticas de Venta

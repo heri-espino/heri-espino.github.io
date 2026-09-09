@@ -2,11 +2,11 @@
 layout: page
 title: Academic Projects
 permalink: /academic-projects/
-description: Research software, course reports, and academic presentations in stochastic geometry, finance, econometrics, and actuarial modeling.
+description: Course projects in actuarial modeling, quantitative finance, econometrics, and data analysis.
 nav: false
 ---
 
-{% assign items = site.projects | where_exp: "project", "project.label == 'Course Project' or project.academic_project" | sort: "importance" %}
+{% assign items = site.projects | where: "portfolio_section", "academic-projects" | sort: "importance" %}
 
 <div class="portfolio-grid">
   {% for item in items %}

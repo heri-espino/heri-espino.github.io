@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/game-theory-models-finance.html
 portfolio_type: project
-importance: 12
+importance: 6
+portfolio_section: academic-projects
 academic_project: true
 card_kind: Course presentation
 title: Modelos de Teoría de Juegos en Finanzas

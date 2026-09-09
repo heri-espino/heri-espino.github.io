@@ -2,8 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/proximity-graphs-asymptotics-presentation.html
 portfolio_type: project
-importance: 4
-academic_project: true
+importance: 2
+portfolio_section: presentations
 card_kind: Academic presentation
 title: Características Asintóticas de las Gráficas de Proximidad
 card_title: Asymptotic Characteristics of Proximity Graphs

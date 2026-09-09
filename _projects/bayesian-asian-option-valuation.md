@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/bayesian-asian-option-valuation.html
 portfolio_type: project
-importance: 15
+importance: 1
+portfolio_section: academic-projects
 academic_project: true
 card_kind: Course project
 title: Implementación del Método de Metropolis–Hastings en una Aplicación Actuarial

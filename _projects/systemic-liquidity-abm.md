@@ -3,6 +3,7 @@ layout: portfolio-item
 permalink: /projects/systemic-liquidity-abm.html
 portfolio_type: project
 importance: 2
+portfolio_section: academic-projects
 card_kind: Course project
 title: Systemic Liquidity-Crisis Agent-Based Model
 label: Course Project
@@ -15,6 +16,8 @@ framing: "Simple balance-sheet rules and margin constraints generate aggregate c
 tags: [agent-based models, systemic risk, liquidity, financial markets]
 image: /assets/img/portfolio/systemic-liquidity-abm-preview-800.webp
 image_alt: Preview of the systemic liquidity-crisis agent-based model
+detail_image: /assets/img/portfolio/systemic-liquidity-abm-first-page.webp
+detail_image_alt: First page of the systemic liquidity-crisis agent-based model report
 pdf: /projects/systemic-liquidity-abm.pdf
 github: https://github.com/heritaco/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM
 contributions:

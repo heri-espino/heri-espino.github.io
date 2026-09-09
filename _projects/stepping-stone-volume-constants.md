@@ -2,8 +2,8 @@
 layout: portfolio-item
 permalink: /projects/stepping-stone-volume-constants.html
 portfolio_type: project
-importance: 1
-academic_project: true
+importance: 3
+portfolio_section: projects
 card_kind: Research software
 title: Stepping-Stone Volume Constants
 label: Research Software

@@ -2,7 +2,8 @@
 layout: portfolio-item
 permalink: /academic-projects/precipitation-time-series-puebla.html
 portfolio_type: project
-importance: 10
+importance: 7
+portfolio_section: academic-projects
 academic_project: true
 card_kind: Course project
 title: Análisis de Series de Tiempo para la Precipitación en Puebla

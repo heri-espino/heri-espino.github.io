@@ -7,7 +7,7 @@ nav: true
 nav_order: 3
 ---
 
-{% assign items = site.projects | sort: "importance" %}
+{% assign items = site.projects | where: "portfolio_section", "projects" | sort: "importance" %}
 
 <div class="portfolio-grid">
   {% for item in items %}
