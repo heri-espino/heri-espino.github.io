@@ -40,6 +40,12 @@ layout: default
             <span aria-hidden="true">↗</span></a
           >
         {% endif %}
+        {% if page.resource_url %}
+          <a class="portfolio-button portfolio-button-primary" href="{{ page.resource_url }}" rel="external nofollow noopener" target="_blank">
+            {{- page.resource_label | default: 'Open resource' }}
+            <span aria-hidden="true">↗</span></a
+          >
+        {% endif %}
         {% if page.github %}
           <a class="portfolio-button portfolio-button-primary" href="{{ page.github }}">
             <span class="portfolio-button-label"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</span>
