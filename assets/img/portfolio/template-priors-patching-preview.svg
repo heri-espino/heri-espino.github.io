@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1035" viewBox="0 0 800 1035" role="img" aria-labelledby="title desc">
+  <title id="title">Template Priors in Small CNNs paper preview</title>
+  <desc id="desc">Preview card for the TMLR manuscript on template priors and activation patching.</desc>
+  <rect width="800" height="1035" fill="#ffffff"/>
+  <line x1="72" y1="70" x2="728" y2="70" stroke="#111111" stroke-width="2"/>
+  <text x="72" y="54" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#222222">Under review as submission to TMLR</text>
+
+  <text x="400" y="155" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="34" fill="#111111">
+    <tspan x="400" dy="0">Template Priors in Small CNNs:</tspan>
+    <tspan x="400" dy="46">Activation-Patching Effects Depend</tspan>
+    <tspan x="400" dy="46">on the Number of Patched Channels</tspan>
+  </text>
+
+  <text x="400" y="325" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="19" fill="#333333">Anonymous authors · double-blind review</text>
+
+  <text x="72" y="405" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="23" fill="#111111">Abstract</text>
+  <text x="72" y="447" font-family="Georgia, 'Times New Roman', serif" font-size="20" fill="#222222">
+    <tspan x="72" dy="0">First-layer convolutional kernels can remain close to hand-designed</tspan>
+    <tspan x="72" dy="30">templates after training, but kernel-template similarity does not determine</tspan>
+    <tspan x="72" dy="30">how internal activation interventions affect model output. We compare</tspan>
+    <tspan x="72" dy="30">template initialization, persistent retention, and gradual release in two</tspan>
+    <tspan x="72" dy="30">controlled rendering tasks and two small CNN architectures.</tspan>
+  </text>
+
+  <rect x="72" y="635" width="656" height="190" rx="10" fill="#f7f7f7" stroke="#bdbdbd"/>
+  <text x="100" y="680" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="21" fill="#111111">Prospective confirmation · TinyCNN</text>
+  <text x="100" y="730" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#111111">B = 0.33098</text>
+  <text x="100" y="771" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#222222">95% CI [0.27368, 0.38827] · p = 2.28 × 10⁻¹⁰</text>
+  <text x="100" y="807" font-family="Georgia, 'Times New Roman', serif" font-size="18" fill="#333333">Effect changes with patch size and differs by architecture.</text>
+
+  <text x="72" y="895" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="20" fill="#111111">Main finding</text>
+  <text x="72" y="931" font-family="Georgia, 'Times New Roman', serif" font-size="19" fill="#222222">
+    <tspan x="72" dy="0">Kernel-template similarity and activation-patching behavior provide</tspan>
+    <tspan x="72" dy="29">different information; patch size is part of the measured result.</tspan>
+  </text>
+
+  <line x1="72" y1="997" x2="728" y2="997" stroke="#111111" stroke-width="1"/>
+</svg>
