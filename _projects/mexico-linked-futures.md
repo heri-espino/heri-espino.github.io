@@ -17,7 +17,7 @@ tags: [futures, derivatives, term structure, Mexican markets]
 image: /assets/img/portfolio/academic-mexico-futures-preview-1200.webp
 image_alt: First page of Mexico-Linked Futures
 detail_image: /assets/img/portfolio/academic-mexico-futures-first-page.webp
-pdf: /academic-projects/mexico-linked-futures.pdf
+pdf: /academic-projects/espino_2026_mexico-linked-futures.pdf
 contributions:
   - Compares six commodity, equity-index, foreign-exchange, and interest-rate futures linked to Mexico.
   - Interprets each asset's term structure and a one-day pricing decomposition.

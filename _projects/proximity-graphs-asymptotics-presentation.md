@@ -18,8 +18,7 @@ tags: [proximity graphs, stochastic geometry, asymptotics, geometric probability
 image: /assets/img/portfolio/proximity-graphs-presentation-preview-1200.webp
 image_alt: Title slide of Características Asintóticas de las Gráficas de Proximidad
 detail_image: /assets/img/portfolio/proximity-graphs-presentation-first-page.webp
-pdf: /academic-projects/proximity-graphs-asymptotics-presentation.pdf
-pdf_label: Open presentation
+pdf: /academic-projects/espino_2026_proximity-graphs-asymptotics-presentation.pdf
 contributions:
   - Introduces proximity graphs as geometric graphs whose edges are selected by local acceptance rules.
   - Compares nearest-neighbor, Gabriel, relative-neighborhood, and Delaunay structures on a common point set.

@@ -18,7 +18,7 @@ tags: [time series, precipitation, seasonal differencing, forecasting]
 image: /assets/img/portfolio/academic-precipitation-preview-1200.webp
 image_alt: First page of Análisis de Series de Tiempo para la Precipitación en Puebla
 detail_image: /assets/img/portfolio/academic-precipitation-first-page.webp
-pdf: /academic-projects/precipitation-time-series-puebla.pdf
+pdf: /academic-projects/espino_2026_precipitation-time-series-puebla.pdf
 contributions:
   - Examines the original and transformed precipitation series with successive seasonal differences.
   - Compares candidate time-series models and selects a final specification.

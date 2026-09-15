@@ -2,23 +2,24 @@
 layout: portfolio-item
 permalink: /projects/cnn-primitive-bases.html
 portfolio_type: paper
-importance: 4
+importance: 70
 card_kind: Research paper
-title: "Template Priors in Small CNNs: Activation-Patching Effects Depend on the Number of Patched Channels"
+title: "Template Priors in Small CNNs: Learning Dynamics and the Measurement Dependence of Causal Usefulness"
 label: Under Review
 status: Transactions on Machine Learning Research (TMLR) · Double-blind review
 authors: Heriberto Espino Montelongo
 display_date: "2026"
-summary: 'A controlled study of template initialization, persistent template retention, and gradual release in small CNNs. Kernel-template similarity and activation-patching behavior separate: in the prospectively confirmed TinyCNN setting, the release-versus-retention selected-channel fidelity effect changes sharply with patch size, from strongly negative at one and two patched channels to slightly positive at eight.'
-formula: 'B=\frac{\Delta F(4)+\Delta F(8)}{2}-\frac{\Delta F(1)+\Delta F(2)}{2}=0.33098'
-framing: "Retained kernel-template similarity is a weight-space property; matched activation patching measures a distinct functional property whose release-versus-retention effect depends on patch size and architecture."
+summary: 'A controlled study of template initialization, retention, and release in small CNNs on two rendering tasks. Across staged experiments with \(n=400\) primary runs, \(n=200\) gradual-release runs, \(80\) final checkpoints, and \(2{,}000\) saved states, template initialization does not uniformly accelerate learning; releasing retention improves compositional accuracy relative to constant retention while reducing alignment; and the relative causal-usefulness difference changes with channel ranking and intervention size.'
+framing: "The paper separates kernel appearance, concept selectivity, and matched activation-patching outcomes, showing that preserved kernel shape and a single patching score are insufficient to establish an interpretability benefit."
 tags: [CNNs, activation patching, mechanistic interpretability, template priors]
-image: /assets/img/portfolio/template-priors-patching-preview.svg
-image_alt: Preview of Template Priors in Small CNNs: Activation-Patching Effects Depend on the Number of Patched Channels
+image: /assets/img/portfolio/template-priors-patching-preview-1200.webp
+image_alt: "First-page preview of Template Priors in Small CNNs: Learning Dynamics and the Measurement Dependence of Causal Usefulness"
+detail_image: /assets/img/portfolio/template-priors-patching-first-page.webp
+detail_image_alt: "First page of Template Priors in Small CNNs: Learning Dynamics and the Measurement Dependence of Causal Usefulness"
 github: https://github.com/heri-espino/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs
 contributions:
-  - Separates kernel-template similarity from matched activation-patching fidelity in two controlled rendering tasks and two small CNN architectures.
-  - Prospectively confirms patch-size dependence in 20 previously unused two_concepts TinyCNN blocks, with the predeclared contrast B = 0.33098 (95% CI [0.27368, 0.38827]).
-  - Extends the sensitivity analysis to 1,200 models across two tasks, two architectures, and six prior schedules, showing a different pattern in TwoLayerCNN.
-  - Decomposes selected-versus-random patching effects to show how the control baseline can change a relative comparison, and reports an independent 32-checkpoint implementation audit.
+  - Compares template strength with renderer-based concept and intervention measures using matched normalization and spectrum controls.
+  - Separates initialization, continued retention, and release across staged training experiments rather than pooling them as independent replications.
+  - Reanalyzes 80 existing final checkpoints with three validation-only channel rankings and four intervention sizes, finding negative release effects at one or two channels and positive effects at four or eight in TinyCNN.
+  - Shows that the retained-kernel contrast persists under one-to-one kernel matching across 2,000 saved checkpoint states while keeping later comparisons exploratory.
 ---

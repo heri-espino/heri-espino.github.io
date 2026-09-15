@@ -18,7 +18,7 @@ image: /assets/img/portfolio/systemic-liquidity-abm-preview-800.webp
 image_alt: Preview of the systemic liquidity-crisis agent-based model
 detail_image: /assets/img/portfolio/systemic-liquidity-abm-first-page.webp
 detail_image_alt: First page of the systemic liquidity-crisis agent-based model report
-pdf: /projects/systemic-liquidity-abm.pdf
+pdf: /projects/espino_2026_systemic-liquidity-abm.pdf
 github: https://github.com/heritaco/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM
 contributions:
   - Implemented a stylized agent-based model with heterogeneous market participants and leveraged traders.

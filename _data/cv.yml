@@ -57,7 +57,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/unit-region-factorization.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
         highlights:
           - Proved rigid-motion covariance and scale covariance for Euclidean-definable neighborhood kernels, yielding a dimensionless unit-region factorization.
           - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
@@ -67,7 +67,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/stepping-stone-empty-regions.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
         highlights:
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
@@ -76,7 +76,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_sp500-trend-comparison.pdf" }
           - { label: GitHub, url: "https://github.com/heritaco/Trend-Estimation" }
         highlights:
           - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
@@ -86,7 +86,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/latent-risk-us-market.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
           - { label: GitHub, url: "https://github.com/heritaco/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
         highlights:
           - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
@@ -96,7 +96,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_template-priors-cnns.pdf" }
           - { label: GitHub, url: "https://github.com/heritaco/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
         highlights:
           - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
@@ -106,7 +106,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_systemic-liquidity-abm.pdf" }
           - { label: GitHub, url: "https://github.com/heritaco/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
         highlights:
           - Built an agent-based derivatives simulator with market participants, stochastic shocks, pricing rules, and margin calls under crisis scenarios.
@@ -116,7 +116,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/notes/random-variables-as-vectors.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/notes/random-variables-as-vectors.pdf" }
+          - { label: PDF, url: "https://heri-espino.github.io/notes/espino_2026_random-variables-as-vectors.pdf" }
         highlights:
           - Wrote formal L² notes framing random variables as Hilbert-space vectors, with expectation, variance, MSE, bias–variance, and regression error as projections.
           - Derived conditional expectation, tower property, Chapman–Kolmogorov, and total variance as nested projection identities in L² with geometric diagrams and examples.

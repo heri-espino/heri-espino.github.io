@@ -17,7 +17,7 @@ framing: "The notes form a conceptual bridge from linear algebra to probability:
 tags: [measure theory, probability, Hilbert spaces, Markov chains]
 image: /assets/img/portfolio/random-variables-l2-preview-800.webp
 image_alt: Preview of Random Variables as Vectors in L²
-pdf: /notes/random-variables-as-vectors.pdf
+pdf: /notes/espino_2026_random-variables-as-vectors.pdf
 contributions:
   - 'Defines random variables as measurable functions and builds the \(L^2\) inner-product geometry using \(\mathbb{E}[XY]\).'
   - Shows expectation and conditional expectation as orthogonal projections onto constants and information subspaces.

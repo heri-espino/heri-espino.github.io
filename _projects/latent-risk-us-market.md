@@ -18,7 +18,7 @@ framing: "Noisy market variables are compressed into a common latent factor and 
 tags: [dynamic factor models, latent risk, penalized trends, macrofinance]
 image: /assets/img/portfolio/latent-risk-preview-800.webp
 image_alt: Preview of Latent Risk Estimation in the U.S. Market
-pdf: /projects/latent-risk-us-market.pdf
+pdf: /projects/espino_2026_latent-risk-us-market.pdf
 github: https://github.com/heritaco/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables
 contributions:
   - Built a latent market-risk index from VIX, WTI, gold, and DXY-style financial variables.

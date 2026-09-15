@@ -18,7 +18,7 @@ tags: [game theory, asset pricing, corporate finance, information asymmetry]
 image: /assets/img/portfolio/academic-game-theory-finance-preview-1200.webp
 image_alt: Title slide of Modelos de Teoría de Juegos en Finanzas
 detail_image: /assets/img/portfolio/academic-game-theory-finance-first-page.webp
-pdf: /academic-projects/game-theory-models-finance.pdf
+pdf: /academic-projects/espino_2026_game-theory-models-finance.pdf
 contributions:
   - Connects game theory with decision-making in asset pricing and corporate finance.
   - Frames information asymmetry and imperfect markets as motivations for strategic financial models.

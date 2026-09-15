@@ -206,6 +206,7 @@ exclude:
   - .codex-preview/
   - .codex-reference/
   - updates/
+  - New folder/
   - Neue-Haas-Grotesk-Font/
   - AGENTS.md
   - CLAUDE.md
