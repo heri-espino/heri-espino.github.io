@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Derivative pricing visualization</title>
+  <desc id="desc">An abstract payoff diagram with intersecting curves and a compact pricing panel.</desc>
+  <rect width="1200" height="800" fill="#f4f7fa"/>
+  <rect x="74" y="74" width="1052" height="652" rx="20" fill="#fff" stroke="#d2dce5" stroke-width="3"/>
+  <g stroke="#d2dce5" stroke-width="2"><path d="M160 588H1002M160 488H1002M160 388H1002M160 288H1002"/><path d="M260 214V620M460 214V620M660 214V620M860 214V620"/></g>
+  <path d="M160 570 L360 570 L560 354 L1002 354" fill="none" stroke="#123b63" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M160 322 C318 320 400 354 510 454 S730 554 1002 554" fill="none" stroke="#728aa0" stroke-width="7" stroke-linecap="round"/>
+  <path d="M160 570 L360 570 L560 354 L1002 354 L1002 570Z" fill="#123b63" opacity=".1"/>
+  <g fill="#123b63"><circle cx="360" cy="570" r="11"/><circle cx="560" cy="354" r="11"/><circle cx="1002" cy="354" r="11"/></g>
+  <g transform="translate(850 132)"><rect width="150" height="92" rx="10" fill="#f4f7fa" stroke="#d2dce5" stroke-width="2"/><rect x="22" y="22" width="78" height="10" rx="5" fill="#123b63"/><rect x="22" y="46" width="106" height="8" rx="4" fill="#728aa0"/><rect x="22" y="66" width="56" height="8" rx="4" fill="#d2dce5"/></g>
+  <text x="168" y="166" font-family="Arial,sans-serif" font-size="22" letter-spacing="3" fill="#123b63">PAYOFF ANALYSIS</text>
+</svg>
