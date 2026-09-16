@@ -19,6 +19,7 @@ image: /assets/img/portfolio/academic-cryptocurrency-portfolios-preview-1200.web
 image_alt: First page of Portafolios para Criptomonedas
 detail_image: /assets/img/portfolio/academic-cryptocurrency-portfolios-first-page.webp
 pdf: /academic-projects/espino_2026_cryptocurrency-portfolios.pdf
+github: https://github.com/heri-espino/LAT3052-Investment-Portfolios
 contributions:
   - Analyzes selected cryptocurrency assets and their correlation structure.
   - Constructs efficient-frontier visualizations for portfolio comparison.

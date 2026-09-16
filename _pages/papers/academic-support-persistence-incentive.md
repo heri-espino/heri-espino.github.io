@@ -17,6 +17,7 @@ image_alt: "First-page preview of Beyond the Incentive Threshold: Academic Suppo
 detail_image: /assets/img/portfolio/academic-support-persistence-incentive-first-page.webp
 detail_image_alt: "First page of Beyond the Incentive Threshold: Academic Support Use and Persistence After a First-Year Participation Incentive"
 pdf: /papers/espino_2026_academic-support-persistence-incentive.pdf
+github: https://github.com/heri-espino/CMAT
 contributions:
   - Follows a strict MU-to-Calculus progression cohort with support-centre coverage in both periods.
   - Shows later CMAT use rising from 17.25% among students with no prior MU visits to 66.84% among those with four or more.

@@ -13,8 +13,9 @@ framing: The documentation covers point sets, geometric graphs, proximity-graph 
 tags: [computational geometry, proximity graphs, Python, visualization]
 image: /assets/img/portfolio/proximity-graphs-preview-800.webp
 image_alt: Proximity Graphs documentation homepage
-external_url: https://hectormaravillo.github.io/ProximityGraphs/
+external_url: https://proximitygraphs.github.io/ProximityGraphs/
 external_label: Open documentation
+github: https://github.com/ProximityGraphs/ProximityGraphs
 contributions:
   - Supports point-set generation and transformation in n-dimensional space.
   - Covers geometric and proximity graphs, graph-property analysis, and visualization of graphs and point patterns.

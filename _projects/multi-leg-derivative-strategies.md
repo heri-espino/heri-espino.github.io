@@ -14,9 +14,10 @@ display_date: May 2026
 summary: "Pricing and payoff analysis for exotic options and multi-leg derivative strategies in the Exotic Derivatives course."
 framing: "The report compares payoff structures across combinations of derivative positions and option types."
 tags: [exotic options, derivatives, payoff profiles, quantitative finance]
-image: /assets/img/portfolio/academic-project-generic.svg
-image_alt: Academic project preview
+image: /assets/img/portfolio/academic-derivatives-preview.svg
+image_alt: Abstract payoff visualization for multi-leg derivative strategies
 resource_url: https://github.com/heri-espino/LAT4092-Derivados-Exoticos/blob/main/tareas/1%20Derivados%20Exoticos/Tarea%20Larga%201.docx
+github: https://github.com/heri-espino/LAT4092-Derivados-Exoticos
 resource_label: Open report
 contributions:
   - Prices exotic derivative positions.

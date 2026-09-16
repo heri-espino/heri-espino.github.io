@@ -14,9 +14,10 @@ display_date: May 2026
 summary: "A derivation and application of the Margrabe formula for an option to exchange one risky asset for another."
 framing: "The report develops the exchange-option valuation formula and applies it in the exotic-derivatives course."
 tags: [Margrabe, exchange options, exotic derivatives, option pricing]
-image: /assets/img/portfolio/academic-project-generic.svg
-image_alt: Academic project preview
+image: /assets/img/portfolio/academic-derivatives-preview.svg
+image_alt: Abstract payoff visualization for the Margrabe option derivation
 resource_url: https://github.com/heri-espino/LAT4092-Derivados-Exoticos/blob/main/tareas/1%20Derivados%20Exoticos/Margrabe%20Model_260515_075233.pdf
+github: https://github.com/heri-espino/LAT4092-Derivados-Exoticos
 resource_label: Open PDF
 contributions:
   - Derives the Margrabe exchange-option formula.

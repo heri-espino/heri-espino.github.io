@@ -1,9 +1,10 @@
 ---
 layout: page
 permalink: /repositories/
+published: false
 title: Repositories
 description: Selected research and software repositories.
-nav: true
+nav: false
 nav_order: 5
 ---
 

@@ -17,6 +17,7 @@ image_alt: First-page preview of Are Course Grades Comparable Across Classrooms?
 detail_image: /assets/img/portfolio/course-grades-comparability-first-page.webp
 detail_image_alt: First page of Are Course Grades Comparable Across Classrooms? Instructor-by-Term Heterogeneity in Undergraduate Mathematics Assessment
 pdf: /papers/espino_2026_course-grades-comparability.pdf
+github: https://github.com/heri-espino/CMAT
 contributions:
   - Uses retained exploratory evidence spanning 26,140 student-classroom observations, 77 instructors, and 769 classrooms from 2019–2025.
   - Frames grade comparability as a measurement problem rather than an instructor-ranking problem.

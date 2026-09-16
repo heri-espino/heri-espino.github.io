@@ -14,8 +14,8 @@ display_date: Sep 2026
 summary: "Link prediction on the Star Wars: Episode II character network, where characters are connected when they share scenes and edge weights encode the number of shared scenes."
 framing: "The notebook loads the film network, constructs the graph, and applies link-prediction analysis to a narrative co-occurrence network."
 tags: [complex networks, link prediction, network science, Star Wars]
-image: /assets/img/portfolio/academic-project-generic.svg
-image_alt: Academic project preview
+image: /assets/img/portfolio/academic-network-preview.svg
+image_alt: Abstract network visualization for Star Wars link prediction
 resource_url: https://nbviewer.org/github/heri-espino/LDS1121-Complex-Networks/blob/main/notebooks/18%20Prediccion%20de%20Enlaces/02%20Star%20Wars.ipynb
 resource_label: View notebook
 github: https://github.com/heri-espino/LDS1121-Complex-Networks

@@ -21,7 +21,7 @@
   </div>
   <div class="portfolio-grid">
     {% for item in include.items %}
-      {% include portfolio/card.liquid item=item %}
+      {% include portfolio/card.liquid item=item archive_url=include.card_archive_url %}
     {% endfor %}
   </div>
   {% if include.preview_items and include.preview_items.size > 0 %}

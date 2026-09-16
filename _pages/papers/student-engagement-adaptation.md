@@ -17,6 +17,7 @@ image_alt: "First-page preview of From Assigned to Chosen Academic Contexts: Lon
 detail_image: /assets/img/portfolio/student-engagement-adaptation-first-page.webp
 detail_image_alt: "First page of From Assigned to Chosen Academic Contexts: Longitudinal Traces of Student Engagement and Adaptation in First-Year University Mathematics"
 pdf: /papers/espino_2026_student-engagement-adaptation.pdf
+github: https://github.com/heri-espino/CMAT
 contributions:
   - Distinguishes classroom context, classroom-relative performance, formal mathematics-support use, later context selection, and subsequent outcomes.
   - Summarizes first-course experiences into five states and tests their stability across nine pre-specified definitions of performance and contextual difficulty.

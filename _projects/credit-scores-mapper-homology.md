@@ -14,9 +14,10 @@ display_date: May 2024
 summary: "Mapped credit-score structure using Mapper and persistent homology for a topological view of credit-score classification."
 framing: "The notebook applies topological data-analysis tools to explore geometry and connectivity in credit-score data."
 tags: [TDA, Mapper, persistent homology, credit scoring]
-image: /assets/img/portfolio/academic-project-generic.svg
-image_alt: Academic project preview
+image: /assets/img/portfolio/academic-ml-preview.svg
+image_alt: Abstract model-structure visualization for credit scores with Mapper and homology
 resource_url: https://nbviewer.org/github/heri-espino/LDS1041-Analisis-Topologico-de-Datos/blob/main/6%20Credit%20score%20classification/Credit%20score%20classification.ipynb
+github: https://github.com/heri-espino/LDS1041-Analisis-Topologico-de-Datos
 resource_label: View notebook
 contributions:
   - Applies Mapper to credit-score data.

@@ -43,7 +43,6 @@ The persistent navigation is defined explicitly in `_includes/header.liquid`:
 - Papers: `/papers/`
 - Projects: `/projects/`
 - Notes: `/notes/`
-- Repositories: `/repositories/`
 - Contact: `/contact/`
 
 Additional archive routes linked from the homepage are:

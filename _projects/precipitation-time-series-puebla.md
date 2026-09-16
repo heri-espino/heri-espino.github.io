@@ -19,6 +19,7 @@ image: /assets/img/portfolio/academic-precipitation-preview-1200.webp
 image_alt: First page of Análisis de Series de Tiempo para la Precipitación en Puebla
 detail_image: /assets/img/portfolio/academic-precipitation-first-page.webp
 pdf: /academic-projects/espino_2026_precipitation-time-series-puebla.pdf
+github: https://github.com/heri-espino/Pronostico-de-Series-de-tiempo-para-la-Precipitacion-en-Puebla-con-Modelos-SARIMA-con-Menor-AIC
 contributions:
   - Examines the original and transformed precipitation series with successive seasonal differences.
   - Compares candidate time-series models and selects a final specification.

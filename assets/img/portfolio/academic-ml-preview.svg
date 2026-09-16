@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Machine learning visualization</title>
+  <desc id="desc">An abstract classification plane connected to a small neural-network diagram.</desc>
+  <rect width="1200" height="800" fill="#f4f7fa"/>
+  <rect x="74" y="74" width="1052" height="652" rx="20" fill="#fff" stroke="#d2dce5" stroke-width="3"/>
+  <g stroke="#d2dce5" stroke-width="2"><path d="M150 590H650M150 490H650M150 390H650M150 290H650"/><path d="M250 210V620M350 210V620M450 210V620M550 210V620"/></g>
+  <path d="M180 550 C270 470 350 460 430 380 S550 270 630 232" fill="none" stroke="#123b63" stroke-width="7"/>
+  <path d="M180 550 L630 232 L630 590 L180 590Z" fill="#123b63" opacity=".08"/>
+  <g fill="#123b63" opacity=".82"><circle cx="250" cy="522" r="12"/><circle cx="326" cy="486" r="12"/><circle cx="410" cy="410" r="12"/><circle cx="490" cy="350" r="12"/><circle cx="566" cy="286" r="12"/></g>
+  <g transform="translate(770 260)" stroke="#9bb1c4" stroke-width="4"><path d="M0 0L130 74M0 0L130 198M0 112L130 74M0 112L130 198M0 224L130 74M0 224L130 198M130 74L260 112M130 198L260 112"/></g>
+  <g fill="#123b63" stroke="#fff" stroke-width="6"><circle cx="770" cy="260" r="24"/><circle cx="770" cy="372" r="24"/><circle cx="770" cy="484" r="24"/><circle cx="900" cy="334" r="28"/><circle cx="900" cy="458" r="28"/><circle cx="1030" cy="372" r="30"/></g>
+  <text x="160" y="166" font-family="Arial,sans-serif" font-size="22" letter-spacing="3" fill="#123b63">MODEL STRUCTURE</text>
+</svg>

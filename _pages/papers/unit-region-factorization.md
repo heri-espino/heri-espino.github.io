@@ -20,6 +20,7 @@ image_alt: Numerical unit-region, mean out-degree, and Weibull simulation figure
 detail_image: /assets/img/portfolio/unit-region-preview-800.webp
 detail_image_alt: First page of Unit-Region Factorization for Empty-Region Proximity Graphs
 pdf: /papers/espino_2026_unit-region-factorization.pdf
+github: https://github.com/ProximityGraphs/ProximityGraphs
 contributions:
   - Formalizes pairwise empty-region rules through a normalized Borel template K.
   - 'Derives the volume factorization \(\lambda_d(S(p,q))=\ell_{p,q}^{d}a_K\).'

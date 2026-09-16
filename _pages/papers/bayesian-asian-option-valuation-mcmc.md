@@ -16,6 +16,7 @@ tags: [Bayesian inference, MCMC, Asian options, actuarial science]
 image: /assets/img/portfolio/paper-draft-generic.svg
 image_alt: Stylized research manuscript preview
 pdf: /academic-projects/espino_2026_bayesian-asian-options-report.pdf
+github: https://github.com/heri-espino/Metropolis-Hastings-para-Opciones-Asiaticas-usando-Inferencia-Bayesiana-y-Black-Scholes
 contributions:
   - Implements a random-walk Metropolis–Hastings scheme for drift and volatility under geometric Brownian motion.
   - Compares posterior estimates with classical estimates and examines MCMC diagnostics.

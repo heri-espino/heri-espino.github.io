@@ -16,8 +16,9 @@ framing: "The theoretical one-dimensional representation is checked independentl
 tags: [stochastic geometry, numerical integration, Monte Carlo, reproducible research]
 image: /assets/img/portfolio/stepping-stone-volume-project-preview-1200.webp
 image_alt: Interactive three-dimensional stepping-stone region with an alpha parameter control
+card_url: /projects/stepping-stone-volume-constants.html
 external_url: https://heri-espino.github.io/Stepping-Stone-Volume-Constants/
-external_label: Open interactive figure
+external_label: Preview project
 github: https://github.com/heri-espino/Stepping-Stone-Volume-Constants
 contributions:
   - Implements the one-dimensional representation for normalized stepping-stone diversion-region volume constants.

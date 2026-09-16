@@ -19,6 +19,7 @@ image: /assets/img/portfolio/academic-asian-put-preview-1200.webp
 image_alt: First page of Valuación de Opciones Asiáticas de Venta
 detail_image: /assets/img/portfolio/academic-asian-put-first-page.webp
 pdf: /academic-projects/espino_2026_asian-put-option-valuation.pdf
+github: https://github.com/heri-espino/LAT4092-Derivados-Exoticos
 contributions:
   - Values a geometric-average Asian put through a closed-form expression.
   - Approximates an arithmetic-average Asian put through moment matching.

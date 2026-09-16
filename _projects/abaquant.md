@@ -15,6 +15,7 @@ image: /assets/img/portfolio/abaquant-preview-800.webp
 image_alt: AbaQuant documentation homepage
 external_url: https://abaquant.github.io/AbaQuant/
 external_label: Open documentation
+github: https://github.com/AbaQuant/AbaQuant
 contributions:
   - Covers derivatives, financial mathematics, market data, credit, portfolio, rates, visualization, reports, and provenance.
   - Provides documentation for installation, workflows, stable public imports, API reference material, and examples.

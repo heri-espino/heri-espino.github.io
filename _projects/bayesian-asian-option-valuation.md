@@ -19,6 +19,7 @@ image: /assets/img/portfolio/academic-bayesian-asian-options-preview-1200.webp
 image_alt: First page of the report on Bayesian Asian-option valuation with Metropolis-Hastings
 detail_image: /assets/img/portfolio/academic-bayesian-asian-options-first-page.webp
 pdf: /academic-projects/espino_2026_bayesian-asian-options-report.pdf
+github: https://github.com/heri-espino/Metropolis-Hastings-para-Opciones-Asiaticas-usando-Inferencia-Bayesiana-y-Black-Scholes
 secondary_pdf: /academic-projects/espino_2026_bayesian-asian-options-presentation.pdf
 secondary_pdf_label: Presentation
 contributions:

@@ -1,14 +1,20 @@
 {% assign item = include.item %}
-{% if item.external_url %}
-  {% assign item_destination = item.external_url %}
-{% else %}
+{% assign item_external = false %}
+{% if include.archive_url %}
+  {% assign item_destination = include.archive_url | relative_url %}
+{% elsif item.card_url %}
+  {% assign item_destination = item.card_url | relative_url %}
+{% elsif item.url %}
   {% assign item_destination = item.url | relative_url %}
+{% elsif item.external_url %}
+  {% assign item_destination = item.external_url %}
+  {% assign item_external = true %}
 {% endif %}
 <article class="portfolio-card portfolio-card--{{ item.portfolio_type }}">
   <a
     class="portfolio-card-image"
     href="{{ item_destination }}"
-    {% if item.external_url %}
+    {% if item_external %}
       rel="external nofollow noopener" target="_blank"
     {% endif %}
   >
@@ -33,7 +39,7 @@
     <h3>
       <a
         href="{{ item_destination }}"
-        {% if item.external_url %}
+        {% if item_external %}
           rel="external nofollow noopener" target="_blank"
         {% endif %}
       >

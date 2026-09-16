@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav">
         <ul class="navbar-nav navbar-menu-list flex-nowrap">
           {% comment %}Restore CV by adding `CV|/cv/` before Contact and re-enabling `_pages/cv.md`.{% endcomment %}
-          {% assign nav_items = 'Papers|/papers/,Projects|/projects/,Academics|/academic-projects/,Posters|/presentations/,Notes|/notes/,Repositories|/repositories/,Contact|/contact/'
+          {% assign nav_items = 'Papers|/papers/,Projects|/projects/,Academics|/academic-projects/,Posters|/presentations/,Notes|/notes/,Contact|/contact/'
             | split: ','
           %}
           {% for nav_item in nav_items %}
