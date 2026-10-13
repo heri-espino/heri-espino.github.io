@@ -63,12 +63,12 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 
 {% if academic_projects.size > featured_academic_projects.size %}
 {% assign academic_projects_eyebrow = "Selected academic projects" %}
-{% assign academic_projects_support = "Selected academic and course projects are shown here; visit LinkedIn for certifications, awards, and additional academic activity." %}
+{% assign academic_projects_support = "Selected academic and course projects are shown here; additional training is catalogued in the credentials archive." %}
 {% assign academic_projects_top_link = "Browse all academic projects" %}
 {% assign academic_projects_bottom_link = "Browse the complete academic projects archive" %}
 {% else %}
 {% assign academic_projects_eyebrow = "Academic projects" %}
-{% assign academic_projects_support = "Academic research software and course projects; visit LinkedIn for certifications, awards, and additional academic activity." %}
+{% assign academic_projects_support = "Academic research software and course projects; additional training is catalogued in the credentials archive." %}
 {% assign academic_projects_top_link = "Open academic projects archive" %}
 {% assign academic_projects_bottom_link = "Open academic projects archive" %}
 {% endif %}
@@ -99,9 +99,43 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 
 {% include portfolio/section.liquid id="papers" title="Papers" eyebrow=papers_eyebrow intro="Research in stochastic geometry and empty-region proximity graphs." support=papers_support top_link=papers_top_link bottom_link=papers_bottom_link items=featured_papers preview_items=preview_papers index_url="/papers/" card_archive_url="/papers/" %}
 {% include portfolio/section.liquid id="projects" title="Projects" eyebrow=projects_eyebrow intro="Research software for proximity graphs, quantitative finance, and computational geometry." support=projects_support top_link=projects_top_link bottom_link=projects_bottom_link items=featured_projects preview_items=preview_projects index_url="/projects/" %}
-{% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Course projects in actuarial modeling, quantitative finance, econometrics, and data analysis." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects preview_items=preview_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View certifications and awards on LinkedIn" %}
+{% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Course projects in actuarial modeling, quantitative finance, econometrics, and data analysis." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects preview_items=preview_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View additional activity and awards on LinkedIn" %}
 {% include portfolio/section.liquid id="presentations" title="Posters & Presentations" eyebrow=presentations_eyebrow intro="Visual academic materials from project work." support=presentations_support top_link=presentations_top_link bottom_link=presentations_bottom_link items=featured_presentations preview_items=preview_presentations index_url="/presentations/" %}
 {% include portfolio/section.liquid id="notes" title="Notes" eyebrow=notes_eyebrow intro="Mathematical notes developed through independent study and research preparation." support=notes_support top_link=notes_top_link bottom_link=notes_bottom_link items=featured_notes preview_items=preview_notes index_url="/notes/" %}
+
+{% assign total_credentials = 0 %}
+{% for credential_group in site.data.credentials.groups %}
+  {% assign total_credentials = total_credentials | plus: credential_group.items.size %}
+{% endfor %}
+
+<section class="portfolio-section portfolio-home-section portfolio-credentials-home" id="credentials" aria-labelledby="credentials-title">
+  <div class="portfolio-section-heading">
+    <div>
+      <p class="portfolio-kicker">Further academic training</p>
+      <h2 id="credentials-title">
+        <a class="portfolio-section-title-link" href="{{ '/credentials/' | relative_url }}">
+          <span>Certificates &amp; Schools</span>
+        </a>
+      </h2>
+      <p class="portfolio-section-intro">Academic schools and structured coursework in mathematical sciences, machine learning, and quantitative finance.</p>
+      <p class="portfolio-section-support">A curated preview; the full archive distinguishes academic school attendance, completed specializations, standalone courses, and courses within specializations.</p>
+    </div>
+    <a class="portfolio-section-link" href="{{ '/credentials/' | relative_url }}">Browse credentials <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="portfolio-credentials-preview">
+    <a class="portfolio-credentials-highlight" href="{{ '/credentials/' | relative_url }}#academic-schools">
+      <p class="portfolio-label">Academic school · CIMAT</p>
+      <h3>XXIV School of Probability and Statistics</h3>
+      <p>Academic school attendance, Guanajuato, Mexico · 2026</p>
+    </a>
+    <a class="portfolio-credentials-highlight" href="{{ '/credentials/' | relative_url }}#specializations">
+      <p class="portfolio-label">Specialization · Oxford Saïd</p>
+      <h3>AI in Financial Services</h3>
+      <p>Completed Coursera specialization from Saïd Business School, University of Oxford · 2025</p>
+    </a>
+  </div>
+  <a class="portfolio-archive-cta" href="{{ '/credentials/' | relative_url }}">Browse all {{ total_credentials }} credential records <span aria-hidden="true">→</span></a>
+</section>
 
 <section class="portfolio-section portfolio-home-section portfolio-contact" id="contact" aria-labelledby="contact-title">
   <div class="portfolio-section-heading">
