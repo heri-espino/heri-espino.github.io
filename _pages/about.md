@@ -105,7 +105,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 
 {% assign total_credentials = 0 %}
 {% for credential_group in site.data.credentials.groups %}
-  {% assign total_credentials = total_credentials | plus: credential_group.items.size %}
+{% assign total_credentials = total_credentials | plus: credential_group.items.size %}
 {% endfor %}
 
 <section class="portfolio-section portfolio-home-section portfolio-credentials-home" id="credentials" aria-labelledby="credentials-title">
