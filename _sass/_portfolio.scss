@@ -1120,3 +1120,302 @@ summary:focus-visible {
     overflow-wrap: anywhere;
   }
 }
+
+
+/* Academic schools and completed-course credentials */
+.credentials-intro {
+  max-width: 65rem;
+  margin-bottom: 2.75rem;
+}
+
+.credentials-intro > p:not(.portfolio-kicker) {
+  max-width: 48rem;
+  margin: 0.85rem 0 1.75rem;
+  color: var(--global-text-color-light);
+  font-size: 1.025rem;
+  line-height: 1.7;
+}
+
+.credentials-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.credentials-overview-item {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--global-divider-color);
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+  text-decoration: none;
+}
+
+.credentials-overview-item:hover,
+.credentials-overview-item:focus-visible {
+  border-color: var(--global-theme-color);
+  color: var(--global-theme-color);
+  text-decoration: none;
+}
+
+.credentials-overview-number {
+  display: block;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+
+.credentials-overview-label {
+  display: block;
+  margin-top: 0.55rem;
+  color: var(--global-text-color-light);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.credentials-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.2rem;
+  align-items: end;
+  margin-bottom: 0.85rem;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.credentials-tool {
+  flex: 1 1 17rem;
+  min-width: 0;
+}
+
+.credentials-tool-select {
+  flex: 0 1 15rem;
+}
+
+.credentials-tool label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--global-text-color-light);
+  font-size: 0.79rem;
+  font-weight: 600;
+}
+
+.credentials-tool input,
+.credentials-tool select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0;
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+  font-size: 0.9rem;
+}
+
+.credentials-tool input:focus-visible,
+.credentials-tool select:focus-visible {
+  border-color: var(--global-theme-color);
+}
+
+.credentials-clear {
+  flex: none;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0;
+  background: transparent;
+  color: var(--global-text-color);
+  font-size: 0.88rem;
+}
+
+.credentials-clear:hover,
+.credentials-clear:focus-visible {
+  border-color: var(--global-theme-color);
+  color: var(--global-theme-color);
+}
+
+.credentials-result-count,
+.credentials-empty,
+.credentials-footnote {
+  color: var(--global-text-color-light);
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+
+.credentials-group {
+  margin-top: 2.6rem;
+  scroll-margin-top: 6rem;
+}
+
+.credentials-group[hidden],
+.credentials-entry[hidden],
+.credentials-empty[hidden] {
+  display: none !important;
+}
+
+.credentials-group-heading {
+  margin-bottom: 1.25rem;
+}
+
+.credentials-group-heading h2 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 450;
+  letter-spacing: -0.035em;
+}
+
+.credentials-group-count {
+  color: var(--global-text-color-light);
+  font-size: 0.8em;
+}
+
+.credentials-group-heading > div > p:last-child {
+  max-width: 48rem;
+  margin: 0;
+  color: var(--global-text-color-light);
+  font-size: 0.91rem;
+}
+
+.credentials-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.credentials-entry {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  gap: 0.7rem 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 1.3rem 0.2rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.credentials-index {
+  align-self: start;
+  padding-top: 0.25rem;
+  color: var(--global-text-color-light);
+  font-family: var(--global-font-family-monospace);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.credentials-entry-content {
+  min-width: 0;
+}
+
+.credentials-meta {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  margin: 0 0 0.3rem;
+  color: var(--global-theme-color);
+  font-size: 0.77rem;
+  font-weight: 650;
+}
+
+.credentials-entry h3 {
+  margin: 0;
+  font-size: 1.06rem;
+  font-weight: 550;
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+
+.credentials-issuer {
+  margin: 0.3rem 0 0;
+  color: var(--global-text-color-light);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.credentials-parent {
+  margin: 0.45rem 0 0;
+  color: var(--global-text-color-light);
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.credentials-proof {
+  justify-self: end;
+  color: var(--global-theme-color);
+  font-size: 0.84rem;
+  white-space: nowrap;
+  text-underline-offset: 0.25em;
+}
+
+.credentials-proof-unlinked {
+  color: var(--global-text-color-light);
+}
+
+.credentials-footnote {
+  max-width: 52rem;
+  margin: 2.8rem 0 1rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.portfolio-credentials-preview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.portfolio-credentials-highlight {
+  display: block;
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 1.8rem);
+  border: 1px solid var(--global-divider-color);
+  color: var(--global-text-color);
+  text-decoration: none;
+}
+
+.portfolio-credentials-highlight:hover,
+.portfolio-credentials-highlight:focus-visible {
+  border-color: var(--global-theme-color);
+  color: var(--global-text-color);
+  text-decoration: none;
+}
+
+.portfolio-credentials-highlight h3 {
+  margin: 0.65rem 0 0.5rem;
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.portfolio-credentials-highlight > p:last-child {
+  margin: 0;
+  color: var(--global-text-color-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .credentials-overview,
+  .portfolio-credentials-preview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .credentials-entry {
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+  }
+
+  .credentials-proof {
+    grid-column: 2;
+    justify-self: start;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .credentials-overview,
+  .portfolio-credentials-preview {
+    grid-template-columns: 1fr;
+  }
+}
