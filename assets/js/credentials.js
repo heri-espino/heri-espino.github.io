@@ -12,7 +12,11 @@
   if (!query || !category || !reset || !status || !empty || !records.length) return;
 
   const normalized = (value) =>
-    value.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    value
+      .toLocaleLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
 
   const searchable = records.map((record) => ({
     element: record,
@@ -26,9 +30,7 @@
     let visibleCount = 0;
 
     for (const record of searchable) {
-      const visible =
-        (selectedCategory === "all" || selectedCategory === record.category) &&
-        (!term || record.text.includes(term));
+      const visible = (selectedCategory === "all" || selectedCategory === record.category) && (!term || record.text.includes(term));
 
       record.element.hidden = !visible;
       if (visible) visibleCount += 1;
