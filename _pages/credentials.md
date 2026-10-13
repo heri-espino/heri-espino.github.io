@@ -9,7 +9,7 @@ nav: false
 {% assign credential_groups = site.data.credentials.groups %}
 {% assign credential_total = 0 %}
 {% for group in credential_groups %}
-  {% assign credential_total = credential_total | plus: group.items.size %}
+{% assign credential_total = credential_total | plus: group.items.size %}
 {% endfor %}
 
 <div class="credentials-intro">
