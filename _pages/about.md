@@ -124,18 +124,31 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   </div>
   <div class="portfolio-credentials-preview">
     <a class="portfolio-credentials-highlight" href="{{ '/credentials/' | relative_url }}#academic-schools">
-      <p class="portfolio-label">Academic school · CIMAT</p>
+      <div class="portfolio-credentials-brand">
+        <div class="credentials-logo-wrap" aria-hidden="true">
+          <span class="credentials-logo-fallback">{{ site.data.credential_issuers.cimat.initials }}</span>
+          <img class="credentials-logo" src="{{ site.data.credential_issuers.cimat.logo }}" alt="" loading="lazy" width="64" height="64" data-credential-logo>
+        </div>
+        <p class="portfolio-label">Academic school · CIMAT</p>
+      </div>
       <h3>XXIV School of Probability and Statistics</h3>
       <p>Academic school attendance, Guanajuato, Mexico · 2026</p>
     </a>
     <a class="portfolio-credentials-highlight" href="{{ '/credentials/' | relative_url }}#specializations">
-      <p class="portfolio-label">Specialization · Oxford Saïd</p>
+      <div class="portfolio-credentials-brand">
+        <div class="credentials-logo-wrap" aria-hidden="true">
+          <span class="credentials-logo-fallback">{{ site.data.credential_issuers.oxford.initials }}</span>
+          <img class="credentials-logo" src="{{ site.data.credential_issuers.oxford.logo }}" alt="" loading="lazy" width="64" height="64" data-credential-logo>
+        </div>
+        <p class="portfolio-label">Specialization · Oxford Saïd</p>
+      </div>
       <h3>AI in Financial Services</h3>
       <p>Completed Coursera specialization from Saïd Business School, University of Oxford · 2025</p>
     </a>
   </div>
   <a class="portfolio-archive-cta" href="{{ '/credentials/' | relative_url }}">Browse all {{ total_credentials }} credential records <span aria-hidden="true">→</span></a>
 </section>
+<script src="{{ '/assets/js/credential-logos.js' | relative_url }}" defer></script>
 
 <section class="portfolio-section portfolio-home-section portfolio-contact" id="contact" aria-labelledby="contact-title">
   <div class="portfolio-section-heading">
