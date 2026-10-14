@@ -1284,7 +1284,7 @@ summary:focus-visible {
 
 .credentials-entry {
   display: grid;
-  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  grid-template-columns: 3.8rem minmax(0, 1fr) auto;
   gap: 0.7rem 1rem;
   align-items: center;
   margin: 0;
@@ -1292,13 +1292,40 @@ summary:focus-visible {
   border-bottom: 1px solid var(--global-divider-color);
 }
 
-.credentials-index {
-  align-self: start;
-  padding-top: 0.25rem;
-  color: var(--global-text-color-light);
-  font-family: var(--global-font-family-monospace);
-  font-size: 0.75rem;
-  font-variant-numeric: tabular-nums;
+.credentials-logo-wrap {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  overflow: hidden;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.45rem;
+  background: #ffffff;
+}
+
+.credentials-logo-fallback {
+  grid-area: 1 / 1;
+  color: #34495e;
+  font-family: var(--portfolio-font-family);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.credentials-logo {
+  display: block;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  padding: 0.4rem;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+.credentials-logo[hidden] {
+  display: none;
 }
 
 .credentials-entry-content {
@@ -1309,8 +1336,8 @@ summary:focus-visible {
   display: flex;
   gap: 0.4rem;
   align-items: baseline;
-  margin: 0 0 0.3rem;
-  color: var(--global-theme-color);
+  margin: 0.4rem 0 0;
+  color: var(--global-text-color-light);
   font-size: 0.77rem;
   font-weight: 650;
 }
@@ -1324,8 +1351,8 @@ summary:focus-visible {
 }
 
 .credentials-issuer {
-  margin: 0.3rem 0 0;
-  color: var(--global-text-color-light);
+  margin: 0.28rem 0 0;
+  color: var(--global-text-color);
   font-size: 0.92rem;
   line-height: 1.4;
 }
@@ -1380,8 +1407,19 @@ summary:focus-visible {
   text-decoration: none;
 }
 
+.portfolio-credentials-brand {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.portfolio-credentials-brand .credentials-logo-wrap {
+  width: 3rem;
+  height: 3rem;
+}
+
 .portfolio-credentials-highlight h3 {
-  margin: 0.65rem 0 0.5rem;
+  margin: 1.05rem 0 0.5rem;
   font-size: clamp(1.2rem, 2.4vw, 1.55rem);
   font-weight: 500;
   line-height: 1.2;
@@ -1402,7 +1440,12 @@ summary:focus-visible {
   }
 
   .credentials-entry {
-    grid-template-columns: 1.8rem minmax(0, 1fr);
+    grid-template-columns: 3.1rem minmax(0, 1fr);
+  }
+
+  .credentials-entry > .credentials-logo-wrap {
+    width: 2.9rem;
+    height: 2.9rem;
   }
 
   .credentials-proof {

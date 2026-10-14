@@ -51,7 +51,6 @@ nav: false
 </p>
 <p class="credentials-empty" id="credential-empty" hidden>No credentials match these filters.</p>
 
-{% assign credential_rank = 0 %}
 {% for group in credential_groups %}
   <section class="credentials-group" id="{{ group.id }}" data-credential-group>
     <div class="credentials-group-heading">
@@ -63,16 +62,21 @@ nav: false
     </div>
     <ol class="credentials-list">
       {% for item in group.items %}
-        {% assign credential_rank = credential_rank | plus: 1 %}
+        {% assign issuer = site.data.credential_issuers[item.issuer_key] %}
         <li class="credentials-entry" data-credential-entry data-category="{{ group.id }}">
-          <span class="credentials-index" aria-hidden="true">{{ credential_rank }}</span>
+          <div class="credentials-logo-wrap" aria-hidden="true">
+            <span class="credentials-logo-fallback">{{ issuer.initials | default: '?' }}</span>
+            {% if issuer.logo %}
+              <img class="credentials-logo" src="{{ issuer.logo }}" alt="" loading="lazy" width="64" height="64" data-credential-logo>
+            {% endif %}
+          </div>
           <div class="credentials-entry-content">
+            <h3>{{ item.title }}</h3>
+            <p class="credentials-issuer">{{ item.issuer }}</p>
             <p class="credentials-meta">
               {% if group.id == 'academic-schools' %}Attendance{% elsif group.id == 'specializations' %}Specialization{% else %}Course{% endif %}
               {% if item.issued %}<span aria-hidden="true">·</span> {{ item.issued }}{% endif %}
             </p>
-            <h3>{{ item.title }}</h3>
-            <p class="credentials-issuer">{{ item.issuer }}</p>
             {% if item.part_of %}
               <p class="credentials-parent">Part of {{ item.part_of }}</p>
             {% endif %}
@@ -97,3 +101,4 @@ nav: false
 </p>
 
 <script src="{{ '/assets/js/credentials.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/credential-logos.js' | relative_url }}" defer></script>
