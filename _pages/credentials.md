@@ -101,3 +101,4 @@ nav: false
 </p>
 
 <script src="{{ '/assets/js/credentials.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/credential-logos.js' | relative_url }}" defer></script>
