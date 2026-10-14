@@ -1,0 +1,1 @@
+document.querySelectorAll("[data-credential-logo]").forEach(e=>{const t=()=>{e.hidden=!0};e.addEventListener("error",t,{once:!0}),e.complete&&0===e.naturalWidth&&t()});
