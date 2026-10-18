@@ -19,7 +19,7 @@
       <span aria-hidden="true">→</span></a
     >
   </div>
-  <div class="portfolio-grid">
+  <div class="portfolio-grid" data-portfolio-collection data-collection-label="{{ include.title | escape }}">
     {% for item in include.items %}
       {% include portfolio/card.liquid item=item archive_url=include.card_archive_url %}
     {% endfor %}
