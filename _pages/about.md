@@ -122,7 +122,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     </div>
     <a class="portfolio-section-link" href="{{ '/credentials/' | relative_url }}">Browse credentials <span aria-hidden="true">→</span></a>
   </div>
-  <div class="portfolio-credentials-preview" data-portfolio-collection data-collection-label="Certificates and schools">
+  <div class="portfolio-credentials-preview">
     <a class="portfolio-credentials-highlight" data-sort-date="Mar 2026" data-sort-title="XXIV School of Probability and Statistics" href="{{ '/credentials/' | relative_url }}#academic-schools">
       <div class="portfolio-credentials-brand">
         <div class="credentials-logo-wrap" aria-hidden="true">
@@ -149,7 +149,6 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   <a class="portfolio-archive-cta" href="{{ '/credentials/' | relative_url }}">Browse all {{ total_credentials }} credential records <span aria-hidden="true">→</span></a>
 </section>
 <script src="{{ '/assets/js/credential-logos.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/portfolio-views.js' | relative_url }}" defer></script>
 
 <section class="portfolio-section portfolio-home-section portfolio-contact" id="contact" aria-labelledby="contact-title">
   <div class="portfolio-section-heading">
