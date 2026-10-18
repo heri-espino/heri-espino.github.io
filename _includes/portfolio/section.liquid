@@ -19,9 +19,9 @@
       <span aria-hidden="true">→</span></a
     >
   </div>
-  <div class="portfolio-grid" data-portfolio-collection data-collection-label="{{ include.title | escape }}">
+  <div class="portfolio-grid">
     {% for item in include.items %}
-      {% include portfolio/card.liquid item=item archive_url=include.card_archive_url %}
+      {% include portfolio/card.liquid item=item archive_url=include.index_url %}
     {% endfor %}
   </div>
   {% if include.preview_items and include.preview_items.size > 0 %}
