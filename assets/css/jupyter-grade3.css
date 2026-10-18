@@ -481,6 +481,14 @@ pre {
 }
 
 
+video {
+  display: inline;
+  vertical-align: middle;
+  align-content: center;
+  margin-left: 20%;
+}
+
+
 .MathJax {
   border: 0 !important;
   font-size: 100% !important;
