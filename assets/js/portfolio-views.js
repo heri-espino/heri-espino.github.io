@@ -1,81 +1,116 @@
-// Progressive enhancement for portfolio collections: grid/list views and sorting.
-// Original content and order remain accessible without JavaScript.
+// Archive-only search, sorting and view controls.
+// Content remains readable in its featured order without JavaScript.
 (() => {
   const months = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const normalize = (value) =>
+    (value || "").toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+
   const dateValue = (input) => {
     const value = (input || "").trim();
     if (!value) return null;
-    const yearOnly = value.match(/^(20\d{2})$/);
-    if (yearOnly) return Date.UTC(Number(yearOnly[1]), 0, 1);
+    const year = value.match(/^(20\d{2})$/);
+    if (year) return Date.UTC(Number(year[1]), 0, 1);
     const monthYear = value.match(/^([A-Za-z]{3,9})\.?\s+(20\d{2})$/);
-    if (monthYear && Object.hasOwn(months, monthYear[1].slice(0, 3).toLowerCase())) {
-      return Date.UTC(Number(monthYear[2]), months[monthYear[1].slice(0, 3).toLowerCase()], 1);
+    if (monthYear) {
+      const month = monthYear[1].slice(0, 3).toLowerCase();
+      if (Object.hasOwn(months, month)) return Date.UTC(Number(monthYear[2]), months[month], 1);
     }
     const iso = value.match(/^(20\d{2})-(\d{2})(?:-(\d{2}))?$/);
     if (iso) return Date.UTC(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3] || 1));
-    return null; // Unknown dates appear last, without guessing.
+    return null; // Keep undated items last in date sorts instead of inventing dates.
   };
 
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.querySelectorAll("[data-portfolio-collection]").forEach((collection, collectionIndex) => {
-    const items = Array.from(collection.children).filter((item) =>
-      item.matches(".portfolio-card, .portfolio-credentials-highlight")
-    );
-    if (!items.length) return;
-    const collectionName = collection.dataset.collectionLabel || "Portfolio";
-    const id = `portfolio-view-${collectionIndex}`;
-    const controls = document.createElement("div");
-    controls.className = "portfolio-view-tools";
-    controls.setAttribute("aria-label", `${collectionName} display options`);
-    controls.innerHTML = `
-      <div class="portfolio-view-toggle" role="group" aria-label="View ${collectionName}">
-        <span class="portfolio-view-label">View</span>
-        <button type="button" data-view-option="grid" aria-pressed="true">Grid</button>
-        <button type="button" data-view-option="list" aria-pressed="false">List</button>
-      </div>
-      <div class="portfolio-sort-control">
-        <label for="${id}">Sort by</label>
-        <select id="${id}">
-          <option value="curated">Featured order</option>
-          <option value="newest">Newest first</option>
-          <option value="oldest">Oldest first</option>
-          <option value="title">Title A–Z</option>
-        </select>
-      </div>`;
-    collection.before(controls);
+  document.querySelectorAll("[data-portfolio-archive]").forEach((collection, index) => {
+    const elements = Array.from(collection.children).filter((node) => node.matches(".portfolio-card"));
+    if (!elements.length) return;
 
-    const initial = items.map((element, index) => ({
+    const label = collection.dataset.collectionLabel || "portfolio";
+    const id = "portfolio-archive-" + index;
+    const controls = document.createElement("div");
+    controls.className = "credentials-tools portfolio-archive-tools";
+    controls.setAttribute("role", "search");
+    controls.setAttribute("aria-label", "Filter " + label);
+    controls.innerHTML = [
+      '<div class="credentials-tool"><label for="' + id + '-query">Search by title or topic</label>',
+      '<input type="search" id="' + id + '-query" placeholder="Search ' + label.toLowerCase() + '" autocomplete="off"></div>',
+      '<div class="credentials-tool credentials-tool-select"><label for="' + id + '-sort">Sort records</label>',
+      '<select id="' + id + '-sort"><option value="curated">Featured order</option>',
+      '<option value="newest">Newest first</option><option value="oldest">Oldest first</option>',
+      '<option value="title">Title A–Z</option></select></div>',
+      '<div class="credentials-tool credentials-tool-select"><label for="' + id + '-view">View</label>',
+      '<select id="' + id + '-view"><option value="grid">Grid</option><option value="list">List</option></select></div>',
+      '<button type="button" class="credentials-clear" data-archive-reset>Reset</button>',
+    ].join("");
+
+    const status = document.createElement("p");
+    status.className = "credentials-result-count";
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    const empty = document.createElement("p");
+    empty.className = "credentials-empty";
+    empty.textContent = "No records match these filters.";
+    empty.hidden = true;
+    collection.before(controls, status, empty);
+
+    const query = controls.querySelector('input[type="search"]');
+    const sort = controls.querySelector("select[id$='-sort']");
+    const view = controls.querySelector("select[id$='-view']");
+    const reset = controls.querySelector("[data-archive-reset]");
+    const records = elements.map((element, originalIndex) => ({
       element,
-      index,
-      title: (element.dataset.sortTitle || element.querySelector("h3")?.textContent || "").trim(),
+      originalIndex,
+      title: normalize(element.dataset.sortTitle || element.querySelector("h3")?.textContent),
+      text: normalize(element.textContent),
       date: dateValue(element.dataset.sortDate),
     }));
-    const buttons = controls.querySelectorAll("[data-view-option]");
-    buttons.forEach((button) =>
-      button.addEventListener("click", () => {
-        const view = button.dataset.viewOption;
-        collection.dataset.view = view;
-        buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-      })
-    );
-    controls.querySelector("select").addEventListener("change", (event) => {
-      const selected = event.target.value;
-      const ordered = [...initial].sort((a, b) => {
-        if (selected === "title") return a.title.localeCompare(b.title, undefined, { sensitivity: "base" }) || a.index - b.index;
-        if (selected === "newest" || selected === "oldest") {
-          if (a.date === null) return b.date === null ? a.index - b.index : 1;
+
+    const reorder = () => {
+      const choice = sort.value;
+      const ordered = [...records].sort((a, b) => {
+        if (choice === "title") return a.title.localeCompare(b.title) || a.originalIndex - b.originalIndex;
+        if (choice === "newest" || choice === "oldest") {
+          if (a.date === null) return b.date === null ? a.originalIndex - b.originalIndex : 1;
           if (b.date === null) return -1;
-          return (selected === "newest" ? b.date - a.date : a.date - b.date) || a.index - b.index;
+          return (choice === "newest" ? b.date - a.date : a.date - b.date) || a.originalIndex - b.originalIndex;
         }
-        return a.index - b.index;
+        return a.originalIndex - b.originalIndex;
       });
-      ordered.forEach(({ element }) => collection.append(element));
-      if (!reducedMotion) {
+      ordered.forEach((record) => collection.append(record.element));
+      if (!reducedMotion && choice !== "curated") {
         collection.classList.remove("is-reordering");
-        // Restart the subtle transition when users actively change sorting.
         void collection.offsetWidth;
         collection.classList.add("is-reordering");
+      } else {
+        collection.classList.remove("is-reordering");
       }
+    };
+
+    const filter = () => {
+      const term = normalize(query.value);
+      let count = 0;
+      records.forEach((record) => {
+        const visible = !term || record.text.includes(term);
+        record.element.hidden = !visible;
+        if (visible) count += 1;
+      });
+      status.textContent = term ? "Showing " + count + " of " + records.length + " records" : "Showing all " + records.length + " records";
+      empty.hidden = count !== 0;
+    };
+
+    query.addEventListener("input", filter);
+    sort.addEventListener("change", reorder);
+    view.addEventListener("change", () => { collection.dataset.view = view.value; });
+    reset.addEventListener("click", () => {
+      query.value = "";
+      sort.value = "curated";
+      view.value = "grid";
+      collection.dataset.view = "grid";
+      reorder();
+      filter();
+      query.focus();
     });
+    filter();
   });
 })();
