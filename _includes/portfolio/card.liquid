@@ -10,7 +10,7 @@
   {% assign item_destination = item.external_url %}
   {% assign item_external = true %}
 {% endif %}
-<article class="portfolio-card portfolio-card--{{ item.portfolio_type }}">
+<article class="portfolio-card portfolio-card--{{ item.portfolio_type }}" data-sort-date="{{ item.display_date | default: item.date | escape }}" data-sort-title="{{ item.card_title | default: item.title | escape }}">
   <a
     class="portfolio-card-image"
     href="{{ item_destination }}"
