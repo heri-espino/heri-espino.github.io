@@ -9,11 +9,10 @@ layout: default
     </div>
     <h1>{{ page.title }}</h1>
     <div class="portfolio-detail-meta">
-      <p class="portfolio-authors">{{ page.authors }}</p>
-      <p class="portfolio-meta">
-        {{ page.display_date -}}
-        {%- if page.location %} · {{ page.location }}{% endif %}
-      </p>
+      {% if page.authors %}<p class="portfolio-authors">{{ page.authors }}</p>{% endif %}
+      {% if page.display_date or page.location %}
+        <p class="portfolio-meta">{{ page.display_date }}{% if page.location %} · {{ page.location }}{% endif %}</p>
+      {% endif %}
     </div>
   </header>
 
@@ -62,6 +61,11 @@ layout: default
     </aside>
 
     <div class="portfolio-detail-content">
+      {% if page.video_id %}
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ page.video_id | escape }}" title="Recorded talk on YouTube" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      {% endif %}
       <section class="portfolio-reading-section">
         <h2>Summary</h2>
         <p>{{ page.summary }}</p>
@@ -75,6 +79,7 @@ layout: default
           <p>{{ page.framing }}</p>
         </section>
       {% endif %}
+      {% if page.contributions and page.contributions.size > 0 %}
       <section class="portfolio-reading-section">
         <h2>Main contributions</h2>
         <ul>
@@ -83,6 +88,7 @@ layout: default
           {% endfor %}
         </ul>
       </section>
+      {% endif %}
       {{ content }}
     </div>
   </div>
