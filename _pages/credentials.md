@@ -44,6 +44,22 @@ nav: false
       {% endfor %}
     </select>
   </div>
+  <div class="credentials-tool credentials-tool-select">
+    <label for="credential-sort">Sort records</label>
+    <select id="credential-sort">
+      <option value="curated">Featured order</option>
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="title">Title A–Z</option>
+    </select>
+  </div>
+  <div class="credentials-tool credentials-tool-select">
+    <label for="credential-view">View</label>
+    <select id="credential-view">
+      <option value="list">List</option>
+      <option value="grid">Grid</option>
+    </select>
+  </div>
   <button class="credentials-clear" id="credential-clear" type="button">Reset</button>
 </div>
 <p class="credentials-result-count" id="credential-results" role="status" aria-live="polite">
@@ -60,10 +76,10 @@ nav: false
         <p>{{ group.intro }}</p>
       </div>
     </div>
-    <ol class="credentials-list">
+    <ol class="credentials-list" data-view="list">
       {% for item in group.items %}
         {% assign issuer = site.data.credential_issuers[item.issuer_key] %}
-        <li class="credentials-entry" data-credential-entry data-category="{{ group.id }}">
+        <li class="credentials-entry" data-credential-entry data-category="{{ group.id }}" data-sort-date="{{ item.issued | default: '' | escape }}" data-sort-title="{{ item.title | escape }}">
           <div class="credentials-logo-wrap" aria-hidden="true">
             <span class="credentials-logo-fallback">{{ issuer.initials | default: '?' }}</span>
             {% if issuer.logo %}
