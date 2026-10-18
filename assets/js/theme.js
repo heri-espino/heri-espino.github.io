@@ -70,6 +70,10 @@ let initScrollMotion = () => {
   const selectors = [
     ".portfolio-hero > *",
     ".portfolio-section-heading",
+    ".portfolio-view-tools",
+    ".credentials-group-heading",
+    ".credentials-entry",
+    ".portfolio-credentials-highlight",
     ".portfolio-grid > .portfolio-card",
     ".portfolio-more-work",
     ".portfolio-archive-cta",
