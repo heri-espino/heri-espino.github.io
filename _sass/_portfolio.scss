@@ -1463,65 +1463,21 @@ summary:focus-visible {
 }
 
 
-/* Consistent grid/list and date sorting controls across portfolio archives and previews. */
-.portfolio-view-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem 1.7rem;
-  align-items: end;
-  justify-content: space-between;
-  margin: 0.8rem 0 1.3rem;
-  padding: 0.75rem 0;
-  border-top: 1px solid var(--global-divider-color);
-  border-bottom: 1px solid var(--global-divider-color);
+
+/* Archive controls use the same labeled field layout as the credentials archive. */
+.portfolio-archive-tools .credentials-tool {
+  flex: 1 1 11rem;
 }
 
-.portfolio-view-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+.portfolio-archive-tools .credentials-tool:first-child {
+  flex: 2 1 19rem;
 }
 
-.portfolio-view-label,
-.portfolio-sort-control label {
-  margin: 0 0.65rem 0 0;
-  color: var(--global-text-color-light);
-  font-size: 0.78rem;
-  font-weight: 650;
+.portfolio-grid > .portfolio-card[hidden] {
+  display: none !important;
 }
 
-.portfolio-view-toggle button,
-.portfolio-sort-control select {
-  min-height: 2.2rem;
-  padding: 0.42rem 0.75rem;
-  border: 1px solid var(--global-divider-color);
-  border-radius: 0;
-  background: var(--global-bg-color);
-  color: var(--global-text-color);
-  font-size: 0.81rem;
-  cursor: pointer;
-}
-
-.portfolio-view-toggle button[aria-pressed="true"] {
-  border-color: var(--global-theme-color);
-  background: var(--global-theme-color);
-  color: var(--global-hover-text-color);
-}
-
-.portfolio-view-toggle button:focus-visible,
-.portfolio-sort-control select:focus-visible {
-  outline: 3px solid var(--portfolio-focus-color);
-  outline-offset: 3px;
-}
-
-.portfolio-sort-control {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.portfolio-grid[data-view="list"],
-.portfolio-credentials-preview[data-view="list"] {
+.portfolio-grid[data-view="list"] {
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
 }
@@ -1546,17 +1502,6 @@ summary:focus-visible {
 
 .portfolio-grid[data-view="list"] .portfolio-tags {
   padding-bottom: 0;
-}
-
-.portfolio-credentials-preview[data-view="list"] .portfolio-credentials-highlight {
-  display: grid;
-  grid-template-columns: minmax(10rem, 24%) minmax(0, 1fr);
-  align-items: center;
-  column-gap: 1.25rem;
-}
-
-.portfolio-credentials-preview[data-view="list"] .portfolio-credentials-highlight h3 {
-  margin-top: 0.1rem;
 }
 
 /* The credentials archive defaults to list; grid is an explicit visitor choice. */
@@ -1640,7 +1585,6 @@ summary:focus-visible {
 }
 
 .portfolio-grid.is-reordering > .portfolio-card,
-.portfolio-credentials-preview.is-reordering > .portfolio-credentials-highlight,
 .credentials-list.is-reordering > .credentials-entry:not([hidden]) {
   animation: portfolio-item-arrive 330ms var(--portfolio-motion-ease) both;
 }
@@ -1673,9 +1617,6 @@ summary:focus-visible {
     max-width: 100%;
   }
 
-  .portfolio-credentials-preview[data-view="list"] .portfolio-credentials-highlight {
-    display: block;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1696,8 +1637,112 @@ summary:focus-visible {
     transform: none;
   }
   .portfolio-grid.is-reordering > .portfolio-card,
-  .portfolio-credentials-preview.is-reordering > .portfolio-credentials-highlight,
   .credentials-list.is-reordering > .credentials-entry:not([hidden]) {
     animation: none;
+  }
+}
+
+
+/* Homepage previews act as quiet, static links to their section archives. */
+body:has(.portfolio-hero) .portfolio-hero *,
+body:has(.portfolio-hero) .portfolio-home-section *,
+body:has(.portfolio-hero) .portfolio-home-section *::before,
+body:has(.portfolio-hero) .portfolio-home-section *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+body:has(.portfolio-hero) .portfolio-hero a:hover,
+body:has(.portfolio-hero) .portfolio-home-section a:hover,
+body:has(.portfolio-hero) .portfolio-hero a:focus-visible,
+body:has(.portfolio-hero) .portfolio-home-section a:focus-visible,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-card:hover,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-card:focus-within,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-card h3 a:hover,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-credentials-highlight:hover,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-credentials-highlight:focus-visible,
+body:has(.portfolio-hero) .portfolio-home-section .credentials-logo:hover,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-credentials-highlight:hover .credentials-logo,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:hover,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:focus-visible {
+  transform: none !important;
+}
+
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:hover .portfolio-more-teaser-inner,
+body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:focus-visible .portfolio-more-teaser-inner {
+  opacity: 0.58;
+  filter: blur(1px);
+}
+
+/* Certificate actions are animated buttons in GRID mode only. */
+.credentials-list:not([data-view="grid"]) .credentials-entry:hover,
+.credentials-list:not([data-view="grid"]) .credentials-entry:focus-within,
+.credentials-list:not([data-view="grid"]) .credentials-entry:hover .credentials-logo,
+.credentials-list:not([data-view="grid"]) .credentials-entry:focus-within .credentials-logo {
+  transform: none;
+}
+
+.credentials-list:not([data-view="grid"]) .credentials-proof {
+  transition: none;
+}
+
+.credentials-list:not([data-view="grid"]) .credentials-proof:hover,
+.credentials-list:not([data-view="grid"]) .credentials-proof:focus-visible {
+  transform: none;
+}
+
+.credentials-list[data-view="grid"] .credentials-proof:not(.credentials-proof-unlinked) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--global-theme-color);
+  background: transparent;
+  color: var(--global-theme-color);
+  font-weight: 650;
+  text-decoration: none;
+  transform-origin: left center;
+  transition:
+    color 250ms var(--portfolio-motion-ease),
+    background-color 250ms var(--portfolio-motion-ease),
+    border-color 250ms var(--portfolio-motion-ease),
+    transform 320ms var(--portfolio-motion-ease);
+}
+
+.credentials-list[data-view="grid"] .credentials-proof:not(.credentials-proof-unlinked):hover,
+.credentials-list[data-view="grid"] .credentials-proof:not(.credentials-proof-unlinked):focus-visible {
+  background: var(--global-theme-color);
+  color: var(--global-hover-text-color);
+  transform: translateY(-2px);
+}
+
+@keyframes certificate-action-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.credentials-list[data-view="grid"].is-grid-activated .credentials-proof:not(.credentials-proof-unlinked) {
+  animation: certificate-action-enter 380ms var(--portfolio-motion-ease) both;
+}
+
+.credentials-list[data-view="grid"].is-grid-activated .credentials-entry:nth-child(even) .credentials-proof:not(.credentials-proof-unlinked) {
+  animation-delay: 65ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .credentials-list[data-view="grid"] .credentials-proof:not(.credentials-proof-unlinked) {
+    animation: none !important;
+    transition: none !important;
+  }
+  .credentials-list[data-view="grid"] .credentials-proof:not(.credentials-proof-unlinked):hover,
+  .credentials-list[data-view="grid"] .credentials-proof:not(.credentials-proof-unlinked):focus-visible {
+    transform: none !important;
   }
 }
