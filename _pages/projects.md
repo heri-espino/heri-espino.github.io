@@ -9,7 +9,7 @@ nav_order: 3
 
 {% assign items = site.projects | where: "portfolio_section", "projects" | sort: "importance" %}
 
-<div class="portfolio-grid" data-portfolio-collection data-collection-label="Projects">
+<div class="portfolio-grid" data-portfolio-archive data-collection-label="Projects">
   {% for item in items %}
     {% include portfolio/card.liquid item=item %}
   {% endfor %}
