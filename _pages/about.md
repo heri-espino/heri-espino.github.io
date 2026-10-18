@@ -122,8 +122,8 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     </div>
     <a class="portfolio-section-link" href="{{ '/credentials/' | relative_url }}">Browse credentials <span aria-hidden="true">→</span></a>
   </div>
-  <div class="portfolio-credentials-preview">
-    <a class="portfolio-credentials-highlight" href="{{ '/credentials/' | relative_url }}#academic-schools">
+  <div class="portfolio-credentials-preview" data-portfolio-collection data-collection-label="Certificates and schools">
+    <a class="portfolio-credentials-highlight" data-sort-date="Mar 2026" data-sort-title="XXIV School of Probability and Statistics" href="{{ '/credentials/' | relative_url }}#academic-schools">
       <div class="portfolio-credentials-brand">
         <div class="credentials-logo-wrap" aria-hidden="true">
           <span class="credentials-logo-fallback">{{ site.data.credential_issuers.cimat.initials }}</span>
@@ -134,7 +134,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
       <h3>XXIV School of Probability and Statistics</h3>
       <p>Academic school attendance, Guanajuato, Mexico · 2026</p>
     </a>
-    <a class="portfolio-credentials-highlight" href="{{ '/credentials/' | relative_url }}#specializations">
+    <a class="portfolio-credentials-highlight" data-sort-date="Aug 2025" data-sort-title="AI in Financial Services" href="{{ '/credentials/' | relative_url }}#specializations">
       <div class="portfolio-credentials-brand">
         <div class="credentials-logo-wrap" aria-hidden="true">
           <span class="credentials-logo-fallback">{{ site.data.credential_issuers.oxford.initials }}</span>
@@ -149,6 +149,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   <a class="portfolio-archive-cta" href="{{ '/credentials/' | relative_url }}">Browse all {{ total_credentials }} credential records <span aria-hidden="true">→</span></a>
 </section>
 <script src="{{ '/assets/js/credential-logos.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/portfolio-views.js' | relative_url }}" defer></script>
 
 <section class="portfolio-section portfolio-home-section portfolio-contact" id="contact" aria-labelledby="contact-title">
   <div class="portfolio-section-heading">
