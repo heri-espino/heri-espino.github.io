@@ -82,14 +82,23 @@
   category.addEventListener("change", update);
   sort.addEventListener("change", reorder);
   view.addEventListener("change", () => {
-    groups.forEach((group) => (group.querySelector(".credentials-list").dataset.view = view.value));
+    groups.forEach((group) => {
+      const list = group.querySelector(".credentials-list");
+      list.dataset.view = view.value;
+      // Animate certificate actions when switching into grid view, but not in list view.
+      list.classList.toggle("is-grid-activated", view.value === "grid");
+    });
   });
   reset.addEventListener("click", () => {
     query.value = "";
     category.value = "all";
     sort.value = "curated";
     view.value = "list";
-    groups.forEach((group) => (group.querySelector(".credentials-list").dataset.view = "list"));
+    groups.forEach((group) => {
+      const list = group.querySelector(".credentials-list");
+      list.dataset.view = "list";
+      list.classList.remove("is-grid-activated");
+    });
     reorder();
     update();
     query.focus();
