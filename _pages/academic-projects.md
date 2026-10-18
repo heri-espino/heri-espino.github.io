@@ -8,7 +8,7 @@ nav: false
 
 {% assign items = site.projects | where: "portfolio_section", "academic-projects" | sort: "importance" %}
 
-<div class="portfolio-grid" data-portfolio-collection data-collection-label="Academic Projects">
+<div class="portfolio-grid" data-portfolio-archive data-collection-label="Academic Projects">
   {% for item in items %}
     {% include portfolio/card.liquid item=item %}
   {% endfor %}
