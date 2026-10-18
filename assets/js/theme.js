@@ -1,6 +1,6 @@
 // al-folio-compatible theme behavior with light as the first-visit default.
 
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.location.pathname !== "/" && !window.location.pathname.endsWith("/index.html")) {
   document.documentElement.classList.add("portfolio-page-enter-motion");
 }
 
@@ -72,8 +72,6 @@ let initScrollMotion = () => {
     ".portfolio-section-heading",
     ".portfolio-view-tools",
     ".credentials-group-heading",
-    ".credentials-entry",
-    ".portfolio-credentials-highlight",
     ".portfolio-grid > .portfolio-card",
     ".portfolio-more-work",
     ".portfolio-archive-cta",
@@ -135,5 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("light-toggle");
   if (toggle) toggle.addEventListener("click", toggleThemeSetting);
   applyTheme();
-  initScrollMotion();
+  // The homepage is a static navigation overview; motion belongs to the archive pages.
+  if (document.querySelector(".portfolio-hero")) {
+    document.documentElement.classList.remove("portfolio-page-enter-motion", "portfolio-scroll-motion");
+  } else {
+    initScrollMotion();
+  }
 });
