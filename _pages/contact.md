@@ -53,5 +53,37 @@ nav_order: 6
       <span aria-hidden="true">↗</span>
     </a>
 
+    <a class="contact-page-link" href="{{ site.data.socials.google_scholar_profile_url }}">
+      <span>
+        <span class="portfolio-label">Google Scholar · Publications</span>
+        <strong>Google Scholar profile</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <a class="contact-page-link" href="{{ site.data.socials.ssrn_author_url }}">
+      <span>
+        <span class="portfolio-label">SSRN · Author profile</span>
+        <strong>SSRN author 13723349</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <a class="contact-page-link" href="{{ site.data.socials.zenodo_archive_url }}">
+      <span>
+        <span class="portfolio-label">Zenodo · Research software archive</span>
+        <strong>Stepping-Stone Volume: Theory, Monte Carlo Validation, and Figures</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <a class="contact-page-link" href="{{ site.data.socials.pypi_profile_url }}">
+      <span>
+        <span class="portfolio-label">PyPI · Python packages</span>
+        <strong>pypi.org/user/heritaco</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
   </div>
 </div>
