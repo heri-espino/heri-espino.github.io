@@ -15,6 +15,8 @@ description: Academic portfolio of Heriberto Espino Montelongo.
       <a href="mailto:{{ site.data.socials.email }}">Email</a>
       <a href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}/">LinkedIn</a>
       <a href="https://github.com/{{ site.data.socials.github_username }}">GitHub</a>
+      <a href="https://orcid.org/{{ site.data.socials.orcid_id }}">ORCID</a>
+      <a href="{{ site.data.socials.researchgate_profile_url }}">ResearchGate</a>
     </nav>
     {% comment %}Restore the View CV link here when `_pages/cv.md` is republished.{% endcomment %}
   </div>
@@ -166,6 +168,8 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     <a href="mailto:{{ site.data.socials.email }}">{{ site.data.socials.email }}</a>
     <a href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}/">LinkedIn</a>
     <a href="https://github.com/{{ site.data.socials.github_username }}">GitHub</a>
+    <a href="https://orcid.org/{{ site.data.socials.orcid_id }}">ORCID</a>
+    <a href="{{ site.data.socials.researchgate_profile_url }}">ResearchGate</a>
     {% comment %}Restore the CV contact link here when `_pages/cv.md` is republished.{% endcomment %}
   </div>
 </section>

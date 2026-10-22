@@ -37,5 +37,21 @@ nav_order: 6
       <span aria-hidden="true">↗</span>
     </a>
 
+    <a class="contact-page-link" href="https://orcid.org/{{ site.data.socials.orcid_id }}">
+      <span>
+        <span class="portfolio-label">ORCID · Researcher identifier</span>
+        <strong>{{ site.data.socials.orcid_id }}</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <a class="contact-page-link" href="{{ site.data.socials.researchgate_profile_url }}">
+      <span>
+        <span class="portfolio-label">ResearchGate · Research profile</span>
+        <strong>researchgate.net/profile/Heriberto-Espino-Montelongo</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+
   </div>
 </div>
