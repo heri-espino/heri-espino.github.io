@@ -1746,30 +1746,3 @@ body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:fo
     transform: none !important;
   }
 }
-
-/* Linked external research records without unverified bibliographic metadata. */
-.portfolio-external-paper {
-  margin: 0 0 2.4rem;
-  padding: clamp(1.2rem, 3vw, 1.8rem);
-  border: 1px solid var(--global-divider-color);
-  background: var(--global-card-bg-color);
-}
-
-.portfolio-external-paper h2 {
-  margin: 0.55rem 0;
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-
-.portfolio-external-paper > p:not(.portfolio-kicker) {
-  max-width: 46rem;
-  margin: 0 0 1rem;
-  color: var(--global-text-color-light);
-  font-size: 0.92rem;
-  line-height: 1.65;
-}
-
-.portfolio-external-paper .portfolio-section-profile-link {
-  font-size: 0.88rem;
-}
