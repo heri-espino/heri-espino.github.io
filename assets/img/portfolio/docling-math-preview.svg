@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Docling Math illustration</title>
+  <desc id="desc">An academic PDF containing a mathematical formula is converted into a structured Markdown document.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0a2742"/><stop offset="1" stop-color="#123b63"/>
+    </linearGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" fill="none" stroke="#dce9f5" stroke-opacity=".08"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <text x="75" y="122" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#bdd7eb">RESEARCH SOFTWARE</text>
+  <text x="75" y="200" font-family="Arial,Helvetica,sans-serif" font-size="62" font-weight="600" fill="#fff">Docling Math</text>
+  <text x="75" y="250" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#c5d8e9">Academic PDF to structured Markdown</text>
+  <g>
+    <rect x="160" y="303" width="322" height="302" rx="10" fill="#f7f9fc"/>
+    <path d="M160 314Q160 303 171 303H415L482 370V594Q482 605 471 605H171Q160 605 160 594Z" fill="#f7f9fc"/>
+    <path d="M415 303V370H482Z" fill="#dbe4ee"/>
+    <text x="202" y="355" font-family="Arial,sans-serif" font-size="19" fill="#345675" font-weight="700" letter-spacing="3">SOURCE PDF</text>
+    <path d="M201 385H393M201 403H443M201 421H405" stroke="#8aa5bd" stroke-width="6" stroke-linecap="round"/>
+    <text x="207" y="482" font-family="Georgia,serif" fill="#183b5e" font-size="27">∫ f(x) dx = F(x) + C</text>
+    <path d="M201 511H431M201 531H389M201 551H410" stroke="#afc1d0" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g fill="none" stroke="#66d8d5" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M514 462H656"/><path d="M632 437L660 462L632 487"/>
+  </g>
+  <g>
+    <rect x="695" y="303" width="345" height="302" rx="10" fill="#e9f2fa"/>
+    <rect x="695" y="303" width="345" height="55" rx="10" fill="#c1d7e8"/>
+    <text x="724" y="341" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3" fill="#153c5e">MARKDOWN</text>
+    <g font-family="Courier New,monospace" font-size="22" fill="#18466b">
+      <text x="724" y="395">---</text>
+      <text x="724" y="430">title: Paper</text>
+      <text x="724" y="465">authors: [...]</text>
+      <text x="724" y="500">---</text>
+      <text x="724" y="545"># Mathematical text</text>
+      <text x="724" y="578">$$ ∫ f(x) dx $$</text>
+    </g>
+  </g>
+</svg>
