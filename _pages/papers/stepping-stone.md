@@ -20,8 +20,8 @@ image_alt: Planar and three-dimensional stepping-stone diversion neighborhoods f
 detail_image: /assets/img/portfolio/stepping-stone-preview-800.webp
 detail_image_alt: First page of Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension
 pdf: /papers/espino_2026_stepping-stone-empty-regions.pdf
-resource_url: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746
-resource_label: View SSRN version
+external_url: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746
+external_label: Open SSRN
 github: https://github.com/heri-espino/Stepping-Stone-Volume-Constants
 contributions:
   - 'Defines the normalized stepping-stone region \(K_{\mathrm{SS},\alpha}\) and factors its volume into pair distance and a normalized constant.'
