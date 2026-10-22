@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">When Do Activation-Patching Effects Add Up?</title>
+  <desc id="desc">A manuscript overview for an activation-patching study, comparing joint channel interventions with additive predictions in controlled CNNs.</desc>
+  <defs>
+    <linearGradient id="paperBg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0a2742"/><stop offset="1" stop-color="#123b63"/>
+    </linearGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" stroke="#b8d2e5" stroke-opacity=".09" fill="none"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#paperBg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <text x="76" y="100" fill="#bcd4e7" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" letter-spacing="4">RESEARCH MANUSCRIPT · 2026</text>
+  <text x="76" y="182" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="53" font-weight="600">When Do Activation-Patching</text>
+  <text x="76" y="246" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="53" font-weight="600">Effects Add Up?</text>
+  <text x="76" y="291" fill="#c8ddec" font-family="Arial,Helvetica,sans-serif" font-size="27">Evidence from Controlled CNNs</text>
+  <text x="76" y="341" fill="#a8cadf" font-family="Arial,Helvetica,sans-serif" font-size="21">Heriberto Espino-Montelongo</text>
+  <g stroke="#c4d9e8" stroke-width="2" stroke-opacity=".45" fill="none">
+    <line x1="118" y1="448" x2="1073" y2="448"/>
+    <line x1="118" y1="553" x2="1073" y2="553"/>
+  </g>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" fill="#e4f1fb">
+    <text x="118" y="417">SINGLE CHANNELS</text>
+    <text x="118" y="521">JOINT INTERVENTION</text>
+  </g>
+  <g fill="#76d3cb">
+    <circle cx="515" cy="447" r="12"/><circle cx="622" cy="447" r="12"/><circle cx="736" cy="447" r="12"/><circle cx="851" cy="447" r="12"/>
+  </g>
+  <g stroke="#76d3cb" stroke-width="4" stroke-linecap="round">
+    <path d="M515 459L541 506 M622 459L637 506 M736 459L736 506 M851 459L831 506"/>
+  </g>
+  <g stroke="#f3cb83" fill="none" stroke-width="5" stroke-linecap="round">
+    <path d="M540 544L635 544L736 544L830 544"/>
+  </g>
+  <g fill="#f3cb83"><circle cx="540" cy="544" r="10"/><circle cx="635" cy="544" r="10"/><circle cx="736" cy="544" r="10"/><circle cx="830" cy="544" r="10"/></g>
+  <text x="76" y="633" fill="#c9ddec" font-family="Arial,Helvetica,sans-serif" font-size="20">Centered-logit additivity · architecture dependence · spatial controls</text>
+</svg>
