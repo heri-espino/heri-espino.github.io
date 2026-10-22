@@ -15,12 +15,11 @@ framing: "The experiments compare retention and release of predefined edge, corn
 tags: [mechanistic interpretability, CNNs, activation patching, additivity]
 image: /assets/img/portfolio/activation-patching-additivity-preview.svg
 image_alt: "Designed manuscript overview for When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
-detail_image: /assets/img/portfolio/activation-patching-additivity-preview.svg
-detail_image_alt: "Manuscript overview identifying the paper title, author, and additivity comparison"
-external_url: https://github.com/heri-espino/Regularizing-First-Layer-CNN-Filters-Toward-Predefined-Templates/blob/main/paper/main.tex
-external_label: View manuscript source
-resource_url: https://raw.githubusercontent.com/heri-espino/Regularizing-First-Layer-CNN-Filters-Toward-Predefined-Templates/main/paper/sn_supplement.pdf
-resource_label: Supplementary Information PDF
+detail_image: /assets/img/portfolio/activation-patching-first-page.webp
+detail_image_alt: "First page of When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+pdf: /papers/espino_2026_activation-patching-effects-add-up.pdf
+secondary_pdf: /papers/espino_2026_activation-patching-supplementary-information.pdf
+secondary_pdf_label: Supplementary Information PDF
 github: https://github.com/heri-espino/Activation-Patching-CNN-Reproducibility
 contributions:
   - "Demonstrates intervention-size dependence despite numerical logit additivity in a controlled TinyCNN architecture."
@@ -29,6 +28,6 @@ contributions:
   - "Provides 100-block architecture and spatial-control comparisons, paired inferential analyses, and a reproducibility archive."
 ---
 
-The main manuscript and the Supplementary Information form **one research article**. The manuscript is under review; its accompanying supplement details architecture specifications, training dynamics, statistical robustness checks, and a reproducibility map.
+The **compiled manuscript PDF** and its **Supplementary Information PDF** are both hosted on this website. They belong to the same research paper. The article is under review at *SN Computer Science* (Springer Nature).
 
-The <a href="https://doi.org/10.5281/zenodo.23432463" target="_blank" rel="noopener noreferrer">versioned reproducibility archive (Zenodo DOI: 10.5281/zenodo.23432463)</a> contains the code, frozen protocols, and derived results used to regenerate the paper's figures and selected numerical checks.
+The <a href="https://doi.org/10.5281/zenodo.23432463" target="_blank" rel="noopener noreferrer">versioned reproducibility archive (Zenodo DOI: 10.5281/zenodo.23432463)</a> contains archived experimental code, protocols, and results for the manuscript's figures and selected numerical checks.
