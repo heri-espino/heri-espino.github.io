@@ -17,6 +17,12 @@ description: Academic portfolio of Heriberto Espino Montelongo.
       <a href="https://github.com/{{ site.data.socials.github_username }}">GitHub</a>
       <a href="https://orcid.org/{{ site.data.socials.orcid_id }}">ORCID</a>
       <a href="{{ site.data.socials.researchgate_profile_url }}">ResearchGate</a>
+    <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>
+    <a href="{{ site.data.socials.ssrn_author_url }}">SSRN</a>
+    <a href="{{ site.data.socials.zenodo_archive_url }}">Zenodo archive</a>
+    <a href="{{ site.data.socials.pypi_profile_url }}">PyPI</a>
+      <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>
+      <a href="{{ site.data.socials.ssrn_author_url }}">SSRN</a>
     </nav>
     {% comment %}Restore the View CV link here when `_pages/cv.md` is republished.{% endcomment %}
   </div>
