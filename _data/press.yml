@@ -9,6 +9,23 @@
   url: "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/"
   tags: [AbaQuant, mathematical finance, risk management]
 
+# Sciences UDLAP social-media coverage of mathematical activities.
+# LinkedIn's original company permalink is not public in available search results;
+# link the verified reshare, and retain the official source feed separately.
+- title: "Estudiantes de la UDLAP destacan en el Putnam 2026"
+  publisher: "Ciencias UDLAP · LinkedIn"
+  kind: "Social media"
+  date: "2026-03-19"
+  date_label: "March 19, 2026"
+  summary: "A Ciencias UDLAP post recognizing the university's Putnam Mathematical Competition team and explicitly naming Heriberto Espino Montelongo among the participating Data Science students. The linked public post is a verified reshare of Ciencias UDLAP's announcement."
+  url: "https://es.linkedin.com/posts/dr-francisco-garc%C3%ADa-castillo_en-d%C3%B3nde-en-la-universidad-de-las-am%C3%A9ricas-activity-7441339549307330560-DW5d"
+  related_url: "https://www.linkedin.com/company/ciencias-udlap/posts/"
+  related_label: "Browse original publisher's LinkedIn posts"
+  image: "/assets/img/portfolio/putnam-udlap.svg"
+  image_alt: "Editorial Putnam Mathematical Competition graphic"
+  image_credit: "Original editorial graphic for this archive, not a LinkedIn photograph"
+  tags: [Putnam, mathematics, UDLAP, competition, LinkedIn]
+
 - title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
   publisher: "Blog UDLAP"
   image: "https://blog.udlap.mx/wp-content/uploads/2026/01/Estudiantes-UDLAP-desarrollan-herramienta_1.jpg"
@@ -116,23 +133,6 @@
   url: "https://www.revistaencuadre.com/universidades/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/"
   coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
   tags: [hackathon, data science, medical audio, UDLAP]
-
-# Sciences UDLAP social-media coverage of mathematical activities.
-# LinkedIn's original company permalink is not public in available search results;
-# link the verified reshare, and retain the official source feed separately.
-- title: "Estudiantes de la UDLAP destacan en el Putnam 2026"
-  publisher: "Ciencias UDLAP · LinkedIn"
-  kind: "Social media"
-  date: "2026-03-19"
-  date_label: "March 19, 2026"
-  summary: "A Ciencias UDLAP post recognizing the university's Putnam Mathematical Competition team and explicitly naming Heriberto Espino Montelongo among the participating Data Science students. The linked public post is a verified reshare of Ciencias UDLAP's announcement."
-  url: "https://es.linkedin.com/posts/dr-francisco-garc%C3%ADa-castillo_en-d%C3%B3nde-en-la-universidad-de-las-am%C3%A9ricas-activity-7441339549307330560-DW5d"
-  related_url: "https://www.linkedin.com/company/ciencias-udlap/posts/"
-  related_label: "Browse original publisher's LinkedIn posts"
-  image: "/assets/img/portfolio/putnam-udlap.svg"
-  image_alt: "Editorial Putnam Mathematical Competition graphic"
-  image_credit: "Original editorial graphic for this archive, not a LinkedIn photograph"
-  tags: [Putnam, mathematics, UDLAP, competition, LinkedIn]
 
 # The user reported a Ciencias UDLAP Facebook mention of this colloquium.
 # The original social-media post has not yet been independently located.
