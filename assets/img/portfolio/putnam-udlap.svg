@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+<title id="t">Putnam Mathematical Competition coverage</title>
+<desc id="d">Editorial graphic featuring mathematical notation and the words Putnam Mathematical Competition, not a photograph from LinkedIn.</desc>
+<rect width="1200" height="675" fill="#f5f9fb"/>
+<path d="M0 545 L1200 245 L1200 675 L0 675Z" fill="#dcebf4"/>
+<rect x="70" y="65" width="1060" height="545" rx="16" fill="#ffffff" stroke="#bed1df" stroke-width="3"/>
+<rect x="70" y="65" width="20" height="545" fill="#1e4a6a"/>
+<g fill="#a0b8c9" font-family="Georgia,serif" font-size="40" opacity=".75">
+<text x="740" y="180">∑  aₙ</text><text x="935" y="295">∫ f(x)dx</text><text x="700" y="410">∀ ε &gt; 0</text><text x="900" y="530">ℝⁿ</text>
+</g>
+<text x="150" y="205" font-family="Arial,Helvetica,sans-serif" font-size="32" letter-spacing="8" fill="#607d91">MATHEMATICAL COMPETITION</text>
+<text x="145" y="352" font-family="Arial,Helvetica,sans-serif" font-size="116" font-weight="700" fill="#173b56">PUTNAM</text>
+<path d="M151 386 H610" stroke="#e69639" stroke-width="9"/>
+<text x="150" y="460" font-family="Arial,Helvetica,sans-serif" font-size="39" fill="#335d77">UDLAP • STUDENT TEAM</text>
+<text x="150" y="528" font-family="Arial,Helvetica,sans-serif" font-size="29" fill="#607d91">Ciencias UDLAP • March 2026</text>
+</svg>
