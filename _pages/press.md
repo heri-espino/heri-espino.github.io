@@ -13,7 +13,7 @@ nav_order: 6
   {% for item in site.data.press %}
     <article class="portfolio-card portfolio-card--press" data-sort-date="{{ item.date | escape }}" data-sort-title="{{ item.title | escape }}">
       <a class="portfolio-card-image" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
-        <img src="{{ '/assets/img/portfolio/press-media.svg' | relative_url }}" alt="Newspaper illustration" loading="lazy">
+        <img src="{{ item.image | default: '/assets/img/portfolio/press-media.svg' | escape }}" alt="{{ item.image_alt | default: item.title | escape }}" loading="lazy" referrerpolicy="no-referrer" data-press-image>
         <span class="portfolio-card-kind">University news</span>
       </a>
       <div class="portfolio-card-body">
@@ -21,9 +21,11 @@ nav_order: 6
         <h3><a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a></h3>
         <p>{{ item.summary }}</p>
         {% if item.coverage_group %}<p class="portfolio-section-support">Additional coverage of: {{ item.coverage_group }}</p>{% endif %}
+        {% if item.image_credit %}<p class="portfolio-section-support">Image: {{ item.image_credit }}</p>{% endif %}
         <div class="portfolio-tags" aria-label="Topics">{% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}</div>
       </div>
     </article>
   {% endfor %}
 </div>
 <script src="{{ '/assets/js/portfolio-views.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/press-images.js' | relative_url }}" defer></script>
