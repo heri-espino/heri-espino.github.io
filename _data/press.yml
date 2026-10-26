@@ -1,5 +1,8 @@
 - title: "AbaQuant: Finanzas matemáticas, valuación y gestión del riesgo"
   publisher: "La Catarina · UDLAP"
+  image: "/assets/img/portfolio/abaquant-preview-800.webp"
+  image_alt: "AbaQuant documentation homepage (article illustration unavailable)"
+  image_credit: "AbaQuant website"
   date: "2026-10"
   date_label: "October 2026"
   summary: "University news article about AbaQuant, mathematical finance, valuation, and risk management."
@@ -8,6 +11,9 @@
 
 - title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
   publisher: "Blog UDLAP"
+  image: "https://blog.udlap.mx/wp-content/uploads/2026/01/Estudiantes-UDLAP-desarrollan-herramienta_1.jpg"
+  image_alt: "Photograph of the three UDLAP hackathon students"
+  image_credit: "Blog UDLAP"
   date: "2026-01-07"
   date_label: "January 7, 2026"
   summary: "University report naming Heriberto Espino Montelongo, Nuria Arroyo Bustamante, and José Ángel Palomares Velázquez as second-place winners of the Tech Capital Puebla Summit 2025 hackathon."
@@ -17,6 +23,9 @@
 
 - title: "La UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero"
   publisher: "El Economista"
+  image: "https://imagenes.eleconomista.com.mx/files/webp_768_448/uploads/2026/01/13/696634df33d22.jpeg"
+  image_alt: "Photograph of the UDLAP hackathon team"
+  image_credit: "El Economista"
   date: "2026-01-13"
   date_label: "January 13, 2026"
   summary: "National news roundup explicitly naming Heriberto Espino Montelongo among the students recognized for a medical-audio hackathon project."
@@ -26,6 +35,9 @@
 
 - title: "UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero"
   publisher: "La Jornada"
+  image: "https://www.jornada.com.mx/ndjsimg/images/jornada/jornadaimg/udlap-inicia-2026-con-estudiantes-y-catedraticos-que-destacan-en-el-extranjero/udlap-inicia-2026-con-estudiantes-y-catedraticos-que-destacan-en-el-extranjero_7a3009ac-7e5e-4662-a31b-cf6786ecc4d9_medialjnimgndimage%3Dfullsize"
+  image_alt: "Photograph of the UDLAP hackathon team"
+  image_credit: "La Jornada"
   date: "2026-01-12"
   date_label: "January 12, 2026"
   summary: "National newspaper coverage naming Heriberto Espino Montelongo and teammates in reporting about the hackathon project."
@@ -35,6 +47,9 @@
 
 - title: "UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero"
   publisher: "La Crónica de Hoy"
+  image: "https://lacronicadehoy-lacronicadehoy-prod.web.arc-cdn.net/resizer/v2/HHKVRUHUFVDRJH32AYXLZ5GWTU.png?auth=a86841640d3c907391c8c16d8b351290b81a0e2fc34c2ebe2c2042b58724d07b&height=460&width=800"
+  image_alt: "Photograph of the UDLAP hackathon team"
+  image_credit: "La Crónica de Hoy"
   date: "2026-01-12"
   date_label: "January 12, 2026"
   summary: "Academic news roundup naming Heriberto Espino Montelongo alongside his teammates in the medical-audio hackathon."
@@ -44,6 +59,9 @@
 
 - title: "Estudiantes de la UDLAP crean herramienta médica para detectar padecimientos en bebés"
   publisher: "e-consulta"
+  image: "https://fotos.e-consulta.com/estudiantes_de_la_udlap_crean_herramienta_medica_para_detectar_padecimientos_en_bebes.jpg"
+  image_alt: "Photo collage of the UDLAP team and Tech Capital Puebla hackathon"
+  image_credit: "e-consulta"
   date: "2026-01-07"
   date_label: "January 7, 2026"
   summary: "Regional education coverage naming Heriberto Espino Montelongo and describing the team's second-place hackathon result."
@@ -53,6 +71,9 @@
 
 - title: "En el llanto del bebé está la clave: así estudiantes crean herramienta para detectar padecimientos"
   publisher: "Noticias Héctor Rodrigo Ortiz"
+  image: "https://hectorrodrigo.com/wp-content/uploads/2026/01/bebe-780x470.png"
+  image_alt: "Editorial illustration of a baby and a medical thermometer"
+  image_credit: "Noticias Héctor Rodrigo Ortiz (Freepik)"
   date: "2026-01-08"
   date_label: "January 8, 2026"
   summary: "Regional reporting naming Heriberto Espino Montelongo and his collaborators, explaining the infant-cry classification challenge."
@@ -62,6 +83,9 @@
 
 - title: "UDLAP | Estudiantes desarrollan herramienta médica para detectar padecimientos de un bebé"
   publisher: "Urbano Tlaxcala"
+  image: "https://urbanotlaxcala.mx/wp-content/uploads/2026/01/Foto-boletin-006-1-2.jpg"
+  image_alt: "Photograph of the UDLAP hackathon team with award banner"
+  image_credit: "Urbano Tlaxcala"
   date: "2026-01-07"
   date_label: "January 7, 2026"
   summary: "Regional news coverage explicitly naming Heriberto Espino Montelongo among the students who developed the hackathon solution."
@@ -71,6 +95,9 @@
 
 - title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
   publisher: "Encuentro Regional"
+  image: "https://blog.udlap.mx/wp-content/uploads/2026/01/Estudiantes-UDLAP-desarrollan-herramienta_2.jpg"
+  image_alt: "Photo collage of the UDLAP hackathon presentations and award"
+  image_credit: "Blog UDLAP (photo from original university report)"
   date: "2026-01-07"
   date_label: "January 7, 2026"
   summary: "Coverage credited to Érick Mayoral, explicitly identifying Heriberto Espino Montelongo and his teammates in the competition."
@@ -80,6 +107,9 @@
 
 - title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
   publisher: "Revista Encuadre"
+  image: "https://www.revistaencuadre.com/wp-content/uploads/2026/01/Foto-boletin-006-1-1024x683.jpg"
+  image_alt: "Photograph of the UDLAP hackathon team"
+  image_credit: "Revista Encuadre"
   date: "2026-01"
   date_label: "January 2026"
   summary: "University-news republication mentioning Heriberto Espino Montelongo by name and covering the Tech Capital Puebla Summit hackathon."
