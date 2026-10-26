@@ -7,7 +7,7 @@ nav: true
 nav_order: 6
 ---
 
-<p class="portfolio-section-intro">Selected university news and institutional social-media coverage naming Heriberto Espino Montelongo, alongside reporting on related academic projects. Verified articles link to their publisher or to a public reshare. A Facebook mention without a verified post URL is explicitly marked as pending. Several outlets covered the same Tech Capital Puebla Summit 2025 hackathon; these are separate publications, not separate achievements.</p>
+<p class="portfolio-section-intro">Selected university news, official UDLAP institutional recognitions, and social-media coverage about academic work involving Heriberto Espino Montelongo. Verified articles link to their publisher or to a public reshare. A Facebook mention without a verified post URL is explicitly marked as pending. Several outlets covered the same Tech Capital Puebla Summit 2025 hackathon; these are separate publications, not separate achievements.</p>
 
 <div class="portfolio-grid" data-portfolio-archive data-collection-label="Press and Media">
   {% for item in site.data.press %}
