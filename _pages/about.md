@@ -114,12 +114,12 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     <div>
       <p class="portfolio-kicker">University news</p>
       <h2 id="press-title"><a class="portfolio-section-title-link" href="{{ '/press/' | relative_url }}"><span>Press &amp; Media</span></a></h2>
-      <p class="portfolio-section-intro">Media coverage of academic projects and activities.</p>
+      <p class="portfolio-section-intro">Media coverage of academic projects, achievements, and activities.</p>
     </div>
     <a class="portfolio-section-link" href="{{ '/press/' | relative_url }}">Browse press coverage <span aria-hidden="true">→</span></a>
   </div>
   <div class="portfolio-grid">
-    {% for item in site.data.press limit:1 %}
+    {% for item in site.data.press limit:2 %}
       <article class="portfolio-card portfolio-card--press">
         <a class="portfolio-card-image" href="{{ '/press/' | relative_url }}">
           <img src="{{ '/assets/img/portfolio/press-media.svg' | relative_url }}" alt="Press and media illustration" loading="lazy">
