@@ -1,7 +1,25 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://heri-espino.github.io/</loc>
+    <loc>{{ '/' | absolute_url | xml_escape }}</loc>
     <priority>1.0</priority>
   </url>
+  {% for item in site.pages %}
+    {% assign include_in_sitemap = true %}
+    {% if item.url == '/' or item.url == '/sitemap.xml' or item.url == '/robots.txt' or item.search_exclude or item.published == false or item.sitemap == false %}
+      {% assign include_in_sitemap = false %}
+    {% endif %}
+    {% if include_in_sitemap and item.url %}
+  <url><loc>{{ item.url | absolute_url | xml_escape }}</loc></url>
+    {% endif %}
+  {% endfor %}
+  {% for item in site.projects %}
+    {% if item.url and item.published != false and item.sitemap != false %}
+  <url><loc>{{ item.url | absolute_url | xml_escape }}</loc></url>
+    {% endif %}
+  {% endfor %}
 </urlset>
