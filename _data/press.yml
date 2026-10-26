@@ -9,6 +9,21 @@
   url: "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/"
   tags: [AbaQuant, mathematical finance, risk management]
 
+# UDLAP's official annual activity report, distinct from third-party news coverage.
+- title: "UDLAP Activity Report 2025–2026 — Student Recognitions"
+  publisher: "Universidad de las Américas Puebla · Institutional Report"
+  kind: "Institutional recognition"
+  date: "2026"
+  date_label: "2025–2026 report"
+  summary: "The official UDLAP activity report (appendices, pp. 118–119) lists Heriberto Espino Montelongo, Nuria Arroyo Bustamante, and José Ángel Palomares Velázquez for second place at the Tech Capital Puebla Summit 2025 hackathon. It also names them, alongside Juan Alonso Martínez Thomas, as selected participants in the first International Society of Pharmacovigilance hackathon."
+  url: "https://www.udlap.mx/informe/files/activity-report-2025-2026-UDLAP.pdf?version=1"
+  image: "https://blog.udlap.mx/wp-content/uploads/2026/01/Estudiantes-UDLAP-desarrollan-herramienta_1.jpg"
+  image_alt: "UDLAP students recognized for their medical-audio hackathon project"
+  image_credit: "Blog UDLAP (photo of the students, not the institutional report cover)"
+  related_url: "https://blog.udlap.mx/blog/2026/01/07/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/"
+  related_label: "Related UDLAP news article about the hackathon"
+  tags: [UDLAP, institutional recognition, hackathon, actuarial science, data science]
+
 # Sciences UDLAP social-media coverage of mathematical activities.
 # LinkedIn's original company permalink is not public in available search results;
 # link the verified reshare, and retain the official source feed separately.
