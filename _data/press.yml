@@ -116,3 +116,36 @@
   url: "https://www.revistaencuadre.com/universidades/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/"
   coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
   tags: [hackathon, data science, medical audio, UDLAP]
+
+# Sciences UDLAP social-media coverage of mathematical activities.
+# LinkedIn's original company permalink is not public in available search results;
+# link the verified reshare, and retain the official source feed separately.
+- title: "Estudiantes de la UDLAP destacan en el Putnam 2026"
+  publisher: "Ciencias UDLAP · LinkedIn"
+  kind: "Social media"
+  date: "2026-03-19"
+  date_label: "March 19, 2026"
+  summary: "A Ciencias UDLAP post recognizing the university's Putnam Mathematical Competition team and explicitly naming Heriberto Espino Montelongo among the participating Data Science students. The linked public post is a verified reshare of Ciencias UDLAP's announcement."
+  url: "https://es.linkedin.com/posts/dr-francisco-garc%C3%ADa-castillo_en-d%C3%B3nde-en-la-universidad-de-las-am%C3%A9ricas-activity-7441339549307330560-DW5d"
+  related_url: "https://www.linkedin.com/company/ciencias-udlap/posts/"
+  related_label: "Browse original publisher's LinkedIn posts"
+  image: "/assets/img/portfolio/putnam-udlap.svg"
+  image_alt: "Editorial Putnam Mathematical Competition graphic"
+  image_credit: "Original editorial graphic for this archive, not a LinkedIn photograph"
+  tags: [Putnam, mathematics, UDLAP, competition, LinkedIn]
+
+# The user reported a Ciencias UDLAP Facebook mention of this colloquium.
+# The original social-media post has not yet been independently located.
+- title: "Ciencias UDLAP: participación en el XLI Coloquio Víctor Neumann-Lara"
+  publisher: "Ciencias UDLAP · Facebook (link pending)"
+  kind: "Social media · unverified link"
+  date: ""
+  date_label: "April 2026 event · Facebook post date unverified"
+  summary: "A Facebook mention of the XLI Víctor Neumann-Lara Colloquium was reported. Heriberto Espino Montelongo presented a proximity-graphs research poster at the 2026 colloquium in Morelia. The exact Ciencias UDLAP Facebook publication has not yet been independently verified."
+  verification_status: "Original Facebook post not yet located; direct source link pending."
+  related_url: "/presentations/proximity-graphs-asymptotic-characteristics-poster.html"
+  related_label: "View the corresponding research poster"
+  image: "/assets/img/portfolio/proximity-graphs-asymptotic-characteristics-poster-preview-1200.webp"
+  image_alt: "First page of the research poster on proximity graphs and asymptotic characteristics"
+  image_credit: "Author's academic research poster (not the Facebook post image)"
+  tags: [colloquium, mathematical research, proximity graphs, poster, Facebook]
