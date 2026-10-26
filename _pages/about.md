@@ -122,7 +122,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     {% for item in site.data.press limit:2 %}
       <article class="portfolio-card portfolio-card--press">
         <a class="portfolio-card-image" href="{{ '/press/' | relative_url }}">
-          <img src="{{ '/assets/img/portfolio/press-media.svg' | relative_url }}" alt="Press and media illustration" loading="lazy">
+          <img src="{{ item.image | default: '/assets/img/portfolio/press-media.svg' | escape }}" alt="{{ item.image_alt | default: item.title | escape }}" loading="lazy" referrerpolicy="no-referrer" data-press-image>
           <span class="portfolio-card-kind">University news</span>
         </a>
         <div class="portfolio-card-body">
@@ -183,6 +183,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   </div>
   <a class="portfolio-archive-cta" href="{{ '/credentials/' | relative_url }}">Browse all {{ total_credentials }} credential records <span aria-hidden="true">→</span></a>
 </section>
+<script src="{{ '/assets/js/press-images.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/credential-logos.js' | relative_url }}" defer></script>
 
 <section class="portfolio-section portfolio-home-section portfolio-contact" id="contact" aria-labelledby="contact-title">
