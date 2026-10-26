@@ -59,3 +59,34 @@
     <progress id="progress" value="0"><span class="progress-bar"></span></progress>
   {% endif %}
 </header>
+
+{% if site.search_enabled %}
+  {% comment %}
+    al_search automatically indexes the Press & Media page. Add individual media articles
+    to its command palette after the theme populates ninja.data (DOMContentLoaded).
+  {% endcomment %}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const ninja = document.querySelector("ninja-keys");
+      if (!ninja) return;
+      const existing = Array.isArray(ninja.data) ? ninja.data : [];
+      const pressResults = [
+        {% for item in site.data.press %}
+          {
+            id: "press-article-{{ forloop.index }}",
+            title: {{ item.title | jsonify }},
+            description: {{ item.publisher | append: " · " | append: item.date_label | jsonify }},
+            section: "Press & Media",
+            handler: () => window.open({{ item.url | jsonify }}, "_blank", "noopener,noreferrer")
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+      const navigation = existing
+        .filter((entry) => !String(entry.id || "").startsWith("press-article-"))
+        .map((entry) => entry.id === "nav-press-amp-media"
+          ? { ...entry, title: "Press & Media" }
+          : entry);
+      ninja.data = [...navigation, ...pressResults];
+    });
+  </script>
+{% endif %}
