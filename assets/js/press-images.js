@@ -1,0 +1,1 @@
+(()=>{const e="/assets/img/portfolio/press-media.svg";document.querySelectorAll("img[data-press-image]").forEach(r=>{let t=!1;const o=()=>{t||(t=!0,r.removeAttribute("referrerpolicy"),r.src=e)};r.addEventListener("error",o),r.complete&&0===r.naturalWidth&&o()})})();
