@@ -71,7 +71,8 @@
       if (!ninja) return;
       const existing = Array.isArray(ninja.data) ? ninja.data : [];
       const pressResults = [
-        {% for item in site.data.press %}
+        {% assign verified_press_items = site.data.press | where_exp: "item", "item.url" %}
+        {% for item in verified_press_items %}
           {
             id: "press-article-{{ forloop.index }}",
             title: {{ item.title | jsonify }},
