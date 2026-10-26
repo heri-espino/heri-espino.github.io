@@ -109,6 +109,33 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% include portfolio/section.liquid id="projects" title="Projects" eyebrow=projects_eyebrow intro="Research software for computational geometry, quantitative finance, interactive mathematics, and academic document processing." support=projects_support top_link=projects_top_link bottom_link=projects_bottom_link items=featured_projects preview_items=preview_projects index_url="/projects/" %}
 {% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Course projects in actuarial modeling, quantitative finance, econometrics, and data analysis." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects preview_items=preview_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View additional activity and awards on LinkedIn" %}
 {% include portfolio/section.liquid id="presentations" title="Posters & Presentations" eyebrow=presentations_eyebrow intro="Visual academic materials from project work." support=presentations_support top_link=presentations_top_link bottom_link=presentations_bottom_link items=featured_presentations preview_items=preview_presentations index_url="/presentations/" %}
+<section class="portfolio-section portfolio-home-section" id="press" aria-labelledby="press-title">
+  <div class="portfolio-section-heading">
+    <div>
+      <p class="portfolio-kicker">University news</p>
+      <h2 id="press-title"><a class="portfolio-section-title-link" href="{{ '/press/' | relative_url }}"><span>Press &amp; Media</span></a></h2>
+      <p class="portfolio-section-intro">Media coverage of academic projects and activities.</p>
+    </div>
+    <a class="portfolio-section-link" href="{{ '/press/' | relative_url }}">Browse press coverage <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="portfolio-grid">
+    {% for item in site.data.press limit:1 %}
+      <article class="portfolio-card portfolio-card--press">
+        <a class="portfolio-card-image" href="{{ '/press/' | relative_url }}">
+          <img src="{{ '/assets/img/portfolio/press-media.svg' | relative_url }}" alt="Press and media illustration" loading="lazy">
+          <span class="portfolio-card-kind">University news</span>
+        </a>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-meta"><span class="portfolio-label">{{ item.publisher }}</span><span>{{ item.date_label }}</span></div>
+          <h3><a href="{{ '/press/' | relative_url }}">{{ item.title }}</a></h3>
+          <p>{{ item.summary }}</p>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+  <a class="portfolio-archive-cta" href="{{ '/press/' | relative_url }}">Browse press coverage <span aria-hidden="true">→</span></a>
+</section>
+
 {% include portfolio/section.liquid id="notes" title="Notes" eyebrow=notes_eyebrow intro="Mathematical notes developed through independent study and research preparation." support=notes_support top_link=notes_top_link bottom_link=notes_bottom_link items=featured_notes preview_items=preview_notes index_url="/notes/" %}
 
 {% assign total_credentials = 0 %}
