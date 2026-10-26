@@ -5,3 +5,84 @@
   summary: "University news article about AbaQuant, mathematical finance, valuation, and risk management."
   url: "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/"
   tags: [AbaQuant, mathematical finance, risk management]
+
+- title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
+  publisher: "Blog UDLAP"
+  date: "2026-01-07"
+  date_label: "January 7, 2026"
+  summary: "University report naming Heriberto Espino Montelongo, Nuria Arroyo Bustamante, and José Ángel Palomares Velázquez as second-place winners of the Tech Capital Puebla Summit 2025 hackathon."
+  url: "https://blog.udlap.mx/blog/2026/01/07/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "La UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero"
+  publisher: "El Economista"
+  date: "2026-01-13"
+  date_label: "January 13, 2026"
+  summary: "National news roundup explicitly naming Heriberto Espino Montelongo among the students recognized for a medical-audio hackathon project."
+  url: "https://www.eleconomista.com.mx/arteseideas/udlap-inicia-2026-estudiantes-catedraticos-destacan-extranjero-20260113-795024.html"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero"
+  publisher: "La Jornada"
+  date: "2026-01-12"
+  date_label: "January 12, 2026"
+  summary: "National newspaper coverage naming Heriberto Espino Montelongo and teammates in reporting about the hackathon project."
+  url: "https://www.jornada.com.mx/noticia/2026/01/12/sociedad/udlap-inicia-2026-con-estudiantes-y-catedraticos-que-destacan-en-el-extranjero"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero"
+  publisher: "La Crónica de Hoy"
+  date: "2026-01-12"
+  date_label: "January 12, 2026"
+  summary: "Academic news roundup naming Heriberto Espino Montelongo alongside his teammates in the medical-audio hackathon."
+  url: "https://www.cronica.com.mx/academia/2026/01/12/udlap-inicia-2026-con-estudiantes-y-catedraticos-que-destacan-en-el-extranjero/"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "Estudiantes de la UDLAP crean herramienta médica para detectar padecimientos en bebés"
+  publisher: "e-consulta"
+  date: "2026-01-07"
+  date_label: "January 7, 2026"
+  summary: "Regional education coverage naming Heriberto Espino Montelongo and describing the team's second-place hackathon result."
+  url: "https://historico.e-consulta.com/nota/2026-01-07/educacion/estudiantes-de-la-udlap-crean-herramienta-medica-para-detectar"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "En el llanto del bebé está la clave: así estudiantes crean herramienta para detectar padecimientos"
+  publisher: "Noticias Héctor Rodrigo Ortiz"
+  date: "2026-01-08"
+  date_label: "January 8, 2026"
+  summary: "Regional reporting naming Heriberto Espino Montelongo and his collaborators, explaining the infant-cry classification challenge."
+  url: "https://hectorrodrigo.com/en-el-llanto-del-bebe-esta-la-clave-asi-estudiantes-crean-herramienta-para-detectar-padecimientos/"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "UDLAP | Estudiantes desarrollan herramienta médica para detectar padecimientos de un bebé"
+  publisher: "Urbano Tlaxcala"
+  date: "2026-01-07"
+  date_label: "January 7, 2026"
+  summary: "Regional news coverage explicitly naming Heriberto Espino Montelongo among the students who developed the hackathon solution."
+  url: "https://urbanotlaxcala.mx/educacion/universidades/udlap-estudiantes-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
+  publisher: "Encuentro Regional"
+  date: "2026-01-07"
+  date_label: "January 7, 2026"
+  summary: "Coverage credited to Érick Mayoral, explicitly identifying Heriberto Espino Montelongo and his teammates in the competition."
+  url: "https://encuentroregional.com/index.php/item/5266-estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
+
+- title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé"
+  publisher: "Revista Encuadre"
+  date: "2026-01"
+  date_label: "January 2026"
+  summary: "University-news republication mentioning Heriberto Espino Montelongo by name and covering the Tech Capital Puebla Summit hackathon."
+  url: "https://www.revistaencuadre.com/universidades/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/"
+  coverage_group: "Infant-cry hackathon · Tech Capital Puebla Summit 2025"
+  tags: [hackathon, data science, medical audio, UDLAP]
