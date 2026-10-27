@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title description">
+  <title id="title">Smoothness-integrated trend comparison</title>
+  <desc id="description">Synthetic illustration: two constant-then-diverging trend vectors at times 1 through 7, with pointwise discrepancies and a three-point rolling root-mean-square distance.</desc>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <rect x="28" y="28" width="1144" height="464" rx="22" fill="#f7fafc" stroke="#dce7ef" stroke-width="2"/>
+  <text x="69" y="78" font-size="28" font-weight="700" fill="#123b63" font-family="Arial, Helvetica, sans-serif">TREND COMPARISON</text>
+  <text x="69" y="110" font-size="17" fill="#61798a" font-family="Arial, Helvetica, sans-serif">Synthetic example · fixed smoothness level · seven aligned observations</text>
+  <line x1="600" y1="142" x2="600" y2="425" stroke="#dae5ec" stroke-width="2"/>
+  <text x="76" y="166" font-size="21" font-weight="700" fill="#173d60" font-family="Arial, Helvetica, sans-serif">Fitted trend values</text>
+  <text x="668" y="166" font-size="21" font-weight="700" fill="#173d60" font-family="Arial, Helvetica, sans-serif">Discrepancy over time</text>
+  <g stroke="#e2eaf0" stroke-width="1.5">
+    <line x1="101" y1="209" x2="528" y2="209"/><line x1="101" y1="282" x2="528" y2="282"/><line x1="101" y1="355" x2="528" y2="355"/>
+    <line x1="681" y1="209" x2="1112" y2="209"/><line x1="681" y1="282" x2="1112" y2="282"/><line x1="681" y1="355" x2="1112" y2="355"/>
+  </g>
+  <g stroke="#a6b9c7" stroke-width="2">
+    <line x1="101" y1="195" x2="101" y2="386"/><line x1="101" y1="386" x2="528" y2="386"/>
+    <line x1="681" y1="195" x2="681" y2="386"/><line x1="681" y1="386" x2="1112" y2="386"/>
+  </g>
+  <polyline points="111,355 179,355 247,355 315,355 383,355 451,355 519,355" fill="none" stroke="#9bb2c5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="111,355 179,355 247,355 315,355 383,307 451,259 519,211" fill="none" stroke="#167ca2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#167ca2">
+    <circle cx="111" cy="355" r="5"/><circle cx="179" cy="355" r="5"/><circle cx="247" cy="355" r="5"/><circle cx="315" cy="355" r="5"/>
+    <circle cx="383" cy="307" r="6"/><circle cx="451" cy="259" r="6"/><circle cx="519" cy="211" r="6"/>
+  </g>
+  <polyline points="691,355 759,355 827,355 895,355 963,307 1031,259 1099,211" fill="none" stroke="#167ca2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 7"/>
+  <polyline points="827,355 895,355 963,327 1031,293 1099,251" fill="none" stroke="#123b63" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#123b63"><circle cx="827" cy="355" r="5"/><circle cx="895" cy="355" r="5"/><circle cx="963" cy="327" r="6"/><circle cx="1031" cy="293" r="6"/><circle cx="1099" cy="251" r="6"/></g>
+  <g fill="#5b7080" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle">
+    <text x="111" y="413">1</text><text x="179" y="413">2</text><text x="247" y="413">3</text><text x="315" y="413">4</text><text x="383" y="413">5</text><text x="451" y="413">6</text><text x="519" y="413">7</text>
+    <text x="691" y="413">1</text><text x="759" y="413">2</text><text x="827" y="413">3</text><text x="895" y="413">4</text><text x="963" y="413">5</text><text x="1031" y="413">6</text><text x="1099" y="413">7</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16">
+    <line x1="105" y1="458" x2="144" y2="458" stroke="#9bb2c5" stroke-width="5" stroke-linecap="round"/><text x="153" y="463" fill="#465f70">Trend 1</text>
+    <line x1="244" y1="458" x2="284" y2="458" stroke="#167ca2" stroke-width="5" stroke-linecap="round"/><text x="295" y="463" fill="#465f70">Trend 2</text>
+    <line x1="682" y1="458" x2="722" y2="458" stroke="#167ca2" stroke-width="5" stroke-dasharray="9 5"/><text x="734" y="463" fill="#465f70">Pointwise gap</text>
+    <line x1="903" y1="458" x2="943" y2="458" stroke="#123b63" stroke-width="6" stroke-linecap="round"/><text x="955" y="463" fill="#465f70">Rolling RMS (w = 3)</text>
+  </g>
+</svg>
