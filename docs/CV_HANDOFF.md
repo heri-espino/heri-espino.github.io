@@ -74,3 +74,21 @@ substituting one version for another where contradictory claims lack
 verification. Keep the website's public privacy boundary intact.
 
 Do not merge or deploy a draft PR without the user's authorization.
+
+## Update — programming experience and Springer review (2026-10-27)
+
+The CV now distinguishes **Programming Experience** from **Research**. The former
+includes AbaQuant, ProximityGraphs, OpenAI Python SDK, Docling Math and
+AwesomeFigures. Their URLs and descriptions are grounded in existing project
+pages. Docling Math and AwesomeFigures have no invented start dates.
+
+Research includes the Springer Nature *SN Computer Science* manuscript
+**When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs**
+(currently under review), and separately lists relevant UDLAP internal reports
+and the WTI Bayesian uncertainty draft from the supplied LaTeX source.
+The Stepping-Stone manuscript is marked **under revision** in accordance with
+its current public paper record. Paper detail pages remain the authoritative
+source for status updates. Review changes to publication status before deploying.
+
+Only PR #13 was open when this update was made; this PR contains the cumulative
+customizable-CV work. Source changes are committed on the feature branch.
