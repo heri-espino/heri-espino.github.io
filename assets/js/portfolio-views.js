@@ -23,7 +23,13 @@
   };
 
   document.querySelectorAll("[data-portfolio-archive]").forEach((collection, index) => {
-    const elements = Array.from(collection.children).filter((node) => node.matches(".portfolio-card"));
+    // The Papers archive has two grouped grids but one shared set of controls.
+    // Flat archives retain their existing behavior.
+    const groups = Array.from(collection.querySelectorAll("[data-portfolio-group]"));
+    const containers = groups.length ? groups : [collection];
+    const elements = containers.flatMap((container) =>
+      Array.from(container.children).filter((node) => node.matches(".portfolio-card"))
+    );
     if (!elements.length) return;
 
     const label = collection.dataset.collectionLabel || "portfolio";
@@ -60,6 +66,7 @@
     const reset = controls.querySelector("[data-archive-reset]");
     const records = elements.map((element, originalIndex) => ({
       element,
+      container: element.parentElement,
       originalIndex,
       title: normalize(element.dataset.sortTitle || element.querySelector("h3")?.textContent),
       text: normalize(element.textContent),
@@ -77,14 +84,18 @@
         }
         return a.originalIndex - b.originalIndex;
       });
-      ordered.forEach((record) => collection.append(record.element));
-      if (!reducedMotion && choice !== "curated") {
-        collection.classList.remove("is-reordering");
-        void collection.offsetWidth;
-        collection.classList.add("is-reordering");
-      } else {
-        collection.classList.remove("is-reordering");
-      }
+      // Sorting must never move a manuscript across its submission-stage divider.
+      containers.forEach((container) => {
+        ordered.filter((record) => record.container === container)
+          .forEach((record) => container.append(record.element));
+        if (!reducedMotion && choice !== "curated") {
+          container.classList.remove("is-reordering");
+          void container.offsetWidth;
+          container.classList.add("is-reordering");
+        } else {
+          container.classList.remove("is-reordering");
+        }
+      });
     };
 
     const filter = () => {
@@ -97,16 +108,31 @@
       });
       status.textContent = term ? "Showing " + count + " of " + records.length + " records" : "Showing all " + records.length + " records";
       empty.hidden = count !== 0;
+      // Hide empty sections while searching; restore both headings when reset.
+      if (groups.length) {
+        groups.forEach((group) => {
+          const section = group.closest("[data-portfolio-section]");
+          if (section) {
+            section.hidden = Boolean(term) && !records.some((record) =>
+              record.container === group && !record.element.hidden
+            );
+          }
+        });
+      }
     };
 
     query.addEventListener("input", filter);
     sort.addEventListener("change", reorder);
-    view.addEventListener("change", () => { collection.dataset.view = view.value; });
+    const setView = (mode) => {
+      collection.dataset.view = mode;
+      containers.forEach((container) => { container.dataset.view = mode; });
+    };
+    view.addEventListener("change", () => setView(view.value));
     reset.addEventListener("click", () => {
       query.value = "";
       sort.value = "curated";
       view.value = "grid";
-      collection.dataset.view = "grid";
+      setView("grid");
       reorder();
       filter();
       query.focus();
