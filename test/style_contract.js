@@ -116,6 +116,28 @@ for (const requiredPath of ["test/visual", "test/integration_plugin_toggles.sh",
   }
 }
 
+// CV must remain present, keyboard-accessible and printable, without a new
+// plugin-owned theme override or a server-side PDF compilation dependency.
+if (exists("_pages/cv.md")) {
+  const cvPage = read("_pages/cv.md");
+  const cvRenderer = read("_includes/cv/render.liquid");
+  const cvScript = read("assets/js/cv-customize.js");
+  const cvStyles = read("_sass/_cv.scss");
+  if (/^published:\s*false\s*$/m.test(cvPage)) failures.push("The CV page should remain public.");
+  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-print", "cv-reset", "cv-timeline"]) {
+    if (!cvRenderer.includes('id="' + id + '"')) failures.push("CV is missing print/sort control: " + id);
+  }
+  if (!cvRenderer.includes("data-cv-date=") || !cvRenderer.includes("data-cv-section-toggle=")) {
+    failures.push("CV renderer must expose dates and selectable sections.");
+  }
+  if (!cvScript.includes("beforeprint") || !cvScript.includes("window.print()") || !cvScript.includes("parseStartDate")) {
+    failures.push("CV print and chronology handlers are missing.");
+  }
+  if (!cvStyles.includes("@media print") || !cvStyles.includes("data-cv-template=\"harvard\"")) {
+    failures.push("CV print style or classic template is missing.");
+  }
+}
+
 if (failures.length > 0) {
   console.error("Starter style contract check failed:");
   failures.forEach((message) => console.error(`- ${message}`));
