@@ -1,0 +1,143 @@
+/* Browser-only CV configurator. The original YAML order remains readable without JS. */
+(() => {
+  "use strict";
+
+  const root = document.getElementById("cv-page");
+  if (!root) return;
+
+  const controls = {
+    order: document.getElementById("cv-order"),
+    template: document.getElementById("cv-template"),
+    font: document.getElementById("cv-font"),
+    paper: document.getElementById("cv-paper"),
+    density: document.getElementById("cv-density"),
+  };
+  const timeline = document.getElementById("cv-timeline");
+  const timelineItems = document.getElementById("cv-timeline-items");
+  const status = document.getElementById("cv-status");
+  const printButton = document.getElementById("cv-print");
+  const resetButton = document.getElementById("cv-reset");
+  const toggles = Array.from(root.querySelectorAll("[data-cv-section-toggle]"));
+  const sections = Array.from(root.querySelectorAll(".cv-content [data-cv-section]"));
+
+  if (
+    Object.values(controls).some((element) => !element) ||
+    !timeline ||
+    !timelineItems ||
+    !status ||
+    !printButton ||
+    !resetButton
+  ) return;
+
+  // Sort by the first calendar date, not by the present-day end of an ongoing role.
+  // This is also correct for date ranges such as "Aug 2023 — Dec 2027 (expected)".
+  const months = {
+    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+  };
+  const parseStartDate = (value) => {
+    const raw = String(value || "");
+    const match = raw.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+((?:19|20)\d{2})\b/i);
+    if (match) return Date.UTC(Number(match[2]), months[match[1].toLowerCase()], 1);
+    const year = raw.match(/\b((?:19|20)\d{2})\b/);
+    return year ? Date.UTC(Number(year[1]), 0, 1) : null;
+  };
+
+  const entries = sections.flatMap((section, sectionIndex) =>
+    Array.from(section.querySelectorAll("[data-cv-record]")).map((element, index) => ({
+      element,
+      section,
+      sectionIndex,
+      index,
+      timestamp: parseStartDate(element.dataset.cvDate),
+    }))
+  );
+
+  // Only whitelisted values can alter @page. Never insert arbitrary user strings into CSS.
+  const pageSizes = { a4: "A4", letter: "letter" };
+  const pageStyle = document.createElement("style");
+  pageStyle.id = "cv-page-size";
+  document.head.appendChild(pageStyle);
+
+  const included = (section) => {
+    const toggle = toggles.find((item) => item.dataset.cvSectionToggle === section.dataset.cvSection);
+    return !toggle || toggle.checked;
+  };
+
+  const render = () => {
+    const order = controls.order.value;
+    root.dataset.cvTemplate = controls.template.value;
+    root.dataset.cvFont = controls.font.value;
+    root.dataset.cvDensity = controls.density.value;
+    pageStyle.textContent = "@page { size: " + (pageSizes[controls.paper.value] || "A4") + "; margin: 13mm; }";
+
+    // Keep undated sections in their authored place after the dynamic timeline.
+    sections.forEach((section) => {
+      const dated = entries.some((item) => item.section === section);
+      section.hidden = !included(section) || (order !== "sections" && dated);
+    });
+
+    if (order === "sections") {
+      timeline.hidden = true;
+      timelineItems.replaceChildren();
+      status.textContent = toggles.filter((toggle) => toggle.checked).length + " sections selected";
+      return;
+    }
+
+    const active = entries
+      .filter((item) => included(item.section))
+      .sort((a, b) => {
+        // Unknown dates are always last. Stable section/entry indices break ties.
+        if (a.timestamp === null) return b.timestamp === null ? a.sectionIndex - b.sectionIndex || a.index - b.index : 1;
+        if (b.timestamp === null) return -1;
+        const difference = order === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp;
+        return difference || a.sectionIndex - b.sectionIndex || a.index - b.index;
+      });
+
+    const fragment = document.createDocumentFragment();
+    active.forEach((item) => {
+      const clone = item.element.cloneNode(true);
+      // Add the original section label to every dated entry so context is never lost.
+      const category = document.createElement("p");
+      category.className = "cv-timeline-category";
+      category.textContent = item.section.dataset.cvTitle;
+      clone.prepend(category);
+      fragment.appendChild(clone);
+    });
+    timelineItems.replaceChildren(fragment);
+    timeline.hidden = active.length === 0;
+    status.textContent = active.length + " dated entries in chronological order";
+  };
+
+  Object.values(controls).forEach((control) => control.addEventListener("change", render));
+  toggles.forEach((toggle) => toggle.addEventListener("change", render));
+
+  resetButton.addEventListener("click", () => {
+    controls.order.value = "sections";
+    controls.template.value = "personal";
+    controls.font.value = "site";
+    controls.paper.value = "a4";
+    controls.density.value = "balanced";
+    toggles.forEach((toggle) => { toggle.checked = true; });
+    render();
+  });
+
+  printButton.addEventListener("click", () => window.print());
+
+  // Closed <details> normally suppress their children in print. Restore each
+  // disclosure's original state after the browser finishes printing.
+  let previouslyOpen = [];
+  window.addEventListener("beforeprint", () => {
+    const details = Array.from(root.querySelectorAll("details.cv-details"));
+    previouslyOpen = details.filter((item) => item.open);
+    details.forEach((item) => { item.open = true; });
+  });
+  window.addEventListener("afterprint", () => {
+    root.querySelectorAll("details.cv-details").forEach((item) => {
+      item.open = previouslyOpen.includes(item);
+    });
+    previouslyOpen = [];
+  });
+
+  render();
+})();

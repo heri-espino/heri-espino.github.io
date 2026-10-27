@@ -1,6 +1,6 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page">
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced">
   <header class="post-header cv-intro">
     <p class="cv-eyebrow">Curriculum vitae</p>
     <h1 class="post-title">{{ cv.name }}</h1>
@@ -14,7 +14,79 @@
     </nav>
   </header>
 
-  <article class="cv-content">
+  <aside class="cv-tools" aria-label="Customize and print CV">
+    <div class="cv-tools-heading">
+      <div>
+        <h2>Customize CV</h2>
+        <p>Choose an order and a print design. Changes appear in the preview below.</p>
+      </div>
+      <span class="cv-tools-note">Print / Save as PDF uses your browser's print dialog.</span>
+    </div>
+    <div class="cv-tools-grid">
+      <label for="cv-order">Order
+        <select id="cv-order">
+          <option value="sections">Grouped by section</option>
+          <option value="newest">All entries: newest first</option>
+          <option value="oldest">All entries: oldest first</option>
+        </select>
+      </label>
+      <label for="cv-template">Template
+        <select id="cv-template">
+          <option value="personal">Personal · navy</option>
+          <option value="harvard">Harvard-inspired · classic</option>
+        </select>
+      </label>
+      <label for="cv-font">Font
+        <select id="cv-font">
+          <option value="site">Helvetica Neue / sans-serif</option>
+          <option value="arial">Arial</option>
+          <option value="georgia">Georgia</option>
+          <option value="times">Times New Roman</option>
+          <option value="garamond">Garamond / serif</option>
+        </select>
+      </label>
+      <label for="cv-paper">Paper size
+        <select id="cv-paper">
+          <option value="a4">A4</option>
+          <option value="letter">US Letter</option>
+        </select>
+      </label>
+      <label for="cv-density">Spacing
+        <select id="cv-density">
+          <option value="balanced">Balanced</option>
+          <option value="compact">Compact</option>
+        </select>
+      </label>
+    </div>
+    <details class="cv-section-picker">
+      <summary>Sections to include</summary>
+      <div class="cv-section-picker-grid">
+        {% for section_pair in cv.sections %}
+          {% assign title = section_pair[0] %}
+          <label>
+            <input type="checkbox" data-cv-section-toggle="{{ title | slugify }}" checked>
+            {{ title }}
+          </label>
+        {% endfor %}
+      </div>
+    </details>
+    <div class="cv-actions">
+      <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
+      <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
+      <p id="cv-status" role="status" aria-live="polite"></p>
+    </div>
+    <p class="cv-disclaimer">
+      The Harvard-inspired option is an independent academic CV style, not an official Harvard University template.
+      Chronological sorting uses each entry's first listed date. Undated sections remain after the timeline.
+    </p>
+  </aside>
+
+  <section id="cv-timeline" class="cv-timeline" aria-label="Chronological CV" hidden>
+    <h2>Chronological record</h2>
+    <div id="cv-timeline-items" class="cv-entry-list"></div>
+  </section>
+
+  <article class="cv-content" id="cv-sections">
     {% for section_pair in cv.sections %}
       {% assign title = section_pair[0] %}
       {% assign entries = section_pair[1] %}
@@ -23,7 +95,7 @@
         {% assign expandable = true %}
       {% endif %}
 
-      <section class="cv-section" aria-labelledby="{{ title | slugify }}-heading">
+      <section class="cv-section" data-cv-section="{{ title | slugify }}" data-cv-title="{{ title | escape }}" aria-labelledby="{{ title | slugify }}-heading">
         {% if expandable %}
           <details class="cv-details">
             <summary>
@@ -53,9 +125,13 @@
             {% endfor %}
           </ul>
         {% else %}
-          <div class="{% if title == 'Education' or title == 'Experience' or title == 'Research & Software Projects' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
+          <div class="{% if title == 'Education' or title == 'Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
             {% for entry in entries %}
-              <article class="{% if title == 'Education' or title == 'Experience' or title == 'Research & Software Projects' %}cv-entry{% else %}cv-compact-entry{% endif %}">
+              <article
+                class="{% if title == 'Education' or title == 'Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
+                data-cv-record
+                data-cv-date="{{ entry.date | default: '' | escape }}"
+              >
                 <div class="cv-entry-heading">
                   <div>
                     <h3>
@@ -90,7 +166,7 @@
                   </p>
                 </div>
                 {% if entry.highlights %}
-                  <ul>
+                  <ul class="cv-highlights">
                     {% for item in entry.highlights %}
                       <li>{{ item }}</li>
                     {% endfor %}
@@ -109,3 +185,5 @@
     {% endfor %}
   </article>
 </div>
+
+<script src="{{ '/assets/js/cv-customize.js' | relative_url }}" defer></script>

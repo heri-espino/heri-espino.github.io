@@ -11,22 +11,22 @@ cv:
       - degree: Bachelor of Science in Data Science
         institution: Universidad de las Américas Puebla
         location: Puebla, Mexico
-        date: Aug 2023 — Jun 2026
+        date: Aug 2023 — Dec 2027 (expected)
         highlights:
-          - "GPA: 9.7/10"
+          - "GPA: 9.6/10"
           - "Scholarship: 40%"
           - "Relevant coursework: Complex Networks, TDA, Advanced Optimization, DL, AI, ML, CC & Big Data, ABM, Numerical Methods"
       - degree: Bachelor of Science in Actuarial Science
         institution: Universidad de las Américas Puebla
         location: Puebla, Mexico
-        date: Aug 2021 — Jun 2026
+        date: Aug 2021 — Dec 2026 (expected)
         highlights:
           - "GPA: 9.5/10"
           - "Scholarship: 40%"
           - "Relevant coursework: Ruin Theory, Stochastic Processes, Exotic Derivatives, Administration of Financial Risk, Measure Theory"
 
     Experience:
-      - name: Data Analyst at Mathematics Learning Center
+      - name: Research Data Scientist — Mathematics Learning Center
         organization: Universidad de las Américas Puebla
         location: Puebla, Mexico
         date: Aug 2025 — Present
@@ -43,7 +43,39 @@ cv:
           - Architected an Airflow ETL DAG with a Docker container to ingest intraday OHLCV/reference data into PostgreSQL for 500 tickers, parameterized to scale to arbitrary tickers.
           - Web-scraped the latest 100 news items per ticker and normalized metadata by publisher/journal to enable fast filtering, deduplication, and rapid analyst-facing news retrieval.
 
-    Research & Software Projects:
+      - name: Academic Assistant — Linear Algebra
+        organization: Universidad de las Américas Puebla
+        location: Puebla, Mexico
+        date: Jan 2023 — May 2023
+        highlights:
+          - Created reproducible LaTeX Beamer lectures with theorem environments, diagrams, figures, and structured handouts.
+          - Standardized notation and visual assets for linear maps, eigenspaces, diagonalization, and factorizations.
+      - name: Analyst — Digital Marketing & Analytics
+        organization: Paletas Loreto
+        location: Puebla, Mexico
+        date: Jan 2021 — Aug 2023
+        highlights:
+          - Created and administered the company's Google Business Profile, including its business information and map listing.
+          - Verified the business location across Google Maps and Waze and created social media pages to analyze audience engagement.
+
+    Programming Experience:
+      - name: Contributor — OpenAI Python SDK
+        date: Sep 2026
+        organization: OpenAI
+        links:
+          - { label: GitHub, url: "https://github.com/openai/openai-python" }
+        highlights:
+          - Updated Python SDK transport-error mapping so mid-stream connection failures surface as stable documented exceptions.
+          - Added synchronous and asynchronous regression tests for transport errors, cleanup, callbacks, and compatibility.
+      - name: AbaQuant — Financial Mathematics Python Library
+        date: Aug 2024 — Present
+        location: Puebla, Mexico
+        links:
+          - { label: Documentation, url: "https://abaquant.github.io/AbaQuant/" }
+          - { label: PyPI, url: "https://pypi.org/project/abaquant/" }
+          - { label: DOI, url: "https://zenodo.org/records/21347375" }
+        highlights:
+          - Developed a Python library for financial mathematics, with reusable quantitative methods and published package documentation.
       - name: Developer in Proximity Graphs Python Library
         date: Aug 2025 — Present
         location: Puebla, Mexico
@@ -52,6 +84,36 @@ cv:
           - Converted proximity-graph constructions from mathematical papers into reproducible, object-oriented Python code, structuring algorithms as modular classes across subpackages.
           - Reorganized the repository architecture for maintainability, enforcing PEP 8/Ruff style conventions and optimizing computational kernels with NumPy vectorization.
           - Implemented continuous-integration workflows in GitHub Actions to run Ruff, PyTest, and package-build checks across multiple Python versions before publishing releases to PyPI.
+      - name: Docling Math — Mathematical PDF Extraction
+        organization: Independent research software
+        links:
+          - { label: Website, url: "https://heri-espino.github.io/docling-math/" }
+          - { label: Documentation, url: "https://heri-espino.github.io/docling-math/docs/" }
+          - { label: GitHub, url: "https://github.com/heri-espino/docling-math" }
+        highlights:
+          - Developed a Docling-based Python workflow to extract mathematics-heavy PDFs into structured Markdown, including formula and table reconstruction.
+          - Added source-page provenance, bibliographic metadata, command-line workflows, local desktop processing, and optional Obsidian integration.
+      - name: AwesomeFigures — Scientific Visualization Toolkit
+        organization: Open-source Python library
+        links:
+          - { label: Website, url: "https://awesomefigures.github.io/awesomefigures/" }
+          - { label: GitHub, url: "https://github.com/awesomefigures/awesomefigures" }
+        highlights:
+          - Developed Matplotlib-oriented plotting tools with perceptually controlled palettes, established accessible color schemes, and publication-ready styles.
+          - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
+
+    Research:
+      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+        date: "2026"
+        organization: "Springer Nature · SN Computer Science · Under Review"
+        links:
+          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
+          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
+        highlights:
+          - Studied when joint activation-patching effects can be reconstructed from individual channel changes across controlled CNNs.
+          - Compared multiple architectures and a spatial-permutation control, separating effects of the evaluation metric from failures of logit additivity.
+
       - name: Unit-Region Factorization for Empty-Region Proximity Graphs
         date: Jun 2026 — Present
         location: Puebla, Mexico
@@ -59,6 +121,7 @@ cv:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
         highlights:
+          - Manuscript under review at Discrete Applied Mathematics (LAGOS special issue).
           - Proved rigid-motion covariance and scale covariance for Euclidean-definable neighborhood kernels, yielding a dimensionless unit-region factorization.
           - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
           - Implemented Monte Carlo membership checks for equivariance and scaling tests, validating β-skeleton and γ-graph constructions under invariant center-selection rules.
@@ -69,6 +132,7 @@ cv:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
         highlights:
+          - Manuscript under revision for Computational Geometry (Elsevier).
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
       - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
@@ -77,7 +141,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_sp500-trend-comparison.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Trend-Estimation" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Trend-Estimation" }
         highlights:
           - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
           - Reused spectral solvers for matrix multiplication across smoothness grids and benchmarked HP, Whittaker, MA, ES, and polynomial baselines using RMSE and SMAPE.
@@ -87,7 +151,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
         highlights:
           - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
           - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
@@ -97,7 +161,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_template-priors-cnns.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
         highlights:
           - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
           - Measured mechanistic identifiability using template-alignment scores, kernel visualizations, ablations, controlled patching, and class-level responses across classes.
@@ -107,7 +171,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_systemic-liquidity-abm.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
         highlights:
           - Built an agent-based derivatives simulator with market participants, stochastic shocks, pricing rules, and margin calls under crisis scenarios.
           - Tracked liquidation cascades through volatility jumps, spread widening, agent health, stress networks, contagion indices, and network-fragility metrics across agent types.
@@ -127,6 +191,40 @@ cv:
         highlights:
           - Built reproducible LaTeX Beamer materials with theorem environments, TikZ diagrams, spectral figures, structured handouts, and clean source files for student use.
           - Standardized notation and visual assets for lectures on linear maps, eigenspaces, diagonalization, decompositions, and matrix factorizations for proof-based teaching.
+      - name: Student Engagement and Adaptation
+        date: Sep 2026
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
+        highlights:
+          - Analyzed longitudinal student engagement and adaptation patterns in introductory mathematics.
+      - name: Instructor Grade Heterogeneity
+        date: Oct 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
+        highlights:
+          - Investigated heterogeneity in grading patterns across 769 university classroom groups.
+      - name: Support Persistence After Incentives
+        date: Sep 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
+        highlights:
+          - Studied whether voluntary academic-support participation persisted after a first-year participation incentive ended.
+      - name: Mathematics Support and Classroom-Relative Performance
+        date: Aug 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
+        highlights:
+          - Analyzed associations between tutoring participation and performance standardized within classrooms.
+      - name: Bayesian Uncertainty in WTI Options
+        organization: "Research draft"
+        links:
+          - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
+        highlights:
+          - Studied the propagation of posterior parameter uncertainty into WTI option valuation.
 
     Schools:
       - {
@@ -173,6 +271,13 @@ cv:
       - { name: Top 10 on The 4th UDLAP Mathematics Olympiad, date: Oct 2024, organization: Universidad de las Américas Puebla, location: On Campus }
 
     Academic Activities:
+      - {
+          name: Contributed Talk — Asymptotic Characteristics of Proximity Graphs,
+          date: Oct 2026,
+          organization: Sociedad Matemática Mexicana — 59th National Congress,
+          location: "Mexico (pre-recorded)",
+          url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html",
+        }
       - {
           name: Poster Presenter on XLI Colloquium Victor Neumann-Lara,
           date: Apr 2026,

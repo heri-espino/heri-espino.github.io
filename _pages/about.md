@@ -24,7 +24,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
       <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>
       <a href="{{ site.data.socials.ssrn_author_url }}">SSRN</a>
     </nav>
-    {% comment %}Restore the View CV link here when `_pages/cv.md` is republished.{% endcomment %}
+    <a class="portfolio-hero-cv" href="{{ '/cv/' | relative_url }}">View CV</a>
   </div>
 </section>
 
