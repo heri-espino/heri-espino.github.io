@@ -23,8 +23,8 @@
       </button>
       <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav">
         <ul class="navbar-nav navbar-menu-list flex-nowrap">
-          {% comment %}Restore CV by adding `CV|/cv/` before Contact and re-enabling `_pages/cv.md`.{% endcomment %}
-          {% assign nav_items = 'Papers|/papers/,Projects|/projects/,Academics|/academic-projects/,Posters|/presentations/,Press|/press/,Notes|/notes/,Contact|/contact/'
+          {% comment %}The CV has its own sorting and print controls; do not put them on the homepage.{% endcomment %}
+          {% assign nav_items = 'Papers|/papers/,Projects|/projects/,Academics|/academic-projects/,Posters|/presentations/,Press|/press/,Notes|/notes/,CV|/cv/,Contact|/contact/'
             | split: ','
           %}
           {% for nav_item in nav_items %}

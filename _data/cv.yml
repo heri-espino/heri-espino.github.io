@@ -11,22 +11,22 @@ cv:
       - degree: Bachelor of Science in Data Science
         institution: Universidad de las Américas Puebla
         location: Puebla, Mexico
-        date: Aug 2023 — Jun 2026
+        date: Aug 2023 — Dec 2027 (expected)
         highlights:
-          - "GPA: 9.7/10"
+          - "GPA: 9.6/10"
           - "Scholarship: 40%"
           - "Relevant coursework: Complex Networks, TDA, Advanced Optimization, DL, AI, ML, CC & Big Data, ABM, Numerical Methods"
       - degree: Bachelor of Science in Actuarial Science
         institution: Universidad de las Américas Puebla
         location: Puebla, Mexico
-        date: Aug 2021 — Jun 2026
+        date: Aug 2021 — Dec 2026 (expected)
         highlights:
           - "GPA: 9.5/10"
           - "Scholarship: 40%"
           - "Relevant coursework: Ruin Theory, Stochastic Processes, Exotic Derivatives, Administration of Financial Risk, Measure Theory"
 
     Experience:
-      - name: Data Analyst at Mathematics Learning Center
+      - name: Research Data Scientist — Mathematics Learning Center
         organization: Universidad de las Américas Puebla
         location: Puebla, Mexico
         date: Aug 2025 — Present
@@ -44,6 +44,15 @@ cv:
           - Web-scraped the latest 100 news items per ticker and normalized metadata by publisher/journal to enable fast filtering, deduplication, and rapid analyst-facing news retrieval.
 
     Research & Software Projects:
+      - name: AbaQuant — Financial Mathematics Python Library
+        date: Aug 2024 — Present
+        location: Puebla, Mexico
+        links:
+          - { label: Documentation, url: "https://abaquant.github.io/AbaQuant/" }
+          - { label: PyPI, url: "https://pypi.org/project/abaquant/" }
+          - { label: DOI, url: "https://zenodo.org/records/21347375" }
+        highlights:
+          - Developed a Python library for financial mathematics, with reusable quantitative methods and published package documentation.
       - name: Developer in Proximity Graphs Python Library
         date: Aug 2025 — Present
         location: Puebla, Mexico
@@ -77,7 +86,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_sp500-trend-comparison.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Trend-Estimation" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Trend-Estimation" }
         highlights:
           - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
           - Reused spectral solvers for matrix multiplication across smoothness grids and benchmarked HP, Whittaker, MA, ES, and polynomial baselines using RMSE and SMAPE.
@@ -87,7 +96,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
         highlights:
           - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
           - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
