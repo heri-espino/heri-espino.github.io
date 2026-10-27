@@ -1746,3 +1746,56 @@ body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:fo
     transform: none !important;
   }
 }
+
+/* Papers archive: visibly separate submitted manuscripts from work in progress. */
+.papers-archive-intro {
+  margin-bottom: 1.8rem;
+}
+
+.papers-archive-section {
+  min-width: 0;
+}
+
+.papers-archive-section[hidden] {
+  display: none !important;
+}
+
+.papers-archive-heading {
+  margin-bottom: 1.8rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.papers-archive-heading h2 {
+  margin: 0.55rem 0 0;
+  color: var(--global-text-color);
+  font-size: clamp(1.65rem, 3.2vw, 2.45rem);
+  font-weight: 550;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.papers-archive-count {
+  margin-left: 0.15rem;
+  color: var(--global-text-color-light);
+  font-size: 0.57em;
+  font-weight: 450;
+  vertical-align: 0.12em;
+}
+
+.papers-archive-heading > div > p:last-child {
+  max-width: 43rem;
+  margin: 0.55rem 0 0;
+  color: var(--global-text-color-light);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.papers-archive-section--secondary {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.papers-archive-section--secondary .papers-archive-heading {
+  padding-top: 1.55rem;
+  border-top: 2px solid var(--global-theme-color);
+}
