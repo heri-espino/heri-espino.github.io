@@ -2,10 +2,10 @@
 
 ## Intent and current implementation
 
-The public, Jekyll-generated CV is published at \`/cv/\` and linked from the
-top navigation and home profile. Source: \`_data/cv.yml\`. Rendering stays
-in the existing \`_includes/cv/render.liquid\` local override, with
-\`assets/js/cv-customize.js\` and \`_sass/_cv.scss\`.
+The public, Jekyll-generated CV is published at `/cv/` and linked from the
+top navigation and home profile. Source: `_data/cv.yml`. Rendering stays
+in the existing `_includes/cv/render.liquid` local override, with
+`assets/js/cv-customize.js` and `_sass/_cv.scss`.
 
 User-selected options (client-side and independent of Jekyll):
 
@@ -50,18 +50,18 @@ migrated public GitHub repositories point to the heri-espino account.
 ## How to maintain
 
 1. Verify any date, title, award, or claim against the CV or public project record.
-2. Edit \`_data/cv.yml\`, not generated HTML. Prefer links to existing site
+2. Edit `_data/cv.yml`, not generated HTML. Prefer links to existing site
    detail pages or directly verified documents.
 3. If print controls change, keep matching IDs in Liquid and JS and update
-   the contract checks in \`test/style_contract.js\`.
+   the contract checks in `test/style_contract.js`.
 4. For CSS, preserve the local override allowlist and reduce-motion,
    light/dark, mobile, accessible focus, and print behaviors.
 5. Compile the standalone LaTeX source with
-   \`latexmk -xelatex -interaction=nonstopmode -halt-on-error Heriberto_Espino_Montelongo.tex\`
+   `latexmk -xelatex -interaction=nonstopmode -halt-on-error Heriberto_Espino_Montelongo.tex`
    on the machine where that source is stored. Verify page count and inspect
    rendered pages.
 6. For the website, run existing site validation commands in AGENTS.md,
-   including \`node test/style_contract.js\`, a Jekyll build, and a Chromium
+   including `node test/style_contract.js`, a Jekyll build, and a Chromium
    print-preview check (both templates, both page sizes, grouped/timeline
    sorting, and closed expandable sections).
 
