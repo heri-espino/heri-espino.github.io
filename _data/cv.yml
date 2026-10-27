@@ -43,7 +43,30 @@ cv:
           - Architected an Airflow ETL DAG with a Docker container to ingest intraday OHLCV/reference data into PostgreSQL for 500 tickers, parameterized to scale to arbitrary tickers.
           - Web-scraped the latest 100 news items per ticker and normalized metadata by publisher/journal to enable fast filtering, deduplication, and rapid analyst-facing news retrieval.
 
+      - name: Academic Assistant — Linear Algebra
+        organization: Universidad de las Américas Puebla
+        location: Puebla, Mexico
+        date: Jan 2023 — May 2023
+        highlights:
+          - Created reproducible LaTeX Beamer lectures with theorem environments, diagrams, figures, and structured handouts.
+          - Standardized notation and visual assets for linear maps, eigenspaces, diagonalization, and factorizations.
+      - name: Analyst — Digital Marketing & Analytics
+        organization: Paletas Loreto
+        location: Puebla, Mexico
+        date: Jan 2021 — Aug 2023
+        highlights:
+          - Created and administered the company's Google Business Profile, including its business information and map listing.
+          - Verified the business location across Google Maps and Waze and created social media pages to analyze audience engagement.
+
     Research & Software Projects:
+      - name: Contributor — OpenAI Python SDK
+        date: Sep 2026
+        organization: OpenAI
+        links:
+          - { label: GitHub, url: "https://github.com/openai/openai-python" }
+        highlights:
+          - Updated Python SDK transport-error mapping so mid-stream connection failures surface as stable documented exceptions.
+          - Added synchronous and asynchronous regression tests for transport errors, cleanup, callbacks, and compatibility.
       - name: AbaQuant — Financial Mathematics Python Library
         date: Aug 2024 — Present
         location: Puebla, Mexico
@@ -68,6 +91,7 @@ cv:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
         highlights:
+          - Manuscript under review at Discrete Applied Mathematics (LAGOS special issue).
           - Proved rigid-motion covariance and scale covariance for Euclidean-definable neighborhood kernels, yielding a dimensionless unit-region factorization.
           - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
           - Implemented Monte Carlo membership checks for equivariance and scaling tests, validating β-skeleton and γ-graph constructions under invariant center-selection rules.
@@ -78,6 +102,7 @@ cv:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
         highlights:
+          - Manuscript under review at Computational Geometry.
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
       - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
@@ -182,6 +207,13 @@ cv:
       - { name: Top 10 on The 4th UDLAP Mathematics Olympiad, date: Oct 2024, organization: Universidad de las Américas Puebla, location: On Campus }
 
     Academic Activities:
+      - {
+          name: Contributed Talk — Asymptotic Characteristics of Proximity Graphs,
+          date: Oct 2026,
+          organization: Sociedad Matemática Mexicana — 59th National Congress,
+          location: "Mexico (pre-recorded)",
+          url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html",
+        }
       - {
           name: Poster Presenter on XLI Colloquium Victor Neumann-Lara,
           date: Apr 2026,
