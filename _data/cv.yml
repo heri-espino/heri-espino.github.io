@@ -58,7 +58,7 @@ cv:
           - Created and administered the company's Google Business Profile, including its business information and map listing.
           - Verified the business location across Google Maps and Waze and created social media pages to analyze audience engagement.
 
-    Research & Software Projects:
+    Programming Experience:
       - name: Contributor — OpenAI Python SDK
         date: Sep 2026
         organization: OpenAI
@@ -84,6 +84,36 @@ cv:
           - Converted proximity-graph constructions from mathematical papers into reproducible, object-oriented Python code, structuring algorithms as modular classes across subpackages.
           - Reorganized the repository architecture for maintainability, enforcing PEP 8/Ruff style conventions and optimizing computational kernels with NumPy vectorization.
           - Implemented continuous-integration workflows in GitHub Actions to run Ruff, PyTest, and package-build checks across multiple Python versions before publishing releases to PyPI.
+      - name: Docling Math — Mathematical PDF Extraction
+        organization: Independent research software
+        links:
+          - { label: Website, url: "https://heri-espino.github.io/docling-math/" }
+          - { label: Documentation, url: "https://heri-espino.github.io/docling-math/docs/" }
+          - { label: GitHub, url: "https://github.com/heri-espino/docling-math" }
+        highlights:
+          - Developed a Docling-based Python workflow to extract mathematics-heavy PDFs into structured Markdown, including formula and table reconstruction.
+          - Added source-page provenance, bibliographic metadata, command-line workflows, local desktop processing, and optional Obsidian integration.
+      - name: AwesomeFigures — Scientific Visualization Toolkit
+        organization: Open-source Python library
+        links:
+          - { label: Website, url: "https://awesomefigures.github.io/awesomefigures/" }
+          - { label: GitHub, url: "https://github.com/awesomefigures/awesomefigures" }
+        highlights:
+          - Developed Matplotlib-oriented plotting tools with perceptually controlled palettes, established accessible color schemes, and publication-ready styles.
+          - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
+
+    Research:
+      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+        date: "2026"
+        organization: "Springer Nature · SN Computer Science · Under Review"
+        links:
+          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
+          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
+        highlights:
+          - Studied when joint activation-patching effects can be reconstructed from individual channel changes across controlled CNNs.
+          - Compared multiple architectures and a spatial-permutation control, separating effects of the evaluation metric from failures of logit additivity.
+
       - name: Unit-Region Factorization for Empty-Region Proximity Graphs
         date: Jun 2026 — Present
         location: Puebla, Mexico
@@ -102,7 +132,7 @@ cv:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
         highlights:
-          - Manuscript under review at Computational Geometry.
+          - Manuscript under revision for Computational Geometry (Elsevier).
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
       - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
@@ -131,7 +161,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_template-priors-cnns.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
         highlights:
           - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
           - Measured mechanistic identifiability using template-alignment scores, kernel visualizations, ablations, controlled patching, and class-level responses across classes.
@@ -141,7 +171,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html" }
           - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_systemic-liquidity-abm.pdf" }
-          - { label: GitHub, url: "https://github.com/heritaco/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
         highlights:
           - Built an agent-based derivatives simulator with market participants, stochastic shocks, pricing rules, and margin calls under crisis scenarios.
           - Tracked liquidation cascades through volatility jumps, spread widening, agent health, stress networks, contagion indices, and network-fragility metrics across agent types.
@@ -161,6 +191,40 @@ cv:
         highlights:
           - Built reproducible LaTeX Beamer materials with theorem environments, TikZ diagrams, spectral figures, structured handouts, and clean source files for student use.
           - Standardized notation and visual assets for lectures on linear maps, eigenspaces, diagonalization, decompositions, and matrix factorizations for proof-based teaching.
+      - name: Student Engagement and Adaptation
+        date: Sep 2026
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
+        highlights:
+          - Analyzed longitudinal student engagement and adaptation patterns in introductory mathematics.
+      - name: Instructor Grade Heterogeneity
+        date: Oct 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
+        highlights:
+          - Investigated heterogeneity in grading patterns across 769 university classroom groups.
+      - name: Support Persistence After Incentives
+        date: Sep 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
+        highlights:
+          - Studied whether voluntary academic-support participation persisted after a first-year participation incentive ended.
+      - name: Mathematics Support and Classroom-Relative Performance
+        date: Aug 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
+        highlights:
+          - Analyzed associations between tutoring participation and performance standardized within classrooms.
+      - name: Bayesian Uncertainty in WTI Options
+        organization: "Research draft"
+        links:
+          - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
+        highlights:
+          - Studied the propagation of posterior parameter uncertainty into WTI option valuation.
 
     Schools:
       - {
