@@ -125,10 +125,10 @@
             {% endfor %}
           </ul>
         {% else %}
-          <div class="{% if title == 'Education' or title == 'Experience' or title == 'Research & Software Projects' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
+          <div class="{% if title == 'Education' or title == 'Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
             {% for entry in entries %}
               <article
-                class="{% if title == 'Education' or title == 'Experience' or title == 'Research & Software Projects' %}cv-entry{% else %}cv-compact-entry{% endif %}"
+                class="{% if title == 'Education' or title == 'Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
                 data-cv-record
                 data-cv-date="{{ entry.date | default: '' | escape }}"
               >
