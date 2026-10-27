@@ -197,3 +197,384 @@
     align-items: flex-start;
   }
 }
+
+
+// CV personalization is scoped to this page. Site-wide typography, palettes,
+// and navigation remain unchanged.
+.cv-page {
+  --cv-accent: #123b63;
+  --cv-font-stack: inherit;
+  font-family: var(--cv-font-stack);
+}
+
+.cv-page[hidden],
+.cv-page [hidden] {
+  display: none !important;
+}
+
+.cv-page[data-cv-font="arial"] {
+  --cv-font-stack: Arial, Helvetica, sans-serif;
+}
+.cv-page[data-cv-font="georgia"] {
+  --cv-font-stack: Georgia, "Times New Roman", serif;
+}
+.cv-page[data-cv-font="times"] {
+  --cv-font-stack: "Times New Roman", Times, serif;
+}
+.cv-page[data-cv-font="garamond"] {
+  --cv-font-stack: Garamond, "EB Garamond", Georgia, serif;
+}
+
+.cv-page .cv-eyebrow,
+.cv-page .cv-timeline-category {
+  color: var(--cv-accent);
+}
+
+.cv-tools {
+  margin-top: 1.4rem;
+  padding: 1.15rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.65rem;
+  background: var(--global-code-bg-color);
+}
+
+.cv-tools-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.cv-tools-heading h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.cv-tools-heading p {
+  margin: 0.2rem 0 0;
+}
+
+.cv-tools-note,
+.cv-disclaimer {
+  font-size: 0.78rem;
+  color: var(--global-text-color-light);
+}
+
+.cv-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 0.75rem;
+}
+
+.cv-tools-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.cv-tools select {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.35rem;
+  padding: 0.5rem 0.35rem;
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+  font: inherit;
+  font-size: 0.86rem;
+}
+
+.cv-section-picker {
+  margin-top: 0.9rem;
+}
+
+.cv-section-picker summary {
+  width: fit-content;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cv-section-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem 1rem;
+  margin: 0.75rem 0;
+}
+
+.cv-section-picker-grid label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-size: 0.83rem;
+}
+
+.cv-section-picker-grid input {
+  accent-color: var(--cv-accent);
+}
+
+.cv-tools :is(button, select, input, summary):focus-visible {
+  outline: 3px solid var(--portfolio-focus-color, #326c9c);
+  outline-offset: 3px;
+}
+
+.cv-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+
+.cv-actions button {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--cv-accent);
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.cv-primary-action {
+  color: #fff;
+  background: var(--cv-accent);
+}
+
+.cv-secondary-action {
+  color: var(--global-text-color);
+  background: transparent;
+}
+
+.cv-actions p {
+  margin: 0;
+  color: var(--global-text-color-light);
+  font-size: 0.82rem;
+}
+
+.cv-disclaimer {
+  margin: 0.9rem 0 0;
+}
+
+.cv-timeline {
+  margin-top: 1.8rem;
+}
+
+.cv-timeline h2 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--cv-border);
+}
+
+.cv-timeline-category {
+  margin: 0 0 0.3rem !important;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.cv-timeline .cv-compact-entry {
+  padding: 0 0 1.5rem;
+}
+
+.cv-page[data-cv-density="compact"] .cv-content {
+  gap: 1.4rem;
+}
+
+.cv-page[data-cv-density="compact"] .cv-entry-list {
+  gap: 0.65rem;
+}
+
+.cv-page[data-cv-density="compact"] .cv-entry {
+  padding-bottom: 0.65rem;
+}
+
+.cv-page[data-cv-density="compact"] .cv-compact-entry {
+  padding: 0.55rem 0;
+}
+
+.cv-page[data-cv-density="compact"] .cv-entry ul,
+.cv-page[data-cv-density="compact"] .cv-compact-entry ul {
+  margin-top: 0.25rem;
+}
+
+.cv-page[data-cv-template="harvard"] {
+  --cv-accent: #252525;
+  --cv-font-stack: Georgia, "Times New Roman", serif;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-intro {
+  text-align: center;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-contact {
+  justify-content: center;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-section > h2,
+.cv-page[data-cv-template="harvard"] .cv-details summary {
+  font-variant: small-caps;
+  letter-spacing: 0.025em;
+  border-bottom: 1.5px solid var(--cv-accent);
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry,
+.cv-page[data-cv-template="harvard"] .cv-compact-entry {
+  border-bottom: 0;
+}
+
+// An explicitly selected font always overrides the chosen template's default.
+.cv-page[data-cv-font="arial"] { --cv-font-stack: Arial, Helvetica, sans-serif; }
+.cv-page[data-cv-font="georgia"] { --cv-font-stack: Georgia, "Times New Roman", serif; }
+.cv-page[data-cv-font="times"] { --cv-font-stack: "Times New Roman", Times, serif; }
+.cv-page[data-cv-font="garamond"] { --cv-font-stack: Garamond, "EB Garamond", Georgia, serif; }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 13mm;
+  }
+
+  body:has(.cv-page) {
+    background: #fff !important;
+    color: #111 !important;
+    font-size: 9pt;
+  }
+
+  body:has(.cv-page) :is(#navbar, footer, #footer, #progress, #back-to-top, .back-to-top) {
+    display: none !important;
+  }
+
+  body:has(.cv-page) .container {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .cv-page {
+    color: #111 !important;
+    background: #fff !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cv-page .cv-tools,
+  .cv-page .post-description {
+    display: none !important;
+  }
+
+  .cv-page .cv-intro {
+    margin-bottom: 8pt;
+    padding-bottom: 8pt;
+  }
+
+  .cv-page .cv-intro h1 {
+    margin-bottom: 4pt;
+    font-size: 17pt;
+  }
+
+  .cv-page .cv-contact {
+    font-size: 8pt;
+    gap: 2pt 10pt;
+  }
+
+  .cv-page .cv-content,
+  .cv-page .cv-entry-list {
+    gap: 9pt;
+    margin-top: 8pt;
+  }
+
+  .cv-page .cv-section > h2,
+  .cv-page .cv-details summary,
+  .cv-page .cv-timeline h2 {
+    margin: 0 0 6pt;
+    padding: 0 0 3pt;
+    font-size: 11pt;
+  }
+
+  .cv-page .cv-section {
+    margin-bottom: 10pt;
+    break-inside: auto;
+  }
+
+  .cv-page .cv-entry,
+  .cv-page .cv-compact-entry,
+  .cv-page .cv-skills > div,
+  .cv-page .cv-inline-list li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv-page .cv-entry,
+  .cv-page .cv-compact-entry {
+    padding-bottom: 4pt;
+  }
+
+  .cv-page .cv-entry h3,
+  .cv-page .cv-compact-entry h3 {
+    font-size: 9pt;
+  }
+
+  .cv-page .cv-meta,
+  .cv-page .cv-organization,
+  .cv-page .cv-links,
+  .cv-page .cv-timeline-category {
+    font-size: 8pt;
+  }
+
+  .cv-page .cv-entry ul,
+  .cv-page .cv-compact-entry ul {
+    margin-top: 3pt;
+  }
+
+  .cv-page a,
+  .cv-page .cv-meta {
+    color: inherit !important;
+  }
+
+  .cv-page .cv-entry a,
+  .cv-page .cv-compact-entry a,
+  .cv-page .cv-contact a {
+    text-decoration: none;
+  }
+
+  .cv-page[data-cv-template="personal"] .cv-content,
+  .cv-page[data-cv-template="personal"] #cv-timeline-items {
+    display: block;
+    column-count: 2;
+    column-gap: 9mm;
+  }
+
+  .cv-page[data-cv-template="personal"] .cv-content .cv-section {
+    margin: 0 0 9pt;
+  }
+
+  .cv-page[data-cv-template="personal"] .cv-compact-grid {
+    display: block;
+  }
+
+  .cv-page[data-cv-template="personal"] .cv-entry-heading {
+    display: block;
+  }
+
+  .cv-page[data-cv-template="personal"] .cv-entry-heading .cv-meta {
+    text-align: left;
+  }
+
+  .cv-page[data-cv-template="harvard"] .cv-content,
+  .cv-page[data-cv-template="harvard"] #cv-timeline-items {
+    display: block;
+    column-count: 1;
+  }
+
+  .cv-page .cv-details-body,
+  .cv-page .cv-details[open] > .cv-details-body {
+    display: block;
+  }
+}
