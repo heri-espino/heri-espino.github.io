@@ -7,7 +7,6 @@ card_kind: Research draft
 title: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
 label: Research Draft
 status: Mathematical research note · Oct 2026
-authors: Heriberto Espino Montelongo
 display_date: "2026"
 summary: 'A mathematical framework for comparing time series through entire families of penalized least-squares trends, rather than a single smoothing parameter. It permits a nonzero target for finite differences and develops a Hilbert-space global distance, time-local rolling distances, and smoothness–time discrepancy surfaces, with spectral formulas and a synthetic illustration.'
 formula: 'D_{\mathrm{PLS}}(y_1,y_2)^2=\frac{1}{N}\int_0^1\left\|\boldsymbol{\tau}_{y_2}(S)-\boldsymbol{\tau}_{y_1}(S)\right\|_2^2\,dS'
