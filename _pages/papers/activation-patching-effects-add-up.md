@@ -13,8 +13,8 @@ display_date: "2026"
 summary: "This study asks when the effects of joint activation-channel patches can be predicted by summing individual channel changes. In controlled convolutional networks, intervention-size effects can occur even under exact logit additivity; other architectures exhibit substantial departures that can reverse a training-regime contrast."
 framing: "The experiments compare retention and release of predefined edge, corner, and ring filters across two synthetic classification tasks, 16 CNN architectures, and a pixel-permuted filter-bank control. Reconstruction first adds individual centered-logit changes and then evaluates the joint output with the original metric, separating metric-induced size dependence from departures from logit additivity."
 tags: [mechanistic interpretability, CNNs, activation patching, additivity]
-image: /assets/img/portfolio/activation-patching-additivity-preview.svg
-image_alt: "Designed manuscript overview for When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+image: /assets/img/portfolio/activation-patching-figure1.avif
+image_alt: "Manuscript Figure 1: rendered synthetic shapes, predefined edge and corner filter templates, and the first-layer activation-patching workflow"
 detail_image: /assets/img/portfolio/activation-patching-first-page.webp
 detail_image_alt: "First page of When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
 pdf: /papers/espino_2026_activation-patching-effects-add-up.pdf
