@@ -13,7 +13,9 @@ summary: "Studies whether Bayesian posterior integration changes WTI average-pri
 framing: "The supplied 17-page file is a blinded draft with English and Spanish abstracts. Its two observational studies use different pricing functions, data sources, and information sets and should not be pooled. Settlement-price proxies and same-day parity anchors constrain interpretation. No manuscript submission, acceptance, or independent prediction performance claim is inferred from the document."
 tags: ["Bayesian inference", "Asian options", "WTI", "implied volatility", "posterior integration"]
 image: /assets/img/portfolio/pdf-page-shots/posterior-integration-volatility-wti-asian-options-figure.avif
-image_alt: "Page 9: four-panel posterior integration and volatility-effects figure from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/posterior-integration-volatility-wti-asian-options-first.avif\ndetail_image_alt: "Screenshot of page 1 of posterior integration volatility wti asian options"
+image_alt: "Page 9: four-panel posterior integration and volatility-effects figure from the uploaded document"
+detail_image: /assets/img/portfolio/pdf-page-shots/posterior-integration-volatility-wti-asian-options-first.avif
+detail_image_alt: "Screenshot of page 1 of posterior integration volatility wti asian options"
 contributions:
   - "Distinguishes posterior-integrated prices, plug-in posterior-mean prices, and uncertainty in theoretical option values."
   - "Simulates 10 million return histories to assess the price-curvature approximation to posterior-integration corrections."

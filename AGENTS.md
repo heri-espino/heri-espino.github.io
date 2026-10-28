@@ -162,3 +162,13 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 - The CV organization-logo coverage audit is `docs/CV_LOGO_AUDIT.md` and its reproducible, dependency-free checker is `scripts/audit-cv-organization-logos.mjs` (`node scripts/audit-cv-organization-logos.mjs`). Colegio Loyola's owner-provided mark is stored locally as `assets/img/cv-organizations/colegio-loyola.webp`. BUAP and Actinver use verified Wikimedia SVG artwork instead of missing or pixelated favicons. Actinver's wide wordmark needs proportional display (see `_sass/_cv.scss`). Remaining unmatched labels are generic noninstitutional placeholders, not schools or employers. For recognized institutions still on Google favicons, prefer properly sourced institutional identity assets before replacing them; never invent brand graphics.
 
 - The six newly documented PDFs are represented by **twelve real, owner-provided PDF-page screenshot assets** stored at `assets/img/portfolio/pdf-page-shots/`. Each card `image` is a cropped figure-page AVIF; each portfolio detail `detail_image` is the PDF's first-page AVIF. Keep them separate and keep source-page provenance in `docs/CV_HANDOFF.md`. Original PDFs are not hosted by this image-only update.
+
+- Regression guard for the Papers archive: six October 2026 research uploads
+  previously failed to publish due to literal `\\n` text between YAML
+  front-matter keys. Jekyll can emit YAML warnings while returning a
+  successful overall build. The rendered archive must contain **3 Submitted**
+  plus **13 Working Drafts** (the original seven plus six uploads), and all
+  six `/papers/<slug>.html` pages must exist. The deploy workflow now runs
+  `node scripts/verify-paper-archive.mjs` after Jekyll; do not remove or
+  bypass this check. Preserve the user's figure card / first-page preview
+  distinction.

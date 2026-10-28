@@ -364,6 +364,11 @@ if (exists("_pages/cv.md")) {
   for (const slug of allScreenshotSlugs) {
     const pagePath = "_pages/papers/" + slug + ".md";
     const pageSource = read(pagePath);
+    const frontMatterMatch = pageSource.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+    if (!frontMatterMatch || frontMatterMatch[1].includes("\\ndetail_image:") ||
+        frontMatterMatch[1].includes("\\ndetail_image_alt:")) {
+      failures.push("Paper metadata must have valid front-matter line breaks, not literal backslash-n text: " + slug);
+    }
     const imagePrefix = "/assets/img/portfolio/pdf-page-shots/" + slug;
     if (pageSource.includes("featured: true") ||
         !pageSource.includes("image: " + imagePrefix + "-figure.avif") ||

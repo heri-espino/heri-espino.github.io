@@ -13,7 +13,9 @@ summary: "A step-by-step mathematical tutorial on weighted Max-Cut, sign and Lap
 framing: "The supplied document is titled MATHEMATICAL TUTORIAL / MAXKCUT RESEARCH PROJECT; it explains known mathematics and an evolving computational workflow rather than reporting a new submitted theorem or a completed benchmark superiority result. Its detailed formulas primarily address Max-Cut (k = 2); Max-k-Cut is discussed separately. Approximation guarantees for nonnegative-weight SDP rounding must not be applied to signed-weight G-set instances or arbitrary nonconvex EVA output."
 tags: ["Max-Cut", "semidefinite programming", "EVA", "clustering", "approximation algorithms"]
 image: /assets/img/portfolio/pdf-page-shots/maxcut-sdp-eva-clustering-tutorial-figure.avif
-image_alt: "Page 1: weighted four-cycle and example Max-Cut partition from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/maxcut-sdp-eva-clustering-tutorial-first.avif\ndetail_image_alt: "Screenshot of page 1 of maxcut sdp eva clustering tutorial"
+image_alt: "Page 1: weighted four-cycle and example Max-Cut partition from the uploaded document"
+detail_image: /assets/img/portfolio/pdf-page-shots/maxcut-sdp-eva-clustering-tutorial-first.avif
+detail_image_alt: "Screenshot of page 1 of maxcut sdp eva clustering tutorial"
 contributions:
   - "Derives weighted Max-Cut as a quadratic sign problem and the corresponding convex semidefinite relaxation."
   - "Explains a sequential low-rank Efficient Vector Ascent update and its local monotonic-improvement property."

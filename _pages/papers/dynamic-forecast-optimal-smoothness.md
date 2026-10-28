@@ -14,7 +14,9 @@ summary: "Develops a framework for tracking multiple local minima of chronologic
 framing: "The uploaded 13-page document uses a Journal of Forecasting manuscript template with placeholder received, accepted, DOI, and correspondence fields. Those placeholders are not evidence of submission, acceptance, or publication. The research distinguishes forecast-optimal smoothness from in-sample trend recovery, uses chronological information restrictions, and requires a final refit at the latest origin."
 tags: ["forecasting", "penalized least squares", "smoothness selection", "local minima", "time series"]
 image: /assets/img/portfolio/pdf-page-shots/dynamic-forecast-optimal-smoothness-figure.avif
-image_alt: "Page 10: historical forecast-error panels and tracked-smoothness comparisons from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/dynamic-forecast-optimal-smoothness-first.avif\ndetail_image_alt: "Screenshot of page 1 of dynamic forecast optimal smoothness"
+image_alt: "Page 10: historical forecast-error panels and tracked-smoothness comparisons from the uploaded document"
+detail_image: /assets/img/portfolio/pdf-page-shots/dynamic-forecast-optimal-smoothness-first.avif
+detail_image_alt: "Screenshot of page 1 of dynamic forecast optimal smoothness"
 github: https://github.com/heri-espino/Trend-Estimation
 contributions:
   - "Represents time-evolving local minima of forecast-loss surfaces as persistent, matched branches."

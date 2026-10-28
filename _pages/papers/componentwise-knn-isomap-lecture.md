@@ -13,7 +13,9 @@ summary: "A mathematical lecture deriving the graph-shortest-path, classical MDS
 framing: "The lecture carefully distinguishes established multi-manifold methods, mathematical identities, executed deterministic experiments, and future proposals. The current EXP-011 partition is built using radius graphs or supplied MST cuts before internal 10-NN graphs—not a validated fully unsupervised kNN partition recovery. Do not advertise it as a peer-reviewed paper or an implemented globally optimized embedding method."
 tags: ["manifold learning", "Isomap", "geodesics", "classical MDS", "separation constraints"]
 image: /assets/img/portfolio/pdf-page-shots/componentwise-knn-isomap-lecture-figure.avif
-image_alt: "Slide 29: five-rings embedding gallery across dimensionality-reduction methods from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/componentwise-knn-isomap-lecture-first.avif\ndetail_image_alt: "Screenshot of page 1 of componentwise knn isomap lecture"
+image_alt: "Slide 29: five-rings embedding gallery across dimensionality-reduction methods from the uploaded document"
+detail_image: /assets/img/portfolio/pdf-page-shots/componentwise-knn-isomap-lecture-first.avif
+detail_image_alt: "Screenshot of page 1 of componentwise knn isomap lecture"
 github: https://github.com/heri-espino/ProximityGraphs-Isomap
 contributions:
   - "Derives the relationship between graph geodesics, double-centering, and the spectral formulation of classical MDS."
