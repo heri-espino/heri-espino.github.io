@@ -196,3 +196,75 @@ tests, then verify logo loading and the print icon-toggle in Chrome on both
 screen and A4/Letter previews. Remote favicon availability may change;
 consider vendoring individually verified logo files if the site needs
 offline-deterministic printing.
+
+
+## Paginated on-screen CV preview and Trend Estimation library (2026-10-27)
+
+The paper preview is now rendered as individually numbered A4 or US Letter
+sheets, with the chosen font, template, accent, text size, margins and
+visibility controls. The screen-only pages are assembled from clones of
+the original, user-filtered records, and a section heading is repeated as
+"(continued)" when its entries move to another preview sheet. The original
+Jekyll-rendered `#cv-document` remains the **only printed document**;
+the browser print engine, not the approximate JavaScript page stack, decides
+real PDF page breaks. Preview sheets never print.
+
+Single-entry overflow is intentionally not truncated; inspect the browser
+Print dialog for the final result. The preview is recalculated on selection,
+layout, font-loading and viewport changes. Mobile scaling may differ from
+desktop pagination. No new PDF library, third-party service, or private CV
+source file is introduced.
+
+The public CV's **Programming Experience** now includes
+[trendestimation](https://github.com/trendestimation/trendestimation), a
+developing research package separate from the forecasting experiments in the
+older Trend-Estimation repository. Its claims reflect the repository README:
+difference-order PLS smoothing, spectral computation, classical in-sample
+criteria for **fixed numeric means**, and optional plotting. Do not list it
+as PyPI-published or invent a start date. The existing project detail page
+already links the same canonical repository and needs no duplicate project.
+
+Validation: syntax-check `assets/js/cv-customize.js`, run
+`node test/style_contract.js` and the Jekyll build; visually inspect both
+paper sizes, all five templates, chronological/grouped layout, entries hidden,
+text-size/margin switches and the print-only source document. Confirm that
+the browser printout does not duplicate the generated preview sheets.
+
+
+## Europass-inspired option (2026-10-28)
+
+Added `Europass-inspired · European CV` to the existing template selector,
+bringing the set to **six** independently customizable single-column designs.
+The style uses a restrained EU-like blue, uppercase section labels, blue
+rules, position/date hierarchy, and section names such as `Work experience`
+and `Education and training`. It retains custom accent/font choices,
+existing English-language CV records, links, A4/Letter, margins, visibility
+toggles, chronological ordering, the numbered-page approximation and the
+browser's actual PDF output.
+
+The user's previous single-column preference takes priority over classic
+two-column Europass form layouts. This is an **independent
+Europass-inspired web/print theme**, not a document generated or certified by
+the European Union. The UI points to the official
+[Europass CV builder](https://europass.europa.eu/en/create-europass-cv)
+for an authentic Europass export. Do not copy EU logos, certify compliance,
+or invent CEFR listening/reading/speaking subgrades, nationality, date of
+birth or photographs not in the verified public CV.
+
+Manual regression: select Europass, confirm section labels switch back
+when changing templates, check page stack and print PDF in A4 and Letter,
+compare chronological and grouped views, verify per-entry filtering,
+and exercise custom accent and font overrides. The site's existing
+Jekyll/style-contract tests should remain unchanged except for added
+template assertions.
+
+
+## Collapsible CV sidebar (2026-10-28)
+
+Print / Save as PDF stays available on a compact left-hand toolbar, even
+while the **Hide settings / Customize CV** panel is closed. Toggling
+`#cv-settings-panel` updates `aria-expanded`, preserves current filters,
+and recalculates paper preview width. The sticky desktop sidebar scrolls
+independently, while mobile controls appear above the CV preview.
+The panel and paper preview clones are excluded from the printed PDF.
+The existing source CV remains readable when JavaScript is disabled.

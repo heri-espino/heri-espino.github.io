@@ -187,6 +187,24 @@ if (exists("_pages/cv.md")) {
   if (!cvStyles.includes('data-cv-included="false"') || !cvStyles.includes('data-cv-show-icons="false"')) {
     failures.push("CV hidden item and icon selectors are missing.");
   }
+  if (!cvRenderer.includes('<option value="europass">') || !cvScript.includes('europass: "#2176ac"') || !cvStyles.includes('data-cv-template="europass"')) {
+    failures.push("The Europass-inspired CV style must be selectable and styled.");
+  }
+  if (!cvScript.includes("europassLabels") || !cvScript.includes("updateSectionTitles")) {
+    failures.push("Europass headings must adapt when switching templates.");
+  }
+  if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
+    failures.push("The CV preview must present separate numbered paper sheets.");
+  }
+  if (!cvStyles.includes('[data-cv-paginated="true"][data-cv-preview="paper"]') || !cvScript.includes('root.dataset.cvPaginated = "true"')) {
+    failures.push("The CV must remain readable without JavaScript.");
+  }
+  if (!cvRenderer.includes('id="cv-panel-toggle"') || !cvRenderer.includes('id="cv-settings-panel"') || !cvScript.includes("setPanelOpen") || !cvStyles.includes(".cv-controls-column")) {
+    failures.push("The CV must offer a collapsible left settings panel and a persistent print button.");
+  }
+  if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
+    failures.push("Programming experience should link the canonical trendestimation library.");
+  }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }

@@ -1,12 +1,18 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="paper" data-cv-paper="a4" data-cv-show-urls="false">
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="paper" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
+  <div class="cv-workspace">
+    <div class="cv-controls-column">
+      <div class="cv-controls-toolbar" aria-label="CV settings and export">
+        <button type="button" id="cv-panel-toggle" class="cv-panel-toggle" aria-controls="cv-settings-panel" aria-expanded="true">Hide settings</button>
+        <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
+      </div>
 
-  <aside class="cv-tools" aria-label="Customize and print CV">
+      <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize and print CV">
     <div class="cv-tools-heading">
       <div>
         <h2>Customize CV</h2>
-        <p>Choose an order and a print design. Changes appear in the preview below.</p>
+        <p>Change templates and content while the preview stays visible on the right.</p>
       </div>
       <span class="cv-tools-note">Print / Save as PDF uses your browser's print dialog.</span>
     </div>
@@ -22,6 +28,7 @@
         <select id="cv-template">
           <option value="personal">Personal · navy</option>
           <option value="harvard">Harvard-inspired · classic</option>
+          <option value="europass">Europass-inspired · European CV</option>
           <option value="minimal">Modern minimal</option>
           <option value="editorial">Research editorial</option>
           <option value="professional">Compact professional</option>
@@ -124,20 +131,22 @@
     </label>
     <div class="cv-actions">
       <button type="button" id="cv-preview" class="cv-secondary-action" aria-pressed="true">Full-width view</button>
-      <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
-    <p class="cv-preview-help" id="cv-preview-help">Live A4 paper-width preview. The browser's Print dialog shows exact page breaks.</p>
+    <p class="cv-preview-help" id="cv-preview-help">Paginated A4 preview. Print / Save as PDF opens the browser's exact page layout.</p>
     <p class="cv-disclaimer">
-      The Harvard-inspired option is an independent academic CV style, not an official Harvard University template.
+      The Harvard-inspired and Europass-inspired options are independent academic CV styles, not official university or EU-issued templates.
+      For an official Europass document, use the <a href="https://europass.europa.eu/en/create-europass-cv" target="_blank" rel="noopener noreferrer">EU Europass CV builder</a>.
       Chronological sorting uses each entry's first listed date. Undated sections remain after the timeline.
     </p>
-  </aside>
-
-  <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
+      </aside>
+    </div>
+    <div class="cv-preview-column">
+      <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
   <header class="post-header cv-intro">
     <p class="cv-eyebrow">Curriculum vitae</p>
+    <p class="cv-europass-personal-heading">Personal information</p>
     <h1 class="post-title">{{ cv.name }}</h1>
     <p class="post-description">{{ page.description }}</p>
     <nav class="cv-contact" aria-label="CV contact links">
@@ -296,6 +305,9 @@
       </section>
     {% endfor %}
   </article>
+      </div>
+      <div class="cv-paged-preview" id="cv-paged-preview" aria-label="Page-by-page CV preview" hidden></div>
+    </div>
   </div>
 </div>
 
