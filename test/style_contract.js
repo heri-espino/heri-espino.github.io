@@ -205,6 +205,25 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-panel-toggle"') || !cvRenderer.includes('id="cv-settings-panel"') || !cvScript.includes("setPanelOpen") || !cvStyles.includes(".cv-controls-column")) {
     failures.push("The CV must offer a collapsible left settings panel and a persistent print button.");
   }
+  // Position must be viewport-fixed (not sticky to a short grid cell).
+  // Both buttons stay together at the left, regardless of scroll, panel
+  // expansion, or mobile breakpoint; browser printing still hides them.
+  const fixedRail = cvStyles.split("/* The CV's settings and Print buttons are *viewport-fixed*")[1] || "";
+  if (!fixedRail.includes("@media screen {") ||
+      !fixedRail.includes(".cv-page .cv-controls-toolbar {") ||
+      !fixedRail.includes("position: fixed;") ||
+      !fixedRail.includes("z-index: 110;") ||
+      !fixedRail.includes('.cv-page[data-cv-tools="open"] .cv-controls-toolbar {') ||
+      !fixedRail.includes("flex-direction: column;") ||
+      !fixedRail.includes("@media (max-width: 1049px)")) {
+    failures.push("CV settings and Print controls must remain viewport-fixed and vertically stacked in all views.");
+  }
+  if (!cvRenderer.includes('id="cv-panel-toggle"') ||
+      !cvRenderer.includes('id="cv-print"') ||
+      !cvRenderer.includes('class="cv-controls-toolbar"')) {
+    failures.push("Both fixed CV controls must remain in one accessible toolbar.");
+  }
+
   if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
     failures.push("Programming experience should link the canonical trendestimation library.");
   }

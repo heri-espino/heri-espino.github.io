@@ -689,3 +689,29 @@ single-column; the two-column structure applies **only to their heading**.
 Narrow mobile screens use constrained right-column widths rather than hiding
 city or dates. All other templates retain their original heading order.
 Test checks are in `test/style_contract.js`.
+
+## Viewport-fixed settings and print buttons (2026-10-28)
+
+The owner requested that the existing small chevron and printer icon stay
+visible as they scroll down the CV. The previous `position: sticky` rule
+was applied to a short sidebar grid cell and could stop sticking when that
+cell's bounds ended.
+
+The toolbar now uses viewport `position: fixed` at the top left of the
+CV reading area, with a desktop offset below the navigation and a smaller
+mobile offset. The two icon buttons always remain stacked vertically,
+including while the settings panel is open. The expanded settings panel
+retains its own scrolling and starts below the toolbar; closing it does
+not move the buttons. They remain accessible by mouse and keyboard and
+are omitted from browser print/PDF as before.
+
+The toolbar has a separate fixed rule on narrow screens and honors mobile
+safe-area insets. The full-width CV content and page-by-page preview
+retain their existing column widths, and none of the document/template
+contents, roles, organization logos, or export options change.
+
+Manual validation: scroll well past the first page on desktop and mobile
+and ensure both icons remain visible; open/close the menu mid-scroll;
+verify keyboard focus, no text overlay, and that neither icon appears
+inside Print / Save as PDF. Static regression checks are in
+`test/style_contract.js`.
