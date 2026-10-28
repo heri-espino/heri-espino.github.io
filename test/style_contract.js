@@ -308,6 +308,28 @@ if (exists("_pages/cv.md")) {
       cvSources.includes("Studied structured storytelling for diverse audiences.")) {
     failures.push("The Penn finance and IESE storytelling descriptions must remain removed.");
   }
+  const trendDraft = read("_pages/papers/smoothness-integrated-trend-distances.md");
+  const papersArchive = read("_pages/papers.md");
+  const researchGroup = cvSources.split("    Research:")[1]?.split("    Selected Academic Projects:")[0] || "";
+  const trendTitle = "Smoothness-Integrated Trend Distances with Nonzero Difference Drift";
+  if (!trendDraft.includes('label: "Working Draft"') ||
+      !trendDraft.includes('status: "Research note · Not submitted"') ||
+      !trendDraft.includes("importance: 1") ||
+      !trendDraft.includes("permalink: /papers/smoothness-integrated-trend-distances.html") ||
+      trendDraft.includes("Under Review") || trendDraft.includes("Submitted Manuscript")) {
+    failures.push("Smoothness-integrated trend manuscript must be a prominent unsubmitted working draft.");
+  }
+  if (!papersArchive.includes('id="featured-working-draft"') ||
+      !papersArchive.includes("include portfolio/card.liquid item=featured_draft") ||
+      !papersArchive.includes("item.url != '/papers/smoothness-integrated-trend-distances.html'") ||
+      papersArchive.indexOf('id="featured-working-draft"') > papersArchive.indexOf('id="submitted-manuscripts"')) {
+    failures.push("Featured working draft must appear before submitted manuscripts without duplication.");
+  }
+  if (!researchGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
+      !researchGroup.includes("Working Draft (Not Submitted)") ||
+      !researchGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
+    failures.push("The working draft must be the first research CV entry and never appear as submitted.");
+  }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }
