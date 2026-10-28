@@ -42,7 +42,7 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium webkit
       - name: Test actual CV layouts on desktop and mobile
-        run: npx playwright test test/visual/interactions.spec.js --grep "CV " --project=desktop --project=mobile --reporter=line
+        run: npx playwright test --config=test/visual/playwright.config.js test/visual/interactions.spec.js --grep "CV " --project=desktop --project=mobile --reporter=line
       - name: Preserve failure screenshots and traces
         if: failure()
         uses: actions/upload-artifact@v4
