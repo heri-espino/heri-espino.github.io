@@ -416,3 +416,28 @@ and remain.
 Validation includes verifying that all six image assets exist, logo names
 resolve to the correct branch asset paths, UDLAP logo variants work in both
 reading and print, and the deleted Matrix Theory record is not displayed.
+
+## Featured PLS trend-distance working draft (2026-10-28)
+
+- Source supplied in this chat: five-page October 2026 PDF, *Smoothness-Integrated
+  Trend Distances with Nonzero Difference Drift*. Its first-page header states
+  **RESEARCH NOTE / WORKING DRAFT**; it contains no journal-submission claim.
+- Added a distinct first-position **Featured Research Draft** group in
+  `/papers/`, explicitly **Not submitted**, above the submitted manuscripts.
+  The new record is excluded from the later draft grid to prevent duplication.
+- New detail page: `/papers/smoothness-integrated-trend-distances.html`.
+  It reflects only the manuscript's actual results: affine nonzero-drift
+  penalized trend estimator, normalized Guerrero smoothness, Hilbert-space
+  integrated distances, equal/unequal-drift spectral formulas, level-versus-shape
+  decomposition, and rolling/smoothness–time discrepancies.
+- The synthetic example is illustrative, not agricultural validation or a
+  calibrated statistical change-point test. Retrospective PLS can leak
+  future data when describing online changes.
+- `_data/cv.yml` lists this title **first** in Research, explicitly as
+  **Working Draft (Not Submitted)**, linking to its new portfolio page and
+  the related research code.
+- The uploaded original PDF is not yet hosted in the website repo. Do not
+  expose a fake `pdf:` field or broken `Open PDF` link until the original
+  binary is committed through an authorized binary-upload mechanism.
+  The portfolio page notes this limitation and does not mislabel the related
+  source-code repository as the manuscript PDF.
