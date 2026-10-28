@@ -9,6 +9,11 @@
   issuer_key: cimat
 - match: "universidad nacional autónoma de méxico"
   issuer_key: unam
+- match: "colegio loyola"
+  logo: "/assets/img/cv-organizations/colegio-loyola.webp"
+# BUAP logo vector, Aicanstome, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Logo_de_la_BUAP.svg
+- match: "benemérita universidad autónoma de puebla"
+  logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Logo_de_la_BUAP.svg"
 - match: "sociedad matemática mexicana"
   logo: "https://www.google.com/s2/favicons?domain=smm.org.mx&sz=128"
 - match: "mathematical association of america"
@@ -41,8 +46,9 @@
   issuer_key: ucsc
 - match: "interactive brokers"
   issuer_key: interactive-brokers
+# Scalable original Actinver wordmark: Wikimedia Commons, attributed to Actinver.
 - match: "actinver"
-  logo: "https://www.google.com/s2/favicons?domain=actinver.com&sz=128"
+  logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_de_Actinver.svg"
 - match: "openai"
   logo: "https://www.google.com/s2/favicons?domain=openai.com&sz=128"
 - match: "springer nature"
