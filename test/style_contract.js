@@ -458,7 +458,43 @@ if (exists("_pages/cv.md")) {
   }
   const trendDraft = read("_pages/papers/smoothness-integrated-trend-distances.md");
   const papersArchive = read("_pages/papers.md");
-  const researchGroup = cvSources.split("    Research:")[1]?.split("    Selected Academic Projects:")[0] || "";
+  const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
+  const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Selected Academic Projects:")[0] || "";
+  const researchGroup = submittedResearchGroup + researchDraftGroup;
+  const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
+  const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
+  if (researchCount !== 11 || draftCount !== 8) {
+    failures.push("Research and Research Drafts must preserve all 19 entries (11 research records, 8 drafts/related materials).");
+  }
+  if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
+      !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
+      !submittedResearchGroup.includes("Springer Nature · SN Computer Science · Under Review") ||
+      researchDraftGroup.includes("Under Review")) {
+    failures.push("The three submitted manuscripts must remain in Research, never Research Drafts.");
+  }
+  if (!cvRenderer.includes("title == 'Research Drafts'") ||
+      !cvScript.includes('"Research Drafts": "Research drafts and related materials"')) {
+    failures.push("Research Drafts must be a first-class printable CV section with research entry styling.");
+  }
+  const manuscriptMonths = [
+    { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
+    { name: "Volume Constants for Stepping–Stone Empty Regions in Rᵈ", month: "Aug 2026", page: "_pages/papers/stepping-stone.md" },
+    { name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs", month: "Oct 2026", page: "_pages/papers/activation-patching-effects-add-up.md" }
+  ];
+  for (const { name, month, page } of manuscriptMonths) {
+    const position = submittedResearchGroup.indexOf("      - name: " + name);
+    const end = submittedResearchGroup.indexOf("\n      - name:", position + 1);
+    const block = submittedResearchGroup.slice(position, end < 0 ? undefined : end);
+    if (position < 0 || !block.includes("date: " + month) ||
+        !read(page).includes('display_date: "' + month + '"')) {
+      failures.push("CV and portfolio paper date must match the user-confirmed month: " + name);
+    }
+  }
+  if (submittedResearchGroup.includes("organization_url: https://link.springer.com/journal/42979") ||
+      !submittedResearchGroup.includes("papers/activation-patching-effects-add-up.html") ||
+      !submittedResearchGroup.includes("papers/espino_2026_activation-patching-effects-add-up.pdf")) {
+    failures.push("Springer journal label should not link out, but CNN manuscript and PDF links must remain.");
+  }
   const trendTitle = "Smoothness-Integrated Trend Distances with Nonzero Difference Drift";
   if (!trendDraft.includes('label: "Working Draft"') ||
       !trendDraft.includes('status: "Research note · Not submitted"') ||
@@ -563,10 +599,10 @@ if (exists("_pages/cv.md")) {
       !read("_pages/papers/maxcut-sdp-eva-clustering-tutorial.md").includes("not represented as a submitted")) {
     failures.push("Lecture/tutorial materials must not be mislabeled as submitted manuscripts.");
   }
-  if (!researchGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
-      !researchGroup.includes("Working Draft (Not Submitted)") ||
-      !researchGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
-    failures.push("The working draft must be the first research CV entry and never appear as submitted.");
+  if (!researchDraftGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
+      !researchDraftGroup.includes("Working Draft (Not Submitted)") ||
+      !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
+    failures.push("The first Research Drafts entry must remain unsubmitted.");
   }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
