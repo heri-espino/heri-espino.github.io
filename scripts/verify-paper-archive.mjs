@@ -39,7 +39,7 @@ function section(id) {
 }
 
 function countCards(markup) {
-  return (markup.match(/<article\\b[^>]*class=["'][^"']*\\bportfolio-card\\b/g) || []).length;
+  return (markup.match(/<article\b[^>]*class=["'][^"']*\bportfolio-card\b/g) || []).length;
 }
 
 const submitted = section("submitted-manuscripts");
@@ -84,7 +84,7 @@ for (const slug of slugs) {
   if (!fs.existsSync(sourcePath)) {
     errors.push(`Markdown source missing: ${sourcePath}`);
   } else {
-    const frontMatter = read(sourcePath).split(/^---\\s*$/m).slice(1, 2)[0] ?? "";
+    const frontMatter = read(sourcePath).split(/^---\s*$/m).slice(1, 2)[0] ?? "";
     if (!frontMatter.includes("portfolio_type: paper") ||
         !frontMatter.includes(`permalink: ${url}`) ||
         frontMatter.includes("\\ndetail_image:") ||
