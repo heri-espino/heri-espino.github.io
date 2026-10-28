@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" role="img" aria-label="AwesomeFigures: scientific plots">
+<rect x="1" y="1" width="142" height="142" rx="28" fill="#F5F7FA"/>
+<path d="M24 22v98h101" stroke="#19334D" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M28 111C44 99 47 45 62 45s17 51 31 51 17-25 33-40" stroke="#246DAA" stroke-width="5" fill="none"/>
+<path d="M28 111C42 112 53 93 70 93s23-59 37-59 12 44 19 53" stroke="#ED7759" stroke-width="5" fill="none"/>
+<path d="M28 111c19 1 25-40 44-40s19 26 54 12" stroke="#71A4A1" stroke-width="5" fill="none"/>
+</svg>
