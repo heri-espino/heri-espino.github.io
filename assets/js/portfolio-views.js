@@ -1,4 +1,4 @@
-// Archive-only search, sorting and view controls.
+// Archive-only search, sorting and view controls; collapsed by default.
 // Content remains readable in its featured order without JavaScript.
 (() => {
   const months = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
@@ -23,7 +23,7 @@
   };
 
   document.querySelectorAll("[data-portfolio-archive]").forEach((collection, index) => {
-    // The Papers archive has two grouped grids but one shared set of controls.
+    // Papers has three grouped grids with one shared control panel.
     // Flat archives retain their existing behavior.
     const groups = Array.from(collection.querySelectorAll("[data-portfolio-group]"));
     const containers = groups.length ? groups : [collection];
@@ -46,9 +46,21 @@
       '<option value="newest">Newest first</option><option value="oldest">Oldest first</option>',
       '<option value="title">Title A–Z</option></select></div>',
       '<div class="credentials-tool credentials-tool-select"><label for="' + id + '-view">View</label>',
-      '<select id="' + id + '-view"><option value="grid">Grid</option><option value="list">List</option></select></div>',
+      '<select id="' + id + '-view"><option value="list">List</option>',
+      '<option value="compact">Compact list</option><option value="grid">Grid</option></select></div>',
       '<button type="button" class="credentials-clear" data-archive-reset>Reset</button>',
     ].join("");
+
+    // A native details/summary toggle is keyboard accessible and stays closed
+    // initially; visitors can reveal all search, sort and display controls.
+    const settings = document.createElement("details");
+    settings.className = "portfolio-display-settings";
+    const summary = document.createElement("summary");
+    summary.className = "portfolio-display-settings-toggle";
+    summary.title = "Customize " + label + " display";
+    summary.innerHTML = '<span class="portfolio-display-chevron" aria-hidden="true">&gt;</span>' +
+      '<span class="portfolio-sr-only">Customize ' + label + ' display</span>';
+    settings.append(summary, controls);
 
     const status = document.createElement("p");
     status.className = "credentials-result-count";
@@ -58,7 +70,7 @@
     empty.className = "credentials-empty";
     empty.textContent = "No records match these filters.";
     empty.hidden = true;
-    collection.before(controls, status, empty);
+    collection.before(settings, status, empty);
 
     const query = controls.querySelector('input[type="search"]');
     const sort = controls.querySelector("select[id$='-sort']");
@@ -131,12 +143,14 @@
     reset.addEventListener("click", () => {
       query.value = "";
       sort.value = "curated";
-      view.value = "grid";
-      setView("grid");
+      view.value = "list";
+      setView("list");
       reorder();
       filter();
       query.focus();
     });
+    // Explicit initialization also handles markup without data-view attributes.
+    setView("list");
     filter();
   });
 })();
