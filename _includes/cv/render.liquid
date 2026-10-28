@@ -232,18 +232,28 @@
                       {% if cv_primary_link %}</a>{% endif %}
                     </h3>
                     {% assign cv_org_name = entry.institution | default: entry.organization | default: '' | downcase %}
+                    {% assign cv_academic_context = false %}
+                    {% if title == 'Education' or title == 'Academic Experience' or title == 'Awards' or title == 'Research' or title == 'Selected Academic Projects' or title == 'Schools' or title == 'Selected Extracurricular Activities' or title == 'Leadership' %}
+                      {% assign cv_academic_context = true %}
+                    {% endif %}
                     {% assign cv_org_logo = nil %}
                     {% for cv_logo_rule in site.data.cv_organization_logos %}
                       {% if cv_org_name contains cv_logo_rule.match %}
                         {% if cv_logo_rule.issuer_key %}
                           {% assign cv_issuer_logo = site.data.credential_issuers[cv_logo_rule.issuer_key] %}
                           {% assign cv_org_logo = cv_issuer_logo.logo %}
+                        {% elsif cv_academic_context and cv_logo_rule.academic_logo %}
+                          {% assign cv_org_logo = cv_logo_rule.academic_logo %}
                         {% else %}
                           {% assign cv_org_logo = cv_logo_rule.logo %}
                         {% endif %}
                         {% break %}
                       {% endif %}
                     {% endfor %}
+                    {% assign cv_org_logo_src = cv_org_logo %}
+                    {% if cv_org_logo contains '/assets/' %}
+                      {% assign cv_org_logo_src = cv_org_logo | relative_url %}
+                    {% endif %}
                     {% assign cv_fallback_icon = 'fa-building-columns' %}
                     {% if cv_org_name contains 'actinver' %}
                       {% assign cv_fallback_icon = 'fa-chart-line' %}
@@ -260,7 +270,7 @@
                       <p class="cv-organization">
                         <span class="cv-org-symbol" aria-hidden="true">
                           {% if cv_org_logo %}
-                            <img class="cv-org-logo" src="{{ cv_org_logo | escape }}" alt="" width="16" height="16" data-cv-org-logo hidden>
+                            <img class="cv-org-logo" src="{{ cv_org_logo_src | escape }}" alt="" width="16" height="16" data-cv-org-logo hidden>
                           {% endif %}
                           <i class="fa-solid {{ cv_fallback_icon }} cv-org-icon" aria-hidden="true"></i>
                         </span>
@@ -273,7 +283,7 @@
                       <p class="cv-organization">
                         <span class="cv-org-symbol" aria-hidden="true">
                           {% if cv_org_logo %}
-                            <img class="cv-org-logo" src="{{ cv_org_logo | escape }}" alt="" width="16" height="16" data-cv-org-logo hidden>
+                            <img class="cv-org-logo" src="{{ cv_org_logo_src | escape }}" alt="" width="16" height="16" data-cv-org-logo hidden>
                           {% endif %}
                           <i class="fa-solid {{ cv_fallback_icon }} cv-org-icon" aria-hidden="true"></i>
                         </span>
