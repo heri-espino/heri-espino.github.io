@@ -214,8 +214,28 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-markers"') || !cvScript.includes("cvMarkers") || !cvStyles.includes('data-cv-markers="dashes"')) {
     failures.push("Description markers must support dashes, bullets, and no markers.");
   }
-  if (!cvRenderer.includes('<option value="latex" selected>') || !cvStyles.includes('data-cv-density="latex"')) {
-    failures.push("The LaTeX-inspired extra-compact density must be available.");
+  if (!cvRenderer.includes('<option value="balanced" selected>') || !cvStyles.includes('data-cv-density="latex"')) {
+    failures.push("The CV must default to balanced reading spacing while retaining LaTeX compact print styling.");
+  }
+  if (!cvRenderer.includes('data-cv-density="balanced" data-cv-preview="reading"')) {
+    failures.push("The CV page must open in balanced full-width reading mode.");
+  }
+  if (!cvScript.includes('viewDensity = { reading: "balanced", paper: "latex" }') ||
+      !cvScript.includes('viewDensity[previousMode] = controls.density.value') ||
+      !cvScript.includes('viewDensity[root.dataset.cvPreview] = controls.density.value')) {
+    failures.push("Reading and paper previews must remember their independent density choices.");
+  }
+  if (!cvScript.includes('root.dataset.cvDensity = viewDensity.paper;') ||
+      !cvScript.includes('screenDensityBeforePrint ?? controls.density.value')) {
+    failures.push("Printing must use paper density and restore the live wide view afterward.");
+  }
+  if (!cvRenderer.includes('<option value="dashes" selected>') ||
+      !cvScript.includes('controls.markers.value = "dashes";')) {
+    failures.push("Em dashes must remain the default in both reading and print views.");
+  }
+  if ((cvRenderer.match(/id="cv-density"/g) || []).length !== 1 ||
+      (cvRenderer.match(/id="cv-markers"/g) || []).length !== 1) {
+    failures.push("Reading and print previews must use one shared customization menu.");
   }
   if (!cvRenderer.includes('cv-entry-role') || !cvRenderer.includes('cv-entry-name')) {
     failures.push("CV entries must display role and activity separately.");

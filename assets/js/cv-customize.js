@@ -185,11 +185,20 @@
     editorial: "#31536e",
     professional: "#27374d",
   };
+  // Both views use the same controls. Only density has separate defaults:
+  // readable/balanced on the full-width page and LaTeX-compact in paper/PDF.
+  // Changing density in either view is remembered when switching back.
+  const viewDensity = { reading: "balanced", paper: "latex" };
   // The paper preview must reveal sections that browser printing expands.
   // Restore a reader's disclosure choices upon returning to full-width mode.
   const paperDisclosureState = new Map();
   const setPreview = (mode) => {
+    const previousMode = root.dataset.cvPreview;
+    if (previousMode === "reading" || previousMode === "paper") {
+      viewDensity[previousMode] = controls.density.value;
+    }
     root.dataset.cvPreview = mode;
+    controls.density.value = viewDensity[mode];
     const paper = mode === "paper";
     if (paper) {
       root.querySelectorAll("details.cv-details").forEach((detail) => {
@@ -203,8 +212,8 @@
     previewButton.textContent = paper ? "Full-width view" : "Paper preview";
     previewButton.setAttribute("aria-pressed", String(paper));
     previewHelp.textContent = paper
-      ? "Page-by-page preview is approximate; the browser's Print dialog shows the final page breaks."
-      : "Full-width reading view; choose Paper preview to inspect the page-by-page layout.";
+      ? "LaTeX-compact paper preview by default. Page breaks are approximate; your browser's Print dialog shows the final pages."
+      : "Balanced full-width reading by default. Switch to Paper preview for compact print pages.";
   };
   const pageStyle = document.createElement("style");
   pageStyle.id = "cv-page-size";
@@ -363,6 +372,7 @@
     updateSectionTitles();
     root.dataset.cvFont = controls.font.value;
     root.dataset.cvDensity = controls.density.value;
+    viewDensity[root.dataset.cvPreview] = controls.density.value;
     root.dataset.cvMarkers = controls.markers.value;
     root.dataset.cvPaper = controls.paper.value;
     root.dataset.cvShowUrls = controls.printUrls.checked ? "true" : "false";
@@ -457,7 +467,7 @@
   controls.accent.addEventListener("input", render);
   previewButton.addEventListener("click", () => {
     setPreview(root.dataset.cvPreview === "paper" ? "reading" : "paper");
-    renderPagedPreview();
+    render();
     (root.dataset.cvPreview === "paper" ? pagedPreview : sourceDocument).scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
@@ -476,7 +486,9 @@
     controls.template.value = "personal";
     controls.font.value = "site";
     controls.paper.value = "a4";
-    controls.density.value = "latex";
+    viewDensity.reading = "balanced";
+    viewDensity.paper = "latex";
+    controls.density.value = "balanced";
     controls.markers.value = "dashes";
     controls.palette.value = "default";
     controls.accent.value = "#00104c";
@@ -491,21 +503,35 @@
     entrySearch.value = "";
     entrySearch.dispatchEvent(new Event("input"));
     setPreview("reading");
+    // Reset always restores the wide default, even if reset was clicked
+    // while a custom paper density was selected.
+    viewDensity.reading = "balanced";
+    viewDensity.paper = "latex";
+    controls.density.value = "balanced";
     toggles.forEach((toggle) => { toggle.checked = true; });
     render();
   });
 
   printButton.addEventListener("click", () => window.print());
 
-  // Closed <details> normally suppress their children in print. Restore each
-  // disclosure's original state after the browser finishes printing.
+  // Browser Print / Save as PDF always uses the paper view's density.
+  // Keep the shared dropdown and on-screen preview unchanged, whether
+  // printing from the wide view or from the page-by-page preview.
+  // Closed <details> suppress their children in print; reopen temporarily.
   let previouslyOpen = [];
+  let screenDensityBeforePrint = null;
   window.addEventListener("beforeprint", () => {
-    const details = Array.from(root.querySelectorAll("details.cv-details"));
-    previouslyOpen = details.filter((item) => item.open);
-    details.forEach((item) => { item.open = true; });
+    if (screenDensityBeforePrint === null) {
+      screenDensityBeforePrint = root.dataset.cvDensity;
+      const details = Array.from(root.querySelectorAll("details.cv-details"));
+      previouslyOpen = details.filter((item) => item.open);
+    }
+    root.dataset.cvDensity = viewDensity.paper;
+    root.querySelectorAll("details.cv-details").forEach((item) => { item.open = true; });
   });
   window.addEventListener("afterprint", () => {
+    root.dataset.cvDensity = screenDensityBeforePrint ?? controls.density.value;
+    screenDensityBeforePrint = null;
     root.querySelectorAll("details.cv-details").forEach((item) => {
       item.open = previouslyOpen.includes(item);
     });

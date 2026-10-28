@@ -299,10 +299,16 @@ research. The corrected website research wording and actual library links take
 precedence. Dates that remain uncertain should be reviewed against issued
 certificates rather than inferred.
 
-The default mode is now **Full-width reading** (not simulated paper pages).
-The default density is **LaTeX · extra compact**, while balanced/compact remain
-optional. Print continues to use the canonical Jekyll CV source and the
-browser's actual pagination. The private source's visual colors are
+The default mode is **Full-width reading** (not simulated paper pages).
+The initial density is **Balanced** in the full-width view and **LaTeX · extra
+compact** in the paper preview and actual browser printing. All three
+density options remain visible in the **same customization menu** for
+both views; each view remembers its own density if changed. Other
+customizations (template, font, paper size, colors, selected entries,
+marker style, print visibility and layout options) remain shared.
+Print continues to use the canonical Jekyll CV source and the
+browser's actual pagination, temporarily using the paper density
+without mutating the reading-view controls. The private source's visual colors are
 `#00104c` ink, `#4c5781` secondary labels, `#666666` descriptions and
 `#505050` keyword text; compact print sizes aim for 7.3pt body and 6.5pt
 descriptions. All print spacing/font controls, six templates and the left-hand
@@ -320,3 +326,21 @@ full-width view, Paper preview, all three list-marker styles, all densities,
 the five nonpersonal templates, the Europass variant, print A4/Letter, reset,
 and sidebar expand/collapse. Confirm that private phone/birth/date information
 is absent from `_data/cv.yml`.
+
+## Distinct full-width and print defaults (2026-10-28)
+
+- Initial browser layout: full-width reading, Balanced spacing, em dashes.
+- Paper preview: same sidebar/menu and em dashes, LaTeX compact spacing by default.
+- Browser Print / Save as PDF: uses the current paper-view density even
+  when initiated from the wide view. The `beforeprint` handler temporarily
+  applies print density; `afterprint` restores wide view styling.
+- The dropdown always contains Balanced, Compact and LaTeX options; users
+  can customize spacing for each view independently. Switching views
+  preserves other selections and does not close the sidebar.
+- Reset restores reading/Balanced and paper/LaTeX, as well as em dashes.
+
+Verification: switch wide → paper → wide, customize spacing separately
+in both modes, then print from wide and from paper. Check that paper
+styles are applied during printing and the wide view is unchanged
+after printing or cancelling. The configuration options must be
+identical between views.
