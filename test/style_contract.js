@@ -702,6 +702,17 @@ if (exists("_pages/cv.md")) {
       !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
     failures.push("The first Research Drafts entry must remain unsubmitted.");
   }
+  // Wide reading should have a cohesive title → institution → links →
+  // description hierarchy. The screenshot-driven fix must not touch the
+  // LaTeX paper density, Harvard layout, or Europass layout.
+  if (!cvStyles.includes("--cv-reading-line-gap: 0.17rem") ||
+      !cvStyles.includes("--cv-reading-description-gap: 0.32rem") ||
+      !cvStyles.includes('data-cv-preview="reading"]:not([data-cv-density="latex"])') ||
+      !cvStyles.includes(':not([data-cv-template="harvard"]):not([data-cv-template="europass"])') ||
+      !cvStyles.includes(':is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry)') ||
+      !cvStyles.includes('.cv-highlights li + li {\\n    margin-top: 0.15rem;'.replace('\\n', '\n'))) {
+    failures.push("Wide CV entries must have consistent spacing/hierarchy without changing compact printing or custom template ordering.");
+  }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }
