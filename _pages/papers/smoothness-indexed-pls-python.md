@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/smoothness-indexed-pls-python.html
 portfolio_type: paper
+pdf: /papers/EspinoMontelongo-2026-PLS_Python.pdf
 importance: 3
 card_kind: "Research manuscript draft"
 title: "Smoothness-Indexed Penalized Trend Estimation in Python: Parameter-Search Coordinates, Numerical Backends, and Reproducible Comparisons"
