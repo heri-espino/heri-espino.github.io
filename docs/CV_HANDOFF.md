@@ -166,3 +166,33 @@ All customizations are ephemeral and can be restored with **Reset options**.
 The full dataset, active hyperlink destinations, source PDF files, and
 original records are not deleted. The generated PDF reflects the current
 selection; it is not a permanent or shared profile change.
+
+## Organization and institution logos (2026-10-27)
+
+The CV now resolves recognized institution/organization names through
+`_data/cv_organization_logos.yml`. Most course/certificate issuers reuse
+`_data/credential_issuers.yml` rather than defining another asset URL.
+Additional organizations use the recognizable favicon from the institution's
+official web domain (via Google's favicon endpoint). The register is ordered:
+specific names precede broad aliases. No organizational affiliation is inferred
+from a paper title or an unaffiliated software project.
+
+Rendering is managed in `_includes/cv/render.liquid`, image-load fallback in
+`assets/js/cv-customize.js`, and image sizing/print behavior in
+`_sass/_cv.scss`. A Font Awesome pictogram remains visible if a remote
+image is unavailable, blocked, or JavaScript is disabled. The existing
+**Show icons** toggle hides both real logos and fallback pictograms. Logo images
+are decorative and empty-alt; institution names remain available as text.
+
+**Not branded:** Paletas Loreto has no confirmed official logo URL, and Kaxa
+Nuk has no confidently identifiable public-domain logo source. Generic
+pictograms are deliberately retained rather than assigning another business's
+trademark. Descriptive labels (e.g., Independent research software,
+Open-source Python library, Research draft, Data Scientist) are also not
+represented as company brands.
+
+**Follow-up checks:** Run the site build, style contract, and browser visual
+tests, then verify logo loading and the print icon-toggle in Chrome on both
+screen and A4/Letter previews. Remote favicon availability may change;
+consider vendoring individually verified logo files if the site needs
+offline-deterministic printing.
