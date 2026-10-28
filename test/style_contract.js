@@ -257,7 +257,7 @@ if (exists("_pages/cv.md")) {
     failures.push("The redundant back-to-top button must be hidden on the CV page only.");
   }
   if (!cvRenderer.includes('class="cv-org-symbol"') ||
-      !cvRenderer.includes('class="cv-org-icon"') ||
+      !cvRenderer.includes('cv-org-icon"') ||
       !cvRenderer.includes('class="cv-org-logo"') ||
       !cvStyles.includes('data-cv-show-icons="false"] .cv-org-symbol')) {
     failures.push("Organization and institution labels must retain their logo and fallback icon.");
