@@ -336,13 +336,6 @@ cv:
         highlights:
           - Wrote formal L² notes framing random variables as Hilbert-space vectors, with expectation, variance, MSE, bias–variance, and regression error as projections.
           - Derived conditional expectation, tower property, Chapman–Kolmogorov, and total variance as nested projection identities in L² with geometric diagrams and examples.
-      - name: Academic Assistant in Matrix Theory Course
-        date: Jan 2023 — May 2023
-        location: Puebla, Mexico
-        organization: "Universidad de las Américas Puebla; Professor: Dr. Hugo Villanueva Méndez"
-        highlights:
-          - Built reproducible LaTeX Beamer materials with theorem environments, TikZ diagrams, spectral figures, structured handouts, and clean source files for student use.
-          - Standardized notation and visual assets for lectures on linear maps, eigenspaces, diagonalization, decompositions, and matrix factorizations for proof-based teaching.
 
     Selected Academic Projects:
       - name: "Systemic Liquidity Crises in Crypto CFD"
