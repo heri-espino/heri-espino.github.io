@@ -288,10 +288,45 @@ if (exists("_pages/cv.md")) {
       !logoSource.includes('Logo_de_la_BUAP.svg')) {
     failures.push("BUAP must have a recognizable vector logo, not an unmatched institution.");
   }
-  if (!logoSource.includes('Logo_de_Actinver.svg') ||
-      logoSource.includes('domain=actinver.com&sz=128') ||
-      !cvStyles.includes('Logo_de_Actinver.svg')) {
-    failures.push("Actinver must use a sharp, legible SVG instead of the small favicon.");
+  if (!exists("assets/img/cv-organizations/actinver.webp") ||
+      !logoSource.includes('logo: "/assets/img/cv-organizations/actinver.webp"') ||
+      logoSource.includes('Logo_de_Actinver.svg') ||
+      cvStyles.includes('Logo_de_Actinver.svg')) {
+    failures.push("Actinver must use the user's local square logo, not the old SVG wordmark.");
+  }
+  const libraryAssets = {
+    "abaquant": "abaquant.svg",
+    "proximitygraphs": "proximitygraphs.svg",
+    "trend estimation": "trendestimation.svg",
+    "awesomefigures": "awesomefigures.svg",
+    "docling math": "doclingmath.svg"
+  };
+  for (const [name, file] of Object.entries(libraryAssets)) {
+    const path = "assets/img/cv-organizations/" + file;
+    if (!exists(path) ||
+        !logoSource.includes('- match: "' + name + '"') ||
+        !logoSource.includes('logo: "/' + path + '"')) {
+      failures.push("Missing authored-library logo or mapping: " + name);
+    }
+  }
+  const libraryCv = read("_data/cv.yml").split("    Programming Experience:")[1]?.split("    Academic Experience:")[0] || "";
+  const libraryRoles = [
+    ['organization: AbaQuant', 'role: "Author & Lead Developer"'],
+    ['organization: ProximityGraphs', 'role: "Co-author & Maintainer"'],
+    ['organization: Trend Estimation', 'role: "Author & Maintainer"'],
+    ['organization: AwesomeFigures', 'role: "Author & Maintainer"'],
+    ['organization: Docling Math', 'role: "Author & Maintainer"']
+  ];
+  for (const [organization, role] of libraryRoles) {
+    const origin = libraryCv.indexOf(organization);
+    const segment = libraryCv.slice(Math.max(0, origin - 250), origin + 250);
+    if (origin < 0 || !segment.includes(role)) {
+      failures.push("Missing library authorship credit on the organization line: " + organization);
+    }
+  }
+  if (!libraryCv.includes('organization: OpenAI') ||
+      !libraryCv.includes('role: "Contributor"')) {
+    failures.push("The external OpenAI SDK must remain credited as a contribution, not authorship.");
   }
   if (!exists("scripts/audit-cv-organization-logos.mjs") ||
       !exists("docs/CV_LOGO_AUDIT.md")) {
