@@ -1,4 +1,12 @@
-# al-folio
+# Heriberto Espino Montelongo — Academic Portfolio
+
+This customized GitHub Pages repository is the public portfolio of **Heriberto Espino Montelongo**, covering manuscripts in review or revision, working drafts, research software, academic projects, presentations, verified media coverage, and the public CV.
+
+**Start here:** [Complete research index](https://heri-espino.github.io/research-index/) · [Machine-readable research catalog](https://heri-espino.github.io/research-catalog.json) · [Papers](https://heri-espino.github.io/papers/) · [CV](https://heri-espino.github.io/cv/) · [AI/agent guide](https://heri-espino.github.io/llms.txt).
+
+**Important:** A submission or under-review status is not a publication or acceptance. Use the individual manuscript's status field and see [AI_DISCOVERABILITY.md](docs/AI_DISCOVERABILITY.md) and [AGENTS.md](AGENTS.md) before changing claims. The records are maintained in `_pages/papers/`, `_projects/`, and public `_data/` files, not in this README.
+
+## Upstream theme and documentation: al-folio
 
 <div align="center">
 

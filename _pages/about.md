@@ -5,6 +5,31 @@ permalink: /
 description: Academic portfolio of Heriberto Espino Montelongo.
 ---
 
+<script type="application/ld+json" id="academic-person-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": {{ '/#person' | absolute_url | jsonify }},
+  "name": "Heriberto Espino Montelongo",
+  "url": {{ '/' | absolute_url | jsonify }},
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universidad de las Américas Puebla",
+    "url": "https://www.udlap.mx/"
+  },
+  "knowsAbout": ["Stochastic geometry", "Proximity graphs", "Probability", "Time series", "Financial risk", "Interpretable machine learning"],
+  "sameAs": [
+    "https://github.com/{{ site.data.socials.github_username }}",
+    "https://orcid.org/{{ site.data.socials.orcid_id }}",
+    {{ site.data.socials.google_scholar_profile_url | jsonify }},
+    {{ site.data.socials.researchgate_profile_url | jsonify }},
+    {{ site.data.socials.ssrn_author_url | jsonify }},
+    "https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}/"
+  ]
+}
+</script>
+
+
 <section class="portfolio-hero" aria-labelledby="hero-title">
   <p class="portfolio-kicker">Academic portfolio · Puebla, Mexico</p>
   <h1 id="hero-title">Heriberto Espino Montelongo</h1>
@@ -20,6 +45,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>
     <a href="{{ site.data.socials.ssrn_author_url }}">SSRN</a>
     <a href="{{ site.data.socials.zenodo_archive_url }}">Zenodo archive</a>
+      <a href="{{ '/research-index/' | relative_url }}">Full research index</a>
     <a href="{{ site.data.socials.pypi_profile_url }}">PyPI</a>
       <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>
       <a href="{{ site.data.socials.ssrn_author_url }}">SSRN</a>
