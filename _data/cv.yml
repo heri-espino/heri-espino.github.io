@@ -78,7 +78,7 @@ cv:
     Programming Experience:
 - name: AbaQuant — Financial Mathematics Python Library
         role: "Lead Developer"
-        subtitle: "Financial Mathematics Python Library"
+        subtitle: "AbaQuant — Financial Mathematics Python Library"
         date: Aug 2024 — Present
         location: Puebla, Mexico
         links:
@@ -89,7 +89,7 @@ cv:
           - Developed a Python library for financial mathematics, with reusable quantitative methods and published package documentation.
       - name: Developer in Proximity Graphs Python Library
         role: "Co-developer"
-        subtitle: "Computational Geometry Python Library"
+        subtitle: "ProximityGraphs — Computational Geometry Python Library"
         date: Aug 2025 — Present
         location: Puebla, Mexico
         links: [{ label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }]
@@ -193,14 +193,14 @@ cv:
       - name: "Undergraduate Mathematical Problem Solving"
         role: "4th Place"
         date: "Apr 2025"
-        organization: "5th UDLAP Mathematics Olympiad"
+        organization: "Universidad de las Américas Puebla · 5th UDLAP Mathematics Olympiad"
         location: "On Campus"
         highlights:
           - "Proof-based undergraduate mathematical problem solving."
       - name: "Undergraduate Mathematical Problem Solving"
         role: "Top 10"
         date: "Oct 2024"
-        organization: "4th UDLAP Mathematics Olympiad"
+        organization: "Universidad de las Américas Puebla · 4th UDLAP Mathematics Olympiad"
         location: "On Campus"
         highlights:
           - "Proof-based undergraduate mathematical problem solving."
@@ -346,91 +346,91 @@ cv:
       - name: "Systemic Liquidity Crises in Crypto CFD"
         role: "Agent-Based Modeling"
         date: "Oct 2025"
-        organization: "Course project · LDS1061"
+        organization: "Universidad de las Américas Puebla · Course LDS1061"
         url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html"
         highlights:
           - "Modeled liquidation cascades from agent shocks and margin calls."
       - name: "Genetic Algorithm for the UFLP"
         role: "Optimization"
         date: "Dec 2025"
-        organization: "Course project · LAT4052"
+        organization: "Universidad de las Américas Puebla · Course LAT4052"
         url: "https://heri-espino.github.io/academic-projects/uflp-genetic-algorithm.html"
         highlights:
           - "Compared genetic algorithms for uncapacitated facility location."
       - name: "Credit Scores with Mapper and Homology"
         role: "Topological Data Analysis"
         date: "May 2024"
-        organization: "Course project · LDS1041"
+        organization: "Universidad de las Américas Puebla · Course LDS1041"
         url: "https://heri-espino.github.io/academic-projects/credit-scores-mapper-homology.html"
         highlights:
           - "Studied credit-score topology with Mapper and homology."
       - name: "U.S. Supply-Chain Network"
         role: "Complex Networks"
         date: "Sep 2026"
-        organization: "Course project · LDS1121"
+        organization: "Universidad de las Américas Puebla · Course LDS1121"
         url: "https://heri-espino.github.io/academic-projects/sp500-supply-chain-network.html"
         highlights:
           - "Applied link prediction to an S&P 500 supplier network."
       - name: "Precipitation Forecasting in Puebla"
         role: "Time Series"
         date: "Apr 2025"
-        organization: "Course project · LEC4032"
+        organization: "Universidad de las Américas Puebla · Course LEC4032"
         url: "https://heri-espino.github.io/academic-projects/precipitation-time-series-puebla.html"
         highlights:
           - "Forecast precipitation with SARIMA."
       - name: "Mexico-Linked Futures"
         role: "Derivatives"
         date: "Sep 2025"
-        organization: "Course project · LAT4012"
+        organization: "Universidad de las Américas Puebla · Course LAT4012"
         url: "https://heri-espino.github.io/academic-projects/mexico-linked-futures.html"
         highlights:
           - "Priced Mexico-linked futures and compared term structures."
       - name: "Synthetic CDO Tranches"
         role: "Credit Derivatives"
         date: "May 2026"
-        organization: "Course project · LAT4092"
+        organization: "Universidad de las Américas Puebla · Course LAT4092"
         url: "https://heri-espino.github.io/academic-projects/synthetic-cdo-tranche-valuation.html"
         highlights:
           - "Valued synthetic CDO tranches under Gaussian dependence."
       - name: "Causality Network for Crypto"
         role: "Data Visualization"
         date: "May 2025"
-        organization: "Course project · LDS1131"
+        organization: "Universidad de las Américas Puebla · Course LDS1131"
         url: "https://heri-espino.github.io/academic-projects/crypto-causality-network.html"
         highlights:
           - "Mapped Granger-causality links across cryptocurrency series."
       - name: "XGBoost for Credit Approval"
         role: "Econometrics"
         date: "Nov 2024"
-        organization: "Course project · LEC3092"
+        organization: "Universidad de las Américas Puebla · Course LEC3092"
         url: "https://heri-espino.github.io/academic-projects/xgboost-credit-approval.html"
         highlights:
           - "Trained a predictive model for credit approval."
       - name: "Margrabe Option Derivation"
         role: "Exotic Derivatives"
         date: "May 2026"
-        organization: "Course project · LAT4092"
+        organization: "Universidad de las Américas Puebla · Course LAT4092"
         url: "https://heri-espino.github.io/academic-projects/margrabe-option-derivation.html"
         highlights:
           - "Derived the Margrabe option-exchange pricing formula."
       - name: "Actuarial Risk Portfolio"
         role: "Risk Management"
         date: "May 2026"
-        organization: "Course project · LAT4062"
+        organization: "Universidad de las Américas Puebla · Course LAT4062"
         url: "https://heri-espino.github.io/academic-projects/actuarial-risk-analysis-portfolio.html"
         highlights:
           - "Analyzed market, credit, operational and liquidity risks."
       - name: "Methane Emissions in Mexico"
         role: "Spatial Analysis"
         date: "Oct 2025"
-        organization: "Course project · LDS1111"
+        organization: "Universidad de las Américas Puebla · Course LDS1111"
         url: "https://heri-espino.github.io/academic-projects/methane-emissions-spatial-clustering.html"
         highlights:
           - "Used spatially constrained clustering to study emissions."
       - name: "Spatial Dynamics in Mexico City"
         role: "Spatial Statistics"
         date: "Nov 2025"
-        organization: "Course project · LDS1111"
+        organization: "Universidad de las Américas Puebla · Course LDS1111"
         url: "https://heri-espino.github.io/academic-projects/mexico-city-theft-spatial-dynamics.html"
         highlights:
           - "Analyzed spatial patterns with Moran's I and LISA."
@@ -540,7 +540,7 @@ cv:
         role: "Participant"
         subtitle: "Barley Yield Analytics"
         date: "Oct 2026"
-        organization: "FIRA"
+        organization: "Fideicomisos Instituidos en Relación con la Agricultura"
         highlights:
           - "Developed barley-yield estimates and a geographic dashboard."
         url: "https://heri-espino.github.io/GeoC/"
