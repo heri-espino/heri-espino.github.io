@@ -1888,3 +1888,41 @@
     font-size: 10.5pt;
   }
 }
+
+
+/* Unlike the old personal template, LaTeX mode keeps the date opposite the
+   role/title, matching the uploaded \\resumeActivity layout. */
+.cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading .cv-meta {
+  text-align: right;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-section > h2 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+@media screen and (max-width: 700px) {
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading {
+    grid-template-columns: 1fr;
+  }
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading .cv-meta {
+    text-align: left;
+  }
+}
+
+@media print {
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading .cv-meta {
+    text-align: right !important;
+  }
+}
