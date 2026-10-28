@@ -252,9 +252,32 @@ if (exists("_pages/cv.md")) {
       !cvScript.includes('setPanelOpen(false)')) {
     failures.push("The CV must start with collapsed settings and accessible chevron/print-only controls.");
   }
+  if (!read("_config.yml").includes("back_to_top: false")) {
+    failures.push("The floating back-to-top button must be disabled in Jekyll configuration, not merely hidden by CV CSS.");
+  }
   if (!cvStyles.includes('body:has(.cv-page) #back-to-top') ||
       !cvStyles.includes('body:has(.cv-page) .back-to-top')) {
-    failures.push("The redundant back-to-top button must be hidden on the CV page only.");
+    failures.push("CV-specific CSS must also hide legacy back-to-top controls.");
+  }
+  if (cvRenderer.includes("Academic Assistant in Matrix Theory Course") ||
+      read("_data/cv.yml").includes("Academic Assistant in Matrix Theory Course")) {
+    failures.push("The redundant Matrix Theory academic assistant entry must remain removed.");
+  }
+  const logoSource = read("_data/cv_organization_logos.yml");
+  for (const file of [
+    "udlap-academic.webp", "udlap-orange.webp", "paletas-loreto.webp",
+    "maa-putnam.webp", "fira.webp", "kaxa-nuk.webp"
+  ]) {
+    const path = "assets/img/cv-organizations/" + file;
+    if (!exists(path) || !logoSource.includes("/" + path)) {
+      failures.push("Missing uploaded local CV organization logo: " + path);
+    }
+  }
+  if (!logoSource.includes('academic_logo: "/assets/img/cv-organizations/udlap-academic.webp"') ||
+      !cvRenderer.includes("cv_logo_rule.academic_logo") ||
+      !cvRenderer.includes("cv_academic_context") ||
+      !cvRenderer.includes("cv_org_logo | relative_url")) {
+    failures.push("UDLAP academic versus nonacademic logo selection is missing.");
   }
   if (!cvRenderer.includes('class="cv-org-symbol"') ||
       !cvRenderer.includes('cv-org-icon"') ||

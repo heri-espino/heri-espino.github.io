@@ -377,8 +377,8 @@ The manuscript names (rather than shortened subtitles) remain visible in the
 CV, alongside their existing portfolio and PDF links.
 
 Validation: check initial collapsed desktop and mobile layouts, mouse/keyboard
-chevron toggle, tiny print icon, single-column full-width CV, the absence of
-floating back-to-top on the CV only, organization-only logo/fallback icons and their show/hide
+chevron toggle, tiny print icon, single-column full-width CV, the site-wide disablement of
+the floating back-to-top control, organization-only logo/fallback icons and their show/hide
 toggle, credential order/URLs/count, both research statuses, and HTML/PDF
 rendering. Browser visual comparison remains separate from CI when the site's
 historical visual baseline is unavailable.
@@ -392,3 +392,27 @@ small external-link icon in entry titles. Preserve actual links, the verified
 organization logo registry, fallback icons, and the user-selectable Show icons
 switch. UI control icons (chevron and print) are distinct interface affordances
 and remain.
+
+## Supplied CV logos and removal (2026-10-28)
+
+- Removed the duplicate "Academic Assistant in Matrix Theory Course" in
+  Academic Experience. The existing "Academic Assistant — Linear Algebra
+  Course" record in Professional Experience is left unchanged.
+- Added six small, locally committed WebP logos, derived from images supplied
+  directly by the portfolio owner: UDLAP academic crest, orange UDLAP mark,
+  Paletas Loreto, MAA/Putnam, FIRA, and Kaxa Nuk.
+- `_data/cv_organization_logos.yml` uses `academic_logo` for UDLAP; the
+  renderer picks the crest for Education, Academic Experience, Awards,
+  Research, Selected Academic Projects, Schools, Selected Extracurricular
+  Activities, and Leadership. Professional Experience uses the orange UDLAP
+  mark. The other supplied logos match their organization names.
+- CV logos render only next to the institution or employer, not titles.
+  Every local logo is passed through `relative_url` for subpath deployments.
+  Remote issuer logos and broken-logo fallback icons are preserved.
+- The large floating bottom-right back-to-top widget was still enabled by
+  the Jekyll config even though CV CSS attempted to hide it. The site now
+  sets `back_to_top: false` globally; CSS remains a defensive fallback.
+
+Validation includes verifying that all six image assets exist, logo names
+resolve to the correct branch asset paths, UDLAP logo variants work in both
+reading and print, and the deleted Matrix Theory record is not displayed.

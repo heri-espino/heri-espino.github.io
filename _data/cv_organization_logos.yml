@@ -3,7 +3,8 @@
 # Other URLs use the favicon of an identifiable official website; these are
 # organizational marks, not endorsements. No invented logos for informal labels.
 - match: "universidad de las américas puebla"
-  logo: "https://www.google.com/s2/favicons?domain=udlap.mx&sz=128"
+  logo: "/assets/img/cv-organizations/udlap-orange.webp"
+  academic_logo: "/assets/img/cv-organizations/udlap-academic.webp"
 - match: "centro de investigación en matemáticas"
   issuer_key: cimat
 - match: "universidad nacional autónoma de méxico"
@@ -11,7 +12,7 @@
 - match: "sociedad matemática mexicana"
   logo: "https://www.google.com/s2/favicons?domain=smm.org.mx&sz=128"
 - match: "mathematical association of america"
-  logo: "https://www.google.com/s2/favicons?domain=maa.org&sz=128"
+  logo: "/assets/img/cv-organizations/maa-putnam.webp"
 - match: "international society of pharmacovigilance"
   logo: "https://www.google.com/s2/favicons?domain=isoponline.org&sz=128"
 - match: "stevens institute of technology"
@@ -56,6 +57,12 @@
   logo: "https://www.google.com/s2/favicons?domain=cmegroup.com&sz=128"
 - match: "coppel"
   logo: "https://www.google.com/s2/favicons?domain=coppel.com&sz=128"
+- match: "paletas loreto"
+  logo: "/assets/img/cv-organizations/paletas-loreto.webp"
+- match: "fideicomisos instituidos en relación con la agricultura"
+  logo: "/assets/img/cv-organizations/fira.webp"
+- match: "kaxa nuk"
+  logo: "/assets/img/cv-organizations/kaxa-nuk.webp"
 - match: "google"
   issuer_key: google-cloud
 - match: "microsoft"
