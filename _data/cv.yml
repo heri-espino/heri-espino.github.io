@@ -8,7 +8,7 @@ cv:
 
   sections:
     Education:
-- degree: Bachelor of Science in Data Science
+      - degree: Bachelor of Science in Data Science
         role: "Bachelor of Science"
         subtitle: "Data Science"
         institution: Universidad de las Américas Puebla
@@ -32,7 +32,7 @@ cv:
           - "Relevant coursework: Ruin Theory, Stochastic Processes, Exotic Derivatives, Administration of Financial Risk, Measure Theory"
 
     Professional Experience:
-- name: Research Data Scientist — Mathematics Learning Center
+      - name: Research Data Scientist — Mathematics Learning Center
         role: "Research Data Scientist"
         subtitle: "Mathematics Learning Center"
         organization: Universidad de las Américas Puebla
@@ -76,7 +76,7 @@ cv:
           - Verified the business location across Google Maps and Waze and created social media pages to analyze audience engagement.
 
     Programming Experience:
-- name: AbaQuant — Financial Mathematics Python Library
+      - name: AbaQuant — Financial Mathematics Python Library
         role: "Lead Developer"
         subtitle: "AbaQuant — Financial Mathematics Python Library"
         date: Aug 2024 — Present
@@ -97,7 +97,7 @@ cv:
           - Converted proximity-graph constructions from mathematical papers into reproducible, object-oriented Python code, structuring algorithms as modular classes across subpackages.
           - Reorganized the repository architecture for maintainability, enforcing PEP 8/Ruff style conventions and optimizing computational kernels with NumPy vectorization.
           - Implemented continuous-integration workflows in GitHub Actions to run Ruff, PyTest, and package-build checks across multiple Python versions before publishing releases to PyPI.
-- name: Contributor — OpenAI Python SDK
+      - name: Contributor — OpenAI Python SDK
         role: "Contributor"
         subtitle: "OpenAI Python SDK"
         date: Sep 2026
@@ -206,7 +206,7 @@ cv:
           - "Proof-based undergraduate mathematical problem solving."
 
     Research:
-- name: Unit-Region Factorization for Empty-Region Proximity Graphs
+      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
         role: "First Author"
         subtitle: "Unit-Region Proximity Graphs"
         date: Jun 2026 — Present
@@ -231,7 +231,7 @@ cv:
           - Manuscript under revision for Computational Geometry (Elsevier).
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
-- name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
         role: "Author"
         date: "2026"
         organization: "Springer Nature · SN Computer Science · Under Review"
@@ -567,7 +567,7 @@ cv:
       - { name: "Research & Specialized Tools", values: "NetworkX · GeoPandas · Mesa · Solara · Qiskit · NetLogo · QGIS · Mapper · Bloomberg Terminal · IBKR Trader Workstation" }
 
     Online Courses:
-- {
+      - {
           name: TensorFlow 2 for Deep Learning Specialization,
           organization: Imperial College London,
           date: Jul 2026,
@@ -597,7 +597,7 @@ cv:
         url: "https://www.coursera.org/account/accomplishments/certificate/PZ6TSICQOM97"
         highlights:
           - "Studied structured storytelling for diverse audiences."
-- {
+      - {
           name: Central Banks and Monetary Policy,
           organization: University of Illinois Urbana-Champaign,
           date: Feb 2026,
@@ -718,13 +718,13 @@ cv:
         }
 
     Languages:
-- { name: Spanish, values: Native }
+      - { name: Spanish, values: Native }
       - { name: English, values: C1 }
       - { name: German, values: A1 }
       - { name: French, values: A1 }
 
     Volunteering:
-- name: Water contamination analysis for Xalmimilulco
+      - name: Water contamination analysis for Xalmimilulco
         organization: Data Scientist
         date: Jan 2026 — Present
         location: Puebla, Mexico
