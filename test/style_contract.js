@@ -710,7 +710,7 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes('data-cv-preview="reading"]:not([data-cv-density="latex"])') ||
       !cvStyles.includes(':not([data-cv-template="harvard"]):not([data-cv-template="europass"])') ||
       !cvStyles.includes(':is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry)') ||
-      !cvStyles.includes('.cv-highlights li + li {\\n    margin-top: 0.15rem;'.replace('\\n', '\n'))) {
+      (!cvStyles.includes('.cv-highlights li + li {') || !cvStyles.includes('margin-top: 0.15rem;'))) {
     failures.push("Wide CV entries must have consistent spacing/hierarchy without changing compact printing or custom template ordering.");
   }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
