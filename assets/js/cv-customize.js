@@ -53,8 +53,8 @@
     "pytest", "CatBoost", "XGBoost", "PostgreSQL", "Docker",
     "Airflow", "Streamlit", "Qiskit", "optimization", "stochastic"
   ];
-  const escaped = keywords.map((word) => word.replace(/[.*+?^\x24{}()|[\]\\]/g, "\\\\  const entries = sections.flatMap((section, sectionIndex) =>"));
-  const keywordPattern = new RegExp("\\\\b(" + escaped.join("|") + ")\\\\b", "gi");
+  const escaped = keywords.map((word) => word.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"));
+  const keywordPattern = new RegExp("\\b(" + escaped.join("|") + ")\\b", "gi");
   root.querySelectorAll(".cv-highlights li, .cv-skills dd").forEach((target) => {
     const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
     const nodes = [];
