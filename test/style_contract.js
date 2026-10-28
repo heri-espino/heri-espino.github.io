@@ -150,6 +150,9 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
     failures.push("CV must provide screen-only numbered paper-sheet previews.");
   }
+  if (!cvStyles.includes('[data-cv-paginated="true"][data-cv-preview="paper"]') || !cvScript.includes('root.dataset.cvPaginated = "true"')) {
+    failures.push("CV must remain visible without JavaScript.");
+  }
   if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
     failures.push("Programming CV must link the canonical trendestimation library.");
   }
