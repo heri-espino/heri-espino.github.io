@@ -543,6 +543,30 @@ if (exists("_pages/cv.md")) {
   if (!cvStyles.includes("@media print") || !cvStyles.includes("data-cv-template=\"harvard\"")) {
     failures.push("CV print style or classic template is missing.");
   }
+  // Harvard's two-column *header* is not a two-column CV: organization and
+  // role remain left while city and date sit right, including print preview.
+  const harvardHeaderSelectors = [
+    '.cv-page[data-cv-template="harvard"] .cv-entry-heading > div',
+    '.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-organization',
+    '.cv-page[data-cv-template="harvard"] .cv-entry-heading h3',
+    '.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta',
+    '.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta .cv-location',
+    '.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta .cv-date'
+  ];
+  if (!harvardHeaderSelectors.every((selector) => cvStyles.includes(selector)) ||
+      !cvStyles.includes('order: -2;') ||
+      !cvStyles.includes('order: -1;') ||
+      !cvStyles.includes('align-items: flex-end;') ||
+      !cvStyles.includes('grid-template-columns: minmax(0, 1fr) minmax(0, max-content);') ||
+      !cvScript.includes('root.dataset.cvTemplate = controls.template.value')) {
+    failures.push("Harvard must place icon-bearing organization and role on the left, city then date on the right.");
+  }
+  if (!cvRenderer.includes('class="cv-org-symbol"') ||
+      !cvRenderer.includes('class="cv-location"') ||
+      !cvRenderer.includes('class="cv-date"') ||
+      !cvStyles.includes('data-cv-markers="dashes"')) {
+    failures.push("Harvard CV must retain organization icons, city and date fields, and em-dash descriptions.");
+  }
 }
 
 if (failures.length > 0) {
