@@ -468,7 +468,6 @@
   previewButton.addEventListener("click", () => {
     setPreview(root.dataset.cvPreview === "paper" ? "reading" : "paper");
     render();
-    renderPagedPreview();
     (root.dataset.cvPreview === "paper" ? pagedPreview : sourceDocument).scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
