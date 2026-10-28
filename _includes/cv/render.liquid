@@ -1,18 +1,6 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced">
-  <header class="post-header cv-intro">
-    <p class="cv-eyebrow">Curriculum vitae</p>
-    <h1 class="post-title">{{ cv.name }}</h1>
-    <p class="post-description">{{ page.description }}</p>
-    <nav class="cv-contact" aria-label="CV contact links">
-      <a href="mailto:{{ cv.email }}">{{ cv.email }}</a>
-      {% for social in cv.social_networks %}
-        <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">{{ social.network }}</a>
-      {% endfor %}
-      <a href="{{ cv.website }}" target="_blank" rel="noopener noreferrer">Portfolio</a>
-    </nav>
-  </header>
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="paper" data-cv-paper="a4" data-cv-show-urls="false">
 
   <aside class="cv-tools" aria-label="Customize and print CV">
     <div class="cv-tools-heading">
@@ -32,8 +20,11 @@
       </label>
       <label for="cv-template">Template
         <select id="cv-template">
-          <option value="personal">Personal · navy (one column)</option>
-          <option value="harvard">Harvard-inspired · classic (one column)</option>
+          <option value="personal">Personal · navy</option>
+          <option value="harvard">Harvard-inspired · classic</option>
+          <option value="minimal">Modern minimal</option>
+          <option value="editorial">Research editorial</option>
+          <option value="professional">Compact professional</option>
         </select>
       </label>
       <label for="cv-font">Font
@@ -57,6 +48,21 @@
           <option value="compact">Compact</option>
         </select>
       </label>
+      <label for="cv-palette">Accent color
+        <select id="cv-palette">
+          <option value="default">Template default</option>
+          <option value="velvet">Velvet blue</option>
+          <option value="sapphire">Sapphire</option>
+          <option value="teal">Teal</option>
+          <option value="forest">Forest</option>
+          <option value="burgundy">Burgundy</option>
+          <option value="graphite">Graphite</option>
+          <option value="custom">Custom</option>
+        </select>
+      </label>
+      <label for="cv-custom-accent">Custom color
+        <input type="color" id="cv-custom-accent" value="#00166c" disabled aria-label="Choose a custom CV accent color">
+      </label>
     </div>
     <details class="cv-section-picker">
       <summary>Sections to include</summary>
@@ -70,17 +76,35 @@
         {% endfor %}
       </div>
     </details>
+    <label class="cv-print-links-option" for="cv-print-urls">
+      <input type="checkbox" id="cv-print-urls"> Show full resource URLs on printed copies (clickable links are always retained)
+    </label>
     <div class="cv-actions">
+      <button type="button" id="cv-preview" class="cv-secondary-action" aria-pressed="true">Full-width view</button>
       <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
+    <p class="cv-preview-help" id="cv-preview-help">Live A4 paper-width preview. The browser's Print dialog shows exact page breaks.</p>
     <p class="cv-disclaimer">
       The Harvard-inspired option is an independent academic CV style, not an official Harvard University template.
       Chronological sorting uses each entry's first listed date. Undated sections remain after the timeline.
     </p>
   </aside>
 
+  <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
+  <header class="post-header cv-intro">
+    <p class="cv-eyebrow">Curriculum vitae</p>
+    <h1 class="post-title">{{ cv.name }}</h1>
+    <p class="post-description">{{ page.description }}</p>
+    <nav class="cv-contact" aria-label="CV contact links">
+      <a href="mailto:{{ cv.email }}">{{ cv.email }}</a>
+      {% for social in cv.social_networks %}
+        <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">{{ social.network }}</a>
+      {% endfor %}
+      <a href="{{ cv.website }}" target="_blank" rel="noopener noreferrer">Portfolio</a>
+    </nav>
+  </header>
   <section id="cv-timeline" class="cv-timeline" aria-label="Chronological CV" hidden>
     <h2>Chronological record</h2>
     <div id="cv-timeline-items" class="cv-entry-list"></div>
@@ -135,13 +159,22 @@
                 <div class="cv-entry-heading">
                   <div>
                     <h3>
-                      {% if entry.url %}<a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">{% endif %}
+                      {% assign cv_primary_link = entry.url %}
+                      {% unless cv_primary_link %}
+                        {% if entry.links and entry.links.size > 0 %}
+                          {% assign cv_primary_link = entry.links.first.url %}
+                        {% endif %}
+                      {% endunless %}
+                      {% if cv_primary_link %}<a href="{{ cv_primary_link }}" class="cv-primary-link" target="_blank" rel="noopener noreferrer">{% endif %}
                       {{ entry.degree | default: entry.name }}
-                      {% if entry.url %}</a>{% endif %}
+                      {% if cv_primary_link %}<i class="fa-solid fa-arrow-up-right-from-square cv-link-icon" aria-hidden="true"></i></a>{% endif %}
                     </h3>
                     {% if entry.institution %}
                       <p class="cv-organization">
-                        <i class="fa-solid fa-building-columns cv-org-icon" aria-hidden="true"></i>{{ entry.institution }}
+                        <i class="fa-solid fa-building-columns cv-org-icon" aria-hidden="true"></i>
+                        {% if entry.institution_url %}<a href="{{ entry.institution_url }}" target="_blank" rel="noopener noreferrer">{% endif %}
+                        {{ entry.institution }}
+                        {% if entry.institution_url %}</a>{% endif %}
                       </p>
                     {% endif %}
                     {% if entry.organization %}
@@ -160,7 +193,9 @@
                         {% elsif cv_org contains 'research' %}
                           <i class="fa-solid fa-flask cv-org-icon" aria-hidden="true"></i>
                         {% endif %}
+                        {% if entry.organization_url %}<a href="{{ entry.organization_url }}" target="_blank" rel="noopener noreferrer">{% endif %}
                         {{ entry.organization }}
+                        {% if entry.organization_url %}</a>{% endif %}
                       </p>
                     {% endif %}
                     {% if entry.links %}
@@ -202,6 +237,7 @@
       </section>
     {% endfor %}
   </article>
+  </div>
 </div>
 
 <script src="{{ '/assets/js/cv-customize.js' | relative_url }}" defer></script>

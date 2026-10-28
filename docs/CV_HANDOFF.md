@@ -111,3 +111,29 @@ Regression: inspect on-screen section cards, print to A4/Letter with both
 templates, verify zero multi-column flows, keyword weights, and meaningful
 institution icon fallbacks. Manual approval is required before merging this
 follow-up PR.
+
+## Live preview, expanded templates, and linked items
+
+The CV customizer now offers five single-column variants: Personal navy,
+Harvard-inspired classic (unofficial), Modern minimal, Research editorial,
+and Compact professional. Color choices are template default, velvet blue,
+sapphire, teal, forest, burgundy, graphite, or a user-picked hex color.
+All controls feed one CSS-scoped preview and browser-print layout.
+
+The default view is a scrollable paper-width **live preview** (A4 or Letter);
+the full-width view toggle is for easier screen reading. The simulated page
+width cannot predict exact browser pagination; **Print / Save as PDF** opens
+the browser's accurate paginated preview before output.
+
+CV title links resolve to `entry.url` or, if absent, `entry.links[0].url`.
+Original resource buttons remain. Institution and employer names are linked
+only when public, sourced `institution_url` or `organization_url` values
+are present in `_data/cv.yml`. No invented certificates or event proof.
+Printed PDF text retains clickable links; optional "Show full resource URLs"
+prints the raw URLs for records with explicit resource links. Unverified
+records remain plain text until a verified link is supplied.
+
+Check contrast for custom user-selected colors and mobile behavior. Institutional
+icons remain generic category pictograms, not official brands. Settings are
+ephemeral to the current page and are reset by Reset options. Print settings
+never modify the content YAML or private uploaded XeLaTeX sources.

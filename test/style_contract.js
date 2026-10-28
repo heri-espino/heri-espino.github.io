@@ -124,7 +124,7 @@ if (exists("_pages/cv.md")) {
   const cvScript = read("assets/js/cv-customize.js");
   const cvStyles = read("_sass/_cv.scss");
   if (/^published:\s*false\s*$/m.test(cvPage)) failures.push("The CV page should remain public.");
-  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-print", "cv-reset", "cv-timeline"]) {
+  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-palette", "cv-custom-accent", "cv-preview", "cv-print-urls", "cv-print", "cv-reset", "cv-timeline"]) {
     if (!cvRenderer.includes('id="' + id + '"')) failures.push("CV is missing print/sort control: " + id);
   }
   if (!cvRenderer.includes("data-cv-date=") || !cvRenderer.includes("data-cv-section-toggle=")) {
@@ -132,6 +132,15 @@ if (exists("_pages/cv.md")) {
   }
   if (!cvScript.includes("beforeprint") || !cvScript.includes("window.print()") || !cvScript.includes("parseStartDate")) {
     failures.push("CV print and chronology handlers are missing.");
+  }
+  if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
+    failures.push("CV live preview or linked entry titles are missing.");
+  }
+  if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("paper")')) {
+    failures.push("CV custom template color or preview handlers are missing.");
+  }
+  if (/column-count:\\s*2\\b/.test(cvStyles)) {
+    failures.push("CV must remain single-column in every print template.");
   }
   if (!cvStyles.includes("@media print") || !cvStyles.includes("data-cv-template=\"harvard\"")) {
     failures.push("CV print style or classic template is missing.");

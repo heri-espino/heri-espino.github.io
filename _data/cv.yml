@@ -10,6 +10,7 @@ cv:
     Education:
       - degree: Bachelor of Science in Data Science
         institution: Universidad de las Américas Puebla
+        institution_url: https://www.udlap.mx/
         location: Puebla, Mexico
         date: Aug 2023 — Dec 2027 (expected)
         highlights:
@@ -18,6 +19,7 @@ cv:
           - "Relevant coursework: Complex Networks, TDA, Advanced Optimization, DL, AI, ML, CC & Big Data, ABM, Numerical Methods"
       - degree: Bachelor of Science in Actuarial Science
         institution: Universidad de las Américas Puebla
+        institution_url: https://www.udlap.mx/
         location: Puebla, Mexico
         date: Aug 2021 — Dec 2026 (expected)
         highlights:
@@ -28,6 +30,7 @@ cv:
     Experience:
       - name: Research Data Scientist — Mathematics Learning Center
         organization: Universidad de las Américas Puebla
+        organization_url: https://www.udlap.mx/
         location: Puebla, Mexico
         date: Aug 2025 — Present
         highlights:
@@ -36,6 +39,7 @@ cv:
           - Built a one-click pipeline with batch scripts that install missing Miniconda, rerun analyses on new data, and regenerate all Python outputs and LaTeX reports automatically.
       - name: Quantitative Analyst
         organization: Actinver
+        organization_url: https://actinver.com/es-MX/home
         location: Mexico City, Mexico
         date: Jun 2025 — Dec 2025
         highlights:
@@ -45,6 +49,7 @@ cv:
 
       - name: Academic Assistant — Linear Algebra
         organization: Universidad de las Américas Puebla
+        organization_url: https://www.udlap.mx/
         location: Puebla, Mexico
         date: Jan 2023 — May 2023
         highlights:
@@ -62,6 +67,7 @@ cv:
       - name: Contributor — OpenAI Python SDK
         date: Sep 2026
         organization: OpenAI
+        organization_url: https://openai.com/
         links:
           - { label: GitHub, url: "https://github.com/openai/openai-python" }
         highlights:
@@ -106,6 +112,7 @@ cv:
       - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
         date: "2026"
         organization: "Springer Nature · SN Computer Science · Under Review"
+        organization_url: https://link.springer.com/journal/42979
         links:
           - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
