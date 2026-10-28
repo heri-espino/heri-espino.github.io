@@ -172,14 +172,18 @@ if (exists("_pages/cv.md")) {
   const cvScript = read("assets/js/cv-customize.js");
   const cvStyles = read("_sass/_cv.scss");
   if (/^published:\s*false\s*$/m.test(cvPage)) failures.push("The CV page should remain public.");
-  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-palette", "cv-custom-accent", "cv-preview", "cv-print-urls", "cv-print-options", "cv-entry-picker", "cv-entry-search", "cv-entry-options", "cv-entries-all", "cv-entries-none", "cv-text-size", "cv-page-margin", "cv-print", "cv-reset", "cv-timeline"]) {
+  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-palette", "cv-custom-accent", "cv-preview", "cv-print-urls", "cv-print-options", "cv-entry-picker", "cv-entry-search", "cv-entry-options", "cv-entries-all", "cv-entries-none", "cv-text-size", "cv-page-margin", "cv-reset", "cv-timeline"]) {
     if (!cvRenderer.includes('id="' + id + '"')) failures.push("CV is missing print/sort control: " + id);
   }
   if (!cvRenderer.includes("data-cv-date=") || !cvRenderer.includes("data-cv-section-toggle=")) {
     failures.push("CV renderer must expose dates and selectable sections.");
   }
-  if (!cvScript.includes("beforeprint") || !cvScript.includes("window.print()") || !cvScript.includes("parseStartDate")) {
-    failures.push("CV print and chronology handlers are missing.");
+  if (!cvScript.includes("beforeprint") || !cvScript.includes("afterprint") || !cvScript.includes("parseStartDate")) {
+    failures.push("Browser-based PDF printing and chronology handlers are missing.");
+  }
+  if (cvRenderer.includes('id="cv-print"') || cvScript.includes('printButton.addEventListener') ||
+      cvScript.includes('document.getElementById("cv-print")')) {
+    failures.push("The separate floating print button must be removed; Ctrl+P/Cmd+P remains supported.");
   }
   if (!cvRenderer.includes('data-cv-print-toggle="icons"') || !cvRenderer.includes('data-cv-print-toggle="highlights"')) {
     failures.push("CV print display options must include icons and highlights.");
@@ -199,11 +203,35 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
     failures.push("The CV preview must present separate numbered paper sheets.");
   }
+  if (!cvStyles.includes("width: var(--cv-paper-width);") ||
+      !cvStyles.includes("min-width: var(--cv-paper-width);") ||
+      !cvStyles.includes('.cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading') ||
+      !cvStyles.includes('grid-template-columns: minmax(0, 1fr) minmax(0, 31%);') ||
+      !cvStyles.includes('.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta')) {
+    failures.push("Harvard paper preview must retain physical paper width and a bounded city/date column.");
+  }
+  if (!cvScript.includes("europassOrder") ||
+      !cvScript.includes("orderedSections()") ||
+      !cvScript.includes("syncSectionOrder()") ||
+      !cvScript.includes('controls.template.value === "europass"') ||
+      !cvScript.includes("sectionContainer.appendChild(section)") ||
+      !cvRenderer.includes('class="cv-europass-language-table"') ||
+      !cvRenderer.includes("Mother tongue(s)") ||
+      !cvStyles.includes('.cv-page[data-cv-template="europass"] .cv-entry-heading {') ||
+      !cvStyles.includes("display: contents;") ||
+      !cvStyles.includes('.cv-page[data-cv-template="europass"] .cv-entry-heading .cv-meta')) {
+    failures.push("Europass must reorder work/education/skills and display dates left of entry content with honest language data.");
+  }
+  if (!cvRenderer.includes("Listening, reading, spoken interaction") ||
+      !cvScript.includes('"Professional Experience", "Programming Experience", "Academic Experience"') ||
+      !cvScript.includes('"Volunteering", "Education", "Credentials", "Schools"')) {
+    failures.push("Europass must not fabricate CEFR subskill scores and must prioritize work before education.");
+  }
   if (!cvStyles.includes('[data-cv-paginated="true"][data-cv-preview="paper"]') || !cvScript.includes('root.dataset.cvPaginated = "true"')) {
     failures.push("The CV must remain readable without JavaScript.");
   }
   if (!cvRenderer.includes('id="cv-panel-toggle"') || !cvRenderer.includes('id="cv-settings-panel"') || !cvScript.includes("setPanelOpen") || !cvStyles.includes(".cv-controls-column")) {
-    failures.push("The CV must offer a collapsible left settings panel and a persistent print button.");
+    failures.push("The CV must offer a collapsible, accessible settings panel.");
   }
   // Shortcuts are anchored next to the name, not fixed to the viewport.
   // Closing settings must free the entire CV width, with no reserved rail.
@@ -221,10 +249,9 @@ if (exists("_pages/cv.md")) {
     failures.push("Name-anchored CV controls must not float with the viewport or reserve a left gutter.");
   }
   if (!cvRenderer.includes('id="cv-panel-toggle"') ||
-      !cvRenderer.includes('id="cv-print"') ||
       !cvRenderer.includes('class="cv-controls-toolbar"') ||
       !cvStyles.includes("@media print")) {
-    failures.push("Both accessible CV shortcuts must remain together and hidden from print.");
+    failures.push("The settings chevron must stay beside the name and be hidden in browser printing.");
   }
   if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
     failures.push("Programming experience should link the canonical trendestimation library.");
@@ -267,11 +294,10 @@ if (exists("_pages/cv.md")) {
       failures.push("The CV is missing LaTeX-defined section " + section);
     }
   }
-  if (!cvRenderer.includes('data-cv-tools="closed"') || !cvRenderer.includes('id="cv-settings-panel" aria-label="Customize and print CV" hidden') ||
+  if (!cvRenderer.includes('data-cv-tools="closed"') || !cvRenderer.includes('id="cv-settings-panel" aria-label="Customize CV" hidden') ||
       !cvRenderer.includes('aria-label="Show CV settings"') || !cvRenderer.includes('fa-chevron-right') ||
-      !cvRenderer.includes('aria-label="Print or save CV as PDF"') || !cvRenderer.includes('fa-print') ||
       !cvScript.includes('setPanelOpen(false)')) {
-    failures.push("The CV must start with collapsed settings and accessible chevron/print-only controls.");
+    failures.push("The CV must start with a collapsed, accessible chevron-only settings control.");
   }
   if (!read("_config.yml").includes("back_to_top: false")) {
     failures.push("The floating back-to-top button must be disabled in Jekyll configuration, not merely hidden by CV CSS.");
