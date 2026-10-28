@@ -1069,7 +1069,13 @@
 
 @media screen {
   .cv-page[data-cv-preview="paper"] .cv-document {
-    padding: min(3.1vw, var(--cv-print-margin, 13mm));
+    padding: var(--cv-print-margin, 13mm);
+  }
+
+  @media (max-width: 590px) {
+    .cv-page[data-cv-preview="paper"] .cv-document {
+      padding: 1rem 0.85rem;
+    }
   }
 
   .cv-page[data-cv-preview="paper"][data-cv-text-size="small"] .cv-document {
