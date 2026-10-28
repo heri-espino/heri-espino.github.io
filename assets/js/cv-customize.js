@@ -5,6 +5,19 @@
   const root = document.getElementById("cv-page");
   if (!root) return;
 
+  // Swap the fallback pictogram only after the institution's logo loads.
+  // Broken or blocked remote images leave the existing icon intact.
+  root.querySelectorAll("[data-cv-org-logo]").forEach((image) => {
+    const fallback = image.parentElement?.querySelector(".cv-org-icon");
+    const reveal = () => {
+      if (!image.naturalWidth) return;
+      image.hidden = false;
+      if (fallback) fallback.hidden = true;
+    };
+    image.addEventListener("load", reveal, { once: true });
+    if (image.complete) reveal();
+  });
+
   const controls = {
     order: document.getElementById("cv-order"),
     template: document.getElementById("cv-template"),
