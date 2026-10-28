@@ -344,3 +344,40 @@ in both modes, then print from wide and from paper. Check that paper
 styles are applied during printing and the wide view is unchanged
 after printing or cancelling. The configuration options must be
 identical between views.
+
+## Collapsed icon controls and credentials sync (2026-10-28)
+
+The CV defaults to full-width reading mode, Balanced density, and **collapsed**
+settings. A 36-pixel chevron-only button at the upper left expands/collapses
+the sidebar (accessible label and `aria-expanded` are updated); a separate
+print icon sits directly below it when closed. Export remains accessible when
+the panel is hidden. The floating site's back-to-top button is suppressed
+**only on the CV route**, not globally. On narrow screens the closed control
+rail stays to the left of the full-width content.
+
+The public CV uses a section-specific, decorative Font Awesome fallback icon
+on **every entry**, with separate icons in skills and languages. Existing
+institution/issuer logos remain alongside organization labels. The print
+'Show icons' switch hides all record-level and organization-level pictograms.
+
+`_data/cv.yml` renames Online Courses to **Credentials** and mirrors the
+**featured** order of `_data/credentials.yml`: first the ten completed
+specializations, then the thirteen independently completed courses. It does
+not duplicate the granular constituent course certificates already covered by
+their specializations. All 23 entries retain credential IDs and their website
+certificate links. Descriptive bullets have been removed for the University of
+Pennsylvania corporate-finance and IESE storytelling credentials, as requested.
+
+Two first-author research records explicitly say **Under Review**:
+Elsevier / *Discrete Applied Mathematics* (LAGOS special issue) and Elsevier /
+*Computational Geometry*. Neither is marked as accepted or published.
+Organization logo matching includes Elsevier and new credential issuers.
+The manuscript names (rather than shortened subtitles) remain visible in the
+CV, alongside their existing portfolio and PDF links.
+
+Validation: check initial collapsed desktop and mobile layouts, mouse/keyboard
+chevron toggle, tiny print icon, single-column full-width CV, the absence of
+floating back-to-top on the CV only, all-entry icons and their show/hide
+toggle, credential order/URLs/count, both research statuses, and HTML/PDF
+rendering. Browser visual comparison remains separate from CI when the site's
+historical visual baseline is unavailable.
