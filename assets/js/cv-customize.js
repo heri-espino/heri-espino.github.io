@@ -113,9 +113,21 @@
     editorial: "#31536e",
     professional: "#27374d",
   };
+  // The paper preview must reveal sections that browser printing expands.
+  // Restore a reader's disclosure choices upon returning to full-width mode.
+  const paperDisclosureState = new Map();
   const setPreview = (mode) => {
     root.dataset.cvPreview = mode;
     const paper = mode === "paper";
+    if (paper) {
+      root.querySelectorAll("details.cv-details").forEach((detail) => {
+        if (!paperDisclosureState.has(detail)) paperDisclosureState.set(detail, detail.open);
+        detail.open = true;
+      });
+    } else {
+      paperDisclosureState.forEach((wasOpen, detail) => { detail.open = wasOpen; });
+      paperDisclosureState.clear();
+    }
     previewButton.textContent = paper ? "Full-width view" : "Paper preview";
     previewButton.setAttribute("aria-pressed", String(paper));
     previewHelp.textContent = paper
