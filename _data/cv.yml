@@ -109,7 +109,7 @@ cv:
           - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
 
       - name: Trend Estimation — Penalized Trend Smoothing Python Library
-        organization: Open-source research software
+        organization: Open-source Python library
         links:
           - { label: GitHub, url: "https://github.com/trendestimation/trendestimation" }
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/trendestimation.html" }
