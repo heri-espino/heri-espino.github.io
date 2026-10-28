@@ -2154,3 +2154,56 @@
     max-width: 36%;
   }
 }
+
+
+/* The CV's settings and Print buttons are *viewport-fixed*, not merely
+   sticky to the short control-grid cell. Keep both actions visible after a
+   long scroll, even if the settings panel is closed or its own panel scrolls.
+   Reserve the same narrow rail beside the reading/PDF preview. */
+@media screen {
+  .cv-page .cv-controls-toolbar {
+    position: fixed;
+    z-index: 110;
+    top: 5.5rem;
+    left: max(1rem, calc((100vw - 1500px) / 2));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 42px;
+    gap: 0.4rem;
+    margin: 0;
+  }
+
+  /* Opening settings must not change the shape, position or stacking
+     of the fixed shortcuts. The detailed configuration remains separate. */
+  .cv-page[data-cv-tools="open"] .cv-controls-toolbar {
+    position: fixed;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 42px;
+  }
+
+  .cv-page[data-cv-tools="open"] .cv-controls-column {
+    padding-top: 4.8rem;
+  }
+
+  .cv-page .cv-controls-toolbar .cv-icon-control {
+    flex: 0 0 36px;
+    width: 36px;
+    min-height: 36px;
+  }
+
+  @media (max-width: 1049px) {
+    .cv-page .cv-controls-toolbar {
+      top: 4.5rem;
+      left: 0.7rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cv-page .cv-controls-toolbar {
+      top: max(4.5rem, env(safe-area-inset-top));
+      left: max(0.5rem, env(safe-area-inset-left));
+    }
+  }
+}
