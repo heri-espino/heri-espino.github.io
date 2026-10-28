@@ -420,6 +420,21 @@ cv:
           - Wrote formal L² notes framing random variables as Hilbert-space vectors, with expectation, variance, MSE, bias–variance, and regression error as projections.
           - Derived conditional expectation, tower property, Chapman–Kolmogorov, and total variance as nested projection identities in L² with geometric diagrams and examples.
 
+    Published Articles & Technical Writing:
+      - name: "AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo"
+        role: "Coauthor · Published Technical Article"
+        organization: "La Catarina · Universidad de las Américas Puebla · IMEF Universitario"
+        date: "26 Oct 2026"
+        location: Puebla, Mexico
+        links:
+          - { label: Publication, url: "https://heri-espino.github.io/articles/abaquant-finanzas-matematicas.html" }
+          - { label: Read original, url: "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/" }
+          - { label: AbaQuant software, url: "https://github.com/AbaQuant/AbaQuant" }
+        highlights:
+          - "Coauthored with Owen Paredes Conde and published in La Catarina's Ciencias / IMEF section."
+          - "Explained open-source Python tools for financial valuation, investment portfolios, derivatives pricing, risk measurement and structured credit."
+
+
     Selected Academic Projects:
       - name: "Systemic Liquidity Crises in Crypto CFD"
         role: "Agent-Based Modeling"
