@@ -2156,35 +2156,49 @@
 }
 
 
-/* The CV's settings and Print buttons are *viewport-fixed*, not merely
-   sticky to the short control-grid cell. Keep both actions visible after a
-   long scroll, even if the settings panel is closed or its own panel scrolls.
-   Reserve the same narrow rail beside the reading/PDF preview. */
+/* CV controls belong to the name/header, NOT the viewport.
+   No persistent left rail or fixed overlay steals width from the body.
+   The shortcuts remain together in exactly the same place when settings
+   expand/collapse, and naturally scroll away with the name. */
 @media screen {
-  .cv-page .cv-controls-toolbar {
-    position: fixed;
-    z-index: 110;
-    top: 5.5rem;
-    left: max(1rem, calc((100vw - 1500px) / 2));
+  .cv-page .cv-workspace,
+  .cv-page[data-cv-tools="open"] .cv-workspace,
+  .cv-page[data-cv-tools="closed"] .cv-workspace {
+    display: block;
+    position: relative;
+    grid-template-columns: none;
+    gap: 0;
+  }
+
+  .cv-page .cv-controls-column,
+  .cv-page[data-cv-tools="open"] .cv-controls-column,
+  .cv-page[data-cv-tools="closed"] .cv-controls-column {
+    position: static;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+  }
+
+  /* Reserve space only inside the name/header, not beside every entry. */
+  .cv-page[data-cv-preview="reading"] .cv-intro {
+    padding-left: 3.45rem;
+  }
+
+  .cv-page .cv-controls-toolbar,
+  .cv-page[data-cv-tools="open"] .cv-controls-toolbar,
+  .cv-page[data-cv-tools="closed"] .cv-controls-toolbar {
+    position: absolute;
+    z-index: 30;
+    top: 2.15rem;
+    left: 0;
+    width: 42px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 42px;
+    justify-content: flex-start;
     gap: 0.4rem;
     margin: 0;
-  }
-
-  /* Opening settings must not change the shape, position or stacking
-     of the fixed shortcuts. The detailed configuration remains separate. */
-  .cv-page[data-cv-tools="open"] .cv-controls-toolbar {
-    position: fixed;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 42px;
-  }
-
-  .cv-page[data-cv-tools="open"] .cv-controls-column {
-    padding-top: 4.8rem;
   }
 
   .cv-page .cv-controls-toolbar .cv-icon-control {
@@ -2193,17 +2207,34 @@
     min-height: 36px;
   }
 
-  @media (max-width: 1049px) {
-    .cv-page .cv-controls-toolbar {
-      top: 4.5rem;
-      left: 0.7rem;
-    }
+  /* The expanded menu floats *over* the CV instead of pushing its content
+     to the right. Keep scroll within the menu on long configuration pages. */
+  .cv-page #cv-settings-panel:not([hidden]) {
+    position: absolute;
+    z-index: 29;
+    top: 8.25rem;
+    left: 0;
+    width: min(21rem, calc(100% - 1rem));
+    max-height: min(74vh, 42rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin: 0;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.16);
   }
 
-  @media (max-width: 480px) {
-    .cv-page .cv-controls-toolbar {
-      top: max(4.5rem, env(safe-area-inset-top));
-      left: max(0.5rem, env(safe-area-inset-left));
+  @media (max-width: 520px) {
+    .cv-page[data-cv-preview="reading"] .cv-intro {
+      padding-left: 2.85rem;
+    }
+    .cv-page .cv-controls-toolbar,
+    .cv-page[data-cv-tools="open"] .cv-controls-toolbar,
+    .cv-page[data-cv-tools="closed"] .cv-controls-toolbar {
+      top: 2rem;
+      width: 36px;
+    }
+    .cv-page #cv-settings-panel:not([hidden]) {
+      top: 8rem;
+      width: min(21rem, 100%);
     }
   }
 }
