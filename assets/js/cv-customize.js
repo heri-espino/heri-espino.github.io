@@ -5,6 +5,19 @@
   const root = document.getElementById("cv-page");
   if (!root) return;
 
+  // Swap the fallback pictogram only after the institution's logo loads.
+  // Broken or blocked remote images leave the existing icon intact.
+  root.querySelectorAll("[data-cv-org-logo]").forEach((image) => {
+    const fallback = image.parentElement?.querySelector(".cv-org-icon");
+    const reveal = () => {
+      if (!image.naturalWidth) return;
+      image.hidden = false;
+      if (fallback) fallback.hidden = true;
+    };
+    image.addEventListener("load", reveal, { once: true });
+    if (image.complete) reveal();
+  });
+
   const controls = {
     order: document.getElementById("cv-order"),
     template: document.getElementById("cv-template"),
@@ -26,6 +39,8 @@
   const previewHelp = document.getElementById("cv-preview-help");
   const sourceDocument = document.getElementById("cv-document");
   const pagedPreview = document.getElementById("cv-paged-preview");
+  const panelToggle = document.getElementById("cv-panel-toggle");
+  const settingsPanel = document.getElementById("cv-settings-panel");
   const printToggles = Array.from(root.querySelectorAll("[data-cv-print-toggle]"));
   const entryPicker = document.getElementById("cv-entry-picker");
   const entryCount = document.getElementById("cv-entry-count");
@@ -47,6 +62,8 @@
     !previewHelp ||
     !sourceDocument ||
     !pagedPreview ||
+    !panelToggle ||
+    !settingsPanel ||
     !entryPicker ||
     !entryCount ||
     !entrySearch ||
@@ -215,7 +232,6 @@
     const toggle = toggles.find((item) => item.dataset.cvSectionToggle === section.dataset.cvSection);
     return !toggle || toggle.checked;
   };
-
 
   // The browser's print engine is authoritative. The screen-only sheet stack
   // provides a measured, block-level approximation without mutating printable
@@ -443,6 +459,16 @@
     (root.dataset.cvPreview === "paper" ? pagedPreview : sourceDocument).scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  // Keep export available while the configuration panel is collapsed.
+  const setPanelOpen = (open) => {
+    settingsPanel.hidden = !open;
+    root.dataset.cvTools = open ? "open" : "closed";
+    panelToggle.textContent = open ? "Hide settings" : "Customize CV";
+    panelToggle.setAttribute("aria-expanded", String(open));
+    requestAnimationFrame(() => renderPagedPreview());
+  };
+  panelToggle.addEventListener("click", () => setPanelOpen(settingsPanel.hidden));
+
   resetButton.addEventListener("click", () => {
     controls.order.value = "sections";
     controls.template.value = "personal";
@@ -483,11 +509,11 @@
     previouslyOpen = [];
   });
 
+  setPanelOpen(true);
   setPreview("paper");
   render();
 
-  // Recalculate when text metrics or responsive page width change.
-  // One layout pass per frame prevents resize-event storms.
+  // Re-measure after responsive width changes or fonts become available.
   let resizeFrame = 0;
   window.addEventListener("resize", () => {
     if (resizeFrame) cancelAnimationFrame(resizeFrame);
@@ -496,7 +522,5 @@
       renderPagedPreview();
     });
   });
-  if (document.fonts?.ready) {
-    document.fonts.ready.then(() => renderPagedPreview());
-  }
+  if (document.fonts?.ready) document.fonts.ready.then(() => renderPagedPreview());
 })();
