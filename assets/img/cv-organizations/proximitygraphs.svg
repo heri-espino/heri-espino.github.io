@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" role="img" aria-label="ProximityGraphs: empty-region graph">
+<rect x="1" y="1" width="142" height="142" rx="28" fill="#F6F8F9"/>
+<path d="M24 85 42 46 86 27 119 63 101 109 60 119Z" fill="none" stroke="#12375F" stroke-width="6" stroke-linejoin="round"/>
+<path d="M24 85 74 79 86 27M42 46 74 79 119 63M60 119 74 79 101 109" stroke="#2676B6" stroke-width="4"/>
+<path d="M42 46 86 27 74 79Z" fill="#96D5ED" fill-opacity=".8"/>
+<path d="M74 79 119 63 101 109Z" fill="#509CC7" fill-opacity=".55"/>
+<g fill="#103961"><circle cx="24" cy="85" r="6"/><circle cx="42" cy="46" r="6"/><circle cx="86" cy="27" r="6"/><circle cx="119" cy="63" r="6"/><circle cx="101" cy="109" r="6"/><circle cx="60" cy="119" r="6"/><circle cx="74" cy="79" r="6"/></g>
+</svg>

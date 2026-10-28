@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" role="img" aria-label="Trend Estimation: smoothness-controlled trend">
+<rect x="1" y="1" width="142" height="142" rx="28" fill="#F6FAF6"/>
+<path d="M17 103Q35 42 56 70T91 63 128 31" stroke="#B4D3EC" stroke-width="15" fill="none" opacity=".7" stroke-linecap="round"/>
+<path d="M17 105Q38 54 57 76T94 66 129 34" stroke="#4D91CE" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M15 113Q41 90 60 89T99 64 128 59" stroke="#0D877C" stroke-width="6" fill="none" stroke-linecap="round"/>
+<path d="M17 118Q43 109 64 104T104 78 128 73" stroke="#7FC5AE" stroke-width="4" fill="none" opacity=".75" stroke-linecap="round"/>
+</svg>
