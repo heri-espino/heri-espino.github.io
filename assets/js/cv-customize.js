@@ -43,6 +43,42 @@
     return year ? Date.UTC(Number(year[1]), 0, 1) : null;
   };
 
+  // Semibold emphasis of technical terminology without changing source data.
+  // Operate on text nodes only: never interpolate arbitrary content into HTML.
+  const keywords = [
+    "GitHub Actions", "Springer Nature", "SN Computer Science", "activation patching",
+    "logit additivity", "Monte Carlo", "mathematical OCR", "Deep Learning",
+    "Machine Learning", "Bayesian", "Python", "PyTorch", "TensorFlow",
+    "Matplotlib", "Docling", "LaTeX", "NumPy", "SciPy", "Ruff",
+    "pytest", "CatBoost", "XGBoost", "PostgreSQL", "Docker",
+    "Airflow", "Streamlit", "Qiskit", "optimization", "stochastic"
+  ];
+  const escaped = keywords.map((word) => word.replace(/[.*+?^\x24{}()|[\]\\]/g, "\\\\  const entries = sections.flatMap((section, sectionIndex) =>"));
+  const keywordPattern = new RegExp("\\\\b(" + escaped.join("|") + ")\\\\b", "gi");
+  root.querySelectorAll(".cv-highlights li, .cv-skills dd").forEach((target) => {
+    const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      const source = node.nodeValue || "";
+      keywordPattern.lastIndex = 0;
+      if (!keywordPattern.test(source)) return;
+      keywordPattern.lastIndex = 0;
+      const fragment = document.createDocumentFragment();
+      let offset = 0;
+      for (const match of source.matchAll(keywordPattern)) {
+        if (match.index > offset) fragment.appendChild(document.createTextNode(source.slice(offset, match.index)));
+        const element = document.createElement("span");
+        element.className = "cv-keyword";
+        element.textContent = match[0];
+        fragment.appendChild(element);
+        offset = match.index + match[0].length;
+      }
+      if (offset < source.length) fragment.appendChild(document.createTextNode(source.slice(offset)));
+      node.replaceWith(fragment);
+    });
+  });
+
   const entries = sections.flatMap((section, sectionIndex) =>
     Array.from(section.querySelectorAll("[data-cv-record]")).map((element, index) => ({
       element,

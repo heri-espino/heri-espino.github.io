@@ -32,8 +32,8 @@
       </label>
       <label for="cv-template">Template
         <select id="cv-template">
-          <option value="personal">Personal · navy</option>
-          <option value="harvard">Harvard-inspired · classic</option>
+          <option value="personal">Personal · navy (one column)</option>
+          <option value="harvard">Harvard-inspired · classic (one column)</option>
         </select>
       </label>
       <label for="cv-font">Font
@@ -140,10 +140,28 @@
                       {% if entry.url %}</a>{% endif %}
                     </h3>
                     {% if entry.institution %}
-                      <p class="cv-organization">{{ entry.institution }}</p>
+                      <p class="cv-organization">
+                        <i class="fa-solid fa-building-columns cv-org-icon" aria-hidden="true"></i>{{ entry.institution }}
+                      </p>
                     {% endif %}
                     {% if entry.organization %}
-                      <p class="cv-organization">{{ entry.organization }}</p>
+                      <p class="cv-organization">
+                        {% assign cv_org = entry.organization | downcase %}
+                        {% if cv_org contains 'actinver' %}
+                          <i class="fa-solid fa-chart-line cv-org-icon" aria-hidden="true"></i>
+                        {% elsif cv_org contains 'openai' %}
+                          <i class="fa-solid fa-code cv-org-icon" aria-hidden="true"></i>
+                        {% elsif cv_org contains 'paletas loreto' %}
+                          <i class="fa-solid fa-store cv-org-icon" aria-hidden="true"></i>
+                        {% elsif cv_org contains 'springer' or cv_org contains 'journal' %}
+                          <i class="fa-solid fa-book-open cv-org-icon" aria-hidden="true"></i>
+                        {% elsif cv_org contains 'universidad' or cv_org contains 'university' or cv_org contains 'college' or cv_org contains 'institute' %}
+                          <i class="fa-solid fa-building-columns cv-org-icon" aria-hidden="true"></i>
+                        {% elsif cv_org contains 'research' %}
+                          <i class="fa-solid fa-flask cv-org-icon" aria-hidden="true"></i>
+                        {% endif %}
+                        {{ entry.organization }}
+                      </p>
                     {% endif %}
                     {% if entry.links %}
                       <p class="cv-links">
