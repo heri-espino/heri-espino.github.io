@@ -1,0 +1,477 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation | Heriberto Espino Montelongo </title> <meta name="author" content="Heriberto Espino Montelongo"> <meta name="description" content="Academic portfolio of Heriberto Espino Montelongo, an Actuarial Science and Data Science student working across stochastic geometry, probability, time series, financial risk, and interpretable machine learning. "> <meta name="keywords" content="stochastic geometry, probability, time series, financial risk, interpretable machine learning, academic portfolio"> <meta property="og:site_name" content="Heriberto Espino Montelongo"> <meta property="og:type" content="website"> <meta property="og:title" content="Heriberto Espino Montelongo | Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"> <meta property="og:url" content="https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html"> <meta property="og:description" content="Academic portfolio of Heriberto Espino Montelongo, an Actuarial Science and Data Science student working across stochastic geometry, probability, time series, financial risk, and interpretable machine learning. "> <meta property="og:image" content="og-card.svg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"> <meta name="twitter:description" content="Academic portfolio of Heriberto Espino Montelongo, an Actuarial Science and Data Science student working across stochastic geometry, probability, time series, financial risk, and interpretable machine learning. "> <meta name="twitter:image" content="og-card.svg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Heriberto Espino Montelongo"
+        },
+        "url": "https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html",
+        "@type": "WebSite",
+        "description": "Academic portfolio of Heriberto Espino Montelongo, an Actuarial Science and Data Science student working across stochastic geometry, probability, time series, financial risk, and interpretable machine learning.
+",
+        "headline": "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation",
+        
+        "sameAs": ["https://github.com/heri-espino","https://www.linkedin.com/in/heri-espino","https://orcid.org/0009-0009-1230-2931",null,null,null,null,null],
+        
+        "name": "Heriberto Espino Montelongo",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?v=03a91e18f9d617a4fab77c0869f07fc5"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html"> <script src="/assets/js/theme.js?v=558f01172325f31793282845b9bdd342"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" aria-label="Primary navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Heriberto <span class="font-weight-bold">Espino Montelongo</span> </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/papers/">Papers</a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">Projects</a> </li> <li class="nav-item "> <a class="nav-link" href="/academic-projects/">Academics</a> </li> <li class="nav-item "> <a class="nav-link" href="/presentations/">Posters</a> </li> <li class="nav-item "> <a class="nav-link" href="/press/">Press</a> </li> <li class="nav-item "> <a class="nav-link" href="/notes/">Notes</a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV</a> </li> <li class="nav-item "> <a class="nav-link" href="/contact/">Contact</a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link"><kbd>Ctrl K</kbd> <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"><span class="progress-bar"></span></progress> </header> <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const ninja = document.querySelector("ninja-keys");
+      if (!ninja) return;
+      const existing = Array.isArray(ninja.data) ? ninja.data : [];
+      const pressResults = [
+        
+        
+          {
+            id: "press-article-1",
+            title: "AbaQuant: Finanzas matemáticas, valuación y gestión del riesgo",
+            description: "La Catarina · UDLAP · October 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-2",
+            title: "UDLAP Activity Report 2025–2026 — Student Recognitions",
+            description: "Universidad de las Américas Puebla · Institutional Report · 2025–2026 report",
+            section: "Press & Media",
+            handler: () => window.open("https://www.udlap.mx/informe/files/activity-report-2025-2026-UDLAP.pdf?version=1", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-3",
+            title: "Estudiantes de la UDLAP destacan en el Putnam 2026",
+            description: "Ciencias UDLAP · LinkedIn · March 19, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://es.linkedin.com/posts/dr-francisco-garc%C3%ADa-castillo_en-d%C3%B3nde-en-la-universidad-de-las-am%C3%A9ricas-activity-7441339549307330560-DW5d", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-4",
+            title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé",
+            description: "Blog UDLAP · January 7, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://blog.udlap.mx/blog/2026/01/07/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-5",
+            title: "La UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero",
+            description: "El Economista · January 13, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://www.eleconomista.com.mx/arteseideas/udlap-inicia-2026-estudiantes-catedraticos-destacan-extranjero-20260113-795024.html", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-6",
+            title: "UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero",
+            description: "La Jornada · January 12, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://www.jornada.com.mx/noticia/2026/01/12/sociedad/udlap-inicia-2026-con-estudiantes-y-catedraticos-que-destacan-en-el-extranjero", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-7",
+            title: "UDLAP inicia 2026 con estudiantes y catedráticos que destacan en el extranjero",
+            description: "La Crónica de Hoy · January 12, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://www.cronica.com.mx/academia/2026/01/12/udlap-inicia-2026-con-estudiantes-y-catedraticos-que-destacan-en-el-extranjero/", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-8",
+            title: "Estudiantes de la UDLAP crean herramienta médica para detectar padecimientos en bebés",
+            description: "e-consulta · January 7, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://historico.e-consulta.com/nota/2026-01-07/educacion/estudiantes-de-la-udlap-crean-herramienta-medica-para-detectar", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-9",
+            title: "En el llanto del bebé está la clave: así estudiantes crean herramienta para detectar padecimientos",
+            description: "Noticias Héctor Rodrigo Ortiz · January 8, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://hectorrodrigo.com/en-el-llanto-del-bebe-esta-la-clave-asi-estudiantes-crean-herramienta-para-detectar-padecimientos/", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-10",
+            title: "UDLAP | Estudiantes desarrollan herramienta médica para detectar padecimientos de un bebé",
+            description: "Urbano Tlaxcala · January 7, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://urbanotlaxcala.mx/educacion/universidades/udlap-estudiantes-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-11",
+            title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé",
+            description: "Encuentro Regional · January 7, 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://encuentroregional.com/index.php/item/5266-estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe", "_blank", "noopener,noreferrer")
+          },
+        
+          {
+            id: "press-article-12",
+            title: "Estudiantes UDLAP desarrollan herramienta médica para detectar padecimientos de un bebé",
+            description: "Revista Encuadre · January 2026",
+            section: "Press & Media",
+            handler: () => window.open("https://www.revistaencuadre.com/universidades/estudiantes-udlap-desarrollan-herramienta-medica-para-detectar-padecimientos-de-un-bebe/", "_blank", "noopener,noreferrer")
+          }
+        
+      ];
+      const navigation = existing
+        .filter((entry) => !String(entry.id || "").startsWith("press-article-"))
+        .map((entry) => entry.id === "nav-press-amp-media"
+          ? { ...entry, title: "Press & Media" }
+          : entry);
+      ninja.data = [...navigation, ...pressResults];
+    });
+  </script> <div class="container mt-5" role="main"> <article class="portfolio-detail"> <header class="portfolio-detail-header"> <div class="portfolio-detail-classification"> <span class="portfolio-label">Working Draft</span> <span>Manuscript draft · Submission not verified</span> </div> <h1>Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation</h1> <div class="portfolio-detail-meta"> <p class="portfolio-authors">Heriberto Espino Montelongo</p> <p class="portfolio-meta">Oct 2026</p> </div> </header> <div class="portfolio-detail-grid"> <aside class="portfolio-detail-aside"> <img class="portfolio-detail-preview" src="/assets/img/portfolio/trendestimation-preview.svg" alt="Related penalized-trend research graphic, not a figure from this manuscript" loading="eager"> <div class="portfolio-actions"> <a class="portfolio-button portfolio-button-primary" href="https://github.com/heri-espino/Trend-Estimation" rel="external nofollow noopener" target="_blank"> <span class="portfolio-button-label"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</span> <span aria-hidden="true">↗</span> </a> </div> <p class="portfolio-aside-label">Topics</p> <div class="portfolio-tags" aria-label="Topics"> <span>forecasting</span><span>penalized least squares</span><span>smoothness selection</span><span>local minima</span><span>time series</span> </div> </aside> <div class="portfolio-detail-content"> <section class="portfolio-reading-section"> <h2>Summary</h2> <p>Develops a framework for tracking multiple local minima of chronological forecast-loss surfaces across forecast origins. Persistent branches retain smoothness, first-stage validation loss, and refitted subsequent loss; branch-selection and branch-to-smoothness rules are evaluated separately. Results favor horizon-matched pooled forecasting in controlled simulations, while broader tests do not establish a universally superior dynamic rule.</p> </section> <section class="portfolio-reading-section"> <h2>Context</h2> <p>The uploaded 13-page document uses a Journal of Forecasting manuscript template with placeholder received, accepted, DOI, and correspondence fields. Those placeholders are not evidence of submission, acceptance, or publication. The research distinguishes forecast-optimal smoothness from in-sample trend recovery, uses chronological information restrictions, and requires a final refit at the latest origin.</p> </section> <section class="portfolio-reading-section"> <h2>Main contributions</h2> <ul> <li>Represents time-evolving local minima of forecast-loss surfaces as persistent, matched branches.</li> <li>Separates branch selection from the rule that converts branch history into a current smoothness parameter, including recency- and loss-weighted choices.</li> <li>Tests horizon-matched pooled tuning, tracked minima, and decision functionals using chronological evaluation and simulations.</li> <li>Reports mixed empirical evidence: favorable results in a small panel, but no general dynamic-rule superiority in wider financial and changing-roughness experiments.</li> <li>Documents final refitting, endpoint behavior, and out-of-sample information restrictions.</li> </ul> </section> <p><strong>Document stage:</strong> Research manuscript draft. No submission or journal decision is confirmed by the supplied manuscript.</p> <p><strong>Interpretation:</strong> This manuscript presents an evaluable decision framework, not a claim that a particular branch rule dominates pooled forecast cross-validation.</p> </div> </div> </article> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2026 Heriberto Espino Montelongo. Academic portfolio of Heriberto Espino Montelongo. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-home",
+    title: "Home",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-papers",
+          title: "Papers",
+          description: "Submitted manuscripts, working drafts, and ongoing research by Heriberto Espino Montelongo.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/papers/";
+          },
+        },{id: "nav-projects",
+          title: "Projects",
+          description: "Research, software, and applied modeling projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-notes",
+          title: "Notes",
+          description: "Mathematical notes in probability and related areas.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/notes/";
+          },
+        },{id: "nav-contact",
+          title: "Contact",
+          description: "Contact Heriberto Espino Montelongo about research, software, and academic collaboration.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contact/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Academic background, research, software, experience, and qualifications. Customize the on-screen layout and print a tailored version.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-press-amp-media",
+          title: "Press &amp; Media",
+          description: "University news and media coverage of academic activities.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/press/";
+          },
+        },{id: "nav-unit-region-factorization-for-empty-region-proximity-graphs",
+          title: "Unit-Region Factorization for Empty-Region Proximity Graphs",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/papers/unit-region-factorization.html";
+          },
+        },{id: "nav-geometry-and-volume-of-stepping-stone-diversion-neighborhoods-in-euclidean-spaces-of-arbitrary-dimension",
+          title: "Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension...",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/papers/stepping-stone.html";
+          },
+        },{id: "nav-random-variables-as-vectors-geometry-of-l-projections-variance-and-bias",
+          title: "Random Variables as Vectors: Geometry of L², Projections, Variance, and Bias",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/notes/random-variables-as-vectors.html";
+          },
+        },{id: "projects-abaquant",
+          title: 'AbaQuant',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/abaquant.html";
+            },},{id: "projects-actuarial-risk-analysis-portfolio",
+          title: 'Actuarial Risk Analysis Portfolio',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/actuarial-risk-analysis-portfolio.html";
+            },},{id: "projects-valuación-de-opciones-asiáticas-de-venta",
+          title: 'Valuación de Opciones Asiáticas de Venta',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/asian-put-option-valuation.html";
+            },},{id: "projects-awesomefigures",
+          title: 'AwesomeFigures',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/awesomefigures.html";
+            },},{id: "projects-implementación-del-método-de-metropolis-hastings-en-una-aplicación-actuarial",
+          title: 'Implementación del Método de Metropolis–Hastings en una Aplicación Actuarial',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/bayesian-asian-option-valuation.html";
+            },},{id: "projects-cephalosporin-clinical-decision-support-system",
+          title: 'Cephalosporin Clinical Decision Support System',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cephalosporin-clinical-decision-support-system.html";
+            },},{id: "projects-credit-scores-with-mapper-and-homology",
+          title: 'Credit Scores with Mapper and Homology',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/credit-scores-mapper-homology.html";
+            },},{id: "projects-causality-network-for-crypto",
+          title: 'Causality Network for Crypto',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/crypto-causality-network.html";
+            },},{id: "projects-portafolios-para-criptomonedas",
+          title: 'Portafolios para Criptomonedas',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/cryptocurrency-portfolios.html";
+            },},{id: "projects-docling-math",
+          title: 'Docling Math',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docling-math.html";
+            },},{id: "projects-function-mapper",
+          title: 'Function Mapper',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/function-mapper.html";
+            },},{id: "projects-modelos-de-teoría-de-juegos-en-finanzas",
+          title: 'Modelos de Teoría de Juegos en Finanzas',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/game-theory-models-finance.html";
+            },},{id: "projects-right-censored-regression-for-ibd-with-catboost-and-xgboost-stacking",
+          title: 'Right-Censored Regression for IBD with CatBoost and XGBoost Stacking',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/ibd-right-censored-regression.html";
+            },},{id: "projects-kessler-multiclass-classification",
+          title: 'Kessler Multiclass Classification',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/kessler-multiclass-classification.html";
+            },},{id: "projects-latent-risk-estimation-in-the-u-s-market-using-representative-variables",
+          title: 'Latent Risk Estimation in the U.S. Market Using Representative Variables',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/latent-risk-us-market.html";
+            },},{id: "projects-margrabe-option-derivation",
+          title: 'Margrabe Option Derivation',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/margrabe-option-derivation.html";
+            },},{id: "projects-agrupamiento-espacial-de-emisiones-de-metano-por-ganado-vacuno-en-pastoreo-en-méxico",
+          title: 'Agrupamiento Espacial de Emisiones de Metano por Ganado Vacuno en Pastoreo en México...',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/methane-emissions-spatial-clustering.html";
+            },},{id: "projects-dinámicas-espaciales-en-la-incidencia-de-robos-en-la-ciudad-de-méxico-en-2024",
+          title: 'Dinámicas Espaciales en la Incidencia de Robos en la Ciudad de México en...',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/mexico-city-theft-spatial-dynamics.html";
+            },},{id: "projects-mexico-linked-futures",
+          title: 'Mexico-Linked Futures',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/mexico-linked-futures.html";
+            },},{id: "projects-multi-leg-derivative-strategies",
+          title: 'Multi-Leg Derivative Strategies',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/multi-leg-derivative-strategies.html";
+            },},{id: "projects-análisis-de-series-de-tiempo-para-la-precipitación-en-puebla",
+          title: 'Análisis de Series de Tiempo para la Precipitación en Puebla',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/precipitation-time-series-puebla.html";
+            },},{id: "projects-proximity-graphs-construction-and-asymptotic-characteristics",
+          title: 'Proximity Graphs: Construction and Asymptotic Characteristics',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/presentations/proximity-graphs-asymptotic-characteristics-poster.html";
+            },},{id: "projects-características-asintóticas-de-las-gráficas-de-proximidad",
+          title: 'Características Asintóticas de las Gráficas de Proximidad',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/proximity-graphs-asymptotics-presentation.html";
+            },},{id: "projects-proximity-graphs",
+          title: 'Proximity Graphs',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/presentations/proximity-graphs-poster.html";
+            },},{id: "projects-proximity-graphs",
+          title: 'Proximity Graphs',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/proximity-graphs.html";
+            },},{id: "projects-recorded-talk",
+          title: 'Recorded Talk',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/presentations/recorded-talk.html";
+            },},{id: "projects-s-amp-p-500-supply-chain-network",
+          title: 'S&amp;amp;P 500 Supply-Chain Network',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/sp500-supply-chain-network.html";
+            },},{id: "projects-star-wars-link-prediction",
+          title: 'Star Wars Link Prediction',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/star-wars-link-prediction.html";
+            },},{id: "projects-stepping-stone-volume-constants",
+          title: 'Stepping-Stone Volume Constants',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/stepping-stone-volume-constants.html";
+            },},{id: "projects-synthetic-cdo-tranche-valuation",
+          title: 'Synthetic CDO Tranche Valuation',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/synthetic-cdo-tranche-valuation.html";
+            },},{id: "projects-systemic-liquidity-crisis-agent-based-model",
+          title: 'Systemic Liquidity-Crisis Agent-Based Model',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/systemic-liquidity-abm.html";
+            },},{id: "projects-trendestimation",
+          title: 'trendestimation',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/trendestimation.html";
+            },},{id: "projects-implementación-de-un-algoritmo-genético-para-el-uflp",
+          title: 'Implementación de un Algoritmo Genético para el UFLP',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/uflp-genetic-algorithm.html";
+            },},{id: "projects-xgboost-for-credit-approval",
+          title: 'XGBoost for Credit Approval',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/academic-projects/xgboost-credit-approval.html";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%68%65%72%69%62%65%72%74%6F.%65%73%70%69%6E%6F%6D%6F@%75%64%6C%61%70.%6D%78", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/heri-espino", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/heri-espino", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-1230-2931", "_blank");
+        },
+      },{
+        id: 'social-researchgate_profile_url',
+        title: 'Researchgate_profile_url',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
+        id: 'social-google_scholar_profile_url',
+        title: 'Google_scholar_profile_url',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
+        id: 'social-ssrn_author_url',
+        title: 'Ssrn_author_url',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
+        id: 'social-pypi_profile_url',
+        title: 'Pypi_profile_url',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
+        id: 'social-zenodo_archive_url',
+        title: 'Zenodo_archive_url',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
