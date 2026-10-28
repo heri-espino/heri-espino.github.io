@@ -14,7 +14,9 @@ formula: '\mathcal{D}_{\mathrm{PLS}}(y_1,y_2)^2=\frac{1}{N}\int_0^1\|\boldsymbol
 framing: "The five-page October 2026 note is an unsubmitted research draft. It presents a mathematical formulation, a synthetic rolling-window example, and validation questions; it does not claim an empirically validated change-point detector or a confirmed agricultural causal relationship. In particular, retrospective PLS smoothing may use future observations, so online divergence detection requires a strictly causal protocol."
 tags: [penalized least squares, Hilbert spaces, trend estimation, smoothness, rolling windows, agricultural monitoring]
 image: /assets/img/portfolio/pdf-page-shots/smoothness-integrated-trend-distances-figure.avif
-image_alt: "Page 4: synthetic rolling-window distance and divergence plots from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/smoothness-integrated-trend-distances-first.avif\ndetail_image_alt: "Screenshot of page 1 of smoothness integrated trend distances"
+image_alt: "Page 4: synthetic rolling-window distance and divergence plots from the uploaded document"
+detail_image: /assets/img/portfolio/pdf-page-shots/smoothness-integrated-trend-distances-first.avif
+detail_image_alt: "Screenshot of page 1 of smoothness integrated trend distances"
 github: https://github.com/heri-espino/Trend-Estimation
 contributions:
   - 'Extends the PLS trend estimator to nonzero reference differences through the affine penalty \(\|y-u\|_2^2+\lambda\|D_d u-\mu\mathbf{1}\|_2^2\).'
