@@ -1,6 +1,6 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="latex" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
   <div class="cv-workspace">
     <div class="cv-controls-column">
       <div class="cv-controls-toolbar" aria-label="CV settings and export">
@@ -51,9 +51,9 @@
       </label>
       <label for="cv-density">Spacing
         <select id="cv-density">
-          <option value="latex" selected>LaTeX · extra compact</option>
+          <option value="balanced" selected>Balanced</option>
           <option value="compact">Compact</option>
-          <option value="balanced">Balanced</option>
+          <option value="latex">LaTeX · extra compact</option>
         </select>
       </label>
       <label for="cv-markers">Description markers
@@ -143,7 +143,7 @@
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
-    <p class="cv-preview-help" id="cv-preview-help">Full-width CV view. Switch to Paper preview for approximate page boundaries; Print / Save as PDF uses the browser.</p>
+    <p class="cv-preview-help" id="cv-preview-help">Full-width CV view. Paper preview uses the extra-compact print spacing by default; Print / Save as PDF uses your browser.</p>
     <p class="cv-disclaimer">
       The Harvard-inspired and Europass-inspired options are independent academic CV styles, not official university or EU-issued templates.
       For an official Europass document, use the <a href="https://europass.europa.eu/en/create-europass-cv" target="_blank" rel="noopener noreferrer">EU Europass CV builder</a>.
