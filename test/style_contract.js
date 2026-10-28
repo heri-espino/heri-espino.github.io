@@ -256,11 +256,14 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes('body:has(.cv-page) .back-to-top')) {
     failures.push("The redundant back-to-top button must be hidden on the CV page only.");
   }
-  if (!cvRenderer.includes('cv-entry-symbol') ||
-      !cvRenderer.includes('cv-skills-icon') ||
-      !cvRenderer.includes('cv-language-icon') ||
-      !cvStyles.includes('data-cv-show-icons="false"] .cv-entry-symbol')) {
-    failures.push("Every CV record, skill, and language must have an optional category icon.");
+  if (!cvRenderer.includes('class="cv-org-symbol"') ||
+      !cvRenderer.includes('cv-org-icon"') ||
+      !cvRenderer.includes('class="cv-org-logo"') ||
+      !cvStyles.includes('data-cv-show-icons="false"] .cv-org-symbol')) {
+    failures.push("Organization and institution labels must retain their logo and fallback icon.");
+  }
+  if (['cv-entry-symbol', 'cv-skills-icon', 'cv-language-icon', 'fa-arrow-up-right-from-square'].some((token) => cvRenderer.includes(token))) {
+    failures.push("CV headings, positions, skills, and languages must remain free of decorative icons.");
   }
   const cvSources = read("_data/cv.yml");
   const credentialSource = read("_data/credentials.yml");

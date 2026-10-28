@@ -355,10 +355,11 @@ the panel is hidden. The floating site's back-to-top button is suppressed
 **only on the CV route**, not globally. On narrow screens the closed control
 rail stays to the left of the full-width content.
 
-The public CV uses a section-specific, decorative Font Awesome fallback icon
-on **every entry**, with separate icons in skills and languages. Existing
-institution/issuer logos remain alongside organization labels. The print
-'Show icons' switch hides all record-level and organization-level pictograms.
+The public CV shows icons **only beside organization and institution names**,
+using a verified issuer logo when available and a neutral Font Awesome icon
+otherwise. No icon appears in position titles, credential names, academic
+roles, technical skills or languages. The print 'Show icons' switch hides
+organization logos and their fallback icons.
 
 `_data/cv.yml` renames Online Courses to **Credentials** and mirrors the
 **featured** order of `_data/credentials.yml`: first the ten completed
@@ -377,7 +378,17 @@ CV, alongside their existing portfolio and PDF links.
 
 Validation: check initial collapsed desktop and mobile layouts, mouse/keyboard
 chevron toggle, tiny print icon, single-column full-width CV, the absence of
-floating back-to-top on the CV only, all-entry icons and their show/hide
+floating back-to-top on the CV only, organization-only logo/fallback icons and their show/hide
 toggle, credential order/URLs/count, both research statuses, and HTML/PDF
 rendering. Browser visual comparison remains separate from CI when the site's
 historical visual baseline is unavailable.
+
+## Organization icons only (2026-10-28)
+
+The owner clarified that icons belong solely to organization and institution
+labels. Remove the previously introduced category pictograms before position
+titles, course names, technical-skill fields and languages, as well as the
+small external-link icon in entry titles. Preserve actual links, the verified
+organization logo registry, fallback icons, and the user-selectable Show icons
+switch. UI control icons (chevron and print) are distinct interface affordances
+and remain.
