@@ -446,6 +446,14 @@ if (exists("_pages/cv.md")) {
     ["maxcut-sdp-eva-clustering-tutorial", "From Max-Cut to Semidefinite Programming", "Research Tutorial"],
   ];
   const allScreenshotSlugs = ["smoothness-integrated-trend-distances", ...newResearchPages.map(([slug]) => slug)];
+  const pdfFilenameBySlug = {
+    "smoothness-integrated-trend-distances": "EspinoMontelongo-2026-Trend_Distances.pdf",
+    "dynamic-forecast-optimal-smoothness": "EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf",
+    "smoothness-indexed-pls-python": "EspinoMontelongo-2026-PLS_Python.pdf",
+    "posterior-integration-volatility-wti-asian-options": "EspinoMontelongo-2026-WTI_Asian_Options.pdf",
+    "componentwise-knn-isomap-lecture": "EspinoMontelongo-2026-Componentwise_Isomap.pdf",
+    "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
+  };
   const figureSourcePages = {
     "smoothness-integrated-trend-distances": 4,
     "dynamic-forecast-optimal-smoothness": 10,
@@ -461,6 +469,20 @@ if (exists("_pages/cv.md")) {
     if (!frontMatterMatch || frontMatterMatch[1].includes("\\ndetail_image:") ||
         frontMatterMatch[1].includes("\\ndetail_image_alt:")) {
       failures.push("Paper metadata must have valid front-matter line breaks, not literal backslash-n text: " + slug);
+    }
+    const file = pdfFilenameBySlug[slug];
+    const pdfPath = "papers/" + file;
+    if (!exists(pdfPath)) {
+      failures.push("Named PDF source missing: " + pdfPath);
+    } else {
+      const pdf = fs.readFileSync(path.join(root, pdfPath));
+      if (pdf.length < 10000 || pdf.toString("ascii", 0, 5) !== "%PDF-") {
+        failures.push("Invalid named PDF: " + pdfPath);
+      }
+    }
+    if (!pageSource.includes("pdf: /papers/" + file) ||
+        !researchGroup.includes("https://heri-espino.github.io/papers/" + file)) {
+      failures.push("Paper and CV must both link the standardized PDF: " + slug);
     }
     const imagePrefix = "/assets/img/portfolio/pdf-page-shots/" + slug;
     if (pageSource.includes("featured: true") ||
