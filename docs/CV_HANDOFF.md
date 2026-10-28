@@ -659,3 +659,33 @@ and could compromise anonymity for any double-blind review. Do not
 use the public copy as an anonymous journal submission or mistake
 public availability for submission, acceptance, or peer review.
 This section supersedes earlier notes saying the PDFs were not hosted.
+
+## Harvard experience heading visual hierarchy (2026-10-28)
+
+The Harvard-inspired CV template now follows the owner's uploaded example
+without changing structured CV records or other templates. For each
+event-based entry, `_sass/_cv.scss` orders the heading visually as:
+
+```text
+Organization (and its existing logo)         City, State
+Role · Entry title                           Month Year — Month Year
+Optional research context / source links
+— Description or achievement
+```
+
+The organization and role/title are left aligned; the optional location and
+date are right aligned. The date is displayed **below** the location even
+though their existing Liquid DOM order is date-first. This visual ordering
+is limited to `data-cv-template="harvard"`, including the browser print and
+paginated paper previews. Where an organization is not applicable, an honest
+research context occupies the top-left line; no fictitious institution or
+logo is introduced. A genuinely absent city is left blank (never invented).
+
+The display preserves named organization logos, link destinations, title
+information, the separate font settings, and the original optional
+description lists. Em dashes remain the default marker, with bullets/no
+markers available through the shared settings menu. All entries remain
+single-column; the two-column structure applies **only to their heading**.
+Narrow mobile screens use constrained right-column widths rather than hiding
+city or dates. All other templates retain their original heading order.
+Test checks are in `test/style_contract.js`.
