@@ -2053,3 +2053,104 @@
     break-inside: avoid;
   }
 }
+
+
+/* Harvard-inspired four-corner experience header.
+   Left:  organization (logo included), role/title.
+   Right: city/state, then dates.
+   Keep the actual Jekyll data and one-column entry flow; reorder only
+   header presentation, never descriptions or source links. */
+.cv-page[data-cv-template="harvard"] .cv-entry-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
+  column-gap: 1.15rem;
+  align-items: start;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry-heading > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+/* Institutional logo stays directly beside the institutional name. */
+.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-organization {
+  order: -2;
+  margin: 0;
+  color: var(--global-text-color);
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry-heading h3 {
+  order: -1;
+  margin: 0.12rem 0 0;
+  font-weight: 680;
+  line-height: 1.3;
+}
+
+/* For independent research records a factual context replaces the
+   missing institution, but it never inherits an institutional logo. */
+.cv-page[data-cv-template="harvard"] .cv-entry-heading > div:not(:has(.cv-organization)) > .cv-context {
+  order: -2;
+  margin: 0;
+  font-weight: 650;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  max-width: min(38vw, 19rem);
+  min-width: 0;
+  margin: 0;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta .cv-location {
+  order: -2;
+  font-weight: 650;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta .cv-date {
+  order: -1;
+  font-weight: 500;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta .cv-credential {
+  order: 0;
+}
+
+/* On narrow screens retain the two-corner alignment while permitting
+   date wrapping; do not crop long cities or institution names. */
+@media screen and (max-width: 560px) {
+  .cv-page[data-cv-template="harvard"] .cv-entry-heading {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 39%);
+    column-gap: 0.5rem;
+  }
+
+  .cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta {
+    max-width: none;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Browser printing and the measured paper preview share the same header
+   structure. Other CV templates retain their original order/layout. */
+@media print {
+  .cv-page[data-cv-template="harvard"] .cv-entry-heading {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
+    column-gap: 8pt;
+    break-inside: avoid;
+  }
+
+  .cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta {
+    text-align: right !important;
+    align-items: flex-end;
+    max-width: 36%;
+  }
+}
