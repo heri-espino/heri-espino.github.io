@@ -1112,7 +1112,7 @@
 }
 
 @media screen {
-  .cv-page[data-cv-preview="paper"] #cv-document {
+  .cv-page[data-cv-paginated="true"][data-cv-preview="paper"] #cv-document {
     display: none !important;
   }
 
