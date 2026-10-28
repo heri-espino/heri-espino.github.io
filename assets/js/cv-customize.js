@@ -259,7 +259,8 @@
   const syncSectionOrder = () => {
     sectionContainer.querySelectorAll(":scope > .cv-europass-group-heading").forEach((heading) => heading.remove());
     for (const section of orderedSections()) {
-      if (root.dataset.cvTemplate === "europass") {
+      if (root.dataset.cvTemplate === "europass" && controls.order.value === "sections" &&
+          toggles.some((toggle) => toggle.dataset.cvSectionToggle === section.dataset.cvSection && toggle.checked)) {
         const group = europassGroup(section);
         if (group) {
           const heading = document.createElement("h2");
@@ -459,6 +460,10 @@
       const hasChosenEntry = !dated || entries.some((item) => item.section === section && item.included);
       section.hidden = !included(section) || !hasChosenEntry || (order !== "sections" && dated);
     });
+    // Hide optional Europass group headers when their section was excluded.
+    for (const heading of sectionContainer.querySelectorAll(":scope > .cv-europass-group-heading")) {
+      heading.hidden = heading.nextElementSibling?.hidden ?? true;
+    }
 
     if (order === "sections") {
       timeline.hidden = true;
