@@ -702,16 +702,21 @@ if (exists("_pages/cv.md")) {
       !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
     failures.push("The first Research Drafts entry must remain unsubmitted.");
   }
-  // Wide reading should have a cohesive title → institution → links →
-  // description hierarchy. The screenshot-driven fix must not touch the
-  // LaTeX paper density, Harvard layout, or Europass layout.
-  if (!cvStyles.includes("--cv-reading-line-gap: 0.17rem") ||
-      !cvStyles.includes("--cv-reading-description-gap: 0.32rem") ||
+  // Wide reading has one font/size, line-height and vertical gap between
+  // title, organization, links, description, and successive highlights.
+  // The extra-compact print density, Harvard, and Europass remain untouched.
+  if (!cvStyles.includes("--cv-reading-row-gap: 0.24rem") ||
+      !cvStyles.includes("--cv-reading-font-size: 0.96rem") ||
+      !cvStyles.includes("--cv-reading-line-height: 1.36") ||
+      !cvStyles.includes("font-family: var(--cv-font-stack);") ||
+      !cvStyles.includes("font-size: var(--cv-reading-font-size);") ||
+      !cvStyles.includes("gap: var(--cv-reading-row-gap);") ||
+      !cvStyles.includes("margin: var(--cv-reading-row-gap) 0 0;") ||
+      !cvStyles.includes("margin-top: var(--cv-reading-row-gap);") ||
       !cvStyles.includes('data-cv-preview="reading"]:not([data-cv-density="latex"])') ||
       !cvStyles.includes(':not([data-cv-template="harvard"]):not([data-cv-template="europass"])') ||
-      !cvStyles.includes(':is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry)') ||
-      (!cvStyles.includes('.cv-highlights li + li {') || !cvStyles.includes('margin-top: 0.15rem;'))) {
-    failures.push("Wide CV entries must have consistent spacing/hierarchy without changing compact printing or custom template ordering.");
+      !cvStyles.includes(':is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry)')) {
+    failures.push("Wide CV must use a shared font, size and equal gaps without changing print or special layouts.");
   }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
