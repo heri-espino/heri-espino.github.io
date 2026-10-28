@@ -189,5 +189,16 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 
 - **AbaQuant published writing:** The La Catarina 26 Oct 2026 `AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo` article is coauthored by Heriberto Espino Montelongo and Owen Paredes Conde. It belongs in the Papers page's separate **Published Articles & Technical Writing** category (and matching CV section), not in Press & Media, Submitted Manuscripts or Working Drafts. Its page uses `portfolio_type: article` and the owner-supplied local AVIF screenshot. Keep the 3 submitted / 13 drafts counts and 1 published-article count in rendered-page checks. See `docs/CV_HANDOFF.md`.
 
+- All archive search/sort/view menus are **collapsed by default** behind
+  a native `<details>` chevron (`>`) at the top left of each archive.
+  Default view is **List** even without JavaScript (explicit
+  `data-view="list"`), with **Compact list** and **Grid** available in the
+  expanded controls. Applies to Papers, Projects, Notes, Press, and
+  Credentials. Avoid introducing expanded toolbars or reverting to grid
+  on reset. The CV customization controls are a separate component.
+- The Papers archive section order is **Submitted Manuscripts**,
+  **Published Articles & Technical Writing**, **Working Drafts &
+  Ongoing Research** (3 + 1 + 13 existing records). Keep the authorship
+  and review statuses unchanged, and preserve section-local sorting.
 - Europass mode must follow the European Commission CV information architecture: **Work Experience → Education and Training → Personal Skills (mother tongue, other languages, digital skills) → Additional Information**. Preserve all user-selected CV sections, reorder only the Europass presentation, and show the date in a left column with qualification/role/employer to the right. Never fabricate missing CEFR subskill scores or claim the output is an official EU-issued Europass PDF. All sections must appear in the A4/Letter paper preview and browser print, and source YAML stays intact.
 - Harvard paper preview and the real print version must match the requested two-sided heading (organization/name left, city/date right) at *physical page width*, including on narrow browser windows. No excessive viewport-dependent word wrapping. The only left-header control is the settings chevron; do not reintroduce the printer icon. Browser interaction checks are in `test/visual/interactions.spec.js` and static checks in `test/style_contract.js`.

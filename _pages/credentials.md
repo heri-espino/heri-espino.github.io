@@ -30,6 +30,11 @@ nav: false
   </div>
 </div>
 
+<details class="portfolio-display-settings credentials-display-settings">
+  <summary class="portfolio-display-settings-toggle" title="Customize credentials display">
+    <span class="portfolio-display-chevron" aria-hidden="true">&gt;</span>
+    <span class="portfolio-sr-only">Customize credentials display</span>
+  </summary>
 <div class="credentials-tools" role="search" aria-label="Filter credentials">
   <div class="credentials-tool">
     <label for="credential-query">Search by title or institution</label>
@@ -57,11 +62,13 @@ nav: false
     <label for="credential-view">View</label>
     <select id="credential-view">
       <option value="list">List</option>
+      <option value="compact">Compact list</option>
       <option value="grid">Grid</option>
     </select>
   </div>
   <button class="credentials-clear" id="credential-clear" type="button">Reset</button>
 </div>
+</details>
 <p class="credentials-result-count" id="credential-results" role="status" aria-live="polite">
   Showing all {{ credential_total }} records
 </p>

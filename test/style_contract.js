@@ -511,14 +511,56 @@ if (exists("_pages/cv.md")) {
     failures.push("AbaQuant image asset and separate CV technical-writing entry are required.");
   }
   const trendDraft = read("_pages/papers/smoothness-integrated-trend-distances.md");
+  const archiveUI = read("assets/js/portfolio-views.js");
+  const archiveCSS = read("_sass/_portfolio.scss");
+  const credentialsPage = read("_pages/credentials.md");
+  const credentialsJS = read("assets/js/credentials.js");
+  const portfolioArchivePaths = ["_pages/projects.md", "_pages/notes.md", "_pages/press.md"];
+  for (const archivePath of portfolioArchivePaths) {
+    const source = read(archivePath);
+    if (!source.includes('data-portfolio-archive') || !source.includes('data-view="list"')) {
+      failures.push("Portfolio archives must render as lists even before JS initialization: " + archivePath);
+    }
+  }
+  if (!archiveUI.includes('document.createElement("details")') ||
+      !archiveUI.includes('settings.append(summary, controls)') ||
+      !archiveUI.includes('collection.before(settings, status, empty)') ||
+      !archiveUI.includes("portfolio-display-chevron") ||
+      !archiveUI.includes("Compact list") ||
+      !archiveUI.includes('setView("list");') ||
+      !archiveUI.includes('view.value = "list";') ||
+      !archiveCSS.includes('.portfolio-grid[data-view="compact"]') ||
+      !archiveCSS.includes('.portfolio-display-settings[open] .portfolio-display-chevron')) {
+    failures.push("Archive controls must default to hidden chevron settings, list view, and support compact list.");
+  }
+  if (!credentialsPage.includes('<details class="portfolio-display-settings') ||
+      !credentialsPage.includes('<option value="compact">Compact list</option>') ||
+      !credentialsPage.includes('data-view="list"') ||
+      !credentialsJS.includes('view.value = "list"') ||
+      !archiveCSS.includes('.credentials-list[data-view="compact"]')) {
+    failures.push("Credentials must share the collapsed control and compact-list behavior.");
+  }
   const papersArchive = read("_pages/papers.md");
+  if (!papersArchive.includes('data-collection-label="Papers" data-view="list"') ||
+      (papersArchive.match(/data-portfolio-group data-view="list"/g) || []).length !== 3 ||
+      !(
+        papersArchive.indexOf('id="submitted-manuscripts"') <
+        papersArchive.indexOf('id="published-technical-articles"') &&
+        papersArchive.indexOf('id="published-technical-articles"') <
+        papersArchive.indexOf('id="working-drafts"')
+      ) ||
+      !papersArchive.includes("02 / Published writing") ||
+      !papersArchive.includes("03 / In development")) {
+    failures.push("Papers must show Submitted, Published Articles, then Working Drafts, each defaulting to list.");
+  }
+
   const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
   const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Selected Academic Projects:")[0] || "";
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 11 || draftCount !== 8) {
-    failures.push("Research and Research Drafts must preserve all 19 entries (11 research records, 8 drafts/related materials).");
+  if (researchCount !== 11 || draftCount !== 9) {
+    failures.push("Research and Research Drafts must preserve all 20 entries (11 research records, 9 drafts/related materials).");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
