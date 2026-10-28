@@ -208,27 +208,29 @@ cv:
     Research:
       - name: Unit-Region Factorization for Empty-Region Proximity Graphs
         role: "First Author"
-        subtitle: "Unit-Region Proximity Graphs"
+        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
+        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
         date: Jun 2026 — Present
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
         highlights:
-          - Manuscript under review at Discrete Applied Mathematics (LAGOS special issue).
+          - Under review at Elsevier Discrete Applied Mathematics (LAGOS special issue).
           - Proved rigid-motion covariance and scale covariance for Euclidean-definable neighborhood kernels, yielding a dimensionless unit-region factorization.
           - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
           - Implemented Monte Carlo membership checks for equivariance and scaling tests, validating β-skeleton and γ-graph constructions under invariant center-selection rules.
       - name: Volume Constants for Stepping–Stone Empty Regions in Rᵈ
         role: "First Author"
-        subtitle: "Stepping–Stone Empty Regions"
+        subtitle: "Volume Constants for Stepping–Stone Empty Regions in Rᵈ"
+        organization: "Elsevier · Computational Geometry · Under Review"
         date: Jun 2026 — Present
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
         highlights:
-          - Manuscript under revision for Computational Geometry (Elsevier).
+          - Under review at Elsevier Computational Geometry.
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
       - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
@@ -566,156 +568,145 @@ cv:
       - { name: "Visualization & Documents", values: "Matplotlib · Plotly · Seaborn · UMAP · LaTeX/Beamer · Streamlit · Markdown · HTML · Power BI · Quarto · GeoGebra · Desmos" }
       - { name: "Research & Specialized Tools", values: "NetworkX · GeoPandas · Mesa · Solara · Qiskit · NetLogo · QGIS · Mapper · Bloomberg Terminal · IBKR Trader Workstation" }
 
-    Online Courses:
-      - {
-          name: TensorFlow 2 for Deep Learning Specialization,
-          organization: Imperial College London,
-          date: Jul 2026,
-          credential: XCI033EN2OJO,
-          url: "https://www.coursera.org/account/accomplishments/certificate/XCI033EN2OJO",
-        }
-      - {
-          name: Practical Guide to Trading Specialization,
-          organization: Interactive Brokers,
-          date: Jul 2026,
-          credential: 92F6VOZC91R6,
-          url: "https://www.coursera.org/account/accomplishments/certificate/92F6VOZC91R6",
-        }
+    Credentials:
+      - name: "AI in Financial Services: Foundations through Future Trends"
+        role: "Specialization"
+        organization: "Saïd Business School, University of Oxford"
+        date: "Aug 2025"
+        credential: "30UBXTRRBN1F"
+        url: "https://www.coursera.org/account/accomplishments/specialization/30UBXTRRBN1F"
+      - name: "TensorFlow 2 for Deep Learning"
+        role: "Specialization"
+        organization: "Imperial College London"
+        date: "Jul 2026"
+        credential: "69ZAEWKYEL49"
+        url: "https://www.coursera.org/account/accomplishments/specialization/69ZAEWKYEL49"
+      - name: "Explainable AI (XAI)"
+        role: "Specialization"
+        organization: "Duke University"
+        date: "Jan 2026"
+        credential: "YW2PTTQMN0Y1"
+        url: "https://www.coursera.org/account/accomplishments/specialization/YW2PTTQMN0Y1"
+      - name: "Machine Learning for Trading"
+        role: "Specialization"
+        organization: "New York Institute of Finance / Google Cloud"
+        date: "Feb 2026"
+        credential: "DXHSQ1BF8268"
+        url: "https://www.coursera.org/account/accomplishments/specialization/DXHSQ1BF8268"
+      - name: "Machine Learning on Google Cloud"
+        role: "Specialization"
+        organization: "Google Cloud"
+        date: "Dec 2025"
+        credential: "Y09J2GJXOZNE"
+        url: "https://www.coursera.org/account/accomplishments/specialization/Y09J2GJXOZNE"
+      - name: "Generative AI for Software Developers"
+        role: "Specialization"
+        organization: "Microsoft"
+        date: "Aug 2025"
+        credential: "HL4R3K5BLPVL"
+        url: "https://www.coursera.org/account/accomplishments/specialization/HL4R3K5BLPVL"
+      - name: "RAG for Generative AI Applications"
+        role: "Specialization"
+        organization: "IBM"
+        date: "Dec 2025"
+        credential: "0OGJ0RXG21O9"
+        url: "https://www.coursera.org/account/accomplishments/specialization/0OGJ0RXG21O9"
+      - name: "IBM DevOps, Cloud, and Agile Foundations"
+        role: "Specialization"
+        organization: "IBM"
+        date: "Aug 2025"
+        credential: "3HFUXXSZM3D4"
+        url: "https://www.coursera.org/account/accomplishments/specialization/3HFUXXSZM3D4"
+      - name: "Practical Guide to Trading"
+        role: "Specialization"
+        organization: "Interactive Brokers"
+        date: "Jul 2026"
+        credential: "4HVJHN1UW6L8"
+        url: "https://www.coursera.org/account/accomplishments/specialization/4HVJHN1UW6L8"
+      - name: "The Complete Quantum Computing Course for Beginners"
+        role: "Specialization"
+        organization: "Packt"
+        date: "Dec 2025"
+        credential: "JWMR0UQE7WO5"
+        url: "https://www.coursera.org/account/accomplishments/specialization/JWMR0UQE7WO5"
+      - name: "Narrative Economics"
+        role: "Course"
+        organization: "Yale University"
+        date: "Dec 2025"
+        credential: "6A388M507ZQW"
+        url: "https://www.coursera.org/account/accomplishments/verify/6A388M507ZQW"
+      - name: "Introduction to Financial Engineering and Risk Management"
+        role: "Course"
+        organization: "Columbia University"
+        date: "Aug 2025"
+        credential: "X45X58MF1V07"
+        url: "https://www.coursera.org/account/accomplishments/verify/X45X58MF1V07"
       - name: "Introduction to Corporate Finance"
         role: "Course"
         organization: "University of Pennsylvania"
         date: "Jul 2026"
         credential: "VGPY42B2NEB6"
-        url: "https://www.coursera.org/account/accomplishments/certificate/VGPY42B2NEB6"
-        highlights:
-          - "Applied valuation, capital budgeting and cost-of-capital methods."
+        url: "https://www.coursera.org/account/accomplishments/verify/VGPY42B2NEB6"
+      - name: "Philosophy of Science"
+        role: "Course"
+        organization: "University of Pennsylvania"
+        date: "Dec 2025"
+        credential: "S7X46JPJRQ6W"
+        url: "https://www.coursera.org/account/accomplishments/verify/S7X46JPJRQ6W"
+      - name: "Fractals and Scaling"
+        role: "Course"
+        organization: "Santa Fe Institute"
+        date: "Dec 2025"
+        credential: "1150156803"
+        url: "https://www.complexityexplorer.org/courses/187-fractals-and-scaling/certificates/1150156803"
+      - name: "Guided Tour of Machine Learning in Finance"
+        role: "Course"
+        organization: "New York University"
+        date: "Dec 2025"
+        credential: "47O3HLM8BODX"
+        url: "https://www.coursera.org/account/accomplishments/verify/47O3HLM8BODX"
+      - name: "Central Banks and Monetary Policy"
+        role: "Course"
+        organization: "University of Illinois Urbana-Champaign"
+        date: "Feb 2026"
+        credential: "99GAKZMPU0XU"
+        url: "https://www.coursera.org/account/accomplishments/verify/99GAKZMPU0XU"
       - name: "The Art of Storytelling"
         role: "Course"
         organization: "IESE Business School"
         date: "Jul 2026"
         credential: "PZ6TSICQOM97"
-        url: "https://www.coursera.org/account/accomplishments/certificate/PZ6TSICQOM97"
-        highlights:
-          - "Studied structured storytelling for diverse audiences."
-      - {
-          name: Central Banks and Monetary Policy,
-          organization: University of Illinois Urbana-Champaign,
-          date: Feb 2026,
-          credential: 99GAKZMPU0XU,
-          url: "https://www.coursera.org/account/accomplishments/certificate/99GAKZMPU0XU",
-        }
-      - {
-          name: ML for Trading Specialization,
-          organization: New York Institute of Finance,
-          date: Feb 2026,
-          credential: DXHSQ1BF8268,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/DXHSQ1BF8268",
-        }
-      - {
-          name: Explainable AI (XAI) Specialization,
-          organization: Duke University,
-          date: Jan 2026,
-          credential: YW2PTTQMN0Y1,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/YW2PTTQMN0Y1",
-        }
-      - {
-          name: Philosophy of Science,
-          organization: University of Pennsylvania,
-          date: Jan 2026,
-          credential: S7X46JPJRQ6W,
-          url: "https://www.coursera.org/account/accomplishments/certificate/S7X46JPJRQ6W",
-        }
-      - {
-          name: Fractals and Scaling,
-          organization: Santa Fe Institute,
-          date: Dec 2025,
-          credential: "1150156803",
-          url: "https://www.complexityexplorer.org/courses/187-fractals-and-scaling/certificates/1150156803",
-        }
-      - {
-          name: Narrative Economics,
-          organization: Yale University,
-          date: Dec 2025,
-          credential: 6A388M507ZQW,
-          url: "https://www.coursera.org/account/accomplishments/certificate/6A388M507ZQW",
-        }
-      - {
-          name: Machine Learning on Google Cloud Specialization,
-          organization: Google,
-          date: Dec 2025,
-          credential: Y09J2GJXOZNE,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/Y09J2GJXOZNE",
-        }
-      - {
-          name: RAG for Generative AI Applications Specialization,
-          organization: IBM,
-          date: Dec 2025,
-          credential: 0OGJ0RXG21O9,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/0OGJ0RXG21O9",
-        }
-      - {
-          name: ML and RL in Finance Specialization,
-          organization: New York University,
-          date: In progress,
-          credential: 47O3HLM8BODX,
-          url: "https://www.coursera.org/account/accomplishments/certificate/47O3HLM8BODX",
-        }
-      - {
-          name: Bayesian Statistics Specialization,
-          organization: UC Santa Cruz,
-          date: In progress,
-          credential: 4FAE9UY8ZIEJ,
-          url: "https://www.coursera.org/account/accomplishments/certificate/4FAE9UY8ZIEJ",
-        }
-      - {
-          name: Quantum Computing Specialization,
-          organization: Packt,
-          date: Dec 2025,
-          credential: JWMR0UQE7WO5,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/JWMR0UQE7WO5",
-        }
-      - {
-          name: Spoken Language Processing in Python,
-          organization: Data Camp,
-          date: Nov 2025,
-          credential: Statement of accomplishment,
-          url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/fe0968fbf0b0e02fe69c2a46168bde207561edaf",
-        }
-      - {
-          name: Deep Learning with PyTorch,
-          organization: Data Camp,
-          date: Nov 2025,
-          credential: Statement of accomplishment,
-          url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/30e121f2a320b4a1682ccb67a51ab77173042a09",
-        }
-      - {
-          name: AI in Financial Services Specialization,
-          organization: University of Oxford,
-          date: Aug 2025,
-          credential: 30UBXTRRBN1F,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/30UBXTRRBN1F",
-        }
-      - {
-          name: Generative AI for Software Developers Specialization,
-          organization: Microsoft,
-          date: Aug 2025,
-          credential: HL4R3K5BLPVL,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/HL4R3K5BLPVL",
-        }
-      - {
-          name: "DevOps, Cloud, and Agile Foundations Specialization",
-          organization: IBM,
-          date: Aug 2025,
-          credential: 3HFUXXSZM3D4,
-          url: "https://www.coursera.org/account/accomplishments/specialization/certificate/3HFUXXSZM3D4",
-        }
-      - {
-          name: Financial Engineering and Risk Management Specialization,
-          organization: Columbia University,
-          date: In progress,
-          credential: X45X58MF1V07,
-          url: "https://www.coursera.org/account/accomplishments/certificate/X45X58MF1V07",
-        }
+        url: "https://www.coursera.org/account/accomplishments/verify/PZ6TSICQOM97"
+      - name: "Bayesian Statistics: From Concept to Data Analysis"
+        role: "Course"
+        organization: "University of California, Santa Cruz"
+        date: "Dec 2025"
+        credential: "4FAE9UY8ZIEJ"
+        url: "https://www.coursera.org/account/accomplishments/verify/4FAE9UY8ZIEJ"
+      - name: "Intermediate Deep Learning with PyTorch"
+        role: "Course"
+        organization: "DataCamp"
+        date: "Nov 2025"
+        credential: "30e121f2a320b4a1682ccb67a51ab77173042a09"
+        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/30e121f2a320b4a1682ccb67a51ab77173042a09"
+      - name: "Introduction to Deep Learning with PyTorch"
+        role: "Course"
+        organization: "DataCamp"
+        credential: "9c159fb3b2c68ff7af623165fbf22414496b18d7"
+        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/9c159fb3b2c68ff7af623165fbf22414496b18d7"
+      - name: "Spoken Language Processing in Python"
+        role: "Course"
+        organization: "DataCamp"
+        date: "Nov 2025"
+        credential: "fe0968fbf0b0e02fe69c2a46168bde207561edaf"
+        url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/fe0968fbf0b0e02fe69c2a46168bde207561edaf"
+      - name: "GitHub: From Zero to Pull Request"
+        role: "Course"
+        organization: "Pragmatic AI Labs"
+        date: "Jul 2026"
+        credential: "EBDG9WII4BQN"
+        url: "https://www.coursera.org/account/accomplishments/verify/EBDG9WII4BQN"
+
 
     Languages:
       - { name: Spanish, values: Native }
