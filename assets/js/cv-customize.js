@@ -311,6 +311,8 @@
       }
     }
 
+    // Keep the unmodified CV visible without JavaScript or if preview fails.
+    root.dataset.cvPaginated = "true";
     previewHelp.textContent = pageNumber + " approximate " +
       (pageNumber === 1 ? "page" : "pages") + " (" +
       (controls.paper.value === "letter" ? "US Letter" : "A4") +
