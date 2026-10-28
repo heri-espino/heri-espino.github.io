@@ -4,14 +4,16 @@ Audit performed: 2026-10-28. Sources: `_data/cv.yml`, `_data/cv_organization_log
 
 ## Result
 
-There are **83 organization references** across **65 distinct display labels**.
-After mapping Colegio Loyola and BUAP, all named organizations/institutions
-have a logo rule. Four generic placeholders are still unmatched:
+The previous audit recorded **83 organization references** across **65 distinct display labels**.
+Following the library-authorship update, the previously generic software
+categories have been replaced by named project identities. The two remaining
+unmatched generic placeholders are *Research draft* and *Data Scientist*;
+neither should be assigned a fictitious institution.
 
 | Display label | CV entries | Action |
 | --- | ---: | --- |
-| Open-source Python library | 2 | Replace with specific project identity only if authorized: Trend Estimation and AwesomeFigures |
-| Independent research software | 1 | Docling Math: use project artwork only if its identity is verified |
+| Open-source Python library | 0 | Resolved: Trend Estimation and AwesomeFigures now use named project identities and original SVG marks |
+| Independent research software | 0 | Resolved: Docling Math now uses a named project identity and original SVG mark |
 | Research draft | 1 | No institution or publisher is asserted; leave neutral fallback |
 | Data Scientist | 1 | This is a role, not an organization. Do not invent an employer |
 
@@ -31,11 +33,10 @@ image actually loads in a user's browser.
   Aicanstome, CC BY-SA 4.0; no modifications or local redistribution.
   BUAP's own identity manual is at
   `https://comunicacion.buap.mx/sites/default/files/IdentidadGrafica/manual-identidad-buap.pdf`.
-- **Actinver:** replaced the raster favicon with the sharp vector wordmark
-  `https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_de_Actinver.svg`,
-  attributed to Actinver by [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Logo_de_Actinver.svg).
-  Its display is wider than the normal square icon to preserve legibility.
-  This is a trademark used only to identify the organization.
+- **Actinver:** the owner provided the exact preferred square A-dot icon.
+  It is now hosted locally at `/assets/img/cv-organizations/actinver.webp`
+  (128 px optimized for the CV's 16 px appearance), replacing the prior
+  wide Wikimedia wordmark and the earlier low-resolution favicon.
 
 ## Existing matches that still use favicons
 
@@ -85,3 +86,15 @@ vector where possible, and keep `docs/CV_HANDOFF.md` up to date.
   the most specific matching named institution.
 - Placeholder roles and generic software categories should not receive
   invented organizational marks.
+
+## Library branding update (2026-10-28, later revision)
+
+Added original editable SVG icons for **AbaQuant**, **ProximityGraphs**,
+**Trend Estimation**, **AwesomeFigures**, and **Docling Math**. These
+project-logo rules match named library identities in `_data/cv.yml` and
+remain subordinate to the `Show icons` setting. The role fields credit
+authorship/coauthorship, rather than incorrectly labeling self-authored
+packages as third-party contribution work. The uploaded Actinver A-dot
+logo supersedes the earlier source and its wide-wordmark styling.
+Run the audit script to get new counts; previous counts in this document
+are historical snapshots, not current tallies.
