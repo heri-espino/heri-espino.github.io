@@ -599,13 +599,37 @@
   font-weight: 650;
 }
 
+.cv-page .cv-org-symbol {
+  display: inline-flex;
+  width: 1.1em;
+  height: 1.1em;
+  margin-right: 0.4em;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.12em;
+}
+
 .cv-page .cv-org-icon {
   display: inline-block;
-  width: 1.1em;
-  margin-right: 0.4em;
+  width: 100%;
   color: var(--cv-accent);
   font-size: 0.86em;
   text-align: center;
+}
+
+.cv-page .cv-org-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* Preserve Font Awesome fallback if the remote image fails or JS is disabled. */
+.cv-page .cv-org-logo[hidden],
+.cv-page .cv-org-icon[hidden] {
+  display: none !important;
 }
 
 .cv-page .cv-keyword {
@@ -925,7 +949,7 @@
   display: none !important;
 }
 
-.cv-page[data-cv-show-icons="false"] .cv-org-icon,
+.cv-page[data-cv-show-icons="false"] .cv-org-symbol,
 .cv-page[data-cv-show-icons="false"] .cv-link-icon {
   display: none !important;
 }
@@ -1425,5 +1449,138 @@
 
   .cv-page[data-cv-template="europass"] .cv-entry-heading .cv-meta {
     font-size: 8pt;
+  }
+}
+
+
+/* CV settings stay to the left of the paper on wide screens and collapse
+   without hiding the export shortcut. No site-wide navbar changes. */
+@media screen {
+  body:has(.cv-page) .container {
+    width: min(100% - 2rem, 1500px);
+    max-width: 1500px;
+  }
+
+  .cv-page .cv-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 1.35rem;
+  }
+
+  .cv-page .cv-controls-column,
+  .cv-page .cv-preview-column {
+    min-width: 0;
+  }
+
+  .cv-page .cv-controls-toolbar {
+    display: flex;
+    align-items: stretch;
+    gap: 0.55rem;
+    margin-top: 0.85rem;
+  }
+
+  .cv-page .cv-controls-toolbar button {
+    flex: 1;
+    min-height: 2.6rem;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--cv-accent);
+    border-radius: 0.35rem;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .cv-page .cv-controls-toolbar .cv-panel-toggle {
+    color: var(--global-text-color);
+    background: var(--global-bg-color);
+  }
+
+  .cv-page .cv-controls-toolbar .cv-primary-action {
+    color: #fff;
+    background: var(--cv-accent);
+  }
+
+  .cv-page .cv-controls-toolbar button:focus-visible {
+    outline: 3px solid var(--portfolio-focus-color, #326c9c);
+    outline-offset: 3px;
+  }
+
+  .cv-page .cv-tools {
+    margin-top: 0.65rem;
+    padding: 0.9rem;
+  }
+
+  .cv-page .cv-tools-grid,
+  .cv-page .cv-section-picker-grid,
+  .cv-page .cv-print-options-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cv-page .cv-tools-heading {
+    display: block;
+  }
+
+  .cv-page .cv-tools-heading .cv-tools-note {
+    display: block;
+    margin-top: 0.45rem;
+  }
+
+  .cv-page .cv-paged-preview {
+    margin-top: 0.85rem;
+  }
+
+  .cv-page .cv-document {
+    min-width: 0;
+  }
+
+  @media (min-width: 1050px) {
+    .cv-page .cv-workspace {
+      grid-template-columns: 288px minmax(0, 1fr);
+      gap: 1.8rem;
+    }
+
+    .cv-page[data-cv-tools="closed"] .cv-workspace {
+      grid-template-columns: 176px minmax(0, 1fr);
+    }
+
+    .cv-page .cv-controls-column {
+      position: sticky;
+      top: 5.5rem;
+      max-height: calc(100vh - 6.5rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      overscroll-behavior: contain;
+    }
+
+    .cv-page .cv-controls-toolbar {
+      flex-direction: column;
+      margin-top: 0;
+    }
+
+    .cv-page .cv-controls-toolbar button {
+      flex: none;
+    }
+  }
+
+  @media (max-width: 1049px) {
+    .cv-page .cv-workspace {
+      gap: 0.8rem;
+    }
+  }
+}
+
+@media print {
+  .cv-page .cv-workspace,
+  .cv-page .cv-preview-column {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .cv-page .cv-controls-column,
+  .cv-page .cv-controls-toolbar,
+  .cv-page #cv-settings-panel {
+    display: none !important;
   }
 }
