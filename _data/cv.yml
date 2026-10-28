@@ -206,6 +206,19 @@ cv:
           - "Proof-based undergraduate mathematical problem solving."
 
     Research:
+      - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
+        role: "Author · Working Draft (Not Submitted)"
+        subtitle: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
+        date: "Oct 2026 — Present"
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/smoothness-integrated-trend-distances.html" }
+          - { label: Related research code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Working research note; not submitted to a journal."
+          - "Defined Hilbert-space distances across normalized smoothness-indexed PLS trend families with nonzero finite-difference reference drift."
+          - "Derived shared/unequal-drift spectral formulas, signed level-versus-shape decompositions, and rolling smoothness–time dissimilarity measures."
+          - "Proposed agricultural index monitoring applications while identifying retrospective-data leakage and validation requirements."
       - name: Unit-Region Factorization for Empty-Region Proximity Graphs
         role: "First Author"
         subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"

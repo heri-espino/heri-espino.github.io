@@ -8,14 +8,30 @@ nav_order: 2
 ---
 
 {% assign items = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
+{% assign featured_draft = items | where: "permalink", "/papers/smoothness-integrated-trend-distances.html" | first %}
 {% assign submitted_papers = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
-{% assign other_papers = items | where_exp: "item", "item.url != '/papers/unit-region-factorization.html' and item.url != '/papers/stepping-stone.html' and item.url != '/papers/activation-patching-effects-add-up.html'" %}
+{% assign other_papers = items | where_exp: "item", "item.url != '/papers/unit-region-factorization.html' and item.url != '/papers/stepping-stone.html' and item.url != '/papers/activation-patching-effects-add-up.html' and item.url != '/papers/smoothness-integrated-trend-distances.html'" %}
 
 <p class="portfolio-section-intro papers-archive-intro">
   Research manuscripts are organized by submission stage. Current review and development details are shown on each record.
 </p>
 
 <div class="papers-archive" data-portfolio-archive data-collection-label="Papers">
+  {% if featured_draft %}
+  <section class="papers-archive-section papers-archive-section--featured" id="featured-working-draft" data-portfolio-section aria-labelledby="featured-working-draft-title">
+    <div class="papers-archive-heading">
+      <div>
+        <p class="portfolio-kicker">Featured / Working Draft</p>
+        <h2 id="featured-working-draft-title">Featured Research Draft</h2>
+        <p>Selected work in development. This manuscript has <strong>not been submitted</strong> to a journal.</p>
+      </div>
+    </div>
+    <div class="portfolio-grid" data-portfolio-group>
+      {% include portfolio/card.liquid item=featured_draft %}
+    </div>
+  </section>
+  {% endif %}
+
   <section class="papers-archive-section" id="submitted-manuscripts" data-portfolio-section aria-labelledby="submitted-manuscripts-title">
     <div class="papers-archive-heading">
       <div>
