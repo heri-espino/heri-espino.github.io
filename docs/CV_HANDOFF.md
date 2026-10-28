@@ -476,3 +476,25 @@ descriptions but **no fabricated Open PDF button**. If the PDFs are added later,
 commit exact PDF bytes to the repository and update the portfolio pages and
 CV together. The blinded WTI source warrants special care before public
 PDF distribution because exposing it could compromise blind review.
+
+## Organization logo audit and upgrades (2026-10-28)
+
+Audited every `organization` and `institution` in `_data/cv.yml`
+against `_data/cv_organization_logos.yml` and the credential issuer data.
+The detailed reproducible audit is in `docs/CV_LOGO_AUDIT.md`;
+run `node scripts/audit-cv-organization-logos.mjs` for updated counts.
+
+- Added the owner's uploaded Colegio Loyola emblem as a local WebP.
+- Added published BUAP vector artwork for the named BUAP course/school.
+  Source and CC BY-SA attribution are recorded in the audit.
+- Replaced the low-resolution Actinver Google favicon with an original
+  vector wordmark attributed to Actinver by Wikimedia Commons. It renders
+  at its natural wide aspect ratio instead of being squeezed to a square.
+- All named institutions/employers in the current CV now match some
+  logo rule. Generic labels for software, independent research, research
+  draft and a volunteer role deliberately retain neutral fallback icons.
+- Many existing recognizable universities still use `google.com/s2`
+  favicons. These are *mapped* but not verified high-resolution logo art;
+  see the audit for the list and future source-quality improvement priorities.
+- Preserve organization-only icons; do not put logos ahead of positions,
+  languages, skills or manuscript titles. Verify screen and print views.

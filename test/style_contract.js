@@ -279,6 +279,24 @@ if (exists("_pages/cv.md")) {
       !cvRenderer.includes("cv_org_logo | relative_url")) {
     failures.push("UDLAP academic versus nonacademic logo selection is missing.");
   }
+  if (!exists("assets/img/cv-organizations/colegio-loyola.webp") ||
+      !logoSource.includes('- match: "colegio loyola"') ||
+      !logoSource.includes('logo: "/assets/img/cv-organizations/colegio-loyola.webp"')) {
+    failures.push("The supplied Colegio Loyola emblem must be hosted locally and mapped.");
+  }
+  if (!logoSource.includes('- match: "benemérita universidad autónoma de puebla"') ||
+      !logoSource.includes('Logo_de_la_BUAP.svg')) {
+    failures.push("BUAP must have a recognizable vector logo, not an unmatched institution.");
+  }
+  if (!logoSource.includes('Logo_de_Actinver.svg') ||
+      logoSource.includes('domain=actinver.com&sz=128') ||
+      !cvStyles.includes('Logo_de_Actinver.svg')) {
+    failures.push("Actinver must use a sharp, legible SVG instead of the small favicon.");
+  }
+  if (!exists("scripts/audit-cv-organization-logos.mjs") ||
+      !exists("docs/CV_LOGO_AUDIT.md")) {
+    failures.push("The organization-logo audit and reproducible checker must remain available.");
+  }
   if (!cvRenderer.includes('class="cv-org-symbol"') ||
       !cvRenderer.includes('cv-org-icon"') ||
       !cvRenderer.includes('class="cv-org-logo"') ||
