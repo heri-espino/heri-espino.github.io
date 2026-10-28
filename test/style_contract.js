@@ -121,6 +121,46 @@ if (!read("purgecss.config.js").includes("greedy: [/cv-/]")) {
   failures.push("PurgeCSS must retain dynamic CV template and preview selectors.");
 }
 
+// Every named CV organization should have a logo unless it lacks a reliably
+// attributable public mark. Reuse the pre-existing certificate issuer source.
+if (exists("_data/cv_organization_logos.yml")) {
+  const logos = read("_data/cv_organization_logos.yml");
+  const existingIssuers = read("_data/credential_issuers.yml");
+  const cvSource = read("_data/cv.yml");
+  const logoRules = [...logos.matchAll(/^- match: "([^"]+)"\s*$/gm)].map((result) => result[1]);
+  if (new Set(logoRules).size !== logoRules.length) {
+    failures.push("CV organization logo registry has duplicate match rules.");
+  }
+  const issuerKeys = new Set([...existingIssuers.matchAll(/^([a-z0-9-]+):\s*$/gm)].map((result) => result[1]));
+  for (const result of logos.matchAll(/^  issuer_key: ([a-z0-9-]+)\s*$/gm)) {
+    if (!issuerKeys.has(result[1])) {
+      failures.push("CV organization logo registry references missing issuer key " + result[1]);
+    }
+  }
+  const unbranded = new Set([
+    "Data Scientist", "Independent research software", "Kaxa Nuk",
+    "Open-source Python library", "Paletas Loreto", "Research draft"
+  ]);
+  const sourceNames = [...cvSource.matchAll(/\b(?:organization|institution):\s*(?:"([^"\n]+)"|([^,\n}]+))/gm)]
+    .map((match) => (match[1] || match[2]).trim());
+  for (const name of new Set(sourceNames)) {
+    if (!unbranded.has(name) && !logoRules.some((part) => name.toLowerCase().includes(part))) {
+      failures.push("Missing CV organization logo mapping for " + name);
+    }
+  }
+  if (!read("_includes/cv/render.liquid").includes("site.data.cv_organization_logos")) {
+    failures.push("CV must resolve its organization logo registry.");
+  }
+  if (!read("assets/js/cv-customize.js").includes('image.addEventListener("load"')) {
+    failures.push("CV must retain failed-image fallback logic.");
+  }
+  if (!read("_sass/_cv.scss").includes('data-cv-show-icons="false"] .cv-org-symbol')) {
+    failures.push("CV print icon toggle must hide organization logos.");
+  }
+} else {
+  failures.push("The public CV must include the organization logo registry.");
+}
+
 // CV must remain present, keyboard-accessible and printable, without a new
 // plugin-owned theme override or a server-side PDF compilation dependency.
 if (exists("_pages/cv.md")) {
