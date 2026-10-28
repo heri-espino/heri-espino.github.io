@@ -1845,3 +1845,46 @@
     font-size: 7pt;
   }
 }
+
+
+/* Respect the user's print-text-size control even in extra-compact mode.
+   The supplied LaTeX sizes describe the regular preset, not a forced size. */
+@media print {
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-document {
+    font-size: 6.7pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-document {
+    font-size: 9pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-entry h3,
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-compact-entry h3 {
+    font-size: 7pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-entry h3,
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-compact-entry h3 {
+    font-size: 9.3pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-highlights {
+    font-size: 6pt !important;
+    line-height: 7.2pt;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-highlights {
+    font-size: 8pt !important;
+    line-height: 9.8pt;
+  }
+}
+
+@media screen {
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-preview-sheet {
+    font-size: 8pt;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-preview-sheet {
+    font-size: 10.5pt;
+  }
+}
