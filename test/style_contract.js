@@ -482,7 +482,9 @@ if (exists("_pages/cv.md")) {
     { name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs", month: "Oct 2026", page: "_pages/papers/activation-patching-effects-add-up.md" }
   ];
   for (const { name, month, page } of manuscriptMonths) {
-    const position = submittedResearchGroup.indexOf("      - name: " + name);
+    const positionUnquoted = submittedResearchGroup.indexOf("      - name: " + name);
+    const positionQuoted = submittedResearchGroup.indexOf('      - name: "' + name + '"');
+    const position = positionUnquoted >= 0 ? positionUnquoted : positionQuoted;
     const end = submittedResearchGroup.indexOf("\n      - name:", position + 1);
     const block = submittedResearchGroup.slice(position, end < 0 ? undefined : end);
     if (position < 0 || !block.includes("date: " + month) ||
