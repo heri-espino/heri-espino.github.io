@@ -229,7 +229,7 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }
-  if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("paper")')) {
+  if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("reading")')) {
     failures.push("CV custom template color or preview handlers are missing.");
   }
   if (/column-count:\\s*2\\b/.test(cvStyles)) {
