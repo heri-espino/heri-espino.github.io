@@ -12,7 +12,7 @@ User-selected options (client-side and independent of Jekyll):
 - Grouped by existing YAML section order (default).
 - Global chronological order, newest/oldest first, with source section labels.
 - Show/hide any CV section for both preview and print.
-- Personal navy two-column print design or Harvard-inspired classic one-column design.
+- Personal navy single-column print design or Harvard-inspired classic single-column design.
 - Template-default, Arial, Georgia, Times New Roman or Garamond-family typography.
 - A4 or US Letter and balanced/compact spacing.
 - Browser Print / Save as PDF; Reset returns the original layout.
@@ -92,3 +92,48 @@ source for status updates. Review changes to publication status before deploying
 
 Only PR #13 was open when this update was made; this PR contains the cumulative
 customizable-CV work. Source changes are committed on the feature branch.
+
+## Single-column typography update
+
+Both browser-print templates and the on-screen section grids now use one
+content column. Entries retain dates right-aligned where space permits. Bold
+role/title headings improve scanning; `cv-keyword` spans apply semantic
+semibold emphasis to selected technical phrases in bullets without modifying
+the YAML text. Academic and company-type pictograms appear before organization
+names, but are not official brand logos and are hidden from assistive tech.
+
+The owner also received a separate single-column XeLaTeX PDF and zipped
+LaTeX sources in the conversation; the underlying personal LaTeX sources
+remain outside the public website repository. The PDF has seven A4 pages
+because source entries were preserved rather than abridged.
+
+Regression: inspect on-screen section cards, print to A4/Letter with both
+templates, verify zero multi-column flows, keyword weights, and meaningful
+institution icon fallbacks. Manual approval is required before merging this
+follow-up PR.
+
+## Live preview, expanded templates, and linked items
+
+The CV customizer now offers five single-column variants: Personal navy,
+Harvard-inspired classic (unofficial), Modern minimal, Research editorial,
+and Compact professional. Color choices are template default, velvet blue,
+sapphire, teal, forest, burgundy, graphite, or a user-picked hex color.
+All controls feed one CSS-scoped preview and browser-print layout.
+
+The default view is a scrollable paper-width **live preview** (A4 or Letter);
+the full-width view toggle is for easier screen reading. The simulated page
+width cannot predict exact browser pagination; **Print / Save as PDF** opens
+the browser's accurate paginated preview before output.
+
+CV title links resolve to `entry.url` or, if absent, `entry.links[0].url`.
+Original resource buttons remain. Institution and employer names are linked
+only when public, sourced `institution_url` or `organization_url` values
+are present in `_data/cv.yml`. No invented certificates or event proof.
+Printed PDF text retains clickable links; optional "Show full resource URLs"
+prints the raw URLs for records with explicit resource links. Unverified
+records remain plain text until a verified link is supplied.
+
+Check contrast for custom user-selected colors and mobile behavior. Institutional
+icons remain generic category pictograms, not official brands. Settings are
+ephemeral to the current page and are reset by Reset options. Print settings
+never modify the content YAML or private uploaded XeLaTeX sources.

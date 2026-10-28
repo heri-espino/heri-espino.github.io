@@ -11,12 +11,17 @@
     font: document.getElementById("cv-font"),
     paper: document.getElementById("cv-paper"),
     density: document.getElementById("cv-density"),
+    palette: document.getElementById("cv-palette"),
+    accent: document.getElementById("cv-custom-accent"),
+    printUrls: document.getElementById("cv-print-urls"),
   };
   const timeline = document.getElementById("cv-timeline");
   const timelineItems = document.getElementById("cv-timeline-items");
   const status = document.getElementById("cv-status");
   const printButton = document.getElementById("cv-print");
   const resetButton = document.getElementById("cv-reset");
+  const previewButton = document.getElementById("cv-preview");
+  const previewHelp = document.getElementById("cv-preview-help");
   const toggles = Array.from(root.querySelectorAll("[data-cv-section-toggle]"));
   const sections = Array.from(root.querySelectorAll(".cv-content [data-cv-section]"));
 
@@ -26,7 +31,9 @@
     !timelineItems ||
     !status ||
     !printButton ||
-    !resetButton
+    !resetButton ||
+    !previewButton ||
+    !previewHelp
   ) return;
 
   // Sort by the first calendar date, not by the present-day end of an ongoing role.
@@ -43,6 +50,42 @@
     return year ? Date.UTC(Number(year[1]), 0, 1) : null;
   };
 
+  // Semibold emphasis of technical terminology without changing source data.
+  // Operate on text nodes only: never interpolate arbitrary content into HTML.
+  const keywords = [
+    "GitHub Actions", "Springer Nature", "SN Computer Science", "activation patching",
+    "logit additivity", "Monte Carlo", "mathematical OCR", "Deep Learning",
+    "Machine Learning", "Bayesian", "Python", "PyTorch", "TensorFlow",
+    "Matplotlib", "Docling", "LaTeX", "NumPy", "SciPy", "Ruff",
+    "pytest", "CatBoost", "XGBoost", "PostgreSQL", "Docker",
+    "Airflow", "Streamlit", "Qiskit", "optimization", "stochastic"
+  ];
+  const escaped = keywords.map((word) => word.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"));
+  const keywordPattern = new RegExp("\\b(" + escaped.join("|") + ")\\b", "gi");
+  root.querySelectorAll(".cv-highlights li, .cv-skills dd").forEach((target) => {
+    const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      const source = node.nodeValue || "";
+      keywordPattern.lastIndex = 0;
+      if (!keywordPattern.test(source)) return;
+      keywordPattern.lastIndex = 0;
+      const fragment = document.createDocumentFragment();
+      let offset = 0;
+      for (const match of source.matchAll(keywordPattern)) {
+        if (match.index > offset) fragment.appendChild(document.createTextNode(source.slice(offset, match.index)));
+        const element = document.createElement("span");
+        element.className = "cv-keyword";
+        element.textContent = match[0];
+        fragment.appendChild(element);
+        offset = match.index + match[0].length;
+      }
+      if (offset < source.length) fragment.appendChild(document.createTextNode(source.slice(offset)));
+      node.replaceWith(fragment);
+    });
+  });
+
   const entries = sections.flatMap((section, sectionIndex) =>
     Array.from(section.querySelectorAll("[data-cv-record]")).map((element, index) => ({
       element,
@@ -55,6 +98,42 @@
 
   // Only whitelisted values can alter @page. Never insert arbitrary user strings into CSS.
   const pageSizes = { a4: "A4", letter: "letter" };
+  const paletteColors = {
+    velvet: "#00166c",
+    sapphire: "#123b63",
+    teal: "#00686d",
+    forest: "#225940",
+    burgundy: "#7b2d42",
+    graphite: "#363d48",
+  };
+  const templateDefaults = {
+    personal: "#00166c",
+    harvard: "#252525",
+    minimal: "#123b63",
+    editorial: "#31536e",
+    professional: "#27374d",
+  };
+  // The paper preview must reveal sections that browser printing expands.
+  // Restore a reader's disclosure choices upon returning to full-width mode.
+  const paperDisclosureState = new Map();
+  const setPreview = (mode) => {
+    root.dataset.cvPreview = mode;
+    const paper = mode === "paper";
+    if (paper) {
+      root.querySelectorAll("details.cv-details").forEach((detail) => {
+        if (!paperDisclosureState.has(detail)) paperDisclosureState.set(detail, detail.open);
+        detail.open = true;
+      });
+    } else {
+      paperDisclosureState.forEach((wasOpen, detail) => { detail.open = wasOpen; });
+      paperDisclosureState.clear();
+    }
+    previewButton.textContent = paper ? "Full-width view" : "Paper preview";
+    previewButton.setAttribute("aria-pressed", String(paper));
+    previewHelp.textContent = paper
+      ? "Live paper-width preview; page breaks are approximated. Print / Save as PDF opens the exact paginated preview."
+      : "Full-width reading view; choose Paper preview to see the print-style page.";
+  };
   const pageStyle = document.createElement("style");
   pageStyle.id = "cv-page-size";
   document.head.appendChild(pageStyle);
@@ -69,6 +148,15 @@
     root.dataset.cvTemplate = controls.template.value;
     root.dataset.cvFont = controls.font.value;
     root.dataset.cvDensity = controls.density.value;
+    root.dataset.cvPaper = controls.paper.value;
+    root.dataset.cvShowUrls = controls.printUrls.checked ? "true" : "false";
+    const selectedPalette = controls.palette.value;
+    controls.accent.disabled = selectedPalette !== "custom";
+    const color = selectedPalette === "custom"
+      ? controls.accent.value
+      : paletteColors[selectedPalette] || templateDefaults[controls.template.value] || paletteColors.velvet;
+    // Strictly validate hex color; do not interpolate arbitrary strings into CSS.
+    root.style.setProperty("--cv-accent", /^#[0-9a-f]{6}$/i.test(color) ? color : paletteColors.velvet);
     pageStyle.textContent = "@page { size: " + (pageSizes[controls.paper.value] || "A4") + "; margin: 13mm; }";
 
     // Keep undated sections in their authored place after the dynamic timeline.
@@ -111,6 +199,11 @@
 
   Object.values(controls).forEach((control) => control.addEventListener("change", render));
   toggles.forEach((toggle) => toggle.addEventListener("change", render));
+  controls.accent.addEventListener("input", render);
+  previewButton.addEventListener("click", () => {
+    setPreview(root.dataset.cvPreview === "paper" ? "reading" : "paper");
+    document.getElementById("cv-document").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
   resetButton.addEventListener("click", () => {
     controls.order.value = "sections";
@@ -118,6 +211,10 @@
     controls.font.value = "site";
     controls.paper.value = "a4";
     controls.density.value = "balanced";
+    controls.palette.value = "default";
+    controls.accent.value = "#00166c";
+    controls.printUrls.checked = false;
+    setPreview("paper");
     toggles.forEach((toggle) => { toggle.checked = true; });
     render();
   });
@@ -139,5 +236,6 @@
     previouslyOpen = [];
   });
 
+  setPreview("paper");
   render();
 })();

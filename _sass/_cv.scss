@@ -104,7 +104,7 @@
 
 .cv-compact-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0 1.5rem;
 }
 
@@ -547,7 +547,7 @@
   .cv-page[data-cv-template="personal"] .cv-content,
   .cv-page[data-cv-template="personal"] #cv-timeline-items {
     display: block;
-    column-count: 2;
+    column-count: 1;
     column-gap: 9mm;
   }
 
@@ -576,5 +576,346 @@
   .cv-page .cv-details-body,
   .cv-page .cv-details[open] > .cv-details-body {
     display: block;
+  }
+}
+
+/* Consistent single-column CV, stronger typographic hierarchy. */
+.cv-page .cv-content {
+  gap: 1.85rem;
+}
+
+.cv-page .cv-compact-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.cv-page .cv-entry h3,
+.cv-page .cv-compact-entry h3 {
+  font-weight: 750;
+  color: var(--global-text-color);
+}
+
+.cv-page .cv-organization {
+  font-weight: 650;
+}
+
+.cv-page .cv-org-icon {
+  display: inline-block;
+  width: 1.1em;
+  margin-right: 0.4em;
+  color: var(--cv-accent);
+  font-size: 0.86em;
+  text-align: center;
+}
+
+.cv-page .cv-keyword {
+  font-weight: 600;
+  color: var(--global-text-color);
+}
+
+.cv-page .cv-section > h2,
+.cv-page .cv-details summary {
+  font-weight: 750;
+}
+
+.cv-page .cv-timeline .cv-entry-list {
+  display: block;
+}
+
+.cv-page .cv-timeline [data-cv-record] {
+  margin-bottom: 0.9rem;
+}
+
+@media print {
+  .cv-page .cv-content,
+  .cv-page #cv-timeline-items,
+  .cv-page[data-cv-template="personal"] .cv-content,
+  .cv-page[data-cv-template="personal"] #cv-timeline-items,
+  .cv-page[data-cv-template="harvard"] .cv-content,
+  .cv-page[data-cv-template="harvard"] #cv-timeline-items {
+    display: block !important;
+    column-count: 1 !important;
+    columns: auto !important;
+  }
+
+  .cv-page .cv-compact-grid {
+    display: block !important;
+  }
+
+  .cv-page .cv-keyword {
+    font-weight: 600 !important;
+    color: #222 !important;
+  }
+
+  .cv-page .cv-org-icon {
+    color: #00104c !important;
+  }
+
+  .cv-page .cv-entry,
+  .cv-page .cv-compact-entry {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* Multiple single-column academic designs: templates vary decoration, not content. */
+.cv-page {
+  --cv-paper-width: 210mm;
+}
+
+.cv-page[data-cv-paper="letter"] {
+  --cv-paper-width: 215.9mm;
+}
+
+.cv-page .cv-primary-link {
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+}
+
+.cv-page .cv-primary-link:hover,
+.cv-page .cv-organization a:hover {
+  text-decoration: underline;
+}
+
+.cv-page .cv-link-icon {
+  display: inline-block;
+  margin-left: 0.42em;
+  font-size: 0.62em;
+  color: var(--cv-accent);
+  vertical-align: baseline;
+}
+
+.cv-page .cv-organization a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--cv-accent) 35%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.cv-page .cv-intro .post-title,
+.cv-page .cv-section > h2,
+.cv-page .cv-details summary,
+.cv-page .cv-timeline h2 {
+  color: var(--global-text-color);
+}
+
+.cv-page .cv-section > h2,
+.cv-page .cv-details summary,
+.cv-page .cv-timeline h2 {
+  border-bottom-color: var(--cv-accent);
+}
+
+.cv-page .cv-contact a,
+.cv-page .cv-links a {
+  overflow-wrap: anywhere;
+}
+
+.cv-page .cv-primary-link:focus-visible,
+.cv-page .cv-organization a:focus-visible {
+  outline: 2px solid var(--cv-accent);
+  outline-offset: 2px;
+}
+
+.cv-page[data-cv-template="minimal"] .cv-intro {
+  border-bottom: 1px solid var(--cv-accent);
+}
+
+.cv-page[data-cv-template="minimal"] .cv-eyebrow {
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.cv-page[data-cv-template="minimal"] .cv-section > h2,
+.cv-page[data-cv-template="minimal"] .cv-details summary {
+  border-bottom: 1px solid var(--cv-border);
+  font-size: 1.12rem;
+  letter-spacing: 0;
+}
+
+.cv-page[data-cv-template="minimal"] .cv-entry {
+  border-bottom: 0;
+}
+
+.cv-page[data-cv-template="editorial"] .cv-intro h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.45rem;
+  letter-spacing: -0.025em;
+}
+
+.cv-page[data-cv-template="editorial"] .cv-section > h2,
+.cv-page[data-cv-template="editorial"] .cv-details summary {
+  padding-left: 0.75rem;
+  border-bottom: 0;
+  border-left: 4px solid var(--cv-accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.27rem;
+}
+
+.cv-page[data-cv-template="editorial"] .cv-timeline h2 {
+  border-bottom: 2px solid var(--cv-accent);
+}
+
+.cv-page[data-cv-template="professional"] .cv-intro {
+  padding-bottom: 0.75rem;
+}
+
+.cv-page[data-cv-template="professional"] .cv-intro h1 {
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+
+.cv-page[data-cv-template="professional"] .cv-section > h2,
+.cv-page[data-cv-template="professional"] .cv-details summary {
+  font-size: 1.03rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--cv-accent);
+}
+
+.cv-page[data-cv-template="professional"] .cv-entry-list {
+  gap: 0.7rem;
+}
+
+.cv-page[data-cv-template="professional"] .cv-content {
+  gap: 1.15rem;
+}
+
+.cv-page[data-cv-template="professional"] .cv-entry {
+  padding-bottom: 0.65rem;
+}
+
+.cv-page[data-cv-template="harvard"] .cv-section > h2,
+.cv-page[data-cv-template="harvard"] .cv-details summary {
+  border-bottom-color: var(--cv-accent);
+}
+
+.cv-page .cv-preview-help {
+  margin: 0.6rem 0 0;
+  font-size: 0.79rem;
+  color: var(--global-text-color-light);
+}
+
+.cv-page .cv-print-links-option {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  font-size: 0.83rem;
+  font-weight: 550;
+}
+
+.cv-page .cv-tools input[type="color"] {
+  width: 100%;
+  min-height: 2.25rem;
+  border: 1px solid var(--global-divider-color);
+  padding: 0.15rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  background: var(--global-bg-color);
+}
+
+.cv-page .cv-tools input[type="color"]:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+@media screen {
+  .cv-page[data-cv-preview="paper"] .cv-document {
+    --global-text-color: #19212b;
+    --global-text-color-light: #5a6470;
+    --global-divider-color: #d6dde5;
+    --global-code-bg-color: #f4f6f8;
+    width: min(100%, var(--cv-paper-width));
+    margin: 1.35rem auto 2rem;
+    padding: min(3.1vw, 13mm);
+    background: #fff;
+    color: #19212b;
+    border: 1px solid #d9e0e7;
+    box-shadow: 0 12px 40px rgb(10 24 45 / 10%);
+    border-radius: 0.25rem;
+    font-size: 10pt;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-intro {
+    padding-bottom: 0.75rem;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-content {
+    gap: 1.15rem;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-entry-list {
+    gap: 0.75rem;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-entry {
+    padding-bottom: 0.75rem;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-entry h3,
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-compact-entry h3 {
+    font-size: 10pt;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-meta {
+    font-size: 8pt;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-intro h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-section > h2,
+  .cv-page[data-cv-preview="paper"] .cv-document .cv-details summary {
+    font-size: 11pt;
+  }
+
+  @media (max-width: 590px) {
+    .cv-page[data-cv-preview="paper"] .cv-document {
+      padding: 1rem 0.85rem;
+    }
+  }
+}
+
+@media print {
+  .cv-page .cv-document {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .cv-page .cv-intro h1,
+  .cv-page .cv-entry h3,
+  .cv-page .cv-compact-entry h3,
+  .cv-page .cv-section > h2 {
+    color: #18212b !important;
+  }
+
+  .cv-page[data-cv-template="editorial"] .cv-intro h1,
+  .cv-page[data-cv-template="professional"] .cv-intro h1 {
+    font-size: 17pt;
+  }
+
+  .cv-page[data-cv-template="minimal"] .cv-section > h2,
+  .cv-page[data-cv-template="editorial"] .cv-section > h2,
+  .cv-page[data-cv-template="professional"] .cv-section > h2 {
+    font-size: 11pt;
+  }
+
+  .cv-page[data-cv-show-urls="true"] .cv-links a::after {
+    content: " (" attr(href) ")";
+    display: inline;
+    font-size: 7pt;
+    font-weight: 400;
+    word-break: break-all;
+  }
+
+  .cv-page .cv-link-icon {
+    font-size: 6pt;
+    color: var(--cv-accent) !important;
   }
 }
