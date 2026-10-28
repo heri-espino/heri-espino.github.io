@@ -111,6 +111,7 @@ cv:
           - Updated Python SDK transport-error mapping so mid-stream connection failures surface as stable documented exceptions.
           - Added synchronous and asynchronous regression tests for transport errors, cleanup, callbacks, and compatibility.
       - name: Trend Estimation — Penalized Trend Smoothing Python Library
+        date: "Active as of Oct 2026 · start date unrecorded"
         role: "Author & Maintainer"
         subtitle: "Penalized Trend Smoothing Library"
         organization: Trend Estimation
@@ -121,6 +122,7 @@ cv:
           - Developing reusable finite-difference penalized least-squares smoothing with configurable difference orders and Guerrero observed-difference plug-in means.
           - Implemented spectral trend fitting and classical in-sample CV, GCV, AICc, and BIC selection for fixed numeric means; examples and optional plotting are included.
       - name: AwesomeFigures — Scientific Visualization Toolkit
+        date: "Active as of Oct 2026 · start date unrecorded"
         role: "Author & Maintainer"
         subtitle: "Scientific Visualization Toolkit"
         organization: AwesomeFigures
@@ -132,6 +134,7 @@ cv:
           - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
 
       - name: Docling Math — Mathematical PDF Extraction
+        date: "Active as of Oct 2026 · start date unrecorded"
         role: "Author & Maintainer"
         subtitle: "Mathematical PDF Extraction"
         organization: Docling Math
@@ -209,6 +212,7 @@ cv:
 
     Research:
       - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
+        context: "Research working draft · not submitted"
         role: "Author · Working Draft (Not Submitted)"
         subtitle: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
         date: "Oct 2026 — Present"
@@ -242,6 +246,7 @@ cv:
           - "Coauthored with Daniela Cortés-Toto; implemented normalized Guerrero smoothness and compared seven PLS numerical backends."
           - "Documented 80,640 archived computational records, independently paired timing experiments, and numerical root-finding validation."
       - name: "Posterior Integration and Volatility Inputs in WTI Asian Options"
+        context: "Blinded research manuscript draft"
         role: "Blinded Research Manuscript Draft"
         date: "2026"
         links:
@@ -250,6 +255,7 @@ cv:
           - "Separated Bayesian posterior-integration corrections from the volatility information used for WTI average-price option pricing."
           - "Combined a 10-million-history simulation with distinct date-ordered and settlement-mark empirical samples, emphasizing prior implied volatility and experimental limitations."
       - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
+        context: "Mathematical research lecture"
         role: "Mathematical Research Lecture · Not Submitted"
         date: "19 Oct 2026"
         links:
@@ -259,6 +265,7 @@ cv:
           - "Prepared a 53-slide derivation covering graph geodesics, classical MDS, componentwise unfolding, and guaranteed strip separation."
           - "Used EXP-010/EXP-011 observations and distinguished the proposed separation-constrained placement optimizer from implemented methods."
       - name: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
+        context: "Mathematical research tutorial"
         role: "Mathematical Research Tutorial · Not Submitted"
         date: "Oct 2026"
         links:
@@ -339,6 +346,7 @@ cv:
         highlights:
           - Analyzed associations between tutoring participation and performance standardized within classrooms.
       - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
+        context: "Trend-estimation research project"
         role: "Author"
         subtitle: "Trend Estimation Methods"
         date: May 2025 — Present
@@ -351,6 +359,7 @@ cv:
           - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
           - Reused spectral solvers for matrix multiplication across smoothness grids and benchmarked HP, Whittaker, MA, ES, and polynomial baselines using RMSE and SMAPE.
       - name: Bayesian Uncertainty in WTI Options
+        date: "2026"
         role: "Author"
         organization: "Research draft"
         links:
@@ -358,6 +367,8 @@ cv:
         highlights:
           - Studied the propagation of posterior parameter uncertainty into WTI option valuation.
       - name: Privileged Template Priors for Mechanistic Interpretability in CNNs
+        context: "CNN mechanistic-interpretability research"
+        role: "Research project"
         date: Dec 2025 — Present
         location: Puebla, Mexico
         links:
@@ -368,6 +379,8 @@ cv:
           - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
           - Measured mechanistic identifiability using template-alignment scores, kernel visualizations, ablations, controlled patching, and class-level responses across classes.
       - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
+        context: "Latent financial-risk modeling"
+        role: "Research project"
         date: Jan 2023 — May 2023
         location: Puebla, Mexico
         links:
@@ -378,6 +391,8 @@ cv:
           - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
           - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
       - name: Systemic Liquidity-Crisis Agent-Based Model
+        context: "Agent-based financial-market simulation"
+        role: "Research project"
         date: Oct 2025 — Present
         location: Puebla, Mexico
         links:
@@ -388,6 +403,8 @@ cv:
           - Built an agent-based derivatives simulator with market participants, stochastic shocks, pricing rules, and margin calls under crisis scenarios.
           - Tracked liquidation cascades through volatility jumps, spread widening, agent health, stress networks, contagion indices, and network-fragility metrics across agent types.
       - name: Mathematical Notes on Random Variables as Vectors in L²
+        context: "Expository probability and Hilbert-space analysis"
+        role: "Mathematical notes"
         date: Jun 2026 — Present
         location: Puebla, Mexico
         links:
@@ -743,6 +760,7 @@ cv:
         credential: "30e121f2a320b4a1682ccb67a51ab77173042a09"
         url: "https://www.datacamp.com/completed/statement-of-accomplishment/course/30e121f2a320b4a1682ccb67a51ab77173042a09"
       - name: "Introduction to Deep Learning with PyTorch"
+        date: "Date not recorded"
         role: "Course"
         organization: "DataCamp"
         credential: "9c159fb3b2c68ff7af623165fbf22414496b18d7"
@@ -769,7 +787,8 @@ cv:
 
     Volunteering:
       - name: Water contamination analysis for Xalmimilulco
-        organization: Data Scientist
+        role: "Data Scientist"
+        context: "Community water-quality project · Xalmimilulco"
         date: Jan 2026 — Present
         location: Puebla, Mexico
         highlights:
