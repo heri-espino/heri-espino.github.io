@@ -438,6 +438,22 @@ if (exists("_pages/cv.md")) {
       cvSources.includes("Studied structured storytelling for diverse audiences.")) {
     failures.push("The Penn finance and IESE storytelling descriptions must remain removed.");
   }
+  const cnnPaperSource = read("_pages/papers/activation-patching-effects-add-up.md");
+  const cnnFigurePath = "assets/img/portfolio/activation-patching-figure1.avif";
+  if (!exists(cnnFigurePath)) {
+    failures.push("CNN paper must include the uploaded Figure 1 screenshot.");
+  } else {
+    const cnnFigureBytes = fs.readFileSync(path.join(root, cnnFigurePath));
+    if (cnnFigureBytes.length < 4000 ||
+        cnnFigureBytes.toString("ascii", 4, 12) !== "ftypavif") {
+      failures.push("CNN paper Figure 1 preview must be a valid local AVIF image.");
+    }
+  }
+  if (!cnnPaperSource.includes("image: /" + cnnFigurePath) ||
+      !cnnPaperSource.includes("detail_image: /assets/img/portfolio/activation-patching-first-page.webp") ||
+      !cnnPaperSource.includes("pdf: /papers/espino_2026_activation-patching-effects-add-up.pdf")) {
+    failures.push("CNN paper card should show the actual uploaded figure, while its detail keeps the first-page preview and original PDF.");
+  }
   const trendDraft = read("_pages/papers/smoothness-integrated-trend-distances.md");
   const papersArchive = read("_pages/papers.md");
   const researchGroup = cvSources.split("    Research:")[1]?.split("    Selected Academic Projects:")[0] || "";
