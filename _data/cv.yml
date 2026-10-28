@@ -219,6 +219,51 @@ cv:
           - "Defined Hilbert-space distances across normalized smoothness-indexed PLS trend families with nonzero finite-difference reference drift."
           - "Derived shared/unequal-drift spectral formulas, signed level-versus-shape decompositions, and rolling smoothness–time dissimilarity measures."
           - "Proposed agricultural index monitoring applications while identifying retrospective-data leakage and validation requirements."
+      - name: "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"
+        role: "Author · Working Draft"
+        organization: "Universidad de las Américas Puebla"
+        date: "Oct 2026"
+        links:
+          - { label: Research draft, url: "https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html" }
+          - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Tracked multiple forecast-loss minima through chronological origins and distinguished persistent-branch selection from mapping each branch to a current smoothness decision."
+          - "Evaluated pooled versus dynamic selection in simulations and financial data; observed mixed evidence, without claiming universal forecasting superiority."
+      - name: "Smoothness-Indexed Penalized Trend Estimation in Python: Parameter-Search Coordinates, Numerical Backends, and Reproducible Comparisons"
+        role: "Coauthor · Working Draft"
+        organization: "Universidad de las Américas Puebla"
+        date: "Oct 2026"
+        links:
+          - { label: Research draft, url: "https://heri-espino.github.io/papers/smoothness-indexed-pls-python.html" }
+          - { label: Code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Coauthored with Daniela Cortés-Toto; implemented normalized Guerrero smoothness and compared seven PLS numerical backends."
+          - "Documented 80,640 archived computational records, independently paired timing experiments, and numerical root-finding validation."
+      - name: "Posterior Integration and Volatility Inputs in WTI Asian Options"
+        role: "Blinded Research Manuscript Draft"
+        date: "2026"
+        links:
+          - { label: Research draft, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
+        highlights:
+          - "Separated Bayesian posterior-integration corrections from the volatility information used for WTI average-price option pricing."
+          - "Combined a 10-million-history simulation with distinct date-ordered and settlement-mark empirical samples, emphasizing prior implied volatility and experimental limitations."
+      - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
+        role: "Mathematical Research Lecture · Not Submitted"
+        date: "19 Oct 2026"
+        links:
+          - { label: Lecture record, url: "https://heri-espino.github.io/papers/componentwise-knn-isomap-lecture.html" }
+          - { label: GitHub, url: "https://github.com/heri-espino/ProximityGraphs-Isomap" }
+        highlights:
+          - "Prepared a 53-slide derivation covering graph geodesics, classical MDS, componentwise unfolding, and guaranteed strip separation."
+          - "Used EXP-010/EXP-011 observations and distinguished the proposed separation-constrained placement optimizer from implemented methods."
+      - name: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
+        role: "Mathematical Research Tutorial · Not Submitted"
+        date: "Oct 2026"
+        links:
+          - { label: Tutorial record, url: "https://heri-espino.github.io/papers/maxcut-sdp-eva-clustering-tutorial.html" }
+        highlights:
+          - "Explained SDP relaxations of Max-Cut, low-rank Efficient Vector Ascent (EVA), and hyperplane versus spherical K-Means rounding."
+          - "Documented matched rounding restarts, G-set reproducibility, and the distinction between Max-Cut and general Max-k-Cut."
       - name: Unit-Region Factorization for Empty-Region Proximity Graphs
         role: "First Author"
         subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"

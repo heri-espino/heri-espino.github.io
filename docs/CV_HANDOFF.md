@@ -441,3 +441,38 @@ reading and print, and the deleted Matrix Theory record is not displayed.
   binary is committed through an authorized binary-upload mechanism.
   The portfolio page notes this limitation and does not mislabel the related
   source-code repository as the manuscript PDF.
+
+## Five additional research and teaching PDFs (2026-10-28)
+
+The user supplied five distinct PDFs; each now has its own public portfolio
+page and a CV Research record. **None has been newly marked as submitted,
+accepted, or under review merely because it uses a journal template.**
+
+| Uploaded source | Portfolio slug | Verified document type / scope |
+|---|---|---|
+| `EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf` (13 pages) | `dynamic-forecast-optimal-smoothness` | Manuscript draft by Heriberto; forecast-loss minima tracking, branch decisions; mixed results; template journal metadata are placeholders |
+| `sncs_main.pdf` (19 pages) | `smoothness-indexed-pls-python` | Coauthored manuscript draft (Heriberto Espino-Montelongo and Daniela Cortés-Toto); Python PLS smoothness and 80,640-record numerical benchmark; submission not verified |
+| `remef_blinded_draft.pdf` (17 pages) | `posterior-integration-volatility-wti-asian-options` | Blinded bilingual manuscript draft; posterior-integrated vs historical/lagged implied volatility WTI APO pricing; no public byline inferred or PDF hosted |
+| `componentwise_knn_isomap_lecture.pdf` (53 slides) | `componentwise-knn-isomap-lecture` | Mathematical lecture of EXP-010/011 and proposed EXP-013; not a research article and not an implemented optimized placement method |
+| `maxcut_sdp_eva_rounding_tutorial (1).pdf` (7 pages) | `maxcut-sdp-eva-clustering-tutorial` | Research tutorial on Max-Cut SDP, EVA, and rounding, with Max-k-Cut distinguished; no new peer-reviewed claim |
+
+`_pages/papers.md` uses a list of `featured: true` portfolio records,
+sorted by `importance`. The prior smoothness-integrated drift paper stays
+first (importance 1), followed by these five entries (2–6). All six are
+excluded from the generic lower draft grid so the page has no duplicates.
+Submitted manuscripts retain their explicitly recorded submission states.
+
+`_data/cv.yml` includes five new entries in Research immediately following
+the already-first smoothness-distance draft. Each links its public portfolio
+page, and public source-code links are shown only for verified public
+repositories. The existing Bayesian WTI option page and already-under-review
+CNN manuscript are separate works and remain untouched.
+
+**PDF policy:** The five uploaded binaries are not yet website assets. The
+GitHub connector in this workflow cannot directly read a chat attachment into
+its blob-upload interface; do not invent a `pdf:` field, downloadable URL,
+or site-relative path. The public pages deliberately provide authored
+descriptions but **no fabricated Open PDF button**. If the PDFs are added later,
+commit exact PDF bytes to the repository and update the portfolio pages and
+CV together. The blinded WTI source warrants special care before public
+PDF distribution because exposing it could compromise blind review.
