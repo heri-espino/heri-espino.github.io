@@ -66,3 +66,5 @@
   issuer_key: packt
 - match: "data camp"
   issuer_key: datacamp
+- match: "iese business school"
+  issuer_key: iese
