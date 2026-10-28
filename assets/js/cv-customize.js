@@ -34,7 +34,6 @@
   const timeline = document.getElementById("cv-timeline");
   const timelineItems = document.getElementById("cv-timeline-items");
   const status = document.getElementById("cv-status");
-  const printButton = document.getElementById("cv-print");
   const resetButton = document.getElementById("cv-reset");
   const previewButton = document.getElementById("cv-preview");
   const previewHelp = document.getElementById("cv-preview-help");
@@ -57,7 +56,6 @@
     !timeline ||
     !timelineItems ||
     !status ||
-    !printButton ||
     !resetButton ||
     !previewButton ||
     !previewHelp ||
@@ -223,13 +221,57 @@
   const europassLabels = {
     "Education": "Education and training",
     "Professional Experience": "Work experience",
+    "Academic Experience": "Academic work experience",
+    "Volunteering": "Volunteering experience",
     "Programming Experience": "Software development experience",
     "Research": "Research and publications",
     "Research Drafts": "Research drafts and related materials",
     "Technical Skills": "Digital and technical skills",
     "Languages": "Language skills",
     "Credentials": "Certificates and credentials",
+    "Published Articles & Technical Writing": "Publications",
+    "Selected Academic Projects": "Projects",
+    "Awards": "Honours and awards",
   };
+  // The EU's standard order puts work experience before education/training,
+  // followed by personal skills and optional additional information.
+  // Reorder presentation nodes only; never mutate the original YAML or
+  // independently selected inclusions.
+  const sectionContainer = sourceDocument.querySelector("#cv-sections");
+  const europassOrder = [
+    "Professional Experience", "Programming Experience", "Academic Experience",
+    "Volunteering", "Education", "Credentials", "Schools",
+    "Languages", "Technical Skills", "Research", "Research Drafts",
+    "Published Articles & Technical Writing", "Selected Academic Projects",
+    "Leadership", "Awards", "Selected Extracurricular Activities"
+  ];
+  const orderedSections = () => root.dataset.cvTemplate !== "europass"
+    ? sections
+    : [...sections].sort((a, b) => {
+        const ai = europassOrder.indexOf(a.dataset.cvTitle);
+        const bi = europassOrder.indexOf(b.dataset.cvTitle);
+        return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
+      });
+  const europassGroup = (section) => ({
+    "Languages": "PERSONAL SKILLS",
+    "Research": "ADDITIONAL INFORMATION"
+  })[section.dataset.cvTitle] || "";
+  const syncSectionOrder = () => {
+    sectionContainer.querySelectorAll(":scope > .cv-europass-group-heading").forEach((heading) => heading.remove());
+    for (const section of orderedSections()) {
+      if (root.dataset.cvTemplate === "europass") {
+        const group = europassGroup(section);
+        if (group) {
+          const heading = document.createElement("h2");
+          heading.className = "cv-europass-group-heading";
+          heading.textContent = group;
+          sectionContainer.appendChild(heading);
+        }
+      }
+      sectionContainer.appendChild(section);
+    }
+  };
+
   const displayTitle = (section) => root.dataset.cvTemplate === "europass"
     ? (europassLabels[section.dataset.cvTitle] || section.dataset.cvTitle)
     : section.dataset.cvTitle;
@@ -308,9 +350,12 @@
       });
     }
 
-    for (const section of sections) {
+    for (const section of orderedSections()) {
       if (section.hidden) continue;
-      const originalList = section.querySelector(".cv-entry-list, .cv-compact-grid, .cv-skills, .cv-inline-list");
+      const europassLanguages = root.dataset.cvTemplate === "europass" && section.dataset.cvTitle === "Languages";
+      const originalList = europassLanguages
+        ? section.querySelector(".cv-europass-languages")
+        : section.querySelector(".cv-entry-list, .cv-compact-grid, .cv-skills, .cv-inline-list");
       if (!originalList) continue;
       const items = Array.from(originalList.children).filter(
         (item) => item.dataset.cvIncluded !== "false"
@@ -318,6 +363,7 @@
       if (!items.length) continue;
       groups.push({
         title: displayTitle(section) || "Section",
+        groupHeading: root.dataset.cvTemplate === "europass" ? europassGroup(section) : "",
         tag: originalList.tagName.toLowerCase(),
         listClass: originalList.className,
         items,
@@ -327,6 +373,12 @@
     const startGroup = (group, continued) => {
       const section = document.createElement("section");
       section.className = "cv-section";
+      if (group.groupHeading && !continued) {
+        const label = document.createElement("h2");
+        label.className = "cv-europass-group-heading";
+        label.textContent = group.groupHeading;
+        section.appendChild(label);
+      }
       const heading = document.createElement("h2");
       heading.textContent = group.title + (continued ? " (continued)" : "");
       const list = document.createElement(group.tag);
@@ -371,6 +423,7 @@
   const render = () => {
     const order = controls.order.value;
     root.dataset.cvTemplate = controls.template.value;
+    syncSectionOrder();
     updateSectionTitles();
     root.dataset.cvFont = controls.font.value;
     root.dataset.cvDensity = controls.density.value;
@@ -442,7 +495,13 @@
     renderPagedPreview();
   };
 
-  Object.values(controls).forEach((control) => control.addEventListener("change", render));
+  Object.entries(controls).filter(([key]) => key !== "template").forEach(([, control]) => control.addEventListener("change", render));
+  controls.template.addEventListener("change", () => {
+    // Europass uses grouped sections by default, while users remain free to
+    // choose the chronological timeline afterwards.
+    if (controls.template.value === "europass") controls.order.value = "sections";
+    render();
+  });
   toggles.forEach((toggle) => toggle.addEventListener("change", render));
   printToggles.forEach((toggle) => toggle.addEventListener("change", render));
   entrySearch.addEventListener("input", () => {
@@ -520,9 +579,8 @@
     render();
   });
 
-  printButton.addEventListener("click", () => window.print());
 
-  // Browser Print / Save as PDF always uses the paper view's density.
+  // The browser Print dialog (Ctrl+P / Cmd+P) uses the paper view's density.
   // Keep the shared dropdown and on-screen preview unchanged, whether
   // printing from the wide view or from the page-by-page preview.
   // Closed <details> suppress their children in print; reopen temporarily.
