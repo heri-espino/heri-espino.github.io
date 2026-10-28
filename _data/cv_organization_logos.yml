@@ -1,0 +1,68 @@
+# CV-only name matching. Put specific names before broad matches.
+# Reuse credential_issuers.yml whenever an issuer has an existing logo.
+# Other URLs use the favicon of an identifiable official website; these are
+# organizational marks, not endorsements. No invented logos for informal labels.
+- match: "universidad de las américas puebla"
+  logo: "https://www.google.com/s2/favicons?domain=udlap.mx&sz=128"
+- match: "centro de investigación en matemáticas"
+  issuer_key: cimat
+- match: "universidad nacional autónoma de méxico"
+  issuer_key: unam
+- match: "sociedad matemática mexicana"
+  logo: "https://www.google.com/s2/favicons?domain=smm.org.mx&sz=128"
+- match: "mathematical association of america"
+  logo: "https://www.google.com/s2/favicons?domain=maa.org&sz=128"
+- match: "international society of pharmacovigilance"
+  logo: "https://www.google.com/s2/favicons?domain=isoponline.org&sz=128"
+- match: "stevens institute of technology"
+  logo: "https://www.google.com/s2/favicons?domain=stevens.edu&sz=128"
+- match: "new york institute of finance"
+  issuer_key: nyif-google
+- match: "university of illinois urbana-champaign"
+  issuer_key: illinois
+- match: "university of pennsylvania"
+  issuer_key: penn
+- match: "university of oxford"
+  issuer_key: oxford
+- match: "new york university"
+  issuer_key: nyu
+- match: "duke university"
+  issuer_key: duke
+- match: "yale university"
+  issuer_key: yale
+- match: "santa fe institute"
+  issuer_key: santa-fe
+- match: "imperial college london"
+  issuer_key: imperial
+- match: "columbia university"
+  issuer_key: columbia
+- match: "uc santa cruz"
+  issuer_key: ucsc
+- match: "interactive brokers"
+  issuer_key: interactive-brokers
+- match: "actinver"
+  logo: "https://www.google.com/s2/favicons?domain=actinver.com&sz=128"
+- match: "openai"
+  logo: "https://www.google.com/s2/favicons?domain=openai.com&sz=128"
+- match: "springer nature"
+  logo: "https://www.google.com/s2/favicons?domain=springernature.com&sz=128"
+- match: "gobierno de puebla"
+  logo: "https://www.google.com/s2/favicons?domain=puebla.gob.mx&sz=128"
+- match: "government of mexico"
+  logo: "https://www.google.com/s2/favicons?domain=gob.mx&sz=128"
+- match: "mapfre"
+  logo: "https://www.google.com/s2/favicons?domain=mapfre.com.mx&sz=128"
+- match: "cme group"
+  logo: "https://www.google.com/s2/favicons?domain=cmegroup.com&sz=128"
+- match: "coppel"
+  logo: "https://www.google.com/s2/favicons?domain=coppel.com&sz=128"
+- match: "google"
+  issuer_key: google-cloud
+- match: "microsoft"
+  issuer_key: microsoft
+- match: "ibm"
+  issuer_key: ibm
+- match: "packt"
+  issuer_key: packt
+- match: "data camp"
+  issuer_key: datacamp
