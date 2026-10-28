@@ -690,28 +690,27 @@ Narrow mobile screens use constrained right-column widths rather than hiding
 city or dates. All other templates retain their original heading order.
 Test checks are in `test/style_contract.js`.
 
-## Viewport-fixed settings and print buttons (2026-10-28)
+## Name-anchored settings and print controls (2026-10-28, revised)
 
-The owner requested that the existing small chevron and printer icon stay
-visible as they scroll down the CV. The previous `position: sticky` rule
-was applied to a short sidebar grid cell and could stop sticking when that
-cell's bounds ended.
+The owner clarified that the two compact buttons should remain **next to the
+name in the CV heading**, not float in the viewport's upper-left corner or
+reserve an empty gutter down the full document.
 
-The toolbar now uses viewport `position: fixed` at the top left of the
-CV reading area, with a desktop offset below the navigation and a smaller
-mobile offset. The two icon buttons always remain stacked vertically,
-including while the settings panel is open. The expanded settings panel
-retains its own scrolling and starts below the toolbar; closing it does
-not move the buttons. They remain accessible by mouse and keyboard and
-are omitted from browser print/PDF as before.
+The CV workspace now uses a full-width block layout whether the customization
+menu is open or closed. The existing chevron and print buttons form a single
+absolutely positioned column at the top-left of the workspace, aligned beside
+the name/header. They scroll away naturally with the header, remaining
+stationary relative to the name when the menu opens. The compact left inset
+is applied **only to the CV intro**, not to every CV section.
 
-The toolbar has a separate fixed rule on narrow screens and honors mobile
-safe-area insets. The full-width CV content and page-by-page preview
-retain their existing column widths, and none of the document/template
-contents, roles, organization logos, or export options change.
+The expanded settings menu overlays the document below the two controls.
+It has an independent maximum height and scrolling, so it does not shift
+the name or move the buttons. Mobile widths use a smaller header inset and
+unchanged touch targets. The shortcuts are omitted from browser print/PDF.
 
-Manual validation: scroll well past the first page on desktop and mobile
-and ensure both icons remain visible; open/close the menu mid-scroll;
-verify keyboard focus, no text overlay, and that neither icon appears
-inside Print / Save as PDF. Static regression checks are in
-`test/style_contract.js`.
+Validation: check first-load desktop and narrow mobile view; confirm the name
+is next to the two icons and all CV sections extend to full available width;
+open/close the settings panel without moving the icons; scroll down and
+confirm the icons move with the name rather than remaining stuck to the
+screen; verify printing excludes the icon controls. The source contract is
+in `test/style_contract.js`.
