@@ -1,14 +1,14 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="closed">
   <div class="cv-workspace">
     <div class="cv-controls-column">
       <div class="cv-controls-toolbar" aria-label="CV settings and export">
-        <button type="button" id="cv-panel-toggle" class="cv-panel-toggle" aria-controls="cv-settings-panel" aria-expanded="true">Hide settings</button>
-        <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
+        <button type="button" id="cv-panel-toggle" class="cv-panel-toggle cv-icon-control" aria-controls="cv-settings-panel" aria-expanded="false" aria-label="Show CV settings" title="Show CV settings"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        <button type="button" id="cv-print" class="cv-primary-action cv-icon-control" aria-label="Print or save CV as PDF" title="Print / Save as PDF"><i class="fa-solid fa-print" aria-hidden="true"></i></button>
       </div>
 
-      <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize and print CV">
+      <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize and print CV" hidden>
     <div class="cv-tools-heading">
       <div>
         <h2>Customize CV</h2>
@@ -176,7 +176,7 @@
       {% assign title = section_pair[0] %}
       {% assign entries = section_pair[1] %}
       {% assign expandable = false %}
-      {% if title == 'Selected Extracurricular Activities' or title == 'Online Courses' %}
+      {% if title == 'Selected Extracurricular Activities' or title == 'Credentials' %}
         {% assign expandable = true %}
       {% endif %}
 
@@ -196,7 +196,7 @@
           <dl class="cv-skills">
             {% for entry in entries %}
               <div>
-                <dt>{{ entry.name }}</dt>
+                <dt><span class="cv-skills-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></span>{{ entry.name }}</dt>
                 <dd>{{ entry.values }}</dd>
               </div>
             {% endfor %}
@@ -205,7 +205,7 @@
           <ul class="cv-inline-list">
             {% for entry in entries %}
               <li>
-                <strong>{{ entry.name }}</strong> — {{ entry.values }}
+                <span class="cv-language-icon" aria-hidden="true"><i class="fa-solid fa-language"></i></span><strong>{{ entry.name }}</strong> — {{ entry.values }}
               </li>
             {% endfor %}
           </ul>
@@ -227,6 +227,22 @@
                         {% endif %}
                       {% endunless %}
                       {% if cv_primary_link %}<a href="{{ cv_primary_link }}" class="cv-primary-link" target="_blank" rel="noopener noreferrer">{% endif %}
+                      {% assign cv_entry_icon = 'fa-file-lines' %}
+                      {% case title %}
+                        {% when 'Education' %}{% assign cv_entry_icon = 'fa-graduation-cap' %}
+                        {% when 'Professional Experience' %}{% assign cv_entry_icon = 'fa-briefcase' %}
+                        {% when 'Programming Experience' %}{% assign cv_entry_icon = 'fa-code' %}
+                        {% when 'Academic Experience' %}{% assign cv_entry_icon = 'fa-chalkboard-user' %}
+                        {% when 'Awards' %}{% assign cv_entry_icon = 'fa-trophy' %}
+                        {% when 'Research' %}{% assign cv_entry_icon = 'fa-flask' %}
+                        {% when 'Selected Academic Projects' %}{% assign cv_entry_icon = 'fa-diagram-project' %}
+                        {% when 'Leadership' %}{% assign cv_entry_icon = 'fa-users' %}
+                        {% when 'Schools' %}{% assign cv_entry_icon = 'fa-school' %}
+                        {% when 'Selected Extracurricular Activities' %}{% assign cv_entry_icon = 'fa-medal' %}
+                        {% when 'Credentials' %}{% assign cv_entry_icon = 'fa-certificate' %}
+                        {% when 'Volunteering' %}{% assign cv_entry_icon = 'fa-hand-holding-heart' %}
+                      {% endcase %}
+                      <span class="cv-entry-symbol" aria-hidden="true"><i class="fa-solid {{ entry.icon | default: cv_entry_icon }}"></i></span>
                       {% if entry.role %}<span class="cv-entry-role">{{ entry.role }}</span><span class="cv-entry-separator" aria-hidden="true"> · </span>{% endif %}
                       <span class="cv-entry-name" title="{{ entry.degree | default: entry.name | escape }}">{{ entry.subtitle | default: entry.degree | default: entry.name }}</span>
                       {% if cv_primary_link %}<i class="fa-solid fa-arrow-up-right-from-square cv-link-icon" aria-hidden="true"></i></a>{% endif %}
