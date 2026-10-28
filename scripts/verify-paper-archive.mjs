@@ -15,6 +15,14 @@ const slugs = [
   "componentwise-knn-isomap-lecture",
   "maxcut-sdp-eva-clustering-tutorial",
 ];
+const pdfs = {
+  "smoothness-integrated-trend-distances": "EspinoMontelongo-2026-Trend_Distances.pdf",
+  "dynamic-forecast-optimal-smoothness": "EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf",
+  "smoothness-indexed-pls-python": "EspinoMontelongo-2026-PLS_Python.pdf",
+  "posterior-integration-volatility-wti-asian-options": "EspinoMontelongo-2026-WTI_Asian_Options.pdf",
+  "componentwise-knn-isomap-lecture": "EspinoMontelongo-2026-Componentwise_Isomap.pdf",
+  "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
+};
 const expectedSubmitted = 3;
 const expectedDrafts = 13;
 
@@ -65,6 +73,22 @@ for (const slug of slugs) {
   const pagePath = path.join(site, "papers", `${slug}.html`);
   const sourcePath = path.resolve("_pages", "papers", `${slug}.md`);
   const imagePrefix = `/assets/img/portfolio/pdf-page-shots/${slug}`;
+  const pdfUrl = `/papers/${pdfs[slug]}`;
+  const pdfSource = path.resolve("papers", pdfs[slug]);
+  const pdfOutput = path.join(site, "papers", pdfs[slug]);
+  for (const pdfPath of [pdfSource, pdfOutput]) {
+    if (!fs.existsSync(pdfPath)) {
+      errors.push(`Missing source or built PDF: ${pdfPath}`);
+      continue;
+    }
+    const fd = fs.openSync(pdfPath, "r");
+    const magic = Buffer.alloc(5);
+    fs.readSync(fd, magic, 0, magic.length, 0);
+    fs.closeSync(fd);
+    if (fs.statSync(pdfPath).size < 10_000 || magic.toString() !== "%PDF-") {
+      errors.push(`Missing or invalid PDF header: ${pdfPath}`);
+    }
+  }
 
   if (!drafts.includes(url)) {
     errors.push(`Archive is missing its working-draft link: ${url}`);
@@ -74,6 +98,7 @@ for (const slug of slugs) {
     continue;
   }
   const page = read(pagePath);
+  if (!page.includes(pdfUrl)) errors.push(`Detail page lacks published PDF link: ${slug}`);
   if (!page.includes("portfolio-detail") ||
       !page.includes(`${imagePrefix}-first.avif`)) {
     errors.push(`Rendered detail page lacks the first-page preview: ${slug}`);
@@ -85,6 +110,7 @@ for (const slug of slugs) {
     errors.push(`Markdown source missing: ${sourcePath}`);
   } else {
     const frontMatter = read(sourcePath).split(/^---\s*$/m).slice(1, 2)[0] ?? "";
+    if (!frontMatter.includes(`pdf: ${pdfUrl}`)) errors.push(`Source page PDF mapping missing: ${slug}`);
     if (!frontMatter.includes("portfolio_type: paper") ||
         !frontMatter.includes(`permalink: ${url}`) ||
         frontMatter.includes("\\ndetail_image:") ||
@@ -99,4 +125,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six pages and image pairs present.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six pages, PDF files and image pairs present.`);
