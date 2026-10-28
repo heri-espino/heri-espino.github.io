@@ -2458,3 +2458,61 @@
     text-align: right !important;
   }
 }
+
+
+/* Wide reading: make title, institution, links and highlights one coherent
+   visual block. Deliberately exclude paper/print, LaTeX density, Harvard's
+   organization-first header and Europass's two-column information hierarchy.
+   Physical pagination and compact XeLaTeX-inspired output stay unchanged. */
+@media screen {
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) {
+    --cv-reading-line-gap: 0.17rem;
+    --cv-reading-description-gap: 0.32rem;
+  }
+
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-entry-heading > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    gap: var(--cv-reading-line-gap);
+  }
+
+  /* Level 1: the title stays dominant at its existing font size. */
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-entry-heading h3 {
+    margin: 0;
+    line-height: 1.28;
+  }
+
+  /* Level 2: organization is stronger than the body, but not the title.
+     Remove inherited <p> margins; the flex gap now owns the rhythm. */
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-entry-heading .cv-organization,
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-entry-heading .cv-context {
+    margin: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+    line-height: 1.32;
+  }
+
+  /* Level 3: links/meta are auxiliary; leave a slightly more visible
+     interval below the institution than below the main title. */
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-entry-heading .cv-links {
+    margin: 0.13rem 0 0;
+    gap: 0.12rem 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+
+  /* Level 4: descriptions connect to the complete header; reduce the
+     old 0.75rem gap and limit spacing inside multi-line highlight lists. */
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-highlights {
+    margin: var(--cv-reading-description-gap) 0 0;
+    font-size: 0.91rem;
+    line-height: 1.42;
+    color: var(--cv-description, var(--global-text-color-light));
+  }
+
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) #cv-document :is(.cv-entry, .cv-compact-entry) .cv-highlights li + li {
+    margin-top: 0.15rem;
+  }
+}
