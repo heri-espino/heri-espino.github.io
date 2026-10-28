@@ -1926,3 +1926,137 @@
     text-align: right !important;
   }
 }
+
+
+/* CV-only icon rail. Collapsed by default: minimal left-hand chevron,
+   with the print icon directly below it. The open panel keeps its controls. */
+@media screen {
+  .cv-page .cv-controls-toolbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    width: 42px;
+    margin: 0;
+  }
+
+  .cv-page .cv-controls-toolbar .cv-icon-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 36px;
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0;
+    border: 1px solid var(--cv-border);
+    border-radius: 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1;
+    box-shadow: none;
+  }
+
+  .cv-page .cv-controls-toolbar .cv-panel-toggle {
+    color: var(--cv-accent);
+    background: var(--global-bg-color);
+  }
+
+  .cv-page .cv-controls-toolbar .cv-primary-action {
+    color: #fff;
+    background: var(--cv-accent);
+  }
+
+  .cv-page .cv-controls-toolbar .cv-icon-control:hover {
+    border-color: var(--cv-accent);
+  }
+
+  .cv-page #cv-settings-panel[hidden] {
+    display: none !important;
+  }
+
+  .cv-page[data-cv-tools="closed"] .cv-workspace {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+
+  .cv-page[data-cv-tools="closed"] .cv-controls-column {
+    position: sticky;
+    top: 5.5rem;
+    width: 44px;
+    max-height: calc(100vh - 6rem);
+    overflow: visible;
+  }
+
+  .cv-page[data-cv-tools="open"] .cv-controls-toolbar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .cv-page[data-cv-tools="open"] .cv-controls-column {
+    width: auto;
+  }
+
+  @media (min-width: 1050px) {
+    .cv-page[data-cv-tools="closed"] .cv-workspace {
+      grid-template-columns: 48px minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 1049px) {
+    .cv-page[data-cv-tools="open"] .cv-workspace {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cv-page[data-cv-tools="closed"] .cv-workspace {
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 0.5rem;
+    }
+    .cv-page[data-cv-tools="closed"] .cv-controls-column {
+      top: 4.5rem;
+    }
+  }
+
+  /* The "go to top" button belongs to the theme and is redundant for the
+     interactive CV. Keep it untouched on all other pages. */
+  body:has(.cv-page) #back-to-top,
+  body:has(.cv-page) .back-to-top {
+    display: none !important;
+  }
+}
+
+/* Meaningful section icons are shown for *every* CV entry, even when there is
+   no employer/institution available for an organization logo. */
+.cv-page .cv-entry-symbol,
+.cv-page .cv-skills-icon,
+.cv-page .cv-language-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  margin-right: 0.35em;
+  color: var(--cv-accent);
+  font-size: 0.88em;
+  vertical-align: baseline;
+}
+
+.cv-page .cv-entry-separator {
+  margin: 0 0.3em;
+}
+
+.cv-page .cv-skills-icon,
+.cv-page .cv-language-icon {
+  margin-right: 0.45em;
+}
+
+.cv-page[data-cv-show-icons="false"] .cv-entry-symbol,
+.cv-page[data-cv-show-icons="false"] .cv-skills-icon,
+.cv-page[data-cv-show-icons="false"] .cv-language-icon {
+  display: none !important;
+}
+
+@media print {
+  .cv-page .cv-entry-symbol,
+  .cv-page .cv-skills-icon,
+  .cv-page .cv-language-icon {
+    font-size: 0.75em;
+  }
+}
