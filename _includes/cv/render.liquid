@@ -22,6 +22,7 @@
         <select id="cv-template">
           <option value="personal">Personal · navy</option>
           <option value="harvard">Harvard-inspired · classic</option>
+          <option value="europass">Europass-inspired · European CV</option>
           <option value="minimal">Modern minimal</option>
           <option value="editorial">Research editorial</option>
           <option value="professional">Compact professional</option>
@@ -130,7 +131,8 @@
     </div>
     <p class="cv-preview-help" id="cv-preview-help">Paginated A4 preview. Print / Save as PDF opens the browser's exact page layout.</p>
     <p class="cv-disclaimer">
-      The Harvard-inspired option is an independent academic CV style, not an official Harvard University template.
+      The Harvard-inspired and Europass-inspired options are independent academic CV styles, not official university or EU-issued templates.
+      For an official Europass document, use the <a href="https://europass.europa.eu/en/create-europass-cv" target="_blank" rel="noopener noreferrer">EU Europass CV builder</a>.
       Chronological sorting uses each entry's first listed date. Undated sections remain after the timeline.
     </p>
   </aside>
@@ -138,6 +140,7 @@
   <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
   <header class="post-header cv-intro">
     <p class="cv-eyebrow">Curriculum vitae</p>
+    <p class="cv-europass-personal-heading">Personal information</p>
     <h1 class="post-title">{{ cv.name }}</h1>
     <p class="post-description">{{ page.description }}</p>
     <nav class="cv-contact" aria-label="CV contact links">

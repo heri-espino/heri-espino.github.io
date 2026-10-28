@@ -162,6 +162,7 @@
   const templateDefaults = {
     personal: "#00166c",
     harvard: "#252525",
+    europass: "#2176ac",
     minimal: "#123b63",
     editorial: "#31536e",
     professional: "#27374d",
@@ -190,6 +191,25 @@
   const pageStyle = document.createElement("style");
   pageStyle.id = "cv-page-size";
   document.head.appendChild(pageStyle);
+
+  // Europass-inspired headings are presentation labels, not edits to CV YAML.
+  const europassLabels = {
+    "Education": "Education and training",
+    "Experience": "Work experience",
+    "Programming Experience": "Software development experience",
+    "Research": "Research and publications",
+    "Technical Skills": "Digital and technical skills",
+    "Languages": "Language skills",
+  };
+  const displayTitle = (section) => root.dataset.cvTemplate === "europass"
+    ? (europassLabels[section.dataset.cvTitle] || section.dataset.cvTitle)
+    : section.dataset.cvTitle;
+  const updateSectionTitles = () => {
+    for (const section of sections) {
+      const heading = section.querySelector(":scope > h2, :scope > details > summary > span");
+      if (heading) heading.textContent = displayTitle(section);
+    }
+  };
 
   const included = (section) => {
     const toggle = toggles.find((item) => item.dataset.cvSectionToggle === section.dataset.cvSection);
@@ -269,7 +289,7 @@
       );
       if (!items.length) continue;
       groups.push({
-        title: section.dataset.cvTitle || "Section",
+        title: displayTitle(section) || "Section",
         tag: originalList.tagName.toLowerCase(),
         listClass: originalList.className,
         items,
@@ -323,6 +343,7 @@
   const render = () => {
     const order = controls.order.value;
     root.dataset.cvTemplate = controls.template.value;
+    updateSectionTitles();
     root.dataset.cvFont = controls.font.value;
     root.dataset.cvDensity = controls.density.value;
     root.dataset.cvPaper = controls.paper.value;
@@ -381,7 +402,7 @@
       // Add the original section label to every dated entry so context is never lost.
       const category = document.createElement("p");
       category.className = "cv-timeline-category";
-      category.textContent = item.section.dataset.cvTitle;
+      category.textContent = displayTitle(item.section);
       clone.prepend(category);
       fragment.appendChild(clone);
     });

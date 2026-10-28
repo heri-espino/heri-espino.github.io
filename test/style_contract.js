@@ -159,6 +159,12 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }
+  if (!cvRenderer.includes('<option value="europass">') || !cvScript.includes('europass: "#2176ac"') || !cvStyles.includes('data-cv-template="europass"')) {
+    failures.push("The Europass-inspired CV template must be selectable and styled for screen and print.");
+  }
+  if (!cvScript.includes("europassLabels") || !cvScript.includes("updateSectionTitles")) {
+    failures.push("The Europass-inspired template must preserve and restore readable section labels.");
+  }
   if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("paper")')) {
     failures.push("CV custom template color or preview handlers are missing.");
   }

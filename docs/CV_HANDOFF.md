@@ -199,3 +199,31 @@ Validation: syntax-check `assets/js/cv-customize.js`, run
 paper sizes, all five templates, chronological/grouped layout, entries hidden,
 text-size/margin switches and the print-only source document. Confirm that
 the browser printout does not duplicate the generated preview sheets.
+
+
+## Europass-inspired option (2026-10-28)
+
+Added `Europass-inspired · European CV` to the existing template selector,
+bringing the set to **six** independently customizable single-column designs.
+The style uses a restrained EU-like blue, uppercase section labels, blue
+rules, position/date hierarchy, and section names such as `Work experience`
+and `Education and training`. It retains custom accent/font choices,
+existing English-language CV records, links, A4/Letter, margins, visibility
+toggles, chronological ordering, the numbered-page approximation and the
+browser's actual PDF output.
+
+The user's previous single-column preference takes priority over classic
+two-column Europass form layouts. This is an **independent
+Europass-inspired web/print theme**, not a document generated or certified by
+the European Union. The UI points to the official
+[Europass CV builder](https://europass.europa.eu/en/create-europass-cv)
+for an authentic Europass export. Do not copy EU logos, certify compliance,
+or invent CEFR listening/reading/speaking subgrades, nationality, date of
+birth or photographs not in the verified public CV.
+
+Manual regression: select Europass, confirm section labels switch back
+when changing templates, check page stack and print PDF in A4 and Letter,
+compare chronological and grouped views, verify per-entry filtering,
+and exercise custom accent and font overrides. The site's existing
+Jekyll/style-contract tests should remain unchanged except for added
+template assertions.

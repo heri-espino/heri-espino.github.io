@@ -1258,3 +1258,172 @@
     display: block !important;
   }
 }
+
+
+/* Independent Europass-inspired design. The modern official Europass builder
+   offers several layouts; this intentionally retains the site's single-column
+   record structure, editability, and user-selected filters. No EU branding. */
+.cv-page .cv-europass-personal-heading {
+  display: none;
+}
+
+.cv-page[data-cv-template="europass"][data-cv-font="site"] {
+  --cv-font-stack: Arial, Helvetica, sans-serif;
+}
+
+.cv-page[data-cv-template="europass"] .cv-intro {
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--cv-accent);
+}
+
+.cv-page[data-cv-template="europass"] .cv-eyebrow {
+  margin-bottom: 0.55rem;
+  color: var(--cv-accent);
+  font-size: 0.79rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+}
+
+.cv-page[data-cv-template="europass"] .cv-europass-personal-heading {
+  display: block;
+  margin: 0 0 0.35rem;
+  color: var(--cv-accent);
+  font-size: 0.79rem;
+  font-weight: 750;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.cv-page[data-cv-template="europass"] .cv-intro h1 {
+  color: var(--cv-accent);
+  font-size: 2.05rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
+.cv-page[data-cv-template="europass"] .cv-contact {
+  gap: 0.3rem 0.85rem;
+  margin-top: 0.6rem;
+  font-size: 0.81rem;
+}
+
+.cv-page[data-cv-template="europass"] .cv-section > h2,
+.cv-page[data-cv-template="europass"] .cv-details summary,
+.cv-page[data-cv-template="europass"] .cv-timeline h2 {
+  margin-bottom: 0.75rem;
+  padding: 0 0 0.42rem;
+  border-bottom: 2px solid var(--cv-accent);
+  border-left: 0;
+  color: var(--cv-accent);
+  font-family: var(--cv-font-stack);
+  font-size: 1.03rem;
+  font-weight: 750;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  font-variant: normal;
+}
+
+.cv-page[data-cv-template="europass"] .cv-content {
+  gap: 1.3rem;
+}
+
+.cv-page[data-cv-template="europass"] .cv-entry-list {
+  gap: 0.75rem;
+}
+
+.cv-page[data-cv-template="europass"] .cv-entry,
+.cv-page[data-cv-template="europass"] .cv-compact-entry {
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid #d7e1e9;
+}
+
+.cv-page[data-cv-template="europass"] .cv-entry:last-child,
+.cv-page[data-cv-template="europass"] .cv-compact-entry:last-child {
+  border-bottom: 0;
+}
+
+.cv-page[data-cv-template="europass"] .cv-entry-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.12rem;
+}
+
+.cv-page[data-cv-template="europass"] .cv-entry-heading .cv-meta {
+  order: -1;
+  margin: 0 0 0.12rem;
+  color: var(--cv-accent);
+  font-size: 0.79rem;
+  font-weight: 650;
+  text-align: left;
+}
+
+.cv-page[data-cv-template="europass"] .cv-entry h3,
+.cv-page[data-cv-template="europass"] .cv-compact-entry h3 {
+  font-size: 0.99rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.cv-page[data-cv-template="europass"] .cv-organization {
+  font-weight: 600;
+}
+
+.cv-page[data-cv-template="europass"] .cv-highlights {
+  margin-top: 0.4rem;
+}
+
+.cv-page[data-cv-template="europass"] .cv-highlights li::marker {
+  color: var(--cv-accent);
+}
+
+.cv-page[data-cv-template="europass"] .cv-skills > div {
+  border-bottom-color: #d7e1e9;
+}
+
+/* Page-by-page canvas must share the same template cues as the print source. */
+@media screen {
+  .cv-page[data-cv-template="europass"] .cv-preview-sheet .cv-intro h1 {
+    font-size: 17pt;
+  }
+
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-section > h2 {
+    border-bottom: 2px solid var(--cv-accent);
+    color: var(--cv-accent);
+    font-size: 10pt;
+    letter-spacing: 0.04em;
+  }
+
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-entry h3,
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-compact-entry h3 {
+    font-size: 9pt;
+  }
+
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-entry-heading .cv-meta {
+    font-size: 8pt;
+  }
+}
+
+@media print {
+  .cv-page[data-cv-template="europass"] .cv-intro h1 {
+    color: var(--cv-accent) !important;
+    font-size: 17pt !important;
+  }
+
+  .cv-page[data-cv-template="europass"] .cv-section > h2,
+  .cv-page[data-cv-template="europass"] .cv-details summary,
+  .cv-page[data-cv-template="europass"] .cv-timeline h2 {
+    color: var(--cv-accent) !important;
+    font-size: 10pt !important;
+    border-bottom: 2px solid var(--cv-accent);
+  }
+
+  .cv-page[data-cv-template="europass"] .cv-entry h3,
+  .cv-page[data-cv-template="europass"] .cv-compact-entry h3 {
+    font-size: 9pt;
+  }
+
+  .cv-page[data-cv-template="europass"] .cv-entry-heading .cv-meta {
+    font-size: 8pt;
+  }
+}
