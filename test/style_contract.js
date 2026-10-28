@@ -337,12 +337,13 @@ if (exists("_pages/cv.md")) {
       trendDraft.includes("Under Review") || trendDraft.includes("Submitted Manuscript")) {
     failures.push("Smoothness-integrated trend manuscript must be a prominent unsubmitted working draft.");
   }
-  if (!papersArchive.includes('id="featured-working-draft"') ||
-      !papersArchive.includes('featured_items = items | where: "featured", true') ||
+  if (papersArchive.includes('id="featured-working-draft"') ||
+      papersArchive.includes("featured_items =") ||
+      papersArchive.includes("item.featured != true") ||
+      !papersArchive.includes('id="working-drafts"') ||
       !papersArchive.includes("include portfolio/card.liquid item=item") ||
-      !papersArchive.includes('item.featured != true') ||
-      papersArchive.indexOf('id="featured-working-draft"') > papersArchive.indexOf('id="submitted-manuscripts"')) {
-    failures.push("Featured research materials must be first, sorted by importance, and absent from lower duplicate grids.");
+      papersArchive.indexOf('id="submitted-manuscripts"') > papersArchive.indexOf('id="working-drafts"')) {
+    failures.push("Submitted manuscripts must precede the unified Working Drafts section, without a featured section or exclusion.");
   }
   const newResearchPages = [
     ["dynamic-forecast-optimal-smoothness", "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation", "Working Draft"],
@@ -351,8 +352,36 @@ if (exists("_pages/cv.md")) {
     ["componentwise-knn-isomap-lecture", "Componentwise kNN-Isomap", "Research Lecture"],
     ["maxcut-sdp-eva-clustering-tutorial", "From Max-Cut to Semidefinite Programming", "Research Tutorial"],
   ];
-  if (!trendDraft.includes("featured: true")) {
-    failures.push("The previously featured smoothness-distance working draft must remain prominently featured.");
+  const allScreenshotSlugs = ["smoothness-integrated-trend-distances", ...newResearchPages.map(([slug]) => slug)];
+  const figureSourcePages = {
+    "smoothness-integrated-trend-distances": 4,
+    "dynamic-forecast-optimal-smoothness": 10,
+    "smoothness-indexed-pls-python": 15,
+    "posterior-integration-volatility-wti-asian-options": 9,
+    "componentwise-knn-isomap-lecture": 29,
+    "maxcut-sdp-eva-clustering-tutorial": 1,
+  };
+  for (const slug of allScreenshotSlugs) {
+    const pagePath = "_pages/papers/" + slug + ".md";
+    const pageSource = read(pagePath);
+    const imagePrefix = "/assets/img/portfolio/pdf-page-shots/" + slug;
+    if (pageSource.includes("featured: true") ||
+        !pageSource.includes("image: " + imagePrefix + "-figure.avif") ||
+        !pageSource.includes("detail_image: " + imagePrefix + "-first.avif") ||
+        !pageSource.includes("Page " + figureSourcePages[slug] + ":") && slug !== "componentwise-knn-isomap-lecture") {
+      failures.push("Draft must be unfeatured and use the correct two PDF screenshots: " + slug);
+    }
+    for (const suffix of ["figure", "first"]) {
+      const imageFile = "assets/img/portfolio/pdf-page-shots/" + slug + "-" + suffix + ".avif";
+      if (!exists(imageFile)) {
+        failures.push("PDF screenshot file missing: " + imageFile);
+        continue;
+      }
+      const bytes = fs.readFileSync(path.join(root, imageFile));
+      if (bytes.length < 1000 || bytes.toString("ascii", 4, 12) !== "ftypavif") {
+        failures.push("Invalid or empty AVIF PDF screenshot: " + imageFile);
+      }
+    }
   }
   for (const [slug, title, stage] of newResearchPages) {
     const relPath = "_pages/papers/" + slug + ".md";
@@ -363,7 +392,7 @@ if (exists("_pages/cv.md")) {
     const source = read(relPath);
     if (!source.includes("title: ") || !source.includes(title) ||
         !source.includes('label: "' + stage + '"') ||
-        !source.includes("featured: true") ||
+        source.includes("featured: true") ||
         !source.includes("permalink: /papers/" + slug + ".html") ||
         source.includes("\\npdf: ") ||
         !researchGroup.includes("papers/" + slug + ".html")) {
