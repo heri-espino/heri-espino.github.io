@@ -241,10 +241,46 @@ if (exists("_pages/cv.md")) {
     failures.push("CV entries must display role and activity separately.");
   }
   const sourceSections = read("_data/cv.yml");
-  for (const section of ["Professional Experience", "Academic Experience", "Selected Academic Projects", "Selected Extracurricular Activities", "Online Courses"]) {
+  for (const section of ["Professional Experience", "Academic Experience", "Selected Academic Projects", "Selected Extracurricular Activities", "Credentials"]) {
     if (!sourceSections.includes("    " + section + ":")) {
       failures.push("The CV is missing LaTeX-defined section " + section);
     }
+  }
+  if (!cvRenderer.includes('data-cv-tools="closed"') || !cvRenderer.includes('id="cv-settings-panel" aria-label="Customize and print CV" hidden') ||
+      !cvRenderer.includes('aria-label="Show CV settings"') || !cvRenderer.includes('fa-chevron-right') ||
+      !cvRenderer.includes('aria-label="Print or save CV as PDF"') || !cvRenderer.includes('fa-print') ||
+      !cvScript.includes('setPanelOpen(false)')) {
+    failures.push("The CV must start with collapsed settings and accessible chevron/print-only controls.");
+  }
+  if (!cvStyles.includes('body:has(.cv-page) #back-to-top') ||
+      !cvStyles.includes('body:has(.cv-page) .back-to-top')) {
+    failures.push("The redundant back-to-top button must be hidden on the CV page only.");
+  }
+  if (!cvRenderer.includes('cv-entry-symbol') ||
+      !cvRenderer.includes('cv-skills-icon') ||
+      !cvRenderer.includes('cv-language-icon') ||
+      !cvStyles.includes('data-cv-show-icons="false"] .cv-entry-symbol')) {
+    failures.push("Every CV record, skill, and language must have an optional category icon.");
+  }
+  const cvSources = read("_data/cv.yml");
+  const credentialSource = read("_data/credentials.yml");
+  const creds = cvSources.split("    Credentials:")[1]?.split("    Languages:")[0] || "";
+  const featuredCredentials = credentialSource.split("  - id: specializations")[1]?.split("  - id: academic-schools")[0] || "";
+  const independentCredentials = credentialSource.split("  - id: independent-courses")[1]?.split("  - id: specialization-courses")[0] || "";
+  const expectedCredentialCount = [...featuredCredentials.matchAll(/^      - title: /gm)].length +
+    [...independentCredentials.matchAll(/^      - title: /gm)].length;
+  const cvCredentialCount = [...creds.matchAll(/^      - name: /gm)].length;
+  if (!creds || cvSources.includes("    Online Courses:") || cvCredentialCount !== expectedCredentialCount) {
+    failures.push("Credentials must mirror the website's curated specialization and independent-course lists.");
+  }
+  if (!cvSources.includes('Elsevier · Discrete Applied Mathematics · Under Review') ||
+      !cvSources.includes('Elsevier · Computational Geometry · Under Review') ||
+      cvSources.includes("Manuscript under revision for Computational Geometry")) {
+    failures.push("Both listed Elsevier journals must explicitly show Under Review.");
+  }
+  if (cvSources.includes("Applied valuation, capital budgeting and cost-of-capital methods.") ||
+      cvSources.includes("Studied structured storytelling for diverse audiences.")) {
+    failures.push("The Penn finance and IESE storytelling descriptions must remain removed.");
   }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
