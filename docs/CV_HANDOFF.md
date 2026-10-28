@@ -731,3 +731,41 @@ The **detail view still shows the PDF's first page** through
 Supplementary Information PDF, under-review status, and scientific text are
 unchanged. Do not replace the specific figure preview with the former generic
 `activation-patching-additivity-preview.svg`.
+
+## Research and Research Drafts: sections and dates (2026-10-28)
+
+The CV's former mixed Research section (19 entries) is divided into two
+separately selectable and printable sections:
+
+- **Research (11)**: three manuscripts submitted for peer review
+  (Unit-Region Factorization, Stepping–Stone, and Activation-Patching),
+  four institutional research reports, and four other research projects.
+- **Research Drafts (8)**: six previously featured unsubmitted working
+  documents (four draft notes/manuscripts plus one lecture and one tutorial),
+  the Bayesian-Uncertainty-in-WTI draft, and the mathematical L² notes.
+  Existing entry-specific labels are retained to avoid representing
+  lectures/tutorials as manuscript submissions.
+
+The split preserves all 19 records, their links, scientific descriptions,
+institutional logos, and optional CV section toggles. Both sections use the
+full-width research-entry layout rather than a condensed credential grid.
+
+The owner specified submission/reference months:
+  Unit-Region Factorization: **Jun 2026**
+  Stepping–Stone: **Aug 2026**
+  When Do Activation-Patching Effects Add Up?: **Oct 2026**
+
+These are synchronized in `_data/cv.yml` and the matching
+`display_date` front matter of the three `_pages/papers/*.md`
+records. We do not change journal under-review or under-revision labels
+based solely on date confirmation.
+
+The Springer Nature · SN Computer Science · Under Review **organization
+label is plain text**, not a link to the external journal website:
+only that entry's `organization_url` was removed. Its manuscript page,
+PDF, and Zenodo reproducibility links remain accessible. No other journal
+links or institutional organization links were touched.
+
+`assets/js/cv-customize.js` includes a separate Europass-facing section
+label. `test/style_contract.js` guards the 11+8 split, the three dates
+on both pages, and the missing Springer organization hyperlink.
