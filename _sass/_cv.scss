@@ -1456,7 +1456,7 @@
 /* CV settings stay to the left of the paper on wide screens and collapse
    without hiding the export shortcut. No site-wide navbar changes. */
 @media screen {
-  body:has(.cv-page) .container {
+  .container:has(.cv-page) {
     width: min(100% - 2rem, 1500px);
     max-width: 1500px;
   }
