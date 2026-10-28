@@ -361,7 +361,7 @@ cv:
       - name: Bayesian Uncertainty in WTI Options
         date: "2026"
         role: "Author"
-        organization: "Research draft"
+        context: "Research draft · WTI options"
         links:
           - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
         highlights:
