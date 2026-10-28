@@ -8,7 +8,9 @@ cv:
 
   sections:
     Education:
-      - degree: Bachelor of Science in Data Science
+- degree: Bachelor of Science in Data Science
+        role: "Bachelor of Science"
+        subtitle: "Data Science"
         institution: Universidad de las Américas Puebla
         institution_url: https://www.udlap.mx/
         location: Puebla, Mexico
@@ -18,6 +20,8 @@ cv:
           - "Scholarship: 40%"
           - "Relevant coursework: Complex Networks, TDA, Advanced Optimization, DL, AI, ML, CC & Big Data, ABM, Numerical Methods"
       - degree: Bachelor of Science in Actuarial Science
+        role: "Bachelor of Science"
+        subtitle: "Actuarial Science"
         institution: Universidad de las Américas Puebla
         institution_url: https://www.udlap.mx/
         location: Puebla, Mexico
@@ -27,8 +31,10 @@ cv:
           - "Scholarship: 40%"
           - "Relevant coursework: Ruin Theory, Stochastic Processes, Exotic Derivatives, Administration of Financial Risk, Measure Theory"
 
-    Experience:
-      - name: Research Data Scientist — Mathematics Learning Center
+    Professional Experience:
+- name: Research Data Scientist — Mathematics Learning Center
+        role: "Research Data Scientist"
+        subtitle: "Mathematics Learning Center"
         organization: Universidad de las Américas Puebla
         organization_url: https://www.udlap.mx/
         location: Puebla, Mexico
@@ -38,6 +44,8 @@ cv:
           - Applied unsupervised learning to compare grade-distribution instances through KS based distributional features, generating diagnostics, effect-size summaries, and reports.
           - Built a one-click pipeline with batch scripts that install missing Miniconda, rerun analyses on new data, and regenerate all Python outputs and LaTeX reports automatically.
       - name: Quantitative Analyst
+        role: "Quantitative Analyst"
+        subtitle: "Global Equity"
         organization: Actinver
         organization_url: https://actinver.com/es-MX/home
         location: Mexico City, Mexico
@@ -48,6 +56,8 @@ cv:
           - Web-scraped the latest 100 news items per ticker and normalized metadata by publisher/journal to enable fast filtering, deduplication, and rapid analyst-facing news retrieval.
 
       - name: Academic Assistant — Linear Algebra
+        role: "Academic Assistant"
+        subtitle: "Linear Algebra Course"
         organization: Universidad de las Américas Puebla
         organization_url: https://www.udlap.mx/
         location: Puebla, Mexico
@@ -56,6 +66,8 @@ cv:
           - Created reproducible LaTeX Beamer lectures with theorem environments, diagrams, figures, and structured handouts.
           - Standardized notation and visual assets for linear maps, eigenspaces, diagonalization, and factorizations.
       - name: Analyst — Digital Marketing & Analytics
+        role: "Analyst"
+        subtitle: "Digital Marketing & Analytics"
         organization: Paletas Loreto
         location: Puebla, Mexico
         date: Jan 2021 — Aug 2023
@@ -64,16 +76,9 @@ cv:
           - Verified the business location across Google Maps and Waze and created social media pages to analyze audience engagement.
 
     Programming Experience:
-      - name: Contributor — OpenAI Python SDK
-        date: Sep 2026
-        organization: OpenAI
-        organization_url: https://openai.com/
-        links:
-          - { label: GitHub, url: "https://github.com/openai/openai-python" }
-        highlights:
-          - Updated Python SDK transport-error mapping so mid-stream connection failures surface as stable documented exceptions.
-          - Added synchronous and asynchronous regression tests for transport errors, cleanup, callbacks, and compatibility.
-      - name: AbaQuant — Financial Mathematics Python Library
+- name: AbaQuant — Financial Mathematics Python Library
+        role: "Lead Developer"
+        subtitle: "Financial Mathematics Python Library"
         date: Aug 2024 — Present
         location: Puebla, Mexico
         links:
@@ -83,6 +88,8 @@ cv:
         highlights:
           - Developed a Python library for financial mathematics, with reusable quantitative methods and published package documentation.
       - name: Developer in Proximity Graphs Python Library
+        role: "Co-developer"
+        subtitle: "Computational Geometry Python Library"
         date: Aug 2025 — Present
         location: Puebla, Mexico
         links: [{ label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }]
@@ -90,16 +97,30 @@ cv:
           - Converted proximity-graph constructions from mathematical papers into reproducible, object-oriented Python code, structuring algorithms as modular classes across subpackages.
           - Reorganized the repository architecture for maintainability, enforcing PEP 8/Ruff style conventions and optimizing computational kernels with NumPy vectorization.
           - Implemented continuous-integration workflows in GitHub Actions to run Ruff, PyTest, and package-build checks across multiple Python versions before publishing releases to PyPI.
-      - name: Docling Math — Mathematical PDF Extraction
-        organization: Independent research software
+- name: Contributor — OpenAI Python SDK
+        role: "Contributor"
+        subtitle: "OpenAI Python SDK"
+        date: Sep 2026
+        organization: OpenAI
+        organization_url: https://openai.com/
         links:
-          - { label: Website, url: "https://heri-espino.github.io/docling-math/" }
-          - { label: Documentation, url: "https://heri-espino.github.io/docling-math/docs/" }
-          - { label: GitHub, url: "https://github.com/heri-espino/docling-math" }
+          - { label: GitHub, url: "https://github.com/openai/openai-python" }
         highlights:
-          - Developed a Docling-based Python workflow to extract mathematics-heavy PDFs into structured Markdown, including formula and table reconstruction.
-          - Added source-page provenance, bibliographic metadata, command-line workflows, local desktop processing, and optional Obsidian integration.
+          - Updated Python SDK transport-error mapping so mid-stream connection failures surface as stable documented exceptions.
+          - Added synchronous and asynchronous regression tests for transport errors, cleanup, callbacks, and compatibility.
+      - name: Trend Estimation — Penalized Trend Smoothing Python Library
+        role: "Contributor"
+        subtitle: "Penalized Trend Smoothing Library"
+        organization: Open-source Python library
+        links:
+          - { label: GitHub, url: "https://github.com/trendestimation/trendestimation" }
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/trendestimation.html" }
+        highlights:
+          - Developing reusable finite-difference penalized least-squares smoothing with configurable difference orders and Guerrero observed-difference plug-in means.
+          - Implemented spectral trend fitting and classical in-sample CV, GCV, AICc, and BIC selection for fixed numeric means; examples and optional plotting are included.
       - name: AwesomeFigures — Scientific Visualization Toolkit
+        role: "Developer"
+        subtitle: "Scientific Visualization Toolkit"
         organization: Open-source Python library
         links:
           - { label: Website, url: "https://awesomefigures.github.io/awesomefigures/" }
@@ -108,29 +129,86 @@ cv:
           - Developed Matplotlib-oriented plotting tools with perceptually controlled palettes, established accessible color schemes, and publication-ready styles.
           - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
 
-      - name: Trend Estimation — Penalized Trend Smoothing Python Library
-        organization: Open-source Python library
+      - name: Docling Math — Mathematical PDF Extraction
+        role: "Developer"
+        subtitle: "Mathematical PDF Extraction"
+        organization: Independent research software
         links:
-          - { label: GitHub, url: "https://github.com/trendestimation/trendestimation" }
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/trendestimation.html" }
+          - { label: Website, url: "https://heri-espino.github.io/docling-math/" }
+          - { label: Documentation, url: "https://heri-espino.github.io/docling-math/docs/" }
+          - { label: GitHub, url: "https://github.com/heri-espino/docling-math" }
         highlights:
-          - Developing reusable finite-difference penalized least-squares smoothing with configurable difference orders and Guerrero observed-difference plug-in means.
-          - Implemented spectral trend fitting and classical in-sample CV, GCV, AICc, and BIC selection for fixed numeric means; examples and optional plotting are included.
+          - Developed a Docling-based Python workflow to extract mathematics-heavy PDFs into structured Markdown, including formula and table reconstruction.
+          - Added source-page provenance, bibliographic metadata, command-line workflows, local desktop processing, and optional Obsidian integration.
+
+    Academic Experience:
+      - name: "Asymptotic Characteristics of Proximity Graphs"
+        role: "Contributed Talk"
+        date: "Oct 2026"
+        organization: "59th SMM National Congress · Sociedad Matemática Mexicana"
+        location: "Pre-recorded"
+        url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html"
+        highlights:
+          - "Accepted theoretical research presentation for the national mathematics congress."
+      - name: "ProximityGraphs Python Library"
+        role: "Poster Presenter"
+        date: "Apr 2026"
+        organization: "XLI Colloquium Victor Neumann-Lara · Universidad Nacional Autónoma de México"
+        location: "Morelia, Mexico"
+        url: "https://heri-espino.github.io/presentations/"
+        highlights:
+          - "Presented research software at a specialized national forum."
+      - name: "Latent Risk Estimation in U.S. Markets"
+        role: "Poster Presenter"
+        date: "Mar 2026"
+        organization: "XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
+        location: "Guanajuato, Mexico"
+        url: "https://heri-espino.github.io/projects/latent-risk-us-market.html"
+        highlights:
+          - "Communicated statistical findings in quantitative market-risk research."
+      - name: "Proximity Graphs for TDA and Machine Learning"
+        role: "Poster Presenter"
+        date: "Oct 2025"
+        organization: "II National Congress of Data Science · Universidad de las Américas Puebla"
+        location: "Puebla, Mexico"
+        url: "https://heri-espino.github.io/presentations/"
+        highlights:
+          - "Presented computational geometry and applications in data science."
+
+    Awards:
+      - name: "Audio Classification with LSTM–Transformer Fusion Models"
+        role: "2nd Place"
+        date: "Oct 2025"
+        organization: "Tech Puebla Capital Hack Summit · Government of Mexico"
+        location: "National, Mexico"
+        highlights:
+          - "Developed a fusion model for infant-cry classification."
+      - name: "Water Quality Regression with CatBoost, Tobit and Temporal Kriging"
+        role: "3rd Place"
+        date: "Oct 2025"
+        organization: "II National Congress of Data Science · Universidad de las Américas Puebla"
+        location: "National, Mexico"
+        highlights:
+          - "Built censor-aware regression with CatBoost and Tobit methods."
+      - name: "Undergraduate Mathematical Problem Solving"
+        role: "4th Place"
+        date: "Apr 2025"
+        organization: "5th UDLAP Mathematics Olympiad"
+        location: "On Campus"
+        highlights:
+          - "Proof-based undergraduate mathematical problem solving."
+      - name: "Undergraduate Mathematical Problem Solving"
+        role: "Top 10"
+        date: "Oct 2024"
+        organization: "4th UDLAP Mathematics Olympiad"
+        location: "On Campus"
+        highlights:
+          - "Proof-based undergraduate mathematical problem solving."
 
     Research:
-      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
-        date: "2026"
-        organization: "Springer Nature · SN Computer Science · Under Review"
-        organization_url: https://link.springer.com/journal/42979
-        links:
-          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
-          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
-        highlights:
-          - Studied when joint activation-patching effects can be reconstructed from individual channel changes across controlled CNNs.
-          - Compared multiple architectures and a spatial-permutation control, separating effects of the evaluation metric from failures of logit additivity.
-
-      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
+- name: Unit-Region Factorization for Empty-Region Proximity Graphs
+        role: "First Author"
+        subtitle: "Unit-Region Proximity Graphs"
         date: Jun 2026 — Present
         location: Puebla, Mexico
         links:
@@ -142,6 +220,8 @@ cv:
           - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
           - Implemented Monte Carlo membership checks for equivariance and scaling tests, validating β-skeleton and γ-graph constructions under invariant center-selection rules.
       - name: Volume Constants for Stepping–Stone Empty Regions in Rᵈ
+        role: "First Author"
+        subtitle: "Stepping–Stone Empty Regions"
         date: Jun 2026 — Present
         location: Puebla, Mexico
         links:
@@ -151,7 +231,54 @@ cv:
           - Manuscript under revision for Computational Geometry (Elsevier).
           - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
           - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
+- name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+        role: "Author"
+        date: "2026"
+        organization: "Springer Nature · SN Computer Science · Under Review"
+        organization_url: https://link.springer.com/journal/42979
+        links:
+          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
+          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
+        highlights:
+          - Studied when joint activation-patching effects can be reconstructed from individual channel changes across controlled CNNs.
+          - Compared multiple architectures and a spatial-permutation control, separating effects of the evaluation metric from failures of logit additivity.
+
+      - name: Student Engagement and Adaptation
+        role: "Study Lead"
+        date: Sep 2026
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
+        highlights:
+          - Analyzed longitudinal student engagement and adaptation patterns in introductory mathematics.
+      - name: Instructor Grade Heterogeneity
+        role: "Study Lead"
+        date: Oct 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
+        highlights:
+          - Investigated heterogeneity in grading patterns across 769 university classroom groups.
+      - name: Support Persistence After Incentives
+        role: "Study Lead"
+        date: Sep 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
+        highlights:
+          - Studied whether voluntary academic-support participation persisted after a first-year participation incentive ended.
+      - name: Mathematics Support and Classroom-Relative Performance
+        role: "Study Lead"
+        date: Aug 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
+        highlights:
+          - Analyzed associations between tutoring participation and performance standardized within classrooms.
       - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
+        role: "Author"
+        subtitle: "Trend Estimation Methods"
         date: May 2025 — Present
         location: Puebla, Mexico
         links:
@@ -161,16 +288,13 @@ cv:
         highlights:
           - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
           - Reused spectral solvers for matrix multiplication across smoothness grids and benchmarked HP, Whittaker, MA, ES, and polynomial baselines using RMSE and SMAPE.
-      - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
-        date: Jan 2023 — May 2023
-        location: Puebla, Mexico
+      - name: Bayesian Uncertainty in WTI Options
+        role: "Author"
+        organization: "Research draft"
         links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
+          - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
         highlights:
-          - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
-          - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
+          - Studied the propagation of posterior parameter uncertainty into WTI option valuation.
       - name: Privileged Template Priors for Mechanistic Interpretability in CNNs
         date: Dec 2025 — Present
         location: Puebla, Mexico
@@ -181,6 +305,16 @@ cv:
         highlights:
           - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
           - Measured mechanistic identifiability using template-alignment scores, kernel visualizations, ablations, controlled patching, and class-level responses across classes.
+      - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
+        date: Jan 2023 — May 2023
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
+        highlights:
+          - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
+          - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
       - name: Systemic Liquidity-Crisis Agent-Based Model
         date: Oct 2025 — Present
         location: Puebla, Mexico
@@ -207,142 +341,263 @@ cv:
         highlights:
           - Built reproducible LaTeX Beamer materials with theorem environments, TikZ diagrams, spectral figures, structured handouts, and clean source files for student use.
           - Standardized notation and visual assets for lectures on linear maps, eigenspaces, diagonalization, decompositions, and matrix factorizations for proof-based teaching.
-      - name: Student Engagement and Adaptation
-        date: Sep 2026
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
-        highlights:
-          - Analyzed longitudinal student engagement and adaptation patterns in introductory mathematics.
-      - name: Instructor Grade Heterogeneity
-        date: Oct 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
-        highlights:
-          - Investigated heterogeneity in grading patterns across 769 university classroom groups.
-      - name: Support Persistence After Incentives
-        date: Sep 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
-        highlights:
-          - Studied whether voluntary academic-support participation persisted after a first-year participation incentive ended.
-      - name: Mathematics Support and Classroom-Relative Performance
-        date: Aug 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
-        highlights:
-          - Analyzed associations between tutoring participation and performance standardized within classrooms.
-      - name: Bayesian Uncertainty in WTI Options
-        organization: "Research draft"
-        links:
-          - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
-        highlights:
-          - Studied the propagation of posterior parameter uncertainty into WTI option valuation.
 
-    Schools:
-      - {
-          name: XXIV School of Probability and Statistics,
-          date: Mar 2026,
-          organization: Centro de Investigación en Matemáticas,
-          location: "Guanajuato, Mexico",
-        }
-      - {
-          name: IV School of Quantum Computing,
-          date: Aug 2025,
-          organization: Universidad Nacional Autónoma de México,
-          location: "Mexico City, Mexico",
-        }
+    Selected Academic Projects:
+      - name: "Systemic Liquidity Crises in Crypto CFD"
+        role: "Agent-Based Modeling"
+        date: "Oct 2025"
+        organization: "Course project · LDS1061"
+        url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html"
+        highlights:
+          - "Modeled liquidation cascades from agent shocks and margin calls."
+      - name: "Genetic Algorithm for the UFLP"
+        role: "Optimization"
+        date: "Dec 2025"
+        organization: "Course project · LAT4052"
+        url: "https://heri-espino.github.io/academic-projects/uflp-genetic-algorithm.html"
+        highlights:
+          - "Compared genetic algorithms for uncapacitated facility location."
+      - name: "Credit Scores with Mapper and Homology"
+        role: "Topological Data Analysis"
+        date: "May 2024"
+        organization: "Course project · LDS1041"
+        url: "https://heri-espino.github.io/academic-projects/credit-scores-mapper-homology.html"
+        highlights:
+          - "Studied credit-score topology with Mapper and homology."
+      - name: "U.S. Supply-Chain Network"
+        role: "Complex Networks"
+        date: "Sep 2026"
+        organization: "Course project · LDS1121"
+        url: "https://heri-espino.github.io/academic-projects/sp500-supply-chain-network.html"
+        highlights:
+          - "Applied link prediction to an S&P 500 supplier network."
+      - name: "Precipitation Forecasting in Puebla"
+        role: "Time Series"
+        date: "Apr 2025"
+        organization: "Course project · LEC4032"
+        url: "https://heri-espino.github.io/academic-projects/precipitation-time-series-puebla.html"
+        highlights:
+          - "Forecast precipitation with SARIMA."
+      - name: "Mexico-Linked Futures"
+        role: "Derivatives"
+        date: "Sep 2025"
+        organization: "Course project · LAT4012"
+        url: "https://heri-espino.github.io/academic-projects/mexico-linked-futures.html"
+        highlights:
+          - "Priced Mexico-linked futures and compared term structures."
+      - name: "Synthetic CDO Tranches"
+        role: "Credit Derivatives"
+        date: "May 2026"
+        organization: "Course project · LAT4092"
+        url: "https://heri-espino.github.io/academic-projects/synthetic-cdo-tranche-valuation.html"
+        highlights:
+          - "Valued synthetic CDO tranches under Gaussian dependence."
+      - name: "Causality Network for Crypto"
+        role: "Data Visualization"
+        date: "May 2025"
+        organization: "Course project · LDS1131"
+        url: "https://heri-espino.github.io/academic-projects/crypto-causality-network.html"
+        highlights:
+          - "Mapped Granger-causality links across cryptocurrency series."
+      - name: "XGBoost for Credit Approval"
+        role: "Econometrics"
+        date: "Nov 2024"
+        organization: "Course project · LEC3092"
+        url: "https://heri-espino.github.io/academic-projects/xgboost-credit-approval.html"
+        highlights:
+          - "Trained a predictive model for credit approval."
+      - name: "Margrabe Option Derivation"
+        role: "Exotic Derivatives"
+        date: "May 2026"
+        organization: "Course project · LAT4092"
+        url: "https://heri-espino.github.io/academic-projects/margrabe-option-derivation.html"
+        highlights:
+          - "Derived the Margrabe option-exchange pricing formula."
+      - name: "Actuarial Risk Portfolio"
+        role: "Risk Management"
+        date: "May 2026"
+        organization: "Course project · LAT4062"
+        url: "https://heri-espino.github.io/academic-projects/actuarial-risk-analysis-portfolio.html"
+        highlights:
+          - "Analyzed market, credit, operational and liquidity risks."
+      - name: "Methane Emissions in Mexico"
+        role: "Spatial Analysis"
+        date: "Oct 2025"
+        organization: "Course project · LDS1111"
+        url: "https://heri-espino.github.io/academic-projects/methane-emissions-spatial-clustering.html"
+        highlights:
+          - "Used spatially constrained clustering to study emissions."
+      - name: "Spatial Dynamics in Mexico City"
+        role: "Spatial Statistics"
+        date: "Nov 2025"
+        organization: "Course project · LDS1111"
+        url: "https://heri-espino.github.io/academic-projects/mexico-city-theft-spatial-dynamics.html"
+        highlights:
+          - "Analyzed spatial patterns with Moran's I and LISA."
 
     Leadership:
-      - {
-          name: President of Pretty Good Quantum OE,
-          date: Jan 2026 — Jun 2026,
-          organization: Universidad de las Américas Puebla,
-          location: On Campus,
-        }
-      - {
-          name: Vice-President Bitwise Competitive Programming,
-          date: Jan 2025 — Jun 2026,
-          organization: Universidad de las Américas Puebla,
-          location: On Campus,
-        }
+      - name: "Quantum Computing Curriculum and Instruction"
+        role: "President"
+        date: "Jan 2026 — Jun 2026"
+        organization: "Pretty Good Quantum OE · Universidad de las Américas Puebla"
+        highlights:
+          - "Organized classes, registrations, and classroom requests."
+      - name: "C++ Algorithms and Complexity Instruction"
+        role: "Vice-President"
+        date: "Jan 2025 — Jun 2026"
+        organization: "Bitwise Competitive Programming · Universidad de las Américas Puebla"
+        highlights:
+          - "Taught C++ and helped prepare classes and assignments."
+      - name: "How to Control Global Outbreaks of Infectious Diseases"
+        role: "Best President"
+        date: "Jun 2021 — Jul 2021"
+        organization: "Model of United Nations Third Edition · WHO · Colegio Loyola"
+        highlights:
+          - "Led and coordinated the WHO committee simulation."
 
-    Awards:
-      - { name: 2nd Place Tech Puebla Capital Hack Summit, date: Oct 2025, organization: Government of Mexico, location: "National, Mexico" }
-      - {
-          name: 3rd Place Datathon on II National Congress of Data Science,
-          date: Oct 2025,
-          organization: Universidad de las Américas Puebla,
-          location: "National, Mexico",
-        }
-      - {
-          name: 4th Place on The 5th UDLAP Mathematics Olympiad,
-          date: Apr 2025,
-          organization: Universidad de las Américas Puebla,
-          location: On Campus,
-        }
-      - { name: Top 10 on The 4th UDLAP Mathematics Olympiad, date: Oct 2024, organization: Universidad de las Américas Puebla, location: On Campus }
+    Schools:
+      - name: "Probability, Bayesian Inference and Stochastic Modeling"
+        role: "Participant"
+        date: "Mar 2026"
+        organization: "XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
+        location: "Guanajuato, Mexico"
+        highlights:
+          - "Studied Gaussian processes and Bayesian decision-making."
+      - name: "Quantum Computing and Algorithms"
+        role: "Participant"
+        date: "Aug 2025"
+        organization: "IV School of Quantum Computing · Universidad Nacional Autónoma de México"
+        location: "Mexico City, Mexico"
+        highlights:
+          - "Studied quantum circuits, algorithms, and Qiskit."
+      - name: "Topological Data Analysis"
+        role: "Participant"
+        date: "Jun 2024"
+        organization: "Un Acercamiento al Análisis Topológico de Datos · Benemérita Universidad Autónoma de Puebla"
+        location: "Puebla, Mexico"
+        highlights:
+          - "Studied methods for extracting geometric structure from data."
 
-    Academic Activities:
-      - {
-          name: Contributed Talk — Asymptotic Characteristics of Proximity Graphs,
-          date: Oct 2026,
-          organization: Sociedad Matemática Mexicana — 59th National Congress,
-          location: "Mexico (pre-recorded)",
-          url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html",
-        }
-      - {
-          name: Poster Presenter on XLI Colloquium Victor Neumann-Lara,
-          date: Apr 2026,
-          organization: Universidad Nacional Autónoma de México,
-          location: "Morelia, Mexico",
-        }
-      - {
-          name: Poster Presenter on XXIV School of Probability and Statistics,
-          date: Mar 2026,
-          organization: Centro de Investigación en Matemáticas,
-          location: "Guanajuato, Mexico",
-        }
-      - {
-          name: Poster Presenter on II National Congress of Data Science,
-          date: Oct 2025,
-          organization: Universidad de las Américas Puebla,
-          location: "Puebla, Mexico",
-        }
+    Selected Extracurricular Activities:
+      - name: "William Lowell Putnam Math Competition"
+        role: "Competitor"
+        subtitle: "Proof-Based Undergraduate Mathematics"
+        date: "Dec 2024, Dec 2025"
+        organization: "Mathematical Association of America"
+        highlights:
+          - "Represented UDLAP in an international proof-based mathematics competition."
+      - name: "Olimpiada Mexicana Universitaria de Matemáticas"
+        role: "Competitor"
+        subtitle: "Proof-Based University Mathematics"
+        date: "Jun 2025"
+        organization: "Centro de Investigación en Matemáticas"
+        highlights:
+          - "Solved proof-based problems in a national mathematics competition."
+      - name: "Stevens High Frequency Trading Competition"
+        role: "Competitor"
+        subtitle: "High-Frequency Algorithmic Trading"
+        date: "May 2026"
+        organization: "Stevens Institute of Technology"
+        highlights:
+          - "Developed trading algorithms using order-book information."
+      - name: "Futures Trading Challenge"
+        role: "Competitor"
+        subtitle: "Multi-Asset Futures Portfolio"
+        date: "Feb 2026, Mar 2026"
+        organization: "CME Group"
+        highlights:
+          - "Constructed a futures portfolio with risk controls."
+      - name: "Medication Errors Prevention Challenge"
+        role: "Competitor"
+        subtitle: "Cephalosporin Clinical Decision Support System"
+        date: "Nov 2025"
+        organization: "International Society of Pharmacovigilance"
+        highlights:
+          - "Built a clinical decision-support prototype."
+      - name: "ExoData Challenge"
+        role: "Competitor"
+        subtitle: "Exoplanet Data Analysis"
+        date: "May 2026"
+        organization: "Gobierno de Puebla"
+        highlights:
+          - "Analyzed astronomical data with observation-bias considerations."
+      - name: "Actinver Challenge"
+        role: "Competitor"
+        subtitle: "Multi-Asset Portfolio Construction"
+        date: "Oct 2024, Oct 2025"
+        organization: "Actinver"
+        highlights:
+          - "Developed and monitored an investment strategy."
+      - name: "HackODS 2026"
+        role: "Participant"
+        subtitle: "UN Sustainable Development Goals"
+        date: "May 2026"
+        organization: "Universidad Nacional Autónoma de México"
+        highlights:
+          - "Built a data-driven dashboard for sustainability indicators."
+        url: "https://heri-espino.github.io/HackODS2026"
+      - name: "Agrocebada Challenge"
+        role: "Participant"
+        subtitle: "Barley Yield Analytics"
+        date: "Oct 2026"
+        organization: "FIRA"
+        highlights:
+          - "Developed barley-yield estimates and a geographic dashboard."
+        url: "https://heri-espino.github.io/GeoC/"
+      - name: "KN Hack Research Challenge"
+        role: "Competitor"
+        date: "Jun 2026"
+        organization: "Kaxa Nuk"
+      - name: "BugaMap Challenge"
+        role: "Competitor"
+        date: "Mar 2026"
+        organization: "MAPFRE"
+      - name: "Coppel Challenge"
+        role: "Competitor"
+        date: "Mar 2025"
+        organization: "Coppel"
 
-    Competitions & Activities:
-      - { name: ExoData Challenge, date: May 2026, organization: Gobierno de Puebla, location: National }
-      - { name: Stevens High Frequency Trading Competition, date: May 2026, organization: Stevens Institute of Technology, location: International }
-      - { name: HackODS 2026, date: May 2026, organization: Universidad Nacional Autónoma de México, location: "National, Mexico" }
-      - { name: KN Hack Research Challenge, date: Jun 2026, organization: Kaxa Nuk, location: "National, Mexico" }
-      - { name: BugaMap Challenge, date: Mar 2026, organization: MAPFRE, location: "National, Mexico" }
-      - { name: Futures Trading Challenge, date: "Feb 2026, Mar 2026", organization: CME Group, location: International }
-      - {
-          name: William Lowell Putnam Math Competition,
-          date: "Dec 2024, Dec 2025",
-          organization: Mathematical Association of America,
-          location: North America,
-        }
-      - {
-          name: Medication Errors Prevention Challenge,
-          date: Nov 2025,
-          organization: International Society of Pharmacovigilance,
-          location: International,
-        }
-      - { name: Actinver Challenge, date: "Oct 2024, Oct 2025", organization: Actinver, location: "National, Mexico" }
-      - {
-          name: Olimpiada Mexicana Universitaria de Matemáticas,
-          date: Jun 2025,
-          organization: Centro de Investigación en Matemáticas,
-          location: "National, Mexico",
-        }
-      - { name: Coppel Challenge, date: Mar 2025, organization: Coppel, location: "National, Mexico" }
+    Technical Skills:
+      - { name: "Programming Languages", values: "Python · Julia · C++ · C · R · Java · Mosel · VBA · SQL" }
+      - { name: "AI & Machine Learning", values: "PyTorch · TensorFlow · scikit-learn · Statsmodels · CatBoost · XGBoost · Vertex AI · LangChain · Ollama · Docling" }
+      - { name: "Scientific Computing", values: "NumPy · SciPy · Numba · pandas · Polars · RAPIDS" }
+      - { name: "Data Engineering & Cloud", values: "Google Cloud Platform · Apache Airflow · PostgreSQL · MySQL · MongoDB · Neo4j · REST APIs · ETL pipelines" }
+      - { name: "Development & Systems", values: "Git · Docker · Jupyter · Google Colab · RStudio · uv · Conda · Vim · WSL2 · Linux · macOS · Windows 11 · Bash · Zsh · PowerShell" }
+      - { name: "Visualization & Documents", values: "Matplotlib · Plotly · Seaborn · UMAP · LaTeX/Beamer · Streamlit · Markdown · HTML · Power BI · Quarto · GeoGebra · Desmos" }
+      - { name: "Research & Specialized Tools", values: "NetworkX · GeoPandas · Mesa · Solara · Qiskit · NetLogo · QGIS · Mapper · Bloomberg Terminal · IBKR Trader Workstation" }
 
-    Courses & Certifications:
+    Online Courses:
+- {
+          name: TensorFlow 2 for Deep Learning Specialization,
+          organization: Imperial College London,
+          date: Jul 2026,
+          credential: XCI033EN2OJO,
+          url: "https://www.coursera.org/account/accomplishments/certificate/XCI033EN2OJO",
+        }
       - {
+          name: Practical Guide to Trading Specialization,
+          organization: Interactive Brokers,
+          date: Jul 2026,
+          credential: 92F6VOZC91R6,
+          url: "https://www.coursera.org/account/accomplishments/certificate/92F6VOZC91R6",
+        }
+      - name: "Introduction to Corporate Finance"
+        role: "Course"
+        organization: "University of Pennsylvania"
+        date: "Jul 2026"
+        credential: "VGPY42B2NEB6"
+        url: "https://www.coursera.org/account/accomplishments/certificate/VGPY42B2NEB6"
+        highlights:
+          - "Applied valuation, capital budgeting and cost-of-capital methods."
+      - name: "The Art of Storytelling"
+        role: "Course"
+        organization: "IESE Business School"
+        date: "Jul 2026"
+        credential: "PZ6TSICQOM97"
+        url: "https://www.coursera.org/account/accomplishments/certificate/PZ6TSICQOM97"
+        highlights:
+          - "Studied structured storytelling for diverse audiences."
+- {
           name: Central Banks and Monetary Policy,
           organization: University of Illinois Urbana-Champaign,
           date: Feb 2026,
@@ -399,6 +654,20 @@ cv:
           url: "https://www.coursera.org/account/accomplishments/specialization/certificate/0OGJ0RXG21O9",
         }
       - {
+          name: ML and RL in Finance Specialization,
+          organization: New York University,
+          date: In progress,
+          credential: 47O3HLM8BODX,
+          url: "https://www.coursera.org/account/accomplishments/certificate/47O3HLM8BODX",
+        }
+      - {
+          name: Bayesian Statistics Specialization,
+          organization: UC Santa Cruz,
+          date: In progress,
+          credential: 4FAE9UY8ZIEJ,
+          url: "https://www.coursera.org/account/accomplishments/certificate/4FAE9UY8ZIEJ",
+        }
+      - {
           name: Quantum Computing Specialization,
           organization: Packt,
           date: Dec 2025,
@@ -441,61 +710,21 @@ cv:
           url: "https://www.coursera.org/account/accomplishments/specialization/certificate/3HFUXXSZM3D4",
         }
       - {
-          name: ML and RL in Finance Specialization,
-          organization: New York University,
-          date: In progress,
-          credential: 47O3HLM8BODX,
-          url: "https://www.coursera.org/account/accomplishments/certificate/47O3HLM8BODX",
-        }
-      - {
-          name: Bayesian Statistics Specialization,
-          organization: UC Santa Cruz,
-          date: In progress,
-          credential: 4FAE9UY8ZIEJ,
-          url: "https://www.coursera.org/account/accomplishments/certificate/4FAE9UY8ZIEJ",
-        }
-      - {
           name: Financial Engineering and Risk Management Specialization,
           organization: Columbia University,
           date: In progress,
           credential: X45X58MF1V07,
           url: "https://www.coursera.org/account/accomplishments/certificate/X45X58MF1V07",
         }
-      - {
-          name: TensorFlow 2 for Deep Learning Specialization,
-          organization: Imperial College London,
-          date: In progress,
-          credential: XCI033EN2OJO,
-          url: "https://www.coursera.org/account/accomplishments/certificate/XCI033EN2OJO",
-        }
-      - {
-          name: Practical Guide to Trading Specialization,
-          organization: Interactive Brokers,
-          date: In progress,
-          credential: 92F6VOZC91R6,
-          url: "https://www.coursera.org/account/accomplishments/certificate/92F6VOZC91R6",
-        }
-
-    Technical Skills:
-      - { name: Programming, values: "Python · C++ · R · SQL · Java · Mosel · Excel/VBA" }
-      - { name: Machine Learning, values: "PyTorch · TensorFlow · Scikit-Learn · Statsmodels · CatBoost · XGBoost · LangChain" }
-      - { name: Data Processing, values: "NumPy · SciPy · Numba · Pandas · Polars · RAPIDS" }
-      - {
-          name: Data Engineering,
-          values: "Airflow (Cloud Composer) · PostgreSQL · MySQL · REST ingestion · Version-controlled ETL · MongoDB · Neo4J",
-        }
-      - { name: Developer Tools, values: "Linux (Arch/Ubuntu) · WSL2 · Bash · Git · Conda · Docker/Compose" }
-      - { name: Visualization, values: "Matplotlib · Plotly · Seaborn · LaTeX · Markdown · HTML · Power BI" }
-      - { name: Specialized, values: "NetworkX · GeoPandas · Mesa · Solara · Qiskit · NetLogo · QGIS" }
 
     Languages:
-      - { name: Spanish, values: Native }
+- { name: Spanish, values: Native }
       - { name: English, values: C1 }
       - { name: German, values: A1 }
       - { name: French, values: A1 }
 
     Volunteering:
-      - name: Water contamination analysis for Xalmimilulco
+- name: Water contamination analysis for Xalmimilulco
         organization: Data Scientist
         date: Jan 2026 — Present
         location: Puebla, Mexico
