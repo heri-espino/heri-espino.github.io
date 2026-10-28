@@ -24,6 +24,8 @@
   const resetButton = document.getElementById("cv-reset");
   const previewButton = document.getElementById("cv-preview");
   const previewHelp = document.getElementById("cv-preview-help");
+  const sourceDocument = document.getElementById("cv-document");
+  const pagedPreview = document.getElementById("cv-paged-preview");
   const printToggles = Array.from(root.querySelectorAll("[data-cv-print-toggle]"));
   const entryPicker = document.getElementById("cv-entry-picker");
   const entryCount = document.getElementById("cv-entry-count");
@@ -43,6 +45,8 @@
     !resetButton ||
     !previewButton ||
     !previewHelp ||
+    !sourceDocument ||
+    !pagedPreview ||
     !entryPicker ||
     !entryCount ||
     !entrySearch ||
@@ -180,8 +184,8 @@
     previewButton.textContent = paper ? "Full-width view" : "Paper preview";
     previewButton.setAttribute("aria-pressed", String(paper));
     previewHelp.textContent = paper
-      ? "Live paper-width preview; page breaks are approximated. Print / Save as PDF opens the exact paginated preview."
-      : "Full-width reading view; choose Paper preview to see the print-style page.";
+      ? "Page-by-page preview is approximate; the browser's Print dialog shows the final page breaks."
+      : "Full-width reading view; choose Paper preview to inspect the page-by-page layout.";
   };
   const pageStyle = document.createElement("style");
   pageStyle.id = "cv-page-size";
@@ -191,6 +195,128 @@
     const toggle = toggles.find((item) => item.dataset.cvSectionToggle === section.dataset.cvSection);
     return !toggle || toggle.checked;
   };
+
+
+  // The browser's print engine is authoritative. The screen-only sheet stack
+  // provides a measured, block-level approximation without mutating printable
+  // source markup, altering entry selectors or forcing artificial PDF breaks.
+  function renderPagedPreview() {
+    if (root.dataset.cvPreview !== "paper") {
+      pagedPreview.hidden = true;
+      return;
+    }
+    pagedPreview.hidden = false;
+    pagedPreview.replaceChildren();
+
+    let pageNumber = 0;
+    let overlongBlocks = 0;
+    const newPage = () => {
+      pageNumber += 1;
+      const wrapper = document.createElement("div");
+      wrapper.className = "cv-preview-page";
+      const label = document.createElement("p");
+      label.className = "cv-preview-page-number";
+      label.textContent = "Page " + pageNumber + " · " + (controls.paper.value === "letter" ? "US Letter" : "A4");
+      const sheet = document.createElement("div");
+      sheet.className = "cv-preview-sheet";
+      const body = document.createElement("div");
+      body.className = "cv-preview-paper-body";
+      const content = document.createElement("article");
+      content.className = "cv-content";
+      body.appendChild(content);
+      sheet.appendChild(body);
+      wrapper.append(label, sheet);
+      pagedPreview.appendChild(wrapper);
+      return { body, sheet, content };
+    };
+    let page = newPage();
+
+    // Clones must not duplicate the IDs of elements in the printable source.
+    const cloneForPreview = (node) => {
+      const copy = node.cloneNode(true);
+      if (copy.hasAttribute("id")) copy.removeAttribute("id");
+      copy.removeAttribute("aria-labelledby");
+      copy.querySelectorAll("[id], [aria-labelledby]").forEach((child) => {
+        child.removeAttribute("id");
+        child.removeAttribute("aria-labelledby");
+      });
+      return copy;
+    };
+
+    const intro = sourceDocument.querySelector(".cv-intro");
+    if (intro) {
+      const heading = cloneForPreview(intro);
+      heading.querySelector(".post-description")?.remove();
+      page.body.insertBefore(heading, page.content);
+    }
+
+    const groups = [];
+    if (controls.order.value !== "sections" && !timeline.hidden) {
+      groups.push({
+        title: "Chronological record",
+        tag: "div",
+        listClass: "cv-entry-list",
+        items: Array.from(timelineItems.children),
+      });
+    }
+
+    for (const section of sections) {
+      if (section.hidden) continue;
+      const originalList = section.querySelector(".cv-entry-list, .cv-compact-grid, .cv-skills, .cv-inline-list");
+      if (!originalList) continue;
+      const items = Array.from(originalList.children).filter(
+        (item) => item.dataset.cvIncluded !== "false"
+      );
+      if (!items.length) continue;
+      groups.push({
+        title: section.dataset.cvTitle || "Section",
+        tag: originalList.tagName.toLowerCase(),
+        listClass: originalList.className,
+        items,
+      });
+    }
+
+    const startGroup = (group, continued) => {
+      const section = document.createElement("section");
+      section.className = "cv-section";
+      const heading = document.createElement("h2");
+      heading.textContent = group.title + (continued ? " (continued)" : "");
+      const list = document.createElement(group.tag);
+      list.className = group.listClass;
+      section.append(heading, list);
+      page.content.appendChild(section);
+      return { section, list };
+    };
+
+    for (const group of groups) {
+      let block = startGroup(group, false);
+      for (const original of group.items) {
+        const entry = cloneForPreview(original);
+        block.list.appendChild(entry);
+        if (page.body.scrollHeight <= page.body.clientHeight + 2) continue;
+
+        // Do not strand a section heading by itself at a page boundary.
+        entry.remove();
+        if (!block.list.children.length) block.section.remove();
+        page = newPage();
+        block = startGroup(group, true);
+        block.list.appendChild(entry);
+
+        // An individual record may be longer than one sheet; retain its
+        // entire text visibly rather than clipping or silently discarding it.
+        if (page.body.scrollHeight > page.body.clientHeight + 2) {
+          page.sheet.dataset.cvOverflow = "true";
+          overlongBlocks += 1;
+        }
+      }
+    }
+
+    previewHelp.textContent = pageNumber + " approximate " +
+      (pageNumber === 1 ? "page" : "pages") + " (" +
+      (controls.paper.value === "letter" ? "US Letter" : "A4") +
+      "). Page breaks can differ in the browser's Print dialog." +
+      (overlongBlocks ? " Some long entries may span a printed page." : "");
+  }
 
   const render = () => {
     const order = controls.order.value;
@@ -233,6 +359,7 @@
       timelineItems.replaceChildren();
       status.textContent = entries.filter((item) => item.included && included(item.section)).length +
         " entries selected across " + toggles.filter((toggle) => toggle.checked).length + " sections";
+      renderPagedPreview();
       return;
     }
 
@@ -259,6 +386,7 @@
     timelineItems.replaceChildren(fragment);
     timeline.hidden = active.length === 0;
     status.textContent = active.length + " selected entries in chronological order";
+    renderPagedPreview();
   };
 
   Object.values(controls).forEach((control) => control.addEventListener("change", render));
@@ -288,7 +416,8 @@
   controls.accent.addEventListener("input", render);
   previewButton.addEventListener("click", () => {
     setPreview(root.dataset.cvPreview === "paper" ? "reading" : "paper");
-    document.getElementById("cv-document").scrollIntoView({ behavior: "smooth", block: "start" });
+    renderPagedPreview();
+    (root.dataset.cvPreview === "paper" ? pagedPreview : sourceDocument).scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   resetButton.addEventListener("click", () => {
@@ -333,4 +462,18 @@
 
   setPreview("paper");
   render();
+
+  // Recalculate when text metrics or responsive page width change.
+  // One layout pass per frame prevents resize-event storms.
+  let resizeFrame = 0;
+  window.addEventListener("resize", () => {
+    if (resizeFrame) cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(() => {
+      resizeFrame = 0;
+      renderPagedPreview();
+    });
+  });
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(() => renderPagedPreview());
+  }
 })();

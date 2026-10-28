@@ -108,6 +108,15 @@ cv:
           - Developed Matplotlib-oriented plotting tools with perceptually controlled palettes, established accessible color schemes, and publication-ready styles.
           - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
 
+      - name: Trend Estimation — Penalized Trend Smoothing Python Library
+        organization: Open-source research software
+        links:
+          - { label: GitHub, url: "https://github.com/trendestimation/trendestimation" }
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/trendestimation.html" }
+        highlights:
+          - Developing reusable finite-difference penalized least-squares smoothing with configurable difference orders and Guerrero observed-difference plug-in means.
+          - Implemented spectral trend fitting and classical in-sample CV, GCV, AICc, and BIC selection for fixed numeric means; examples and optional plotting are included.
+
     Research:
       - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
         date: "2026"

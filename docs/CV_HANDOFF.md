@@ -166,3 +166,36 @@ All customizations are ephemeral and can be restored with **Reset options**.
 The full dataset, active hyperlink destinations, source PDF files, and
 original records are not deleted. The generated PDF reflects the current
 selection; it is not a permanent or shared profile change.
+
+
+## Paginated on-screen CV preview and Trend Estimation library (2026-10-27)
+
+The paper preview is now rendered as individually numbered A4 or US Letter
+sheets, with the chosen font, template, accent, text size, margins and
+visibility controls. The screen-only pages are assembled from clones of
+the original, user-filtered records, and a section heading is repeated as
+"(continued)" when its entries move to another preview sheet. The original
+Jekyll-rendered `#cv-document` remains the **only printed document**;
+the browser print engine, not the approximate JavaScript page stack, decides
+real PDF page breaks. Preview sheets never print.
+
+Single-entry overflow is intentionally not truncated; inspect the browser
+Print dialog for the final result. The preview is recalculated on selection,
+layout, font-loading and viewport changes. Mobile scaling may differ from
+desktop pagination. No new PDF library, third-party service, or private CV
+source file is introduced.
+
+The public CV's **Programming Experience** now includes
+[trendestimation](https://github.com/trendestimation/trendestimation), a
+developing research package separate from the forecasting experiments in the
+older Trend-Estimation repository. Its claims reflect the repository README:
+difference-order PLS smoothing, spectral computation, classical in-sample
+criteria for **fixed numeric means**, and optional plotting. Do not list it
+as PyPI-published or invent a start date. The existing project detail page
+already links the same canonical repository and needs no duplicate project.
+
+Validation: syntax-check `assets/js/cv-customize.js`, run
+`node test/style_contract.js` and the Jekyll build; visually inspect both
+paper sizes, all five templates, chronological/grouped layout, entries hidden,
+text-size/margin switches and the print-only source document. Confirm that
+the browser printout does not duplicate the generated preview sheets.

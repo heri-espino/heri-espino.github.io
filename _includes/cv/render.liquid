@@ -128,7 +128,7 @@
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
-    <p class="cv-preview-help" id="cv-preview-help">Live A4 paper-width preview. The browser's Print dialog shows exact page breaks.</p>
+    <p class="cv-preview-help" id="cv-preview-help">Paginated A4 preview. Print / Save as PDF opens the browser's exact page layout.</p>
     <p class="cv-disclaimer">
       The Harvard-inspired option is an independent academic CV style, not an official Harvard University template.
       Chronological sorting uses each entry's first listed date. Undated sections remain after the timeline.
@@ -275,6 +275,7 @@
     {% endfor %}
   </article>
   </div>
+  <div class="cv-paged-preview" id="cv-paged-preview" aria-label="Page-by-page CV preview" hidden></div>
 </div>
 
 <script src="{{ '/assets/js/cv-customize.js' | relative_url }}" defer></script>

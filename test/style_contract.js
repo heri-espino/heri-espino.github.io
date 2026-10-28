@@ -147,6 +147,12 @@ if (exists("_pages/cv.md")) {
   if (!cvStyles.includes('data-cv-included="false"') || !cvStyles.includes('data-cv-show-icons="false"')) {
     failures.push("CV hidden item and icon selectors are missing.");
   }
+  if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
+    failures.push("CV must provide screen-only numbered paper-sheet previews.");
+  }
+  if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
+    failures.push("Programming CV must link the canonical trendestimation library.");
+  }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }
