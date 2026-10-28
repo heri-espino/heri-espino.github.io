@@ -137,3 +137,32 @@ Check contrast for custom user-selected colors and mobile behavior. Institutiona
 icons remain generic category pictograms, not official brands. Settings are
 ephemeral to the current page and are reset by Reset options. Print settings
 never modify the content YAML or private uploaded XeLaTeX sources.
+
+## Granular PDF / print customization
+
+The CV print toolbar has an expandable **Print content and layout** panel:
+toggle organization/link pictograms, dates, locations, credential IDs,
+organization names, highlight bullets, visible resource link labels, and
+header contact links. All are enabled by default; these selections affect
+the live paper preview and the PDF output and never modify CV YAML.
+
+The print panel also selects **small / standard / large** base text size
+and **8 / 13 / 19 mm** page margins. The `@page` rule receives only the
+whitelisted page size and margin values. The paper-width preview reflects
+the selected margins and approximate body font size; the actual browser
+print dialog is authoritative for pagination.
+
+**Choose individual entries** is a searchable, section-grouped checklist
+populated by the original HTML CV entries. Every research item, employment
+role, academic activity, award, competition and certification can be
+excluded separately. Include-all and exclude-all controls work across
+the whole CV (not just search results); a higher-level section checkbox
+takes precedence. Grouped layouts hide empty sections; chronological
+layouts omit excluded entries, including copied entries. A section's
+skill list or language list remains controllable as a whole from the
+Sections picker, not as individually selectable entries.
+
+All customizations are ephemeral and can be restored with **Reset options**.
+The full dataset, active hyperlink destinations, source PDF files, and
+original records are not deleted. The generated PDF reflects the current
+selection; it is not a permanent or shared profile change.

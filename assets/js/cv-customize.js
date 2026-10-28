@@ -14,6 +14,8 @@
     palette: document.getElementById("cv-palette"),
     accent: document.getElementById("cv-custom-accent"),
     printUrls: document.getElementById("cv-print-urls"),
+    size: document.getElementById("cv-text-size"),
+    margin: document.getElementById("cv-page-margin"),
   };
   const timeline = document.getElementById("cv-timeline");
   const timelineItems = document.getElementById("cv-timeline-items");
@@ -22,6 +24,13 @@
   const resetButton = document.getElementById("cv-reset");
   const previewButton = document.getElementById("cv-preview");
   const previewHelp = document.getElementById("cv-preview-help");
+  const printToggles = Array.from(root.querySelectorAll("[data-cv-print-toggle]"));
+  const entryPicker = document.getElementById("cv-entry-picker");
+  const entryCount = document.getElementById("cv-entry-count");
+  const entrySearch = document.getElementById("cv-entry-search");
+  const entryOptions = document.getElementById("cv-entry-options");
+  const allEntriesButton = document.getElementById("cv-entries-all");
+  const noEntriesButton = document.getElementById("cv-entries-none");
   const toggles = Array.from(root.querySelectorAll("[data-cv-section-toggle]"));
   const sections = Array.from(root.querySelectorAll(".cv-content [data-cv-section]"));
 
@@ -33,7 +42,13 @@
     !printButton ||
     !resetButton ||
     !previewButton ||
-    !previewHelp
+    !previewHelp ||
+    !entryPicker ||
+    !entryCount ||
+    !entrySearch ||
+    !entryOptions ||
+    !allEntriesButton ||
+    !noEntriesButton
   ) return;
 
   // Sort by the first calendar date, not by the present-day end of an ongoing role.
@@ -93,11 +108,45 @@
       sectionIndex,
       index,
       timestamp: parseStartDate(element.dataset.cvDate),
+      included: true,
+      label: element.querySelector("h3")?.textContent.trim() || "Unnamed entry",
     }))
   );
 
+  // Build checkboxes from existing Jekyll-rendered entries; do not duplicate data.
+  // Checkbox changes affect both grouped and chronological views.
+  const entryControls = new Map();
+  sections.forEach((section) => {
+    const groupEntries = entries.filter((item) => item.section === section);
+    if (!groupEntries.length) return;
+    const group = document.createElement("fieldset");
+    group.className = "cv-entry-option-group";
+    const legend = document.createElement("legend");
+    legend.textContent = section.dataset.cvTitle;
+    group.appendChild(legend);
+    groupEntries.forEach((item) => {
+      const label = document.createElement("label");
+      label.className = "cv-entry-option";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = true;
+      checkbox.setAttribute("aria-label", "Include " + item.label);
+      const title = document.createElement("span");
+      title.textContent = item.label;
+      label.append(checkbox, title);
+      group.appendChild(label);
+      entryControls.set(item, { checkbox, label, group });
+      checkbox.addEventListener("change", () => {
+        item.included = checkbox.checked;
+        render();
+      });
+    });
+    entryOptions.appendChild(group);
+  });
+
   // Only whitelisted values can alter @page. Never insert arbitrary user strings into CSS.
   const pageSizes = { a4: "A4", letter: "letter" };
+  const pageMargins = { narrow: "8mm", standard: "13mm", wide: "19mm" };
   const paletteColors = {
     velvet: "#00166c",
     sapphire: "#123b63",
@@ -150,6 +199,17 @@
     root.dataset.cvDensity = controls.density.value;
     root.dataset.cvPaper = controls.paper.value;
     root.dataset.cvShowUrls = controls.printUrls.checked ? "true" : "false";
+    root.dataset.cvTextSize = controls.size.value;
+    for (const toggle of printToggles) {
+      root.dataset["cvShow" + toggle.dataset.cvPrintToggle[0].toUpperCase() + toggle.dataset.cvPrintToggle.slice(1)] =
+        toggle.checked ? "true" : "false";
+    }
+    const chosenMargin = pageMargins[controls.margin.value] || pageMargins.standard;
+    root.style.setProperty("--cv-print-margin", chosenMargin);
+    entries.forEach((item) => {
+      item.element.dataset.cvIncluded = item.included ? "true" : "false";
+    });
+    entryCount.textContent = "(" + entries.filter((item) => item.included).length + " / " + entries.length + ")";
     const selectedPalette = controls.palette.value;
     controls.accent.disabled = selectedPalette !== "custom";
     const color = selectedPalette === "custom"
@@ -157,23 +217,27 @@
       : paletteColors[selectedPalette] || templateDefaults[controls.template.value] || paletteColors.velvet;
     // Strictly validate hex color; do not interpolate arbitrary strings into CSS.
     root.style.setProperty("--cv-accent", /^#[0-9a-f]{6}$/i.test(color) ? color : paletteColors.velvet);
-    pageStyle.textContent = "@page { size: " + (pageSizes[controls.paper.value] || "A4") + "; margin: 13mm; }";
+    pageStyle.textContent =
+      "@page { size: " + (pageSizes[controls.paper.value] || "A4") +
+      "; margin: " + chosenMargin + "; }";
 
     // Keep undated sections in their authored place after the dynamic timeline.
     sections.forEach((section) => {
       const dated = entries.some((item) => item.section === section);
-      section.hidden = !included(section) || (order !== "sections" && dated);
+      const hasChosenEntry = !dated || entries.some((item) => item.section === section && item.included);
+      section.hidden = !included(section) || !hasChosenEntry || (order !== "sections" && dated);
     });
 
     if (order === "sections") {
       timeline.hidden = true;
       timelineItems.replaceChildren();
-      status.textContent = toggles.filter((toggle) => toggle.checked).length + " sections selected";
+      status.textContent = entries.filter((item) => item.included && included(item.section)).length +
+        " entries selected across " + toggles.filter((toggle) => toggle.checked).length + " sections";
       return;
     }
 
     const active = entries
-      .filter((item) => included(item.section))
+      .filter((item) => included(item.section) && item.included)
       .sort((a, b) => {
         // Unknown dates are always last. Stable section/entry indices break ties.
         if (a.timestamp === null) return b.timestamp === null ? a.sectionIndex - b.sectionIndex || a.index - b.index : 1;
@@ -194,11 +258,33 @@
     });
     timelineItems.replaceChildren(fragment);
     timeline.hidden = active.length === 0;
-    status.textContent = active.length + " dated entries in chronological order";
+    status.textContent = active.length + " selected entries in chronological order";
   };
 
   Object.values(controls).forEach((control) => control.addEventListener("change", render));
   toggles.forEach((toggle) => toggle.addEventListener("change", render));
+  printToggles.forEach((toggle) => toggle.addEventListener("change", render));
+  entrySearch.addEventListener("input", () => {
+    const query = entrySearch.value.trim().toLocaleLowerCase();
+    for (const [item, control] of entryControls) {
+      control.label.hidden = !(
+        item.label.toLocaleLowerCase().includes(query) ||
+        item.section.dataset.cvTitle.toLocaleLowerCase().includes(query)
+      );
+    }
+    for (const group of entryOptions.querySelectorAll("fieldset")) {
+      group.hidden = !Array.from(group.querySelectorAll(".cv-entry-option")).some((label) => !label.hidden);
+    }
+  });
+  const setAllEntries = (included) => {
+    for (const [item, control] of entryControls) {
+      item.included = included;
+      control.checkbox.checked = included;
+    }
+    render();
+  };
+  allEntriesButton.addEventListener("click", () => setAllEntries(true));
+  noEntriesButton.addEventListener("click", () => setAllEntries(false));
   controls.accent.addEventListener("input", render);
   previewButton.addEventListener("click", () => {
     setPreview(root.dataset.cvPreview === "paper" ? "reading" : "paper");
@@ -214,6 +300,15 @@
     controls.palette.value = "default";
     controls.accent.value = "#00166c";
     controls.printUrls.checked = false;
+    controls.size.value = "regular";
+    controls.margin.value = "standard";
+    printToggles.forEach((toggle) => { toggle.checked = true; });
+    for (const [item, control] of entryControls) {
+      item.included = true;
+      control.checkbox.checked = true;
+    }
+    entrySearch.value = "";
+    entrySearch.dispatchEvent(new Event("input"));
     setPreview("paper");
     toggles.forEach((toggle) => { toggle.checked = true; });
     render();

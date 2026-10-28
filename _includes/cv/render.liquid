@@ -76,6 +76,49 @@
         {% endfor %}
       </div>
     </details>
+
+    <details class="cv-print-options" id="cv-print-options">
+      <summary>Print content and layout</summary>
+      <p class="cv-tools-help">These choices affect the live preview and the printed PDF. The full CV remains in the source data.</p>
+      <div class="cv-print-options-grid">
+        <label><input type="checkbox" data-cv-print-toggle="icons" checked> Show icons</label>
+        <label><input type="checkbox" data-cv-print-toggle="dates" checked> Show dates</label>
+        <label><input type="checkbox" data-cv-print-toggle="locations" checked> Show locations</label>
+        <label><input type="checkbox" data-cv-print-toggle="credentials" checked> Show credential IDs</label>
+        <label><input type="checkbox" data-cv-print-toggle="organizations" checked> Show institutions and employers</label>
+        <label><input type="checkbox" data-cv-print-toggle="highlights" checked> Show detailed bullet points</label>
+        <label><input type="checkbox" data-cv-print-toggle="links" checked> Show resource-link labels</label>
+        <label><input type="checkbox" data-cv-print-toggle="contact" checked> Show header contact links</label>
+      </div>
+      <div class="cv-tools-grid cv-print-layout-grid">
+        <label for="cv-text-size">Print text size
+          <select id="cv-text-size">
+            <option value="regular">Standard</option>
+            <option value="small">Small</option>
+            <option value="large">Large</option>
+          </select>
+        </label>
+        <label for="cv-page-margin">Page margins
+          <select id="cv-page-margin">
+            <option value="standard">Standard (13 mm)</option>
+            <option value="narrow">Narrow (8 mm)</option>
+            <option value="wide">Wide (19 mm)</option>
+          </select>
+        </label>
+      </div>
+    </details>
+    <details class="cv-entry-picker" id="cv-entry-picker">
+      <summary>Choose individual entries <span id="cv-entry-count"></span></summary>
+      <p class="cv-tools-help">Exclude individual activities, competitions, research, experience, or credentials without removing them from your full CV. Entire-section exclusions take priority.</p>
+      <label class="cv-entry-search-label" for="cv-entry-search">Find entries
+        <input type="search" id="cv-entry-search" placeholder="Search titles or sections">
+      </label>
+      <div class="cv-entry-picker-actions">
+        <button type="button" id="cv-entries-all">Include all entries</button>
+        <button type="button" id="cv-entries-none">Exclude all entries</button>
+      </div>
+      <div class="cv-entry-options" id="cv-entry-options"></div>
+    </details>
     <label class="cv-print-links-option" for="cv-print-urls">
       <input type="checkbox" id="cv-print-urls"> Show full resource URLs on printed copies (clickable links are always retained)
     </label>
@@ -207,15 +250,9 @@
                     {% endif %}
                   </div>
                   <p class="cv-meta">
-                    {{ entry.date }}
-                    {% if entry.location -%}
-                      <br>
-                      {{ entry.location -}}
-                    {%- endif %}
-                    {% if entry.credential -%}
-                      <br>
-                      {{ entry.credential -}}
-                    {%- endif %}
+                    {% if entry.date %}<span class="cv-date">{{ entry.date }}</span>{% endif %}
+                    {% if entry.location %}<span class="cv-location">{{ entry.location }}</span>{% endif %}
+                    {% if entry.credential %}<span class="cv-credential">{{ entry.credential }}</span>{% endif %}
                   </p>
                 </div>
                 {% if entry.highlights %}

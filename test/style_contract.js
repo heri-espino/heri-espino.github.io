@@ -129,7 +129,7 @@ if (exists("_pages/cv.md")) {
   const cvScript = read("assets/js/cv-customize.js");
   const cvStyles = read("_sass/_cv.scss");
   if (/^published:\s*false\s*$/m.test(cvPage)) failures.push("The CV page should remain public.");
-  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-palette", "cv-custom-accent", "cv-preview", "cv-print-urls", "cv-print", "cv-reset", "cv-timeline"]) {
+  for (const id of ["cv-order", "cv-template", "cv-font", "cv-paper", "cv-density", "cv-palette", "cv-custom-accent", "cv-preview", "cv-print-urls", "cv-print-options", "cv-entry-picker", "cv-entry-search", "cv-entry-options", "cv-entries-all", "cv-entries-none", "cv-text-size", "cv-page-margin", "cv-print", "cv-reset", "cv-timeline"]) {
     if (!cvRenderer.includes('id="' + id + '"')) failures.push("CV is missing print/sort control: " + id);
   }
   if (!cvRenderer.includes("data-cv-date=") || !cvRenderer.includes("data-cv-section-toggle=")) {
@@ -137,6 +137,15 @@ if (exists("_pages/cv.md")) {
   }
   if (!cvScript.includes("beforeprint") || !cvScript.includes("window.print()") || !cvScript.includes("parseStartDate")) {
     failures.push("CV print and chronology handlers are missing.");
+  }
+  if (!cvRenderer.includes('data-cv-print-toggle="icons"') || !cvRenderer.includes('data-cv-print-toggle="highlights"')) {
+    failures.push("CV print display options must include icons and highlights.");
+  }
+  if (!cvScript.includes("entryControls") || !cvScript.includes("item.included") || !cvScript.includes("pageMargins")) {
+    failures.push("CV per-entry selection and margin handling are missing.");
+  }
+  if (!cvStyles.includes('data-cv-included="false"') || !cvStyles.includes('data-cv-show-icons="false"')) {
+    failures.push("CV hidden item and icon selectors are missing.");
   }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
