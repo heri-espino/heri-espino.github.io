@@ -342,6 +342,64 @@ if (exists("_pages/cv.md")) {
     failures.push("CV headings, positions, skills, and languages must remain free of decorative icons.");
   }
   const cvSources = read("_data/cv.yml");
+
+  // Four core facts on event-based CV entries: canonical title,
+  // role/category, date and institution OR explicitly labeled research context.
+  // Skills/languages are taxonomies, not dated career events.
+  const metadataEntries = [];
+  let metadataSection = "";
+  let currentEntry = null;
+  for (const line of cvSources.split("\n")) {
+    const sectionMatch = line.match(/^    ([A-Za-z][^:]+):\s*$/);
+    if (sectionMatch) {
+      metadataSection = sectionMatch[1];
+      currentEntry = null;
+      continue;
+    }
+    const entryMatch = line.match(/^      - (name|degree):\s*(.+)$/);
+    if (entryMatch) {
+      if (metadataSection === "Technical Skills" || metadataSection === "Languages") {
+        currentEntry = null;
+        continue;
+      }
+      currentEntry = {
+        section: metadataSection,
+        name: entryMatch[2],
+        role: false,
+        date: false,
+        affiliationOrContext: false,
+      };
+      metadataEntries.push(currentEntry);
+      continue;
+    }
+    if (!currentEntry) continue;
+    if (/^        role:/.test(line)) currentEntry.role = true;
+    if (/^        date:/.test(line)) currentEntry.date = true;
+    if (/^        (organization|institution|context):/.test(line)) {
+      currentEntry.affiliationOrContext = true;
+    }
+  }
+  if (metadataEntries.length < 80) {
+    failures.push("Too few event-based CV entries were checked for four-field metadata.");
+  }
+  for (const entry of metadataEntries) {
+    if (!entry.name || !entry.role || !entry.date || !entry.affiliationOrContext) {
+      failures.push("CV core metadata missing: " + entry.section + " / " + entry.name);
+    }
+  }
+  if (!cvRenderer.includes("entry.context") ||
+      !cvRenderer.includes('class="cv-context"') ||
+      !cvRenderer.includes("{{ entry.name | escape }}")) {
+    failures.push("CV must visibly render research context and full Python library titles.");
+  }
+  const metadataExceptions = [
+    "date: \"Date not recorded\"",
+    "start date unrecorded",
+  ];
+  if (!metadataExceptions.every((phrase) => cvSources.includes(phrase))) {
+    failures.push("Unknown credential/library dates must remain explicitly distinguished from verified dates.");
+  }
+
   const credentialSource = read("_data/credentials.yml");
   const creds = cvSources.split("    Credentials:")[1]?.split("    Languages:")[0] || "";
   const featuredCredentials = credentialSource.split("  - id: specializations")[1]?.split("  - id: academic-schools")[0] || "";
