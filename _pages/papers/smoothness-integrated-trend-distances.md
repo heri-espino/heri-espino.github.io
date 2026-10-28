@@ -3,6 +3,7 @@ layout: portfolio-item
 permalink: /papers/smoothness-integrated-trend-distances.html
 portfolio_type: paper
 importance: 1
+featured: true
 card_kind: Working draft
 title: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
 card_title: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
