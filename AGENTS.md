@@ -2,6 +2,15 @@
 
 This repository is a personalized academic portfolio built on the pluginized al-folio v1 starter. It is not a stock al-folio demo. Preserve the portfolio's content, visual language, privacy boundaries, and local overrides.
 
+## Public Research and AI Discoverability
+
+- **First stop for research facts:** `_pages/papers/` and `_data/cv.yml`. The generated `/research-index/`, `/research-catalog.json`, and `/llms.txt` read from those records; do not manually duplicate manuscript statuses in multiple discovery pages.
+- Read `docs/AI_DISCOVERABILITY.md` before edits affecting research descriptions, Schema.org, SEO, crawlers, or academic profiles.
+- **Distinguish Under Review, Under Revision, Working Draft, Research Lecture, Research Tutorial, Accepted, and Published.** Never infer acceptance, DOI, or journal publication from a manuscript PDF template, a journal name, or a search snippet.
+- Known source discrepancy (2026-10-28): the stepping-stone detail page uses **Under Revision**; the public CV, BibTeX and a later AGENTS note use **Under Review**. Reconcile only after user verification, not automatically.
+- Published authored technical articles (e.g. AbaQuant) are **not** journal publications and must remain in their separate category. New public research records must have title, status, honest summary, verified author information (or preserved anonymity), canonical detail URL, and only genuine public resource URLs. The JSON catalog and research index are generated at build time.
+- Execute `node scripts/validate-research-index.mjs` and the full Jekyll build. Validate generated JSON-LD, `research-catalog.json`, and sitemap before publication.
+
 ## Read First
 
 - Read this file before changing the site.
