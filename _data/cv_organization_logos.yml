@@ -68,3 +68,12 @@
   issuer_key: datacamp
 - match: "iese business school"
   issuer_key: iese
+
+- match: "elsevier"
+  logo: "https://www.google.com/s2/favicons?domain=elsevier.com&sz=128"
+- match: "university of california, santa cruz"
+  issuer_key: ucsc
+- match: "datacamp"
+  issuer_key: datacamp
+- match: "pragmatic ai labs"
+  issuer_key: pragmatic-ai

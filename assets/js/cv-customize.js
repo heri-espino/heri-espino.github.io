@@ -222,11 +222,12 @@
   // Europass-inspired headings are presentation labels, not edits to CV YAML.
   const europassLabels = {
     "Education": "Education and training",
-    "Experience": "Work experience",
+    "Professional Experience": "Work experience",
     "Programming Experience": "Software development experience",
     "Research": "Research and publications",
     "Technical Skills": "Digital and technical skills",
     "Languages": "Language skills",
+    "Credentials": "Certificates and credentials",
   };
   const displayTitle = (section) => root.dataset.cvTemplate === "europass"
     ? (europassLabels[section.dataset.cvTitle] || section.dataset.cvTitle)
@@ -475,8 +476,14 @@
   const setPanelOpen = (open) => {
     settingsPanel.hidden = !open;
     root.dataset.cvTools = open ? "open" : "closed";
-    panelToggle.textContent = open ? "Hide settings" : "Customize CV";
     panelToggle.setAttribute("aria-expanded", String(open));
+    panelToggle.setAttribute("aria-label", open ? "Hide CV settings" : "Show CV settings");
+    panelToggle.title = open ? "Hide CV settings" : "Show CV settings";
+    const chevron = panelToggle.querySelector("i");
+    if (chevron) {
+      chevron.classList.toggle("fa-chevron-right", !open);
+      chevron.classList.toggle("fa-chevron-left", open);
+    }
     requestAnimationFrame(() => renderPagedPreview());
   };
   panelToggle.addEventListener("click", () => setPanelOpen(settingsPanel.hidden));
@@ -538,7 +545,7 @@
     previouslyOpen = [];
   });
 
-  setPanelOpen(true);
+  setPanelOpen(false);
   setPreview("reading");
   render();
 
