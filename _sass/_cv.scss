@@ -2460,14 +2460,16 @@
 }
 
 
-/* Wide reading: make title, institution, links and highlights one coherent
-   visual block. Deliberately exclude paper/print, LaTeX density, Harvard's
-   organization-first header and Europass's two-column information hierarchy.
-   Physical pagination and compact XeLaTeX-inspired output stay unchanged. */
+/* Unified type and rhythm for the default wide CV reading view.
+   Every adjacent row (title, institution/context, source links, description)
+   uses one typeface, one size, one line-height and one vertical interval.
+   Hierarchy comes from weight and color, not arbitrary size or spacing.
+   Keep LaTeX/paper/print, Harvard and Europass layouts unchanged. */
 @media screen {
   .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) {
-    --cv-reading-line-gap: 0.17rem;
-    --cv-reading-description-gap: 0.32rem;
+    --cv-reading-row-gap: 0.24rem;
+    --cv-reading-font-size: 0.96rem;
+    --cv-reading-line-height: 1.36;
   }
 
   .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-entry-heading > div {
@@ -2475,50 +2477,44 @@
     flex-direction: column;
     align-items: flex-start;
     min-width: 0;
-    gap: var(--cv-reading-line-gap);
+    gap: var(--cv-reading-row-gap);
   }
 
-  /* Level 1: the title stays dominant at its existing font size. */
+  /* The title, organization, context, links and description share a size
+     and the selected template font family, including their anchors. */
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-entry-heading h3, .cv-organization, .cv-context, .cv-links, .cv-highlights, .cv-meta) {
+    font-family: var(--cv-font-stack);
+    font-size: var(--cv-reading-font-size);
+    line-height: var(--cv-reading-line-height);
+  }
+
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-entry-heading h3, .cv-organization, .cv-context, .cv-links) {
+    margin: 0;
+  }
+
+  /* Consistent hierarchy by weight, without shrinking supporting rows. */
   .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-entry-heading h3 {
-    margin: 0;
-    line-height: 1.28;
+    font-weight: 750;
   }
-
-  /* Level 2: organization is stronger than the body, but not the title.
-     Remove inherited <p> margins; the flex gap now owns the rhythm. */
-  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-entry-heading .cv-organization {
-    margin: 0;
-    font-size: 0.96rem;
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-organization {
     font-weight: 600;
-    line-height: 1.32;
+  }
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-links, .cv-context, .cv-highlights) {
+    font-weight: 400;
   }
 
-  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-entry-heading .cv-context {
-    margin: 0;
-    font-size: 0.84rem;
-    font-weight: 500;
-    line-height: 1.32;
+  /* Multiple links retain lateral spacing; wrapped rows use the same gap. */
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-links {
+    gap: var(--cv-reading-row-gap) 0.7rem;
   }
 
-  /* Level 3: links/meta are auxiliary; leave a slightly more visible
-     interval below the institution than below the main title. */
-  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-entry-heading .cv-links {
-    margin: 0.13rem 0 0;
-    gap: 0.12rem 0.7rem;
-    font-size: 0.85rem;
-    line-height: 1.35;
-  }
-
-  /* Level 4: descriptions connect to the complete header; reduce the
-     old 0.75rem gap and limit spacing inside multi-line highlight lists. */
+  /* The heading-to-description interval equals title-to-institution and
+     institution-to-links; successive highlights follow the same cadence. */
   .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-highlights {
-    margin: var(--cv-reading-description-gap) 0 0;
-    font-size: 0.91rem;
-    line-height: 1.42;
+    margin: var(--cv-reading-row-gap) 0 0;
     color: var(--cv-description, var(--global-text-color-light));
   }
-
   .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-highlights li + li {
-    margin-top: 0.15rem;
+    margin-top: var(--cv-reading-row-gap);
   }
 }
