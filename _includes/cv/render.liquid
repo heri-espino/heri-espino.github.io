@@ -228,7 +228,11 @@
                       {% endunless %}
                       {% if cv_primary_link %}<a href="{{ cv_primary_link }}" class="cv-primary-link" target="_blank" rel="noopener noreferrer">{% endif %}
                       {% if entry.role %}<span class="cv-entry-role">{{ entry.role }}</span><span class="cv-entry-separator" aria-hidden="true"> · </span>{% endif %}
-                      <span class="cv-entry-name" title="{{ entry.degree | default: entry.name | escape }}">{{ entry.subtitle | default: entry.degree | default: entry.name }}</span>
+                      {% if title == 'Programming Experience' %}
+                        <span class="cv-entry-name">{{ entry.name | escape }}</span>
+                      {% else %}
+                        <span class="cv-entry-name" title="{{ entry.degree | default: entry.name | escape }}">{{ entry.subtitle | default: entry.degree | default: entry.name }}</span>
+                      {% endif %}
                       {% if cv_primary_link %}</a>{% endif %}
                     </h3>
                     {% assign cv_org_name = entry.institution | default: entry.organization | default: '' | downcase %}
@@ -291,6 +295,9 @@
                         {{ entry.organization }}
                         {% if entry.organization_url %}</a>{% endif %}
                       </p>
+                    {% endif %}
+                    {% if entry.context %}
+                      <p class="cv-context">{{ entry.context | escape }}</p>
                     {% endif %}
                     {% if entry.links %}
                       <p class="cv-links">

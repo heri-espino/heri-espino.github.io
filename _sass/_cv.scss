@@ -2033,3 +2033,23 @@
    square aspect ratio. The base .cv-org-logo rule scales them consistently
    on screen and in PDF; no special wide-wordmark layout is needed. */
 
+
+/* Four-field CV metadata: title, role/category, date, and organization or
+   factual research context. Context is not an institution, so no icon. */
+.cv-page .cv-context {
+  margin: 0.08rem 0 0.12rem;
+  color: #70798b;
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+.cv-page[data-cv-density="latex"] .cv-context {
+  font-size: 0.73rem;
+  margin: 0.05rem 0 0.1rem;
+}
+@media print {
+  .cv-page .cv-context {
+    font-size: 6.8pt;
+    color: #737373 !important;
+    break-inside: avoid;
+  }
+}

@@ -589,3 +589,36 @@ has been altered.
 Validation: inspect each project identity and role in wide and print
 layouts; test locally served SVG/WebP URLs, fallback icons, and
 'Show icons'. Verify remote and paper layouts remain single-column.
+
+## Four core fields on event-based CV entries (2026-10-28)
+
+All **94 event-based records** now expose the same four core facts:
+1. **Name** (canonical degree/project/manuscript/credential title, visible for
+   authored Python libraries instead of obscured by their subtitles).
+2. **Role or category** (position, activity, award category, etc.).
+3. **Organization/institution** when a real affiliation exists, or a neutral
+   **context** (such as "Mathematical research tutorial") when there is none.
+   A context is *not* presented as an institution and gets no logo.
+4. **Date** (issue date, attendance range, or explicitly marked missing).
+   
+The document's descriptive highlights are **optional additional information**
+and remain unchanged. Notably, no course-description bullets were recreated
+for "Introduction to Corporate Finance" or "The Art of Storytelling", which
+the owner previously asked to omit. Skills and Languages are static taxonomies,
+not dated events, and retain their appropriate two-field presentations.
+
+Corrections: added transparent work-date labels for Trend Estimation,
+AwesomeFigures and Docling Math ("Active as of Oct 2026 · start date
+unrecorded"); the DataCamp Introduction to Deep Learning with PyTorch issue
+date was absent from the authoritative credentials data and is explicitly
+"Date not recorded". Bayesian Uncertainty in WTI Options uses the documented
+year 2026. Unaffiliated research notes and lectures use truthful context
+rather than inventing a host university or journal. In the volunteering entry,
+"Data Scientist" was a **role**, not an organization; it is now role metadata,
+with "Community water-quality project · Xalmimilulco" as context.
+
+The output is source-driven in `_data/cv.yml` and rendered in
+`_includes/cv/render.liquid`. The style contract audits four-field
+completeness for all event-based entries. Keep unknown dates explicit until
+an actual repository commit, dated credential, or user-provided timeline
+verifies them; don't invent historical start dates.
