@@ -8,7 +8,6 @@ title: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
 card_title: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
 label: "Working Draft"
 status: "Research note · Not submitted"
-authors: "Heriberto Espino Montelongo"
 display_date: "Oct 2026"
 summary: 'This working research note compares complete smoothness-indexed families of penalized least-squares (PLS) trends in a Hilbert-space framework. It permits nonzero reference drift in finite-difference penalties, distinguishes that drift from the signed mean gap between fitted trends, and derives global, rolling-window, and smoothness–time distances with spectral representations for shared and unequal drifts.'
 formula: '\mathcal{D}_{\mathrm{PLS}}(y_1,y_2)^2=\frac{1}{N}\int_0^1\|\boldsymbol{\tau}_{y_1}(S)-\boldsymbol{\tau}_{y_2}(S)\|_2^2\,dS'
