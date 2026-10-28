@@ -211,6 +211,127 @@ cv:
           - "Proof-based undergraduate mathematical problem solving."
 
     Research:
+      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
+        role: "First Author"
+        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
+        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
+        date: Jun 2026
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
+        highlights:
+          - Under review at Elsevier Discrete Applied Mathematics (LAGOS special issue).
+          - Proved rigid-motion covariance and scale covariance for Euclidean-definable neighborhood kernels, yielding a dimensionless unit-region factorization.
+          - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
+          - Implemented Monte Carlo membership checks for equivariance and scaling tests, validating β-skeleton and γ-graph constructions under invariant center-selection rules.
+      - name: Volume Constants for Stepping–Stone Empty Regions in Rᵈ
+        role: "First Author"
+        subtitle: "Volume Constants for Stepping–Stone Empty Regions in Rᵈ"
+        organization: "Elsevier · Computational Geometry · Under Review"
+        date: Aug 2026
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
+        highlights:
+          - Under review at Elsevier Computational Geometry.
+          - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
+          - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
+      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+        role: "Author"
+        date: Oct 2026
+        organization: "Springer Nature · SN Computer Science · Under Review"
+        links:
+          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
+          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
+        highlights:
+          - Studied when joint activation-patching effects can be reconstructed from individual channel changes across controlled CNNs.
+          - Compared multiple architectures and a spatial-permutation control, separating effects of the evaluation metric from failures of logit additivity.
+      - name: Student Engagement and Adaptation
+        role: "Study Lead"
+        date: Sep 2026
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
+        highlights:
+          - Analyzed longitudinal student engagement and adaptation patterns in introductory mathematics.
+      - name: Instructor Grade Heterogeneity
+        role: "Study Lead"
+        date: Oct 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
+        highlights:
+          - Investigated heterogeneity in grading patterns across 769 university classroom groups.
+      - name: Support Persistence After Incentives
+        role: "Study Lead"
+        date: Sep 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
+        highlights:
+          - Studied whether voluntary academic-support participation persisted after a first-year participation incentive ended.
+      - name: Mathematics Support and Classroom-Relative Performance
+        role: "Study Lead"
+        date: Aug 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
+        highlights:
+          - Analyzed associations between tutoring participation and performance standardized within classrooms.
+      - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
+        context: "Trend-estimation research project"
+        role: "Author"
+        subtitle: "Trend Estimation Methods"
+        date: May 2025 — Present
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_sp500-trend-comparison.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
+          - Reused spectral solvers for matrix multiplication across smoothness grids and benchmarked HP, Whittaker, MA, ES, and polynomial baselines using RMSE and SMAPE.
+      - name: Privileged Template Priors for Mechanistic Interpretability in CNNs
+        context: "CNN mechanistic-interpretability research"
+        role: "Research project"
+        date: Dec 2025 — Present
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_template-priors-cnns.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
+        highlights:
+          - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
+          - Measured mechanistic identifiability using template-alignment scores, kernel visualizations, ablations, controlled patching, and class-level responses across classes.
+      - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
+        context: "Latent financial-risk modeling"
+        role: "Research project"
+        date: Jan 2023 — May 2023
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
+        highlights:
+          - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
+          - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
+      - name: Systemic Liquidity-Crisis Agent-Based Model
+        context: "Agent-based financial-market simulation"
+        role: "Research project"
+        date: Oct 2025 — Present
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_systemic-liquidity-abm.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
+        highlights:
+          - Built an agent-based derivatives simulator with market participants, stochastic shocks, pricing rules, and margin calls under crisis scenarios.
+          - Tracked liquidation cascades through volatility jumps, spread widening, agent health, stress networks, contagion indices, and network-fragility metrics across agent types.
+
+    Research Drafts:
       - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
         context: "Research working draft · not submitted"
         role: "Author · Working Draft (Not Submitted)"
@@ -279,91 +400,6 @@ cv:
         highlights:
           - "Explained SDP relaxations of Max-Cut, low-rank Efficient Vector Ascent (EVA), and hyperplane versus spherical K-Means rounding."
           - "Documented matched rounding restarts, G-set reproducibility, and the distinction between Max-Cut and general Max-k-Cut."
-      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
-        role: "First Author"
-        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
-        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
-        date: Jun 2026 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
-        highlights:
-          - Under review at Elsevier Discrete Applied Mathematics (LAGOS special issue).
-          - Proved rigid-motion covariance and scale covariance for Euclidean-definable neighborhood kernels, yielding a dimensionless unit-region factorization.
-          - Derived applications to γ-neighborhood lenses and empty-region graph kernels, establishing invariance conditions for Poisson and NHPP analytic formulas.
-          - Implemented Monte Carlo membership checks for equivariance and scaling tests, validating β-skeleton and γ-graph constructions under invariant center-selection rules.
-      - name: Volume Constants for Stepping–Stone Empty Regions in Rᵈ
-        role: "First Author"
-        subtitle: "Volume Constants for Stepping–Stone Empty Regions in Rᵈ"
-        organization: "Elsevier · Computational Geometry · Under Review"
-        date: Jun 2026 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
-        highlights:
-          - Under review at Elsevier Computational Geometry.
-          - Proved a normalized 1D formula for the Lebesgue measure of the Stepping–Stone region using scale reduction, axial slicing, midpoint symmetry.
-          - Derived special cases and built stable quadrature for high-dimensional stepping–stone constants, anchor checks, and limiting geometry across dimensions.
-      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
-        role: "Author"
-        date: "2026"
-        organization: "Springer Nature · SN Computer Science · Under Review"
-        organization_url: https://link.springer.com/journal/42979
-        links:
-          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
-          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
-        highlights:
-          - Studied when joint activation-patching effects can be reconstructed from individual channel changes across controlled CNNs.
-          - Compared multiple architectures and a spatial-permutation control, separating effects of the evaluation metric from failures of logit additivity.
-
-      - name: Student Engagement and Adaptation
-        role: "Study Lead"
-        date: Sep 2026
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
-        highlights:
-          - Analyzed longitudinal student engagement and adaptation patterns in introductory mathematics.
-      - name: Instructor Grade Heterogeneity
-        role: "Study Lead"
-        date: Oct 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
-        highlights:
-          - Investigated heterogeneity in grading patterns across 769 university classroom groups.
-      - name: Support Persistence After Incentives
-        role: "Study Lead"
-        date: Sep 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
-        highlights:
-          - Studied whether voluntary academic-support participation persisted after a first-year participation incentive ended.
-      - name: Mathematics Support and Classroom-Relative Performance
-        role: "Study Lead"
-        date: Aug 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
-        highlights:
-          - Analyzed associations between tutoring participation and performance standardized within classrooms.
-      - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
-        context: "Trend-estimation research project"
-        role: "Author"
-        subtitle: "Trend Estimation Methods"
-        date: May 2025 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_sp500-trend-comparison.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Trend-Estimation" }
-        highlights:
-          - Built a reproducible S&P 500 log-price trend pipeline using Guerrero smoothness, penalized least squares, cached solvers, temporal splits, metrics, and diagnostic plots.
-          - Reused spectral solvers for matrix multiplication across smoothness grids and benchmarked HP, Whittaker, MA, ES, and polynomial baselines using RMSE and SMAPE.
       - name: Bayesian Uncertainty in WTI Options
         date: "2026"
         role: "Author"
@@ -372,42 +408,6 @@ cv:
           - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
         highlights:
           - Studied the propagation of posterior parameter uncertainty into WTI option valuation.
-      - name: Privileged Template Priors for Mechanistic Interpretability in CNNs
-        context: "CNN mechanistic-interpretability research"
-        role: "Research project"
-        date: Dec 2025 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_template-priors-cnns.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
-        highlights:
-          - Trained CNNs with random, template-initialized, and frozen-template filters to test inductive bias, sample efficiency, feature reuse, and prior strength in controlled data.
-          - Measured mechanistic identifiability using template-alignment scores, kernel visualizations, ablations, controlled patching, and class-level responses across classes.
-      - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
-        context: "Latent financial-risk modeling"
-        role: "Research project"
-        date: Jan 2023 — May 2023
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
-        highlights:
-          - Built a latent U.S. market-risk index from VIX, WTI, gold, and DXY using a dynamic-factor model to extract common financial-stress variation across global risk proxies.
-          - Smoothed the latent factor with Guerrero-calibrated penalized trends and analyzed inflation lags, crisis deviations, forecast bands, and regime shifts and tail-risk signals.
-      - name: Systemic Liquidity-Crisis Agent-Based Model
-        context: "Agent-based financial-market simulation"
-        role: "Research project"
-        date: Oct 2025 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_systemic-liquidity-abm.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
-        highlights:
-          - Built an agent-based derivatives simulator with market participants, stochastic shocks, pricing rules, and margin calls under crisis scenarios.
-          - Tracked liquidation cascades through volatility jumps, spread widening, agent health, stress networks, contagion indices, and network-fragility metrics across agent types.
       - name: Mathematical Notes on Random Variables as Vectors in L²
         context: "Expository probability and Hilbert-space analysis"
         role: "Mathematical notes"

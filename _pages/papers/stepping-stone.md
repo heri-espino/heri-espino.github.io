@@ -10,7 +10,7 @@ card_title: Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euc
 label: Under Revision
 status: Elsevier · Computational Geometry
 authors: Heriberto Espino Montelongo and Héctor Maravillo
-display_date: "2026"
+display_date: "Aug 2026"
 summary: 'This manuscript develops a geometric, graph-theoretic, and probabilistic analysis of the stepping-stone graph in \(\mathbb{R}^d\) for every \(d\geq 2\). It derives a normalized one-dimensional volume integral, recovers the degenerate and Gabriel cases and the relative-neighborhood limit, proves strict region and volume monotonicity, establishes graph inclusions and connectivity, and validates a stable quadrature formula by rejection sampling.'
 formula: 'a_{d,\mathrm{SS}}(\alpha)=2\kappa_{d-1}\int_{2^{-1/\alpha}}^{1}y_\alpha(u)^{d-1}x_\alpha^{\prime}(u)\,du'
 framing: "The manuscript is framed as a dimension-lift of a planar empty-region computation: symmetry reduces the d-dimensional stepping-stone region to a one-dimensional quadrature over transverse ball slices. The manuscript is currently under revision, and an SSRN version is available (abstract 7634746)."

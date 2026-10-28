@@ -10,7 +10,7 @@ card_title: Unit-Region Factorization for Empty-Region Proximity Graphs
 label: Under Review
 status: Elsevier · Discrete Applied Mathematics · Special Issue LAGOS 2025
 authors: Heriberto Espino Montelongo and Héctor Maravillo
-display_date: "2026"
+display_date: "Jun 2026"
 summary: 'A fixed-template empty-region rule assigns a Borel region \(S(p,q)\) to a candidate pair and retains the edge when that region contains no other site. The manuscript isolates the unit-volume constant \(a_K\) for similarity-copy regions and shows how the same scalar controls exact Poisson void probabilities, incident-edge length intensities, mean out-degree, and normalized incident-edge length laws.'
 formula: '\lambda_d\!\left(S(p,q)\right)=\ell_{p,q}^{d}a_K,\qquad \mathbb{P}\!\left\{\Phi\!\left(S(p,q)\right)=0\right\}=\exp\!\left\{-\rho a_K\ell_{p,q}^{d}\right\}'
 framing: "The manuscript is framed as a local scalar reduction: once a candidate-pair region is a translated, rotated, and uniformly scaled copy of K, the stochastic calculations depend on geometry through a single finite-volume constant."

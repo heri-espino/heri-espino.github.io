@@ -225,6 +225,7 @@
     "Professional Experience": "Work experience",
     "Programming Experience": "Software development experience",
     "Research": "Research and publications",
+    "Research Drafts": "Research drafts and related materials",
     "Technical Skills": "Digital and technical skills",
     "Languages": "Language skills",
     "Credentials": "Certificates and credentials",

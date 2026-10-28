@@ -210,10 +210,10 @@
             {% endfor %}
           </ul>
         {% else %}
-          <div class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
+          <div class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Research Drafts' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
             {% for entry in entries %}
               <article
-                class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
+                class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Research Drafts' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
                 data-cv-record
                 data-cv-date="{{ entry.date | default: '' | escape }}"
               >
@@ -237,7 +237,7 @@
                     </h3>
                     {% assign cv_org_name = entry.institution | default: entry.organization | default: '' | downcase %}
                     {% assign cv_academic_context = false %}
-                    {% if title == 'Education' or title == 'Academic Experience' or title == 'Awards' or title == 'Research' or title == 'Selected Academic Projects' or title == 'Schools' or title == 'Selected Extracurricular Activities' or title == 'Leadership' %}
+                    {% if title == 'Education' or title == 'Academic Experience' or title == 'Awards' or title == 'Research' or title == 'Research Drafts' or title == 'Selected Academic Projects' or title == 'Schools' or title == 'Selected Extracurricular Activities' or title == 'Leadership' %}
                       {% assign cv_academic_context = true %}
                     {% endif %}
                     {% assign cv_org_logo = nil %}
