@@ -219,6 +219,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/smoothness-integrated-trend-distances.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Trend_Distances.pdf" }
           - { label: Related research code, url: "https://github.com/heri-espino/Trend-Estimation" }
         highlights:
           - "Working research note; not submitted to a journal."
@@ -231,6 +232,7 @@ cv:
         date: "Oct 2026"
         links:
           - { label: Research draft, url: "https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf" }
           - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
         highlights:
           - "Tracked multiple forecast-loss minima through chronological origins and distinguished persistent-branch selection from mapping each branch to a current smoothness decision."
@@ -241,6 +243,7 @@ cv:
         date: "Oct 2026"
         links:
           - { label: Research draft, url: "https://heri-espino.github.io/papers/smoothness-indexed-pls-python.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-PLS_Python.pdf" }
           - { label: Code, url: "https://github.com/heri-espino/Trend-Estimation" }
         highlights:
           - "Coauthored with Daniela Cortés-Toto; implemented normalized Guerrero smoothness and compared seven PLS numerical backends."
@@ -251,6 +254,7 @@ cv:
         date: "2026"
         links:
           - { label: Research draft, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-WTI_Asian_Options.pdf" }
         highlights:
           - "Separated Bayesian posterior-integration corrections from the volatility information used for WTI average-price option pricing."
           - "Combined a 10-million-history simulation with distinct date-ordered and settlement-mark empirical samples, emphasizing prior implied volatility and experimental limitations."
@@ -260,6 +264,7 @@ cv:
         date: "19 Oct 2026"
         links:
           - { label: Lecture record, url: "https://heri-espino.github.io/papers/componentwise-knn-isomap-lecture.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Componentwise_Isomap.pdf" }
           - { label: GitHub, url: "https://github.com/heri-espino/ProximityGraphs-Isomap" }
         highlights:
           - "Prepared a 53-slide derivation covering graph geodesics, classical MDS, componentwise unfolding, and guaranteed strip separation."
@@ -270,6 +275,7 @@ cv:
         date: "Oct 2026"
         links:
           - { label: Tutorial record, url: "https://heri-espino.github.io/papers/maxcut-sdp-eva-clustering-tutorial.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf" }
         highlights:
           - "Explained SDP relaxations of Max-Cut, low-rank Efficient Vector Ascent (EVA), and hyperplane versus spherical K-Means rounding."
           - "Documented matched rounding restarts, G-set reproducibility, and the distinction between Max-Cut and general Max-k-Cut."
