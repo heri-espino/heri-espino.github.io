@@ -533,8 +533,8 @@ if (exists("_pages/cv.md")) {
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 11 || draftCount !== 8) {
-    failures.push("Research and Research Drafts must preserve all 19 entries (11 research records, 8 drafts/related materials).");
+  if (researchCount !== 11 || draftCount !== 9) {
+    failures.push("Research and Research Drafts must preserve all 20 entries (11 research records, 9 drafts/related materials).");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
