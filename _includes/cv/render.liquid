@@ -3,12 +3,11 @@
 <div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="closed">
   <div class="cv-workspace">
     <div class="cv-controls-column">
-      <div class="cv-controls-toolbar" aria-label="CV settings and export">
+      <div class="cv-controls-toolbar" aria-label="CV settings">
         <button type="button" id="cv-panel-toggle" class="cv-panel-toggle cv-icon-control" aria-controls="cv-settings-panel" aria-expanded="false" aria-label="Show CV settings" title="Show CV settings"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-        <button type="button" id="cv-print" class="cv-primary-action cv-icon-control" aria-label="Print or save CV as PDF" title="Print / Save as PDF"><i class="fa-solid fa-print" aria-hidden="true"></i></button>
       </div>
 
-      <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize and print CV" hidden>
+      <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize CV" hidden>
     <div class="cv-tools-heading">
       <div>
         <h2>Customize CV</h2>
@@ -28,7 +27,7 @@
         <select id="cv-template">
           <option value="personal">Personal · navy</option>
           <option value="harvard">Harvard-inspired · classic</option>
-          <option value="europass">Europass-inspired · European CV</option>
+          <option value="europass">Europass · European CV structure</option>
           <option value="minimal">Modern minimal</option>
           <option value="editorial">Research editorial</option>
           <option value="professional">Compact professional</option>
@@ -143,7 +142,7 @@
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
-    <p class="cv-preview-help" id="cv-preview-help">Full-width CV view. Paper preview uses the extra-compact print spacing by default; Print / Save as PDF uses your browser.</p>
+    <p class="cv-preview-help" id="cv-preview-help">Full-width CV view. Paper preview follows the selected template; use your browser’s Print dialog (Ctrl+P / Cmd+P) to save as PDF.</p>
     <p class="cv-disclaimer">
       The Harvard-inspired and Europass-inspired options are independent academic CV styles, not official university or EU-issued templates.
       For an official Europass document, use the <a href="https://europass.europa.eu/en/create-europass-cv" target="_blank" rel="noopener noreferrer">EU Europass CV builder</a>.
@@ -209,6 +208,27 @@
               </li>
             {% endfor %}
           </ul>
+          <div class="cv-europass-languages" aria-label="Europass language skills">
+            <p class="cv-europass-mother-tongue"><strong>Mother tongue(s)</strong>
+              {% for entry in entries %}
+                {% assign lang_level = entry.values | downcase %}
+                {% if lang_level contains 'native' %}{{ entry.name }}{% endif %}
+              {% endfor %}
+            </p>
+            <table class="cv-europass-language-table">
+              <caption>Other language(s) · Reported overall CEFR level</caption>
+              <thead><tr><th scope="col">Language</th><th scope="col">Overall level</th></tr></thead>
+              <tbody>
+                {% for entry in entries %}
+                  {% assign lang_level = entry.values | downcase %}
+                  {% unless lang_level contains 'native' %}
+                    <tr><th scope="row">{{ entry.name }}</th><td>{{ entry.values }}</td></tr>
+                  {% endunless %}
+                {% endfor %}
+              </tbody>
+            </table>
+            <p class="cv-europass-language-note">Listening, reading, spoken interaction, spoken production and writing are not individually assessed in the available CV data.</p>
+          </div>
         {% else %}
           <div class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Research Drafts' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
             {% for entry in entries %}
