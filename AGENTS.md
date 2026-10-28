@@ -188,3 +188,15 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 - The three first-author submitted papers have user-confirmed CV and paper-page display dates: **Unit-Region Factorization — Jun 2026**, **Stepping–Stone — Aug 2026**, **When Do Activation-Patching Effects Add Up? — Oct 2026**. Do not attach `— Present` to submission-month dates. Preserve original review statuses pending direct evidence of changes. The SN Computer Science organizational line is **not** a hyperlink; remove only its `organization_url`, leaving portfolio/PDF/reproducibility links untouched.
 
 - **AbaQuant published writing:** The La Catarina 26 Oct 2026 `AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo` article is coauthored by Heriberto Espino Montelongo and Owen Paredes Conde. It belongs in the Papers page's separate **Published Articles & Technical Writing** category (and matching CV section), not in Press & Media, Submitted Manuscripts or Working Drafts. Its page uses `portfolio_type: article` and the owner-supplied local AVIF screenshot. Keep the 3 submitted / 13 drafts counts and 1 published-article count in rendered-page checks. See `docs/CV_HANDOFF.md`.
+
+- All archive search/sort/view menus are **collapsed by default** behind
+  a native `<details>` chevron (`>`) at the top left of each archive.
+  Default view is **List** even without JavaScript (explicit
+  `data-view="list"`), with **Compact list** and **Grid** available in the
+  expanded controls. Applies to Papers, Projects, Notes, Press, and
+  Credentials. Avoid introducing expanded toolbars or reverting to grid
+  on reset. The CV customization controls are a separate component.
+- The Papers archive section order is **Submitted Manuscripts**,
+  **Published Articles & Technical Writing**, **Working Drafts &
+  Ongoing Research** (3 + 1 + 13 existing records). Keep the authorship
+  and review statuses unchanged, and preserve section-local sorting.

@@ -51,6 +51,13 @@ function countCards(markup) {
 }
 
 const submitted = section("submitted-manuscripts");
+const sectionIds = ["submitted-manuscripts", "published-technical-articles", "working-drafts"];
+const sectionPositions = sectionIds.map((id) => html.indexOf('id="' + id + '"'));
+if (sectionPositions.some((position) => position < 0) ||
+    sectionPositions[0] >= sectionPositions[1] ||
+    sectionPositions[1] >= sectionPositions[2]) {
+  errors.push("Papers sections must be ordered Submitted → Published Articles → Working Drafts");
+}
 const drafts = section("working-drafts");
 const actualSubmitted = countCards(submitted);
 const actualDrafts = countCards(drafts);

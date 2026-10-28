@@ -777,3 +777,29 @@ on both pages, and the missing Springer organization hyperlink.
 - CV: separate `Published Articles & Technical Writing` group after Research, coauthor role and publication links. No change to manuscript publication statuses or 3-submitted/13-working-draft counts.
 - Preview: user's directly uploaded 1659×747 publisher image resized to 900×405 and encoded AVIF. Committed at `assets/img/portfolio/abaquant-la-catarina-article.avif`, Git SHA `9c5b3594077bbbea9f0ec73f0d0eb5cd275ab3ca` checked against the local transformed upload. Used for both card preview and article detail view, not the old generic AbaQuant documentation graphic.
 - `scripts/verify-paper-archive.mjs` also requires one authored technical article, the generated detail page, the uploaded image and verified external publication URL.
+
+## Archive ordering and hidden display settings (2026-10-28)
+
+The owner requests the Papers page order **Submitted Manuscripts → Published
+Articles & Technical Writing → Working Drafts & Ongoing Research**, preserving
+the original 3 + 1 + 13 contents and the authored-publication classification.
+
+The portfolio archive controls in `assets/js/portfolio-views.js` are created
+inside a native `<details>`, **closed by default**, with a tiny left-aligned
+`>` summary trigger. The trigger has a hidden accessible name, keyboard
+support, and a visible focus state. Search, sort, layout and Reset all remain
+available once expanded. Default presentation is **List**, not Grid; choices
+are **List / Compact list / Grid**. Compact list uses narrow thumbnails,
+reduced row spacing, condensed summary and hides topic chips; all cards keep
+their original links. Reset returns to List.
+
+This applies to `/papers/`, `/projects/`, `/notes/`, and `/press/`, with
+`data-view="list"` in the original Jekyll markup for sensible no-JS loading.
+The `/credentials/` filter menu uses the same closed native details control,
+and its list/grid selector now also offers compact list, retaining the
+existing list default. The CV customization interface is distinct and is
+not altered by this portfolio change.
+
+The source contract checks for the default markup, controls, and CSS; the
+built-page contract verifies the new Papers section ordering. Keep this
+consistent when introducing new portfolio archives.

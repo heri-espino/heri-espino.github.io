@@ -16,7 +16,7 @@ nav_order: 2
   Manuscripts under review, working drafts, and authored technical articles are listed by publication type. Lectures and tutorials retain their distinct labels.
 </p>
 
-<div class="papers-archive" data-portfolio-archive data-collection-label="Papers">
+<div class="papers-archive" data-portfolio-archive data-collection-label="Papers" data-view="list">
   <section class="papers-archive-section" id="submitted-manuscripts" data-portfolio-section aria-labelledby="submitted-manuscripts-title">
     <div class="papers-archive-heading">
       <div>
@@ -25,8 +25,23 @@ nav_order: 2
         <p>Manuscripts sent to journals for peer review or currently undergoing revision.</p>
       </div>
     </div>
-    <div class="portfolio-grid" data-portfolio-group>
+    <div class="portfolio-grid" data-portfolio-group data-view="list">
       {% for item in submitted_papers %}
+        {% include portfolio/card.liquid item=item %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="papers-archive-section papers-archive-section--secondary" id="published-technical-articles" data-portfolio-section aria-labelledby="published-technical-articles-title">
+    <div class="papers-archive-heading">
+      <div>
+        <p class="portfolio-kicker">02 / Published writing</p>
+        <h2 id="published-technical-articles-title">Published Articles &amp; Technical Writing <span class="papers-archive-count">({{ published_articles.size }})</span></h2>
+        <p>Authored technical writing published outside peer-reviewed research journals, listed separately from submitted manuscripts and working drafts.</p>
+      </div>
+    </div>
+    <div class="portfolio-grid" data-portfolio-group data-view="list">
+      {% for item in published_articles %}
         {% include portfolio/card.liquid item=item %}
       {% endfor %}
     </div>
@@ -35,27 +50,13 @@ nav_order: 2
   <section class="papers-archive-section papers-archive-section--secondary" id="working-drafts" data-portfolio-section aria-labelledby="working-drafts-title">
     <div class="papers-archive-heading">
       <div>
-        <p class="portfolio-kicker">02 / In development</p>
+        <p class="portfolio-kicker">03 / In development</p>
         <h2 id="working-drafts-title">Working Drafts &amp; Ongoing Research <span class="papers-archive-count">({{ other_papers.size }})</span></h2>
         <p>Unsubmitted manuscript drafts, mathematical lectures, tutorials, and ongoing research. The first six records are drawn from the uploaded PDFs; all statuses remain explicit.</p>
       </div>
     </div>
-    <div class="portfolio-grid" data-portfolio-group>
+    <div class="portfolio-grid" data-portfolio-group data-view="list">
       {% for item in other_papers %}
-        {% include portfolio/card.liquid item=item %}
-      {% endfor %}
-    </div>
-  </section>
-  <section class="papers-archive-section papers-archive-section--secondary" id="published-technical-articles" data-portfolio-section aria-labelledby="published-technical-articles-title">
-    <div class="papers-archive-heading">
-      <div>
-        <p class="portfolio-kicker">03 / Published writing</p>
-        <h2 id="published-technical-articles-title">Published Articles &amp; Technical Writing <span class="papers-archive-count">({{ published_articles.size }})</span></h2>
-        <p>Authored technical writing published outside peer-reviewed research journals, listed separately from submitted manuscripts and working drafts.</p>
-      </div>
-    </div>
-    <div class="portfolio-grid" data-portfolio-group>
-      {% for item in published_articles %}
         {% include portfolio/card.liquid item=item %}
       {% endfor %}
     </div>
