@@ -527,3 +527,32 @@ Their Git blob hashes were verified against the generated local files.
 The source PDFs are still **not** public website downloads. This is a
 page-preview-only update; it deliberately does not expose the original
 blinded REMEF manuscript PDF as a downloadable file.
+
+## Papers archive missing six drafts: YAML diagnosis and regression protection (2026-10-28)
+
+**Incident:** Six October 2026 paper records were correctly committed under
+`_pages/papers/*.md` but absent from the deployed `/papers/` archive.
+The live archive showed only seven working-draft records. Their expected
+`/papers/<slug>.html` URLs were also missing.
+
+**Root cause:** During screenshot metadata updates, the files received
+literal backslash-n sequences between YAML front-matter properties:
+`image_alt: "..."\ndetail_image: ...\ndetail_image_alt: "..." `.
+Jekyll logged `YAML Exception ... did not find expected key` for all six
+files, but the build still reported success. It emitted orphaned fallback
+pages under `/_pages/papers/<slug>/index.html` instead of the intended
+permalinks. Thus, static source assertions alone had incorrectly passed.
+
+**Fix:** Rewrite those metadata attributes onto three real YAML lines in
+all six sources while preserving each selected figure and first-page AVIF.
+The correct archive output is **3 Submitted Manuscripts** and **13 Working
+Drafts & Ongoing Research** (the original seven plus the six new resources).
+Neither submission classifications nor the existing CV contents change.
+
+**Guard:** `scripts/verify-paper-archive.mjs` checks the **built `_site`**,
+counting exactly 3 submitted and 13 draft cards; verifying every new
+draft link and generated `/papers/<slug>.html` page; and checking both
+card figure images and first-page detail images. The GitHub Pages deploy
+workflow runs it directly after `bundle exec jekyll build`, blocking
+production deployment if the expected pages disappear. Source-level tests
+in `test/style_contract.js` additionally detect escaped-newline metadata.
