@@ -256,7 +256,8 @@ Run the test yourself: [Google Lighthouse PageSpeed Insights](https://pagespeed.
 
 <!--ts-->
 
-- [al-folio](#al-folio)
+- [Heriberto Espino Montelongo — Academic Portfolio](#heriberto-espino-montelongo--academic-portfolio)
+  - [Upstream theme and documentation: al-folio](#upstream-theme-and-documentation-al-folio)
   - [User community](#user-community)
   - [Lighthouse PageSpeed Insights](#lighthouse-pagespeed-insights)
     - [Desktop](#desktop)
