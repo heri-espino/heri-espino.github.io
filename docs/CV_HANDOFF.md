@@ -855,3 +855,9 @@ Regression: `test/style_contract.js` checks source contracts, while
 button, physical paper dimensions, Harvard header position, Europass order,
 language display, and paper-mode grid alignment. Print must keep all record
 links/selection controls without an extra on-page Print button.
+
+## Connected wide-mode CV entries (2026-10-28)
+
+The screenshot review identified an uneven typographic rhythm: the institution line was smaller than the description and close to the link row, while the description was detached by an excessive top margin. The reading-view-only fix uses an explicit visual hierarchy: **title** (existing dominant size), **organization** (0.96rem, semibold), **links** (0.85rem), then **description** (0.91rem, lighter, 1.42 line-height). A 0.17rem internal line gap and 0.32rem description gap connect each record; link rows get another 0.13rem to distinguish them from the institution. Adjacent description lines have 0.15rem separation. The noninstitutional context label remains muted at 0.84rem.
+
+Scope: `@media screen`, `data-cv-preview="reading"`, any density except `latex`, excluding the special Harvard organization-first and Europass two-column templates. Both grouped CV entries and the chronological view are covered. No edits to LaTeX compact print rules, Jekyll data, print/PDF pagination, print margins, default wide view, or entry ordering. For a manual check, open the La Catarina published technical article in the default wide view, verify title–organization–links–highlights spacing; switch to chronological view and repeat; then compare a Paper preview and browser Print to ensure the compact LaTeX rules remain unchanged.
