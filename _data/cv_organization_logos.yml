@@ -46,9 +46,21 @@
   issuer_key: ucsc
 - match: "interactive brokers"
   issuer_key: interactive-brokers
-# Scalable original Actinver wordmark: Wikimedia Commons, attributed to Actinver.
+# User-provided square A-dot mark, hosted locally for crisp and reliable CV rendering.
 - match: "actinver"
-  logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_de_Actinver.svg"
+  logo: "/assets/img/cv-organizations/actinver.webp"
+# Custom CV-only project marks, designed for the user's authored libraries.
+# These are project identities, not outside institutional affiliations.
+- match: "abaquant"
+  logo: "/assets/img/cv-organizations/abaquant.svg"
+- match: "proximitygraphs"
+  logo: "/assets/img/cv-organizations/proximitygraphs.svg"
+- match: "trend estimation"
+  logo: "/assets/img/cv-organizations/trendestimation.svg"
+- match: "awesomefigures"
+  logo: "/assets/img/cv-organizations/awesomefigures.svg"
+- match: "docling math"
+  logo: "/assets/img/cv-organizations/doclingmath.svg"
 - match: "openai"
   logo: "https://www.google.com/s2/favicons?domain=openai.com&sz=128"
 - match: "springer nature"

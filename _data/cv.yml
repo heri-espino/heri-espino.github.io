@@ -77,8 +77,9 @@ cv:
 
     Programming Experience:
       - name: AbaQuant — Financial Mathematics Python Library
-        role: "Lead Developer"
-        subtitle: "AbaQuant — Financial Mathematics Python Library"
+        role: "Author & Lead Developer"
+        subtitle: "Financial Mathematics Python Library"
+        organization: AbaQuant
         date: Aug 2024 — Present
         location: Puebla, Mexico
         links:
@@ -87,9 +88,10 @@ cv:
           - { label: DOI, url: "https://zenodo.org/records/21347375" }
         highlights:
           - Developed a Python library for financial mathematics, with reusable quantitative methods and published package documentation.
-      - name: Developer in Proximity Graphs Python Library
-        role: "Co-developer"
-        subtitle: "ProximityGraphs — Computational Geometry Python Library"
+      - name: ProximityGraphs — Computational Geometry Python Library
+        role: "Co-author & Maintainer"
+        subtitle: "Computational Geometry Python Library"
+        organization: ProximityGraphs
         date: Aug 2025 — Present
         location: Puebla, Mexico
         links: [{ label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }]
@@ -109,9 +111,9 @@ cv:
           - Updated Python SDK transport-error mapping so mid-stream connection failures surface as stable documented exceptions.
           - Added synchronous and asynchronous regression tests for transport errors, cleanup, callbacks, and compatibility.
       - name: Trend Estimation — Penalized Trend Smoothing Python Library
-        role: "Contributor"
+        role: "Author & Maintainer"
         subtitle: "Penalized Trend Smoothing Library"
-        organization: Open-source Python library
+        organization: Trend Estimation
         links:
           - { label: GitHub, url: "https://github.com/trendestimation/trendestimation" }
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/trendestimation.html" }
@@ -119,9 +121,9 @@ cv:
           - Developing reusable finite-difference penalized least-squares smoothing with configurable difference orders and Guerrero observed-difference plug-in means.
           - Implemented spectral trend fitting and classical in-sample CV, GCV, AICc, and BIC selection for fixed numeric means; examples and optional plotting are included.
       - name: AwesomeFigures — Scientific Visualization Toolkit
-        role: "Developer"
+        role: "Author & Maintainer"
         subtitle: "Scientific Visualization Toolkit"
-        organization: Open-source Python library
+        organization: AwesomeFigures
         links:
           - { label: Website, url: "https://awesomefigures.github.io/awesomefigures/" }
           - { label: GitHub, url: "https://github.com/awesomefigures/awesomefigures" }
@@ -130,9 +132,9 @@ cv:
           - Added utilities for LaTeX-compatible figure dimensions, vector export, and reusable scientific visualizations.
 
       - name: Docling Math — Mathematical PDF Extraction
-        role: "Developer"
+        role: "Author & Maintainer"
         subtitle: "Mathematical PDF Extraction"
-        organization: Independent research software
+        organization: Docling Math
         links:
           - { label: Website, url: "https://heri-espino.github.io/docling-math/" }
           - { label: Documentation, url: "https://heri-espino.github.io/docling-math/docs/" }

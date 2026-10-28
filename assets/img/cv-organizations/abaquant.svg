@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144" role="img" aria-label="AbaQuant: financial mathematics">
+<defs><linearGradient id="bg" x2="0.7" y2="1"><stop stop-color="#103B72"/><stop offset="1" stop-color="#0B1D3B"/></linearGradient></defs>
+<rect x="1" y="1" width="142" height="142" rx="29" fill="url(#bg)"/>
+<path d="M27 101 55 39H69L91 88M40 77h30" stroke="#F5F8FF" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="99" cy="93" r="20" fill="none" stroke="#66D3C5" stroke-width="8"/>
+<path d="m104 98 13 14" stroke="#66D3C5" stroke-width="8" stroke-linecap="round"/>
+<circle cx="111" cy="43" r="7" fill="#E8BA5D"/>
+</svg>

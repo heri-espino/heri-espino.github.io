@@ -2029,22 +2029,7 @@
 
 
 
-/* Actinver's official mark is a wide wordmark. Never force it into a 16px
-   square: show its vector artwork at its intended aspect ratio instead.
-   Only expand after the SVG is loaded; generic fallback stays compact. */
-.cv-page .cv-org-symbol:has(.cv-org-logo:not([hidden])[src*="Logo_de_Actinver.svg"]) {
-  width: 4.3em;
-  min-width: 4.3em;
-  height: 1em;
-  margin-right: 0.5em;
-}
-.cv-page .cv-org-symbol:has(.cv-org-logo:not([hidden])[src*="Logo_de_Actinver.svg"]) .cv-org-logo {
-  object-fit: contain;
-  object-position: left center;
-}
-@media print {
-  .cv-page .cv-org-symbol:has(.cv-org-logo:not([hidden])[src*="Logo_de_Actinver.svg"]) {
-    width: 4.3em !important;
-    min-width: 4.3em !important;
-  }
-}
+/* The owner-provided Actinver monogram and all library marks have a
+   square aspect ratio. The base .cv-org-logo rule scales them consistently
+   on screen and in PDF; no special wide-wordmark layout is needed. */
+
