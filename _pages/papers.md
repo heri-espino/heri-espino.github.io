@@ -8,8 +8,8 @@ nav_order: 2
 ---
 
 {% assign items = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
-{% assign submitted_papers = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
-{% assign other_papers = items | where_exp: "item", "item.url != '/papers/unit-region-factorization.html' and item.url != '/papers/stepping-stone.html' and item.url != '/papers/activation-patching-effects-add-up.html'" %}
+{% assign submitted_papers = items | where_exp: "item", "item.label == 'Under Review' or item.label == 'Under Revision'" %}
+{% assign other_papers = items | where_exp: "item", "item.label != 'Under Review' and item.label != 'Under Revision'" %}
 
 <p class="portfolio-section-intro papers-archive-intro">
   Manuscripts under review are listed separately from working drafts and related research materials. Lectures and tutorials retain their distinct labels.
