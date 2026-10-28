@@ -139,7 +139,10 @@ if (exists("_data/cv_organization_logos.yml")) {
   }
   const unbranded = new Set([
     "Data Scientist", "Independent research software", "Kaxa Nuk",
-    "Open-source Python library", "Paletas Loreto", "Research draft"
+    "Open-source Python library", "Paletas Loreto", "Research draft",
+    "Model of United Nations Third Edition · WHO · Colegio Loyola",
+    "Un Acercamiento al Análisis Topológico de Datos · Benemérita Universidad Autónoma de Puebla",
+    "Fideicomisos Instituidos en Relación con la Agricultura"
   ]);
   const sourceNames = [...cvSource.matchAll(/\b(?:organization|institution):\s*(?:"([^"\n]+)"|([^,\n}]+))/gm)]
     .map((match) => (match[1] || match[2]).trim());
@@ -205,10 +208,28 @@ if (exists("_pages/cv.md")) {
   if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
     failures.push("Programming experience should link the canonical trendestimation library.");
   }
+  if (!cvRenderer.includes('data-cv-preview="reading"') || !cvScript.includes('setPreview("reading")')) {
+    failures.push("The CV must start in full-width reading mode.");
+  }
+  if (!cvRenderer.includes('id="cv-markers"') || !cvScript.includes("cvMarkers") || !cvStyles.includes('data-cv-markers="dashes"')) {
+    failures.push("Description markers must support dashes, bullets, and no markers.");
+  }
+  if (!cvRenderer.includes('<option value="latex" selected>') || !cvStyles.includes('data-cv-density="latex"')) {
+    failures.push("The LaTeX-inspired extra-compact density must be available.");
+  }
+  if (!cvRenderer.includes('cv-entry-role') || !cvRenderer.includes('cv-entry-name')) {
+    failures.push("CV entries must display role and activity separately.");
+  }
+  const sourceSections = read("_data/cv.yml");
+  for (const section of ["Professional Experience", "Academic Experience", "Selected Academic Projects", "Selected Extracurricular Activities", "Online Courses"]) {
+    if (!sourceSections.includes("    " + section + ":")) {
+      failures.push("The CV is missing LaTeX-defined section " + section);
+    }
+  }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
   }
-  if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("paper")')) {
+  if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("reading")')) {
     failures.push("CV custom template color or preview handlers are missing.");
   }
   if (/column-count:\\s*2\\b/.test(cvStyles)) {

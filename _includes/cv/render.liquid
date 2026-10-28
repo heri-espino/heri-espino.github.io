@@ -1,6 +1,6 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="paper" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="latex" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
   <div class="cv-workspace">
     <div class="cv-controls-column">
       <div class="cv-controls-toolbar" aria-label="CV settings and export">
@@ -51,8 +51,16 @@
       </label>
       <label for="cv-density">Spacing
         <select id="cv-density">
-          <option value="balanced">Balanced</option>
+          <option value="latex" selected>LaTeX · extra compact</option>
           <option value="compact">Compact</option>
+          <option value="balanced">Balanced</option>
+        </select>
+      </label>
+      <label for="cv-markers">Description markers
+        <select id="cv-markers">
+          <option value="dashes" selected>Em dashes (—)</option>
+          <option value="bullets">Bullets (•)</option>
+          <option value="none">No markers</option>
         </select>
       </label>
       <label for="cv-palette">Accent color
@@ -68,7 +76,7 @@
         </select>
       </label>
       <label for="cv-custom-accent">Custom color
-        <input type="color" id="cv-custom-accent" value="#00166c" disabled aria-label="Choose a custom CV accent color">
+        <input type="color" id="cv-custom-accent" value="#00104c" disabled aria-label="Choose a custom CV accent color">
       </label>
     </div>
     <details class="cv-section-picker">
@@ -93,7 +101,7 @@
         <label><input type="checkbox" data-cv-print-toggle="locations" checked> Show locations</label>
         <label><input type="checkbox" data-cv-print-toggle="credentials" checked> Show credential IDs</label>
         <label><input type="checkbox" data-cv-print-toggle="organizations" checked> Show institutions and employers</label>
-        <label><input type="checkbox" data-cv-print-toggle="highlights" checked> Show detailed bullet points</label>
+        <label><input type="checkbox" data-cv-print-toggle="highlights" checked> Show descriptions</label>
         <label><input type="checkbox" data-cv-print-toggle="links" checked> Show resource-link labels</label>
         <label><input type="checkbox" data-cv-print-toggle="contact" checked> Show header contact links</label>
       </div>
@@ -107,6 +115,7 @@
         </label>
         <label for="cv-page-margin">Page margins
           <select id="cv-page-margin">
+            <option value="latex" selected>LaTeX (10 mm)</option>
             <option value="standard">Standard (13 mm)</option>
             <option value="narrow">Narrow (8 mm)</option>
             <option value="wide">Wide (19 mm)</option>
@@ -130,11 +139,11 @@
       <input type="checkbox" id="cv-print-urls"> Show full resource URLs on printed copies (clickable links are always retained)
     </label>
     <div class="cv-actions">
-      <button type="button" id="cv-preview" class="cv-secondary-action" aria-pressed="true">Full-width view</button>
+      <button type="button" id="cv-preview" class="cv-secondary-action" aria-pressed="false">Paper preview</button>
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
-    <p class="cv-preview-help" id="cv-preview-help">Paginated A4 preview. Print / Save as PDF opens the browser's exact page layout.</p>
+    <p class="cv-preview-help" id="cv-preview-help">Full-width CV view. Switch to Paper preview for approximate page boundaries; Print / Save as PDF uses the browser.</p>
     <p class="cv-disclaimer">
       The Harvard-inspired and Europass-inspired options are independent academic CV styles, not official university or EU-issued templates.
       For an official Europass document, use the <a href="https://europass.europa.eu/en/create-europass-cv" target="_blank" rel="noopener noreferrer">EU Europass CV builder</a>.
@@ -167,13 +176,13 @@
       {% assign title = section_pair[0] %}
       {% assign entries = section_pair[1] %}
       {% assign expandable = false %}
-      {% if title == 'Competitions & Activities' or title == 'Courses & Certifications' %}
+      {% if title == 'Selected Extracurricular Activities' or title == 'Online Courses' %}
         {% assign expandable = true %}
       {% endif %}
 
       <section class="cv-section" data-cv-section="{{ title | slugify }}" data-cv-title="{{ title | escape }}" aria-labelledby="{{ title | slugify }}-heading">
         {% if expandable %}
-          <details class="cv-details">
+          <details class="cv-details" open>
             <summary>
               <span id="{{ title | slugify }}-heading">{{ title }}</span>
               <span class="cv-details-count">{{ entries.size }} entries</span>
@@ -201,10 +210,10 @@
             {% endfor %}
           </ul>
         {% else %}
-          <div class="{% if title == 'Education' or title == 'Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
+          <div class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
             {% for entry in entries %}
               <article
-                class="{% if title == 'Education' or title == 'Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
+                class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
                 data-cv-record
                 data-cv-date="{{ entry.date | default: '' | escape }}"
               >
@@ -218,7 +227,8 @@
                         {% endif %}
                       {% endunless %}
                       {% if cv_primary_link %}<a href="{{ cv_primary_link }}" class="cv-primary-link" target="_blank" rel="noopener noreferrer">{% endif %}
-                      {{ entry.degree | default: entry.name }}
+                      {% if entry.role %}<span class="cv-entry-role">{{ entry.role }}</span><span class="cv-entry-separator" aria-hidden="true"> · </span>{% endif %}
+                      <span class="cv-entry-name" title="{{ entry.degree | default: entry.name | escape }}">{{ entry.subtitle | default: entry.degree | default: entry.name }}</span>
                       {% if cv_primary_link %}<i class="fa-solid fa-arrow-up-right-from-square cv-link-icon" aria-hidden="true"></i></a>{% endif %}
                     </h3>
                     {% assign cv_org_name = entry.institution | default: entry.organization | default: '' | downcase %}

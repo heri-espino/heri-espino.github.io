@@ -1584,3 +1584,345 @@
     display: none !important;
   }
 }
+
+
+/* Reference typography from the owner's private LaTeX CV:
+   7.3pt/8.4pt base, 6.5pt/7.6pt descriptions, navy #00104c,
+   description gray #666 and semibold keyword gray #505.
+   One-column layout is retained as separately requested. */
+.cv-page[data-cv-density="latex"] {
+  --cv-description: #666;
+  --cv-keyword-ink: #505050;
+  --cv-border: #ccd1dd;
+  --cv-muted: #4c5781;
+  line-height: 1.2;
+}
+
+.cv-page[data-cv-density="latex"] .cv-document,
+.cv-page[data-cv-density="latex"] .cv-preview-sheet {
+  font-size: 9pt;
+  line-height: 1.2;
+}
+
+.cv-page[data-cv-density="latex"] .cv-intro {
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-intro h1 {
+  margin-bottom: 0.2rem;
+  font-size: 1.52rem;
+  line-height: 1.08;
+}
+
+.cv-page[data-cv-density="latex"] .cv-eyebrow {
+  margin-bottom: 0.15rem;
+  font-size: 0.67rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-contact {
+  gap: 0.2rem 0.65rem;
+  margin-top: 0.2rem;
+  font-size: 0.74rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-content {
+  gap: 0.65rem;
+  margin-top: 0.6rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-section {
+  margin-bottom: 0.3rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-section > h2,
+.cv-page[data-cv-density="latex"] .cv-details > summary,
+.cv-page[data-cv-density="latex"] .cv-timeline h2 {
+  margin: 0 0 0.32rem;
+  padding: 0 0 0.18rem;
+  border-bottom: 1.25px solid var(--cv-accent);
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.12;
+}
+
+.cv-page[data-cv-density="latex"] .cv-entry-list {
+  gap: 0.26rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-entry,
+.cv-page[data-cv-density="latex"] .cv-compact-entry {
+  margin: 0;
+  padding: 0 0 0.18rem;
+  border-bottom: 0;
+}
+
+.cv-page[data-cv-density="latex"] .cv-compact-grid {
+  gap: 0.18rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-entry-heading {
+  gap: 0.32rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-entry h3,
+.cv-page[data-cv-density="latex"] .cv-compact-entry h3 {
+  margin: 0;
+  font-size: 0.83rem;
+  line-height: 1.13;
+}
+
+.cv-page .cv-entry-role {
+  color: var(--cv-accent);
+  font-weight: 750;
+}
+
+.cv-page .cv-entry-separator {
+  color: #6e7792;
+  font-weight: 400;
+}
+
+.cv-page .cv-entry-name {
+  color: #4c5781;
+  font-weight: 500;
+}
+
+.cv-page[data-cv-density="latex"] .cv-entry p,
+.cv-page[data-cv-density="latex"] .cv-compact-entry p {
+  margin: 0.08rem 0 0;
+  line-height: 1.15;
+}
+
+.cv-page[data-cv-density="latex"] .cv-organization,
+.cv-page[data-cv-density="latex"] .cv-organization a {
+  color: #4c5781;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.cv-page[data-cv-density="latex"] .cv-meta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.cv-page[data-cv-density="latex"] .cv-links {
+  gap: 0.1rem 0.45rem;
+  margin-top: 0.1rem;
+  font-size: 0.71rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-highlights {
+  margin: 0.14rem 0 0.2rem;
+  padding-left: 0.95rem;
+  color: var(--cv-description);
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.22;
+}
+
+.cv-page[data-cv-density="latex"] .cv-highlights li + li {
+  margin-top: 0.06rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-keyword {
+  color: var(--cv-keyword-ink);
+  font-weight: 600;
+}
+
+.cv-page[data-cv-density="latex"] .cv-skills > div {
+  grid-template-columns: minmax(6rem, 0.27fr) minmax(0, 1fr);
+  gap: 0.65rem;
+  padding: 0.2rem 0;
+  font-size: 0.76rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-inline-list {
+  gap: 0.25rem;
+}
+
+.cv-page[data-cv-density="latex"] .cv-inline-list li {
+  padding: 0.18rem 0.45rem;
+  font-size: 0.76rem;
+}
+
+/* User-selectable markers: a dash, a conventional bullet, or plain lines.
+   Apply equally to the live document, cloned page preview, and print. */
+.cv-page[data-cv-markers="dashes"] .cv-highlights {
+  list-style: none;
+}
+
+.cv-page[data-cv-markers="dashes"] .cv-highlights li {
+  position: relative;
+}
+
+.cv-page[data-cv-markers="dashes"] .cv-highlights li::before {
+  content: "—";
+  position: absolute;
+  left: -0.92rem;
+  color: #8a929e;
+  font-weight: 400;
+}
+
+.cv-page[data-cv-markers="bullets"] .cv-highlights {
+  list-style-type: disc;
+}
+
+.cv-page[data-cv-markers="bullets"] .cv-highlights li::before,
+.cv-page[data-cv-markers="none"] .cv-highlights li::before {
+  content: none;
+}
+
+.cv-page[data-cv-markers="none"] .cv-highlights {
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+@media print {
+  .cv-page[data-cv-density="latex"] .cv-document {
+    font-size: 7.3pt !important;
+    line-height: 1.15 !important;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-intro {
+    margin-bottom: 3pt;
+    padding-bottom: 4pt;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-intro h1 {
+    font-size: 16pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-content,
+  .cv-page[data-cv-density="latex"] .cv-entry-list {
+    margin-top: 3pt;
+    gap: 3pt;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-section {
+    margin-bottom: 4pt;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-section > h2,
+  .cv-page[data-cv-density="latex"] .cv-details > summary,
+  .cv-page[data-cv-density="latex"] .cv-timeline h2 {
+    margin-bottom: 2.5pt;
+    padding-bottom: 2pt;
+    font-size: 10pt !important;
+    break-after: avoid;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-entry,
+  .cv-page[data-cv-density="latex"] .cv-compact-entry {
+    padding-bottom: 2pt;
+    break-inside: avoid;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-entry h3,
+  .cv-page[data-cv-density="latex"] .cv-compact-entry h3 {
+    font-size: 7.6pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-meta,
+  .cv-page[data-cv-density="latex"] .cv-organization,
+  .cv-page[data-cv-density="latex"] .cv-links {
+    font-size: 6.8pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-highlights {
+    margin: 1pt 0 2pt;
+    font-size: 6.5pt !important;
+    line-height: 7.6pt;
+    color: #666 !important;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-keyword {
+    color: #505050 !important;
+  }
+
+  .cv-page[data-cv-density="latex"] .cv-skills > div {
+    padding: 1.2pt 0;
+    font-size: 7pt;
+  }
+}
+
+
+/* Respect the user's print-text-size control even in extra-compact mode.
+   The supplied LaTeX sizes describe the regular preset, not a forced size. */
+@media print {
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-document {
+    font-size: 6.7pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-document {
+    font-size: 9pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-entry h3,
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-compact-entry h3 {
+    font-size: 7pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-entry h3,
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-compact-entry h3 {
+    font-size: 9.3pt !important;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-highlights {
+    font-size: 6pt !important;
+    line-height: 7.2pt;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-highlights {
+    font-size: 8pt !important;
+    line-height: 9.8pt;
+  }
+}
+
+@media screen {
+  .cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-preview-sheet {
+    font-size: 8pt;
+  }
+
+  .cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-preview-sheet {
+    font-size: 10.5pt;
+  }
+}
+
+
+/* Unlike the old personal template, LaTeX mode keeps the date opposite the
+   role/title, matching the uploaded \\resumeActivity layout. */
+.cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading .cv-meta {
+  text-align: right;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-section > h2 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+@media screen and (max-width: 700px) {
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading {
+    grid-template-columns: 1fr;
+  }
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading .cv-meta {
+    text-align: left;
+  }
+}
+
+@media print {
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .cv-page[data-cv-density="latex"][data-cv-template="personal"] .cv-entry-heading .cv-meta {
+    text-align: right !important;
+  }
+}

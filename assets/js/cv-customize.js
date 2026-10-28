@@ -24,6 +24,7 @@
     font: document.getElementById("cv-font"),
     paper: document.getElementById("cv-paper"),
     density: document.getElementById("cv-density"),
+    markers: document.getElementById("cv-markers"),
     palette: document.getElementById("cv-palette"),
     accent: document.getElementById("cv-custom-accent"),
     printUrls: document.getElementById("cv-print-urls"),
@@ -89,7 +90,7 @@
   // Semibold emphasis of technical terminology without changing source data.
   // Operate on text nodes only: never interpolate arbitrary content into HTML.
   const keywords = [
-    "GitHub Actions", "Springer Nature", "SN Computer Science", "activation patching",
+    "GitHub Actions", "penalized least squares", "stochastic processes", "finite differences", "Springer Nature", "SN Computer Science", "activation patching",
     "logit additivity", "Monte Carlo", "mathematical OCR", "Deep Learning",
     "Machine Learning", "Bayesian", "Python", "PyTorch", "TensorFlow",
     "Matplotlib", "Docling", "LaTeX", "NumPy", "SciPy", "Ruff",
@@ -167,7 +168,7 @@
 
   // Only whitelisted values can alter @page. Never insert arbitrary user strings into CSS.
   const pageSizes = { a4: "A4", letter: "letter" };
-  const pageMargins = { narrow: "8mm", standard: "13mm", wide: "19mm" };
+  const pageMargins = { latex: "10mm", narrow: "8mm", standard: "13mm", wide: "19mm" };
   const paletteColors = {
     velvet: "#00166c",
     sapphire: "#123b63",
@@ -177,7 +178,7 @@
     graphite: "#363d48",
   };
   const templateDefaults = {
-    personal: "#00166c",
+    personal: "#00104c",
     harvard: "#252525",
     europass: "#2176ac",
     minimal: "#123b63",
@@ -362,6 +363,7 @@
     updateSectionTitles();
     root.dataset.cvFont = controls.font.value;
     root.dataset.cvDensity = controls.density.value;
+    root.dataset.cvMarkers = controls.markers.value;
     root.dataset.cvPaper = controls.paper.value;
     root.dataset.cvShowUrls = controls.printUrls.checked ? "true" : "false";
     root.dataset.cvTextSize = controls.size.value;
@@ -474,12 +476,13 @@
     controls.template.value = "personal";
     controls.font.value = "site";
     controls.paper.value = "a4";
-    controls.density.value = "balanced";
+    controls.density.value = "latex";
+    controls.markers.value = "dashes";
     controls.palette.value = "default";
-    controls.accent.value = "#00166c";
+    controls.accent.value = "#00104c";
     controls.printUrls.checked = false;
     controls.size.value = "regular";
-    controls.margin.value = "standard";
+    controls.margin.value = "latex";
     printToggles.forEach((toggle) => { toggle.checked = true; });
     for (const [item, control] of entryControls) {
       item.included = true;
@@ -487,7 +490,7 @@
     }
     entrySearch.value = "";
     entrySearch.dispatchEvent(new Event("input"));
-    setPreview("paper");
+    setPreview("reading");
     toggles.forEach((toggle) => { toggle.checked = true; });
     render();
   });
@@ -510,7 +513,7 @@
   });
 
   setPanelOpen(true);
-  setPreview("paper");
+  setPreview("reading");
   render();
 
   // Re-measure after responsive width changes or fonts become available.

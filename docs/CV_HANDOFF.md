@@ -268,3 +268,55 @@ and recalculates paper preview width. The sticky desktop sidebar scrolls
 independently, while mobile controls appear above the CV preview.
 The panel and paper preview clones are excluded from the printed PDF.
 The existing source CV remains readable when JavaScript is disabled.
+
+## LaTeX-aligned CV hierarchy, compactness, and default view (2026-10-28)
+
+The user's newly uploaded private XeLaTeX source (`Heriberto_Espino_Montelongo(1).tex`,
+`template(1).tex`, and `colors(1).tex`) was compared against the
+public CV. **Do not commit these uploaded source files or the phone number
+contained in them.**
+
+The public source `_data/cv.yml` now follows the LaTeX section order:
+Education, Professional Experience, Programming Experience, Academic Experience,
+Awards, Research, Selected Academic Projects, Leadership, Schools, Selected
+Extracurricular Activities, Technical Skills, Online Courses, then the website's
+additional Languages and Volunteering. The individual programming and research
+records were also reordered to mirror the LaTeX's intended presentation.
+
+Structured records can now supply optional `role` and `subtitle` fields. The
+CV displays role followed by an activity/subject title, without overwriting the
+canonical `name`/publication title used for search, source links, or source data.
+Fields introduced from the user-provided document include poster subjects,
+award subjects/descriptions, the third summer school, selected course projects,
+the Model UN activity and two previously missing certificates. Existing verified
+CV research, website links and additional activities have not been deleted.
+
+Known LaTeX inconsistencies were intentionally not copied: the
+`trendestimation`, AwesomeFigures, and Docling Math entries contain duplicated
+OpenAI SDK descriptions, the Max k-Cut activity contains copied trend-estimation
+text and unrelated links, and some older statuses conflict with updated public
+research. The corrected website research wording and actual library links take
+precedence. Dates that remain uncertain should be reviewed against issued
+certificates rather than inferred.
+
+The default mode is now **Full-width reading** (not simulated paper pages).
+The default density is **LaTeX · extra compact**, while balanced/compact remain
+optional. Print continues to use the canonical Jekyll CV source and the
+browser's actual pagination. The private source's visual colors are
+`#00104c` ink, `#4c5781` secondary labels, `#666666` descriptions and
+`#505050` keyword text; compact print sizes aim for 7.3pt body and 6.5pt
+descriptions. All print spacing/font controls, six templates and the left-hand
+settings sidebar remain available.
+
+The `Description markers` menu chooses **em dashes**, **bullets**, or **no
+markers** in reading, paper approximation, and browser print. The original
+descriptions are preserved unchanged when switching marker modes. Compact
+styles keep one content column, as previously requested, even though the
+reference's visual output used `paracol` for two columns.
+
+Validation: inspect each section's contents against the current source,
+including entry-picker labels and Chronological order. Exercise default
+full-width view, Paper preview, all three list-marker styles, all densities,
+the five nonpersonal templates, the Europass variant, print A4/Letter, reset,
+and sidebar expand/collapse. Confirm that private phone/birth/date information
+is absent from `_data/cv.yml`.
