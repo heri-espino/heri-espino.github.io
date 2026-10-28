@@ -1,0 +1,54 @@
+name: CV template browser checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "_includes/cv/**"
+      - "_sass/_cv.scss"
+      - "assets/js/cv-customize.js"
+      - "_data/cv.yml"
+      - "test/visual/interactions.spec.js"
+      - ".github/workflows/cv-browser.yml"
+  push:
+    branches: [main]
+    paths:
+      - "_includes/cv/**"
+      - "_sass/_cv.scss"
+      - "assets/js/cv-customize.js"
+      - "_data/cv.yml"
+      - "test/visual/interactions.spec.js"
+      - ".github/workflows/cv-browser.yml"
+
+jobs:
+  cv-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.5"
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install browser test dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium webkit
+      - name: Test actual CV layouts on desktop and mobile
+        run: npx playwright test test/visual/interactions.spec.js --grep "CV " --project=desktop --project=mobile --reporter=line
+      - name: Preserve failure screenshots and traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-layout-test-artifacts
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
