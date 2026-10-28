@@ -320,10 +320,44 @@ if (exists("_pages/cv.md")) {
     failures.push("Smoothness-integrated trend manuscript must be a prominent unsubmitted working draft.");
   }
   if (!papersArchive.includes('id="featured-working-draft"') ||
-      !papersArchive.includes("include portfolio/card.liquid item=featured_draft") ||
-      !papersArchive.includes("item.url != '/papers/smoothness-integrated-trend-distances.html'") ||
+      !papersArchive.includes('featured_items = items | where: "featured", true') ||
+      !papersArchive.includes("include portfolio/card.liquid item=item") ||
+      !papersArchive.includes('item.featured != true') ||
       papersArchive.indexOf('id="featured-working-draft"') > papersArchive.indexOf('id="submitted-manuscripts"')) {
-    failures.push("Featured working draft must appear before submitted manuscripts without duplication.");
+    failures.push("Featured research materials must be first, sorted by importance, and absent from lower duplicate grids.");
+  }
+  const newResearchPages = [
+    ["dynamic-forecast-optimal-smoothness", "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation", "Working Draft"],
+    ["smoothness-indexed-pls-python", "Smoothness-Indexed Penalized Trend Estimation in Python", "Working Draft"],
+    ["posterior-integration-volatility-wti-asian-options", "Posterior Integration and Volatility Inputs in WTI Asian Options", "Working Draft"],
+    ["componentwise-knn-isomap-lecture", "Componentwise kNN-Isomap", "Research Lecture"],
+    ["maxcut-sdp-eva-clustering-tutorial", "From Max-Cut to Semidefinite Programming", "Research Tutorial"],
+  ];
+  if (!trendDraft.includes("featured: true")) {
+    failures.push("The previously featured smoothness-distance working draft must remain prominently featured.");
+  }
+  for (const [slug, title, stage] of newResearchPages) {
+    const relPath = "_pages/papers/" + slug + ".md";
+    if (!exists(relPath)) {
+      failures.push("Missing linked research material: " + relPath);
+      continue;
+    }
+    const source = read(relPath);
+    if (!source.includes("title: ") || !source.includes(title) ||
+        !source.includes('label: "' + stage + '"') ||
+        !source.includes("featured: true") ||
+        !source.includes("permalink: /papers/" + slug + ".html") ||
+        source.includes("\\npdf: ") ||
+        !researchGroup.includes("papers/" + slug + ".html")) {
+      failures.push("Research page or CV link/status not synchronized for: " + slug);
+    }
+  }
+  if (researchGroup.includes("Under Review") && !cvSources.includes("Elsevier · Discrete Applied Mathematics · Under Review")) {
+    failures.push("Existing journal review classifications must be retained.");
+  }
+  if (!read("_pages/papers/componentwise-knn-isomap-lecture.md").includes("not a submitted research article") ||
+      !read("_pages/papers/maxcut-sdp-eva-clustering-tutorial.md").includes("not represented as a submitted")) {
+    failures.push("Lecture/tutorial materials must not be mislabeled as submitted manuscripts.");
   }
   if (!researchGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
       !researchGroup.includes("Working Draft (Not Submitted)") ||
