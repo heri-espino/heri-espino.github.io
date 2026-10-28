@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/componentwise-knn-isomap-lecture.html
 portfolio_type: paper
+pdf: /papers/EspinoMontelongo-2026-Componentwise_Isomap.pdf
 importance: 5
 card_kind: "Mathematical lecture"
 title: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"

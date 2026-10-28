@@ -622,3 +622,40 @@ The output is source-driven in `_data/cv.yml` and rendered in
 completeness for all event-based entries. Keep unknown dates explicit until
 an actual repository commit, dated credential, or user-provided timeline
 verifies them; don't invent historical start dates.
+
+## Public 2026 PDF filenames and links (2026-10-28)
+
+The owner uploaded the original PDFs directly under `papers/` and explicitly
+requested the naming scheme `EspinoMontelongo-2026-Short_title.pdf`.
+
+The six canonical public PDF paths are:
+- `papers/EspinoMontelongo-2026-Trend_Distances.pdf`
+- `papers/EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf`
+- `papers/EspinoMontelongo-2026-PLS_Python.pdf`
+- `papers/EspinoMontelongo-2026-WTI_Asian_Options.pdf`
+- `papers/EspinoMontelongo-2026-Componentwise_Isomap.pdf`
+- `papers/EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf`
+
+All five necessary renames reuse the exact Git blob SHA, preserving PDF
+bytes and avoiding re-encoding; the forecast PDF already followed the naming
+convention and was left in place. The old upload filenames are removed.
+
+Each of the six `_pages/papers/*.md` records now has its actual
+`pdf: /papers/<canonical-filename>` metadata, enabling the existing
+**Open PDF** action. The six corresponding entries in `_data/cv.yml`
+each have a **PDF** link. Figure-page card thumbnails and first-page
+portfolio detail previews remain untouched. Submission status and the
+13-entry Working Drafts section are unchanged.
+
+`scripts/verify-paper-archive.mjs` is a production build guard that checks
+all six PDFs appear in the generated site, have a real `%PDF-` header and
+are linked by the rendered detail page. The style contract checks
+source PDF bytes plus CV and portfolio references.
+
+**Blinded manuscript warning:** The WTI document remains classified as a
+blinded manuscript draft; the owner explicitly requested the public
+surname-based filename and PDF link. That identifies the portfolio owner
+and could compromise anonymity for any double-blind review. Do not
+use the public copy as an anonymous journal submission or mistake
+public availability for submission, acceptance, or peer review.
+This section supersedes earlier notes saying the PDFs were not hosted.

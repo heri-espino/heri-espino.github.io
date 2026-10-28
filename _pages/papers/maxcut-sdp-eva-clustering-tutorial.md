@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/maxcut-sdp-eva-clustering-tutorial.html
 portfolio_type: paper
+pdf: /papers/EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf
 importance: 6
 card_kind: "Mathematical tutorial"
 title: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
