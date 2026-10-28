@@ -556,3 +556,36 @@ card figure images and first-page detail images. The GitHub Pages deploy
 workflow runs it directly after `bundle exec jekyll build`, blocking
 production deployment if the expected pages disappear. Source-level tests
 in `test/style_contract.js` additionally detect escaped-newline metadata.
+
+## Actinver image and Python-library author credits (2026-10-28)
+
+The owner uploaded a navy square Actinver icon with a white A and gold dot.
+It replaces the Actinver Wikimedia wordmark entirely. The original
+512 × 512 PNG was resized without creative changes to a 128 × 128 WebP
+(`assets/img/cv-organizations/actinver.webp`) for crisp 16 px CV display.
+The 4.3-em wide-wordmark CSS override was removed.
+
+Five open-source libraries in **Programming Experience** are now visibly
+credited to their author/coauthor and given named organization/project lines:
+- **AbaQuant:** Author & Lead Developer; original SVG stylizes A and Q
+  as a mathematical-finance identity.
+- **ProximityGraphs:** Co-author & Maintainer; SVG proximity/empty-region
+  graph mark, keeping collaborative attribution explicit.
+- **Trend Estimation:** Author & Maintainer; SVG overlapping smoothness
+  curves.
+- **AwesomeFigures:** Author & Maintainer; SVG scientific plotting curves.
+- **Docling Math:** Author & Maintainer; SVG math-document extraction symbol.
+
+All five SVG logo sources are editable and committed under
+`assets/img/cv-organizations/`. These are new **CV-only project graphics**,
+not an assertion that the upstream Python package has adopted official
+branding. They derive stylistically from a generated graphical concept
+created for this task, with the SVGs hand-defined for small-scale crispness.
+The old labels 'Contributor' or generic 'Developer' for the user's own
+libraries were corrected. The external OpenAI Python SDK remains
+'Contributor'. No original research claim or Git repository attribution
+has been altered.
+
+Validation: inspect each project identity and role in wide and print
+layouts; test locally served SVG/WebP URLs, fallback icons, and
+'Show icons'. Verify remote and paper layouts remain single-column.
