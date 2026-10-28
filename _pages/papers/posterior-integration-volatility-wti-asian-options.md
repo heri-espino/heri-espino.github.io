@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/posterior-integration-volatility-wti-asian-options.html
 portfolio_type: paper
+pdf: /papers/EspinoMontelongo-2026-WTI_Asian_Options.pdf
 importance: 4
 card_kind: "Blinded manuscript draft"
 title: "Posterior Integration and Volatility Inputs in WTI Asian Options"
