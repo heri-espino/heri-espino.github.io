@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/dynamic-forecast-optimal-smoothness.html
 portfolio_type: paper
+pdf: /papers/EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf
 importance: 2
 card_kind: "Research manuscript draft"
 title: "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"
