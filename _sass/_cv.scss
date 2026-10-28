@@ -2023,40 +2023,7 @@
   }
 }
 
-/* Meaningful section icons are shown for *every* CV entry, even when there is
-   no employer/institution available for an organization logo. */
-.cv-page .cv-entry-symbol,
-.cv-page .cv-skills-icon,
-.cv-page .cv-language-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.15em;
-  margin-right: 0.35em;
-  color: var(--cv-accent);
-  font-size: 0.88em;
-  vertical-align: baseline;
-}
+/* Icons are deliberately limited to the organization and institution
+   labels (.cv-org-symbol). Job titles, skills, credentials and languages
+   remain typographic text; the Show icons control hides the logos/fallbacks. */
 
-.cv-page .cv-entry-separator {
-  margin: 0 0.3em;
-}
-
-.cv-page .cv-skills-icon,
-.cv-page .cv-language-icon {
-  margin-right: 0.45em;
-}
-
-.cv-page[data-cv-show-icons="false"] .cv-entry-symbol,
-.cv-page[data-cv-show-icons="false"] .cv-skills-icon,
-.cv-page[data-cv-show-icons="false"] .cv-language-icon {
-  display: none !important;
-}
-
-@media print {
-  .cv-page .cv-entry-symbol,
-  .cv-page .cv-skills-icon,
-  .cv-page .cv-language-icon {
-    font-size: 0.75em;
-  }
-}
