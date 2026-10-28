@@ -714,3 +714,20 @@ open/close the settings panel without moving the icons; scroll down and
 confirm the icons move with the name rather than remaining stuck to the
 screen; verify printing excludes the icon controls. The source contract is
 in `test/style_contract.js`.
+
+## CNN activation-patching paper preview image (2026-10-28)
+
+For `When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs`
+(`_pages/papers/activation-patching-effects-add-up.md`), the paper's
+portfolio **card** now displays the author's uploaded manuscript screenshot,
+cropped to Figure 1 (rendered synthetic inputs, template bank, and first-layer
+patching diagram). The optimized **700 × 316 AVIF** is committed to
+`assets/img/portfolio/activation-patching-figure1.avif`; its Git blob SHA
+`5b03cfecde34e09753c454ca0096d05346fc4d15` was checked against the
+local image produced from the upload.
+
+The **detail view still shows the PDF's first page** through
+`activation-patching-first-page.webp`. The existing manuscript PDF,
+Supplementary Information PDF, under-review status, and scientific text are
+unchanged. Do not replace the specific figure preview with the former generic
+`activation-patching-additivity-preview.svg`.
