@@ -116,6 +116,11 @@ for (const requiredPath of ["test/visual", "test/integration_plugin_toggles.sh",
   }
 }
 
+// Preserve runtime-selected CV themes after PurgeCSS builds the public site.
+if (!read("purgecss.config.js").includes("greedy: [/cv-/]")) {
+  failures.push("PurgeCSS must retain dynamic CV template and preview selectors.");
+}
+
 // CV must remain present, keyboard-accessible and printable, without a new
 // plugin-owned theme override or a server-side PDF compilation dependency.
 if (exists("_pages/cv.md")) {
