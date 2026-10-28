@@ -3,7 +3,11 @@ module.exports = {
   css: ["_site/assets/css/*.css"],
   output: "_site/assets/css/",
   skippedContentGlobs: ["_site/assets/**/*.html"],
-  safelist: [
+  safelist: {
+    // Preserve CV styles that become active only after client-side template,
+    // palette, print, and preview settings change. PurgeCSS scans static HTML.
+    greedy: [/cv-/],
+    standard: [
     "collapse",
     "collapsing",
     "show",
@@ -23,5 +27,6 @@ module.exports = {
     // and page chrome (scroll-progress bar, ToC) bleeds through a zoomed image.
     "medium-zoom-overlay",
     "medium-zoom-image--opened",
-  ],
+    ],
+  },
 };
