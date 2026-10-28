@@ -14,8 +14,8 @@ summary: 'This working research note compares complete smoothness-indexed famili
 formula: '\mathcal{D}_{\mathrm{PLS}}(y_1,y_2)^2=\frac{1}{N}\int_0^1\|\boldsymbol{\tau}_{y_1}(S)-\boldsymbol{\tau}_{y_2}(S)\|_2^2\,dS'
 framing: "The five-page October 2026 note is an unsubmitted research draft. It presents a mathematical formulation, a synthetic rolling-window example, and validation questions; it does not claim an empirically validated change-point detector or a confirmed agricultural causal relationship. In particular, retrospective PLS smoothing may use future observations, so online divergence detection requires a strictly causal protocol."
 tags: [penalized least squares, Hilbert spaces, trend estimation, smoothness, rolling windows, agricultural monitoring]
-image: /assets/img/portfolio/paper-draft-generic.svg
-image_alt: "Generic research-draft graphic for Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
+image: /assets/img/portfolio/trendestimation-preview.svg
+image_alt: "Related penalized least-squares trend-estimation visualization, not a figure from the research draft"
 github: https://github.com/heri-espino/Trend-Estimation
 contributions:
   - 'Extends the PLS trend estimator to nonzero reference differences through the affine penalty \(\|y-u\|_2^2+\lambda\|D_d u-\mu\mathbf{1}\|_2^2\).'
