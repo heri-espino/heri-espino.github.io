@@ -3,7 +3,6 @@ layout: portfolio-item
 permalink: /papers/componentwise-knn-isomap-lecture.html
 portfolio_type: paper
 importance: 5
-featured: true
 card_kind: "Mathematical lecture"
 title: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
 card_title: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
@@ -13,8 +12,8 @@ display_date: "19 Oct 2026"
 summary: "A mathematical lecture deriving the graph-shortest-path, classical MDS, and rigid-placement stages of componentwise Isomap. It distinguishes connected-component discovery from independent embedding, states a constructive strip-separation guarantee, and uses completed EXP-010/EXP-011 experiments to illustrate distortion and separation trade-offs. A more ambitious separation-constrained optimization is explicitly proposed, not implemented."
 framing: "The lecture carefully distinguishes established multi-manifold methods, mathematical identities, executed deterministic experiments, and future proposals. The current EXP-011 partition is built using radius graphs or supplied MST cuts before internal 10-NN graphs—not a validated fully unsupervised kNN partition recovery. Do not advertise it as a peer-reviewed paper or an implemented globally optimized embedding method."
 tags: ["manifold learning", "Isomap", "geodesics", "classical MDS", "separation constraints"]
-image: /assets/img/portfolio/paper-draft-generic.svg
-image_alt: "Generic research-material graphic for the mathematical Isomap lecture"
+image: /assets/img/portfolio/pdf-page-shots/componentwise-knn-isomap-lecture-figure.avif
+image_alt: "Slide 29: five-rings embedding gallery across dimensionality-reduction methods from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/componentwise-knn-isomap-lecture-first.avif\ndetail_image_alt: "Screenshot of page 1 of componentwise knn isomap lecture"
 github: https://github.com/heri-espino/ProximityGraphs-Isomap
 contributions:
   - "Derives the relationship between graph geodesics, double-centering, and the spectral formulation of classical MDS."

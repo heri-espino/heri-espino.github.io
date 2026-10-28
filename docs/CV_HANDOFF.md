@@ -422,9 +422,9 @@ reading and print, and the deleted Matrix Theory record is not displayed.
 - Source supplied in this chat: five-page October 2026 PDF, *Smoothness-Integrated
   Trend Distances with Nonzero Difference Drift*. Its first-page header states
   **RESEARCH NOTE / WORKING DRAFT**; it contains no journal-submission claim.
-- Added a distinct first-position **Featured Research Draft** group in
-  `/papers/`, explicitly **Not submitted**, above the submitted manuscripts.
-  The new record is excluded from the later draft grid to prevent duplication.
+- The note belongs to **Working Drafts & Ongoing Research** below Submitted
+  Manuscripts. Its `importance: 1` puts it first among working-draft items.
+  There is no separately featured section.
 - New detail page: `/papers/smoothness-integrated-trend-distances.html`.
   It reflects only the manuscript's actual results: affine nonzero-drift
   penalized trend estimator, normalized Guerrero smoothness, Hilbert-space
@@ -456,11 +456,11 @@ accepted, or under review merely because it uses a journal template.**
 | `componentwise_knn_isomap_lecture.pdf` (53 slides) | `componentwise-knn-isomap-lecture` | Mathematical lecture of EXP-010/011 and proposed EXP-013; not a research article and not an implemented optimized placement method |
 | `maxcut_sdp_eva_rounding_tutorial (1).pdf` (7 pages) | `maxcut-sdp-eva-clustering-tutorial` | Research tutorial on Max-Cut SDP, EVA, and rounding, with Max-k-Cut distinguished; no new peer-reviewed claim |
 
-`_pages/papers.md` uses a list of `featured: true` portfolio records,
-sorted by `importance`. The prior smoothness-integrated drift paper stays
-first (importance 1), followed by these five entries (2–6). All six are
-excluded from the generic lower draft grid so the page has no duplicates.
-Submitted manuscripts retain their explicitly recorded submission states.
+`_pages/papers.md` now has just two stages: **Submitted Manuscripts** first,
+then **Working Drafts & Ongoing Research**. The existing smoothness-integrated
+drift paper stays first among working drafts (importance 1), followed by these
+five entries (importance 2–6). All six belong to the same working-drafts grid;
+none is marked featured. Submitted manuscripts retain their verified states.
 
 `_data/cv.yml` includes five new entries in Research immediately following
 the already-first smoothness-distance draft. Each links its public portfolio
@@ -498,3 +498,32 @@ run `node scripts/audit-cv-organization-logos.mjs` for updated counts.
   see the audit for the list and future source-quality improvement priorities.
 - Preserve organization-only icons; do not put logos ahead of positions,
   languages, skills or manuscript titles. Verify screen and print views.
+
+## PDF-page screenshots and unified Working Drafts section (2026-10-28)
+
+The user requested the six previously highlighted research resources to be
+moved into **Working Drafts & Ongoing Research** (below Submitted Manuscripts),
+removing the separately featured section entirely. The user's CV research
+entries and publication status claims are unchanged.
+
+For **each of these six documents**, two images were actually rendered from
+the uploaded PDF and committed as optimized AVIF assets under
+`assets/img/portfolio/pdf-page-shots/`:
+
+| Portfolio slug | Uploaded PDF | Card figure screenshot | Detail page screenshot |
+| --- | --- | --- | --- |
+| `smoothness-integrated-trend-distances` | `trend_comparison_two_column(3).pdf` | Page 4: rolling-window distance figure | Page 1 |
+| `dynamic-forecast-optimal-smoothness` | `EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf` | Page 10: tracked forecast-loss analyses | Page 1 |
+| `smoothness-indexed-pls-python` | `sncs_main.pdf` | Page 15: real-series trend figures | Page 1 |
+| `posterior-integration-volatility-wti-asian-options` | `remef_blinded_draft.pdf` | Page 9: posterior integration panels | Page 1 |
+| `componentwise-knn-isomap-lecture` | `componentwise_knn_isomap_lecture.pdf` | Slide 29: five-rings method gallery | Slide 1 |
+| `maxcut-sdp-eva-clustering-tutorial` | `maxcut_sdp_eva_rounding_tutorial (1).pdf` | Page 1: graph cut example | Page 1 |
+
+The card uses `image: ...-figure.avif`; the opened portfolio detail
+uses `detail_image: ...-first.avif`. These are actual screenshots from
+the PDF pages, not stock images or mathematically invented graphics.
+Their Git blob hashes were verified against the generated local files.
+
+The source PDFs are still **not** public website downloads. This is a
+page-preview-only update; it deliberately does not expose the original
+blinded REMEF manuscript PDF as a downloadable file.

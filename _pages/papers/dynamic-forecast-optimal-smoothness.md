@@ -3,7 +3,6 @@ layout: portfolio-item
 permalink: /papers/dynamic-forecast-optimal-smoothness.html
 portfolio_type: paper
 importance: 2
-featured: true
 card_kind: "Research manuscript draft"
 title: "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"
 card_title: "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"
@@ -14,8 +13,8 @@ authors: "Heriberto Espino Montelongo"
 summary: "Develops a framework for tracking multiple local minima of chronological forecast-loss surfaces across forecast origins. Persistent branches retain smoothness, first-stage validation loss, and refitted subsequent loss; branch-selection and branch-to-smoothness rules are evaluated separately. Results favor horizon-matched pooled forecasting in controlled simulations, while broader tests do not establish a universally superior dynamic rule."
 framing: "The uploaded 13-page document uses a Journal of Forecasting manuscript template with placeholder received, accepted, DOI, and correspondence fields. Those placeholders are not evidence of submission, acceptance, or publication. The research distinguishes forecast-optimal smoothness from in-sample trend recovery, uses chronological information restrictions, and requires a final refit at the latest origin."
 tags: ["forecasting", "penalized least squares", "smoothness selection", "local minima", "time series"]
-image: /assets/img/portfolio/trendestimation-preview.svg
-image_alt: "Related penalized-trend research graphic, not a figure from this manuscript"
+image: /assets/img/portfolio/pdf-page-shots/dynamic-forecast-optimal-smoothness-figure.avif
+image_alt: "Page 10: historical forecast-error panels and tracked-smoothness comparisons from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/dynamic-forecast-optimal-smoothness-first.avif\ndetail_image_alt: "Screenshot of page 1 of dynamic forecast optimal smoothness"
 github: https://github.com/heri-espino/Trend-Estimation
 contributions:
   - "Represents time-evolving local minima of forecast-loss surfaces as persistent, matched branches."
