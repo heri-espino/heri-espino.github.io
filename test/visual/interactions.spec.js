@@ -326,3 +326,76 @@ test("core pages no longer emit jQuery-style runtime errors", async ({ page }) =
   const jqueryFailures = failures.filter((message) => /\$\s*is not defined|lightbox/i.test(message));
   expect(jqueryFailures).toEqual([]);
 });
+
+
+
+test("CV Harvard paper preview preserves the organization/role and city/date corners", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await expect(page.locator("#cv-print")).toHaveCount(0);
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-template").selectOption("harvard");
+  await page.locator("#cv-preview").click();
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "paper");
+  await expect(page.locator(".cv-preview-page").first()).toBeVisible();
+
+  const measurement = await page.locator(".cv-preview-paper-body .cv-entry-heading").first().evaluate((heading) => {
+    const entry = heading.closest("[data-cv-record]");
+    const organization = heading.querySelector(".cv-organization")?.getBoundingClientRect();
+    const role = heading.querySelector("h3")?.getBoundingClientRect();
+    const location = heading.querySelector(".cv-location")?.getBoundingClientRect();
+    const date = heading.querySelector(".cv-date")?.getBoundingClientRect();
+    const sheet = heading.closest(".cv-preview-sheet");
+    return {
+      display: getComputedStyle(heading).display,
+      paperWidth: sheet.getBoundingClientRect().width,
+      leftOrder: organization && role ? organization.y <= role.y : null,
+      rightOrder: location && date ? location.y <= date.y : null,
+      rightOfTitle: location && role ? location.x > role.x : null,
+      entryFits: entry.scrollWidth <= entry.clientWidth + 3,
+    };
+  });
+  expect(measurement.display).toBe("grid");
+  expect(measurement.paperWidth).toBeGreaterThan(700);
+  expect(measurement.leftOrder).toBeTruthy();
+  expect(measurement.rightOrder).toBeTruthy();
+  expect(measurement.rightOfTitle).toBeTruthy();
+  expect(measurement.entryFits).toBeTruthy();
+});
+
+test("CV Europass uses EU section sequence and truthful language layout", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-template").selectOption("europass");
+
+  const sections = await page.locator("#cv-sections > [data-cv-section]").evaluateAll((nodes) =>
+    nodes.map((node) => node.dataset.cvTitle));
+  expect(sections.indexOf("Professional Experience")).toBeLessThan(sections.indexOf("Education"));
+  expect(sections.indexOf("Education")).toBeLessThan(sections.indexOf("Languages"));
+  expect(sections.indexOf("Languages")).toBeLessThan(sections.indexOf("Research"));
+  await expect(page.locator("#cv-sections .cv-europass-language-table")).toBeVisible();
+  await expect(page.locator("#cv-sections .cv-europass-mother-tongue")).toContainText("Spanish");
+
+  const entryLayout = await page.locator("#cv-sections .cv-entry").first().evaluate((entry) => {
+    const heading = entry.querySelector(".cv-entry-heading");
+    const meta = entry.querySelector(".cv-meta")?.getBoundingClientRect();
+    const title = entry.querySelector("h3")?.getBoundingClientRect();
+    return {
+      display: getComputedStyle(entry).display,
+      heading: getComputedStyle(heading).display,
+      dateLeft: meta && title ? meta.x < title.x : null,
+    };
+  });
+  expect(entryLayout.display).toBe("grid");
+  expect(entryLayout.heading).toBe("contents");
+  expect(entryLayout.dateLeft).toBeTruthy();
+
+  await page.locator("#cv-preview").click();
+  await expect(page.locator(".cv-preview-paper-body .cv-europass-language-table").first()).toBeVisible();
+  const previewLayout = await page.locator(".cv-preview-paper-body .cv-entry").first().evaluate((entry) => ({
+    display: getComputedStyle(entry).display,
+    dateLeft: entry.querySelector(".cv-meta").getBoundingClientRect().x <
+      entry.querySelector("h3").getBoundingClientRect().x,
+  }));
+  expect(previewLayout.display).toBe("grid");
+  expect(previewLayout.dateLeft).toBeTruthy();
+});

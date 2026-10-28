@@ -803,3 +803,55 @@ not altered by this portfolio change.
 The source contract checks for the default markup, controls, and CSS; the
 built-page contract verifies the new Papers section ordering. Keep this
 consistent when introducing new portfolio archives.
+
+## Print control, Harvard paper preview, and Europass structural revision (2026-10-28)
+
+The owner explicitly removed the small floating **Print** button. The
+customization chevron stays anchored beside the name, with full-width reading
+as the default. Browser Ctrl+P/Cmd+P provides printing and PDF saving; the
+`beforeprint`/`afterprint` handlers still apply paper density and restore
+the reader's settings. The existing **Paper preview** toggle in the settings
+menu remains.
+
+### Harvard page preview
+
+The former preview could shrink its CSS paper width to the browser's viewport
+and wrap the Harvard two-column entry heading inconsistently. A4/US Letter
+preview sheets now maintain their actual CSS paper dimensions, with horizontal
+scrolling on unusually narrow screens rather than corrupting the layout.
+The organization/logo and role/title stay left; city/state and date remain
+right, with a bounded 31% right column. This applies to live reading,
+the approximate page-by-page preview, and browser print. Long link labels
+may break across lines rather than overflowing into the date column.
+
+### Europass reference and section sequence
+
+The Europass template now models the actual EU CV information architecture:
+
+1. **Work experience**: Professional Experience, Programming Experience,
+   Academic Experience, Volunteering.
+2. **Education and training**: Education, Credentials, Schools.
+3. **Personal skills**: Languages and Technical Skills.
+4. **Additional information**: Research, Research Drafts, Published Articles,
+   Selected Academic Projects, Leadership, Awards, Extracurricular Activities.
+
+The same order is used in live reading, printed source, and paginated preview;
+the underlying `_data/cv.yml` ordering is untouched for other templates.
+Switching to Europass selects grouped sections by default, but users may
+still choose chronological sorting explicitly.
+
+Records use the EU-style **date-left / position-and-employer-right** layout.
+Language skills display native Spanish and other languages' *reported
+overall CEFR level*; no listening/reading/speaking/writing subskill levels
+are invented. The presentation does not claim to be an EU-issued Europass CV:
+for certified Europass output, the official builder remains linked.
+
+Official references:
+- https://europass.europa.eu/en/create-europass-cv
+- https://www.eeas.europa.eu/sites/default/files/documents/2025/Europass-cv-en%20template_0.pdf
+
+Regression: `test/style_contract.js` checks source contracts, while
+`test/visual/interactions.spec.js` uses Playwright to verify the removed
+button, physical paper dimensions, Harvard header position, Europass order,
+language display, and paper-mode grid alignment. Print must keep all record
+links/selection controls without an extra on-page Print button.

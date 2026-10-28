@@ -2238,3 +2238,223 @@
     }
   }
 }
+
+
+
+/* CV paper preview: render at true A4/Letter CSS dimensions, even on narrow
+   browser windows. The preview may scroll horizontally instead of reflowing
+   the page into an incorrect, mobile-width paper layout. */
+@media screen {
+  .cv-page[data-cv-preview="paper"] .cv-paged-preview {
+    display: grid;
+    overflow-x: auto;
+    overflow-y: visible;
+    justify-items: center;
+    max-width: 100%;
+    padding-bottom: 0.75rem;
+  }
+  .cv-page[data-cv-preview="paper"] .cv-preview-page {
+    box-sizing: border-box;
+    width: var(--cv-paper-width);
+    min-width: var(--cv-paper-width);
+    max-width: none;
+  }
+  .cv-page .cv-preview-paper-body .cv-entry-heading > div {
+    min-width: 0;
+  }
+  .cv-page .cv-preview-paper-body .cv-entry-heading a,
+  .cv-page .cv-preview-paper-body .cv-links {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Harvard: the physical page uses the same four-corner layout as the wide
+   reading view. Do not let viewport breakpoints or max-content columns
+   squeeze the location/date into unreadable fragments. */
+.cv-page[data-cv-template="harvard"] .cv-entry-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 31%);
+  column-gap: 0.75rem;
+  align-items: start;
+}
+.cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  overflow-wrap: break-word;
+  text-align: right;
+}
+@media screen {
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 31%);
+    column-gap: 8pt;
+  }
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading .cv-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: none;
+    font-size: 8pt;
+  }
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-location { order: -2; }
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-date { order: -1; }
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-organization { order: -2; }
+  .cv-page[data-cv-template="harvard"] .cv-preview-paper-body h3 { order: -1; }
+}
+@media print {
+  .cv-page[data-cv-template="harvard"] .cv-entry-heading {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 31%) !important;
+  }
+  .cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Europass: genuine European CV information architecture rather than a
+   generic themed layout. This mirrors the EU reference's date-left,
+   employer/qualification-right records and core section hierarchy.
+   No EU seal or official-document endorsement is claimed. */
+.cv-page .cv-europass-languages,
+.cv-page .cv-europass-group-heading {
+  display: none;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-languages {
+  display: block;
+}
+.cv-page[data-cv-template="europass"] .cv-inline-list {
+  display: none;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-group-heading {
+  display: block;
+  margin: 0.85rem 0 0.3rem;
+  padding-bottom: 0.22rem;
+  border-bottom: 1px solid var(--cv-accent);
+  color: var(--cv-accent);
+  font-size: 0.96rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+.cv-page[data-cv-template="europass"] .cv-entry,
+.cv-page[data-cv-template="europass"] .cv-compact-entry {
+  display: grid;
+  grid-template-columns: minmax(7rem, 23%) minmax(0, 1fr);
+  column-gap: 1.05rem;
+  row-gap: 0.2rem;
+  align-items: start;
+}
+.cv-page[data-cv-template="europass"] .cv-entry-heading {
+  display: contents;
+}
+.cv-page[data-cv-template="europass"] .cv-entry-heading > div {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+.cv-page[data-cv-template="europass"] .cv-entry-heading .cv-meta {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0;
+  color: var(--cv-accent);
+  font-size: 0.78rem;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.cv-page[data-cv-template="europass"] .cv-entry-heading .cv-date {
+  order: -2;
+}
+.cv-page[data-cv-template="europass"] .cv-entry-heading .cv-location {
+  order: -1;
+  color: var(--global-text-color-light);
+}
+.cv-page[data-cv-template="europass"] .cv-highlights,
+.cv-page[data-cv-template="europass"] .cv-timeline-category {
+  grid-column: 2;
+  margin-top: 0.25rem;
+}
+.cv-page[data-cv-template="europass"] .cv-entry-heading h3 {
+  font-weight: 750;
+  color: var(--cv-accent);
+}
+.cv-page[data-cv-template="europass"] .cv-organization {
+  font-weight: 500;
+}
+.cv-page[data-cv-template="europass"] .cv-section > h2 {
+  font-weight: 750;
+  border-bottom: 1px solid var(--cv-accent);
+}
+.cv-page[data-cv-template="europass"] .cv-europass-mother-tongue {
+  margin: 0 0 0.55rem;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-mother-tongue strong {
+  color: var(--cv-accent);
+  margin-right: 0.65rem;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-language-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85em;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-language-table caption {
+  padding: 0.3rem 0;
+  text-align: left;
+  color: var(--cv-accent);
+  font-weight: 700;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-language-table th,
+.cv-page[data-cv-template="europass"] .cv-europass-language-table td {
+  padding: 0.24rem 0.45rem;
+  border: 1px solid var(--cv-border);
+  text-align: left;
+}
+.cv-page[data-cv-template="europass"] .cv-europass-language-note {
+  margin-top: 0.35rem;
+  color: var(--cv-muted);
+  font-size: 0.72rem;
+}
+@media screen and (max-width: 590px) {
+  .cv-page[data-cv-template="europass"] #cv-document .cv-entry,
+  .cv-page[data-cv-template="europass"] #cv-document .cv-compact-entry {
+    grid-template-columns: minmax(5.5rem, 25%) minmax(0, 1fr);
+    column-gap: 0.45rem;
+  }
+}
+@media screen {
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-entry,
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-compact-entry {
+    grid-template-columns: minmax(7rem, 23%) minmax(0, 1fr);
+    column-gap: 8pt;
+  }
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-entry-heading {
+    display: contents;
+  }
+  .cv-page[data-cv-template="europass"] .cv-preview-paper-body .cv-entry-heading .cv-meta {
+    font-size: 8pt;
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+@media print {
+  .cv-page[data-cv-template="europass"] .cv-entry,
+  .cv-page[data-cv-template="europass"] .cv-compact-entry {
+    display: grid !important;
+    grid-template-columns: minmax(7rem, 23%) minmax(0, 1fr);
+    column-gap: 8pt;
+    break-inside: avoid;
+  }
+  .cv-page[data-cv-template="europass"] .cv-entry-heading {
+    display: contents !important;
+  }
+  .cv-page[data-cv-template="europass"] .cv-entry-heading .cv-meta {
+    text-align: right !important;
+  }
+}
