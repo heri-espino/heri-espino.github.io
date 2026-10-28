@@ -121,6 +121,46 @@ if (!read("purgecss.config.js").includes("greedy: [/cv-/]")) {
   failures.push("PurgeCSS must retain dynamic CV template and preview selectors.");
 }
 
+// Every named CV organization should have a logo unless it lacks a reliably
+// attributable public mark. Reuse the pre-existing certificate issuer source.
+if (exists("_data/cv_organization_logos.yml")) {
+  const logos = read("_data/cv_organization_logos.yml");
+  const existingIssuers = read("_data/credential_issuers.yml");
+  const cvSource = read("_data/cv.yml");
+  const logoRules = [...logos.matchAll(/^- match: "([^"]+)"\s*$/gm)].map((result) => result[1]);
+  if (new Set(logoRules).size !== logoRules.length) {
+    failures.push("CV organization logo registry has duplicate match rules.");
+  }
+  const issuerKeys = new Set([...existingIssuers.matchAll(/^([a-z0-9-]+):\s*$/gm)].map((result) => result[1]));
+  for (const result of logos.matchAll(/^  issuer_key: ([a-z0-9-]+)\s*$/gm)) {
+    if (!issuerKeys.has(result[1])) {
+      failures.push("CV organization logo registry references missing issuer key " + result[1]);
+    }
+  }
+  const unbranded = new Set([
+    "Data Scientist", "Independent research software", "Kaxa Nuk",
+    "Open-source Python library", "Paletas Loreto", "Research draft"
+  ]);
+  const sourceNames = [...cvSource.matchAll(/\b(?:organization|institution):\s*(?:"([^"\n]+)"|([^,\n}]+))/gm)]
+    .map((match) => (match[1] || match[2]).trim());
+  for (const name of new Set(sourceNames)) {
+    if (!unbranded.has(name) && !logoRules.some((part) => name.toLowerCase().includes(part))) {
+      failures.push("Missing CV organization logo mapping for " + name);
+    }
+  }
+  if (!read("_includes/cv/render.liquid").includes("site.data.cv_organization_logos")) {
+    failures.push("CV must resolve its organization logo registry.");
+  }
+  if (!read("assets/js/cv-customize.js").includes('image.addEventListener("load"')) {
+    failures.push("CV must retain failed-image fallback logic.");
+  }
+  if (!read("_sass/_cv.scss").includes('data-cv-show-icons="false"] .cv-org-symbol')) {
+    failures.push("CV print icon toggle must hide organization logos.");
+  }
+} else {
+  failures.push("The public CV must include the organization logo registry.");
+}
+
 // CV must remain present, keyboard-accessible and printable, without a new
 // plugin-owned theme override or a server-side PDF compilation dependency.
 if (exists("_pages/cv.md")) {
@@ -147,23 +187,26 @@ if (exists("_pages/cv.md")) {
   if (!cvStyles.includes('data-cv-included="false"') || !cvStyles.includes('data-cv-show-icons="false"')) {
     failures.push("CV hidden item and icon selectors are missing.");
   }
+  if (!cvRenderer.includes('<option value="europass">') || !cvScript.includes('europass: "#2176ac"') || !cvStyles.includes('data-cv-template="europass"')) {
+    failures.push("The Europass-inspired CV style must be selectable and styled.");
+  }
+  if (!cvScript.includes("europassLabels") || !cvScript.includes("updateSectionTitles")) {
+    failures.push("Europass headings must adapt when switching templates.");
+  }
   if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
-    failures.push("CV must provide screen-only numbered paper-sheet previews.");
+    failures.push("The CV preview must present separate numbered paper sheets.");
   }
   if (!cvStyles.includes('[data-cv-paginated="true"][data-cv-preview="paper"]') || !cvScript.includes('root.dataset.cvPaginated = "true"')) {
-    failures.push("CV must remain visible without JavaScript.");
+    failures.push("The CV must remain readable without JavaScript.");
+  }
+  if (!cvRenderer.includes('id="cv-panel-toggle"') || !cvRenderer.includes('id="cv-settings-panel"') || !cvScript.includes("setPanelOpen") || !cvStyles.includes(".cv-controls-column")) {
+    failures.push("The CV must offer a collapsible left settings panel and a persistent print button.");
   }
   if (!read("_data/cv.yml").includes("https://github.com/trendestimation/trendestimation")) {
-    failures.push("Programming CV must link the canonical trendestimation library.");
+    failures.push("Programming experience should link the canonical trendestimation library.");
   }
   if (!cvRenderer.includes('id="cv-document"') || !cvRenderer.includes('class="cv-primary-link"')) {
     failures.push("CV live preview or linked entry titles are missing.");
-  }
-  if (!cvRenderer.includes('<option value="europass">') || !cvScript.includes('europass: "#2176ac"') || !cvStyles.includes('data-cv-template="europass"')) {
-    failures.push("The Europass-inspired CV template must be selectable and styled for screen and print.");
-  }
-  if (!cvScript.includes("europassLabels") || !cvScript.includes("updateSectionTitles")) {
-    failures.push("The Europass-inspired template must preserve and restore readable section labels.");
   }
   if (!cvScript.includes("templateDefaults") || !cvScript.includes('setPreview("paper")')) {
     failures.push("CV custom template color or preview handlers are missing.");
