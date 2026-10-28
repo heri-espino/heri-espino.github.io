@@ -456,6 +456,34 @@ if (exists("_pages/cv.md")) {
       !cnnPaperSource.includes("pdf: /papers/espino_2026_activation-patching-effects-add-up.pdf")) {
     failures.push("CNN paper card should show the actual uploaded figure, while its detail keeps the first-page preview and original PDF.");
   }
+  const abaArticle = read("_pages/articles/abaquant-finanzas-matematicas.md");
+  const abaPress = read("_data/press.yml");
+  const abaArchive = read("_pages/papers.md");
+  const abaImagePath = "assets/img/portfolio/abaquant-la-catarina-article.avif";
+  const abaCvSection = cvSources.split("    Published Articles & Technical Writing:")[1]?.split("    Selected Academic Projects:")[0] || "";
+  if (abaPress.includes('AbaQuant: Finanzas matemáticas, valuación y gestión del riesgo')) {
+    failures.push("Coauthored AbaQuant publication should be moved out of Press & Media, not duplicated there.");
+  }
+  if (!abaArchive.includes('id="published-technical-articles"') ||
+      !abaArchive.includes('published_articles = site.pages | where: "portfolio_type", "article"') ||
+      !abaArchive.includes("for item in published_articles")) {
+    failures.push("Papers archive must have an independent published technical writing section.");
+  }
+  if (!abaArticle.includes("portfolio_type: article") ||
+      !abaArticle.includes("permalink: /articles/abaquant-finanzas-matematicas.html") ||
+      !abaArticle.includes("Heriberto Espino Montelongo and Owen Paredes Conde") ||
+      !abaArticle.includes("26 October 2026") ||
+      !abaArticle.includes("image: /" + abaImagePath) ||
+      !abaArticle.includes("detail_image: /" + abaImagePath) ||
+      !abaArticle.includes("resource_url: \"https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/\"")) {
+    failures.push("Coauthored technical article must include correct stage, author credit, publication link and screenshot.");
+  }
+  if (!exists(abaImagePath) ||
+      fs.readFileSync(path.join(root, abaImagePath)).toString("ascii", 4, 12) !== "ftypavif" ||
+      !abaCvSection.includes('Coauthor · Published Technical Article') ||
+      !abaCvSection.includes("articles/abaquant-finanzas-matematicas.html")) {
+    failures.push("AbaQuant image asset and separate CV technical-writing entry are required.");
+  }
   const trendDraft = read("_pages/papers/smoothness-integrated-trend-distances.md");
   const papersArchive = read("_pages/papers.md");
   const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";

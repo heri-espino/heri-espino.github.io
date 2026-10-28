@@ -769,3 +769,11 @@ links or institutional organization links were touched.
 `assets/js/cv-customize.js` includes a separate Europass-facing section
 label. `test/style_contract.js` guards the 11+8 split, the three dates
 on both pages, and the missing Springer organization hyperlink.
+
+## AbaQuant coauthored technical article (2026-10-28)
+- Publication: *AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo*, **26 October 2026**, `La Catarina`, UDLAP / IMEF Universitario; verified authors **Heriberto Espino Montelongo and Owen Paredes Conde**. Original: https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/
+- Unlike institutional coverage *about* the author, this is an article **written by** the author. Remove its old `_data/press.yml` entry, add a separate `Published Articles & Technical Writing` category **below** Working Drafts on `/papers/`. Do not classify it as a peer-reviewed manuscript.
+- Public detail page: `_pages/articles/abaquant-finanzas-matematicas.md` → `/articles/abaquant-finanzas-matematicas.html`. Links to the authoritative published article and official AbaQuant repository.
+- CV: separate `Published Articles & Technical Writing` group after Research, coauthor role and publication links. No change to manuscript publication statuses or 3-submitted/13-working-draft counts.
+- Preview: user's directly uploaded 1659×747 publisher image resized to 900×405 and encoded AVIF. Committed at `assets/img/portfolio/abaquant-la-catarina-article.avif`, Git SHA `9c5b3594077bbbea9f0ec73f0d0eb5cd275ab3ca` checked against the local transformed upload. Used for both card preview and article detail view, not the old generic AbaQuant documentation graphic.
+- `scripts/verify-paper-archive.mjs` also requires one authored technical article, the generated detail page, the uploaded image and verified external publication URL.

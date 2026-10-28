@@ -1,14 +1,3 @@
-- title: "AbaQuant: Finanzas matemáticas, valuación y gestión del riesgo"
-  publisher: "La Catarina · UDLAP"
-  image: "/assets/img/portfolio/abaquant-preview-800.webp"
-  image_alt: "AbaQuant documentation homepage (article illustration unavailable)"
-  image_credit: "AbaQuant website"
-  date: "2026-10"
-  date_label: "October 2026"
-  summary: "University news article about AbaQuant, mathematical finance, valuation, and risk management."
-  url: "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/"
-  tags: [AbaQuant, mathematical finance, risk management]
-
 # UDLAP's official annual activity report, distinct from third-party news coverage.
 - title: "UDLAP Activity Report 2025–2026 — Student Recognitions"
   publisher: "Universidad de las Américas Puebla · Institutional Report"

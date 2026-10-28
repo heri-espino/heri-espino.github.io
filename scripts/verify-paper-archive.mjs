@@ -54,6 +54,30 @@ const submitted = section("submitted-manuscripts");
 const drafts = section("working-drafts");
 const actualSubmitted = countCards(submitted);
 const actualDrafts = countCards(drafts);
+const published = section("published-technical-articles");
+const actualPublished = countCards(published);
+const articlePagePath = path.join(site, "articles", "abaquant-finanzas-matematicas.html");
+const articleImg = "assets/img/portfolio/abaquant-la-catarina-article.avif";
+const articleLink = "/articles/abaquant-finanzas-matematicas.html";
+const officialArticle = "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/";
+if (actualPublished !== 1 || !published.includes(articleLink)) {
+  errors.push(`Expected 1 published technical article (AbaQuant), rendered ${actualPublished}`);
+}
+if (!published.includes("/" + articleImg)) {
+  errors.push("Published AbaQuant card lacks user-uploaded article image");
+}
+for (const imgPath of [path.resolve(articleImg), path.join(site, articleImg)]) {
+  if (!fs.existsSync(imgPath)) errors.push(`AbaQuant article image missing: ${imgPath}`);
+}
+if (!fs.existsSync(articlePagePath)) {
+  errors.push(`AbaQuant detail page not rendered: ${articlePagePath}`);
+} else {
+  const detail = read(articlePagePath);
+  if (!detail.includes(officialArticle) || !detail.includes("/" + articleImg) ||
+      !detail.includes("Owen Paredes Conde")) {
+    errors.push("AbaQuant detail page lost its original publication, coauthor or image preview");
+  }
+}
 
 if (actualSubmitted !== expectedSubmitted) {
   errors.push(`Expected ${expectedSubmitted} submitted cards, rendered ${actualSubmitted}`);
@@ -125,4 +149,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six pages, PDF files and image pairs present.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six PDF pages and the published AbaQuant article present.`);
