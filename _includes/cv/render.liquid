@@ -1,12 +1,18 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="paper" data-cv-paper="a4" data-cv-show-urls="false">
+<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="paper" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="open">
+  <div class="cv-workspace">
+    <div class="cv-controls-column">
+      <div class="cv-controls-toolbar" aria-label="CV settings and export">
+        <button type="button" id="cv-panel-toggle" class="cv-panel-toggle" aria-controls="cv-settings-panel" aria-expanded="true">Hide settings</button>
+        <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
+      </div>
 
-  <aside class="cv-tools" aria-label="Customize and print CV">
+      <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize and print CV">
     <div class="cv-tools-heading">
       <div>
         <h2>Customize CV</h2>
-        <p>Choose an order and a print design. Changes appear in the preview below.</p>
+        <p>Change templates and content while the preview stays visible on the right.</p>
       </div>
       <span class="cv-tools-note">Print / Save as PDF uses your browser's print dialog.</span>
     </div>
@@ -125,7 +131,6 @@
     </label>
     <div class="cv-actions">
       <button type="button" id="cv-preview" class="cv-secondary-action" aria-pressed="true">Full-width view</button>
-      <button type="button" id="cv-print" class="cv-primary-action">Print / Save as PDF</button>
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
     </div>
@@ -135,9 +140,10 @@
       For an official Europass document, use the <a href="https://europass.europa.eu/en/create-europass-cv" target="_blank" rel="noopener noreferrer">EU Europass CV builder</a>.
       Chronological sorting uses each entry's first listed date. Undated sections remain after the timeline.
     </p>
-  </aside>
-
-  <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
+      </aside>
+    </div>
+    <div class="cv-preview-column">
+      <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
   <header class="post-header cv-intro">
     <p class="cv-eyebrow">Curriculum vitae</p>
     <p class="cv-europass-personal-heading">Personal information</p>
@@ -215,9 +221,39 @@
                       {{ entry.degree | default: entry.name }}
                       {% if cv_primary_link %}<i class="fa-solid fa-arrow-up-right-from-square cv-link-icon" aria-hidden="true"></i></a>{% endif %}
                     </h3>
+                    {% assign cv_org_name = entry.institution | default: entry.organization | default: '' | downcase %}
+                    {% assign cv_org_logo = nil %}
+                    {% for cv_logo_rule in site.data.cv_organization_logos %}
+                      {% if cv_org_name contains cv_logo_rule.match %}
+                        {% if cv_logo_rule.issuer_key %}
+                          {% assign cv_issuer_logo = site.data.credential_issuers[cv_logo_rule.issuer_key] %}
+                          {% assign cv_org_logo = cv_issuer_logo.logo %}
+                        {% else %}
+                          {% assign cv_org_logo = cv_logo_rule.logo %}
+                        {% endif %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                    {% assign cv_fallback_icon = 'fa-building-columns' %}
+                    {% if cv_org_name contains 'actinver' %}
+                      {% assign cv_fallback_icon = 'fa-chart-line' %}
+                    {% elsif cv_org_name contains 'openai' or cv_org_name contains 'python library' %}
+                      {% assign cv_fallback_icon = 'fa-code' %}
+                    {% elsif cv_org_name contains 'paletas loreto' %}
+                      {% assign cv_fallback_icon = 'fa-store' %}
+                    {% elsif cv_org_name contains 'springer' or cv_org_name contains 'journal' %}
+                      {% assign cv_fallback_icon = 'fa-book-open' %}
+                    {% elsif cv_org_name contains 'research' %}
+                      {% assign cv_fallback_icon = 'fa-flask' %}
+                    {% endif %}
                     {% if entry.institution %}
                       <p class="cv-organization">
-                        <i class="fa-solid fa-building-columns cv-org-icon" aria-hidden="true"></i>
+                        <span class="cv-org-symbol" aria-hidden="true">
+                          {% if cv_org_logo %}
+                            <img class="cv-org-logo" src="{{ cv_org_logo | escape }}" alt="" width="16" height="16" data-cv-org-logo hidden>
+                          {% endif %}
+                          <i class="fa-solid {{ cv_fallback_icon }} cv-org-icon" aria-hidden="true"></i>
+                        </span>
                         {% if entry.institution_url %}<a href="{{ entry.institution_url }}" target="_blank" rel="noopener noreferrer">{% endif %}
                         {{ entry.institution }}
                         {% if entry.institution_url %}</a>{% endif %}
@@ -225,20 +261,12 @@
                     {% endif %}
                     {% if entry.organization %}
                       <p class="cv-organization">
-                        {% assign cv_org = entry.organization | downcase %}
-                        {% if cv_org contains 'actinver' %}
-                          <i class="fa-solid fa-chart-line cv-org-icon" aria-hidden="true"></i>
-                        {% elsif cv_org contains 'openai' %}
-                          <i class="fa-solid fa-code cv-org-icon" aria-hidden="true"></i>
-                        {% elsif cv_org contains 'paletas loreto' %}
-                          <i class="fa-solid fa-store cv-org-icon" aria-hidden="true"></i>
-                        {% elsif cv_org contains 'springer' or cv_org contains 'journal' %}
-                          <i class="fa-solid fa-book-open cv-org-icon" aria-hidden="true"></i>
-                        {% elsif cv_org contains 'universidad' or cv_org contains 'university' or cv_org contains 'college' or cv_org contains 'institute' %}
-                          <i class="fa-solid fa-building-columns cv-org-icon" aria-hidden="true"></i>
-                        {% elsif cv_org contains 'research' %}
-                          <i class="fa-solid fa-flask cv-org-icon" aria-hidden="true"></i>
-                        {% endif %}
+                        <span class="cv-org-symbol" aria-hidden="true">
+                          {% if cv_org_logo %}
+                            <img class="cv-org-logo" src="{{ cv_org_logo | escape }}" alt="" width="16" height="16" data-cv-org-logo hidden>
+                          {% endif %}
+                          <i class="fa-solid {{ cv_fallback_icon }} cv-org-icon" aria-hidden="true"></i>
+                        </span>
                         {% if entry.organization_url %}<a href="{{ entry.organization_url }}" target="_blank" rel="noopener noreferrer">{% endif %}
                         {{ entry.organization }}
                         {% if entry.organization_url %}</a>{% endif %}
@@ -277,8 +305,10 @@
       </section>
     {% endfor %}
   </article>
+      </div>
+      <div class="cv-paged-preview" id="cv-paged-preview" aria-label="Page-by-page CV preview" hidden></div>
+    </div>
   </div>
-  <div class="cv-paged-preview" id="cv-paged-preview" aria-label="Page-by-page CV preview" hidden></div>
 </div>
 
 <script src="{{ '/assets/js/cv-customize.js' | relative_url }}" defer></script>
