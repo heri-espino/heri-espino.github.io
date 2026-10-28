@@ -168,7 +168,7 @@
 
   // Only whitelisted values can alter @page. Never insert arbitrary user strings into CSS.
   const pageSizes = { a4: "A4", letter: "letter" };
-  const pageMargins = { narrow: "8mm", standard: "13mm", wide: "19mm" };
+  const pageMargins = { latex: "10mm", narrow: "8mm", standard: "13mm", wide: "19mm" };
   const paletteColors = {
     velvet: "#00166c",
     sapphire: "#123b63",
@@ -482,7 +482,7 @@
     controls.accent.value = "#00104c";
     controls.printUrls.checked = false;
     controls.size.value = "regular";
-    controls.margin.value = "standard";
+    controls.margin.value = "latex";
     printToggles.forEach((toggle) => { toggle.checked = true; });
     for (const [item, control] of entryControls) {
       item.included = true;
