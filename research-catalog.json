@@ -1,0 +1,88 @@
+---
+layout: null
+permalink: /research-catalog.json
+sitemap: false
+---
+{% assign catalog_papers = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
+{% assign catalog_notes = site.pages | where: "portfolio_type", "note" | sort: "importance" %}
+{% assign catalog_projects = site.projects | sort: "importance" %}
+{
+  "schema_version": "1.0",
+  "generated_from": "Jekyll content and public data files in heri-espino/heri-espino.github.io",
+  "caveat": "Submission, revision, drafts, tutorials and lectures are distinct. Under review does not mean accepted or published. Use each item's status and detail page; do not infer outcomes.",
+  "person": {
+    "@type": "Person",
+    "name": "Heriberto Espino Montelongo",
+    "url": {{ '/' | absolute_url | jsonify }},
+    "orcid": {{ site.data.socials.orcid_id | jsonify }},
+    "github": "https://github.com/{{ site.data.socials.github_username }}",
+    "google_scholar": {{ site.data.socials.google_scholar_profile_url | jsonify }},
+    "ssrn": {{ site.data.socials.ssrn_author_url | jsonify }}
+  },
+  "indexes": {
+    "research": {{ '/research-index/' | absolute_url | jsonify }},
+    "papers": {{ '/papers/' | absolute_url | jsonify }},
+    "projects": {{ '/projects/' | absolute_url | jsonify }},
+    "presentations": {{ '/presentations/' | absolute_url | jsonify }},
+    "academic_projects": {{ '/academic-projects/' | absolute_url | jsonify }},
+    "credentials": {{ '/credentials/' | absolute_url | jsonify }},
+    "press": {{ '/press/' | absolute_url | jsonify }},
+    "cv": {{ '/cv/' | absolute_url | jsonify }}
+  },
+  "papers_and_learning_resources": [
+    {% for item in catalog_papers %}
+    {
+      "title": {{ item.title | jsonify }},
+      "category": {{ item.card_kind | default: "Research record" | jsonify }},
+      "status": {{ item.label | jsonify }},
+      "status_detail": {{ item.status | jsonify }},
+      "date_display": {{ item.display_date | jsonify }},
+      "authors_display": {{ item.authors | jsonify }},
+      "summary": {{ item.summary | strip_html | jsonify }},
+      "tags": {{ item.tags | jsonify }},
+      "url": {{ item.url | absolute_url | jsonify }},
+      "pdf_url": {% if item.pdf %}{{ item.pdf | absolute_url | jsonify }}{% else %}null{% endif %},
+      "repository_url": {{ item.github | jsonify }},
+      "external_url": {{ item.external_url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "projects": [
+    {% for item in catalog_projects %}
+    {
+      "title": {{ item.title | jsonify }},
+      "section": {{ item.portfolio_section | jsonify }},
+      "kind": {{ item.label | jsonify }},
+      "status_detail": {{ item.status | jsonify }},
+      "summary": {{ item.summary | strip_html | jsonify }},
+      "url": {{ item.url | absolute_url | jsonify }},
+      "repository_url": {{ item.github | jsonify }},
+      "external_url": {{ item.external_url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "notes": [
+    {% for item in catalog_notes %}
+    {
+      "title": {{ item.title | jsonify }},
+      "url": {{ item.url | absolute_url | jsonify }},
+      "summary": {{ item.summary | strip_html | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "press_and_recognition": [
+    {% for item in site.data.press %}
+    {
+      "title": {{ item.title | jsonify }},
+      "publisher": {{ item.publisher | jsonify }},
+      "date": {{ item.date | jsonify }},
+      "kind": {{ item.kind | default: "Media coverage" | jsonify }},
+      "source_url": {{ item.url | jsonify }},
+      "verification_status": {{ item.verification_status | jsonify }},
+      "summary": {{ item.summary | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "public_cv_sections": {{ site.data.cv.cv.sections | jsonify }},
+  "credential_groups": {{ site.data.credentials.groups | jsonify }}
+}

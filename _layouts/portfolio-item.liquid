@@ -93,3 +93,42 @@ layout: default
     </div>
   </div>
 </article>
+
+{% if page.portfolio_type == 'paper' %}
+{% assign work_kind = page.card_kind | default: '' | downcase %}
+<script type="application/ld+json" id="academic-work-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": {% if work_kind contains 'lecture' or work_kind contains 'tutorial' %}"LearningResource"{% else %}"ScholarlyArticle"{% endif %},
+  "@id": {{ page.url | append: '#work' | absolute_url | jsonify }},
+  "headline": {{ page.title | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+  "description": {{ page.summary | strip_html | jsonify }},
+  "creativeWorkStatus": {{ page.label | jsonify }},
+  "additionalProperty": {
+    "@type": "PropertyValue",
+    "name": "Research or editorial stage",
+    "value": {{ page.status | jsonify }}
+  },
+  "keywords": {{ page.tags | jsonify }},
+  "inLanguage": "en"{% if page.authors %},
+  "author": [
+    {% assign work_authors = page.authors | split: ' and ' %}
+    {% for author_name in work_authors %}
+    {
+      "@type": "Person",
+      "name": {{ author_name | strip | jsonify }}{% if author_name contains 'Heriberto' %},
+      "url": {{ '/' | absolute_url | jsonify }},
+      "sameAs": "https://orcid.org/{{ site.data.socials.orcid_id }}"{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]{% endif %}{% if page.pdf %},
+  "encoding": {
+    "@type": "MediaObject",
+    "encodingFormat": "application/pdf",
+    "contentUrl": {{ page.pdf | absolute_url | jsonify }}
+  }{% endif %}
+}
+</script>
+{% endif %}

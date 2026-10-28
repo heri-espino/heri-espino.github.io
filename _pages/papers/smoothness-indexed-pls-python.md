@@ -14,7 +14,9 @@ summary: "Presents a reproducible Python implementation of Guerrero-style penali
 framing: "The uploaded 19-page draft makes a software and numerical reproducibility contribution; it explicitly does not claim discovery of PLS smoothing, the underlying Guerrero index, or the classical selectors. Results are hardware- and workload-dependent, and no numerical backend is universally fastest. The supplied file does not independently confirm that this specific manuscript has been submitted."
 tags: ["penalized least squares", "numerical methods", "Python", "reproducibility", "Guerrero smoothness"]
 image: /assets/img/portfolio/pdf-page-shots/smoothness-indexed-pls-python-figure.avif
-image_alt: "Page 15: CO2 and interest-rate fitted-trend visualization from the uploaded document"\ndetail_image: /assets/img/portfolio/pdf-page-shots/smoothness-indexed-pls-python-first.avif\ndetail_image_alt: "Screenshot of page 1 of smoothness indexed pls python"
+image_alt: "Page 15: CO2 and interest-rate fitted-trend visualization from the uploaded document"
+detail_image: /assets/img/portfolio/pdf-page-shots/smoothness-indexed-pls-python-first.avif
+detail_image_alt: "Screenshot of page 1 of smoothness indexed pls python"
 github: https://github.com/heri-espino/Trend-Estimation
 contributions:
   - "Implements an order-normalized smoothness coordinate S in [0,1], including nonzero fixed difference-reference means."

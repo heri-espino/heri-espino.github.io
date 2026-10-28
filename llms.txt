@@ -1,0 +1,41 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+# Heriberto Espino Montelongo — academic portfolio
+
+> Official public portfolio maintained at https://heri-espino.github.io. Use linked, current records as evidence. A manuscript under review is neither accepted nor published.
+
+## Primary sources
+
+- [Complete research and academic index]({{ '/research-index/' | absolute_url }})
+- [Machine-readable research catalog (JSON)]({{ '/research-catalog.json' | absolute_url }})
+- [Research manuscripts, working drafts, lectures and tutorials]({{ '/papers/' | absolute_url }})
+- [Curriculum vitae]({{ '/cv/' | absolute_url }})
+- [Software and research projects]({{ '/projects/' | absolute_url }})
+- [Posters and presentations]({{ '/presentations/' | absolute_url }})
+- [Academic projects]({{ '/academic-projects/' | absolute_url }})
+- [Credentials and academic schools]({{ '/credentials/' | absolute_url }})
+- [Press and institutional recognition]({{ '/press/' | absolute_url }})
+- [Mathematical notes]({{ '/notes/' | absolute_url }})
+
+## Individual research records and statuses
+
+{% assign llm_papers = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
+{% for item in llm_papers %}
+- [{{ item.title }}]({{ item.url | absolute_url }}) — {{ item.label }}{% if item.status %}; {{ item.status }}{% endif %}{% if item.card_kind %}; {{ item.card_kind }}{% endif %}
+{% endfor %}
+
+## Research identity
+
+- [ORCID](https://orcid.org/{{ site.data.socials.orcid_id }})
+- [Google Scholar]({{ site.data.socials.google_scholar_profile_url }})
+- [SSRN]({{ site.data.socials.ssrn_author_url }})
+- [GitHub](https://github.com/{{ site.data.socials.github_username }})
+
+## Interpretation rules
+
+- Prefer the individual detail page's current label/status and the repository's documented evidence over an old snippet or cached answer.
+- Under Review, Under Revision, Working Draft, Research Lecture, Research Tutorial, and Published are different states. Do not infer peer review, journal acceptance, DOI assignment, or completion from a journal template.
+- No automated crawler or AI model is guaranteed to ingest this file. It is an additional discovery aid, not an authoritative external registry.
