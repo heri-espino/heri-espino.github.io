@@ -1473,6 +1473,65 @@ summary:focus-visible {
   flex: 2 1 19rem;
 }
 
+/* Archive filters remain accessible without occupying page width by default. */
+.portfolio-display-settings {
+  margin: 0 0 0.35rem;
+}
+
+.portfolio-display-settings-toggle {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  min-height: 2rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  color: var(--global-theme-color);
+  cursor: pointer;
+  list-style: none;
+}
+
+.portfolio-display-settings-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.portfolio-display-settings-toggle::marker {
+  content: "";
+}
+
+.portfolio-display-settings-toggle:hover,
+.portfolio-display-settings-toggle:focus-visible {
+  border-color: var(--global-divider-color);
+  outline-offset: 2px;
+  background: var(--global-code-bg-color);
+}
+
+.portfolio-display-chevron {
+  display: inline-block;
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.portfolio-display-settings[open] .portfolio-display-chevron {
+  transform: rotate(90deg);
+}
+
+.portfolio-display-settings .credentials-tools {
+  margin: 0.45rem 0 0.85rem;
+}
+
+.portfolio-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 .portfolio-grid > .portfolio-card[hidden] {
   display: none !important;
 }
@@ -1502,6 +1561,85 @@ summary:focus-visible {
 
 .portfolio-grid[data-view="list"] .portfolio-tags {
   padding-bottom: 0;
+}
+
+/* Compact list keeps a recognizable thumbnail and title, with minimal spacing. */
+.portfolio-grid[data-view="compact"] {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 6.25rem) minmax(0, 1fr);
+  grid-template-rows: auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card-image {
+  aspect-ratio: 16 / 9;
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card-kind,
+.portfolio-grid[data-view="compact"] .portfolio-tags {
+  display: none;
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card-body {
+  padding: 0;
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card-meta {
+  flex-flow: row wrap;
+  gap: 0.1rem 0.6rem;
+  font-size: 0.7rem;
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card h3 {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.portfolio-grid[data-view="compact"] .portfolio-card-body > p:not(.portfolio-formula) {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  -webkit-line-clamp: 1;
+}
+
+/* Credential archives use the same compact control vocabulary. */
+.credentials-list[data-view="compact"] .credentials-entry {
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: 0.5rem 0.75rem;
+  padding: 0.55rem 0.2rem;
+}
+
+.credentials-list[data-view="compact"] .credentials-logo-wrap {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+.credentials-list[data-view="compact"] .credentials-logo {
+  padding: 0.22rem;
+}
+
+.credentials-list[data-view="compact"] .credentials-entry h3 {
+  font-size: 0.95rem;
+}
+
+.credentials-list[data-view="compact"] .credentials-issuer,
+.credentials-list[data-view="compact"] .credentials-meta,
+.credentials-list[data-view="compact"] .credentials-parent {
+  margin-top: 0.12rem;
+  font-size: 0.75rem;
+}
+
+.credentials-list[data-view="compact"] .credentials-proof {
+  font-size: 0.76rem;
 }
 
 /* The credentials archive defaults to list; grid is an explicit visitor choice. */
@@ -1617,6 +1755,20 @@ summary:focus-visible {
     max-width: 100%;
   }
 
+  .portfolio-grid[data-view="compact"] .portfolio-card {
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .credentials-list[data-view="compact"] .credentials-entry {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+  }
+
+  .credentials-list[data-view="compact"] .credentials-proof {
+    grid-column: 2;
+    justify-self: start;
+    white-space: normal;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
