@@ -44,7 +44,10 @@ cv:
         location: Puebla, Mexico
         date: Aug 2025 — Present
         highlights:
+          - "Research leadership: proposed questions and independently designed statistical studies."
           - "Statistical inference: studied tutoring–grade associations in 6,627 students."
+          - "Stakeholder communication: explained findings to technical and nontechnical leaders."
+          - "Decision support: presented evidence and proposed university improvements."
           - "Unsupervised learning: clustered grade distributions using KS-derived features."
           - "Reproducibility: automated Conda/Python analyses and LaTeX report generation."
           - "Dashboard engineering: built Streamlit views of academic and tutoring records."
