@@ -2539,3 +2539,13 @@
     text-overflow: clip !important;
   }
 }
+
+/* Single-sheet CVs use measured half of their unused vertical space above
+   the content, leaving the same amount below. For a long/multipage CV the
+   value is zero: retain the selected equal @page margins and browser-native
+   pagination. Never scale text or force page breaks to achieve centering. */
+@media print {
+  .cv-page[data-cv-single-page="true"] #cv-document {
+    padding-top: var(--cv-print-top-balance, 0px) !important;
+  }
+}

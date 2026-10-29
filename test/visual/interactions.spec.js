@@ -450,3 +450,58 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
     await page.setViewportSize(screenViewport);
   }
 });
+
+test("CV print balances top and bottom whitespace only for one-page selections", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-print-options > summary").click();
+  await page.locator("#cv-entry-picker > summary").click();
+  await page.locator("#cv-entries-none").click();
+  await page.locator("#cv-entry-options input[type=checkbox]").first().check();
+
+  // The default reading view must compute a print balance without displaying
+  // the offscreen measuring sheets or changing the reading density.
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "reading");
+  for (const [size, paper] of [["small", "a4"], ["large", "letter"]]) {
+    await page.locator("#cv-text-size").selectOption(size);
+    await page.locator("#cv-paper").selectOption(paper);
+    const reading = await page.locator("#cv-page").evaluate((root) => ({
+      single: root.dataset.cvSinglePage,
+      offset: parseFloat(root.style.getPropertyValue("--cv-print-top-balance")),
+      density: root.dataset.cvDensity,
+      previewHidden: document.querySelector("#cv-paged-preview").hidden,
+    }));
+    expect(reading.single).toBe("true");
+    expect(reading.offset).toBeGreaterThan(0);
+    expect(reading.density).toBe("balanced");
+    expect(reading.previewHidden).toBe(true);
+
+    await page.locator("#cv-preview").click();
+    const balanced = await page.locator(".cv-preview-paper-body").first().evaluate((body) => {
+      const box = body.getBoundingClientRect();
+      const intro = body.querySelector(".cv-intro").getBoundingClientRect();
+      const content = body.querySelector(".cv-content").getBoundingClientRect();
+      return { top: intro.top - box.top, bottom: box.bottom - content.bottom, used: body.scrollHeight };
+    });
+    expect(Math.abs(balanced.top - balanced.bottom)).toBeLessThan(14);
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    await page.emulateMedia({ media: "print" });
+    const printPadding = await page.locator("#cv-document").evaluate((node) =>
+      parseFloat(getComputedStyle(node).paddingTop));
+    expect(printPadding).toBeGreaterThan(0);
+    await page.emulateMedia({ media: "screen" });
+    await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+    await page.locator("#cv-preview").click();
+  }
+
+  // A full CV requires multiple pages and must not receive added top padding
+  // or alter the user's equal physical @page margins.
+  await page.locator("#cv-entries-all").click();
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-single-page", "false");
+  const full = await page.locator("#cv-page").evaluate((root) => ({
+    offset: parseFloat(root.style.getPropertyValue("--cv-print-top-balance")),
+    margin: root.style.getPropertyValue("--cv-print-margin").trim(),
+  }));
+  expect(full.offset).toBe(0);
+  expect(full.margin).toBe("10mm");
+});
