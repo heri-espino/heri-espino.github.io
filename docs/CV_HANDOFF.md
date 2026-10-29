@@ -902,7 +902,7 @@ The owner requested removal **from the website CV only** of four individual rese
 - `Systemic Liquidity-Crisis Agent-Based Model`
 - `Bayesian Uncertainty in WTI Options`
 
-Do not remove the underlying portfolio pages, publications, PDFs, or GitHub projects; these are CV-selection decisions, not retractions. The CV now contains 8 Research entries and 8 Research Drafts entries. Maintain the three actual submitted manuscripts and their individual status metadata.
+Do not remove the underlying portfolio pages, publications, PDFs, or GitHub projects; these are CV-selection decisions, not retractions. The CV now contains 8 Research entries and 7 Research Drafts entries; the published technical article remains in its own category. Maintain the three actual submitted manuscripts and their individual status metadata.
 
 The 10 Coursera **Specializations**, not individual standalone Courses, each received a single concise technical-skill description in `_data/cv.yml`. The archive/source provenance was checked newest-to-oldest:
 
