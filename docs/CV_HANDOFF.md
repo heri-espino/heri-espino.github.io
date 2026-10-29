@@ -369,9 +369,9 @@ their specializations. All 23 entries retain credential IDs and their website
 certificate links. Descriptive bullets have been removed for the University of
 Pennsylvania corporate-finance and IESE storytelling credentials, as requested.
 
-Two first-author research records explicitly say **Under Review**:
+Two first-author journal manuscripts have distinct current statuses:
 Elsevier / *Discrete Applied Mathematics* (LAGOS special issue) and Elsevier /
-*Computational Geometry*. Neither is marked as accepted or published.
+*Computational Geometry* (**Under Revision**). Neither is marked as accepted or published.
 Organization logo matching includes Elsevier and new credential issuers.
 The manuscript names (rather than shortened subtitles) remain visible in the
 CV, alongside their existing portfolio and PDF links.
