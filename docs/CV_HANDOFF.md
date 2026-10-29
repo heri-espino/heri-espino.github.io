@@ -962,3 +962,24 @@ community adoption, documented outcomes, and third-party confirmation.
 Recheck after any wording change: `node test/style_contract.js`, Jekyll build,
 Playwright print-overflow checks across A4/Letter and CV templates. This content
 pass changes only structured descriptions and does not alter print styling.
+
+## Mathematics Learning Center: independent inquiry and stakeholder reporting (2026-10-29)
+
+User-confirmed account: independently proposed institutional research questions,
+designed and ran statistical studies, then presented technical and accessible
+explanations to university stakeholders with varied statistical expertise.
+Presentations also proposed future institutional improvements.
+
+Three concise highlights were added to the existing Mathematics Learning Center
+record: research leadership, stakeholder communication, and decision support.
+The five pre-existing technical highlights remain, and all eight new/current
+bullets comply with the 94-character printable-line limit (maximum 87).
+
+Do **not** claim that analyses caused policy adoption, established instructor
+or student misconduct, or experimentally proved an incentive's causal effect.
+The longitudinal tutoring studies are observational, and statements about
+instructor-grade heterogeneity should remain measurement-focused.
+Use observed impacts only when independently documented.
+
+Verification: inspect the CV's Mathematics Learning Center record in
+reading mode and print preview (A4/Letter) and run the source contract.
