@@ -902,7 +902,7 @@ The owner requested removal **from the website CV only** of four individual rese
 - `Systemic Liquidity-Crisis Agent-Based Model`
 - `Bayesian Uncertainty in WTI Options`
 
-Do not remove the underlying portfolio pages, publications, PDFs, or GitHub projects; these are CV-selection decisions, not retractions. The CV now contains 8 Research entries and 7 Research Drafts entries; the published technical article remains in its own category. Maintain the three actual submitted manuscripts and their individual status metadata.
+Do not remove the underlying portfolio pages, publications, PDFs, or GitHub projects; these are CV-selection decisions, not retractions. The CV now contains 9 Research entries (including numerical-validation software) and 7 Research Drafts entries; the published technical article remains in its own category. Maintain the three actual submitted manuscripts and their individual status metadata.
 
 The 10 Coursera **Specializations**, not individual standalone Courses, each received a single concise technical-skill description in `_data/cv.yml`. The archive/source provenance was checked newest-to-oldest:
 
@@ -911,3 +911,14 @@ The 10 Coursera **Specializations**, not individual standalone Courses, each rec
 3. `heri-espino/heri-latex/Curriculum Vitae/Legacy/260826-activities-names/Heriberto_Espino_Montelongo.tex` — commented technical notes (used for specificity and cross-checking).
 
 No Coursera account was connected or required. The specialization titles, providers, recorded dates, IDs, and official certificate URLs are unchanged. The descriptions characterize the skills covered and documented in the legacy LaTeX sources, without independently asserting production deployments or external course assessment. Each skill statement respects the existing one-line (≤94-character) source contract. Check `node test/style_contract.js`, Jekyll, and CV browser-print tests when changing these records.
+
+## Final pre-merge CV evidence and contact enrichment (2026-10-29)
+
+The owner supplied concise subject descriptions and asked for previously documented omissions to be restored. Updates on PR #47:
+
+- **Math Learning Center:** two separate competency bullets: interactive Streamlit dashboards over student/tutoring records and risk-screening algorithms, based on the newest `heri-latex/Curriculum Vitae/290913-skills/Heriberto_Espino_Montelongo.tex`.
+- **Stepping–Stone:** add a dedicated Research software record for July 2026, `Stepping-Stone Volume Validation`, citing DOI `10.5281/zenodo.21291269` and the already public validation project and GitHub repository. The manuscript itself also links to this validation DOI. The full manuscript title and **Under Revision** status now agree with the current `_pages/papers/stepping-stone.md` record, which takes precedence over the earlier abbreviated LaTeX CV. Other manuscript statuses remain unchanged.
+- **Competitions:** add three user-confirmed technical descriptions: Kaxa Nuk quantitative cryptocurrency ML; MAPFRE BugaMap actuarial insurance; Coppel in-store sales methodology. No invented awards or numeric performance outcomes.
+- **Dates:** correct the Mexican University Mathematics Olympiad participation to `Jun 2025, May 2026` and Stevens HFT to `Mar–Apr 2026` following the newest LaTeX CV. The 2025 UDLAP Mathematics Olympiad edition conflicted between the website's 5th and newest TeX's 4th (also assigned to 2024): omit the ambiguous ordinal without changing the 4th-place ranking.
+- **Contacts:** retain public email, portfolio, LinkedIn and GitHub; add ORCID, Google Scholar, ResearchGate and SSRN links using the verified `_data/socials.yml` values. Do not invent a telephone number or claim English proficiency certification without evidence. Contact links wrap naturally in the screen/print header.
+- **Scope and checks:** 9 Research records, 7 Research Drafts, all three submitted/under-revision manuscript records, 10 Coursera Specializations and 13 standalone Courses. Source highlights remain within 94 characters. Tests in `test/style_contract.js` cover the restored evidence and link consistency. Print/browser tests must also pass before merging.
