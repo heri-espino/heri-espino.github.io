@@ -555,12 +555,12 @@ if (exists("_pages/cv.md")) {
   }
 
   const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
-  const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Selected Academic Projects:")[0] || "";
+  const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Published Articles & Technical Writing:")[0] || "";
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 8 || draftCount !== 8) {
-    failures.push("CV Research and Research Drafts must contain 8 entries each after the four requested removals.");
+  if (researchCount !== 8 || draftCount !== 7) {
+    failures.push("CV must retain 8 Research records and 7 Research Drafts after four curated exclusions.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
