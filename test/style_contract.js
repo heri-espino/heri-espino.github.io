@@ -559,8 +559,8 @@ if (exists("_pages/cv.md")) {
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 11 || draftCount !== 9) {
-    failures.push("Research and Research Drafts must preserve all 20 entries (11 research records, 9 drafts/related materials).");
+  if (researchCount !== 8 || draftCount !== 8) {
+    failures.push("CV Research and Research Drafts must contain 8 entries each after the four requested removals.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
@@ -753,6 +753,38 @@ if (exists("_pages/cv.md")) {
       !cvRenderer.includes('class="cv-date"') ||
       !cvStyles.includes('data-cv-markers="dashes"')) {
     failures.push("Harvard CV must retain organization icons, city and date fields, and em-dash descriptions.");
+  }
+}
+
+// User-curated CV exclusions apply only to the CV, not to project or paper pages.
+{
+  const source = read("_data/cv.yml");
+  const blocked = [
+    "Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends",
+    "Privileged Template Priors for Mechanistic Interpretability in CNNs",
+    "Systemic Liquidity-Crisis Agent-Based Model",
+    "Bayesian Uncertainty in WTI Options",
+  ];
+  for (const title of blocked) {
+    if (source.includes("      - name: " + title) || source.includes('      - name: "' + title + '"')) {
+      failures.push("Excluded CV research entry reappeared: " + title);
+    }
+  }
+
+  const section = source.split("    Credentials:")[1]?.split("    Languages:")[0] || "";
+  const entries = section.split(/(?=^      - name: )/m).slice(1);
+  const specializations = entries.filter((entry) => /^        role: "Specialization"\s*$/m.test(entry));
+  if (specializations.length !== 10) {
+    failures.push("CV must retain all ten curated Coursera specializations.");
+  }
+  for (const entry of specializations) {
+    const name = entry.match(/^      - name: (.+)$/m)?.[1] || "<unnamed>";
+    const highlights = [...entry.matchAll(/^          - (.+)$/gm)];
+    if (highlights.length !== 1 ||
+        !highlights[0][1].includes(": ") ||
+        highlights[0][1].replace(/^["']|["']$/g, "").length > 94) {
+      failures.push("Coursera specialization needs one concise skill highlight: " + name);
+    }
   }
 }
 
