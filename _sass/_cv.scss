@@ -2518,3 +2518,24 @@
     margin-top: var(--cv-reading-row-gap);
   }
 }
+
+/* A printed highlight is one complete skill statement, never a clipped
+   multi-line paragraph. Source copy is editorially capped by the CV contract.
+   Apply the same layout to the physical-size paper preview, but leave the
+   full-width reading experience unchanged. */
+@media screen {
+  .cv-page[data-cv-preview="paper"] .cv-preview-paper-body .cv-highlights li {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
+@media print {
+  .cv-page #cv-document .cv-highlights li,
+  .cv-page #cv-timeline-items .cv-highlights li {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+}
