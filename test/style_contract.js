@@ -780,6 +780,18 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Social cards must resolve to a real JPEG; LinkedIn may not display SVG OG images.
+{
+  const config = read("_config.yml");
+  const cv = read("_pages/cv.md");
+  if (!/^serve_og_meta: true\\b/m.test(config) ||
+      !/^og_image: og-mountain\\.jpg\\b/m.test(config) ||
+      !/^og_image: og-mountain\\.jpg\\b/m.test(cv) ||
+      !exists("assets/img/og-mountain.jpg")) {
+    failures.push("Social link previews must use the committed mountain JPEG Open Graph image.");
+  }
+}
+
 if (failures.length > 0) {
   console.error("Starter style contract check failed:");
   failures.forEach((message) => console.error(`- ${message}`));
