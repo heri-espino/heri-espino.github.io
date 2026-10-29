@@ -443,6 +443,9 @@
     // In reading mode the measuring sheets must never become visible.
     root.dataset.cvPaginated = showing ? "true" : "false";
     if (!showing) {
+      // Cache the numeric offset only; don't retain duplicate, invisible CV
+      // entries or active links in the reading-mode DOM.
+      pagedPreview.replaceChildren();
       pagedPreview.hidden = true;
       pagedPreview.style.display = "none";
       for (const key of ["position", "left", "top", "width", "visibility", "pointerEvents"]) {
