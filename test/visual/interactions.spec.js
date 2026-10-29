@@ -404,7 +404,9 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
 
-  // Inspect both the narrow Europass grid and the conventional single-column CV.
+  // Screen preview stays at the device viewport. Browser print is evaluated
+  // at physical sheet width (96 CSS px/in), not at an iPhone screen width.
+  const screenViewport = page.viewportSize();
   for (const [template, paper] of [["personal", "a4"], ["harvard", "letter"], ["europass", "a4"]]) {
     await page.locator("#cv-template").selectOption(template);
     await page.locator("#cv-paper").selectOption(paper);
@@ -425,6 +427,10 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
     expect(preview.bad, `${template}/${paper} paper preview overflows`).toEqual([]);
     await page.locator("#cv-preview").click();
 
+    // Chromium's emulateMedia('print') does NOT resize the page as the real
+    // print/PDF compositor does. Simulate A4/Letter width for an honest
+    // print-geometry check, also when this test runs on the mobile project.
+    await page.setViewportSize({ width: paper === "a4" ? 794 : 816, height: 1123 });
     await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     await page.emulateMedia({ media: "print" });
     const printed = await page.locator("#cv-document .cv-highlights li").evaluateAll((nodes) => {
@@ -441,5 +447,6 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
     expect(printed.bad, `${template}/${paper} browser print overflows`).toEqual([]);
     await page.emulateMedia({ media: "screen" });
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+    await page.setViewportSize(screenViewport);
   }
 });
