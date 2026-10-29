@@ -867,3 +867,28 @@ Scope: `@media screen`, `data-cv-preview="reading"`, any density except `latex`,
 The owner requested equal gaps and the same font across the title, organization, links and description following the previous spacing pass. Wide reading (Balanced and Compact) now applies the template-selected `--cv-font-stack`, a consistent `0.96rem` size, and `1.36` line-height to the entire entry. Title, organization, links, description and date remain distinguishable by weight/color, not font size. An identical `0.24rem` row gap connects title→organization→links→description and adjacent highlight lines; longer link rows also follow the same vertical rhythm.
 
 This is a CSS-only change scoped to `@media screen` and `data-cv-preview="reading"` (non-LaTeX), and excludes special Harvard and Europass. LaTeX extra-compact paper preview and actual print styles, data, ordering and controls remain unchanged. Verify against the La Catarina CV article in grouped and chronological wide views, then test browser print for unchanged compact settings.
+
+## Skill-oriented highlights and single-line printing (2026-10-28)
+
+- The latest factual comparison source is `heri-espino/heri-latex`, especially
+  `Curriculum Vitae/Legacy/260826-activities-names/Heriberto_Espino_Montelongo.tex`
+  and `Curriculum Vitae/290913-skills/Heriberto_Espino_Montelongo.tex`.
+  The *site* YAML remains canonical; older CVs are supporting evidence, not an
+  instruction to overwrite contemporary research classifications or public links.
+- Each description should demonstrate **one specific method or skill plus evidence
+  of its application** (for example, "Data engineering: built Dockerized Airflow
+  ETL into PostgreSQL for 500 tickers."). Prefer measured results or technical
+  outputs over generic accomplishment claims. Do not claim causal identification
+  from observational association or invent review decisions, dates or metrics.
+- `_data/cv.yml` highlights are now concise (at most 94 characters per source
+  list item) so they fit on one print line, including narrow Europass entries.
+  GPA/scholarship facts remain in Education as verified factual metadata.
+- Paper preview and browser printing use `white-space: nowrap` with **visible**
+  overflow, never ellipses or clipping. Therefore every new bullet must be
+  short enough to fit the paper at the configured type size; do not rely solely
+  on CSS to hide excess text. Full-width reading mode can wrap normally.
+- Re-run `node test/style_contract.js` and the Playwright CV print-bullet
+  geometry check. Inspect A4 and Letter, Harvard, Europass and personal
+  variants; printing at unusually large user-configured font sizes may require
+  shorter source copy rather than scaling to illegibility.
+- Maintain this one-skill-per-bullet editorial policy in subsequent changes.
