@@ -399,3 +399,47 @@ test("CV Europass uses EU section sequence and truthful language layout", async 
   expect(previewLayout.display).toBe("grid");
   expect(previewLayout.dateLeft).toBeTruthy();
 });
+
+test("CV skill bullets occupy exactly one complete line in print and paper preview", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+
+  // Inspect both the narrow Europass grid and the conventional single-column CV.
+  for (const [template, paper] of [["personal", "a4"], ["harvard", "letter"], ["europass", "a4"]]) {
+    await page.locator("#cv-template").selectOption(template);
+    await page.locator("#cv-paper").selectOption(paper);
+    await page.locator("#cv-preview").click();
+    await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "paper");
+
+    const preview = await page.locator(".cv-preview-paper-body .cv-highlights li").evaluateAll((nodes) => {
+      const visible = nodes.filter((node) => node.getClientRects().length > 0);
+      return {
+        total: visible.length,
+        bad: visible.filter((node) =>
+          getComputedStyle(node).whiteSpace !== "nowrap" ||
+          node.scrollWidth > node.clientWidth + 1
+        ).map((node) => node.textContent.trim()).slice(0, 10),
+      };
+    });
+    expect(preview.total).toBeGreaterThan(0);
+    expect(preview.bad, `${template}/${paper} paper preview overflows`).toEqual([]);
+    await page.locator("#cv-preview").click();
+
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    await page.emulateMedia({ media: "print" });
+    const printed = await page.locator("#cv-document .cv-highlights li").evaluateAll((nodes) => {
+      const visible = nodes.filter((node) => node.getClientRects().length > 0);
+      return {
+        total: visible.length,
+        bad: visible.filter((node) =>
+          getComputedStyle(node).whiteSpace !== "nowrap" ||
+          node.scrollWidth > node.clientWidth + 1
+        ).map((node) => node.textContent.trim()).slice(0, 10),
+      };
+    });
+    expect(printed.total).toBeGreaterThan(0);
+    expect(printed.bad, `${template}/${paper} browser print overflows`).toEqual([]);
+    await page.emulateMedia({ media: "screen" });
+    await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+  }
+});
