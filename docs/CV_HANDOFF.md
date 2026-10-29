@@ -892,3 +892,22 @@ This is a CSS-only change scoped to `@media screen` and `data-cv-preview="readin
   variants; printing at unusually large user-configured font sizes may require
   shorter source copy rather than scaling to illegibility.
 - Maintain this one-skill-per-bullet editorial policy in subsequent changes.
+
+## Requested CV curation and Coursera specializations (2026-10-29)
+
+The owner requested removal **from the website CV only** of four individual research entries:
+
+- `Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends` (displayed as “Trend Estimation Methods”)
+- `Privileged Template Priors for Mechanistic Interpretability in CNNs`
+- `Systemic Liquidity-Crisis Agent-Based Model`
+- `Bayesian Uncertainty in WTI Options`
+
+Do not remove the underlying portfolio pages, publications, PDFs, or GitHub projects; these are CV-selection decisions, not retractions. The CV now contains 8 Research entries and 8 Research Drafts entries. Maintain the three actual submitted manuscripts and their individual status metadata.
+
+The 10 Coursera **Specializations**, not individual standalone Courses, each received a single concise technical-skill description in `_data/cv.yml`. The archive/source provenance was checked newest-to-oldest:
+
+1. `heri-espino/heri-latex/Curriculum Vitae/290913-skills/Heriberto_Espino_Montelongo.tex` — most recent concise descriptions.
+2. `heri-espino/heri-latex/Curriculum Vitae/290911-two-columns/Heriberto_Espino_Montelongo.tex` — expanded descriptions.
+3. `heri-espino/heri-latex/Curriculum Vitae/Legacy/260826-activities-names/Heriberto_Espino_Montelongo.tex` — commented technical notes (used for specificity and cross-checking).
+
+No Coursera account was connected or required. The specialization titles, providers, recorded dates, IDs, and official certificate URLs are unchanged. The descriptions characterize the skills covered and documented in the legacy LaTeX sources, without independently asserting production deployments or external course assessment. Each skill statement respects the existing one-line (≤94-character) source contract. Check `node test/style_contract.js`, Jekyll, and CV browser-print tests when changing these records.
