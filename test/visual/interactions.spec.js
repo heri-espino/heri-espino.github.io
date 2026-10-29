@@ -454,6 +454,7 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
 test("CV print balances top and bottom whitespace only for one-page selections", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-print-options > summary").click();
   await page.locator("#cv-entry-picker > summary").click();
   await page.locator("#cv-entries-none").click();
   await page.locator("#cv-entry-options input[type=checkbox]").first().check();
