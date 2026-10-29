@@ -458,9 +458,9 @@ if (exists("_pages/cv.md")) {
     failures.push("Credentials must mirror the website's curated specialization and independent-course lists.");
   }
   if (!cvSources.includes('Elsevier · Discrete Applied Mathematics · Under Review') ||
-      !cvSources.includes('Elsevier · Computational Geometry · Under Review') ||
-      cvSources.includes("Manuscript under revision for Computational Geometry")) {
-    failures.push("Both listed Elsevier journals must explicitly show Under Review.");
+      !cvSources.includes('Elsevier · Computational Geometry · Under Revision') ||
+      !read("_pages/papers/stepping-stone.md").includes("label: Under Revision")) {
+    failures.push("Elsevier manuscript statuses in the CV must match their current paper records.");
   }
   if (cvSources.includes("Applied valuation, capital budgeting and cost-of-capital methods.") ||
       cvSources.includes("Studied structured storytelling for diverse audiences.")) {
@@ -555,15 +555,15 @@ if (exists("_pages/cv.md")) {
   }
 
   const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
-  const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Selected Academic Projects:")[0] || "";
+  const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Published Articles & Technical Writing:")[0] || "";
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 11 || draftCount !== 9) {
-    failures.push("Research and Research Drafts must preserve all 20 entries (11 research records, 9 drafts/related materials).");
+  if (researchCount !== 9 || draftCount !== 7) {
+    failures.push("CV must retain 9 Research records (including volume validation) and 7 drafts.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
-      !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
+      !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||
       !submittedResearchGroup.includes("Springer Nature · SN Computer Science · Under Review") ||
       researchDraftGroup.includes("Under Review")) {
     failures.push("The three submitted manuscripts must remain in Research, never Research Drafts.");
@@ -574,7 +574,7 @@ if (exists("_pages/cv.md")) {
   }
   const manuscriptMonths = [
     { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
-    { name: "Volume Constants for Stepping–Stone Empty Regions in Rᵈ", month: "Aug 2026", page: "_pages/papers/stepping-stone.md" },
+    { name: "Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension", month: "Aug 2026", page: "_pages/papers/stepping-stone.md" },
     { name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs", month: "Oct 2026", page: "_pages/papers/activation-patching-effects-add-up.md" }
   ];
   for (const { name, month, page } of manuscriptMonths) {
@@ -753,6 +753,73 @@ if (exists("_pages/cv.md")) {
       !cvRenderer.includes('class="cv-date"') ||
       !cvStyles.includes('data-cv-markers="dashes"')) {
     failures.push("Harvard CV must retain organization icons, city and date fields, and em-dash descriptions.");
+  }
+}
+
+// Added profile links and concrete specialist evidence must remain verifiable.
+{
+  const source = read("_data/cv.yml");
+  const social = read("_data/socials.yml");
+  const requiredProfiles = [
+    ["ORCID", "https://orcid.org/" + social.match(/orcid_id: "([^"]+)"/)?.[1]],
+    ["Google Scholar", social.match(/google_scholar_profile_url: "([^"]+)"/)?.[1]],
+    ["ResearchGate", social.match(/researchgate_profile_url: "([^"]+)"/)?.[1]],
+    ["SSRN", social.match(/ssrn_author_url: "([^"]+)"/)?.[1]],
+  ];
+  for (const [name, url] of requiredProfiles) {
+    if (!url || !source.includes('network: ' + name) || !source.includes('url: "' + url + '"')) {
+      failures.push("CV academic contact missing or out of sync: " + name);
+    }
+  }
+  for (const evidence of [
+    'Dashboard engineering: built Streamlit views of academic and tutoring records.',
+    'Risk screening: implemented dashboard algorithms to flag students needing support.',
+    'Quantitative ML: developed cryptocurrency financial-analysis models.',
+    'Insurance analytics: applied actuarial modeling to an insurance challenge.',
+    'Retail optimization: designed a method to improve in-store sales.',
+    'Stepping-Stone Volume Validation',
+    'https://doi.org/10.5281/zenodo.21291269',
+    'date: "Jun 2025, May 2026"',
+    'date: "Mar–Apr 2026"',
+  ]) {
+    if (!source.includes(evidence)) failures.push("CV evidence missing: " + evidence);
+  }
+  // The two most recent source files disagree about the 2025 UDLAP
+  // Olympiad edition. The site records the award without an ordinal.
+  if (source.includes("5th UDLAP Mathematics Olympiad")) {
+    failures.push("Unverified 2025 UDLAP Olympiad ordinal reappeared.");
+  }
+}
+
+// User-curated CV exclusions apply only to the CV, not to project or paper pages.
+{
+  const source = read("_data/cv.yml");
+  const blocked = [
+    "Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends",
+    "Privileged Template Priors for Mechanistic Interpretability in CNNs",
+    "Systemic Liquidity-Crisis Agent-Based Model",
+    "Bayesian Uncertainty in WTI Options",
+  ];
+  for (const title of blocked) {
+    if (source.includes("      - name: " + title) || source.includes('      - name: "' + title + '"')) {
+      failures.push("Excluded CV research entry reappeared: " + title);
+    }
+  }
+
+  const section = source.split("    Credentials:")[1]?.split("    Languages:")[0] || "";
+  const entries = section.split(/(?=^      - name: )/m).slice(1);
+  const specializations = entries.filter((entry) => /^        role: "Specialization"\s*$/m.test(entry));
+  if (specializations.length !== 10) {
+    failures.push("CV must retain all ten curated Coursera specializations.");
+  }
+  for (const entry of specializations) {
+    const name = entry.match(/^      - name: (.+)$/m)?.[1] || "<unnamed>";
+    const highlights = [...entry.matchAll(/^          - (.+)$/gm)];
+    if (highlights.length !== 1 ||
+        !highlights[0][1].includes(": ") ||
+        highlights[0][1].replace(/^["']|["']$/g, "").length > 94) {
+      failures.push("Coursera specialization needs one concise skill highlight: " + name);
+    }
   }
 }
 
