@@ -932,3 +932,54 @@ For a **multi-page** selection, the dynamic offset is zero; native print paginat
 Implementation: `assets/js/cv-customize.js` computes `--cv-print-top-balance` and `data-cv-single-page` using measured page-preview content. In wide reading mode it measures paper density offscreen and restores the reading layout. `_sass/_cv.scss` applies the offset only when one sheet fits. Re-evaluation occurs on font/size/paper/selection changes, font readiness, and resize. Browser and source regression checks are in `test/visual/interactions.spec.js` and `test/style_contract.js`.
 
 To inspect: open /cv/, choose one record and Paper preview, compare whitespace above and below, print to PDF, and repeat for A4 and Letter. Then include all records and confirm ordinary fixed symmetric page margins.
+
+## Scholarship-impact evidence pass (2026-10-29)
+
+The public CV received **10 concise revisions** to existing highlights, without adding activities,
+changing titles/dates, removing entries, or altering the page renderer and print presets.
+The revised highlights emphasize documented scale, teaching, and community relevance:
+
+- Mathematics Learning Center and reports: observational cohorts of 6,627 and 3,241 students,
+  plus 26,140 student-classroom observations across 769 mathematics classrooms.
+  These are **analysis populations**, not counts of students assisted or causal beneficiaries.
+  Evidence: `_pages/papers/student-engagement-adaptation.md`,
+  `_pages/papers/mathematics-support-classroom-performance.md`,
+  `_pages/papers/academic-support-persistence-incentive.md` and
+  `_pages/papers/course-grades-comparability.md`.
+- Agrocebada: 59 model-generated yield estimates and an interactive publication;
+  **not** 59 known ground-truth validation outcomes or verified farmer adoption.
+  Evidence: `heri-espino/GeoC` and `heri-espino/todoseboso` README files.
+- Xalmimilulco: a community-focused water-risk dashboard, **not** a documented
+  reduction in contamination or deployment by health authorities.
+- Quantum-computing and C++ instruction: curriculum/teaching contributions only;
+  no invented audience sizes, teaching hours or measured learning gains.
+
+Each replacement is at most 81 characters (the CV contract remains at most 94
+characters per highlight). Follow-up evidence to request before stronger impact
+claims: student attendance, verified dashboard use, institutional decisions,
+community adoption, documented outcomes, and third-party confirmation.
+
+Recheck after any wording change: `node test/style_contract.js`, Jekyll build,
+Playwright print-overflow checks across A4/Letter and CV templates. This content
+pass changes only structured descriptions and does not alter print styling.
+
+## Mathematics Learning Center: independent inquiry and stakeholder reporting (2026-10-29)
+
+User-confirmed account: independently proposed institutional research questions,
+designed and ran statistical studies, then presented technical and accessible
+explanations to university stakeholders with varied statistical expertise.
+Presentations also proposed future institutional improvements.
+
+Three concise highlights were added to the existing Mathematics Learning Center
+record: research leadership, stakeholder communication, and decision support.
+The five pre-existing technical highlights remain, and all eight new/current
+bullets comply with the 94-character printable-line limit (maximum 87).
+
+Do **not** claim that analyses caused policy adoption, established instructor
+or student misconduct, or experimentally proved an incentive's causal effect.
+The longitudinal tutoring studies are observational, and statements about
+instructor-grade heterogeneity should remain measurement-focused.
+Use observed impacts only when independently documented.
+
+Verification: inspect the CV's Mathematics Learning Center record in
+reading mode and print preview (A4/Letter) and run the source contract.

@@ -44,7 +44,10 @@ cv:
         location: Puebla, Mexico
         date: Aug 2025 — Present
         highlights:
-          - "Statistical inference: estimated tutoring associations with bootstrap confidence intervals."
+          - "Research leadership: proposed questions and independently designed statistical studies."
+          - "Statistical inference: studied tutoring–grade associations in 6,627 students."
+          - "Stakeholder communication: explained findings to technical and nontechnical leaders."
+          - "Decision support: presented evidence and proposed university improvements."
           - "Unsupervised learning: clustered grade distributions using KS-derived features."
           - "Reproducibility: automated Conda/Python analyses and LaTeX report generation."
           - "Dashboard engineering: built Streamlit views of academic and tutoring records."
@@ -69,7 +72,7 @@ cv:
         location: Puebla, Mexico
         date: Jan 2023 — May 2023
         highlights:
-          - "Scientific communication: authored reproducible LaTeX Beamer lectures."
+          - "Teaching materials: authored LaTeX lectures for linear algebra students."
           - "Mathematical exposition: standardized linear algebra diagrams and notation."
       - name: Analyst — Digital Marketing & Analytics
         role: "Analyst"
@@ -273,7 +276,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
         highlights:
-          - "Longitudinal analysis: measured mathematics-support engagement changes."
+          - "Longitudinal analysis: traced engagement patterns among 6,627 students."
       - name: Instructor Grade Heterogeneity
         role: "Study Lead"
         date: Oct 2025
@@ -281,7 +284,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
         highlights:
-          - "Distributional statistics: compared grades across 769 classroom groups."
+          - "Measurement analysis: studied 26,140 observations across 769 math classrooms."
       - name: Support Persistence After Incentives
         role: "Study Lead"
         date: Sep 2025
@@ -289,7 +292,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
         highlights:
-          - "Policy evaluation: tested tutoring persistence after incentives."
+          - "Longitudinal analysis: tracked tutoring among 3,241 students after incentives."
       - name: Mathematics Support and Classroom-Relative Performance
         role: "Study Lead"
         date: Aug 2025
@@ -297,7 +300,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
         highlights:
-          - "Statistical inference: related tutoring use to standardized class performance."
+          - "Statistical inference: compared tutoring use and grades for 6,627 students."
       - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
         context: "Latent financial-risk modeling"
         role: "Research project"
@@ -504,13 +507,13 @@ cv:
         date: "Jan 2026 — Jun 2026"
         organization: "Pretty Good Quantum OE · Universidad de las Américas Puebla"
         highlights:
-          - "Leadership: organized quantum-computing classes and student logistics."
+          - "Student outreach: organized quantum-computing classes at UDLAP."
       - name: "C++ Algorithms and Complexity Instruction"
         role: "Vice-President"
         date: "Jan 2025 — Jun 2026"
         organization: "Bitwise Competitive Programming · Universidad de las Américas Puebla"
         highlights:
-          - "Teaching: designed C++ problem sets on algorithms and complexity."
+          - "Peer instruction: designed C++ algorithms and complexity problem sets."
       - name: "How to Control Global Outbreaks of Infectious Diseases"
         role: "Best President"
         date: "Jun 2021 — Jul 2021"
@@ -605,7 +608,7 @@ cv:
         date: "Oct 2026"
         organization: "Fideicomisos Instituidos en Relación con la Agricultura"
         highlights:
-          - "Geospatial ML: modeled barley yield and visualized field predictions."
+          - "Agricultural ML: estimated yields for 59 fields and published an interactive map."
         url: "https://heri-espino.github.io/GeoC/"
       - name: "KN Hack Research Challenge"
         role: "Competitor"
@@ -812,4 +815,4 @@ cv:
         date: Jan 2026 — Present
         location: Puebla, Mexico
         highlights:
-          - "Civic data engineering: built scraping and geospatial water-risk dashboards."
+          - "Community mapping: built geospatial water-risk dashboards for Xalmimilulco."
