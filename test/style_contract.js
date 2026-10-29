@@ -458,9 +458,9 @@ if (exists("_pages/cv.md")) {
     failures.push("Credentials must mirror the website's curated specialization and independent-course lists.");
   }
   if (!cvSources.includes('Elsevier · Discrete Applied Mathematics · Under Review') ||
-      !cvSources.includes('Elsevier · Computational Geometry · Under Review') ||
-      cvSources.includes("Manuscript under revision for Computational Geometry")) {
-    failures.push("Both listed Elsevier journals must explicitly show Under Review.");
+      !cvSources.includes('Elsevier · Computational Geometry · Under Revision') ||
+      !read("_pages/papers/stepping-stone.md").includes("label: Under Revision")) {
+    failures.push("Elsevier manuscript statuses in the CV must match their current paper records.");
   }
   if (cvSources.includes("Applied valuation, capital budgeting and cost-of-capital methods.") ||
       cvSources.includes("Studied structured storytelling for diverse audiences.")) {
@@ -559,11 +559,11 @@ if (exists("_pages/cv.md")) {
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 8 || draftCount !== 7) {
-    failures.push("CV must retain 8 Research records and 7 Research Drafts after four curated exclusions.");
+  if (researchCount !== 9 || draftCount !== 7) {
+    failures.push("CV must retain 9 Research records (including volume validation) and 7 drafts.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
-      !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Review") ||
+      !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||
       !submittedResearchGroup.includes("Springer Nature · SN Computer Science · Under Review") ||
       researchDraftGroup.includes("Under Review")) {
     failures.push("The three submitted manuscripts must remain in Research, never Research Drafts.");
@@ -574,7 +574,7 @@ if (exists("_pages/cv.md")) {
   }
   const manuscriptMonths = [
     { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
-    { name: "Volume Constants for Stepping–Stone Empty Regions in Rᵈ", month: "Aug 2026", page: "_pages/papers/stepping-stone.md" },
+    { name: "Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension", month: "Aug 2026", page: "_pages/papers/stepping-stone.md" },
     { name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs", month: "Oct 2026", page: "_pages/papers/activation-patching-effects-add-up.md" }
   ];
   for (const { name, month, page } of manuscriptMonths) {
@@ -753,6 +753,41 @@ if (exists("_pages/cv.md")) {
       !cvRenderer.includes('class="cv-date"') ||
       !cvStyles.includes('data-cv-markers="dashes"')) {
     failures.push("Harvard CV must retain organization icons, city and date fields, and em-dash descriptions.");
+  }
+}
+
+// Added profile links and concrete specialist evidence must remain verifiable.
+{
+  const source = read("_data/cv.yml");
+  const social = read("_data/socials.yml");
+  const requiredProfiles = [
+    ["ORCID", "https://orcid.org/" + social.match(/orcid_id: "([^"]+)"/)?.[1]],
+    ["Google Scholar", social.match(/google_scholar_profile_url: "([^"]+)"/)?.[1]],
+    ["ResearchGate", social.match(/researchgate_profile_url: "([^"]+)"/)?.[1]],
+    ["SSRN", social.match(/ssrn_author_url: "([^"]+)"/)?.[1]],
+  ];
+  for (const [name, url] of requiredProfiles) {
+    if (!url || !source.includes('network: ' + name) || !source.includes('url: "' + url + '"')) {
+      failures.push("CV academic contact missing or out of sync: " + name);
+    }
+  }
+  for (const evidence of [
+    'Dashboard engineering: built Streamlit views of academic and tutoring records.',
+    'Risk screening: implemented dashboard algorithms to flag students needing support.',
+    'Quantitative ML: developed cryptocurrency financial-analysis models.',
+    'Insurance analytics: applied actuarial modeling to an insurance challenge.',
+    'Retail optimization: designed a method to improve in-store sales.',
+    'Stepping-Stone Volume Validation',
+    'https://doi.org/10.5281/zenodo.21291269',
+    'date: "Jun 2025, May 2026"',
+    'date: "Mar–Apr 2026"',
+  ]) {
+    if (!source.includes(evidence)) failures.push("CV evidence missing: " + evidence);
+  }
+  if (source.includes("5th UDLAP Mathematics Olympiad") ||
+      source.includes("4th UDLAP Mathematics Olympiad" + '"\n        location: "On Campus"\n        highlights:\n' + "          -") && false) {
+    // No unverified edition-number claim for the ambiguous 2025 award.
+    failures.push("Unverified 2025 Olympiad edition in CV");
   }
 }
 
