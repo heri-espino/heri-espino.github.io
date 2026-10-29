@@ -784,10 +784,10 @@ if (exists("_pages/cv.md")) {
   ]) {
     if (!source.includes(evidence)) failures.push("CV evidence missing: " + evidence);
   }
-  if (source.includes("5th UDLAP Mathematics Olympiad") ||
-      source.includes("4th UDLAP Mathematics Olympiad" + '"\n        location: "On Campus"\n        highlights:\n' + "          -") && false) {
-    // No unverified edition-number claim for the ambiguous 2025 award.
-    failures.push("Unverified 2025 Olympiad edition in CV");
+  // The two most recent source files disagree about the 2025 UDLAP
+  // Olympiad edition. The site records the award without an ordinal.
+  if (source.includes("5th UDLAP Mathematics Olympiad")) {
+    failures.push("Unverified 2025 UDLAP Olympiad ordinal reappeared.");
   }
 }
 
