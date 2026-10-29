@@ -288,15 +288,24 @@
     return !toggle || toggle.checked;
   };
 
-  // The browser's print engine is authoritative. The screen-only sheet stack
-  // provides a measured, block-level approximation without mutating printable
-  // source markup, altering entry selectors or forcing artificial PDF breaks.
+  // The print engine owns actual page breaks. Build the same physical-sheet
+  // measurement even in reading mode (offscreen), since Ctrl+P can start there.
+  // Only a CV that fits on ONE sheet receives a vertical centering offset;
+  // multipage CVs retain equal, fixed physical @page margins and native breaks.
   function renderPagedPreview() {
-    if (root.dataset.cvPreview !== "paper") {
-      pagedPreview.hidden = true;
-      return;
+    const showing = root.dataset.cvPreview === "paper";
+    const screenDensity = root.dataset.cvDensity;
+    if (!showing) {
+      root.dataset.cvDensity = viewDensity.paper;
+      pagedPreview.style.position = "absolute";
+      pagedPreview.style.left = "-10000px";
+      pagedPreview.style.top = "0";
+      pagedPreview.style.width = "var(--cv-paper-width)";
+      pagedPreview.style.visibility = "hidden";
+      pagedPreview.style.pointerEvents = "none";
     }
     pagedPreview.hidden = false;
+    pagedPreview.style.display = "";
     pagedPreview.replaceChildren();
 
     let pageNumber = 0;
@@ -412,13 +421,42 @@
       }
     }
 
-    // Keep the unmodified CV visible without JavaScript or if preview fails.
-    root.dataset.cvPaginated = "true";
+    // Center a short, single-page selection inside the printable paper area.
+    // Balance each half of the *unused* height; never compress text or change
+    // the user-selected minimum @page margin. For longer documents the offset
+    // stays zero, preventing accidental new pages or fragmented flex columns.
+    let topBalance = 0;
+    if (pageNumber === 1 && !overlongBlocks) {
+      const bodyTop = page.body.getBoundingClientRect().top;
+      const contentBottom = page.content.getBoundingClientRect().bottom;
+      const unusedHeight = page.body.clientHeight - (contentBottom - bodyTop);
+      if (unusedHeight > 12) {
+        topBalance = Math.floor(unusedHeight / 2);
+        page.body.style.boxSizing = "border-box";
+        page.body.style.paddingTop = topBalance + "px";
+      }
+    }
+    root.dataset.cvSinglePage = pageNumber === 1 && !overlongBlocks ? "true" : "false";
+    root.style.setProperty("--cv-print-top-balance", topBalance + "px");
+
+    // The on-screen sheet uses the same offset as the actual print document.
+    // In reading mode the measuring sheets must never become visible.
+    root.dataset.cvPaginated = showing ? "true" : "false";
+    if (!showing) {
+      pagedPreview.hidden = true;
+      pagedPreview.style.display = "none";
+      for (const key of ["position", "left", "top", "width", "visibility", "pointerEvents"]) {
+        pagedPreview.style[key] = "";
+      }
+      root.dataset.cvDensity = screenDensity;
+      return;
+    }
     previewHelp.textContent = pageNumber + " approximate " +
       (pageNumber === 1 ? "page" : "pages") + " (" +
       (controls.paper.value === "letter" ? "US Letter" : "A4") +
       "). Page breaks can differ in the browser's Print dialog." +
-      (overlongBlocks ? " Some long entries may span a printed page." : "");
+      (overlongBlocks ? " Some long entries may span a printed page." : "") +
+      (topBalance ? " Short single-page selections are centered vertically." : "");
   }
 
   const render = () => {
