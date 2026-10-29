@@ -88,6 +88,8 @@ cv:
           - { label: DOI, url: "https://zenodo.org/records/21347375" }
         highlights:
           - "Quantitative finance: implemented fixed-income, portfolio-risk and Greeks APIs."
+          - "Derivatives pricing: implemented Black–Scholes, Heston and Monte Carlo methods."
+          - "Package engineering: maintained pytest, Ruff, GitHub Actions and PyPI releases."
       - name: ProximityGraphs — Computational Geometry Python Library
         role: "Co-author & Maintainer"
         subtitle: "Computational Geometry Python Library"
