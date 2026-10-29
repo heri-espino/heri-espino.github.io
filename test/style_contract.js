@@ -823,6 +823,22 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Preserve symmetric minimum print margins and auto-center only a CV that
+// fits on a single physical sheet, using measured available space.
+{
+  const script = read("assets/js/cv-customize.js");
+  const css = read("_sass/_cv.scss");
+  if (!script.includes('root.dataset.cvSinglePage = pageNumber === 1') ||
+      !script.includes('topBalance = Math.floor(unusedHeight / 2)') ||
+      !script.includes('root.style.setProperty("--cv-print-top-balance"') ||
+      !script.includes("root.dataset.cvDensity = viewDensity.paper;") ||
+      !css.includes('.cv-page[data-cv-single-page="true"] #cv-document') ||
+      !css.includes('padding-top: var(--cv-print-top-balance, 0px) !important;') ||
+      !script.includes('"; margin: " + chosenMargin + "; }"')) {
+    failures.push("CV vertical balance must center short selections and preserve equal @page margins.");
+  }
+}
+
 // Short, skill-specific CV highlights must remain legible in print.
 // Check source copy rather than relying on ellipsis, clipping or tiny fonts.
 {
