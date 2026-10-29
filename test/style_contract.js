@@ -756,6 +756,30 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Short, skill-specific CV highlights must remain legible in print.
+// Check source copy rather than relying on ellipsis, clipping or tiny fonts.
+{
+  const source = read("_data/cv.yml");
+  const css = read("_sass/_cv.scss");
+  let inHighlights = false;
+  let checked = 0;
+  for (const line of source.split("\n")) {
+    if (/^        highlights:\s*$/.test(line)) inHighlights = true;
+    else if (/^        [a-z_]+:/.test(line) || /^    [^\s]/.test(line)) inHighlights = false;
+    if (!inHighlights || !/^          - /.test(line)) continue;
+    const content = line.trim().slice(2).replace(/^["']|["']$/g, "");
+    checked += 1;
+    if (content.length > 94) failures.push("CV print bullet exceeds 94 characters: " + content);
+  }
+  if (checked < 95) failures.push("CV skill bullet validation covered unexpectedly few highlights.");
+  if (!css.includes('.cv-page[data-cv-preview="paper"] .cv-preview-paper-body .cv-highlights li') ||
+      !css.includes('.cv-page #cv-document .cv-highlights li') ||
+      !css.includes('white-space: nowrap') ||
+      css.includes('cv-highlights li {\n    overflow: hidden')) {
+    failures.push("Print/paper bullets must stay one line without hidden overflow.");
+  }
+}
+
 if (failures.length > 0) {
   console.error("Starter style contract check failed:");
   failures.forEach((message) => console.error(`- ${message}`));
