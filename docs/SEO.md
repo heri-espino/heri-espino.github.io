@@ -534,3 +534,9 @@ Before considering your site "SEO optimized":
 5. Monitor search console regularly for indexing issues
 
 Your research will be more discoverable with these optimizations! 🔍
+
+## Current site's LinkedIn sharing image (2026-10-29)
+
+The global image is configured in `_config.yml` as `og_image: og-mountain.jpg`; it is a JPEG of the owner's supplied black-and-white mountain photograph, stored at `assets/img/og-mountain.jpg` (600 × 315 px, 1.91:1). `_pages/cv.md` also selects this asset, so sharing `https://heri-espino.github.io/cv/` uses the mountain preview **without placing any banner in the visible/printed CV**.
+
+Validate the deployed page source for an absolute `og:image` URL, open that image URL publicly, and test the page in [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/). Sharing previews are cached by third-party platforms, so a successful website deployment does not immediately guarantee a refreshed existing post. The old SVG remains available for archival/reference use; JPEG is used for social crawler compatibility.
