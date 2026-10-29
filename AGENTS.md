@@ -224,3 +224,9 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
   `heri-espino/heri-latex/Curriculum Vitae/Legacy/` for factual provenance.
   Do not invent causal effects or change manuscript statuses. Run CV source
   contracts and Chromium print-overflow checks before merging.
+
+## Social Link Preview Asset (2026-10-29)
+
+- The site-wide Open Graph image is `assets/img/og-mountain.jpg` (mirrored in `_images/`), derived from the owner's supplied monochrome mountain photo, used **only as link-preview metadata**. The CV page explicitly selects the same image in its front matter. Do not display this asset as a CV or homepage hero unless explicitly requested.
+- Social crawlers, including LinkedIn, require a public raster image. Keep `serve_og_meta: true`, reference `og_image: og-mountain.jpg` in `_config.yml`, and verify the built HTML exposes an absolute HTTPS `og:image` URL. Avoid SVG for the default OG image. Existing `og-card.svg` legacy artwork is retained but no longer the global default.
+- For stale social previews after deployment, request a fresh scrape with LinkedIn Post Inspector; caches and deployment propagation can delay updates. See `docs/SEO.md`.
