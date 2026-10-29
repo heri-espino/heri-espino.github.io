@@ -215,3 +215,12 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 - Wide **reading mode** (Balanced or Compact) groups each CV entry's title, organization, links, and highlights into a cohesive typographic block, with the organization more prominent than descriptive text. It also covers chronological sorting. These CSS overrides apply only at `data-cv-preview="reading"`, explicitly excluding LaTeX density, Harvard, and Europass; do not let them affect actual print or paper previews. See `docs/CV_HANDOFF.md`.
 
 - The default wide CV reading view now uses **one typeface, 0.96rem font size and 1.36 line-height** for title, institution, context, links, description and dates, with a consistent **0.24rem gap** between successive rows and highlight paragraphs. Visual hierarchy relies on weight (title 750, institution 600, body/links 400) rather than changing font size or introducing unequal spacing. This stays scoped to reading/non-LaTeX densities and excludes Harvard and Europass, preserving physical PDF layout.
+
+- **CV skill bullets (2026-10-28):** Each `_data/cv.yml` highlight must state
+  one verifiable technical skill and its application, not a list of unrelated
+  methods. Keep printed copy <=94 characters per list item; the CSS uses
+  visible, single-line print bullets and preserves normal full-width wrapping.
+  Review `docs/CV_HANDOFF.md` and compare newer LaTeX CVs in
+  `heri-espino/heri-latex/Curriculum Vitae/Legacy/` for factual provenance.
+  Do not invent causal effects or change manuscript statuses. Run CV source
+  contracts and Chromium print-overflow checks before merging.
