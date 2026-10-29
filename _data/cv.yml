@@ -281,31 +281,6 @@ cv:
           - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
         highlights:
           - "Statistical inference: related tutoring use to standardized class performance."
-      - name: Optimal Smoothness Index and Regularization in Guerrero's Penalized Trends
-        context: "Trend-estimation research project"
-        role: "Author"
-        subtitle: "Trend Estimation Methods"
-        date: May 2025 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/sp500-trend-comparison.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_sp500-trend-comparison.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Trend-Estimation" }
-        highlights:
-          - "Time-series analysis: estimated S&P 500 trends via penalized least squares."
-          - "Numerical benchmarking: compared PLS solvers against HP and MA baselines."
-      - name: Privileged Template Priors for Mechanistic Interpretability in CNNs
-        context: "CNN mechanistic-interpretability research"
-        role: "Research project"
-        date: Dec 2025 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/cnn-primitive-bases.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_template-priors-cnns.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Privileged-Template-Priors-for-Mechanistic-Interpretability-in-CNNs" }
-        highlights:
-          - "Controlled experiments: compared random, initialized and frozen CNN templates."
-          - "Model interpretability: assessed CNN filters with ablations and patching."
       - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
         context: "Latent financial-risk modeling"
         role: "Research project"
@@ -318,19 +293,6 @@ cv:
         highlights:
           - "Dynamic-factor modeling: extracted market risk from VIX, WTI, gold and DXY."
           - "Financial econometrics: identified regime shifts in smoothed latent risk."
-      - name: Systemic Liquidity-Crisis Agent-Based Model
-        context: "Agent-based financial-market simulation"
-        role: "Research project"
-        date: Oct 2025 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/systemic-liquidity-abm.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_systemic-liquidity-abm.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Modelado-de-Crisis-de-Liquidez-Sistemica-en-Mercados-de-Opciones-mediante-ABM" }
-        highlights:
-          - "Agent-based modeling: simulated derivatives markets with shocks and margin calls."
-          - "Systemic-risk modeling: tracked simulated margin-call liquidation cascades."
-
     Research Drafts:
       - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
         context: "Research working draft · not submitted"
@@ -399,14 +361,6 @@ cv:
         highlights:
           - "Convex optimization: explained Max-Cut SDP relaxations and low-rank EVA."
           - "Experimental reproducibility: compared rounding methods on G-set instances."
-      - name: Bayesian Uncertainty in WTI Options
-        date: "2026"
-        role: "Author"
-        context: "Research draft · WTI options"
-        links:
-          - { label: Paper, url: "https://heri-espino.github.io/papers/bayesian-parameter-uncertainty-wti.html" }
-        highlights:
-          - "Bayesian risk: propagated parameter uncertainty to WTI option values."
       - name: Mathematical Notes on Random Variables as Vectors in L²
         context: "Expository probability and Hilbert-space analysis"
         role: "Mathematical notes"
@@ -665,60 +619,80 @@ cv:
         date: "Aug 2025"
         credential: "30UBXTRRBN1F"
         url: "https://www.coursera.org/account/accomplishments/specialization/30UBXTRRBN1F"
+        highlights:
+          - "AI governance: evaluated financial AI risk, ethics and data controls."
       - name: "TensorFlow 2 for Deep Learning"
         role: "Specialization"
         organization: "Imperial College London"
         date: "Jul 2026"
         credential: "69ZAEWKYEL49"
         url: "https://www.coursera.org/account/accomplishments/specialization/69ZAEWKYEL49"
+        highlights:
+          - "Deep learning: trained TensorFlow/Keras models with callbacks and validation."
       - name: "Explainable AI (XAI)"
         role: "Specialization"
         organization: "Duke University"
         date: "Jan 2026"
         credential: "YW2PTTQMN0Y1"
         url: "https://www.coursera.org/account/accomplishments/specialization/YW2PTTQMN0Y1"
+        highlights:
+          - "Model explainability: applied SHAP, LIME and counterfactual explanations."
       - name: "Machine Learning for Trading"
         role: "Specialization"
         organization: "New York Institute of Finance / Google Cloud"
         date: "Feb 2026"
         credential: "DXHSQ1BF8268"
         url: "https://www.coursera.org/account/accomplishments/specialization/DXHSQ1BF8268"
+        highlights:
+          - "Quantitative ML: evaluated trading models with out-of-sample backtests."
       - name: "Machine Learning on Google Cloud"
         role: "Specialization"
         organization: "Google Cloud"
         date: "Dec 2025"
         credential: "Y09J2GJXOZNE"
         url: "https://www.coursera.org/account/accomplishments/specialization/Y09J2GJXOZNE"
+        highlights:
+          - "MLOps: built Vertex AI workflows for training, deployment and monitoring."
       - name: "Generative AI for Software Developers"
         role: "Specialization"
         organization: "Microsoft"
         date: "Aug 2025"
         credential: "HL4R3K5BLPVL"
         url: "https://www.coursera.org/account/accomplishments/specialization/HL4R3K5BLPVL"
+        highlights:
+          - "LLM engineering: designed prompting, agent and retrieval workflows."
       - name: "RAG for Generative AI Applications"
         role: "Specialization"
         organization: "IBM"
         date: "Dec 2025"
         credential: "0OGJ0RXG21O9"
         url: "https://www.coursera.org/account/accomplishments/specialization/0OGJ0RXG21O9"
+        highlights:
+          - "Retrieval systems: built chunking, embedding and reranking pipelines."
       - name: "IBM DevOps, Cloud, and Agile Foundations"
         role: "Specialization"
         organization: "IBM"
         date: "Aug 2025"
         credential: "3HFUXXSZM3D4"
         url: "https://www.coursera.org/account/accomplishments/specialization/3HFUXXSZM3D4"
+        highlights:
+          - "DevOps: applied Agile practices, CI/CD, testing and cloud deployment."
       - name: "Practical Guide to Trading"
         role: "Specialization"
         organization: "Interactive Brokers"
         date: "Jul 2026"
         credential: "4HVJHN1UW6L8"
         url: "https://www.coursera.org/account/accomplishments/specialization/4HVJHN1UW6L8"
+        highlights:
+          - "Trade execution: applied order types, position sizing and risk controls."
       - name: "The Complete Quantum Computing Course for Beginners"
         role: "Specialization"
         organization: "Packt"
         date: "Dec 2025"
         credential: "JWMR0UQE7WO5"
         url: "https://www.coursera.org/account/accomplishments/specialization/JWMR0UQE7WO5"
+        highlights:
+          - "Quantum computing: built circuits and simulated noise effects."
       - name: "Narrative Economics"
         role: "Course"
         organization: "Yale University"
