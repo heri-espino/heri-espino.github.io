@@ -398,7 +398,10 @@
       return { section, list };
     };
 
-    for (const group of groups) {
+    // Offscreen measurement only needs to distinguish one sheet from two.
+    // Stop at the first overflow in reading mode; avoid cloning a potentially
+    // lengthy multi-page CV every time the user changes one setting.
+    groupLoop: for (const group of groups) {
       let block = startGroup(group, false);
       for (const original of group.items) {
         const entry = cloneForPreview(original);
@@ -411,6 +414,7 @@
         page = newPage();
         block = startGroup(group, true);
         block.list.appendChild(entry);
+        if (!showing) break groupLoop;
 
         // An individual record may be longer than one sheet; retain its
         // entire text visibly rather than clipping or silently discarding it.
