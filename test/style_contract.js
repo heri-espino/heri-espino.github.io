@@ -784,10 +784,11 @@ if (exists("_pages/cv.md")) {
 {
   const config = read("_config.yml");
   const cv = read("_pages/cv.md");
-  if (!/^serve_og_meta: true\\b/m.test(config) ||
-      !/^og_image: og-mountain\\.jpg\\b/m.test(config) ||
-      !/^og_image: og-mountain\\.jpg\\b/m.test(cv) ||
-      !exists("assets/img/og-mountain.jpg")) {
+  if (!config.includes("serve_og_meta: true") ||
+      !config.includes("og_image: og-mountain.jpg") ||
+      !cv.includes("og_image: og-mountain.jpg") ||
+      !exists("assets/img/og-mountain.jpg") ||
+      !exists("_images/og-mountain.jpg")) {
     failures.push("Social link previews must use the committed mountain JPEG Open Graph image.");
   }
 }
