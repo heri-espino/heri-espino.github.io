@@ -1023,3 +1023,24 @@ verified continued code commits. Verify no unwanted layout shifts in paper
 preview, one-line print bullets and official brand imagery. All changes are
 limited to the CV source, its existing renderer/styles, matching logos,
 tests and handoff; no research classifications were changed.
+
+## SSRN preprint and Elsevier submission tracking (2026-10-30)
+
+- The owner supplied an SSRN preprint URL for Stepping–Stone:
+  `https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746`.
+  The canonical paper detail page already contained this exact `external_url`.
+  Its CV Research entry now also includes a labeled `SSRN` link.
+- The owner also supplied an Elsevier Author Hub manuscript tracking URL
+  for Unit-Region Factorization (UUID-bearing link). It appears as a
+  `Track submission` CV link and a *secondary* `resource_url` on the
+  canonical paper detail page, preserving the local PDF as primary.
+- These are distinct functions: SSRN hosts a preprint; the Elsevier
+  tracker displays submission progress. Neither changes the original
+  manuscript's status or establishes journal acceptance/publication.
+- **Privacy caution:** The tracking URL contains a unique UUID and is
+  now publicly linked at the owner's explicit request. If it exposes
+  nonpublic editorial data or an access capability without login, the
+  owner should revoke that URL and remove the site links.
+- Source-only checks assert consistency across CV/paper pages; do not
+  assert the tracker is publicly accessible or that the SSRN page
+  was fetched from a restricted network environment.
