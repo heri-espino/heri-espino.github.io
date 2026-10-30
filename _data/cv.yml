@@ -231,6 +231,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
+          - { label: Track submission, url: "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430" }
         highlights:
           - "Stochastic geometry: proved unit-region factorization under Euclidean similarity."
           - "Poisson geometry: derived invariant empty-region graph formulas."
@@ -244,6 +245,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
+          - { label: SSRN, url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746" }
           - { label: Validation DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
         highlights:
           - "Geometric analysis: reduced Stepping–Stone volume to a 1D integral."
