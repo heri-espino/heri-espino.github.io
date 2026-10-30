@@ -983,3 +983,43 @@ Use observed impacts only when independently documented.
 
 Verification: inspect the CV's Mathematics Learning Center record in
 reading mode and print preview (A4/Letter) and run the source contract.
+
+## UDLAP student organization, Zenodo, CIMAT and software dates (2026-10-30)
+
+- **UDLAP official directory:** The Spring 2026 student organization is published as
+  **Preety Good Quantum OE** (official spelling) with Heriberto's public UDLAP
+  contact. The existing Leadership record keeps its President role and
+  Jan–Jun 2026 dates. Its title and organization now link to
+  `https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=Preety%20Good%20Quantum%20OE`.
+  A Chrome text fragment may scroll to matching text, but the university controls
+  its collapsible directory and may not open the accordion programmatically.
+- **User-provided mark:** `assets/img/cv-organizations/preety-good-quantum.webp`
+  is a 96×96 WebP optimization of the 400×400 uploaded navy Q emblem;
+  it is *not* an AbaQuant mark. Its organization-logo match precedes the
+  generic UDLAP rule, preserving the correct logo on the Leadership entry.
+- **AbaQuant:** A canonical icon from `AbaQuant/AbaQuant/docs/_static/q_dark.png`
+  replaces the generic CV-only `abaquant.svg` logo mapping. The old SVG is retained
+  as a historical repository artifact and is not deleted. Check remote image
+  load/fallback in desktop and PDF modes.
+- **Zenodo:** The Stepping–Stone validation DOI remains
+  `10.5281/zenodo.21291269`; the SN Computer Science CNN research already linked
+  `10.5281/zenodo.23432463`, now surfaced with an explicit Zenodo record link.
+  `_includes/cv/render.liquid` adds an official Zenodo icon beside links
+  resolving to Zenodo, including `doi.org` Zenodo DOI routes; icons have empty
+  alt text because the links retain visible accessible labels.
+- **CIMAT:** The independent latent-risk research was presented at the XXIV
+  School of Probability and Statistics; the Research record now has a
+  *Presented at ... CIMAT* organization line so the existing CIMAT logo
+  appears without misrepresenting CIMAT as the site where research began.
+- **Programming dates:** Trend Estimation's original repository creation
+  `2026-05-25` supports `May 2026 — Present`. User supplied
+  `Oct 2026 — Present` for AwesomeFigures and `Sep 2026 — Present`
+  for Docling Math, and requested `Sep 2026 — Present` for OpenAI SDK
+  contributions. Existing AbaQuant and ProximityGraphs dates stay unchanged.
+  `Marp` is added to Visualization & Documents.
+
+Keep the distinction between an ongoing contribution label and independently
+verified continued code commits. Verify no unwanted layout shifts in paper
+preview, one-line print bullets and official brand imagery. All changes are
+limited to the CV source, its existing renderer/styles, matching logos,
+tests and handoff; no research classifications were changed.
