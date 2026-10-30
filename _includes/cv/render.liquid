@@ -322,7 +322,7 @@
                     {% if entry.links %}
                       <p class="cv-links">
                         {% for link in entry.links %}
-                          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}</a>
+                          <a href="{{ link.url | escape }}" target="_blank" rel="noopener noreferrer">{% if link.url contains 'zenodo.org' or link.url contains 'zenodo.' %}<img class="cv-zenodo-mark" src="https://about.zenodo.org/static/img/icons/zenodo-icon-blue.svg" alt="" width="14" height="14" aria-hidden="true" loading="lazy">{% endif %}{{ link.label | escape }}</a>
                         {% endfor %}
                       </p>
                     {% endif %}
