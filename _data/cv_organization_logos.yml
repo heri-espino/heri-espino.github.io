@@ -1,3 +1,7 @@
+# Verified UDLAP student organization mark (user-provided image).
+# Match first so the broader UDLAP rule does not override the student group's identity.
+- match: "preety good quantum oe"
+  logo: "/assets/img/cv-organizations/preety-good-quantum.webp"
 # CV-only name matching. Put specific names before broad matches.
 # Reuse credential_issuers.yml whenever an issuer has an existing logo.
 # Other URLs use the favicon of an identifiable official website; these are
@@ -51,8 +55,9 @@
   logo: "/assets/img/cv-organizations/actinver.webp"
 # Custom CV-only project marks, designed for the user's authored libraries.
 # These are project identities, not outside institutional affiliations.
+# Maintained AbaQuant project icon from its canonical documentation repository.
 - match: "abaquant"
-  logo: "/assets/img/cv-organizations/abaquant.svg"
+  logo: "https://raw.githubusercontent.com/AbaQuant/AbaQuant/main/docs/_static/q_dark.png"
 - match: "proximitygraphs"
   logo: "/assets/img/cv-organizations/proximitygraphs.svg"
 - match: "trend estimation"
