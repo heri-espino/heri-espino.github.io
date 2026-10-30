@@ -14,8 +14,10 @@ display_date: Sep 2026
 summary: "A 30-firm supplier-client network for large S&P 500 companies, represented as a directed graph and analyzed with link-prediction methods after projection to a simple undirected network."
 framing: "The notebook encodes supplier-client relations and studies network structure and candidate missing links with standard complex-network tools."
 tags: [complex networks, S&P 500, supply chains, link prediction]
-image: /assets/img/portfolio/academic-network-preview.svg
-image_alt: Abstract directed-network visualization for an S&amp;P 500 supply-chain network
+image: /assets/img/portfolio/academic-sp500-supply-chain-network-card.svg
+image_alt: "Project-specific visual from S&P 500 Supply-Chain Network course work."
+detail_image: /assets/img/portfolio/academic-sp500-supply-chain-network-first-page.svg
+detail_image_alt: "A4 project overview based on S&P 500 Supply-Chain Network source materials."
 resource_url: https://nbviewer.org/github/heri-espino/LDS1121-Complex-Networks/blob/main/notebooks/18%20Prediccion%20de%20Enlaces/03%20SP500.ipynb
 resource_label: View notebook
 github: https://github.com/heri-espino/LDS1121-Complex-Networks
