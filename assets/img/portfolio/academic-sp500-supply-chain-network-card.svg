@@ -9,7 +9,7 @@
 
 <text x="57" y="584" fill="#516779" font-size="17" font-weight="700" font-family="Arial,Helvetica,sans-serif" >HERIBERTO ESPINO M.</text>
 <text x="57" y="610" fill="#7d909b" font-size="14" font-weight="600" font-family="Arial,Helvetica,sans-serif" >UDLAP  ·  COURSE PROJECT</text>
-<rect x="366" y="115" width="813" height="520" rx="20" fill="#fff" stroke="#d7dfe1" stroke-width="2"/><svg x="365" y="116" width="810" height="520" preserveAspectRatio="xMidYMid meet" viewBox="0 0 980 780" width="100%" height="auto" role="img" aria-label="Enlaces predichos con AAC">
+<rect x="366" y="115" width="813" height="520" rx="20" fill="#fff" stroke="#d7dfe1" stroke-width="2"/><svg x="365" y="116" width="810" height="520" preserveAspectRatio="xMidYMid meet" viewBox="0 0 980 780" role="img" aria-label="Enlaces predichos con AAC">
         <title>Enlaces predichos con AAC</title>
         <desc>30 nodos | 37 aristas observadas | 4 comunidades por modularidad. Los colores indican comunidades de modularidad; las lineas gruesas son enlaces predichos.</desc>
         <rect width="100%" height="100%" fill="#ffffff" />
