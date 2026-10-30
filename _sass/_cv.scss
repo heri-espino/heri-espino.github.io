@@ -31,6 +31,11 @@
   text-underline-offset: 0.2em;
 }
 
+/* Respect the existing Show icons customization in all CV templates. */
+.cv-page[data-cv-show-icons="false"] .cv-zenodo-mark {
+  display: none !important;
+}
+
 /* Official Zenodo marks appear on reproducibility links, never before entry titles. */
 .cv-page .cv-links .cv-zenodo-mark {
   display: inline-block;
