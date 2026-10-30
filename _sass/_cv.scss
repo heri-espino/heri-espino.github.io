@@ -31,6 +31,18 @@
   text-underline-offset: 0.2em;
 }
 
+/* Official Zenodo marks appear on reproducibility links, never before entry titles. */
+.cv-page .cv-links .cv-zenodo-mark {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.3em;
+  vertical-align: -0.09em;
+  object-fit: contain;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
 .cv-content {
   display: grid;
   gap: 3rem;
