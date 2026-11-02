@@ -26,13 +26,27 @@
 } /* Literal.Number */
 .highlight .s {
   color: #d01040;
-} /* Literal.String */ /* Name.Attribute */ /* Name.Builtin */ /* Name.Class */
+} /* Literal.String */
+.highlight .na {
+  color: #008080;
+} /* Name.Attribute */ /* Name.Builtin */
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+} /* Name.Class */
 .highlight .no {
   color: #008080;
-} /* Name.Constant */ /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */ /* Name.Label */ /* Name.Namespace */
+} /* Name.Constant */ /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+} /* Name.Label */ /* Name.Namespace */
 .highlight .nt {
   color: #000080;
-} /* Name.Tag */ /* Name.Variable */ /* Operator.Word */
+} /* Name.Tag */
+.highlight .nv {
+  color: #008080;
+} /* Name.Variable */ /* Operator.Word */
 .highlight .w {
   color: #bbbbbb;
 } /* Text.Whitespace */ /* Literal.Number.Float */ /* Literal.Number.Hex */ /* Literal.Number.Integer */ /* Literal.Number.Oct */ /* Literal.String.Backtick */ /* Literal.String.Char */ /* Literal.String.Doc */
