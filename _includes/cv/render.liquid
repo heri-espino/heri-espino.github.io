@@ -138,6 +138,7 @@
       <input type="checkbox" id="cv-print-urls"> Show full resource URLs on printed copies (clickable links are always retained)
     </label>
     <div class="cv-actions">
+      <button type="button" id="cv-print" class="cv-primary-action" title="Print CV or save as a PDF"><i class="fa-solid fa-print" aria-hidden="true"></i> Print / Save PDF</button>
       <button type="button" id="cv-preview" class="cv-secondary-action" aria-pressed="false">Paper preview</button>
       <button type="button" id="cv-reset" class="cv-secondary-action">Reset options</button>
       <p id="cv-status" role="status" aria-live="polite"></p>
@@ -153,7 +154,6 @@
     <div class="cv-preview-column">
       <div class="cv-document" id="cv-document" aria-label="Live curriculum vitae preview">
   <header class="post-header cv-intro">
-    <p class="cv-eyebrow">Curriculum vitae</p>
     <p class="cv-europass-personal-heading">Personal information</p>
     <h1 class="post-title">{{ cv.name }}</h1>
     <p class="post-description">{{ page.description }}</p>
