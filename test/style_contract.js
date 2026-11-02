@@ -471,9 +471,30 @@ if (exists("_pages/cv.md")) {
       !read("_pages/papers/stepping-stone.md").includes("label: Under Revision")) {
     failures.push("Elsevier manuscript statuses in the CV must match their current paper records.");
   }
-  if (cvSources.includes("Applied valuation, capital budgeting and cost-of-capital methods.") ||
-      cvSources.includes("Studied structured storytelling for diverse audiences.")) {
-    failures.push("The Penn finance and IESE storytelling descriptions must remain removed.");
+  // Owner's November 2026 request supersedes the earlier preference to
+  // leave standalone-course descriptions blank. Each course now has one
+  // short, method-specific description in both sources.
+  const courseEntries = [...independentCredentials.matchAll(/^      - title: "([^"]+)"[\\s\\S]*?(?=^      - title: |$(?![\\s\\S]))/gm)];
+  const cvEntries = [...creds.matchAll(/^      - name: "([^"]+)"[\\s\\S]*?(?=^      - name: |$(?![\\s\\S]))/gm)];
+  const cvByName = new Map(cvEntries.map(match => [match[1], match[0]]));
+  if (courseEntries.length !== 13) {
+    failures.push("Exactly 13 standalone courses should be present in credentials source.");
+  }
+  for (const match of courseEntries) {
+    const [, name] = match;
+    const description = match[0].match(/^        description: "([^"]+)"$/m)?.[1];
+    const cvBlock = cvByName.get(name) || "";
+    if (!description || description.length > 94 ||
+        !cvBlock.includes('role: "Course"') ||
+        !cvBlock.includes("        highlights:") ||
+        !cvBlock.includes('          - "' + description + '"')) {
+      failures.push("Standalone course description missing, too long, or unsynchronized: " + name);
+    }
+  }
+  if (!read("_pages/credentials.md").includes("{{ item.description | escape }}") ||
+      !read("_sass/_portfolio.scss").includes(".credentials-description") ||
+      !read("_sass/_portfolio.scss").includes('.credentials-list[data-view="compact"] .credentials-description')) {
+    failures.push("Credentials archive must display standalone-course summaries in noncompact views.");
   }
   const cnnPaperSource = read("_pages/papers/activation-patching-effects-add-up.md");
   const cnnFigurePath = "assets/img/portfolio/activation-patching-figure1.avif";
