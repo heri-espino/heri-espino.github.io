@@ -613,15 +613,21 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
       expect(pdf.byteLength).toBeGreaterThan(1000);
       // THIS caught the original regression: Chrome must not squeeze two or
       // more Paper Preview sheets into a single printed PDF page.
-      const pdfPageCount = (pdf.toString("latin1").match(/\/Type\s+\/Page\b/g) || []).length;
+      const rawPageObjects = (pdf.toString("latin1").match(/\/Type\s+\/Page\b/g) || []).length;
+      const { spawnSync } = require("node:child_process");
+      const info = spawnSync("pdfinfo", ["-"], { input: pdf });
+      const pdfPageCount = Number(info.stdout?.toString().match(/^Pages:\s*(\d+)/m)?.[1]);
+      if (!Number.isInteger(pdfPageCount) || pdfPageCount < 1) {
+        throw new Error("pdfinfo could not inspect the generated PDF: " + info.stderr?.toString());
+      }
       if (pdfPageCount !== geometry.pages) {
         await testInfo.attach(paper + "-actual-print.pdf", { body: pdf, contentType: "application/pdf" });
-        const { spawnSync } = require("node:child_process");
         const tail = spawnSync("pdftotext", [
           "-f", String(pdfPageCount), "-l", String(pdfPageCount), "-"
         ], { input: pdf });
         console.log("PDF pagination mismatch:", JSON.stringify({
-          paper, template, printedPages: pdfPageCount, previewPages: geometry.pages,
+          paper, template, printedPages: pdfPageCount, rawPageObjects,
+          previewPages: geometry.pages, pdfinfo: info.stdout?.toString().slice(0, 350),
           sheets: geometry.dimensions,
           topOffsets: await page.evaluate(() => {
             const selectors = ["body", "main", ".cv-page", ".cv-workspace",
@@ -636,6 +642,7 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
             });
           }),
           lastPageText: tail.stdout?.toString().slice(0, 700),
+          extractionStatus: tail.status, extractionStderr: tail.stderr?.toString().slice(0, 250),
           extractionError: tail.error?.message
         }));
       }
