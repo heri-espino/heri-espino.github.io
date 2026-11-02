@@ -603,11 +603,11 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
       expect(pdf.byteLength).toBeGreaterThan(1000);
       // THIS caught the original regression: Chrome must not squeeze two or
       // more Paper Preview sheets into a single printed PDF page.
-      const pdfPageCount = (pdf.toString("latin1").match(/\\/Type\\s+\\/Page\\b/g) || []).length;
+      const pdfPageCount = (pdf.toString("latin1").match(/\/Type\s+\/Page\b/g) || []).length;
       expect(pdfPageCount).toBe(geometry.pages);
       // PDF MediaBox must be the chosen real paper dimensions in PostScript pt.
       const mediaBoxes = [...pdf.toString("latin1")
-        .matchAll(/\\/MediaBox\\s*\\[\\s*0\\s+0\\s+([0-9.]+)\\s+([0-9.]+)\\s*\\]/g)];
+        .matchAll(/\/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]/g)];
       expect(mediaBoxes.length).toBeGreaterThan(0);
       for (const box of mediaBoxes) {
         expect(Math.abs(parseFloat(box[1]) - (paper === "a4" ? 595.28 : 612))).toBeLessThan(1);
