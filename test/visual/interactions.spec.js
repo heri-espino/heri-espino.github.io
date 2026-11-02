@@ -331,7 +331,7 @@ test("core pages no longer emit jQuery-style runtime errors", async ({ page }) =
 
 test("CV Harvard paper preview preserves the organization/role and city/date corners", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-  await expect(page.locator("#cv-print")).toHaveCount(0);
+  await expect(page.locator("#cv-print")).toBeHidden();
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-template").selectOption("harvard");
   await page.locator("#cv-preview").click();
@@ -398,6 +398,47 @@ test("CV Europass uses EU section sequence and truthful language layout", async 
   }));
   expect(previewLayout.display).toBe("grid");
   expect(previewLayout.dateLeft).toBeTruthy();
+});
+
+test("CV name-first header and Display print action retain searchable text and rasterize only graphics", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await expect(page.locator("#cv-document .cv-eyebrow")).toHaveCount(0);
+  const name = page.locator("#cv-document .cv-intro h1.post-title");
+  await expect(name).toBeVisible();
+  const typography = await name.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { size: parseFloat(style.fontSize), weight: Number(style.fontWeight) };
+  });
+  expect(typography.size).toBeGreaterThanOrEqual(36);
+  expect(typography.weight).toBeGreaterThanOrEqual(800);
+
+  // No second floating button: the print control lives inside Display.
+  await expect(page.locator("#cv-print")).toBeHidden();
+  await page.locator("#cv-panel-toggle").click();
+  const printButton = page.locator("#cv-settings-panel #cv-print");
+  await expect(printButton).toBeVisible();
+
+  // The test stubs the native browser print dialog, without suppressing
+  // synchronous graphic rasterization on the real button click.
+  await page.evaluate(() => {
+    window.__cvPrintInvocations = 0;
+    window.print = () => { window.__cvPrintInvocations += 1; };
+  });
+  const svg = page.locator('#cv-document img.cv-org-logo[src*="proximitygraphs.svg"]').first();
+  await expect(svg).toHaveCount(1);
+  await svg.evaluate((image) => image.decode());
+  const initialSrc = await svg.getAttribute("src");
+
+  await printButton.click();
+  const called = await page.evaluate(() => window.__cvPrintInvocations);
+  expect(called).toBe(1);
+  const printSrc = await svg.getAttribute("src");
+  expect(printSrc).toMatch(/^data:image\/webp;base64,/);
+
+  // The normal page and its original vector artwork return after printing.
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+  await expect(svg).toHaveAttribute("src", initialSrc);
+  await expect(name).toBeVisible();
 });
 
 test("CV skill bullets occupy exactly one complete line in print and paper preview", async ({ page }) => {
