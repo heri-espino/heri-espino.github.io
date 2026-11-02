@@ -181,9 +181,24 @@ if (exists("_pages/cv.md")) {
   if (!cvScript.includes("beforeprint") || !cvScript.includes("afterprint") || !cvScript.includes("parseStartDate")) {
     failures.push("Browser-based PDF printing and chronology handlers are missing.");
   }
-  if (cvRenderer.includes('id="cv-print"') || cvScript.includes('printButton.addEventListener') ||
-      cvScript.includes('document.getElementById("cv-print")')) {
-    failures.push("The separate floating print button must be removed; Ctrl+P/Cmd+P remains supported.");
+  if (!cvRenderer.includes('id="cv-print"') ||
+      !cvRenderer.includes('class="cv-actions"') ||
+      !cvScript.includes('printButton.addEventListener("click"') ||
+      !cvScript.includes("window.print()") ||
+      !cvStyles.includes(".cv-page .cv-intro h1.post-title")) {
+    failures.push("The Display menu must offer Print / Save PDF and keep the large bold CV name.");
+  }
+  if (cvRenderer.includes('<p class="cv-eyebrow">Curriculum vitae</p>') ||
+      !cvStyles.includes("font-weight: 800 !important") ||
+      !cvStyles.includes("font-size: 20pt !important")) {
+    failures.push("CV must start with the larger bold name, not the redundant eyebrow heading.");
+  }
+  if (!cvScript.includes("rasterizePrintGraphics") ||
+      !cvScript.includes('canvas.toDataURL("image/webp", 0.72)') ||
+      !cvScript.includes("restorePrintGraphics") ||
+      !cvScript.includes("printImageOriginals") ||
+      !cvScript.includes("960 / Math.max(box.width, box.height)")) {
+    failures.push("Print must rasterize SVG graphics at bounded resolution and restore source images.");
   }
   if (!cvRenderer.includes('data-cv-print-toggle="icons"') || !cvRenderer.includes('data-cv-print-toggle="highlights"')) {
     failures.push("CV print display options must include icons and highlights.");
