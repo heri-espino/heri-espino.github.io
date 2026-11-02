@@ -2673,12 +2673,12 @@
      full-height block after the content. @page still supplies a physical A4
      / Letter page and its remaining blank space. This avoids Chrome's
      phantom trailing page without clipping or shrinking the CV. */
-  .cv-page[data-cv-printing="true"] .cv-preview-page:last-child,
-  .cv-page[data-cv-printing="true"] .cv-preview-page:last-child .cv-preview-sheet {
+  .cv-page[data-cv-printing="true"]:not([data-cv-print-measuring="true"]) .cv-preview-page:last-child,
+  .cv-page[data-cv-printing="true"]:not([data-cv-print-measuring="true"]) .cv-preview-page:last-child .cv-preview-sheet {
     height: auto !important;
     min-height: 0 !important;
   }
-  .cv-page[data-cv-printing="true"] .cv-preview-page:last-child .cv-preview-paper-body {
+  .cv-page[data-cv-printing="true"]:not([data-cv-print-measuring="true"]) .cv-preview-page:last-child .cv-preview-paper-body {
     height: auto !important;
   }
 
