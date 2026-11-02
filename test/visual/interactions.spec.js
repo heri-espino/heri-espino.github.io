@@ -594,10 +594,16 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
     const mmPerInch = 25.4;
     const expectedWidth = (paper === "a4" ? 210 : 215.9) * 96 / mmPerInch;
     const expectedHeight = (paper === "a4" ? 297 : 279.4) * 96 / mmPerInch;
-    for (const { pageWidth, sheetWidth, height, padding } of geometry.dimensions) {
+    for (const [index, { pageWidth, sheetWidth, height, padding }] of geometry.dimensions.entries()) {
       expect(Math.abs(pageWidth - expectedWidth)).toBeLessThan(2);
       expect(Math.abs(sheetWidth - expectedWidth)).toBeLessThan(2);
-      expect(Math.abs(height - expectedHeight)).toBeLessThan(2);
+      // The final printed sheet ends at its content. Physical PDF paper is
+      // still A4/Letter, but no extra full-height DOM block causes a blank page.
+      if (index < geometry.pages - 1) expect(Math.abs(height - expectedHeight)).toBeLessThan(2);
+      else {
+        expect(height).toBeGreaterThan(0);
+        expect(height).toBeLessThanOrEqual(expectedHeight + 2);
+      }
       expect(padding).toBeGreaterThan(10);
     }
 
