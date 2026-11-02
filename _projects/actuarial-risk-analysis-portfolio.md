@@ -14,8 +14,10 @@ display_date: May 2026
 summary: "A course portfolio covering practical analysis of market, credit, operational, and liquidity risk."
 framing: "This page reserves a place for the compiled PDF of the full set of course assignments; the repository remains linked in the meantime."
 tags: [risk management, market risk, credit risk, operational risk]
-image: /assets/img/portfolio/academic-risk-preview.svg
-image_alt: Abstract risk distribution visualization for the actuarial risk analysis portfolio
+image: /assets/img/portfolio/academic-actuarial-risk-analysis-portfolio-card.svg
+image_alt: "Project-specific visual from Actuarial Risk Analysis Portfolio course work."
+detail_image: /assets/img/portfolio/academic-actuarial-risk-analysis-portfolio-first-page.svg
+detail_image_alt: "A4 project overview based on Actuarial Risk Analysis Portfolio source materials."
 github: https://github.com/heri-espino/LAT062-Admin-Actuarial-de-Riesgos/tree/main/tareas
 contributions:
   - Covers market, credit, operational, and liquidity risks in applied assignments.
