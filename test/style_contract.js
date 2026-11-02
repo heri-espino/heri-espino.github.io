@@ -881,6 +881,27 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// The native PDF must print the page-by-page PREVIEW itself. Previously
+// CSS forcibly hid #cv-paged-preview and printed #cv-document at full width.
+// This regression guard is intentionally independent of default preview mode.
+{
+  const js = read("assets/js/cv-customize.js");
+  const css = read("_sass/_cv.scss");
+  if (!js.includes('renderPagedPreview(true)') ||
+      !js.includes('root.dataset.cvPrinting = "true"') ||
+      !js.includes('root.dataset.cvPrintMeasuring = "true"') ||
+      !js.includes('root.dataset.cvPrinting = "false"') ||
+      !js.includes('pagedPreview.querySelectorAll("img")') ||
+      !css.includes('.cv-page[data-cv-printing="true"] #cv-document') ||
+      !css.includes('.cv-page[data-cv-printing="true"] #cv-paged-preview') ||
+      !css.includes(".cv-preview-page:not(:last-child)") ||
+      !css.includes("break-after: page;") ||
+      !css.includes(".cv-preview-page-number") ||
+      !css.includes('.cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-sheet')) {
+    failures.push("Native CV print must use measured paper-preview pages, not full-width source markup.");
+  }
+}
+
 // Preserve symmetric minimum print margins and auto-center only a CV that
 // fits on a single physical sheet, using measured available space.
 {
