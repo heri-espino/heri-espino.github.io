@@ -2566,3 +2566,32 @@
     padding-top: var(--cv-print-top-balance, 0px) !important;
   }
 }
+
+/* Name-first hierarchy: the CV starts with the owner's name, not a redundant
+   "Curriculum vitae" eyebrow. Preserve template typefaces and real text. */
+@media screen {
+  .cv-page[data-cv-preview="reading"] .cv-intro h1.post-title {
+    font-size: clamp(2.4rem, 4.2vw, 3.4rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  .cv-page .cv-preview-paper-body .cv-intro h1.post-title {
+    font-size: 20pt !important;
+    font-weight: 800 !important;
+    line-height: 1.08;
+  }
+}
+
+@media print {
+  .cv-page .cv-intro h1.post-title {
+    font-size: 20pt !important;
+    font-weight: 800 !important;
+    line-height: 1.08;
+  }
+  .cv-page .cv-actions,
+  .cv-page #cv-print {
+    display: none !important;
+  }
+}

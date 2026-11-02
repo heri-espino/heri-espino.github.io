@@ -1365,6 +1365,14 @@ summary:focus-visible {
   line-height: 1.35;
 }
 
+/* Optional course descriptions are compact and hidden only in compact view. */
+.credentials-description {
+  margin: 0.35rem 0 0;
+  color: var(--global-text-color-light);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
 .credentials-proof {
   justify-self: end;
   color: var(--global-theme-color);
@@ -1636,6 +1644,10 @@ summary:focus-visible {
 .credentials-list[data-view="compact"] .credentials-parent {
   margin-top: 0.12rem;
   font-size: 0.75rem;
+}
+
+.credentials-list[data-view="compact"] .credentials-description {
+  display: none;
 }
 
 .credentials-list[data-view="compact"] .credentials-proof {

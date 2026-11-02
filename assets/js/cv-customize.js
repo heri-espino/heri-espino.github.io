@@ -35,6 +35,7 @@
   const timelineItems = document.getElementById("cv-timeline-items");
   const status = document.getElementById("cv-status");
   const resetButton = document.getElementById("cv-reset");
+  const printButton = document.getElementById("cv-print");
   const previewButton = document.getElementById("cv-preview");
   const previewHelp = document.getElementById("cv-preview-help");
   const sourceDocument = document.getElementById("cv-document");
@@ -57,6 +58,7 @@
     !timelineItems ||
     !status ||
     !resetButton ||
+    !printButton ||
     !previewButton ||
     !previewHelp ||
     !sourceDocument ||
@@ -630,6 +632,50 @@
   });
 
 
+  // Keep CV text and hyperlinks selectable. Before native printing, draw
+  // SVG graphics into bounded bitmap canvases and swap only those image
+  // nodes. Canvas prints as raster with no asynchronous data-URL loading,
+  // while the original SVGs are restored after printing. PNG/JPEG/WebP
+  // inputs already are raster and are left untouched.
+  const printGraphics = new Map();
+  const rasterizePrintGraphics = () => {
+    sourceDocument.querySelectorAll("img").forEach((img) => {
+      const src = img.currentSrc || img.getAttribute("src") || "";
+      if (!/\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
+          img.hidden || printGraphics.has(img)) return;
+      const box = img.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      const scale = Math.min(2, 960 / Math.max(box.width, box.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(box.width * scale));
+      canvas.height = Math.max(1, Math.round(box.height * scale));
+      canvas.style.width = box.width + "px";
+      canvas.style.height = box.height + "px";
+      canvas.className = img.className;
+      canvas.setAttribute("aria-hidden", "true");
+      try {
+        const context = canvas.getContext("2d");
+        if (!context) return;
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        img.replaceWith(canvas);
+        printGraphics.set(img, canvas);
+      } catch (_error) {
+        // A blocked or invalid SVG remains intact; never omit the logo.
+      }
+    });
+  };
+  const restorePrintGraphics = () => {
+    printGraphics.forEach((canvas, image) => {
+      if (canvas.isConnected) canvas.replaceWith(image);
+    });
+    printGraphics.clear();
+  };
+
+  printButton.addEventListener("click", () => {
+    rasterizePrintGraphics();
+    window.print();
+  });
+
   // The browser Print dialog (Ctrl+P / Cmd+P) uses the paper view's density.
   // Keep the shared dropdown and on-screen preview unchanged, whether
   // printing from the wide view or from the page-by-page preview.
@@ -637,6 +683,7 @@
   let previouslyOpen = [];
   let screenDensityBeforePrint = null;
   window.addEventListener("beforeprint", () => {
+    rasterizePrintGraphics();
     if (screenDensityBeforePrint === null) {
       screenDensityBeforePrint = root.dataset.cvDensity;
       const details = Array.from(root.querySelectorAll("details.cv-details"));
@@ -646,6 +693,7 @@
     root.querySelectorAll("details.cv-details").forEach((item) => { item.open = true; });
   });
   window.addEventListener("afterprint", () => {
+    restorePrintGraphics();
     root.dataset.cvDensity = screenDensityBeforePrint ?? controls.density.value;
     screenDensityBeforePrint = null;
     root.querySelectorAll("details.cv-details").forEach((item) => {
