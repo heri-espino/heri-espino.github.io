@@ -188,6 +188,18 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes(".cv-page .cv-intro h1.post-title")) {
     failures.push("The Display menu must offer Print / Save PDF and keep the large bold CV name.");
   }
+  // A button placed after the 92-entry picker is technically present but
+  // undiscoverable in a scrollable panel. Keep it first AND sticky.
+  const printAt = cvRenderer.indexOf('id="cv-print"');
+  const formAt = cvRenderer.indexOf('id="cv-order"');
+  if (printAt < 0 || formAt < 0 || printAt > formAt ||
+      (cvRenderer.match(/id="cv-print"/g) || []).length !== 1 ||
+      !cvRenderer.includes('class="cv-actions cv-print-menu-action"') ||
+      !cvStyles.includes(".cv-page #cv-settings-panel .cv-print-menu-action") ||
+      !cvStyles.includes("position: sticky;") ||
+      !cvRenderer.includes("cv-customize.js' | relative_url }}?v={{ site.time | date: '%s' }}")) {
+    failures.push("CV Print button must be singular, sticky and first in the Display menu, with fresh deployed JS.");
+  }
   if (cvRenderer.includes('<p class="cv-eyebrow">Curriculum vitae</p>') ||
       !cvStyles.includes("font-weight: 800 !important") ||
       !cvStyles.includes("font-size: 20pt !important")) {

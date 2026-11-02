@@ -2595,3 +2595,35 @@
     display: none !important;
   }
 }
+
+/* The Print action remains in view even when the long Display panel is
+   scrolled; never make the user hunt below 90+ entry-selection controls. */
+@media screen {
+  .cv-page #cv-settings-panel .cv-print-menu-action {
+    position: sticky;
+    top: 0.5rem;
+    z-index: 4;
+    display: flex;
+    margin: -0.2rem -0.3rem 0.8rem;
+    padding: 0.45rem 0.3rem;
+    border-bottom: 1px solid var(--cv-border);
+    background: var(--global-code-bg-color);
+  }
+
+  .cv-page #cv-settings-panel .cv-print-menu-action #cv-print {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    flex: 1 1 auto;
+    min-height: 2.65rem;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media print {
+  .cv-page #cv-settings-panel .cv-print-menu-action {
+    display: none !important;
+  }
+}
