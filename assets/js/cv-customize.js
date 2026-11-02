@@ -640,7 +640,7 @@
   const rasterizePrintGraphics = () => {
     sourceDocument.querySelectorAll("img").forEach((img) => {
       const src = img.currentSrc || img.getAttribute("src") || "";
-      if (!/\\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
+      if (!/\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
           printImageOriginals.has(img)) return;
       const box = img.getBoundingClientRect();
       if (!box.width || !box.height) return;
