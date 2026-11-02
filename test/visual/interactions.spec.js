@@ -448,20 +448,23 @@ test("CV name-first header and Display print action retain searchable text and r
   await printButton.click();
   const called = await page.evaluate(() => window.__cvPrintInvocations);
   expect(called).toBe(1);
-  // The SVG itself is replaced with a physical bitmap canvas for print;
-  // no browser image-fetch race or page-wide rasterization is introduced.
-  await expect(svg).toHaveCount(0);
-  const bitmap = page.locator("#cv-document canvas.cv-org-logo").first();
-  await expect(bitmap).toHaveCount(1);
-  const pixels = await bitmap.evaluate((canvas) => [canvas.width, canvas.height]);
-  expect(pixels[0]).toBeGreaterThan(0);
-  expect(pixels[1]).toBeGreaterThan(0);
-  expect(Math.max(...pixels)).toBeLessThanOrEqual(960);
+  // Printing must use the fully populated pages, not the full-width source.
+  // Source text and source logos remain untouched for editing after print.
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "true");
+  await expect(page.locator("#cv-paged-preview .cv-preview-page")).not.toHaveCount(0);
+  await expect(svg).toHaveAttribute("src", initialSrc);
+  const printBitmap = page.locator("#cv-paged-preview canvas.cv-org-logo").first();
+  if (await printBitmap.count()) {
+    const pixels = await printBitmap.evaluate((canvas) => [canvas.width, canvas.height]);
+    expect(Math.min(...pixels)).toBeGreaterThan(0);
+    expect(Math.max(...pixels)).toBeLessThanOrEqual(960);
+  }
 
-  // The normal page and its original vector artwork return after printing.
+  // The normal wide view and original source artwork return after printing.
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
   await expect(svg).toHaveAttribute("src", initialSrc);
-  await expect(bitmap).toHaveCount(0);
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "false");
+  await expect(page.locator("#cv-paged-preview .cv-preview-page")).toHaveCount(0);
   await expect(name).toBeVisible();
 });
 
@@ -510,10 +513,13 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
     // Chromium's emulateMedia('print') does NOT resize the page as the real
     // print/PDF compositor does. Simulate A4/Letter width for an honest
     // print-geometry check, also when this test runs on the mobile project.
-    await page.setViewportSize({ width: paper === "a4" ? 794 : 816, height: 1123 });
+    await page.setViewportSize({ width: paper === "a4" ? 718 : 740, height: 1123 });
     await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     await page.emulateMedia({ media: "print" });
-    const printed = await page.locator("#cv-document .cv-highlights li").evaluateAll((nodes) => {
+    await expect(page.locator("#cv-document")).toBeHidden();
+    await expect(page.locator("#cv-paged-preview")).toBeVisible();
+    await expect(page.locator("#cv-paged-preview .cv-preview-page").first()).toBeVisible();
+    const printed = await page.locator("#cv-paged-preview .cv-highlights li").evaluateAll((nodes) => {
       const visible = nodes.filter((node) => node.getClientRects().length > 0);
       return {
         total: visible.length,
@@ -528,6 +534,52 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
     await page.emulateMedia({ media: "screen" });
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
     await page.setViewportSize(screenViewport);
+  }
+});
+
+
+test("CV native Print uses A4 and Letter paper preview pages instead of the wide source", async ({ page }, testInfo) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  for (const [paper, template] of [["a4", "personal"], ["letter", "harvard"]]) {
+    await page.locator("#cv-paper").selectOption(paper);
+    await page.locator("#cv-template").selectOption(template);
+    // Print while still in the full-width reading mode. No preview toggle.
+    await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "reading");
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    await page.emulateMedia({ media: "print" });
+    const geometry = await page.locator("#cv-page").evaluate((root) => {
+      const source = root.querySelector("#cv-document");
+      const pages = [...root.querySelectorAll("#cv-paged-preview .cv-preview-page")];
+      const preview = root.querySelector("#cv-paged-preview");
+      return {
+        printing: root.dataset.cvPrinting,
+        sourceDisplay: getComputedStyle(source).display,
+        previewDisplay: getComputedStyle(preview).display,
+        pages: pages.length,
+        allSections: pages.map((el) => el.textContent).join(" ").includes("PROGRAMMING EXPERIENCE"),
+        noPageLabels: pages.every((el) =>
+          getComputedStyle(el.querySelector(".cv-preview-page-number")).display === "none"),
+        sized: pages.every((el) => el.querySelector(".cv-preview-paper-body") !== null),
+      };
+    });
+    expect(geometry.printing).toBe("true");
+    expect(geometry.sourceDisplay).toBe("none");
+    expect(geometry.previewDisplay).not.toBe("none");
+    expect(geometry.pages).toBeGreaterThan(1);
+    expect(geometry.noPageLabels).toBe(true);
+    expect(geometry.sized).toBe(true);
+    expect(geometry.allSections).toBe(true);
+
+    if (testInfo.project.name === "desktop") {
+      const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true });
+      expect(pdf.subarray(0, 4).toString()).toBe("%PDF");
+      expect(pdf.byteLength).toBeGreaterThan(1000);
+    }
+    await page.emulateMedia({ media: "screen" });
+    await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+    await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "false");
+    await expect(page.locator("#cv-paged-preview .cv-preview-page")).toHaveCount(0);
   }
 });
 
@@ -566,9 +618,11 @@ test("CV print balances top and bottom whitespace only for one-page selections",
     expect(Math.abs(balanced.top - balanced.bottom)).toBeLessThan(14);
     await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     await page.emulateMedia({ media: "print" });
-    const printPadding = await page.locator("#cv-document").evaluate((node) =>
-      parseFloat(getComputedStyle(node).paddingTop));
+    // Printed page keeps the same balanced top padding as its paper preview.
+    const printPadding = await page.locator("#cv-paged-preview .cv-preview-paper-body").first()
+      .evaluate((node) => parseFloat(getComputedStyle(node).paddingTop));
     expect(printPadding).toBeGreaterThan(0);
+    await expect(page.locator("#cv-document")).toBeHidden();
     await page.emulateMedia({ media: "screen" });
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
     await page.locator("#cv-preview").click();
