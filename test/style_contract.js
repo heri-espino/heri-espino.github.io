@@ -881,6 +881,19 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Paper-preview sheets own their physical margins, and @page uses zero.
+{
+  const js = read("assets/js/cv-customize.js");
+  const css = read("_sass/_cv.scss");
+  if (!js.includes('"; margin: 0; }"') ||
+      !js.includes('setPreview("paper");') ||
+      !css.includes('width: var(--cv-paper-width) !important;') ||
+      !css.includes('height: var(--cv-paper-height) !important;') ||
+      !css.includes('padding: var(--cv-print-margin, 13mm) !important;')) {
+    failures.push("Print must reproduce Paper Preview without double margins or shrink-to-fit.");
+  }
+}
+
 // The native PDF must print the page-by-page PREVIEW itself. Previously
 // CSS forcibly hid #cv-paged-preview and printed #cv-document at full width.
 // This regression guard is intentionally independent of default preview mode.
@@ -895,7 +908,7 @@ if (exists("_pages/cv.md")) {
       !css.includes('.cv-page[data-cv-printing="true"] #cv-document') ||
       !css.includes('.cv-page[data-cv-printing="true"] #cv-paged-preview') ||
       !css.includes(".cv-preview-page:not(:last-child)") ||
-      !css.includes("break-after: page;") ||
+      !css.includes("break-after: auto;") ||
       !css.includes(".cv-preview-page-number") ||
       !css.includes('.cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-sheet')) {
     failures.push("Native CV print must use measured paper-preview pages, not full-width source markup.");
@@ -913,7 +926,7 @@ if (exists("_pages/cv.md")) {
       !script.includes("root.dataset.cvDensity = viewDensity.paper;") ||
       !css.includes('.cv-page[data-cv-single-page="true"] #cv-document') ||
       !css.includes('padding-top: var(--cv-print-top-balance, 0px) !important;') ||
-      !script.includes('"; margin: " + chosenMargin + "; }"')) {
+      !script.includes('"; margin: 0; }"')) {
     failures.push("CV vertical balance must center short selections and preserve equal @page margins.");
   }
 }

@@ -446,6 +446,8 @@ test("CV name-first header and Display print action retain searchable text and r
   const initialSrc = await svg.getAttribute("src");
 
   await printButton.click();
+  // The menu button must reveal and print the *same* Paper Preview.
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "paper");
   const called = await page.evaluate(() => window.__cvPrintInvocations);
   expect(called).toBe(1);
   // Printing must use the fully populated pages, not the full-width source.
@@ -464,8 +466,8 @@ test("CV name-first header and Display print action retain searchable text and r
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
   await expect(svg).toHaveAttribute("src", initialSrc);
   await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "false");
-  await expect(page.locator("#cv-paged-preview .cv-preview-page")).toHaveCount(0);
-  await expect(name).toBeVisible();
+  await expect(page.locator("#cv-paged-preview .cv-preview-page").first()).toBeVisible();
+  await expect(page.locator(".cv-preview-paper-body .cv-intro h1")).toBeVisible();
 });
 
 test("CV embeds descriptions for every course in both reading and A4 paper preview", async ({ page }) => {
@@ -565,6 +567,20 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
         noPageLabels: pages.every((el) =>
           getComputedStyle(el.querySelector(".cv-preview-page-number")).display === "none"),
         sized: pages.every((el) => el.querySelector(".cv-preview-paper-body") !== null),
+        dimensions: pages.map((el) => {
+          const rect = el.getBoundingClientRect();
+          const sheet = el.querySelector(".cv-preview-sheet");
+          const box = sheet.getBoundingClientRect();
+          const padding = getComputedStyle(sheet).paddingLeft;
+          return {
+            pageWidth: rect.width, sheetWidth: box.width, height: rect.height,
+            padding: parseFloat(padding),
+            sheetScrollHeight: sheet.scrollHeight,
+            sheetClientHeight: sheet.clientHeight,
+            bodyScrollHeight: sheet.querySelector(".cv-preview-paper-body").scrollHeight,
+            bodyClientHeight: sheet.querySelector(".cv-preview-paper-body").clientHeight
+          };
+        }),
       };
     });
     expect(geometry.printing).toBe("true");
@@ -574,11 +590,72 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
     expect(geometry.noPageLabels).toBe(true);
     expect(geometry.sized).toBe(true);
     expect(geometry.allSections).toBe(true);
+    // A4: 210 x 297 mm; Letter: 215.9 x 279.4 mm, at 96 CSS px/inch.
+    const mmPerInch = 25.4;
+    const expectedWidth = (paper === "a4" ? 210 : 215.9) * 96 / mmPerInch;
+    const expectedHeight = (paper === "a4" ? 297 : 279.4) * 96 / mmPerInch;
+    for (const [index, { pageWidth, sheetWidth, height, padding }] of geometry.dimensions.entries()) {
+      expect(Math.abs(pageWidth - expectedWidth)).toBeLessThan(2);
+      expect(Math.abs(sheetWidth - expectedWidth)).toBeLessThan(2);
+      // The final printed sheet ends at its content. Physical PDF paper is
+      // still A4/Letter, but no extra full-height DOM block causes a blank page.
+      if (index < geometry.pages - 1) expect(Math.abs(height - expectedHeight)).toBeLessThan(2);
+      else {
+        expect(height).toBeGreaterThan(0);
+        expect(height).toBeLessThanOrEqual(expectedHeight + 2);
+      }
+      expect(padding).toBeGreaterThan(10);
+    }
 
     if (testInfo.project.name === "desktop") {
       const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true });
       expect(pdf.subarray(0, 4).toString()).toBe("%PDF");
       expect(pdf.byteLength).toBeGreaterThan(1000);
+      // THIS caught the original regression: Chrome must not squeeze two or
+      // more Paper Preview sheets into a single printed PDF page.
+      const rawPageObjects = (pdf.toString("latin1").match(/\/Type\s+\/Page\b/g) || []).length;
+      const { spawnSync } = require("node:child_process");
+      const info = spawnSync("pdfinfo", ["-"], { input: pdf });
+      const pdfPageCount = Number(info.stdout?.toString().match(/^Pages:\s*(\d+)/m)?.[1]);
+      if (!Number.isInteger(pdfPageCount) || pdfPageCount < 1) {
+        throw new Error("pdfinfo could not inspect the generated PDF: " + info.stderr?.toString());
+      }
+      if (pdfPageCount !== geometry.pages) {
+        await testInfo.attach(paper + "-actual-print.pdf", { body: pdf, contentType: "application/pdf" });
+        const tail = spawnSync("pdftotext", [
+          "-f", String(pdfPageCount), "-l", String(pdfPageCount), "-", "-"
+        ], { input: pdf });
+        console.log("PDF pagination mismatch:", JSON.stringify({
+          paper, template, printedPages: pdfPageCount, rawPageObjects,
+          previewPages: geometry.pages,
+          reportedPageInfo: info.stdout?.toString().match(/^Pages:\s*(\d+)/m)?.[0],
+          sheets: geometry.dimensions,
+          topOffsets: await page.evaluate(() => {
+            const selectors = ["body", "main", ".cv-page", ".cv-workspace",
+              ".cv-preview-column", "#cv-paged-preview", ".cv-preview-page"];
+            return selectors.map(selector => {
+              const node = document.querySelector(selector);
+              if (!node) return [selector, null];
+              const r = node.getBoundingClientRect(), st = getComputedStyle(node);
+              return [selector, { top: r.top, left: r.left, height: r.height,
+                marginTop: st.marginTop, paddingTop: st.paddingTop,
+                breakAfter: st.breakAfter }];
+            });
+          }),
+          lastPageText: tail.stdout?.toString().slice(0, 700),
+          extractionStatus: tail.status, extractionStderr: tail.stderr?.toString().slice(0, 250),
+          extractionError: tail.error?.message
+        }));
+      }
+      expect(pdfPageCount).toBe(geometry.pages);
+      // PDF MediaBox must be the chosen real paper dimensions in PostScript pt.
+      const mediaBoxes = [...pdf.toString("latin1")
+        .matchAll(/\/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]/g)];
+      expect(mediaBoxes.length).toBeGreaterThan(0);
+      for (const box of mediaBoxes) {
+        expect(Math.abs(parseFloat(box[1]) - (paper === "a4" ? 595.28 : 612))).toBeLessThan(1);
+        expect(Math.abs(parseFloat(box[2]) - (paper === "a4" ? 841.89 : 792))).toBeLessThan(1);
+      }
     }
     await page.emulateMedia({ media: "screen" });
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));

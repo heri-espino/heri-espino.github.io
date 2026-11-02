@@ -2652,29 +2652,54 @@
 
   .cv-page[data-cv-printing="true"] .cv-preview-page {
     display: block !important;
-    width: 100% !important;
+    box-sizing: border-box;
+    width: var(--cv-paper-width) !important;
+    min-width: var(--cv-paper-width) !important;
+    max-width: var(--cv-paper-width) !important;
+    height: var(--cv-paper-height) !important;
+    min-height: var(--cv-paper-height) !important;
     margin: 0 !important;
     padding: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
+  /* Every sheet already occupies a full physical page. A second forced
+     break after a full-height sheet creates a phantom blank PDF page. */
   .cv-page[data-cv-printing="true"] .cv-preview-page:not(:last-child) {
-    break-after: page;
-    page-break-after: always;
+    break-after: auto;
+    page-break-after: auto;
   }
+  /* The last preview sheet is the final document content, not an extra
+     full-height block after the content. @page still supplies a physical A4
+     / Letter page and its remaining blank space. This avoids Chrome's
+     phantom trailing page without clipping or shrinking the CV. */
+  .cv-page[data-cv-printing="true"]:not([data-cv-print-measuring="true"]) .cv-preview-page:last-child,
+  .cv-page[data-cv-printing="true"]:not([data-cv-print-measuring="true"]) .cv-preview-page:last-child .cv-preview-sheet {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  .cv-page[data-cv-printing="true"]:not([data-cv-print-measuring="true"]) .cv-preview-page:last-child .cv-preview-paper-body {
+    height: auto !important;
+  }
+
   .cv-page[data-cv-printing="true"] .cv-preview-page-number {
     display: none !important;
   }
 
-  /* @page supplies the chosen physical margins. Do NOT pad the page again:
-     the print content box is paper width minus 2 margins, exactly as it is
-     inside the on-screen paper preview. Short final pages leave blank space. */
+  /* Zero-margin @page contains one exact physical-size sheet. The SAME
+     selected CSS padding as the screen Paper Preview is applied exactly once
+     inside the sheet; no browser shrink-to-fit or second print margin. */
   .cv-page[data-cv-printing="true"] .cv-preview-sheet {
     box-sizing: border-box;
-    width: 100% !important;
-    min-height: 0 !important;
-    height: auto !important;
+    width: var(--cv-paper-width) !important;
+    min-width: var(--cv-paper-width) !important;
+    max-width: var(--cv-paper-width) !important;
+    min-height: var(--cv-paper-height) !important;
+    height: var(--cv-paper-height) !important;
     margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
+    padding: var(--cv-print-margin, 13mm) !important;
+    /* Transparent border reserves the exact 1px of the screen preview. */
+    border: 1px solid transparent !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: #fff !important;
@@ -2686,7 +2711,7 @@
     --global-code-bg-color: #f4f6f8;
   }
   .cv-page[data-cv-printing="true"] .cv-preview-paper-body {
-    height: auto;
+    height: 100%;
     min-height: 0;
   }
 
@@ -2803,7 +2828,7 @@
     width: var(--cv-paper-width) !important;
     height: var(--cv-paper-height) !important;
     padding: var(--cv-print-margin, 13mm) !important;
-    border: 1px solid #d9e0e7 !important;
+    border: 1px solid transparent !important;
   }
   .cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-paper-body {
     height: 100%;
@@ -2822,5 +2847,24 @@
     box-sizing: border-box;
     height: var(--cv-paper-height);
     padding: var(--cv-print-margin, 13mm);
+  }
+}
+
+
+/* Site shell offsets (fixed-navbar padding, page/post spacing) must not
+   consume part of an A4/Letter PDF page. The paper sheet itself has the
+   exact selected margin; everything above it must start at page origin. */
+@media print {
+  html:has(.cv-page),
+  body:has(.cv-page) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body:has(.cv-page) :is(.container, .page-content, .post),
+  .cv-page[data-cv-printing="true"],
+  .cv-page[data-cv-printing="true"] .cv-workspace,
+  .cv-page[data-cv-printing="true"] .cv-preview-column {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
