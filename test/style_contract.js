@@ -970,6 +970,40 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Verified institutional icons and citable ProximityGraphs software release.
+{
+  const issuers = read("_data/credential_issuers.yml");
+  const logoRules = read("_data/cv_organization_logos.yml");
+  const cv = read("_data/cv.yml");
+  const project = read("_projects/proximity-graphs.md");
+  const proximity = cv.split("      - name: ProximityGraphs — Computational Geometry Python Library")[1]
+    ?.split("      - name: Contributor — OpenAI Python SDK")[0] || "";
+  if (!issuers.includes('logo: "https://upload.wikimedia.org/wikipedia/commons/6/66/Nyu_stacked_color.svg"') ||
+      !issuers.includes('logo: "https://paiml.com/assets/img/logo.png"') ||
+      !logoRules.includes('- match: "new york university"\\n  issuer_key: nyu'.replace("\\n", "\n")) ||
+      !logoRules.includes('- match: "pragmatic ai labs"\\n  issuer_key: pragmatic-ai'.replace("\\n", "\n")) ||
+      issuers.includes("https://commons.wikimedia.org/wiki/Special:FilePath/Nyu_short_color.svg") ||
+      issuers.includes("favicons?domain=paiml.com")) {
+    failures.push("NYU and Pragmatic AI Labs must use identified logos, not redirects or generic favicons.");
+  }
+  for (const url of [
+    "https://proximitygraphs.github.io/ProximityGraphs/",
+    "https://github.com/ProximityGraphs/ProximityGraphs",
+    "https://pypi.org/project/proximitygraphs/",
+    "https://doi.org/10.5281/zenodo.21088183"
+  ]) {
+    if (!proximity.includes(url)) failures.push("ProximityGraphs CV link missing: " + url);
+  }
+  if (!project.includes("resource_url: https://doi.org/10.5281/zenodo.21088183") ||
+      !project.includes("resource_label: \"Zenodo · v0.1.0a2\"") ||
+      !project.includes("Maravillo, Héctor and Villarreal De La Cerda, Diego and Espino-Montelongo, Heriberto") ||
+      !project.includes("license = {MIT}") ||
+      !project.includes("version = {0.1.0a2}") ||
+      !project.includes("external_url: https://proximitygraphs.github.io/ProximityGraphs/")) {
+    failures.push("ProximityGraphs project must retain documentation and exact versioned Zenodo citation.");
+  }
+}
+
 if (failures.length > 0) {
   console.error("Starter style contract check failed:");
   failures.forEach((message) => console.error(`- ${message}`));
