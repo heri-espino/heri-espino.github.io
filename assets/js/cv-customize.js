@@ -35,6 +35,7 @@
   const timelineItems = document.getElementById("cv-timeline-items");
   const status = document.getElementById("cv-status");
   const resetButton = document.getElementById("cv-reset");
+  const printButton = document.getElementById("cv-print");
   const previewButton = document.getElementById("cv-preview");
   const previewHelp = document.getElementById("cv-preview-help");
   const sourceDocument = document.getElementById("cv-document");
@@ -57,6 +58,7 @@
     !timelineItems ||
     !status ||
     !resetButton ||
+    !printButton ||
     !previewButton ||
     !previewHelp ||
     !sourceDocument ||
@@ -630,6 +632,49 @@
   });
 
 
+  // Keep text and hyperlinks as searchable/selectable vectors in the PDF.
+  // Only rasterize SVG graphics, bounded to 2x rendered dimensions (maximum
+  // 960 pixels). The browser can then compress image content independently
+  // of the text. Blocked cross-origin SVGs are kept in their original form.
+  const printImageOriginals = new Map();
+  const rasterizePrintGraphics = () => {
+    sourceDocument.querySelectorAll("img").forEach((img) => {
+      const src = img.currentSrc || img.getAttribute("src") || "";
+      if (!/\\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
+          printImageOriginals.has(img)) return;
+      const box = img.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      const scale = Math.min(2, 960 / Math.max(box.width, box.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(box.width * scale));
+      canvas.height = Math.max(1, Math.round(box.height * scale));
+      try {
+        const context = canvas.getContext("2d");
+        if (!context) return;
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const compressed = canvas.toDataURL("image/webp", 0.72);
+        if (!compressed.startsWith("data:image/webp;")) return;
+        printImageOriginals.set(img, img.getAttribute("src"));
+        img.setAttribute("src", compressed);
+      } catch (_error) {
+        // A remote SVG can prohibit canvas export (CORS). Keep its original.
+      }
+    });
+  };
+  const restorePrintGraphics = () => {
+    printImageOriginals.forEach((original, image) => {
+      if (original === null) image.removeAttribute("src");
+      else image.setAttribute("src", original);
+    });
+    printImageOriginals.clear();
+  };
+
+  printButton.addEventListener("click", () => {
+    // Execute synchronously from the button gesture to avoid popup blockers.
+    rasterizePrintGraphics();
+    window.print();
+  });
+
   // The browser Print dialog (Ctrl+P / Cmd+P) uses the paper view's density.
   // Keep the shared dropdown and on-screen preview unchanged, whether
   // printing from the wide view or from the page-by-page preview.
@@ -637,6 +682,7 @@
   let previouslyOpen = [];
   let screenDensityBeforePrint = null;
   window.addEventListener("beforeprint", () => {
+    rasterizePrintGraphics();
     if (screenDensityBeforePrint === null) {
       screenDensityBeforePrint = root.dataset.cvDensity;
       const details = Array.from(root.querySelectorAll("details.cv-details"));
@@ -646,6 +692,7 @@
     root.querySelectorAll("details.cv-details").forEach((item) => { item.open = true; });
   });
   window.addEventListener("afterprint", () => {
+    restorePrintGraphics();
     root.dataset.cvDensity = screenDensityBeforePrint ?? controls.density.value;
     screenDensityBeforePrint = null;
     root.querySelectorAll("details.cv-details").forEach((item) => {
