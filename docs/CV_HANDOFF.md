@@ -1044,3 +1044,23 @@ tests and handoff; no research classifications were changed.
 - Source-only checks assert consistency across CV/paper pages; do not
   assert the tracker is publicly accessible or that the SSRN page
   was fetched from a restricted network environment.
+
+## Specific methods in four Mathematics Learning Center study highlights (2026-11-02)
+
+At the owner's request, replace generic sample-size/longitudinal/measurement labels in `_data/cv.yml` with specific statistical operations. Preserve the study identities, dates, URLs, cohorts and observational/noncausal framing in their individual paper pages.
+
+| Study | CV method and interpretation |
+| --- | --- |
+| Student Engagement and Adaptation | Five-state classification; nine pre-specified sensitivity definitions of performance/context (already detailed in the paper page) |
+| Instructor Grade Heterogeneity | Kolmogorov–Smirnov distances to cluster instructors by observed grade distributions; the owner explicitly supplied this method, replacing the former *planned* distributional-distance statement in the paper metadata |
+| Support Persistence After Incentives | Conditional continuation/transition rates: later Calculus-I support use stratified by earlier support visits; prior observed sample size of 3,241 students remains on the paper page |
+| Mathematics Support and Classroom-Relative Performance | Wald tests for mathematics-support terms in a partially linear model (PLM) of grade outcomes; owner-supplied method, supplementary to documented Welch/Games–Howell and classroom fixed-effects analyses |
+
+These are descriptions of techniques, **not estimates of treatment effects**, causal identification, statistical significance, or guaranteed effects of tutoring. Avoid saying instructors were ranked objectively or that clustering reveals latent instructional quality. The exact four one-line CV highlights remain ≤94 characters for paper/PDF printing. Keep source data, experimental outputs and technical manuscript pages intact. Source regression tests cross-check the CV and respective paper pages in `test/style_contract.js`.
+
+## NYU / Pragmatic AI Labs logos and ProximityGraphs links (2026-11-02)
+
+- NYU's `nyu` credential issuer uses the source-attributed NYU stacked-color logo directly from Wikimedia's stable original SVG endpoint (`https://upload.wikimedia.org/wikipedia/commons/6/66/Nyu_stacked_color.svg`) in place of `Special:FilePath/Nyu_short_color.svg`. At CV icon sizes the square-ish stacked identity is clearer than the full horizontal wordmark.
+- The `pragmatic-ai` issuer references `https://paiml.com/assets/img/logo.png`, the official Pragmatic AI Labs image rather than Google's generic favicon. These issuer keys serve both the credentials collection and organization-logo matches in the CV. Maintain accessible initials/fallback and the opt-out Show icons control. See `docs/CV_LOGO_AUDIT.md`.
+- The collaborative `ProximityGraphs — Computational Geometry Python Library` CV entry keeps PyPI and now also links the [documentation](https://proximitygraphs.github.io/ProximityGraphs/), the [current development GitHub repository](https://github.com/ProximityGraphs/ProximityGraphs), and the version-specific [Zenodo DOI 10.5281/zenodo.21088183](https://doi.org/10.5281/zenodo.21088183). The project detail `_projects/proximity-graphs.md` now provides the Zenodo action and the exact user-supplied software BibTeX for **v0.1.0a2**, **MIT**, **June 2026**, by **Héctor Maravillo, Diego Villarreal De La Cerda and Heriberto Espino-Montelongo**. The user-supplied BibTeX retains the historical `HectorMaravillo/ProximityGraphs` URL; the live project also links the maintained `ProximityGraphs/ProximityGraphs` organization without treating them as mutually exclusive.
+- The `test/style_contract.js` contract verifies source URLs, issuer routing, both CV/project DOI links, citation authors and version. Keep chronological source data, CV role and other research records unchanged.

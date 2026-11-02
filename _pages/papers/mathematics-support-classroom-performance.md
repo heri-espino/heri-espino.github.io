@@ -22,4 +22,5 @@ contributions:
   - Aligns support-centre visits to the same academic period as the focal first-year mathematics attempt.
   - Standardizes outcomes within instructor-course-period classrooms to reduce grading-context incomparability.
   - Reports positive-use versus non-use differences using Welch/Games–Howell comparisons and classroom fixed-effect models without claiming a causal tutoring effect.
+  - Applies Wald tests to mathematics-support terms in a partially linear model (PLM) of grades, interpreted as associational rather than causal.
 ---

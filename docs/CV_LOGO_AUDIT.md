@@ -54,8 +54,7 @@ California Santa Cruz, Santa Fe Institute.
 **Other academic/professional organizations still favicon-based:**
 Sociedad Matemática Mexicana, Stevens Institute of Technology,
 International Society of Pharmacovigilance, New York Institute of Finance,
-Google Cloud, IBM, Microsoft, Interactive Brokers, Packt, DataCamp,
-Pragmatic AI Labs.
+Google Cloud, IBM, Microsoft, Interactive Brokers, Packt, DataCamp.
 
 **Other companies, governments, and publishers still favicon-based:**
 OpenAI, Elsevier, Springer Nature, Government of Mexico, Gobierno de Puebla,
@@ -68,7 +67,7 @@ before replacing it.
 
 Site-native quality improvements already present:
 UDLAP (academic and orange versions), CIMAT, Paletas Loreto, MAA/Putnam,
-FIRA, and Kaxa Nuk. NYU uses a Wikimedia vector link. See the registry for
+FIRA, and Kaxa Nuk. NYU uses a direct Wikimedia-hosted stacked official vector; Pragmatic AI Labs uses its own site-hosted logo. See the registry for
 individual paths and source URLs.
 
 ## Reproducible check
@@ -98,3 +97,9 @@ packages as third-party contribution work. The uploaded Actinver A-dot
 logo supersedes the earlier source and its wide-wordmark styling.
 Run the audit script to get new counts; previous counts in this document
 are historical snapshots, not current tallies.
+
+## NYU and Pragmatic AI Labs official identity fixes (2026-11-02)
+
+The prior `nyu` issuer image used a Wikimedia Commons `Special:FilePath` redirected link. It now references the direct high-quality [NYU stacked-color SVG](https://commons.wikimedia.org/wiki/File:Nyu_stacked_color.svg) from NYU's 2016 brand identity artwork: `https://upload.wikimedia.org/wikipedia/commons/6/66/Nyu_stacked_color.svg`. The stacked form is suitable for a square, narrow CV icon without cropping a wide wordmark. NYU's own branding guidance retains the complete torch-and-name lockup.
+
+The `pragmatic-ai` issuer image no longer uses Google's generic favicon. It now uses the [Pragmatic AI Labs official logo image](https://paiml.com/assets/img/logo.png) served from its website. Both issuer keys drive the CV organization icon and the Credentials page; accessible initial/fallback text remains if a remote asset fails. Images are not represented as an institutional endorsement or as user-authored art. The source is an official publisher for Pragmatic AI Labs and a source-attributed Wikimedia vector of NYU branding. Remote availability should be periodically verified.

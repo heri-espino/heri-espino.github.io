@@ -21,5 +21,5 @@ github: https://github.com/heri-espino/CMAT
 contributions:
   - Follows a strict MU-to-Calculus progression cohort with support-centre coverage in both periods.
   - Shows later CMAT use rising from 17.25% among students with no prior MU visits to 66.84% among those with four or more.
-  - Preserves the non-causal interpretation while testing persistence across a change in incentive context.
+  - Estimates conditional continuation rates by earlier support-visit count, without treating the participation threshold as an exogenous treatment.
 ---

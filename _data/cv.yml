@@ -105,7 +105,11 @@ cv:
         organization: ProximityGraphs
         date: Aug 2025 — Present
         location: Puebla, Mexico
-        links: [{ label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }]
+        links:
+          - { label: Documentation, url: "https://proximitygraphs.github.io/ProximityGraphs/" }
+          - { label: GitHub, url: "https://github.com/ProximityGraphs/ProximityGraphs" }
+          - { label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }
+          - { label: Zenodo · v0.1.0a2, url: "https://doi.org/10.5281/zenodo.21088183" }
         highlights:
           - "Computational geometry: translated empty-region graph definitions into Python."
           - "Software architecture: modularized APIs and vectorized NumPy kernels."
@@ -278,7 +282,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
         highlights:
-          - "Longitudinal analysis: traced engagement patterns among 6,627 students."
+          - "Five-state cohort classification: tested nine definitions of engagement and adaptation."
       - name: Instructor Grade Heterogeneity
         role: "Study Lead"
         date: Oct 2025
@@ -286,7 +290,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
         highlights:
-          - "Measurement analysis: studied 26,140 observations across 769 math classrooms."
+          - "Kolmogorov–Smirnov distances: clustered instructors by grade distributions."
       - name: Support Persistence After Incentives
         role: "Study Lead"
         date: Sep 2025
@@ -294,7 +298,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
         highlights:
-          - "Longitudinal analysis: tracked tutoring among 3,241 students after incentives."
+          - "Conditional transition rates: measured later tutoring use by earlier visit count."
       - name: Mathematics Support and Classroom-Relative Performance
         role: "Study Lead"
         date: Aug 2025
@@ -302,7 +306,7 @@ cv:
         links:
           - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
         highlights:
-          - "Statistical inference: compared tutoring use and grades for 6,627 students."
+          - "PLM Wald tests: examined grade differences associated with mathematics-support use."
       - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
         context: "Latent financial-risk modeling"
         role: "Research project"
