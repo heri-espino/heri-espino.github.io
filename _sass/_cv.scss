@@ -2652,9 +2652,16 @@
 
   .cv-page[data-cv-printing="true"] .cv-preview-page {
     display: block !important;
-    width: 100% !important;
+    box-sizing: border-box;
+    width: var(--cv-paper-width) !important;
+    min-width: var(--cv-paper-width) !important;
+    max-width: var(--cv-paper-width) !important;
+    height: var(--cv-paper-height) !important;
+    min-height: var(--cv-paper-height) !important;
     margin: 0 !important;
     padding: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
   .cv-page[data-cv-printing="true"] .cv-preview-page:not(:last-child) {
     break-after: page;
@@ -2664,17 +2671,20 @@
     display: none !important;
   }
 
-  /* @page supplies the chosen physical margins. Do NOT pad the page again:
-     the print content box is paper width minus 2 margins, exactly as it is
-     inside the on-screen paper preview. Short final pages leave blank space. */
+  /* Zero-margin @page contains one exact physical-size sheet. The SAME
+     selected CSS padding as the screen Paper Preview is applied exactly once
+     inside the sheet; no browser shrink-to-fit or second print margin. */
   .cv-page[data-cv-printing="true"] .cv-preview-sheet {
     box-sizing: border-box;
-    width: 100% !important;
-    min-height: 0 !important;
-    height: auto !important;
+    width: var(--cv-paper-width) !important;
+    min-width: var(--cv-paper-width) !important;
+    max-width: var(--cv-paper-width) !important;
+    min-height: var(--cv-paper-height) !important;
+    height: var(--cv-paper-height) !important;
     margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
+    padding: var(--cv-print-margin, 13mm) !important;
+    /* Transparent border reserves the exact 1px of the screen preview. */
+    border: 1px solid transparent !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: #fff !important;
@@ -2686,7 +2696,7 @@
     --global-code-bg-color: #f4f6f8;
   }
   .cv-page[data-cv-printing="true"] .cv-preview-paper-body {
-    height: auto;
+    height: 100%;
     min-height: 0;
   }
 
@@ -2803,7 +2813,7 @@
     width: var(--cv-paper-width) !important;
     height: var(--cv-paper-height) !important;
     padding: var(--cv-print-margin, 13mm) !important;
-    border: 1px solid #d9e0e7 !important;
+    border: 1px solid transparent !important;
   }
   .cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-paper-body {
     height: 100%;
