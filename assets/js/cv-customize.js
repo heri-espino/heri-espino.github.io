@@ -498,9 +498,12 @@
       : paletteColors[selectedPalette] || templateDefaults[controls.template.value] || paletteColors.velvet;
     // Strictly validate hex color; do not interpolate arbitrary strings into CSS.
     root.style.setProperty("--cv-accent", /^#[0-9a-f]{6}$/i.test(color) ? color : paletteColors.velvet);
+    // The preview sheets themselves own the selected margins. Printing
+    // them with extra @page margins previously shrank/cropped the content.
+    // Zero physical-page margins prevent double application and scaling.
     pageStyle.textContent =
       "@page { size: " + (pageSizes[controls.paper.value] || "A4") +
-      "; margin: " + chosenMargin + "; }";
+      "; margin: 0; }";
 
     // Keep undated sections in their authored place after the dynamic timeline.
     sections.forEach((section) => {
@@ -695,6 +698,15 @@
     rasterizePrintGraphics();
   };
   printButton.addEventListener("click", () => {
+    // Print WHAT IS SHOWN by the Paper preview toggle, never a separate
+    // compacted version of the full-width reading layout. Switching here
+    // also lets the user inspect those exact page divisions after printing.
+    if (root.dataset.cvPreview !== "paper") {
+      setPreview("paper");
+      render();
+    } else {
+      renderPagedPreview();
+    }
     preparePaperPrint();
     window.print();
   });
