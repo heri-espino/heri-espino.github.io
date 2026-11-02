@@ -2809,3 +2809,18 @@
     height: 100%;
   }
 }
+
+/* Print initiated from reading mode must paginate at the physical A4/Letter
+   sheet width, not the phone/desktop viewport width. */
+@media screen {
+  .cv-page[data-cv-printing="true"] .cv-preview-page {
+    width: var(--cv-paper-width) !important;
+    min-width: var(--cv-paper-width) !important;
+    max-width: none !important;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-sheet {
+    box-sizing: border-box;
+    height: var(--cv-paper-height);
+    padding: var(--cv-print-margin, 13mm);
+  }
+}
