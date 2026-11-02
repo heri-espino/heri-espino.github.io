@@ -105,7 +105,11 @@ cv:
         organization: ProximityGraphs
         date: Aug 2025 — Present
         location: Puebla, Mexico
-        links: [{ label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }]
+        links:
+          - { label: Documentation, url: "https://proximitygraphs.github.io/ProximityGraphs/" }
+          - { label: GitHub, url: "https://github.com/ProximityGraphs/ProximityGraphs" }
+          - { label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }
+          - { label: Zenodo · v0.1.0a2, url: "https://doi.org/10.5281/zenodo.21088183" }
         highlights:
           - "Computational geometry: translated empty-region graph definitions into Python."
           - "Software architecture: modularized APIs and vectorized NumPy kernels."
