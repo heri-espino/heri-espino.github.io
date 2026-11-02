@@ -14,8 +14,10 @@ display_date: May 2026
 summary: "Valuation of a 12%–22% synthetic CDO tranche using a Gaussian dependence model for portfolio credit losses."
 framing: "The notebook applies a portfolio credit-risk model to tranche-level valuation and loss allocation."
 tags: [CDO, credit derivatives, Gaussian model, credit risk]
-image: /assets/img/portfolio/academic-risk-preview.svg
-image_alt: Abstract risk-distribution visualization for synthetic CDO tranche valuation
+image: /assets/img/portfolio/academic-synthetic-cdo-tranche-valuation-card.svg
+image_alt: "Project-specific visual from Synthetic CDO Tranche Valuation course work."
+detail_image: /assets/img/portfolio/academic-synthetic-cdo-tranche-valuation-first-page.svg
+detail_image_alt: "A4 project overview based on Synthetic CDO Tranche Valuation source materials."
 resource_url: https://nbviewer.org/github/heri-espino/LAT4092-Derivados-Exoticos/blob/main/tareas/2%20Derivados%20de%20Credito/Ejercicio%203.ipynb
 github: https://github.com/heri-espino/LAT4092-Derivados-Exoticos
 resource_label: View notebook
