@@ -623,11 +623,12 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
       if (pdfPageCount !== geometry.pages) {
         await testInfo.attach(paper + "-actual-print.pdf", { body: pdf, contentType: "application/pdf" });
         const tail = spawnSync("pdftotext", [
-          "-f", String(pdfPageCount), "-l", String(pdfPageCount), "-"
+          "-f", String(pdfPageCount), "-l", String(pdfPageCount), "-", "-"
         ], { input: pdf });
         console.log("PDF pagination mismatch:", JSON.stringify({
           paper, template, printedPages: pdfPageCount, rawPageObjects,
-          previewPages: geometry.pages, pdfinfo: info.stdout?.toString().slice(0, 350),
+          previewPages: geometry.pages,
+          reportedPageInfo: info.stdout?.toString().match(/^Pages:\s*(\d+)/m)?.[0],
           sheets: geometry.dimensions,
           topOffsets: await page.evaluate(() => {
             const selectors = ["body", "main", ".cv-page", ".cv-workspace",
