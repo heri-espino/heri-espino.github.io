@@ -687,9 +687,11 @@
     root.dataset.cvDensity = viewDensity.paper;
     root.dataset.cvPrinting = "true";
 
-    // Build and show every paper-preview page; do not print #cv-document.
-    // This is intentionally synchronous, before the browser snapshots print.
+    // Even when the browser has already switched to print media for Ctrl+P,
+    // measure the full physical-size A4/Letter preview sheets first.
+    root.dataset.cvPrintMeasuring = "true";
     renderPagedPreview(true);
+    root.dataset.cvPrintMeasuring = "false";
     rasterizePrintGraphics();
   };
   printButton.addEventListener("click", () => {
