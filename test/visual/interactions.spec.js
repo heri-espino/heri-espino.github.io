@@ -574,7 +574,11 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
           const padding = getComputedStyle(sheet).paddingLeft;
           return {
             pageWidth: rect.width, sheetWidth: box.width, height: rect.height,
-            padding: parseFloat(padding)
+            padding: parseFloat(padding),
+            sheetScrollHeight: sheet.scrollHeight,
+            sheetClientHeight: sheet.clientHeight,
+            bodyScrollHeight: sheet.querySelector(".cv-preview-paper-body").scrollHeight,
+            bodyClientHeight: sheet.querySelector(".cv-preview-paper-body").clientHeight
           };
         }),
       };
@@ -604,6 +608,19 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
       // THIS caught the original regression: Chrome must not squeeze two or
       // more Paper Preview sheets into a single printed PDF page.
       const pdfPageCount = (pdf.toString("latin1").match(/\/Type\s+\/Page\b/g) || []).length;
+      if (pdfPageCount !== geometry.pages) {
+        await testInfo.attach(paper + "-actual-print.pdf", { body: pdf, contentType: "application/pdf" });
+        const { spawnSync } = require("node:child_process");
+        const tail = spawnSync("pdftotext", [
+          "-f", String(pdfPageCount), "-l", String(pdfPageCount), "-"
+        ], { input: pdf });
+        console.log("PDF pagination mismatch:", JSON.stringify({
+          paper, template, printedPages: pdfPageCount, previewPages: geometry.pages,
+          sheets: geometry.dimensions,
+          lastPageText: tail.stdout?.toString().slice(0, 500),
+          extractionError: tail.error?.message
+        }));
+      }
       expect(pdfPageCount).toBe(geometry.pages);
       // PDF MediaBox must be the chosen real paper dimensions in PostScript pt.
       const mediaBoxes = [...pdf.toString("latin1")
