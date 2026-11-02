@@ -1044,3 +1044,16 @@ tests and handoff; no research classifications were changed.
 - Source-only checks assert consistency across CV/paper pages; do not
   assert the tracker is publicly accessible or that the SSRN page
   was fetched from a restricted network environment.
+
+## Specific methods in four Mathematics Learning Center study highlights (2026-11-02)
+
+At the owner's request, replace generic sample-size/longitudinal/measurement labels in `_data/cv.yml` with specific statistical operations. Preserve the study identities, dates, URLs, cohorts and observational/noncausal framing in their individual paper pages.
+
+| Study | CV method and interpretation |
+| --- | --- |
+| Student Engagement and Adaptation | Five-state classification; nine pre-specified sensitivity definitions of performance/context (already detailed in the paper page) |
+| Instructor Grade Heterogeneity | Kolmogorov–Smirnov distances to cluster instructors by observed grade distributions; the owner explicitly supplied this method, replacing the former *planned* distributional-distance statement in the paper metadata |
+| Support Persistence After Incentives | Conditional continuation/transition rates: later Calculus-I support use stratified by earlier support visits; prior observed sample size of 3,241 students remains on the paper page |
+| Mathematics Support and Classroom-Relative Performance | Wald tests for mathematics-support terms in a partially linear model (PLM) of grade outcomes; owner-supplied method, supplementary to documented Welch/Games–Howell and classroom fixed-effects analyses |
+
+These are descriptions of techniques, **not estimates of treatment effects**, causal identification, statistical significance, or guaranteed effects of tutoring. Avoid saying instructors were ranked objectively or that clustering reveals latent instructional quality. The exact four one-line CV highlights remain ≤94 characters for paper/PDF printing. Keep source data, experimental outputs and technical manuscript pages intact. Source regression tests cross-check the CV and respective paper pages in `test/style_contract.js`.
