@@ -514,8 +514,10 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
     // print/PDF compositor does. Simulate A4/Letter width for an honest
     // print-geometry check, also when this test runs on the mobile project.
     await page.setViewportSize({ width: paper === "a4" ? 718 : 740, height: 1123 });
-    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    // Enter print media first: Chromium's media emulation may fire
+    // afterprint, clearing preview pages prepared before the switch.
     await page.emulateMedia({ media: "print" });
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     await expect(page.locator("#cv-document")).toBeHidden();
     await expect(page.locator("#cv-paged-preview")).toBeVisible();
     await expect(page.locator("#cv-paged-preview .cv-preview-page").first()).toBeVisible();
@@ -546,8 +548,10 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
     await page.locator("#cv-template").selectOption(template);
     // Print while still in the full-width reading mode. No preview toggle.
     await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "reading");
-    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    // Enter print media first: Chromium's media emulation may fire
+    // afterprint, clearing preview pages prepared before the switch.
     await page.emulateMedia({ media: "print" });
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     const geometry = await page.locator("#cv-page").evaluate((root) => {
       const source = root.querySelector("#cv-document");
       const pages = [...root.querySelectorAll("#cv-paged-preview .cv-preview-page")];
@@ -616,8 +620,10 @@ test("CV print balances top and bottom whitespace only for one-page selections",
       return { top: intro.top - box.top, bottom: box.bottom - content.bottom, used: body.scrollHeight };
     });
     expect(Math.abs(balanced.top - balanced.bottom)).toBeLessThan(14);
-    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    // Enter print media first: Chromium's media emulation may fire
+    // afterprint, clearing preview pages prepared before the switch.
     await page.emulateMedia({ media: "print" });
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     // Printed page keeps the same balanced top padding as its paper preview.
     const printPadding = await page.locator("#cv-paged-preview .cv-preview-paper-body").first()
       .evaluate((node) => parseFloat(getComputedStyle(node).paddingTop));
