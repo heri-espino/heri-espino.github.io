@@ -341,8 +341,17 @@ if (exists("_pages/cv.md")) {
       cvStyles.includes('Logo_de_Actinver.svg')) {
     failures.push("Actinver must use the user's local square logo, not the old SVG wordmark.");
   }
+  // AbaQuant's canonical repository now provides the owner-maintained icon.
+  if (!logoSource.includes('- match: "abaquant"') ||
+      !logoSource.includes('https://raw.githubusercontent.com/AbaQuant/AbaQuant/main/docs/_static/q_dark.png')) {
+    failures.push("AbaQuant must use its official repository icon.");
+  }
+  if (!exists("assets/img/cv-organizations/preety-good-quantum.webp") ||
+      !logoSource.includes('- match: "preety good quantum oe"') ||
+      !logoSource.includes('logo: "/assets/img/cv-organizations/preety-good-quantum.webp"')) {
+    failures.push("The official UDLAP student-organization mark must use the supplied image.");
+  }
   const libraryAssets = {
-    "abaquant": "abaquant.svg",
     "proximitygraphs": "proximitygraphs.svg",
     "trend estimation": "trendestimation.svg",
     "awesomefigures": "awesomefigures.svg",
@@ -863,6 +872,27 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Distinguish public SSRN preprint links from author-only submission tracking.
+// Preserve the paper PDF primary action and do not alter peer-review labels.
+{
+  const cv = read("_data/cv.yml");
+  const unitRegion = read("_pages/papers/unit-region-factorization.md");
+  const steppingStone = read("_pages/papers/stepping-stone.md");
+  const ssrnUrl = "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746";
+  const trackerUrl = "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430";
+  if (!cv.includes('label: SSRN, url: "' + ssrnUrl + '"') ||
+      !steppingStone.includes('external_url: ' + ssrnUrl)) {
+    failures.push("Stepping-Stone SSRN preprint link must appear in both CV and paper page.");
+  }
+  if (!cv.includes('label: Track submission, url: "' + trackerUrl + '"') ||
+      !unitRegion.includes('resource_url: ' + trackerUrl) ||
+      !unitRegion.includes("resource_label: Track submission (Elsevier)") ||
+      !unitRegion.includes("pdf: /papers/espino_2026_unit-region-factorization.pdf") ||
+      !unitRegion.includes("label: Under Review")) {
+    failures.push("Unit-Region submission tracker must preserve the PDF and review status.");
+  }
+}
+
 // Social cards must resolve to a real JPEG; LinkedIn may not display SVG OG images.
 {
   const config = read("_config.yml");
@@ -873,6 +903,29 @@ if (exists("_pages/cv.md")) {
       !exists("assets/img/og-mountain.jpg") ||
       !exists("_images/og-mountain.jpg")) {
     failures.push("Social link previews must use the committed mountain JPEG Open Graph image.");
+  }
+}
+
+
+// Zenodo identifiers should retain accessible labels and a recognizable mark.
+{
+  const source = read("_data/cv.yml");
+  const renderer = read("_includes/cv/render.liquid");
+  const css = read("_sass/_cv.scss");
+  if (!source.includes('https://zenodo.org/records/23432463') ||
+      !source.includes('https://doi.org/10.5281/zenodo.21291269') ||
+      !renderer.includes('class="cv-zenodo-mark"') ||
+      !renderer.includes('zenodo-icon-blue.svg') ||
+      !css.includes(".cv-zenodo-mark")) {
+    failures.push("Research Zenodo record and reproducibility icons must remain accessible.");
+  }
+  if (!source.includes('Marp · Streamlit') ||
+      !source.includes('date: May 2026 — Present') ||
+      !source.includes('date: Oct 2026 — Present') ||
+      !source.includes('date: Sep 2026 — Present') ||
+      !source.includes('Preety Good Quantum OE · Universidad de las Américas Puebla') ||
+      !source.includes('organization: "Presented at XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"')) {
+    failures.push("CV software dates, Marp, CIMAT presentation and UDLAP evidence must be preserved.");
   }
 }
 

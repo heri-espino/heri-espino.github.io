@@ -113,7 +113,7 @@ cv:
       - name: Contributor — OpenAI Python SDK
         role: "Contributor"
         subtitle: "OpenAI Python SDK"
-        date: Sep 2026
+        date: Sep 2026 — Present
         organization: OpenAI
         organization_url: https://openai.com/
         links:
@@ -122,7 +122,7 @@ cv:
           - "API reliability: normalized mid-stream transport failures to SDK exceptions."
           - "Regression testing: covered sync/async transport errors and cleanup."
       - name: Trend Estimation — Penalized Trend Smoothing Python Library
-        date: "Active as of Oct 2026 · start date unrecorded"
+        date: May 2026 — Present
         role: "Author & Maintainer"
         subtitle: "Penalized Trend Smoothing Library"
         organization: Trend Estimation
@@ -133,7 +133,7 @@ cv:
           - "Numerical modeling: implemented finite-difference penalized least-squares trends."
           - "Model selection: compared spectral trends using CV, GCV, AICc and BIC."
       - name: AwesomeFigures — Scientific Visualization Toolkit
-        date: "Active as of Oct 2026 · start date unrecorded"
+        date: Oct 2026 — Present
         role: "Author & Maintainer"
         subtitle: "Scientific Visualization Toolkit"
         organization: AwesomeFigures
@@ -145,7 +145,7 @@ cv:
           - "Publication tooling: automated LaTeX figure sizing and vector export."
 
       - name: Docling Math — Mathematical PDF Extraction
-        date: "Active as of Oct 2026 · start date unrecorded"
+        date: Sep 2026 — Present
         role: "Author & Maintainer"
         subtitle: "Mathematical PDF Extraction"
         organization: Docling Math
@@ -231,6 +231,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
+          - { label: Track submission, url: "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430" }
         highlights:
           - "Stochastic geometry: proved unit-region factorization under Euclidean similarity."
           - "Poisson geometry: derived invariant empty-region graph formulas."
@@ -244,6 +245,7 @@ cv:
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
+          - { label: SSRN, url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746" }
           - { label: Validation DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
         highlights:
           - "Geometric analysis: reduced Stepping–Stone volume to a 1D integral."
@@ -265,7 +267,7 @@ cv:
         links:
           - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
-          - { label: Reproducibility, url: "https://doi.org/10.5281/zenodo.23432463" }
+          - { label: Zenodo · Reproducibility, url: "https://zenodo.org/records/23432463" }
         highlights:
           - "Mechanistic interpretability: tested CNN activation-patching additivity."
           - "Experimental design: isolated logit additivity from metric-induced effects."
@@ -304,6 +306,8 @@ cv:
       - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
         context: "Latent financial-risk modeling"
         role: "Research project"
+        organization: "Presented at XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
+        organization_url: "https://www.cimat.mx/"
         date: Jan 2023 — May 2023
         location: Puebla, Mexico
         links:
@@ -505,9 +509,13 @@ cv:
       - name: "Quantum Computing Curriculum and Instruction"
         role: "President"
         date: "Jan 2026 — Jun 2026"
-        organization: "Pretty Good Quantum OE · Universidad de las Américas Puebla"
+        organization: "Preety Good Quantum OE · Universidad de las Américas Puebla"
+        organization_url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=Preety%20Good%20Quantum%20OE"
+        links:
+          - { label: UDLAP student organizations, url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=Preety%20Good%20Quantum%20OE" }
         highlights:
           - "Student outreach: organized quantum-computing classes at UDLAP."
+          - "Curriculum: introduced quantum circuits, QFT and Grover with Python workshops."
       - name: "C++ Algorithms and Complexity Instruction"
         role: "Vice-President"
         date: "Jan 2025 — Jun 2026"
@@ -638,7 +646,7 @@ cv:
       - { name: "Scientific Computing", values: "NumPy · SciPy · Numba · pandas · Polars · RAPIDS" }
       - { name: "Data Engineering & Cloud", values: "Google Cloud Platform · Apache Airflow · PostgreSQL · MySQL · MongoDB · Neo4j · REST APIs · ETL pipelines" }
       - { name: "Development & Systems", values: "Git · Docker · Jupyter · Google Colab · RStudio · uv · Conda · Vim · WSL2 · Linux · macOS · Windows 11 · Bash · Zsh · PowerShell" }
-      - { name: "Visualization & Documents", values: "Matplotlib · Plotly · Seaborn · UMAP · LaTeX/Beamer · Streamlit · Markdown · HTML · Power BI · Quarto · GeoGebra · Desmos" }
+      - { name: "Visualization & Documents", values: "Matplotlib · Plotly · Seaborn · UMAP · LaTeX/Beamer · Marp · Streamlit · Markdown · HTML · Power BI · Quarto · GeoGebra · Desmos" }
       - { name: "Research & Specialized Tools", values: "NetworkX · GeoPandas · Mesa · Solara · Qiskit · NetLogo · QGIS · Mapper · Bloomberg Terminal · IBKR Trader Workstation" }
 
     Credentials:
