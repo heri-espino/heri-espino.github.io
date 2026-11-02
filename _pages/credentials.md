@@ -103,6 +103,9 @@ nav: false
             {% if item.part_of %}
               <p class="credentials-parent">Part of {{ item.part_of }}</p>
             {% endif %}
+            {% if item.description %}
+              <p class="credentials-description">{{ item.description | escape }}</p>
+            {% endif %}
           </div>
           {% if item.url %}
             <a class="credentials-proof" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
