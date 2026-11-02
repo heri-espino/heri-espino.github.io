@@ -908,7 +908,7 @@ if (exists("_pages/cv.md")) {
       !css.includes('.cv-page[data-cv-printing="true"] #cv-document') ||
       !css.includes('.cv-page[data-cv-printing="true"] #cv-paged-preview') ||
       !css.includes(".cv-preview-page:not(:last-child)") ||
-      !css.includes("break-after: page;") ||
+      !css.includes("break-after: auto;") ||
       !css.includes(".cv-preview-page-number") ||
       !css.includes('.cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-sheet')) {
     failures.push("Native CV print must use measured paper-preview pages, not full-width source markup.");
