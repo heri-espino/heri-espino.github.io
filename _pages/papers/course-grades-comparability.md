@@ -21,5 +21,5 @@ github: https://github.com/heri-espino/CMAT
 contributions:
   - Uses retained exploratory evidence spanning 26,140 student-classroom observations, 77 instructors, and 769 classrooms from 2019–2025.
   - Frames grade comparability as a measurement problem rather than an instructor-ranking problem.
-  - Plans distributional-distance, temporal-stability, and raw-versus-standardized reclassification analyses within comparable course-period strata.
+  - Uses Kolmogorov–Smirnov distances between empirical grade distributions to cluster instructors within comparable course-period strata.
 ---
