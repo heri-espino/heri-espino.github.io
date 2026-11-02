@@ -848,6 +848,47 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Research-study CV bullets should state the implemented method, not
+// merely describe an observational cohort or repeat sample sizes.
+{
+  const cv = read("_data/cv.yml");
+  const studies = [
+    ["Student Engagement and Adaptation",
+      "Five-state cohort classification: tested nine definitions of engagement and adaptation.",
+      "_pages/papers/student-engagement-adaptation.md",
+      "five states"],
+    ["Instructor Grade Heterogeneity",
+      "Kolmogorov–Smirnov distances: clustered instructors by grade distributions.",
+      "_pages/papers/course-grades-comparability.md",
+      "Kolmogorov–Smirnov distances"],
+    ["Support Persistence After Incentives",
+      "Conditional transition rates: measured later tutoring use by earlier visit count.",
+      "_pages/papers/academic-support-persistence-incentive.md",
+      "conditional continuation rates"],
+    ["Mathematics Support and Classroom-Relative Performance",
+      "PLM Wald tests: examined grade differences associated with mathematics-support use.",
+      "_pages/papers/mathematics-support-classroom-performance.md",
+      "Wald tests"],
+  ];
+  for (const [name, method, paper, evidence] of studies) {
+    const begin = cv.indexOf("      - name: " + name + "\n");
+    const end = cv.indexOf("\n      - name:", begin + 1);
+    const record = begin < 0 ? "" : cv.slice(begin, end < 0 ? undefined : end);
+    if (!record.includes(method) || method.length > 94 ||
+        !read(paper).toLowerCase().includes(evidence.toLowerCase())) {
+      failures.push("Research study CV must name a documented statistical method: " + name);
+    }
+  }
+  for (const vague of [
+    "Longitudinal analysis: traced engagement patterns",
+    "Measurement analysis: studied 26,140",
+    "Longitudinal analysis: tracked tutoring among",
+    "Statistical inference: compared tutoring use",
+  ]) {
+    if (cv.includes(vague)) failures.push("Uninformative CV research bullet reappeared: " + vague);
+  }
+}
+
 // Short, skill-specific CV highlights must remain legible in print.
 // Check source copy rather than relying on ellipsis, clipping or tiny fonts.
 {
