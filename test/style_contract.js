@@ -194,9 +194,10 @@ if (exists("_pages/cv.md")) {
     failures.push("CV must start with the larger bold name, not the redundant eyebrow heading.");
   }
   if (!cvScript.includes("rasterizePrintGraphics") ||
-      !cvScript.includes('canvas.toDataURL("image/webp", 0.72)') ||
+      !cvScript.includes('context.drawImage(img, 0, 0, canvas.width, canvas.height)') ||
+      !cvScript.includes("img.replaceWith(canvas)") ||
       !cvScript.includes("restorePrintGraphics") ||
-      !cvScript.includes("printImageOriginals") ||
+      !cvScript.includes("printGraphics") ||
       !cvScript.includes("960 / Math.max(box.width, box.height)")) {
     failures.push("Print must rasterize SVG graphics at bounded resolution and restore source images.");
   }
