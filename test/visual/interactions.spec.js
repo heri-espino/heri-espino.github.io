@@ -432,12 +432,20 @@ test("CV name-first header and Display print action retain searchable text and r
   await printButton.click();
   const called = await page.evaluate(() => window.__cvPrintInvocations);
   expect(called).toBe(1);
-  const printSrc = await svg.getAttribute("src");
-  expect(printSrc).toMatch(/^data:image\/webp;base64,/);
+  // The SVG itself is replaced with a physical bitmap canvas for print;
+  // no browser image-fetch race or page-wide rasterization is introduced.
+  await expect(svg).toHaveCount(0);
+  const bitmap = page.locator("#cv-document canvas.cv-org-logo").first();
+  await expect(bitmap).toHaveCount(1);
+  const pixels = await bitmap.evaluate((canvas) => [canvas.width, canvas.height]);
+  expect(pixels[0]).toBeGreaterThan(0);
+  expect(pixels[1]).toBeGreaterThan(0);
+  expect(Math.max(...pixels)).toBeLessThanOrEqual(960);
 
   // The normal page and its original vector artwork return after printing.
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
   await expect(svg).toHaveAttribute("src", initialSrc);
+  await expect(bitmap).toHaveCount(0);
   await expect(name).toBeVisible();
 });
 
