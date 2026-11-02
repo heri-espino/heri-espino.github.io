@@ -2663,9 +2663,11 @@
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
+  /* Every sheet already occupies a full physical page. A second forced
+     break after a full-height sheet creates a phantom blank PDF page. */
   .cv-page[data-cv-printing="true"] .cv-preview-page:not(:last-child) {
-    break-after: page;
-    page-break-after: always;
+    break-after: auto;
+    page-break-after: auto;
   }
   .cv-page[data-cv-printing="true"] .cv-preview-page-number {
     display: none !important;
