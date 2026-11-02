@@ -2834,3 +2834,22 @@
     padding: var(--cv-print-margin, 13mm);
   }
 }
+
+
+/* Site shell offsets (fixed-navbar padding, page/post spacing) must not
+   consume part of an A4/Letter PDF page. The paper sheet itself has the
+   exact selected margin; everything above it must start at page origin. */
+@media print {
+  html:has(.cv-page),
+  body:has(.cv-page) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body:has(.cv-page) :is(.container, .page-content, .post),
+  .cv-page[data-cv-printing="true"],
+  .cv-page[data-cv-printing="true"] .cv-workspace,
+  .cv-page[data-cv-printing="true"] .cv-preview-column {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
