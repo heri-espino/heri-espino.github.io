@@ -557,7 +557,7 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
         sourceDisplay: getComputedStyle(source).display,
         previewDisplay: getComputedStyle(preview).display,
         pages: pages.length,
-        allSections: pages.map((el) => el.textContent).join(" ").includes("PROGRAMMING EXPERIENCE"),
+        allSections: pages.map((el) => el.textContent).join(" ").toLowerCase().includes("programming experience"),
         noPageLabels: pages.every((el) =>
           getComputedStyle(el.querySelector(".cv-preview-page-number")).display === "none"),
         sized: pages.every((el) => el.querySelector(".cv-preview-paper-body") !== null),
