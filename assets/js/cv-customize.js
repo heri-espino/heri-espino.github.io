@@ -632,45 +632,46 @@
   });
 
 
-  // Keep text and hyperlinks as searchable/selectable vectors in the PDF.
-  // Only rasterize SVG graphics, bounded to 2x rendered dimensions (maximum
-  // 960 pixels). The browser can then compress image content independently
-  // of the text. Blocked cross-origin SVGs are kept in their original form.
-  const printImageOriginals = new Map();
+  // Keep CV text and hyperlinks selectable. Before native printing, draw
+  // SVG graphics into bounded bitmap canvases and swap only those image
+  // nodes. Canvas prints as raster with no asynchronous data-URL loading,
+  // while the original SVGs are restored after printing. PNG/JPEG/WebP
+  // inputs already are raster and are left untouched.
+  const printGraphics = new Map();
   const rasterizePrintGraphics = () => {
     sourceDocument.querySelectorAll("img").forEach((img) => {
       const src = img.currentSrc || img.getAttribute("src") || "";
-      if (!/\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
-          printImageOriginals.has(img)) return;
+      if (!/\\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
+          img.hidden || printGraphics.has(img)) return;
       const box = img.getBoundingClientRect();
       if (!box.width || !box.height) return;
       const scale = Math.min(2, 960 / Math.max(box.width, box.height));
       const canvas = document.createElement("canvas");
       canvas.width = Math.max(1, Math.round(box.width * scale));
       canvas.height = Math.max(1, Math.round(box.height * scale));
+      canvas.style.width = box.width + "px";
+      canvas.style.height = box.height + "px";
+      canvas.className = img.className;
+      canvas.setAttribute("aria-hidden", "true");
       try {
         const context = canvas.getContext("2d");
         if (!context) return;
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
-        const compressed = canvas.toDataURL("image/webp", 0.72);
-        if (!compressed.startsWith("data:image/webp;")) return;
-        printImageOriginals.set(img, img.getAttribute("src"));
-        img.setAttribute("src", compressed);
+        img.replaceWith(canvas);
+        printGraphics.set(img, canvas);
       } catch (_error) {
-        // A remote SVG can prohibit canvas export (CORS). Keep its original.
+        // A blocked or invalid SVG remains intact; never omit the logo.
       }
     });
   };
   const restorePrintGraphics = () => {
-    printImageOriginals.forEach((original, image) => {
-      if (original === null) image.removeAttribute("src");
-      else image.setAttribute("src", original);
+    printGraphics.forEach((canvas, image) => {
+      if (canvas.isConnected) canvas.replaceWith(image);
     });
-    printImageOriginals.clear();
+    printGraphics.clear();
   };
 
   printButton.addEventListener("click", () => {
-    // Execute synchronously from the button gesture to avoid popup blockers.
     rasterizePrintGraphics();
     window.print();
   });
