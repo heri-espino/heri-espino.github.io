@@ -417,6 +417,22 @@ test("CV name-first header and Display print action retain searchable text and r
   await page.locator("#cv-panel-toggle").click();
   const printButton = page.locator("#cv-settings-panel #cv-print");
   await expect(printButton).toBeVisible();
+  const panel = page.locator("#cv-settings-panel");
+  const initialPosition = await printButton.evaluate((button) => {
+    const parent = button.closest("#cv-settings-panel");
+    return button.getBoundingClientRect().top - parent.getBoundingClientRect().top;
+  });
+  expect(initialPosition).toBeGreaterThanOrEqual(0);
+  expect(initialPosition).toBeLessThan(175);
+  await panel.evaluate((element) => { element.scrollTop = element.scrollHeight; });
+  const stickyPosition = await printButton.evaluate((button) => {
+    const outer = button.closest("#cv-settings-panel").getBoundingClientRect();
+    const rect = button.getBoundingClientRect();
+    return { top: rect.top - outer.top, bottom: rect.bottom - outer.top, height: outer.height };
+  });
+  expect(stickyPosition.top).toBeGreaterThanOrEqual(0);
+  expect(stickyPosition.bottom).toBeLessThan(stickyPosition.height);
+  await panel.evaluate((element) => { element.scrollTop = 0; });
 
   // The test stubs the native browser print dialog, without suppressing
   // synchronous graphic rasterization on the real button click.
@@ -447,6 +463,21 @@ test("CV name-first header and Display print action retain searchable text and r
   await expect(svg).toHaveAttribute("src", initialSrc);
   await expect(bitmap).toHaveCount(0);
   await expect(name).toBeVisible();
+});
+
+test("CV embeds descriptions for every course in both reading and A4 paper preview", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const credentials = page.locator('#cv-document [data-cv-section="credentials"]');
+  await expect(credentials).toContainText("Narrative Economics");
+  await expect(credentials).toContainText("Economic narratives: examined their diffusion");
+  await expect(credentials).toContainText("Git workflows: used branches");
+  await expect(credentials.locator(".cv-highlights li")).toHaveCount(23);
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  await expect(page.locator("#cv-paged-preview")).toContainText("Economic narratives: examined their diffusion");
+  await expect(page.locator("#cv-paged-preview")).toContainText("Git workflows: used branches");
+  await expect(page.locator("#cv-paged-preview .cv-eyebrow")).toHaveCount(0);
 });
 
 test("CV skill bullets occupy exactly one complete line in print and paper preview", async ({ page }) => {
