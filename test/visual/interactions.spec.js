@@ -617,7 +617,19 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
         console.log("PDF pagination mismatch:", JSON.stringify({
           paper, template, printedPages: pdfPageCount, previewPages: geometry.pages,
           sheets: geometry.dimensions,
-          lastPageText: tail.stdout?.toString().slice(0, 500),
+          topOffsets: await page.evaluate(() => {
+            const selectors = ["body", "main", ".cv-page", ".cv-workspace",
+              ".cv-preview-column", "#cv-paged-preview", ".cv-preview-page"];
+            return selectors.map(selector => {
+              const node = document.querySelector(selector);
+              if (!node) return [selector, null];
+              const r = node.getBoundingClientRect(), st = getComputedStyle(node);
+              return [selector, { top: r.top, left: r.left, height: r.height,
+                marginTop: st.marginTop, paddingTop: st.paddingTop,
+                breakAfter: st.breakAfter }];
+            });
+          }),
+          lastPageText: tail.stdout?.toString().slice(0, 700),
           extractionError: tail.error?.message
         }));
       }
