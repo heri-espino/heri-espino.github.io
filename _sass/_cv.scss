@@ -2627,3 +2627,200 @@
     display: none !important;
   }
 }
+
+
+/* PRINT = PAPER PREVIEW, not full-width CV:
+   Paper preview is generated from the same records, same physical A4/Letter
+   width and selected margin. Force its exact page divisions in the PDF while
+   preserving searchable text/links and native vector typography. The preview
+   numbering, border, shadows and screen gutters are not printed. */
+@media print {
+  .cv-page[data-cv-printing="true"] #cv-document {
+    display: none !important;
+  }
+
+  .cv-page[data-cv-printing="true"] #cv-paged-preview {
+    display: block !important;
+    position: static !important;
+    visibility: visible !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  .cv-page[data-cv-printing="true"] .cv-preview-page {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-page:not(:last-child) {
+    break-after: page;
+    page-break-after: always;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-page-number {
+    display: none !important;
+  }
+
+  /* @page supplies the chosen physical margins. Do NOT pad the page again:
+     the print content box is paper width minus 2 margins, exactly as it is
+     inside the on-screen paper preview. Short final pages leave blank space. */
+  .cv-page[data-cv-printing="true"] .cv-preview-sheet {
+    box-sizing: border-box;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #19212b;
+    font-size: 9pt;
+    --global-text-color: #19212b;
+    --global-text-color-light: #5a6470;
+    --global-divider-color: #d6dde5;
+    --global-code-bg-color: #f4f6f8;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body {
+    height: auto;
+    min-height: 0;
+  }
+
+  /* Match the actual paper preview's typography and group spacing. */
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-content {
+    display: block;
+    margin-top: 8pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-section {
+    margin-bottom: 10pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-section > h2 {
+    margin: 0 0 6pt;
+    padding: 0 0 3pt;
+    font-size: 11pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-intro {
+    margin-bottom: 8pt;
+    padding-bottom: 8pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-intro h1 {
+    margin-bottom: 4pt;
+    font-size: 20pt !important;
+    font-weight: 800 !important;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-contact {
+    font-size: 8pt;
+    gap: 2pt 10pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-entry-list {
+    gap: 9pt;
+    margin-top: 8pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-entry,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-compact-entry {
+    padding-bottom: 4pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-entry h3,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-compact-entry h3 {
+    font-size: 9pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-meta,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-organization,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-links,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-timeline-category {
+    font-size: 8pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-entry ul,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-compact-entry ul {
+    margin-top: 3pt;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-entry-heading > div {
+    min-width: 0;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-entry-heading a,
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-links {
+    overflow-wrap: anywhere;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-paper-body .cv-highlights li {
+    white-space: nowrap;
+    overflow: visible;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="personal"] .cv-preview-paper-body .cv-entry-heading {
+    display: block;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="personal"] .cv-preview-paper-body .cv-meta {
+    text-align: left;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 31%) !important;
+    column-gap: 8pt;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading .cv-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: none;
+    font-size: 8pt;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body .cv-location { order: -2; }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body .cv-date { order: -1; }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body .cv-organization { order: -2; }
+  .cv-page[data-cv-printing="true"][data-cv-template="harvard"] .cv-preview-paper-body h3 { order: -1; }
+
+  .cv-page[data-cv-printing="true"][data-cv-template="europass"] .cv-preview-paper-body .cv-entry,
+  .cv-page[data-cv-printing="true"][data-cv-template="europass"] .cv-preview-paper-body .cv-compact-entry {
+    grid-template-columns: minmax(7rem, 23%) minmax(0, 1fr);
+    column-gap: 8pt;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="europass"] .cv-preview-paper-body .cv-entry-heading {
+    display: contents;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-template="europass"] .cv-preview-paper-body .cv-entry-heading .cv-meta {
+    font-size: 8pt;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-text-size="small"] .cv-preview-sheet { font-size: 8.5pt; }
+  .cv-page[data-cv-printing="true"][data-cv-text-size="large"] .cv-preview-sheet { font-size: 10.5pt; }
+
+  /* beforeprint can run after print media becomes active (native Ctrl+P).
+     Temporarily reconstruct screen-sized measurement sheets so the paginator
+     sees true physical height rather than an auto-height printed sheet. */
+  .cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-page {
+    width: var(--cv-paper-width) !important;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-sheet {
+    width: var(--cv-paper-width) !important;
+    height: var(--cv-paper-height) !important;
+    padding: var(--cv-print-margin, 13mm) !important;
+    border: 1px solid #d9e0e7 !important;
+  }
+  .cv-page[data-cv-printing="true"][data-cv-print-measuring="true"] .cv-preview-paper-body {
+    height: 100%;
+  }
+}
+
+/* Print initiated from reading mode must paginate at the physical A4/Letter
+   sheet width, not the phone/desktop viewport width. */
+@media screen {
+  .cv-page[data-cv-printing="true"] .cv-preview-page {
+    width: var(--cv-paper-width) !important;
+    min-width: var(--cv-paper-width) !important;
+    max-width: none !important;
+  }
+  .cv-page[data-cv-printing="true"] .cv-preview-sheet {
+    box-sizing: border-box;
+    height: var(--cv-paper-height);
+    padding: var(--cv-print-margin, 13mm);
+  }
+}
