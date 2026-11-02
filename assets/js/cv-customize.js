@@ -294,8 +294,10 @@
   // measurement even in reading mode (offscreen), since Ctrl+P can start there.
   // Only a CV that fits on ONE sheet receives a vertical centering offset;
   // multipage CVs retain equal, fixed physical @page margins and native breaks.
-  function renderPagedPreview() {
-    const showing = root.dataset.cvPreview === "paper";
+  function renderPagedPreview(forPrinting = false) {
+    // Real print must contain these *same* paginated pages, even if the
+    // on-screen CV was left in full-width reading mode.
+    const showing = forPrinting || root.dataset.cvPreview === "paper";
     const screenDensity = root.dataset.cvDensity;
     if (!showing) {
       root.dataset.cvDensity = viewDensity.paper;
@@ -400,9 +402,8 @@
       return { section, list };
     };
 
-    // Offscreen measurement only needs to distinguish one sheet from two.
-    // Stop at the first overflow in reading mode; avoid cloning a potentially
-    // lengthy multi-page CV every time the user changes one setting.
+    // Normal offscreen measurement only needs to distinguish one sheet from two.
+    // Actual printing, like Paper preview, MUST include the entire CV.
     groupLoop: for (const group of groups) {
       let block = startGroup(group, false);
       for (const original of group.items) {
@@ -639,7 +640,9 @@
   // inputs already are raster and are left untouched.
   const printGraphics = new Map();
   const rasterizePrintGraphics = () => {
-    sourceDocument.querySelectorAll("img").forEach((img) => {
+    // Source CV is hidden in print. Rasterize only graphics on the printable
+    // paper pages; otherwise printed SVGs remain untouched and may be heavy.
+    pagedPreview.querySelectorAll("img").forEach((img) => {
       const src = img.currentSrc || img.getAttribute("src") || "";
       if (!/\.svg(?:[?#]|$)/i.test(src) || !img.complete || !img.naturalWidth ||
           img.hidden || printGraphics.has(img)) return;
@@ -671,35 +674,42 @@
     printGraphics.clear();
   };
 
-  printButton.addEventListener("click", () => {
-    rasterizePrintGraphics();
-    window.print();
-  });
-
-  // The browser Print dialog (Ctrl+P / Cmd+P) uses the paper view's density.
-  // Keep the shared dropdown and on-screen preview unchanged, whether
-  // printing from the wide view or from the page-by-page preview.
-  // Closed <details> suppress their children in print; reopen temporarily.
   let previouslyOpen = [];
   let screenDensityBeforePrint = null;
-  window.addEventListener("beforeprint", () => {
-    rasterizePrintGraphics();
-    if (screenDensityBeforePrint === null) {
-      screenDensityBeforePrint = root.dataset.cvDensity;
-      const details = Array.from(root.querySelectorAll("details.cv-details"));
-      previouslyOpen = details.filter((item) => item.open);
-    }
-    root.dataset.cvDensity = viewDensity.paper;
+  let printWasPrepared = false;
+  const preparePaperPrint = () => {
+    if (printWasPrepared) return; // button click also fires beforeprint
+    printWasPrepared = true;
+    screenDensityBeforePrint = root.dataset.cvDensity;
+    previouslyOpen = Array.from(root.querySelectorAll("details.cv-details"))
+      .filter((item) => item.open);
     root.querySelectorAll("details.cv-details").forEach((item) => { item.open = true; });
+    root.dataset.cvDensity = viewDensity.paper;
+    root.dataset.cvPrinting = "true";
+
+    // Build and show every paper-preview page; do not print #cv-document.
+    // This is intentionally synchronous, before the browser snapshots print.
+    renderPagedPreview(true);
+    rasterizePrintGraphics();
+  };
+  printButton.addEventListener("click", () => {
+    preparePaperPrint();
+    window.print();
   });
+  window.addEventListener("beforeprint", preparePaperPrint);
   window.addEventListener("afterprint", () => {
     restorePrintGraphics();
+    root.dataset.cvPrinting = "false";
     root.dataset.cvDensity = screenDensityBeforePrint ?? controls.density.value;
-    screenDensityBeforePrint = null;
     root.querySelectorAll("details.cv-details").forEach((item) => {
       item.open = previouslyOpen.includes(item);
     });
     previouslyOpen = [];
+    screenDensityBeforePrint = null;
+    printWasPrepared = false;
+    // Restore the selected view: reading mode remains wide and the
+    // paper preview is regenerated with the original SVG marks.
+    renderPagedPreview();
   });
 
   setPanelOpen(false);
