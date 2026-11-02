@@ -2656,8 +2656,8 @@
     width: var(--cv-paper-width) !important;
     min-width: var(--cv-paper-width) !important;
     max-width: var(--cv-paper-width) !important;
-    height: var(--cv-paper-height) !important;
-    min-height: var(--cv-paper-height) !important;
+    height: calc(var(--cv-paper-height) - 1px) !important;
+    min-height: calc(var(--cv-paper-height) - 1px) !important;
     margin: 0 !important;
     padding: 0 !important;
     break-inside: avoid !important;
@@ -2679,8 +2679,8 @@
     width: var(--cv-paper-width) !important;
     min-width: var(--cv-paper-width) !important;
     max-width: var(--cv-paper-width) !important;
-    min-height: var(--cv-paper-height) !important;
-    height: var(--cv-paper-height) !important;
+    min-height: calc(var(--cv-paper-height) - 1px) !important;
+    height: calc(var(--cv-paper-height) - 1px) !important;
     margin: 0 !important;
     padding: var(--cv-print-margin, 13mm) !important;
     /* Transparent border reserves the exact 1px of the screen preview. */
