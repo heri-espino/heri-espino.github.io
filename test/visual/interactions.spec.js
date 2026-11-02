@@ -446,6 +446,8 @@ test("CV name-first header and Display print action retain searchable text and r
   const initialSrc = await svg.getAttribute("src");
 
   await printButton.click();
+  // The menu button must reveal and print the *same* Paper Preview.
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "paper");
   const called = await page.evaluate(() => window.__cvPrintInvocations);
   expect(called).toBe(1);
   // Printing must use the fully populated pages, not the full-width source.
@@ -464,8 +466,8 @@ test("CV name-first header and Display print action retain searchable text and r
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
   await expect(svg).toHaveAttribute("src", initialSrc);
   await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "false");
-  await expect(page.locator("#cv-paged-preview .cv-preview-page")).toHaveCount(0);
-  await expect(name).toBeVisible();
+  await expect(page.locator("#cv-paged-preview .cv-preview-page").first()).toBeVisible();
+  await expect(page.locator(".cv-preview-paper-body .cv-intro h1")).toBeVisible();
 });
 
 test("CV embeds descriptions for every course in both reading and A4 paper preview", async ({ page }) => {
@@ -565,6 +567,16 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
         noPageLabels: pages.every((el) =>
           getComputedStyle(el.querySelector(".cv-preview-page-number")).display === "none"),
         sized: pages.every((el) => el.querySelector(".cv-preview-paper-body") !== null),
+        dimensions: pages.map((el) => {
+          const rect = el.getBoundingClientRect();
+          const sheet = el.querySelector(".cv-preview-sheet");
+          const box = sheet.getBoundingClientRect();
+          const padding = getComputedStyle(sheet).paddingLeft;
+          return {
+            pageWidth: rect.width, sheetWidth: box.width, height: rect.height,
+            padding: parseFloat(padding)
+          };
+        }),
       };
     });
     expect(geometry.printing).toBe("true");
@@ -574,11 +586,33 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
     expect(geometry.noPageLabels).toBe(true);
     expect(geometry.sized).toBe(true);
     expect(geometry.allSections).toBe(true);
+    // A4: 210 x 297 mm; Letter: 215.9 x 279.4 mm, at 96 CSS px/inch.
+    const mmPerInch = 25.4;
+    const expectedWidth = (paper === "a4" ? 210 : 215.9) * 96 / mmPerInch;
+    const expectedHeight = (paper === "a4" ? 297 : 279.4) * 96 / mmPerInch;
+    for (const { pageWidth, sheetWidth, height, padding } of geometry.dimensions) {
+      expect(Math.abs(pageWidth - expectedWidth)).toBeLessThan(2);
+      expect(Math.abs(sheetWidth - expectedWidth)).toBeLessThan(2);
+      expect(Math.abs(height - expectedHeight)).toBeLessThan(2);
+      expect(padding).toBeGreaterThan(10);
+    }
 
     if (testInfo.project.name === "desktop") {
       const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true });
       expect(pdf.subarray(0, 4).toString()).toBe("%PDF");
       expect(pdf.byteLength).toBeGreaterThan(1000);
+      // THIS caught the original regression: Chrome must not squeeze two or
+      // more Paper Preview sheets into a single printed PDF page.
+      const pdfPageCount = (pdf.toString("latin1").match(/\\/Type\\s+\\/Page\\b/g) || []).length;
+      expect(pdfPageCount).toBe(geometry.pages);
+      // PDF MediaBox must be the chosen real paper dimensions in PostScript pt.
+      const mediaBoxes = [...pdf.toString("latin1")
+        .matchAll(/\\/MediaBox\\s*\\[\\s*0\\s+0\\s+([0-9.]+)\\s+([0-9.]+)\\s*\\]/g)];
+      expect(mediaBoxes.length).toBeGreaterThan(0);
+      for (const box of mediaBoxes) {
+        expect(Math.abs(parseFloat(box[1]) - (paper === "a4" ? 595.28 : 612))).toBeLessThan(1);
+        expect(Math.abs(parseFloat(box[2]) - (paper === "a4" ? 841.89 : 792))).toBeLessThan(1);
+      }
     }
     await page.emulateMedia({ media: "screen" });
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
