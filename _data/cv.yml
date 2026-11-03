@@ -557,6 +557,13 @@ cv:
           - "Topology: studied geometric structure in complex datasets."
 
     Selected Extracurricular Activities:
+      - name: "IMEF Universitario Membership"
+        role: "Member"
+        date: "Aug 2026 — Jun 2027 (expected)"
+        organization: "IMEF Universitario"
+        organization_url: "https://www.imef-universitario.com/"
+        highlights:
+          - "Student affiliation: member of IMEF's national university division."
       - name: "William Lowell Putnam Math Competition"
         role: "Competitor"
         subtitle: "Proof-Based Undergraduate Mathematics"
