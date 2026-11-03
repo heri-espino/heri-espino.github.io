@@ -173,7 +173,7 @@ cv:
           - { label: "Recorded talk · YouTube", url: "https://youtu.be/KjQFeBLJybw" }
           - { label: "Slides and presentation details", url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html" }
         highlights:
-          - "Research communication: presented talk 8744 in the SMM prerecorded Discrete Mathematics session."
+          - "Research communication: delivered SMM recorded talk 8744 on proximity graphs."
       - name: "ProximityGraphs Python Library"
         role: "Poster Presenter"
         date: "Apr 2026"
