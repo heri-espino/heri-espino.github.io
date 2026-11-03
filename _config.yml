@@ -9,10 +9,10 @@ last_name: Montelongo
 contact_note: >
   Research, software, and academic collaboration.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Academic portfolio of Heriberto Espino Montelongo, an Actuarial Science and Data Science student working across stochastic geometry, probability, time series, financial risk, and interpretable machine learning.
+  Official academic portfolio of Heriberto Espino Montelongo (Heriberto Espino-Montelongo), an undergraduate researcher at UDLAP. Research in stochastic geometry, proximity graphs, probability, penalized trend estimation, CNN interpretability, and quantitative finance; software, papers, and public CV.
 footer_text: >
   Academic portfolio of Heriberto Espino Montelongo.
-keywords: stochastic geometry, probability, time series, financial risk, interpretable machine learning, academic portfolio
+keywords: Heriberto Espino Montelongo, Heriberto Espino-Montelongo, proximity graphs, stochastic geometry, penalized least squares, time series, actuarial science, quantitative finance, interpretable machine learning, academic portfolio
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: favicon.ico # the favicon image in /assets/img/
 

@@ -6,6 +6,7 @@ Provide an auditable, public set of research sources to search engines, retrieva
 
 ## Public entry points
 
+- Human-readable personal biography and Google-compatible ProfilePage JSON-LD: https://heri-espino.github.io/about-me/
 - Human-readable generated index: https://heri-espino.github.io/research-index/
 - Machine-readable Jekyll-generated JSON catalog: https://heri-espino.github.io/research-catalog.json
 - Experimental AI-reading convention: https://heri-espino.github.io/llms.txt
@@ -30,7 +31,8 @@ An "Under Review" label does not imply acceptance, publication, a DOI, or that a
 
 ## Structured data
 
-- The homepage exposes a public Person JSON-LD record with public identity links.
+- The homepage exposes a public Person JSON-LD record with a stable /#person identity, public name variant, biographical description, research fields and public profile links.
+- /about-me/ exposes a dedicated ProfilePage JSON-LD record whose mainEntity points to that same person; do not add a placeholder headshot, unearned degree, or journal acceptance.
 - Each research-detail page exposes ScholarlyArticle JSON-LD for manuscript-like works and LearningResource for lectures/tutorials, including the current explicit label and summary.
 - Do not set datePublished, publisher, journal issue, DOI or acceptance metadata for an unaccepted item.
 - Structured data and llms.txt **do not guarantee** indexing, rich results, citation by AI tools, or future model memory. They simply make publicly visible claims easier to parse.
@@ -66,3 +68,19 @@ After building, inspect /tmp/_site/research-catalog.json with a JSON parser, and
 ## Current archive stage grouping
 
 The current site deliberately keeps its submitted-manuscript and working-draft groupings in `_pages/papers.md`; the new public index and JSON catalog always use each individual record's own status field, including any known disagreements with the CV or archive. Do not silently move a contested item between categories merely because its source front matter says `Under Review`. Keep the separate `Published Articles & Technical Writing` archive section for independently published technical articles, which must not be represented as peer-reviewed journal publications.
+
+## Expanded academic identity (2026-11-03)
+
+- `_data/profile.yml` is a **public biographical summary**, not a replacement for `_data/cv.yml` (dated programs, roles, and memberships) or paper front matter (authorship, current review stage, and results). It supplies consistent biography, the academic name variant `Heriberto Espino-Montelongo`, and research topics for the homepage, `/about-me/`, `/llms.txt`, and the research catalog.
+- `_pages/profile.md` is a crawlable, human-readable profile at `/about-me/`, with Google `ProfilePage` markup, public identity links, dynamic CV extracts and review-stage manuscript lists. The homepage links to it; the research index also links to it.
+- Keep the site profile **current and truthful**: two bachelor's degrees have expected completion dates, ProximityGraphs is collaborative, and IMEF Universitario is membership without an asserted board title. The source records outrank prose if they change.
+- `llms.txt` is a **voluntary** discovery convention, not proof that Google or any AI assistant reads the file. Prioritize actual HTML content, canonicals, crawlability, official external citations, legitimate inbound links, and the XML sitemap. Never promise search ranking or AI memory.
+- The profile and catalog list `research_interests` to support entity disambiguation, not keyword stuffing. The metadata must describe genuinely present work.
+- Reproducible regression: `node scripts/validate-research-index.mjs` checks profile sources and links, and the Jekyll build must emit valid `/about-me/index.html` ProfilePage JSON-LD, `/research-catalog.json` JSON, and `/llms.txt` with populated biography/education. Run these before merging changes that affect discoverability.
+
+### External indexing operations (require account access)
+
+1. Confirm Google Search Console verification and inspect `/`, `/about-me/`, `/cv/`, and `/research-index/`; submit the sitemap at `https://heri-espino.github.io/sitemap.xml` if it is not already submitted.
+2. Verify the same domain in Bing Webmaster Tools, submit or import the sitemap, and investigate crawl/index coverage. Do not fabricate verification tokens or claim a console action happened without explicit account confirmation.
+3. Check the public name variants on ORCID, Google Scholar, and other confirmed author profiles; cross-link to the canonical portfolio when those services permit it.
+4. For substantive public releases, update source pages and let the normal GitHub Pages deploy refresh the sitemap. A deployment alone is not evidence of search-engine indexing.

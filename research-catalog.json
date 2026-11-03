@@ -12,14 +12,36 @@ sitemap: false
   "caveat": "Submission, revision, drafts, tutorials and lectures are distinct. Under review does not mean accepted or published. Use each item's status and detail page; do not infer outcomes.",
   "person": {
     "@type": "Person",
-    "name": "Heriberto Espino Montelongo",
+    "@id": {{ '/#person' | absolute_url | jsonify }},
+    "name": {{ site.data.profile.full_name | jsonify }},
+    "alternate_names": {{ site.data.profile.alternate_names | jsonify }},
+    "biography": {{ site.data.profile.short_bio | jsonify }},
+    "research_summary": {{ site.data.profile.extended_bio | jsonify }},
+    "research_interests": {{ site.data.profile.research_interests | jsonify }},
+    "affiliation": {
+      "name": {{ site.data.profile.institution_name | jsonify }},
+      "url": {{ site.data.profile.institution_url | jsonify }}
+    },
+    "education": [
+      {% for item in site.data.cv.cv.sections.Education %}
+      {
+        "degree": {{ item.degree | jsonify }},
+        "institution": {{ item.institution | jsonify }},
+        "date_display": {{ item.date | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "public_profile": {{ '/about-me/' | absolute_url | jsonify }},
     "url": {{ '/' | absolute_url | jsonify }},
     "orcid": {{ site.data.socials.orcid_id | jsonify }},
     "github": "https://github.com/{{ site.data.socials.github_username }}",
     "google_scholar": {{ site.data.socials.google_scholar_profile_url | jsonify }},
+    "researchgate": {{ site.data.socials.researchgate_profile_url | jsonify }},
+    "linkedin": "https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}/",
     "ssrn": {{ site.data.socials.ssrn_author_url | jsonify }}
   },
   "indexes": {
+    "about": {{ '/about-me/' | absolute_url | jsonify }},
     "research": {{ '/research-index/' | absolute_url | jsonify }},
     "papers": {{ '/papers/' | absolute_url | jsonify }},
     "projects": {{ '/projects/' | absolute_url | jsonify }},

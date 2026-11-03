@@ -10,14 +10,16 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": {{ '/#person' | absolute_url | jsonify }},
-  "name": "Heriberto Espino Montelongo",
+  "name": {{ site.data.profile.full_name | jsonify }},
+  "alternateName": {{ site.data.profile.alternate_names | jsonify }},
+  "description": {{ site.data.profile.short_bio | jsonify }},
   "url": {{ '/' | absolute_url | jsonify }},
   "affiliation": {
     "@type": "CollegeOrUniversity",
     "name": "Universidad de las Américas Puebla",
     "url": "https://www.udlap.mx/"
   },
-  "knowsAbout": ["Stochastic geometry", "Proximity graphs", "Probability", "Time series", "Financial risk", "Interpretable machine learning"],
+  "knowsAbout": {{ site.data.profile.research_interests | jsonify }},
   "sameAs": [
     "https://github.com/{{ site.data.socials.github_username }}",
     "https://orcid.org/{{ site.data.socials.orcid_id }}",
@@ -34,7 +36,8 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   <p class="portfolio-kicker">Academic portfolio · Puebla, Mexico</p>
   <h1 id="hero-title">Heriberto Espino Montelongo</h1>
   <p class="portfolio-role">Actuarial Science and Data Science student at Universidad de las Américas Puebla.</p>
-  <p class="portfolio-intro">I work across stochastic geometry, probability, time series, financial risk, and interpretable machine learning. My projects combine mathematical modeling, reproducible computation, and applied data analysis.</p>
+  <p class="portfolio-intro">{{ site.data.profile.short_bio | escape }}</p>
+  <p class="portfolio-intro">{{ site.data.profile.extended_bio | escape }}</p>
   <div class="portfolio-hero-footer">
     <nav class="portfolio-hero-links" aria-label="Profile links">
       <a href="mailto:{{ site.data.socials.email }}">Email</a>
@@ -45,6 +48,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
     <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>
     <a href="{{ site.data.socials.ssrn_author_url }}">SSRN</a>
     <a href="{{ site.data.socials.zenodo_archive_url }}">Zenodo archive</a>
+      <a href="{{ '/about-me/' | relative_url }}">About &amp; research profile</a>
       <a href="{{ '/research-index/' | relative_url }}">Full research index</a>
     <a href="{{ site.data.socials.pypi_profile_url }}">PyPI</a>
       <a href="{{ site.data.socials.google_scholar_profile_url }}">Google Scholar</a>

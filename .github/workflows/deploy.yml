@@ -104,6 +104,10 @@ jobs:
           bundle exec jekyll build
       - name: Verify paper archive has 13 drafts 📄
         run: node scripts/verify-paper-archive.mjs
+      - name: Verify public academic profile and AI discovery files
+        run: |
+          node scripts/validate-research-index.mjs
+          node scripts/verify-public-profile.mjs
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss

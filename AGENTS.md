@@ -4,6 +4,9 @@ This repository is a personalized academic portfolio built on the pluginized al-
 
 ## Public Research and AI Discoverability
 
+- The expanded public academic identity has a dedicated source at `_data/profile.yml` and a human-readable page at `/about-me/` (`_pages/profile.md`). Keep the biography and name variant synchronized across the homepage, ProfilePage JSON-LD, llms.txt and the JSON catalog via that shared data file. CV dates, positions and degree completion still come from `_data/cv.yml`; manuscript status, coauthors and conclusions still come from each paper's front matter. Preserve these precedence rules.
+- `/about-me/` is intentionally linked from the homepage and research index without changing the fixed site navigation. It must remain a real HTML page for humans and crawlers; `llms.txt` alone does not guarantee indexing. For details and indexing steps see `docs/AI_DISCOVERABILITY.md`.
+
 - **First stop for research facts:** `_pages/papers/` and `_data/cv.yml`. The generated `/research-index/`, `/research-catalog.json`, and `/llms.txt` read from those records; do not manually duplicate manuscript statuses in multiple discovery pages.
 - Read `docs/AI_DISCOVERABILITY.md` before edits affecting research descriptions, Schema.org, SEO, crawlers, or academic profiles.
 - **Distinguish Under Review, Under Revision, Working Draft, Research Lecture, Research Tutorial, Accepted, and Published.** Never infer acceptance, DOI, or journal publication from a manuscript PDF template, a journal name, or a search snippet.
