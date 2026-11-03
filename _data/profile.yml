@@ -1,0 +1,32 @@
+# Public biographical framing. Keep dates, roles, and manuscript statuses in
+# _data/cv.yml and the individual paper detail records; do not duplicate them here.
+# This file is consumed by the homepage, /about-me/, /llms.txt, and JSON catalog.
+full_name: "Heriberto Espino Montelongo"
+alternate_names:
+  - "Heriberto Espino-Montelongo"
+location: "Puebla, Mexico"
+institution_name: "Universidad de las Américas Puebla"
+institution_url: "https://www.udlap.mx/"
+short_bio: >-
+  Heriberto Espino Montelongo (also publishing as Heriberto Espino-Montelongo)
+  is an undergraduate researcher and research software developer at Universidad
+  de las Américas Puebla (UDLAP), Mexico, studying Actuarial Science and Data
+  Science. His work spans stochastic geometry and proximity graphs,
+  probabilistic modeling, penalized least-squares trend estimation,
+  interpretable machine learning, and quantitative finance.
+extended_bio: >-
+  His mathematical research addresses empty-region proximity graphs and
+  stochastic-geometric laws, while related projects study smoothness-indexed
+  trends, financial risk and derivatives, and controlled CNN interpretability.
+  He also develops and maintains open-source mathematical and analytical
+  software, and has worked on statistical analysis for academic decision
+  support. This portfolio distinguishes submitted manuscripts from working
+  drafts, technical articles, lectures, tutorials, and citable software.
+research_interests:
+  - "Stochastic geometry and random geometric graphs"
+  - "Computational geometry and proximity graphs"
+  - "Probability, stochastic processes, and statistical inference"
+  - "Penalized least-squares smoothing and time-series trends"
+  - "Interpretable machine learning and CNN interventions"
+  - "Quantitative finance, derivatives, and financial risk"
+  - "Scientific software and reproducible computation"
