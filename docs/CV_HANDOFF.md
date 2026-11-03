@@ -1102,3 +1102,11 @@ Regression: source checks verify button position, uniqueness, sticky CSS and ver
 **Late native beforeprint:** Some browsers already activate print media before firing `beforeprint`. A short-lived `data-cv-print-measuring=true` state recreates true screen-sized page-preview dimensions for the synchronous pagination pass, then drops into clean physical print content. The routine is idempotent if the user clicks Print (which also causes the browser to fire `beforeprint`). SVGs are rasterized only within the actual printable preview, not the now-hidden source. `afterprint` restores canvas-replaced SVGs, the original reading/paper density, disclosure state, screen preview and full-width source (with no duplicated hidden CV content).
 
 **Validation:** `test/visual/interactions.spec.js` now asserts `#cv-document` is hidden and the full `#cv-paged-preview` is visible under print media, with one or more forced page breaks for the full CV. It checks the selected A4/Letter size, small/large print settings, hidden page labels, single-page vertical balance and PDF byte generation; the exact same technical descriptions must be present in the document. `test/style_contract.js` prevents reintroducing source-only printing. Do not claim browser-generated PDFs are byte-identical across systems; print margins, font engines and SVG fallback behavior vary. The first objective is fidelity to the on-screen paper preview, not just a small file.
+
+## IMEF Universitario membership (2026-11-03)
+
+- Owner-confirmed membership in **IMEF Universitario** begins **Aug 2026** and is scheduled to end **Jun 2027**. The CV date uses `Aug 2026 — Jun 2027 (expected)` to avoid presenting a future end as completed.
+- The owner provided no committee or elected title. Use **Member**, not president, board member or leadership claims.
+- Keep the entry in **Selected Extracurricular Activities**, not Leadership; it contains only a membership description, not invented accomplishments.
+- Official organization URL: https://www.imef-universitario.com/ . Its own domain provides a CV organization favicon via the existing logo registry; retain the existing icon fallback.
+- Recheck the entry in both the wide CV and paper/print modes; the date and official institution link should remain visible under all templates when the section is enabled.
