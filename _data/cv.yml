@@ -45,10 +45,8 @@ cv:
         date: Aug 2025 — Present
         highlights:
           - "Research leadership: proposed questions and independently designed statistical studies."
-          - "Statistical inference: studied tutoring–grade associations in 6,627 students."
           - "Stakeholder communication: explained findings to technical and nontechnical leaders."
           - "Decision support: presented evidence and proposed university improvements."
-          - "Unsupervised learning: clustered grade distributions using KS-derived features."
           - "Reproducibility: automated Conda/Python analyses and LaTeX report generation."
           - "Dashboard engineering: built Streamlit views of academic and tutoring records."
           - "Risk screening: implemented dashboard algorithms to flag students needing support."
@@ -61,8 +59,8 @@ cv:
         date: Jun 2025 — Dec 2025
         highlights:
           - "Quant research: backtested sentiment-based portfolios with walk-forward splits."
-          - "Data engineering: built Dockerized Airflow ETL into PostgreSQL for 500 tickers."
-          - "Information retrieval: scraped and normalized 100 news items per ticker."
+          - "Data engineering: built Dockerized Airflow ETL into PostgreSQL for arbitrary tickers."
+          - "Information retrieval: scraped and normalized news items per ticker."
 
       - name: Academic Assistant — Linear Algebra
         role: "Academic Assistant"
@@ -72,8 +70,7 @@ cv:
         location: Puebla, Mexico
         date: Jan 2023 — May 2023
         highlights:
-          - "Teaching materials: authored LaTeX lectures for linear algebra students."
-          - "Mathematical exposition: standardized linear algebra diagrams and notation."
+          - "Teaching materials: translated existing LaTeX slides from English into Spanish."
       - name: Analyst — Digital Marketing & Analytics
         role: "Analyst"
         subtitle: "Digital Marketing & Analytics"
@@ -83,6 +80,7 @@ cv:
         highlights:
           - "Local analytics: configured and maintained a Google Business Profile."
           - "Geospatial listings: verified Google Maps and Waze presence."
+          - "Web development: created the business's websites."
 
     Programming Experience:
       - name: AbaQuant — Financial Mathematics Python Library
@@ -261,6 +259,8 @@ cv:
       - name: Stepping-Stone Volume Validation
         role: "Research Software Developer"
         context: "Independent research software · numerical validation"
+        icon: github
+        icon_url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants"
         date: "Jul 2026"
         links:
           - { label: DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
@@ -316,7 +316,7 @@ cv:
         role: "Research project"
         organization: "Presented at XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
         organization_url: "https://www.cimat.mx/"
-        date: Jan 2023 — May 2023
+        date: Jan 2026 — Mar 2026
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
@@ -536,6 +536,13 @@ cv:
         organization: "Model of United Nations Third Edition · WHO · Colegio Loyola"
         highlights:
           - "Facilitation: chaired a WHO outbreak-response policy simulation."
+      - name: "IMEF Universitario Membership"
+        role: "Member"
+        date: "Aug 2026 — Jun 2027 (expected)"
+        organization: "IMEF Universitario"
+        organization_url: "https://www.imef-universitario.com/"
+        highlights:
+          - "Student affiliation: member of IMEF's national university division."
 
     Schools:
       - name: "Probability, Bayesian Inference and Stochastic Modeling"
@@ -561,20 +568,16 @@ cv:
           - "Topology: studied geometric structure in complex datasets."
 
     Selected Extracurricular Activities:
-      - name: "IMEF Universitario Membership"
-        role: "Member"
-        date: "Aug 2026 — Jun 2027 (expected)"
-        organization: "IMEF Universitario"
-        organization_url: "https://www.imef-universitario.com/"
-        highlights:
-          - "Student affiliation: member of IMEF's national university division."
       - name: "William Lowell Putnam Math Competition"
         role: "Competitor"
         subtitle: "Proof-Based Undergraduate Mathematics"
         date: "Dec 2024, Dec 2025"
         organization: "Mathematical Association of America"
+        links:
+          - { label: "MAA · Mexico pilot (2024)", url: "https://maa.org/news/results-of-the-85th-william-lowell-putnam-mathematical-competition/" }
         highlights:
-          - "Proof-writing: competed in the William Lowell Putnam Competition."
+          - "University selection: one of 10 UDLAP representatives in both 2024 and 2025."
+          - "Historic cohort: joined the 2024 pilot when Putnam first included Mexican universities."
       - name: "Olimpiada Mexicana Universitaria de Matemáticas"
         role: "Competitor"
         subtitle: "Proof-Based University Mathematics"

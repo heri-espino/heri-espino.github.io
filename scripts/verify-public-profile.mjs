@@ -68,4 +68,40 @@ assert(talkHtml.includes(smmUrl), "Talk detail must link to the SMM programme");
 assert(talkHtml.includes("youtube-nocookie.com/embed/KjQFeBLJybw"), "Talk detail must embed official video");
 assert(talkHtml.includes("espino_2026_proximity-graphs-asymptotics-presentation.pdf"), "Talk detail must retain PDF action");
 
+const cvRecord = read("cv/index.html");
+const riskRecord = read("projects/latent-risk-us-market.html");
+for (const removed of [
+  "studied tutoring–grade associations in 6,627 students",
+  "clustered grade distributions using KS-derived features",
+  "authored LaTeX lectures for linear algebra students",
+  "normalized 100 news items per ticker",
+]) {
+  assert(!cvRecord.includes(removed), "Outdated owner-corrected CV claim remains: " + removed);
+}
+for (const required of [
+  "Dockerized Airflow ETL into PostgreSQL for arbitrary tickers",
+  "translated existing LaTeX slides from English into Spanish",
+  "Jan 2026 — Mar 2026",
+  "one of 10 UDLAP representatives in both 2024 and 2025",
+  "https://maa.org/news/results-of-the-85th-william-lowell-putnam-mathematical-competition/",
+]) {
+  assert(cvRecord.includes(required), "Owner-corrected CV record missing: " + required);
+}
+assert(
+  cvRecord.includes("created the business's websites") || cvRecord.includes("created the business&#39;s websites"),
+  "Paletas Loreto website-development work missing"
+);
+const cvSection = (name) => {
+  const start = cvRecord.indexOf('data-cv-section="' + name + '"');
+  assert(start >= 0, "CV section not found: " + name);
+  const end = cvRecord.indexOf("</section>", start);
+  assert(end > start, "CV section markup not closed: " + name);
+  return cvRecord.slice(start, end);
+};
+assert(cvSection("leadership").includes("IMEF Universitario Membership"), "IMEF must appear under Leadership");
+assert(!cvSection("selected-extracurricular-activities").includes("IMEF Universitario Membership"), "IMEF must not remain extracurricular");
+assert(cvRecord.includes('fa-brands fa-github cv-org-icon'), "Stepping-Stone context must show GitHub icon");
+assert(cvRecord.includes('GitHub repository for Stepping-Stone Volume Validation'), "Stepping-Stone icon must link to GitHub");
+assert(riskRecord.includes("Jan–Mar 2026"), "Latent-risk project date not synchronized");
+
 console.log("Verified profile HTML/JSON-LD, biography, identity aliases, llms.txt, catalog, and sitemap.");

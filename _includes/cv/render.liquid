@@ -319,7 +319,14 @@
                       </p>
                     {% endif %}
                     {% if entry.context %}
-                      <p class="cv-context">{{ entry.context | escape }}</p>
+                      <p class="cv-context">
+                        {% if entry.icon == 'github' and entry.icon_url %}
+                          <a class="cv-org-symbol" href="{{ entry.icon_url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository for {{ entry.name | escape }}" title="Open GitHub repository">
+                            <i class="fa-brands fa-github cv-org-icon" aria-hidden="true"></i>
+                          </a>
+                        {% endif %}
+                        {{ entry.context | escape }}
+                      </p>
                     {% endif %}
                     {% if entry.links %}
                       <p class="cv-links">
