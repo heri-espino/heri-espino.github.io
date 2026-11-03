@@ -20,6 +20,9 @@ image_alt: Title slide of Características Asintóticas de las Gráficas de Prox
 detail_image: /assets/img/portfolio/proximity-graphs-presentation-first-page.webp
 pdf: /academic-projects/espino_2026_proximity-graphs-asymptotics-presentation.pdf
 github: https://github.com/ProximityGraphs/ProximityGraphs
+resource_url: "https://www.smm.org.mx/congreso/areas/platicas#:~:text=Heriberto%20Espino%20Montelongo"
+resource_label: "Official SMM programme · Talk 8744"
+video_id: "KjQFeBLJybw"
 contributions:
   - Introduces proximity graphs as geometric graphs whose edges are selected by local acceptance rules.
   - Compares nearest-neighbor, Gabriel, relative-neighborhood, and Delaunay structures on a common point set.

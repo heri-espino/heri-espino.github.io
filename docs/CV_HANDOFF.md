@@ -1110,3 +1110,12 @@ Regression: source checks verify button position, uniqueness, sticky CSS and ver
 - Keep the entry in **Selected Extracurricular Activities**, not Leadership; it contains only a membership description, not invented accomplishments.
 - Official organization URL: https://www.imef-universitario.com/ . Its own domain provides a CV organization favicon via the existing logo registry; retain the existing icon fallback.
 - Recheck the entry in both the wide CV and paper/print modes; the date and official institution link should remain visible under all templates when the section is enabled.
+
+## SMM presentation official evidence and video (2026-11-03)
+
+- The user identified SMM talk **8744**, *Características Asintóticas de las Gráficas de Proximidad*, presented by **Heriberto Espino Montelongo** in the 59th SMM National Congress prerecorded Discrete Mathematics section. The SMM public programme at https://www.smm.org.mx/congreso/areas/platicas independently confirms the number, title, speaker and recording.
+- The SMM-hosted video link is https://youtu.be/KjQFeBLJybw. The video link was cross-checked against the corresponding programme row; it is not a guessed video ID.
+- In `_data/cv.yml` the *Academic Experience* talk title opens the official SMM listing with a text fragment `#:~:text=Heriberto%20Espino%20Montelongo`, which generally scrolls to and highlights the speaker name in supporting browsers (e.g. Chromium); the URL safely falls back to the programme without highlighting elsewhere. The CV also provides distinct **Official SMM listing · Talk 8744**, **Recorded talk · YouTube**, and **Slides and presentation details** links. Keep the existing slides portfolio URL.
+- In `_projects/proximity-graphs-asymptotics-presentation.md` the same official programme is available as a resource button and the verified YouTube recording is embedded, while retaining the locally hosted presentation PDF and GitHub source.
+- Do not claim the text fragment is a native server-side search result, or that it works in every browser. Fallback: `Ctrl+F` / `Cmd+F` for `Heriberto Espino Montelongo` or `8744`.
+- Production regression: `scripts/verify-public-profile.mjs` checks the generated CV and presentation HTML for the authoritative official link and embedded video, including retained slides PDF. The SMM source may change; recheck links if the conference moves its programme.

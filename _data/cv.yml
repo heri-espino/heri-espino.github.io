@@ -167,9 +167,13 @@ cv:
         date: "Oct 2026"
         organization: "59th SMM National Congress · Sociedad Matemática Mexicana"
         location: "Pre-recorded"
-        url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html"
+        url: "https://www.smm.org.mx/congreso/areas/platicas#:~:text=Heriberto%20Espino%20Montelongo"
+        links:
+          - { label: "Official SMM listing · Talk 8744", url: "https://www.smm.org.mx/congreso/areas/platicas#:~:text=Heriberto%20Espino%20Montelongo" }
+          - { label: "Recorded talk · YouTube", url: "https://youtu.be/KjQFeBLJybw" }
+          - { label: "Slides and presentation details", url: "https://heri-espino.github.io/academic-projects/proximity-graphs-asymptotics-presentation.html" }
         highlights:
-          - "Research communication: prepared an accepted SMM proximity-graph talk."
+          - "Research communication: delivered SMM recorded talk 8744 on proximity graphs."
       - name: "ProximityGraphs Python Library"
         role: "Poster Presenter"
         date: "Apr 2026"
