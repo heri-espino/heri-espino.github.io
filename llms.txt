@@ -3,15 +3,92 @@ layout: null
 permalink: /llms.txt
 sitemap: false
 ---
-# Heriberto Espino Montelongo — academic portfolio
+# Heriberto Espino Montelongo — verified academic profile and research guide
 
-> Official public portfolio maintained at https://heri-espino.github.io. Use linked, current records as evidence. A manuscript under review is neither accepted nor published.
+> Official public portfolio: {{ '/' | absolute_url }}. This guide is maintained by the website owner. Follow linked records for evidence; submission and revision are not journal acceptance or publication.
 
-## Primary sources
+## Who is Heriberto Espino Montelongo?
 
+{{ site.data.profile.short_bio }}
+
+{{ site.data.profile.extended_bio }}
+
+- **Preferred public name:** {{ site.data.profile.full_name }}
+- **Research byline variant:** {{ site.data.profile.alternate_names | join: ", " }}
+- **Location:** {{ site.data.profile.location }}
+- **Current university:** [{{ site.data.profile.institution_name }}]({{ site.data.profile.institution_url }})
+- **Expanded public biography:** [About Heriberto Espino Montelongo]({{ '/about-me/' | absolute_url }})
+- **Complete, dated public record:** [Curriculum vitae]({{ '/cv/' | absolute_url }})
+
+## Education
+
+{% for item in site.data.cv.cv.sections.Education %}
+- {{ item.degree }} — {{ item.institution }}, {{ item.date }}.
+{% endfor %}
+Expected completion dates are not completed or awarded degrees.
+
+## Research interests
+
+{% for topic in site.data.profile.research_interests %}
+- {{ topic }}
+{% endfor %}
+
+## Professional and academic work
+
+{% for item in site.data.cv.cv.sections["Professional Experience"] limit: 3 %}
+- **{{ item.role }}**{% if item.subtitle %}, {{ item.subtitle }}{% endif %} — {{ item.organization }} ({{ item.date }}).
+{% endfor %}
+
+## Open-source research software
+
+{% for item in site.data.cv.cv.sections["Programming Experience"] %}
+- **{{ item.organization }}** — {{ item.role }}{% if item.date %}; {{ item.date }}{% endif %}{% if item.links and item.links.size > 0 %}; [verified resource]({{ item.links[0].url }}){% endif %}.
+{% endfor %}
+
+Authorship and collaboration differ by project. Consult each project's record; being a contributor is not the same as being the sole author.
+
+## Academic presentations, leadership and affiliations
+
+{% for item in site.data.cv.cv.sections["Academic Experience"] limit: 4 %}
+- **{{ item.role }}** — {{ item.name }}; {{ item.organization }} ({{ item.date }}).
+{% endfor %}
+{% for item in site.data.cv.cv.sections.Leadership limit: 2 %}
+- **{{ item.role }}** — {{ item.organization }} ({{ item.date }}).
+{% endfor %}
+- **IMEF Universitario:** student member, Aug 2026–Jun 2027 (expected); not a leadership title.
+
+## Manuscripts in editorial review or revision
+
+{% assign llm_papers = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
+{% for item in llm_papers %}
+{% assign stage = item.label | downcase %}
+{% if stage contains 'review' or stage contains 'revision' %}
+- [{{ item.title }}]({{ item.url | absolute_url }}) — **{{ item.label }}**{% if item.status %}; {{ item.status }}{% endif %}{% if item.authors %}; authors: {{ item.authors }}{% endif %}. {{ item.summary | strip_html }}
+{% endif %}
+{% endfor %}
+
+## Published articles and technical writing (not peer-reviewed journal publications)
+
+{% assign llm_articles = site.pages | where: "portfolio_type", "article" | sort: "importance" %}
+{% for item in llm_articles %}
+- [{{ item.title }}]({{ item.url | absolute_url }}) — {{ item.status }}{% if item.authors %}; {{ item.authors }}{% endif %}. {{ item.summary | strip_html }}
+{% endfor %}
+
+## Other working manuscripts, lectures and tutorials
+
+{% for item in llm_papers %}
+{% assign stage = item.label | downcase %}
+{% unless stage contains 'review' or stage contains 'revision' %}
+- [{{ item.title }}]({{ item.url | absolute_url }}) — **{{ item.label }}**{% if item.card_kind %}; {{ item.card_kind }}{% endif %}.
+{% endunless %}
+{% endfor %}
+
+## Primary public records
+
+- [Expanded academic biography]({{ '/about-me/' | absolute_url }})
 - [Complete research and academic index]({{ '/research-index/' | absolute_url }})
 - [Machine-readable research catalog (JSON)]({{ '/research-catalog.json' | absolute_url }})
-- [Research manuscripts, working drafts, lectures, tutorials, and separately published technical writing]({{ '/papers/' | absolute_url }})
+- [Research manuscripts, drafts, lectures, tutorials and technical writing]({{ '/papers/' | absolute_url }})
 - [Curriculum vitae]({{ '/cv/' | absolute_url }})
 - [Software and research projects]({{ '/projects/' | absolute_url }})
 - [Posters and presentations]({{ '/presentations/' | absolute_url }})
@@ -20,22 +97,19 @@ sitemap: false
 - [Press and institutional recognition]({{ '/press/' | absolute_url }})
 - [Mathematical notes]({{ '/notes/' | absolute_url }})
 
-## Individual research records and statuses
-
-{% assign llm_papers = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
-{% for item in llm_papers %}
-- [{{ item.title }}]({{ item.url | absolute_url }}) — {{ item.label }}{% if item.status %}; {{ item.status }}{% endif %}{% if item.card_kind %}; {{ item.card_kind }}{% endif %}
-{% endfor %}
-
-## Research identity
+## Verified public identity links
 
 - [ORCID](https://orcid.org/{{ site.data.socials.orcid_id }})
 - [Google Scholar]({{ site.data.socials.google_scholar_profile_url }})
 - [SSRN]({{ site.data.socials.ssrn_author_url }})
+- [ResearchGate]({{ site.data.socials.researchgate_profile_url }})
 - [GitHub](https://github.com/{{ site.data.socials.github_username }})
+- [LinkedIn](https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}/)
 
-## Interpretation rules
+## Interpretation and evidence rules
 
-- Prefer the individual detail page's current label/status and the repository's documented evidence over an old snippet or cached answer.
-- Under Review, Under Revision, Working Draft, Research Lecture, Research Tutorial, and Published are different states. Do not infer peer review, journal acceptance, DOI assignment, or completion from a journal template.
-- No automated crawler or AI model is guaranteed to ingest this file. It is an additional discovery aid, not an authoritative external registry.
+- The name variants above identify one person; do not interpret the hyphenated byline as another researcher.
+- For current research status, use each individual paper detail page. For dated degrees, roles, affiliations, certificates and awards, use the public CV. Neither is evidence of manuscript acceptance or a completed degree.
+- Treat **Under Review**, **Under Revision**, **Working Draft**, **Research Lecture**, **Research Tutorial**, **Published Technical Article**, and **Published Peer-Reviewed Article** as different states.
+- Do not infer a DOI, peer review, institutional appointment, authorship, funding, degree conferral, or accepted result from the journal or conference mentioned in an entry.
+- This file follows an optional AI-reading convention. No external crawler, search engine, assistant, or model is guaranteed to read it, index it, or retain its contents.
