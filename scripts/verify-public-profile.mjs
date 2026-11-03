@@ -81,17 +81,25 @@ for (const removed of [
 for (const required of [
   "Dockerized Airflow ETL into PostgreSQL for arbitrary tickers",
   "translated existing LaTeX slides from English into Spanish",
-  "created the business&#39;s websites",
   "Jan 2026 — Mar 2026",
   "one of 10 UDLAP representatives in both 2024 and 2025",
   "https://maa.org/news/results-of-the-85th-william-lowell-putnam-mathematical-competition/",
 ]) {
   assert(cvRecord.includes(required), "Owner-corrected CV record missing: " + required);
 }
-const leadership = cvRecord.match(/data-cv-section="leadership"[\\s\\S]*?<\\/section>/);
-const extracurricular = cvRecord.match(/data-cv-section="selected-extracurricular-activities"[\\s\\S]*?<\\/section>/);
-assert(leadership?.[0].includes("IMEF Universitario Membership"), "IMEF must appear under Leadership");
-assert(!extracurricular?.[0].includes("IMEF Universitario Membership"), "IMEF must not remain extracurricular");
+assert(
+  cvRecord.includes("created the business's websites") || cvRecord.includes("created the business&#39;s websites"),
+  "Paletas Loreto website-development work missing"
+);
+const cvSection = (name) => {
+  const start = cvRecord.indexOf('data-cv-section="' + name + '"');
+  assert(start >= 0, "CV section not found: " + name);
+  const end = cvRecord.indexOf("</section>", start);
+  assert(end > start, "CV section markup not closed: " + name);
+  return cvRecord.slice(start, end);
+};
+assert(cvSection("leadership").includes("IMEF Universitario Membership"), "IMEF must appear under Leadership");
+assert(!cvSection("selected-extracurricular-activities").includes("IMEF Universitario Membership"), "IMEF must not remain extracurricular");
 assert(cvRecord.includes('fa-brands fa-github cv-org-icon'), "Stepping-Stone context must show GitHub icon");
 assert(cvRecord.includes('GitHub repository for Stepping-Stone Volume Validation'), "Stepping-Stone icon must link to GitHub");
 assert(riskRecord.includes("Jan–Mar 2026"), "Latent-risk project date not synchronized");
