@@ -57,4 +57,15 @@ assert(about.includes("IMEF Universitario"), "Public biography omits organizatio
 assert(index.includes("about-me/"), "Research index must link to expanded profile");
 assert(sitemap.includes("/about-me/"), "Sitemap must advertise the profile");
 
+const cvHtml = read("cv/index.html");
+const talkHtml = read("academic-projects/proximity-graphs-asymptotics-presentation.html");
+const smmUrl = "https://www.smm.org.mx/congreso/areas/platicas#:~:text=Heriberto%20Espino%20Montelongo";
+assert(cvHtml.includes(smmUrl), "CV talk title must link to SMM listing with a speaker text fragment");
+assert(cvHtml.includes("Official SMM listing · Talk 8744"), "CV talk must provide an official-programme link");
+assert(cvHtml.includes("https://youtu.be/KjQFeBLJybw"), "CV talk must provide the verified recording");
+assert(cvHtml.includes("Slides and presentation details"), "CV must preserve local presentation details");
+assert(talkHtml.includes(smmUrl), "Talk detail must link to the SMM programme");
+assert(talkHtml.includes("youtube-nocookie.com/embed/KjQFeBLJybw"), "Talk detail must embed official video");
+assert(talkHtml.includes("espino_2026_proximity-graphs-asymptotics-presentation.pdf"), "Talk detail must retain PDF action");
+
 console.log("Verified profile HTML/JSON-LD, biography, identity aliases, llms.txt, catalog, and sitemap.");
