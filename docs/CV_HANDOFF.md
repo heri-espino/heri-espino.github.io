@@ -1119,3 +1119,16 @@ Regression: source checks verify button position, uniqueness, sticky CSS and ver
 - In `_projects/proximity-graphs-asymptotics-presentation.md` the same official programme is available as a resource button and the verified YouTube recording is embedded, while retaining the locally hosted presentation PDF and GitHub source.
 - Do not claim the text fragment is a native server-side search result, or that it works in every browser. Fallback: `Ctrl+F` / `Cmd+F` for `Heriberto Espino Montelongo` or `8744`.
 - Production regression: `scripts/verify-public-profile.mjs` checks the generated CV and presentation HTML for the authoritative official link and embedded video, including retained slides PDF. The SMM source may change; recheck links if the conference moves its programme.
+
+## Owner-supplied CV accuracy corrections (2026-11-03)
+
+- In the Mathematics Learning Center role, removed the 6,627-student tutoring-grade association statement and the KS-feature clustering highlight by explicit owner request. Do not restore them from old CV exports; independently sourced research pages are unchanged.
+- In Actinver, kept Dockerized Airflow-to-PostgreSQL ETL and per-ticker news retrieval, but replaced unsupported fixed sample counts with variable ticker coverage and unquantified news items.
+- In the Linear Algebra Academic Assistant role, the owner **only translated existing LaTeX presentations from English to Spanish**. Do not describe the role as authoring lectures, developing original teaching materials, or standardizing diagrams.
+- In Paletas Loreto, included owner-reported creation of the business's websites. No specific domains, launch dates, or frontend technologies were supplied; do not invent them.
+- Moved **IMEF Universitario Membership** from Selected Extracurricular Activities to **Leadership** at the user's request, retaining **Member** (not an elected/managerial position) and the original Aug 2026–Jun 2027 (expected) period.
+- The Putnam CV entry now describes university selection among **10 UDLAP representatives in both 2024 and 2025**, as reported by the owner. The [MAA announcement](https://maa.org/news/results-of-the-85th-william-lowell-putnam-mathematical-competition/) independently establishes that **2024 was the first pilot year including Mexican universities**. The individual UDLAP selection count comes from the owner, not from the MAA article. Do not misrepresent participation as a top-10 global Putnam finish or a competitive medal.
+- Changed the latent-risk research-project period from the erroneous Jan–May 2023 to **Jan–Mar 2026**; synchronized the related portfolio project's display_date to Jan–Mar 2026 without changing its paper/poster or coauthor claims.
+- The Stepping-Stone Volume Validation research-software CV record retains its verified GitHub link and now has a dedicated linked **GitHub brand icon**, instead of inventing an institutional employer or incorrectly claiming Python-only implementation. The generic `entry.icon: github` / `entry.icon_url` rendering is opt-in and respects the CV's Show icons toggle; the existing DOI and portfolio links remain.
+- Regenerate site HTML from `_data/cv.yml` and check `scripts/verify-public-profile.mjs`, not edited output. Maintain compact print highlights within 94 characters and separate editing from pre-existing global baseline CI failures.
+
