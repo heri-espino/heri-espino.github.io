@@ -11,7 +11,7 @@ label: Course Project
 presentation_type: Poster
 status: Latent risk index
 authors: Heriberto Espino Montelongo, Owen Paredes Conde, and Pedro José García Guevara
-display_date: "2026"
+display_date: "Jan–Mar 2026"
 summary: Poster project proposing a latent financial-risk index from representative global signals such as implied volatility, oil, gold, and the dollar index. The workflow combines dynamic factor modeling with penalized least-squares smoothing and Guerrero-style smoothness selection through validation.
 formula: 'X_t=\Lambda f_t+e_t,\qquad \min_{\tau}\sum_t(R_t-\tau_t)^2+\lambda\sum_t(\nabla^d\tau_t-m)^2'
 framing: "Noisy market variables are compressed into a common latent factor and then smoothed into an interpretable risk-monitoring index."
