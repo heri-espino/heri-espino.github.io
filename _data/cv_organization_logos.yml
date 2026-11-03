@@ -3,6 +3,9 @@
 - match: "preety good quantum oe"
   logo: "/assets/img/cv-organizations/preety-good-quantum.webp"
 # CV-only name matching. Put specific names before broad matches.
+# Official student division: use its own website favicon rather than the parent IMEF identity.
+- match: "imef universitario"
+  logo: "https://www.google.com/s2/favicons?domain=imef-universitario.com&sz=128"
 # Reuse credential_issuers.yml whenever an issuer has an existing logo.
 # Other URLs use the favicon of an identifiable official website; these are
 # organizational marks, not endorsements. No invented logos for informal labels.
