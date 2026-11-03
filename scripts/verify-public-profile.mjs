@@ -68,4 +68,32 @@ assert(talkHtml.includes(smmUrl), "Talk detail must link to the SMM programme");
 assert(talkHtml.includes("youtube-nocookie.com/embed/KjQFeBLJybw"), "Talk detail must embed official video");
 assert(talkHtml.includes("espino_2026_proximity-graphs-asymptotics-presentation.pdf"), "Talk detail must retain PDF action");
 
+const cvRecord = read("cv/index.html");
+const riskRecord = read("projects/latent-risk-us-market.html");
+for (const removed of [
+  "studied tutoring–grade associations in 6,627 students",
+  "clustered grade distributions using KS-derived features",
+  "authored LaTeX lectures for linear algebra students",
+  "normalized 100 news items per ticker",
+]) {
+  assert(!cvRecord.includes(removed), "Outdated owner-corrected CV claim remains: " + removed);
+}
+for (const required of [
+  "Dockerized Airflow ETL into PostgreSQL for arbitrary tickers",
+  "translated existing LaTeX slides from English into Spanish",
+  "created the business&#39;s websites",
+  "Jan 2026 — Mar 2026",
+  "one of 10 UDLAP representatives in both 2024 and 2025",
+  "https://maa.org/news/results-of-the-85th-william-lowell-putnam-mathematical-competition/",
+]) {
+  assert(cvRecord.includes(required), "Owner-corrected CV record missing: " + required);
+}
+const leadership = cvRecord.match(/data-cv-section="leadership"[\\s\\S]*?<\\/section>/);
+const extracurricular = cvRecord.match(/data-cv-section="selected-extracurricular-activities"[\\s\\S]*?<\\/section>/);
+assert(leadership?.[0].includes("IMEF Universitario Membership"), "IMEF must appear under Leadership");
+assert(!extracurricular?.[0].includes("IMEF Universitario Membership"), "IMEF must not remain extracurricular");
+assert(cvRecord.includes('fa-brands fa-github cv-org-icon'), "Stepping-Stone context must show GitHub icon");
+assert(cvRecord.includes('GitHub repository for Stepping-Stone Volume Validation'), "Stepping-Stone icon must link to GitHub");
+assert(riskRecord.includes("Jan–Mar 2026"), "Latent-risk project date not synchronized");
+
 console.log("Verified profile HTML/JSON-LD, biography, identity aliases, llms.txt, catalog, and sitemap.");
