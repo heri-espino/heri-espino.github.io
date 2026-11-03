@@ -6,7 +6,11 @@ description: Public academic record and research status index for Heriberto Espi
 nav: false
 ---
 
-This is a **public, source-linked index** of the research and academic work of **Heriberto Espino Montelongo**, a researcher and student at Universidad de las Américas Puebla (UDLAP), Mexico. It is generated from the same content records as the main portfolio; it is not an independent claim of journal publication.
+This is a **public, source-linked index** of the research and academic work of **Heriberto Espino Montelongo**, an undergraduate researcher and student at Universidad de las Américas Puebla (UDLAP), Mexico. It is generated from the same content records as the main portfolio; it is not an independent claim of journal publication.
+
+{{ site.data.profile.short_bio }}
+
+For degree timelines, research software, professional experience, presentations, affiliations, and name variants, see the [expanded academic biography]({{ '/about-me/' | relative_url }}) and [public CV]({{ '/cv/' | relative_url }}).
 
 **Publication-status key:** *Under Review* means submitted and undergoing editorial or peer review, **not** accepted or published. *Under Revision* indicates a revision stage, not acceptance. *Working Draft*, *Research Lecture*, and *Research Tutorial* are not journal publications. The status displayed on each individual record is authoritative for that record; discrepancies should be reconciled with documented evidence, not guessed.
 
