@@ -1132,3 +1132,10 @@ Regression: source checks verify button position, uniqueness, sticky CSS and ver
 - The Stepping-Stone Volume Validation research-software CV record retains its verified GitHub link and now has a dedicated linked **GitHub brand icon**, instead of inventing an institutional employer or incorrectly claiming Python-only implementation. The generic `entry.icon: github` / `entry.icon_url` rendering is opt-in and respects the CV's Show icons toggle; the existing DOI and portfolio links remain.
 - Regenerate site HTML from `_data/cv.yml` and check `scripts/verify-public-profile.mjs`, not edited output. Maintain compact print highlights within 94 characters and separate editing from pre-existing global baseline CI failures.
 
+## La Catarina first-author correction and semantic CV highlighting (2026-11-04)
+
+- The owner confirmed first authorship of the La Catarina AbaQuant technical article. The publisher's byline at https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/ lists Heriberto Espino Montelongo **first**, then Owen Paredes Conde. Use **First Author · Published Technical Article** in the CV to convey byline order, not sole authorship or peer-reviewed journal status.
+- Remove the redundant CV bullet `Technical writing: coauthored an AbaQuant article with Owen Paredes Conde.`. Preserve both names on the article detail page and the original publication link.
+- The CV's semibold `cv-keyword` treatment is no longer a global term highlighter. Emphasize only the **complete initial label before the colon** in the `cv-highlights` descriptions; emphasize each case-folded label **once across the source CV** and leave all technical-skills values in normal weight. Thus `Stochastic geometry:` remains intact and `PyTorch:` receives at most one bold label, even when it appears in several course descriptions.
+- The script processes the original source CV, and timeline/paper/print preview clone that DOM. Do not duplicate highlighting or change original prose. No-JS reading remains plain text. Playwright and style-contract tests guard this behavior.
+
