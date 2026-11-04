@@ -564,9 +564,17 @@ if (exists("_pages/cv.md")) {
   }
   if (!exists(abaImagePath) ||
       fs.readFileSync(path.join(root, abaImagePath)).toString("ascii", 4, 12) !== "ftypavif" ||
-      !abaCvSection.includes('Coauthor · Published Technical Article') ||
-      !abaCvSection.includes("articles/abaquant-finanzas-matematicas.html")) {
+      !abaCvSection.includes('First Author · Published Technical Article') ||
+      !abaCvSection.includes("articles/abaquant-finanzas-matematicas.html") ||
+      abaCvSection.includes("Technical writing: coauthored an AbaQuant article with Owen Paredes Conde.")) {
     failures.push("AbaQuant image asset and separate CV technical-writing entry are required.");
+  }
+  if (!cvScript.includes("const emphasizedLabels = new Set()") ||
+      !cvScript.includes('root.querySelectorAll("#cv-document .cv-highlights li")') ||
+      !cvScript.includes('emphasized.textContent = label + ":"') ||
+      cvScript.includes("const keywords = [") ||
+      !abaArticle.includes("first-listed author")) {
+    failures.push("CV must highlight complete, nonrepeating labels and preserve AbaQuant author order.");
   }
   const trendDraft = read("_pages/papers/smoothness-integrated-trend-distances.md");
   const archiveUI = read("assets/js/portfolio-views.js");
