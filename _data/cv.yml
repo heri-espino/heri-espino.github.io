@@ -407,7 +407,7 @@ cv:
 
     Published Articles & Technical Writing:
       - name: "AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo"
-        role: "Coauthor · Published Technical Article"
+        role: "First Author · Published Technical Article"
         organization: "La Catarina · Universidad de las Américas Puebla · IMEF Universitario"
         date: "26 Oct 2026"
         location: Puebla, Mexico
@@ -416,7 +416,6 @@ cv:
           - { label: Read original, url: "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/" }
           - { label: AbaQuant software, url: "https://github.com/AbaQuant/AbaQuant" }
         highlights:
-          - "Technical writing: coauthored an AbaQuant article with Owen Paredes Conde."
           - "Science communication: explained open-source derivatives and risk analytics."
 
 
