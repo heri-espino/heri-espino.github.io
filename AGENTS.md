@@ -66,6 +66,10 @@ Do not rename routes or navigation labels without an explicit request.
 
 ## CV State and Print Workflow
 
+- For the La Catarina AbaQuant technical article, the publisher's first-listed author is Heriberto Espino Montelongo; the CV role is `First Author · Published Technical Article` (not a peer-reviewed journal paper, not sole authorship). Preserve Owen Paredes Conde as coauthor in article metadata.
+- CV semibold description emphasis should cover a complete label before the colon (e.g. `Stochastic geometry:`) at most once across the source, and should not repeat `PyTorch:` emphasis or highlight scattered software terms throughout technical skills. See `docs/CV_HANDOFF.md`.
+
+
 - The public CV is enabled at `/cv/`, linked from the homepage and top navigation.
 - The structured, public source of truth is `_data/cv.yml`. Keep claims, dates, institutions, and links backed by evidence; edit the data before editing output markup.
 - `_includes/cv/render.liquid` renders the page, `assets/js/cv-customize.js` handles chronological sorting, section selection, and print controls, and `_sass/_cv.scss` contains page-scoped styles.

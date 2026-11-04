@@ -87,40 +87,30 @@
     return year ? Date.UTC(Number(year[1]), 0, 1) : null;
   };
 
-  // Semibold emphasis of technical terminology without changing source data.
-  // Operate on text nodes only: never interpolate arbitrary content into HTML.
-  const keywords = [
-    "GitHub Actions", "penalized least squares", "stochastic processes", "finite differences", "Springer Nature", "SN Computer Science", "activation patching",
-    "logit additivity", "Monte Carlo", "mathematical OCR", "Deep Learning",
-    "Machine Learning", "Bayesian", "Python", "PyTorch", "TensorFlow",
-    "Matplotlib", "Docling", "LaTeX", "NumPy", "SciPy", "Ruff",
-    "pytest", "CatBoost", "XGBoost", "PostgreSQL", "Docker",
-    "Airflow", "Streamlit", "Qiskit", "optimization", "stochastic"
-  ];
-  const escaped = keywords.map((word) => word.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"));
-  const keywordPattern = new RegExp("\\b(" + escaped.join("|") + ")\\b", "gi");
-  root.querySelectorAll(".cv-highlights li, .cv-skills dd").forEach((target) => {
-    const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach((node) => {
-      const source = node.nodeValue || "";
-      keywordPattern.lastIndex = 0;
-      if (!keywordPattern.test(source)) return;
-      keywordPattern.lastIndex = 0;
-      const fragment = document.createDocumentFragment();
-      let offset = 0;
-      for (const match of source.matchAll(keywordPattern)) {
-        if (match.index > offset) fragment.appendChild(document.createTextNode(source.slice(offset, match.index)));
-        const element = document.createElement("span");
-        element.className = "cv-keyword";
-        element.textContent = match[0];
-        fragment.appendChild(element);
-        offset = match.index + match[0].length;
-      }
-      if (offset < source.length) fragment.appendChild(document.createTextNode(source.slice(offset)));
-      node.replaceWith(fragment);
-    });
+  // Highlight full semantic lead-ins ("Stochastic geometry:"), not scattered
+  // software tokens or a substring such as "Stochastic" inside a phrase.
+  // Labels repeat across projects/courses; emphasize only their first occurrence.
+  // The grouped timeline, paper preview and print clone this source DOM.
+  const emphasizedLabels = new Set();
+  root.querySelectorAll("#cv-document .cv-highlights li").forEach((item) => {
+    const node = item.firstChild;
+    if (!node || node.nodeType !== Node.TEXT_NODE) return;
+    const source = node.nodeValue || "";
+    const match = source.match(/^(\s*)([^:\n]{2,55}):(\s*)/);
+    if (!match) return;
+    const label = match[2].trim();
+    const canonical = label.toLocaleLowerCase("en");
+    if (emphasizedLabels.has(canonical)) return;
+    emphasizedLabels.add(canonical);
+
+    const fragment = document.createDocumentFragment();
+    if (match[1]) fragment.appendChild(document.createTextNode(match[1]));
+    const emphasized = document.createElement("span");
+    emphasized.className = "cv-keyword";
+    emphasized.textContent = label + ":";
+    fragment.appendChild(emphasized);
+    fragment.appendChild(document.createTextNode(source.slice(match[0].length - match[3].length)));
+    node.replaceWith(fragment);
   });
 
   const entries = sections.flatMap((section, sectionIndex) =>

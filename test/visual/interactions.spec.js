@@ -540,6 +540,25 @@ test("CV skill bullets occupy exactly one complete line in print and paper previ
 });
 
 
+test("CV emphasizes full unique labels, never repetitive software tokens", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const source = page.locator("#cv-document");
+  const labels = await source.locator(".cv-highlights .cv-keyword").allTextContents();
+  expect(labels).toContain("Stochastic geometry:");
+  expect(labels).not.toContain("Stochastic:");
+  expect(labels.filter((label) => label === "PyTorch:")).toHaveLength(1);
+  expect(new Set(labels.map((label) => label.toLowerCase())).size).toBe(labels.length);
+  await expect(source.locator(".cv-skills .cv-keyword")).toHaveCount(0);
+  await expect(source.getByText("First Author · Published Technical Article", { exact: false })).toHaveCount(1);
+  await expect(source.getByText("Technical writing: coauthored an AbaQuant article", { exact: false })).toHaveCount(0);
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const preview = page.locator("#cv-paged-preview");
+  await expect(preview.locator(".cv-keyword", { hasText: "Stochastic geometry:" }).first()).toBeAttached();
+  await expect(preview.locator(".cv-keyword", { hasText: "PyTorch:" })).toHaveCount(1);
+});
+
 test("CV native Print uses A4 and Letter paper preview pages instead of the wide source", async ({ page }, testInfo) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
