@@ -104,4 +104,7 @@ assert(cvRecord.includes('fa-brands fa-github cv-org-icon'), "Stepping-Stone con
 assert(cvRecord.includes('GitHub repository for Stepping-Stone Volume Validation'), "Stepping-Stone icon must link to GitHub");
 assert(riskRecord.includes("Jan–Mar 2026"), "Latent-risk project date not synchronized");
 
+assert(cvRecord.includes("First Author · Published Technical Article"), "AbaQuant must indicate first author");
+assert(!cvRecord.includes("Technical writing: coauthored an AbaQuant article with Owen Paredes Conde."),
+  "Remove redundant coauthoring bullet from the CV");
 console.log("Verified profile HTML/JSON-LD, biography, identity aliases, llms.txt, catalog, and sitemap.");
