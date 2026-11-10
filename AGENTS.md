@@ -327,3 +327,36 @@ The JFM/Wiley submission remains listed and unchanged. Production guard
 `scripts/verify-paper-archive.mjs` validates both the exclusions and
 the preserved detail routes. Historical count notes elsewhere in
 this file describe the archival state before this request.
+
+
+## Mathematical notes consolidated into Research Drafts (2026-11-10)
+
+The owner retired the public **Notes** navigation/homepage category and
+requested adding the 31-page handwritten `notes on trend estimation.pdf`
+upload as a research draft. Do **not** delete existing sources or PDFs.
+The `/notes/` landing route now contains a migration notice and
+`nav: false`; individual note URLs are preserved. The existing
+`Random Variables as Vectors` note was reclassified as
+`portfolio_type: paper` so it appears in **Working Drafts & Ongoing
+Research** alongside the new trend-estimation research-notebook page
+`/papers/handwritten-trend-estimation-notes.html`.
+This is an unsubmitted handwritten notebook, not a journal paper.
+
+The new entry is also in the CV's **Research Drafts** (7 entries,
+up from 6), using a stable paper-detail URL and related GitHub code.
+The Papers archive shows 4 submitted, 1 published technical article
+and **8 visible working-draft/research-note entries** (up from 6).
+The old six paper listing exclusions remain in force.
+
+**Binary provenance blocker:** The owner uploaded a 31-page scanned PDF
+in ChatGPT. The manuscript text is *not machine-extractable* and the
+original PDF has **not** been transferred into the GitHub repository.
+No public `pdf:` or CV PDF hyperlink is included until the original
+bytes are uploaded. Never substitute a different trend-estimation
+paper or claim the original has been hosted. The new detail page is
+an explicitly characterized notebook overview with thematic summaries
+grounded in the visible handwritten pages (1–26); pages 27–31
+are blank. Use the user's original upload when completing PDF asset
+transfer, with checksum and an actual repository-backed URL.
+The `_pages/notes.md` migration route remains to avoid breaking prior
+links, but should not be re-added to top navigation.

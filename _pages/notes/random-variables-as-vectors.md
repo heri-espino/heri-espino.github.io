@@ -1,14 +1,12 @@
 ---
 layout: portfolio-item
 permalink: /notes/random-variables-as-vectors.html
-portfolio_type: note
+portfolio_type: paper
 importance: 1
-nav: true
-nav_order: 30
 title: "Random Variables as Vectors: Geometry of L², Projections, Variance, and Bias"
 card_title: Random Variables as Vectors in L²
-label: Notes
-status: In progress
+label: Research Notes
+status: Expository research notes · In progress
 authors: Heriberto Espino Montelongo
 display_date: Jun 2026
 summary: 'In-progress notes formalizing random variables as vectors in the Hilbert space \(L^2(\Omega,\mathcal{F},\mathbb{P})\). They interpret expectation and conditional expectation as orthogonal projections, variance and bias-variance as Pythagorean decompositions, and Chapman-Kolmogorov as a tower-property identity.'

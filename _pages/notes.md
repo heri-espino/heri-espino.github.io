@@ -1,18 +1,11 @@
 ---
 layout: page
-title: Notes
+title: Research Notes
 permalink: /notes/
-description: Mathematical notes in probability and related areas.
-nav: true
-nav_order: 4
+description: Former notes archive; mathematical notes now appear among research drafts.
+nav: false
 ---
 
-{% assign items = site.pages | where: "portfolio_type", "note" | sort: "importance" %}
+The standalone Notes archive has been retired. Its research notes are now listed in [Working Drafts & Ongoing Research]({{ '/papers/#working-drafts' | relative_url }}), alongside other ongoing research.
 
-<div class="portfolio-grid" data-portfolio-archive data-collection-label="Notes" data-view="list">
-  {% for item in items %}
-    {% include portfolio/card.liquid item=item %}
-  {% endfor %}
-</div>
-
-<script src="{{ '/assets/js/portfolio-views.js' | relative_url }}" defer></script>
+Existing individual note pages and their original PDFs remain available at their previous addresses.

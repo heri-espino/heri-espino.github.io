@@ -25,7 +25,7 @@ const pdfs = {
   "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
 };
 const expectedSubmitted = 4;
-const expectedDrafts = 6;
+const expectedDrafts = 8;
 const hiddenSlugs = new Set([
   "smoothness-integrated-trend-distances",
   "dynamic-forecast-optimal-smoothness",
@@ -206,6 +206,25 @@ for (const slug of slugs) {
   }
 }
 
+// A separate Notes category was retired. Both mathematical note records
+// must now appear in Research Drafts, retaining the old random-variables URL.
+for (const [url, title] of [
+  ["/papers/handwritten-trend-estimation-notes.html", "Handwritten Notes on Penalized Trend Estimation"],
+  ["/notes/random-variables-as-vectors.html", "Random Variables as Vectors"],
+]) {
+  const dest = path.join(site, url.replace(/^\//, ""));
+  if (!drafts.includes(`href="${url}"`) || !fs.existsSync(dest) || !read(dest).includes(title)) {
+    errors.push(`Research Notes record missing from visible working drafts or detail pages: ${url}`);
+  }
+}
+const formerNotesArchive = path.join(site, "notes", "index.html");
+if (!fs.existsSync(formerNotesArchive) || !read(formerNotesArchive).includes("standalone Notes archive has been retired")) {
+  errors.push("Former /notes/ archive must retain a migration notice.");
+}
+if (html.includes('id="notes"') || html.includes('data-collection-label="Notes"')) {
+  errors.push("Notes must not reappear as a separate Papers category.");
+}
+
 // The user hid six *listings*, not the underlying pages, PDFs or previews.
 for (const [url, source] of hiddenRoutes) {
   const outputPage = path.join(site, url.replace(/^\//, ""));
@@ -224,6 +243,9 @@ if (!fs.existsSync(homepage)) {
   errors.push("Homepage missing while checking hidden Papers previews");
 } else {
   const homeHTML = read(homepage);
+  if (homeHTML.includes('id="notes"') || homeHTML.includes("Browse the complete notes archive")) {
+    errors.push("Homepage still renders the retired Notes section");
+  }
   for (const [url] of hiddenRoutes) {
     if (homeHTML.includes(`href="${url}"`)) {
       errors.push(`Hidden paper is still promoted in homepage Papers section: ${url}`);
@@ -236,4 +258,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} visible drafts; six unlisted paper records and all PDFs preserved.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} visible drafts (including two research notes); six unlisted paper records and all prior PDFs preserved.`);

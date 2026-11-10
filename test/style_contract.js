@@ -606,7 +606,7 @@ if (exists("_pages/cv.md")) {
   const archiveCSS = read("_sass/_portfolio.scss");
   const credentialsPage = read("_pages/credentials.md");
   const credentialsJS = read("assets/js/credentials.js");
-  const portfolioArchivePaths = ["_pages/projects.md", "_pages/notes.md", "_pages/press.md"];
+  const portfolioArchivePaths = ["_pages/projects.md", "_pages/press.md"];
   for (const archivePath of portfolioArchivePaths) {
     const source = read(archivePath);
     if (!source.includes('data-portfolio-archive') || !source.includes('data-view="list"')) {
@@ -630,6 +630,23 @@ if (exists("_pages/cv.md")) {
       !credentialsJS.includes('view.value = "list"') ||
       !archiveCSS.includes('.credentials-list[data-view="compact"]')) {
     failures.push("Credentials must share the collapsed control and compact-list behavior.");
+  }
+  const notesPage = read("_pages/notes.md");
+  const homePage = read("_pages/about.md");
+  const siteHeader = read("_includes/header.liquid");
+  const handwritten = read("_pages/papers/handwritten-trend-estimation-notes.md");
+  const randomVectors = read("_pages/notes/random-variables-as-vectors.md");
+  if (siteHeader.includes("Notes|/notes/") ||
+      homePage.includes('id="notes" title="Notes"') ||
+      homePage.includes('assign featured_notes') ||
+      !notesPage.includes("nav: false") ||
+      !notesPage.includes("standalone Notes archive has been retired") ||
+      !handwritten.includes("portfolio_type: paper") ||
+      !handwritten.includes("Handwritten working notes · Not submitted") ||
+      !randomVectors.includes("portfolio_type: paper") ||
+      !cvSources.includes("Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization") ||
+      !cvSources.includes("papers/handwritten-trend-estimation-notes.html")) {
+    failures.push("Both mathematical research notes must be catalogued under Research Drafts, without a Notes navbar/homepage section.");
   }
   const papersArchive = read("_pages/papers.md");
   if (!papersArchive.includes('data-collection-label="Papers" data-view="list"') ||
@@ -682,7 +699,7 @@ if (exists("_pages/cv.md")) {
   }
   const archiveCheck = read("scripts/verify-paper-archive.mjs");
   if (!archiveCheck.includes("const expectedSubmitted = 4;") ||
-      !archiveCheck.includes("const expectedDrafts = 6;") ||
+      !archiveCheck.includes("const expectedDrafts = 8;") ||
       !archiveCheck.includes("hiddenRoutes") ||
       !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
     failures.push("Rendered Papers archive checks must preserve four submissions, six visible drafts and six hidden public detail pages.");
@@ -692,8 +709,8 @@ if (exists("_pages/cv.md")) {
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 10 || draftCount !== 6) {
-    failures.push("CV must retain 10 Research records (including the submitted Wiley JFM manuscript) and 6 drafts.");
+  if (researchCount !== 10 || draftCount !== 7) {
+    failures.push("CV must retain 10 Research records (including the submitted Wiley JFM manuscript) and 7 drafts, including the trend-estimation notebook.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||

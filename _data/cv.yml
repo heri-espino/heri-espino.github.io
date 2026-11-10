@@ -397,6 +397,17 @@ cv:
         highlights:
           - "Convex optimization: explained Max-Cut SDP relaxations and low-rank EVA."
           - "Experimental reproducibility: compared rounding methods on G-set instances."
+      - name: "Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization"
+        role: "Author · Research Notes (Not Submitted)"
+        context: "Handwritten mathematical research notebook"
+        date: "Oct 2026"
+        location: Puebla, Mexico
+        links:
+          - { label: Research notes, url: "https://heri-espino.github.io/papers/handwritten-trend-estimation-notes.html" }
+          - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Penalized least squares: explored finite-difference smoothness and bias–variance."
+          - "Optimization: differentiated smoothing operators and studied CV minima."
       - name: Mathematical Notes on Random Variables as Vectors in L²
         context: "Expository probability and Hilbert-space analysis"
         role: "Mathematical notes"
