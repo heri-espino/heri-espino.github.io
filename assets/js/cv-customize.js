@@ -77,6 +77,40 @@
     sectionOrderRows.length !== sections.length
   ) return;
 
+  // Animate disclosure height without replacing native <details>/<summary>.
+  // The user can still activate every section by keyboard, and reduced-motion
+  // preferences, print and the paper preview never depend on animations.
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  sourceDocument.querySelectorAll("#cv-sections > .cv-section > details.cv-details").forEach((detail) => {
+    const summary = detail.querySelector(":scope > summary");
+    if (!summary) return;
+    let motion = null;
+    summary.addEventListener("click", (event) => {
+      if (root.dataset.cvPreview !== "reading" ||
+          root.dataset.cvPrinting === "true" || reducedMotion.matches) return;
+      event.preventDefault();
+      if (motion) motion.finish();
+      const opening = !detail.open;
+      const startHeight = detail.getBoundingClientRect().height;
+      if (opening) detail.open = true;
+      const endHeight = opening ? detail.scrollHeight : summary.getBoundingClientRect().height;
+      detail.dataset.cvInteraction = opening ? "opening" : "closing";
+      detail.style.overflow = "hidden";
+      const animation = detail.animate(
+        [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+        { duration: 280, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" }
+      );
+      motion = animation;
+      animation.addEventListener("finish", () => {
+        if (motion !== animation) return;
+        if (!opening) detail.open = false;
+        detail.style.overflow = "";
+        delete detail.dataset.cvInteraction;
+        motion = null;
+      }, { once: true });
+    });
+  });
+
   // Sort by the first calendar date, not by the present-day end of an ongoing role.
   // This is also correct for date ranges such as "Aug 2023 — Dec 2026 (expected)".
   const months = {
@@ -218,10 +252,9 @@
     "Education": "Education and training",
     "Professional Experience": "Work experience",
     "Academic Experience": "Academic work experience",
-    "Volunteering": "Volunteering experience",
     "Programming Experience": "Software development experience",
-    "Research": "Research and publications",
-    "Research Drafts": "Research drafts and related materials",
+    "Submitted Manuscripts": "Submitted Manuscripts",
+    "Manuscripts": "Manuscripts",
     "Technical Skills": "Digital and technical skills",
     "Languages": "Language skills",
     "Credentials": "Certificates and credentials",
@@ -236,14 +269,14 @@
   const sectionContainer = sourceDocument.querySelector("#cv-sections");
   const europassOrder = [
     "Professional Experience", "Programming Experience", "Academic Experience",
-    "Volunteering", "Education", "Credentials", "Schools",
-    "Languages", "Technical Skills", "Research", "Research Drafts",
+    "Education", "Credentials", "Schools",
+    "Languages", "Technical Skills", "Submitted Manuscripts", "Manuscripts",
     "Published Articles & Technical Writing", "Selected Academic Projects",
     "Leadership", "Awards", "Selected Extracurricular Activities"
   ];
   // A custom order is a browser-local preference. Keep YAML untouched and
   // respect the Europass default sequence until the reader customizes it.
-  const sectionOrderStorageKey = "cv-section-order-v1";
+  const sectionOrderStorageKey = "cv-section-order-v2";
   const defaultSectionIds = sections.map((section) => section.dataset.cvSection);
   const sectionById = new Map(sections.map((section) => [section.dataset.cvSection, section]));
   let customSectionIds = null;
@@ -329,7 +362,7 @@
   });
   const europassGroup = (section) => ({
     "Languages": "PERSONAL SKILLS",
-    "Research": "ADDITIONAL INFORMATION"
+    "Submitted Manuscripts": "ADDITIONAL INFORMATION"
   })[section.dataset.cvTitle] || "";
   const syncSectionOrder = () => {
     sectionContainer.querySelectorAll(":scope > .cv-europass-group-heading").forEach((heading) => heading.remove());
@@ -668,8 +701,8 @@
     panelToggle.title = open ? "Hide CV settings" : "Show CV settings";
     const chevron = panelToggle.querySelector("i");
     if (chevron) {
-      chevron.classList.toggle("fa-chevron-right", !open);
-      chevron.classList.toggle("fa-chevron-left", open);
+      chevron.classList.toggle("fa-chevron-left", !open);
+      chevron.classList.toggle("fa-chevron-right", open);
     }
     requestAnimationFrame(() => renderPagedPreview());
   };
@@ -679,7 +712,7 @@
     controls.order.value = "sections";
     customSectionIds = null;
     try { window.localStorage.removeItem(sectionOrderStorageKey); } catch (_error) { /* Storage disabled. */ }
-    controls.template.value = "personal";
+    controls.template.value = "minimal";
     controls.font.value = "site";
     controls.paper.value = "a4";
     viewDensity.reading = "balanced";
@@ -687,7 +720,7 @@
     controls.density.value = "balanced";
     controls.markers.value = "dashes";
     controls.palette.value = "default";
-    controls.accent.value = "#00104c";
+    controls.accent.value = "#123b63";
     controls.printUrls.checked = false;
     controls.size.value = "regular";
     controls.margin.value = "latex";
