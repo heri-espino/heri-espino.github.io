@@ -329,6 +329,57 @@ test("core pages no longer emit jQuery-style runtime errors", async ({ page }) =
 
 
 
+test("CV sections collapse independently while the paper preview retains their entries", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+
+  const sections = page.locator("#cv-sections > .cv-section");
+  const disclosures = page.locator("#cv-sections > .cv-section > details.cv-details");
+  const sectionCount = await sections.count();
+  expect(sectionCount).toBeGreaterThan(8);
+  await expect(disclosures).toHaveCount(sectionCount);
+
+  const education = page.locator('#cv-sections [data-cv-section="education"]');
+  await expect(education.locator(".cv-date")).toHaveText([
+    "Aug 2023 — Dec 2026 (expected)",
+    "Aug 2021 — Dec 2026 (expected)",
+  ]);
+  const details = education.locator("details.cv-details");
+  await expect(details).toHaveAttribute("open", "");
+  await details.locator("summary").click();
+  await expect(details).not.toHaveAttribute("open", "");
+  await expect(education.locator(".cv-entry").first()).toBeHidden();
+
+  // A disclosure only changes the reading view: printing must retain its records.
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  await expect(page.locator("#cv-paged-preview")).toContainText("Dec 2026 (expected)");
+  await expect(page.locator("#cv-paged-preview")).toContainText("Data Science");
+  await page.locator("#cv-preview").click();
+  await expect(details).not.toHaveAttribute("open", "");
+});
+
+test("CV section order can be changed, survives reload, and resets to source order", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const sections = page.locator("#cv-sections > .cv-section");
+  const originalIds = await sections.evaluateAll((nodes) => nodes.map((node) => node.dataset.cvSection));
+  expect(originalIds.length).toBeGreaterThan(8);
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator(".cv-section-picker > summary").click();
+  const second = originalIds[1];
+  await page.locator(`[data-cv-order-item="${second}"] [data-cv-move="up"]`).click();
+  await expect(sections.first()).toHaveAttribute("data-cv-section", second);
+  await expect(page.locator("#cv-section-order-list > .cv-section-order-item").first())
+    .toHaveAttribute("data-cv-order-item", second);
+
+  await page.reload({ waitUntil: "networkidle" });
+  await expect(sections.first()).toHaveAttribute("data-cv-section", second);
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-reset").click();
+  await expect(sections.first()).toHaveAttribute("data-cv-section", originalIds[0]);
+  expect(await page.evaluate(() => localStorage.getItem("cv-section-order-v1"))).toBeNull();
+});
+
 test("CV Harvard paper preview preserves the organization/role and city/date corners", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await expect(page.locator("#cv-print")).toBeHidden();
