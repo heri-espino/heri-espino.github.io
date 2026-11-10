@@ -2197,9 +2197,11 @@
     padding: 0;
   }
 
-  /* Reserve space only inside the name/header, not beside every entry. */
+  /* The toggle occupies only the right edge of the name header, leaving
+     the full CV width available below the header. */
   .cv-page[data-cv-preview="reading"] .cv-intro {
-    padding-left: 3.45rem;
+    padding-left: 0;
+    padding-right: 3.45rem;
   }
 
   .cv-page .cv-controls-toolbar,
@@ -2208,7 +2210,8 @@
     position: absolute;
     z-index: 30;
     top: 2.15rem;
-    left: 0;
+    left: auto;
+    right: 0;
     width: 42px;
     display: flex;
     flex-direction: column;
@@ -2230,7 +2233,8 @@
     position: absolute;
     z-index: 29;
     top: 8.25rem;
-    left: 0;
+    left: auto;
+    right: 0;
     width: min(21rem, calc(100% - 1rem));
     max-height: min(74vh, 42rem);
     overflow-y: auto;
@@ -2241,7 +2245,8 @@
 
   @media (max-width: 520px) {
     .cv-page[data-cv-preview="reading"] .cv-intro {
-      padding-left: 2.85rem;
+      padding-left: 0;
+      padding-right: 2.85rem;
     }
     .cv-page .cv-controls-toolbar,
     .cv-page[data-cv-tools="open"] .cv-controls-toolbar,
@@ -2930,4 +2935,46 @@
 .cv-page #cv-sections .cv-details[open] > summary::after {
   transform: rotate(225deg);
   margin-bottom: -0.2rem;
+}
+
+/* CV disclosures animate only after an explicit user interaction.
+   Native details stay open/readable without JS and are fully expanded for
+   paper preview and printing. Reduced-motion users see no animation. */
+@media screen {
+  @keyframes cv-section-enter {
+    from { opacity: 0; transform: translateY(-0.35rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes cv-section-exit {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-0.2rem); }
+  }
+
+  .cv-page[data-cv-preview="reading"] .cv-details[data-cv-interaction="opening"] > .cv-details-body {
+    animation: cv-section-enter 260ms ease-out both;
+  }
+
+  .cv-page[data-cv-preview="reading"] .cv-details[data-cv-interaction="closing"] > .cv-details-body {
+    animation: cv-section-exit 200ms ease-in both;
+  }
+
+  .cv-page #cv-sections .cv-details > summary::after {
+    transition: transform 180ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-page .cv-details > .cv-details-body {
+    animation: none !important;
+  }
+  .cv-page #cv-sections .cv-details > summary::after {
+    transition: none !important;
+  }
+}
+
+@media print {
+  .cv-page .cv-details > .cv-details-body {
+    animation: none !important;
+  }
 }

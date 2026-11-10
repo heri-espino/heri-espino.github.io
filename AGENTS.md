@@ -75,8 +75,8 @@ Do not rename routes or navigation labels without an explicit request.
 - `_includes/cv/render.liquid` renders the page, `assets/js/cv-customize.js` handles chronological sorting, section selection, and print controls, and `_sass/_cv.scss` contains page-scoped styles.
 - Available printable designs are **Personal · navy**, **Harvard-inspired · classic** (not official), **Europass-inspired · European CV** (independent, not EU-issued), **Modern minimal**, **Research editorial**, and **Compact professional**, all one column. The latter is not an official university template. Changing fonts, accent colors, paper size, spacing, margins, content visibility, print entry inclusion, live preview mode, and included sections must not alter the underlying CV data. Titles should link to sourced resource URLs, and institution/employer links require verified YAML values.
 - Institution/organization marks on the CV are defined in `_data/cv_organization_logos.yml`; reuse `_data/credential_issuers.yml` where possible. Load logos only from documented organization sources and retain the generic accessible-name-preserving pictogram fallback when an asset is missing or blocked. The **Show icons** toggle hides both. Never invent a third-party logo.
-- The on-screen preview assembles numbered A4/Letter sheets from visible records; the original `#cv-document` remains the only printable source. The browser Print / Save as PDF dialog controls final pagination. A collapsible left settings panel retains a persistent print/export button, even when the panel is hidden. Keep all records readable without JavaScript.
-- As of 2026-11-09, all CV sections are native open-by-default disclosures. The left settings panel includes section include/exclude checkboxes plus drag and accessible Up/Down section reordering. Reorder persists only in browser `localStorage` (`cv-section-order-v1`), with Reset restoring YAML order. Paper preview and printing always contain selected entries even when their reading-view sections are collapsed. The user-confirmed expected graduation date is December 2026 for **both** Data Science and Actuarial Science; `_data/cv.yml` is canonical. Preserve Europass's default section order until manually overridden.
+- The on-screen preview assembles numbered A4/Letter sheets from visible records; the original `#cv-document` remains the only printable source. The browser Print / Save as PDF dialog controls final pagination. A right-anchored name-header settings toggle opens a floating panel with a sticky print/export button; no persistent gutter is reserved. Keep all records readable without JavaScript.
+- As of 2026-11-09, all CV sections are native open-by-default disclosures. The right-anchored settings panel includes section include/exclude checkboxes plus drag and accessible Up/Down section reordering. Reorder persists only in browser `localStorage` (`cv-section-order-v2`), with Reset restoring YAML order. Paper preview and printing always contain selected entries even when their reading-view sections are collapsed. The user-confirmed expected graduation date is December 2026 for **both** Data Science and Actuarial Science; `_data/cv.yml` is canonical. Preserve Europass's default section order until manually overridden.
 - The LaTeX source and original PDF may contain private contact details and remain outside this public repository. Do not check in the uploaded source or private PDF merely to provide a downloadable CV.
 - The uploaded XeLaTeX variant uses Helvetica Neue when available and a portable font fallback otherwise; inspect every compiled page and logs after changes.
 - See `docs/CV_HANDOFF.md` for usage, validation, and the remaining fact-check checklist.
@@ -199,9 +199,9 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 
 - Harvard CV template: preserve the owner-requested four-corner **header only**: **organization + logo** left/top, **role/title** left/below; **city/state** right/top, **date** right/below. This style is scoped to `data-cv-template="harvard"` and applies to wide, paper preview and print. It must not turn the CV into two content columns, hide source links, add icons to job titles, or override the em-dash description setting. Unaffiliated research can show its factual `context` above the role, not a fabricated institution. Regression guard is in `test/style_contract.js`.
 
-- The CV settings-chevron is **name-anchored**, not viewport-fixed: positioned absolutely beside the CV header. A Print / Save PDF button now lives **inside the expanded Display/customization panel** at `#cv-print` (the owner explicitly reinstated a menu action); no extra floating print icon/left rail is permitted. Ctrl+P / Cmd+P still works. They scroll away with the header and must **not reserve a left rail/gutter** for the remainder of the document. Expanding the customization menu overlays a scrollable panel without shifting the icons or CV body. The header alone gets a compact inset. Keep them excluded from print. See `test/style_contract.js`.
+- The CV settings-chevron is **name-anchored on the far RIGHT**, not viewport-fixed: positioned absolutely beside the CV header. A Print / Save PDF button now lives **inside the expanded Display/customization panel** at `#cv-print` (the owner explicitly reinstated a menu action); no extra floating print icon/left rail is permitted. Ctrl+P / Cmd+P still works. They scroll away with the header and must **not reserve a left rail/gutter** for the remainder of the document. Expanding the customization menu overlays a scrollable panel without shifting the icons or CV body. The header alone gets **right** padding for the toggle. Keep them excluded from print. See `test/style_contract.js`.
 
-- CV research is separated into **Research** (10 records: 4 journal manuscripts, 4 internal research reports, 1 latent-risk project and 1 volume-validation software record) and **Research Drafts** (6 records: unsubmitted manuscripts, tutorial/lecture and mathematical notes). Source order is in `_data/cv.yml`; both sections must be available in settings and chronological/print views. Do not relabel a lecture or tutorial as a journal submission.
+- **Current CV research structure (2026-11-10):** `Submitted Manuscripts` holds **4** journal submissions, followed by `Manuscripts` with **13** non-submitted drafts and related research records (seven earlier Research Drafts, four internal reports, one latent-risk project, one volume-validation software record). Each item retains its explicit actual stage/type; do **not** describe the lecture/tutorial/reports/software as submitted manuscripts. Both sections are located directly after Professional Experience in `_data/cv.yml`, before Programming Experience. The retired Volunteering entry is preserved only in `_data/cv_archived.yml`. All sections remain reorderable and printable. Prior Research / Research Drafts labels are historical.
 - The three earlier submitted manuscripts (not all first-authored) have user-confirmed CV and paper-page display dates: **Unit-Region Factorization — Jun 2026**, **Stepping–Stone — Aug 2026**, **When Do Activation-Patching Effects Add Up? — Oct 2026**. Do not attach `— Present` to submission-month dates. Preserve original review statuses pending direct evidence of changes. The SN Computer Science organizational line is **not** a hyperlink; remove only its `organization_url`, leaving portfolio/PDF/reproducibility links untouched.
 
 - **AbaQuant published writing:** The La Catarina 26 Oct 2026 `AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo` article is coauthored by Heriberto Espino Montelongo and Owen Paredes Conde. It belongs in the Papers page's separate **Published Articles & Technical Writing** category (and matching CV section), not in Press & Media, Submitted Manuscripts or Working Drafts. Its page uses `portfolio_type: article` and the owner-supplied local AVIF screenshot. Keep the 4 submitted / 12 drafts counts and 1 published-article count in rendered-page checks. See `docs/CV_HANDOFF.md`.
@@ -360,3 +360,41 @@ are blank. Use the user's original upload when completing PDF asset
 transfer, with checksum and an actual repository-backed URL.
 The `_pages/notes.md` migration route remains to avoid breaking prior
 links, but should not be re-added to top navigation.
+
+
+## CV layout and disclosure controls (2026-11-10; latest)
+
+The owner requested **Modern Minimal** as the *default and Reset* template,
+on both wide and mobile displays. The other five templates remain selectable.
+In the default grouped view the section order is: Education, Professional
+Experience, **Submitted Manuscripts (4)**, **Manuscripts (13)**, then
+Programming Experience and the existing remaining sections. The former
+`Research` and `Research Drafts` records are reorganized, not discarded.
+Only the four genuine submissions belong under Submitted Manuscripts. The
+`Manuscripts` label is an umbrella for working manuscripts, internal reports,
+software research, project work, mathematical notes and teaching documents;
+preserve their actual item-specific role/status labels.
+
+**Volunteering is removed from the visible CV**, including paper preview,
+print, timeline and section picker. The original Xalmimilulco research service
+item remains in `_data/cv_archived.yml` (provenance only). Do not inadvertently
+render that archive file through Jekyll.
+
+The settings toggle now resides at the **right side of the owner's name**,
+with right-side header padding and a right-aligned flyout panel; keep all
+other CV content full-width. The collapsed toggle points left, the expanded
+toggle points right. This must remain keyboard accessible, and the controls
+must be excluded from print.
+
+All native `<details>` sections remain open on initial load and usable
+without JavaScript. User interactions in reading mode animate height with
+the Web Animations API (280 ms) and a subtle entrance/exit fade. Under
+`prefers-reduced-motion: reduce` native, nonanimated toggling is preserved.
+Preview and print always include selected entries irrespective of collapsed
+reading-view state and do not run disclosure animations.
+
+Reorder storage was intentionally changed to `cv-section-order-v2`, because
+the old `v1` section IDs no longer exist. Reset clears `v2` and restores
+the new canonical YAML order. Europass retains its separate European
+section sequence until explicitly reordered; the underlying record fields,
+dates, PDF links and journal statuses must not change.

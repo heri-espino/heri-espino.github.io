@@ -377,12 +377,72 @@ test("CV section order can be changed, survives reload, and resets to source ord
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-reset").click();
   await expect(sections.first()).toHaveAttribute("data-cv-section", originalIds[0]);
-  expect(await page.evaluate(() => localStorage.getItem("cv-section-order-v1"))).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem("cv-section-order-v2"))).toBeNull();
+});
+
+test("CV defaults to Modern Minimal with right-hand settings and the requested research order", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const cv = page.locator("#cv-page");
+  await expect(cv).toHaveAttribute("data-cv-template", "minimal");
+  await expect(page.locator("#cv-template")).toHaveValue("minimal");
+
+  const sections = await page.locator("#cv-sections > [data-cv-section]").evaluateAll((nodes) =>
+    nodes.map((node) => node.dataset.cvSection));
+  const professional = sections.indexOf("professional-experience");
+  expect(professional).toBeGreaterThan(0);
+  expect(sections.slice(professional + 1, professional + 3)).toEqual([
+    "submitted-manuscripts", "manuscripts",
+  ]);
+  expect(sections).not.toContain("research");
+  expect(sections).not.toContain("research-drafts");
+  expect(sections).not.toContain("volunteering");
+
+  await expect(page.locator('#cv-sections [data-cv-section="submitted-manuscripts"] [data-cv-record]')).toHaveCount(4);
+  await expect(page.locator('#cv-sections [data-cv-section="manuscripts"] [data-cv-record]')).toHaveCount(13);
+  await expect(page.locator('[data-cv-order-item="volunteering"]')).toHaveCount(0);
+
+  const geometry = await page.evaluate(() => {
+    const header = document.querySelector("#cv-document .cv-intro").getBoundingClientRect();
+    const toggle = document.querySelector("#cv-panel-toggle").getBoundingClientRect();
+    return {
+      insideRightEdge: toggle.right <= header.right + 2 && toggle.right >= header.right - 7,
+      clearsNameStart: toggle.left > header.left + header.width / 2,
+    };
+  });
+  expect(geometry.insideRightEdge).toBeTruthy();
+  expect(geometry.clearsNameStart).toBeTruthy();
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-template").selectOption("harvard");
+  await page.locator("#cv-reset").click();
+  await expect(cv).toHaveAttribute("data-cv-template", "minimal");
+});
+
+test("CV sections animate on interaction but honor reduced-motion and keyboard input", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const details = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"] > details');
+  const summary = details.locator("summary");
+  await expect(details).toHaveAttribute("open", "");
+  const activeAnimations = await summary.evaluate((element) => {
+    element.click();
+    return element.closest("details").getAnimations().length;
+  });
+  expect(activeAnimations).toBeGreaterThan(0);
+  await expect(details).not.toHaveAttribute("open", "");
+  await expect(details).not.toHaveAttribute("data-cv-interaction", "closing");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await summary.focus();
+  await page.keyboard.press("Enter");
+  await expect(details).toHaveAttribute("open", "");
+  const animationsWithReducedMotion = await details.evaluate((element) => element.getAnimations().length);
+  expect(animationsWithReducedMotion).toBe(0);
 });
 
 test("CV Wiley JFM submission and Papers page expose both PDFs and their first-page previews", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-  const cvJfm = page.locator('#cv-sections [data-cv-section="research"] [data-cv-record]').filter({
+  const cvJfm = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"] [data-cv-record]').filter({
     hasText: "When Does Posterior Integration Change Option Values?",
   });
   await expect(cvJfm).toHaveCount(1);
@@ -460,7 +520,7 @@ test("CV Europass uses EU section sequence and truthful language layout", async 
     nodes.map((node) => node.dataset.cvTitle));
   expect(sections.indexOf("Professional Experience")).toBeLessThan(sections.indexOf("Education"));
   expect(sections.indexOf("Education")).toBeLessThan(sections.indexOf("Languages"));
-  expect(sections.indexOf("Languages")).toBeLessThan(sections.indexOf("Research"));
+  expect(sections.indexOf("Languages")).toBeLessThan(sections.indexOf("Submitted Manuscripts"));
   await expect(page.locator("#cv-sections .cv-europass-language-table")).toBeVisible();
   await expect(page.locator("#cv-sections .cv-europass-mother-tongue")).toContainText("Spanish");
 

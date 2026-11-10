@@ -1,10 +1,10 @@
 {% assign cv = site.data.cv.cv %}
 
-<div class="post cv-page" id="cv-page" data-cv-template="personal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="closed">
+<div class="post cv-page" id="cv-page" data-cv-template="minimal" data-cv-font="site" data-cv-density="balanced" data-cv-preview="reading" data-cv-markers="dashes" data-cv-paper="a4" data-cv-show-urls="false" data-cv-tools="closed">
   <div class="cv-workspace">
     <div class="cv-controls-column">
       <div class="cv-controls-toolbar" aria-label="CV settings">
-        <button type="button" id="cv-panel-toggle" class="cv-panel-toggle cv-icon-control" aria-controls="cv-settings-panel" aria-expanded="false" aria-label="Show CV settings" title="Show CV settings"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        <button type="button" id="cv-panel-toggle" class="cv-panel-toggle cv-icon-control" aria-controls="cv-settings-panel" aria-expanded="false" aria-label="Show CV settings" title="Show CV settings"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
       </div>
 
       <aside class="cv-tools" id="cv-settings-panel" aria-label="Customize CV" hidden>
@@ -31,7 +31,7 @@
           <option value="personal">Personal · navy</option>
           <option value="harvard">Harvard-inspired · classic</option>
           <option value="europass">Europass · European CV structure</option>
-          <option value="minimal">Modern minimal</option>
+          <option value="minimal" selected>Modern minimal</option>
           <option value="editorial">Research editorial</option>
           <option value="professional">Compact professional</option>
         </select>
@@ -231,10 +231,10 @@
             <p class="cv-europass-language-note">Listening, reading, spoken interaction, spoken production and writing are not individually assessed in the available CV data.</p>
           </div>
         {% else %}
-          <div class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Research Drafts' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
+          <div class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Submitted Manuscripts' or title == 'Manuscripts' or title == 'Programming Experience' %}cv-entry-list{% else %}cv-compact-grid{% endif %}">
             {% for entry in entries %}
               <article
-                class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Research' or title == 'Research Drafts' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
+                class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Submitted Manuscripts' or title == 'Manuscripts' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
                 data-cv-record
                 data-cv-date="{{ entry.date | default: '' | escape }}"
               >
@@ -258,7 +258,7 @@
                     </h3>
                     {% assign cv_org_name = entry.institution | default: entry.organization | default: '' | downcase %}
                     {% assign cv_academic_context = false %}
-                    {% if title == 'Education' or title == 'Academic Experience' or title == 'Awards' or title == 'Research' or title == 'Research Drafts' or title == 'Selected Academic Projects' or title == 'Schools' or title == 'Selected Extracurricular Activities' or title == 'Leadership' %}
+                    {% if title == 'Education' or title == 'Academic Experience' or title == 'Awards' or title == 'Submitted Manuscripts' or title == 'Manuscripts' or title == 'Selected Academic Projects' or title == 'Schools' or title == 'Selected Extracurricular Activities' or title == 'Leadership' %}
                       {% assign cv_academic_context = true %}
                     {% endif %}
                     {% assign cv_org_logo = nil %}
