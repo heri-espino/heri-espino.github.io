@@ -1294,3 +1294,53 @@ coverage as a thematic overview and does **not** provide a fabricated
 PDF URL. Once the original PDF is added to the public repo, add its
 verified `pdf:` metadata and CV download link, and preserve
 the exact 31-page source independently of the overview.
+
+
+## 2026-11-10: Modern Minimal default and two manuscript sections
+
+**Latest owner-confirmed CV preference.** Do not follow superseded 2026-10-28
+and 2026-11-09 Research / Research Drafts layouts when editing this version.
+
+- Default template for initial HTML (including no JS) and `Reset options` is
+  `Modern minimal` (`data-cv-template="minimal"` and the selected `#cv-template`
+  option); the original Personal/Harvard/Europass/editorial/professional
+  templates remain available, and paper view retains compact print density.
+- Section order is **Education → Professional Experience → Submitted
+  Manuscripts (4) → Manuscripts (13) → Programming Experience**, followed by
+  the preserved other categories. The 4 true submissions are Unit-Region
+  Factorization, Stepping–Stone, Activation-Patching CNNs, and Wiley's
+  posterior-integration paper. Their exact author credits, journal names,
+  submitted/revision status, PDF links and source dates remain unchanged.
+- `Manuscripts` retains **all** 7 former Research Drafts records
+  (including the October 2026 handwritten trend-estimation notebook, the
+  mathematical L² notes, and the lecture/tutorial), followed by the 6
+  non-submitted records formerly mixed into Research (4 internal reports,
+  1 latent-risk project, 1 volume-validation software record). That name
+  is a section grouping, **not a claim that every item is an academic
+  manuscript**: retain each item's actual research/lecture/report/software
+  label. Never inflate the count of submitted journal manuscripts.
+- **Volunteering** was removed from `_data/cv.yml` and therefore from the
+  rendered view, print and customization controls. Its Xalmimilulco record
+  was archived unmodified in `_data/cv_archived.yml`; it is not surfaced
+  anywhere on the public CV and is not used by Jekyll templates.
+- The settings chevron is now **right-aligned with the owner's name**.
+  CSS scopes the header-only inset to the right, without a left or right
+  permanent rail; the customization flyout is right-anchored and overlays
+  rather than shifting content. The original print button is still sticky
+  inside the settings menu. CSS print styles continue hiding all controls.
+- Native details are open by default for no-JS access. Explicit summary
+  clicks in the normal reading view use the Web Animations API to animate
+  the height over 280 ms, with a short fade/translation inside the body.
+  `prefers-reduced-motion: reduce` bypasses JavaScript animation; print
+  and the paper preview always render full included records. Keyboard
+  (Enter/Space) activation still works.
+- The reordered set has a new browser key,
+  `localStorage['cv-section-order-v2']`. The old `v1` key is deliberately
+  ignored because the Research/Research Drafts and Volunteering IDs changed.
+  `Reset options` clears `v2` and restores the YAML order and Modern
+  Minimal template. Europass's original work-before-education default
+  continues to apply when users select that template.
+- Regression tests in `test/style_contract.js` and
+  `test/visual/interactions.spec.js` check section membership, display
+  order, button geometry, browser persistence, keyboard disclosure
+  animation, reduced-motion preference and print preview.
