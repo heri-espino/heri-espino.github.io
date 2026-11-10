@@ -262,6 +262,31 @@ if (exists("_pages/cv.md")) {
     failures.push("The CV must offer a collapsible, accessible settings panel.");
   }
   // Shortcuts are anchored next to the name, not fixed to the viewport.
+  // All CV sections disclose without JavaScript, and browser-local order is
+  // distinct from the canonical YAML (also used for print/paper previews).
+  if (!cvRenderer.includes('id="cv-section-order-list"') ||
+      !cvRenderer.includes('data-cv-order-item=') ||
+      !cvRenderer.includes('data-cv-move="up"') ||
+      !cvRenderer.includes('draggable="true"') ||
+      !cvRenderer.includes('<details class="cv-details" open>') ||
+      cvRenderer.includes('{% if expandable %}')) {
+    failures.push("Every CV section must be a disclosure, with section-order controls.");
+  }
+  if (!cvScript.includes("sectionOrderStorageKey") ||
+      !cvScript.includes('row.addEventListener("dragstart"') ||
+      !cvScript.includes("renderSectionOrderControls()") ||
+      !cvScript.includes("customSectionIds = null")) {
+    failures.push("Section order must support drag/drop, keyboard-accessible moves and reset.");
+  }
+  if (!cvStyles.includes(".cv-page .cv-section-order-item") ||
+      !cvStyles.includes(".cv-page #cv-sections .cv-details > summary")) {
+    failures.push("CV sortable section controls and disclosures must remain styled.");
+  }
+  const degreeSource = read("_data/cv.yml");
+  if (!degreeSource.includes("date: Aug 2023 — Dec 2026 (expected)") ||
+      !degreeSource.includes("date: Aug 2021 — Dec 2026 (expected)")) {
+    failures.push("Both bachelor's degrees must indicate December 2026 expected completion.");
+  }
   // Closing settings must free the entire CV width, with no reserved rail.
   const nameAnchored = cvStyles.split("/* CV controls belong to the name/header, NOT the viewport.")[1] || "";
   if (!nameAnchored.includes(".cv-page[data-cv-tools=\"closed\"] .cv-workspace") ||
