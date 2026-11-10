@@ -678,7 +678,6 @@ if (exists("_pages/cv.md")) {
       researchDraftGroup.includes("Posterior Integration and Volatility Inputs in WTI Asian Options")) {
     failures.push("All four submitted manuscripts, including the Wiley JFM dual-PDF record, must remain in Research.");
   }
-  }
   if (!cvRenderer.includes("title == 'Research Drafts'") ||
       !cvScript.includes('"Research Drafts": "Research drafts and related materials"')) {
     failures.push("Research Drafts must be a first-class printable CV section with research entry styling.");
