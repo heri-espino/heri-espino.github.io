@@ -1,0 +1,13 @@
+# Removed from the public CV at the owner's request on 2026-11-10.
+# Preserved for research provenance and optional future re-inclusion.
+# This file is not referenced by _includes/cv/render.liquid.
+archived_cv_sections:
+  Volunteering:
+    - name: Water contamination analysis for Xalmimilulco
+      role: "Data Scientist"
+      context: "Community water-quality project · Xalmimilulco"
+      date: Jan 2026 — Present
+      location: Puebla, Mexico
+      highlights:
+      - "Community mapping: built geospatial water-risk dashboards for Xalmimilulco."
+
