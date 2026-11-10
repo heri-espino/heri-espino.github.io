@@ -73,6 +73,9 @@
   logo: "https://www.google.com/s2/favicons?domain=openai.com&sz=128"
 - match: "springer nature"
   logo: "https://www.google.com/s2/favicons?domain=springernature.com&sz=128"
+# Wiley publisher favicon for the submitted Journal of Futures Markets manuscript.
+- match: "wiley"
+  logo: "https://www.google.com/s2/favicons?domain=wiley.com&sz=128"
 - match: "gobierno de puebla"
   logo: "https://www.google.com/s2/favicons?domain=puebla.gob.mx&sz=128"
 - match: "government of mexico"
