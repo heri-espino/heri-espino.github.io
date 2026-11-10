@@ -252,7 +252,8 @@ if (exists("_pages/cv.md")) {
   }
   if (!cvRenderer.includes("Listening, reading, spoken interaction") ||
       !cvScript.includes('"Professional Experience", "Programming Experience", "Academic Experience"') ||
-      !cvScript.includes('"Volunteering", "Education", "Credentials", "Schools"')) {
+      !cvScript.includes('"Education", "Credentials", "Schools"') ||
+      cvScript.includes('"Volunteering",')) {
     failures.push("Europass must not fabricate CEFR subskill scores and must prioritize work before education.");
   }
   if (!cvStyles.includes('[data-cv-paginated="true"][data-cv-preview="paper"]') || !cvScript.includes('root.dataset.cvPaginated = "true"')) {
@@ -282,6 +283,36 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes(".cv-page #cv-sections .cv-details > summary")) {
     failures.push("CV sortable section controls and disclosures must remain styled.");
   }
+  // Default presentation is Modern Minimal, with the settings chevron on
+  // the right side of the owner's name and no persistent sidebar.
+  if (!cvRenderer.includes('data-cv-template="minimal" data-cv-font="site"') ||
+      !cvRenderer.includes('<option value="minimal" selected>Modern minimal</option>') ||
+      !cvScript.includes('controls.template.value = "minimal";') ||
+      !cvScript.includes('chevron.classList.toggle("fa-chevron-left", !open)') ||
+      !cvScript.includes('chevron.classList.toggle("fa-chevron-right", open)')) {
+    failures.push("Modern Minimal must be the initial and reset view, with a right-side toggle.");
+  }
+  // Only four submitted manuscripts; never reclassify reports, notebooks,
+  // lectures or tutorials as journal submissions to fill the new category.
+  const cvSource = read("_data/cv.yml");
+  const cvSectionHeads = [...cvSource.matchAll(/^    ([^:\\n]+):\\s*$/gm)].map((match) => match[1]);
+  const profIndex = cvSectionHeads.indexOf("Professional Experience");
+  if (cvSectionHeads[profIndex + 1] !== "Submitted Manuscripts" ||
+      cvSectionHeads[profIndex + 2] !== "Manuscripts" ||
+      cvSectionHeads.includes("Research") ||
+      cvSectionHeads.includes("Research Drafts") ||
+      cvSectionHeads.includes("Volunteering") ||
+      !exists("_data/cv_archived.yml")) {
+    failures.push("CV must place Submitted Manuscripts and Manuscripts directly after Professional Experience and archive Volunteering.");
+  }
+  if (!cvScript.includes("window.matchMedia(\"(prefers-reduced-motion: reduce)\")") ||
+      !cvScript.includes('detail.animate(') ||
+      !cvScript.includes('event.preventDefault()') ||
+      !cvStyles.includes("@keyframes cv-section-enter") ||
+      !cvStyles.includes("@media (prefers-reduced-motion: reduce)") ||
+      !cvStyles.includes('cv-details[data-cv-interaction="closing"]')) {
+    failures.push("CV disclosures require animated open/close plus reduced-motion and print fallbacks.");
+  }
   const degreeSource = read("_data/cv.yml");
   if (!degreeSource.includes("date: Aug 2023 — Dec 2026 (expected)") ||
       !degreeSource.includes("date: Aug 2021 — Dec 2026 (expected)")) {
@@ -294,7 +325,9 @@ if (exists("_pages/cv.md")) {
       !nameAnchored.includes("grid-template-columns: none;") ||
       !nameAnchored.includes("position: relative;") ||
       !nameAnchored.includes(".cv-page[data-cv-preview=\"reading\"] .cv-intro") ||
-      !nameAnchored.includes("padding-left: 3.45rem;") ||
+      !nameAnchored.includes("padding-right: 3.45rem;") ||
+      !nameAnchored.includes("right: 0;") ||
+      !nameAnchored.includes("left: auto;") ||
       !nameAnchored.includes("position: absolute;") ||
       !nameAnchored.includes(".cv-page #cv-settings-panel:not([hidden])") ||
       !nameAnchored.includes("overflow-y: auto;") ||
@@ -348,7 +381,7 @@ if (exists("_pages/cv.md")) {
     }
   }
   if (!cvRenderer.includes('data-cv-tools="closed"') || !cvRenderer.includes('id="cv-settings-panel" aria-label="Customize CV" hidden') ||
-      !cvRenderer.includes('aria-label="Show CV settings"') || !cvRenderer.includes('fa-chevron-right') ||
+      !cvRenderer.includes('aria-label="Show CV settings"') || !cvRenderer.includes('fa-chevron-left') ||
       !cvScript.includes('setPanelOpen(false)')) {
     failures.push("The CV must start with a collapsed, accessible chevron-only settings control.");
   }
@@ -646,7 +679,7 @@ if (exists("_pages/cv.md")) {
       !randomVectors.includes("portfolio_type: paper") ||
       !cvSources.includes("Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization") ||
       !cvSources.includes("papers/handwritten-trend-estimation-notes.html")) {
-    failures.push("Both mathematical research notes must be catalogued under Research Drafts, without a Notes navbar/homepage section.");
+    failures.push("Both mathematical research notes must remain in Manuscripts, without a Notes navbar/homepage section.");
   }
   const papersArchive = read("_pages/papers.md");
   if (!papersArchive.includes('data-collection-label="Papers" data-view="list"') ||
@@ -704,13 +737,13 @@ if (exists("_pages/cv.md")) {
       !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
     failures.push("Rendered Papers archive checks must preserve four submissions, six visible drafts and six hidden public detail pages.");
   }
-  const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
-  const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Published Articles & Technical Writing:")[0] || "";
+  const submittedResearchGroup = cvSources.split("    Submitted Manuscripts:")[1]?.split("    Manuscripts:")[0] || "";
+  const researchDraftGroup = cvSources.split("    Manuscripts:")[1]?.split("    Programming Experience:")[0] || "";
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 10 || draftCount !== 7) {
-    failures.push("CV must retain 10 Research records (including the submitted Wiley JFM manuscript) and 7 drafts, including the trend-estimation notebook.");
+  if (researchCount !== 4 || draftCount !== 13) {
+    failures.push("CV must retain four submitted manuscripts and thirteen manuscripts/related research records, including the trend-estimation notebook.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||
@@ -719,11 +752,13 @@ if (exists("_pages/cv.md")) {
       !submittedResearchGroup.includes("Wiley · The Journal of Futures Markets · Submitted") ||
       !submittedResearchGroup.includes("when-does-posterior-integration-change-option-values-supplement.pdf") ||
       researchDraftGroup.includes("Posterior Integration and Volatility Inputs in WTI Asian Options")) {
-    failures.push("All four submitted manuscripts, including the Wiley JFM dual-PDF record, must remain in Research.");
+    failures.push("All four submitted manuscripts, including the Wiley JFM dual-PDF record, must remain in Submitted Manuscripts.");
   }
-  if (!cvRenderer.includes("title == 'Research Drafts'") ||
-      !cvScript.includes('"Research Drafts": "Research drafts and related materials"')) {
-    failures.push("Research Drafts must be a first-class printable CV section with research entry styling.");
+  if (!cvRenderer.includes("title == 'Manuscripts'") ||
+      !cvRenderer.includes("title == 'Submitted Manuscripts'") ||
+      !cvScript.includes('"Manuscripts": "Manuscripts"') ||
+      !cvScript.includes('"Submitted Manuscripts": "Submitted Manuscripts"')) {
+    failures.push("Submitted Manuscripts and Manuscripts must be independent printable research sections.");
   }
   const manuscriptMonths = [
     { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
@@ -871,7 +906,7 @@ if (exists("_pages/cv.md")) {
   if (!researchDraftGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
       !researchDraftGroup.includes("Working Draft (Not Submitted)") ||
       !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
-    failures.push("The first Research Drafts entry must remain unsubmitted.");
+    failures.push("The first Manuscripts entry must remain unsubmitted.");
   }
   // Wide reading has one font/size, line-height and vertical gap between
   // title, organization, links, description, and successive highlights.
