@@ -722,7 +722,7 @@ if (exists("_pages/cv.md")) {
   const newResearchPages = [
     ["dynamic-forecast-optimal-smoothness", "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation", "Working Draft"],
     ["smoothness-indexed-pls-python", "Smoothness-Indexed Penalized Trend Estimation in Python", "Working Draft"],
-    ["posterior-integration-volatility-wti-asian-options", "Posterior Integration and Volatility Inputs in WTI Asian Options", "Working Draft"],
+    ["posterior-integration-volatility-wti-asian-options", "When Does Posterior Integration Change Option Values", "Submitted"],
     ["componentwise-knn-isomap-lecture", "Componentwise kNN-Isomap", "Research Lecture"],
     ["maxcut-sdp-eva-clustering-tutorial", "From Max-Cut to Semidefinite Programming", "Research Tutorial"],
   ];
@@ -731,7 +731,7 @@ if (exists("_pages/cv.md")) {
     "smoothness-integrated-trend-distances": "EspinoMontelongo-2026-Trend_Distances.pdf",
     "dynamic-forecast-optimal-smoothness": "EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf",
     "smoothness-indexed-pls-python": "EspinoMontelongo-2026-PLS_Python.pdf",
-    "posterior-integration-volatility-wti-asian-options": "EspinoMontelongo-2026-WTI_Asian_Options.pdf",
+    "posterior-integration-volatility-wti-asian-options": "when-does-posterior-integration-change-option-values.pdf",
     "componentwise-knn-isomap-lecture": "EspinoMontelongo-2026-Componentwise_Isomap.pdf",
     "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
   };
@@ -739,7 +739,7 @@ if (exists("_pages/cv.md")) {
     "smoothness-integrated-trend-distances": 4,
     "dynamic-forecast-optimal-smoothness": 10,
     "smoothness-indexed-pls-python": 15,
-    "posterior-integration-volatility-wti-asian-options": 9,
+    "posterior-integration-volatility-wti-asian-options": 6,
     "componentwise-knn-isomap-lecture": 29,
     "maxcut-sdp-eva-clustering-tutorial": 1,
   };
@@ -765,23 +765,41 @@ if (exists("_pages/cv.md")) {
         !researchGroup.includes("https://heri-espino.github.io/papers/" + file)) {
       failures.push("Paper and CV must both link the standardized PDF: " + slug);
     }
-    const imagePrefix = "/assets/img/portfolio/pdf-page-shots/" + slug;
+    const isSubmittedJfm = slug === "posterior-integration-volatility-wti-asian-options";
+    const imagePrefix = isSubmittedJfm
+      ? "/assets/img/portfolio/jfm-posterior-integration"
+      : "/assets/img/portfolio/pdf-page-shots/" + slug;
+    const cardImage = imagePrefix + (isSubmittedJfm ? "-figure.webp" : "-figure.avif");
+    const detailImage = imagePrefix + (isSubmittedJfm ? "-first-page.webp" : "-first.avif");
+    const matchingFigureDescription = isSubmittedJfm
+      ? pageSource.includes("Figure 1")
+      : pageSource.includes("Page " + figureSourcePages[slug] + ":") ||
+        slug === "componentwise-knn-isomap-lecture";
     if (pageSource.includes("featured: true") ||
-        !pageSource.includes("image: " + imagePrefix + "-figure.avif") ||
-        !pageSource.includes("detail_image: " + imagePrefix + "-first.avif") ||
-        !pageSource.includes("Page " + figureSourcePages[slug] + ":") && slug !== "componentwise-knn-isomap-lecture") {
-      failures.push("Draft must be unfeatured and use the correct two PDF screenshots: " + slug);
+        !pageSource.includes("image: " + cardImage) ||
+        !pageSource.includes("detail_image: " + detailImage) ||
+        !matchingFigureDescription) {
+      failures.push("Paper must be unfeatured and use its correct card/first-page screenshots: " + slug);
     }
-    for (const suffix of ["figure", "first"]) {
-      const imageFile = "assets/img/portfolio/pdf-page-shots/" + slug + "-" + suffix + ".avif";
+    const screenshotPaths = isSubmittedJfm
+      ? [
+          "assets/img/portfolio/jfm-posterior-integration-figure.webp",
+          "assets/img/portfolio/jfm-posterior-integration-first-page.webp",
+          "assets/img/portfolio/jfm-posterior-integration-supplement-first-page.webp",
+        ]
+      : ["figure", "first"].map((suffix) =>
+          "assets/img/portfolio/pdf-page-shots/" + slug + "-" + suffix + ".avif"
+        );
+    for (const imageFile of screenshotPaths) {
       if (!exists(imageFile)) {
         failures.push("PDF screenshot file missing: " + imageFile);
         continue;
       }
       const bytes = fs.readFileSync(path.join(root, imageFile));
-      if (bytes.length < 1000 || bytes.toString("ascii", 4, 12) !== "ftypavif") {
-        failures.push("Invalid or empty AVIF PDF screenshot: " + imageFile);
-      }
+      const valid = isSubmittedJfm
+        ? bytes.length > 10000 && bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP"
+        : bytes.length > 1000 && bytes.toString("ascii", 4, 12) === "ftypavif";
+      if (!valid) failures.push("Invalid or empty PDF screenshot: " + imageFile);
     }
   }
   for (const [slug, title, stage] of newResearchPages) {
