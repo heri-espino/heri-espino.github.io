@@ -6,6 +6,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 
 const slugs = [
   "smoothness-integrated-trend-distances",
@@ -19,12 +20,12 @@ const pdfs = {
   "smoothness-integrated-trend-distances": "EspinoMontelongo-2026-Trend_Distances.pdf",
   "dynamic-forecast-optimal-smoothness": "EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf",
   "smoothness-indexed-pls-python": "EspinoMontelongo-2026-PLS_Python.pdf",
-  "posterior-integration-volatility-wti-asian-options": "EspinoMontelongo-2026-WTI_Asian_Options.pdf",
+  "posterior-integration-volatility-wti-asian-options": "when-does-posterior-integration-change-option-values.pdf",
   "componentwise-knn-isomap-lecture": "EspinoMontelongo-2026-Componentwise_Isomap.pdf",
   "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
 };
-const expectedSubmitted = 3;
-const expectedDrafts = 13;
+const expectedSubmitted = 4;
+const expectedDrafts = 12;
 
 const site = path.resolve(process.argv[2] ?? "_site");
 const archivePath = path.join(site, "papers", "index.html");
@@ -90,7 +91,7 @@ if (actualSubmitted !== expectedSubmitted) {
   errors.push(`Expected ${expectedSubmitted} submitted cards, rendered ${actualSubmitted}`);
 }
 if (actualDrafts !== expectedDrafts) {
-  errors.push(`Expected ${expectedDrafts} working-draft cards (7 existing + 6 new), rendered ${actualDrafts}`);
+  errors.push(`Expected ${expectedDrafts} working-draft cards after promoting JFM, rendered ${actualDrafts}`);
 }
 if (!drafts.includes(`(${expectedDrafts})`)) {
   errors.push(`Working-drafts heading does not report (${expectedDrafts})`);
@@ -103,7 +104,13 @@ for (const slug of slugs) {
   const url = `/papers/${slug}.html`;
   const pagePath = path.join(site, "papers", `${slug}.html`);
   const sourcePath = path.resolve("_pages", "papers", `${slug}.md`);
-  const imagePrefix = `/assets/img/portfolio/pdf-page-shots/${slug}`;
+  const isJfm = slug === "posterior-integration-volatility-wti-asian-options";
+  const imagePrefix = isJfm
+    ? "/assets/img/portfolio/jfm-posterior-integration"
+    : `/assets/img/portfolio/pdf-page-shots/${slug}`;
+  const cardImage = imagePrefix + (isJfm ? "-figure.webp" : "-figure.avif");
+  const detailImage = imagePrefix + (isJfm ? "-first-page.webp" : "-first.avif");
+  const archiveSection = isJfm ? submitted : drafts;
   const pdfUrl = `/papers/${pdfs[slug]}`;
   const pdfSource = path.resolve("papers", pdfs[slug]);
   const pdfOutput = path.join(site, "papers", pdfs[slug]);
@@ -121,8 +128,8 @@ for (const slug of slugs) {
     }
   }
 
-  if (!drafts.includes(url)) {
-    errors.push(`Archive is missing its working-draft link: ${url}`);
+  if (!archiveSection.includes(url)) {
+    errors.push(`Archive has not placed this entry in the correct submitted/draft section: ${url}`);
   }
   if (!fs.existsSync(pagePath)) {
     errors.push(`Jekyll did not generate ${pagePath} (check YAML front matter)`);
@@ -131,11 +138,44 @@ for (const slug of slugs) {
   const page = read(pagePath);
   if (!page.includes(pdfUrl)) errors.push(`Detail page lacks published PDF link: ${slug}`);
   if (!page.includes("portfolio-detail") ||
-      !page.includes(`${imagePrefix}-first.avif`)) {
+      !page.includes(detailImage)) {
     errors.push(`Rendered detail page lacks the first-page preview: ${slug}`);
   }
-  if (!drafts.includes(`${imagePrefix}-figure.avif`)) {
-    errors.push(`Draft card lacks its figure-page screenshot: ${slug}`);
+  if (!archiveSection.includes(cardImage)) {
+    errors.push(`Paper card lacks its figure-page screenshot: ${slug}`);
+  }
+  if (isJfm) {
+    const supplement = "when-does-posterior-integration-change-option-values-supplement.pdf";
+    const supplementImage = "/assets/img/portfolio/jfm-posterior-integration-supplement-first-page.webp";
+    const expectedHashes = {
+      [pdfs[slug]]: "5f5063654bc62c0aab51f3620e90ab9292214dd72cdae421c4bca0ebe3986043",
+      [supplement]: "edf24cf45fbc5678911608f12b19069473d29455985b5a5c2e3fc323d5ca4111",
+    };
+    for (const [name, expectedHash] of Object.entries(expectedHashes)) {
+      for (const location of [path.resolve("papers", name), path.join(site, "papers", name)]) {
+        if (!fs.existsSync(location)) {
+          errors.push(`Missing JFM source or built PDF: ${location}`);
+          continue;
+        }
+        const digest = createHash("sha256").update(fs.readFileSync(location)).digest("hex");
+        if (digest !== expectedHash) errors.push(`JFM PDF content checksum changed: ${location}`);
+      }
+    }
+    for (const imagePath of [
+      "assets/img/portfolio/jfm-posterior-integration-figure.webp",
+      "assets/img/portfolio/jfm-posterior-integration-first-page.webp",
+      "assets/img/portfolio/jfm-posterior-integration-supplement-first-page.webp",
+    ]) {
+      if (!fs.existsSync(imagePath) || !fs.existsSync(path.join(site, imagePath))) {
+        errors.push(`Missing source or built JFM preview: ${imagePath}`);
+      }
+    }
+    if (!page.includes(supplement) || !page.includes(supplementImage)) {
+      errors.push("JFM detail page must contain the supplementary PDF and its first-page screenshot");
+    }
+    if (!submitted.includes("Submitted to The Journal of Futures Markets")) {
+      errors.push("JFM must be explicitly submitted, not an unverified draft");
+    }
   }
   if (!fs.existsSync(sourcePath)) {
     errors.push(`Markdown source missing: ${sourcePath}`);
@@ -156,4 +196,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six PDF pages and the published AbaQuant article present.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six research PDFs and the exact Wiley JFM supplementary PDF present.`);
