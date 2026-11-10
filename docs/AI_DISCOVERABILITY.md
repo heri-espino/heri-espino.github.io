@@ -84,3 +84,15 @@ The current site deliberately keeps its submitted-manuscript and working-draft g
 2. Verify the same domain in Bing Webmaster Tools, submit or import the sitemap, and investigate crawl/index coverage. Do not fabricate verification tokens or claim a console action happened without explicit account confirmation.
 3. Check the public name variants on ORCID, Google Scholar, and other confirmed author profiles; cross-link to the canonical portfolio when those services permit it.
 4. For substantive public releases, update source pages and let the normal GitHub Pages deploy refresh the sitemap. A deployment alone is not evidence of search-engine indexing.
+
+
+## Papers listing visibility versus research provenance (2026-11-09)
+
+Six historic research records have `hide_from_papers: true`. This
+prevents them from rendering as cards in the Papers archive and homepage
+Papers preview, without deleting their detail pages, documents, images,
+authors, scientific status, research index entries, or JSON catalog data.
+For a comprehensive machine-readable bibliography use
+`/research-catalog.json`, not the curated `/papers/` listing.
+The public Papers page now shows four submitted manuscripts,
+one published technical article, and six working-draft items.
