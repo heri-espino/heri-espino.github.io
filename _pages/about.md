@@ -58,7 +58,8 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   </div>
 </section>
 
-{% assign papers = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
+{% assign paper_records = site.pages | where: "portfolio_type", "paper" %}
+{% assign papers = paper_records | where_exp: "item", "item.hide_from_papers != true" | sort: "importance" %}
 {% assign projects = site.projects | sort: "importance" %}
 {% assign notes = site.pages | where: "portfolio_type", "note" | sort: "importance" %}
 {% assign portfolio_projects = projects | where: "portfolio_section", "projects" %}
