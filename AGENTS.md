@@ -297,3 +297,33 @@ independent binary previews in Git. The original older public WTI draft PDF is
 left untouched, but no longer used as the newly submitted manuscript.
 The reviewer files must stay anonymized; identifying title page, editable
 source ZIP and commercial market data are **never** exported.
+
+
+## Owner-curated Papers listing exclusions (2026-11-09)
+
+By explicit owner request, the six records listed below must **not appear as
+cards in `/papers/` or in the homepage Papers preview**, but their Markdown
+sources, compiled detail pages, PDFs, images, original research repositories,
+and CV entries must **not be removed**. Use
+`hide_from_papers: true` in the corresponding `_pages/papers/` front
+matter and apply `where_exp: "item", "item.hide_from_papers != true"`
+after selecting `portfolio_type: paper` in both `_pages/papers.md`
+and `_pages/about.md`.
+
+Unlisted sources:
+- `privileged-template-priors-cnns.md` (direct route: `/projects/cnn-primitive-bases.html`)
+- `bayesian-parameter-uncertainty-wti.md`
+- `guerrero-penalized-trend-estimation.md` (direct route: `/projects/sp500-trend-comparison.html`)
+- `smoothness-integrated-trend-distances.md`
+- `dynamic-forecast-optimal-smoothness.md`
+- `smoothness-indexed-pls-python.md`
+
+The current public Papers archive count is **4 Submitted + 1 Published
+Article + 6 Working Drafts**, rather than the historical 4+1+12. The
+six hidden research records continue to exist and remain accessible at
+their original URLs; do not remove them from the academic research
+index or machine-readable catalog without a separate user request.
+The JFM/Wiley submission remains listed and unchanged. Production guard
+`scripts/verify-paper-archive.mjs` validates both the exclusions and
+the preserved detail routes. Historical count notes elsewhere in
+this file describe the archival state before this request.
