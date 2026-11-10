@@ -82,14 +82,22 @@
       </label>
     </div>
     <details class="cv-section-picker">
-      <summary>Sections to include</summary>
-      <div class="cv-section-picker-grid">
+      <summary>Sections: include and reorder</summary>
+      <p class="cv-tools-help">Drag sections into position or use the arrow buttons. Your order is saved in this browser and applies to the grouped view and printed CV.</p>
+      <div class="cv-section-order-list" id="cv-section-order-list" role="list" aria-label="CV section order">
         {% for section_pair in cv.sections %}
           {% assign title = section_pair[0] %}
-          <label>
-            <input type="checkbox" data-cv-section-toggle="{{ title | slugify }}" checked>
-            {{ title }}
-          </label>
+          <div class="cv-section-order-item" data-cv-order-item="{{ title | slugify }}" role="listitem" draggable="true">
+            <span class="cv-section-drag-indicator" aria-hidden="true">⋮⋮</span>
+            <label>
+              <input type="checkbox" data-cv-section-toggle="{{ title | slugify }}" checked>
+              <span>{{ title }}</span>
+            </label>
+            <div class="cv-section-order-actions">
+              <button type="button" data-cv-move="up" aria-label="Move {{ title | escape }} up" title="Move up">↑</button>
+              <button type="button" data-cv-move="down" aria-label="Move {{ title | escape }} down" title="Move down">↓</button>
+            </div>
+          </div>
         {% endfor %}
       </div>
     </details>
@@ -176,22 +184,13 @@
     {% for section_pair in cv.sections %}
       {% assign title = section_pair[0] %}
       {% assign entries = section_pair[1] %}
-      {% assign expandable = false %}
-      {% if title == 'Selected Extracurricular Activities' or title == 'Credentials' %}
-        {% assign expandable = true %}
-      {% endif %}
-
       <section class="cv-section" data-cv-section="{{ title | slugify }}" data-cv-title="{{ title | escape }}" aria-labelledby="{{ title | slugify }}-heading">
-        {% if expandable %}
-          <details class="cv-details" open>
-            <summary>
-              <span id="{{ title | slugify }}-heading">{{ title }}</span>
-              <span class="cv-details-count">{{ entries.size }} entries</span>
-            </summary>
-            <div class="cv-details-body">
-        {% else %}
-          <h2 id="{{ title | slugify }}-heading">{{ title }}</h2>
-        {% endif %}
+        <details class="cv-details" open>
+          <summary>
+            <span id="{{ title | slugify }}-heading" role="heading" aria-level="2">{{ title }}</span>
+            <span class="cv-details-count">{{ entries.size }} entries</span>
+          </summary>
+          <div class="cv-details-body">
 
         {% if title == 'Technical Skills' %}
           <dl class="cv-skills">
@@ -354,10 +353,8 @@
           </div>
         {% endif %}
 
-        {% if expandable %}
           </div>
-          </details>
-        {% endif %}
+        </details>
       </section>
     {% endfor %}
   </article>

@@ -51,6 +51,8 @@
   const noEntriesButton = document.getElementById("cv-entries-none");
   const toggles = Array.from(root.querySelectorAll("[data-cv-section-toggle]"));
   const sections = Array.from(root.querySelectorAll(".cv-content [data-cv-section]"));
+  const sectionOrderList = document.getElementById("cv-section-order-list");
+  const sectionOrderRows = Array.from(sectionOrderList?.querySelectorAll("[data-cv-order-item]") || []);
 
   if (
     Object.values(controls).some((element) => !element) ||
@@ -70,11 +72,13 @@
     !entrySearch ||
     !entryOptions ||
     !allEntriesButton ||
-    !noEntriesButton
+    !noEntriesButton ||
+    !sectionOrderList ||
+    sectionOrderRows.length !== sections.length
   ) return;
 
   // Sort by the first calendar date, not by the present-day end of an ongoing role.
-  // This is also correct for date ranges such as "Aug 2023 — Dec 2027 (expected)".
+  // This is also correct for date ranges such as "Aug 2023 — Dec 2026 (expected)".
   const months = {
     jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
     jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
@@ -237,13 +241,92 @@
     "Published Articles & Technical Writing", "Selected Academic Projects",
     "Leadership", "Awards", "Selected Extracurricular Activities"
   ];
-  const orderedSections = () => root.dataset.cvTemplate !== "europass"
-    ? sections
-    : [...sections].sort((a, b) => {
-        const ai = europassOrder.indexOf(a.dataset.cvTitle);
-        const bi = europassOrder.indexOf(b.dataset.cvTitle);
-        return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
+  // A custom order is a browser-local preference. Keep YAML untouched and
+  // respect the Europass default sequence until the reader customizes it.
+  const sectionOrderStorageKey = "cv-section-order-v1";
+  const defaultSectionIds = sections.map((section) => section.dataset.cvSection);
+  const sectionById = new Map(sections.map((section) => [section.dataset.cvSection, section]));
+  let customSectionIds = null;
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(sectionOrderStorageKey) || "null");
+    if (Array.isArray(saved) && saved.length === defaultSectionIds.length &&
+        new Set(saved).size === saved.length && saved.every((id) => sectionById.has(id))) {
+      customSectionIds = saved;
+    }
+  } catch (_error) {
+    // Storage can be disabled; reordering still works during this visit.
+  }
+  const orderedSections = () => {
+    if (customSectionIds) return customSectionIds.map((id) => sectionById.get(id));
+    if (root.dataset.cvTemplate !== "europass") return sections;
+    return [...sections].sort((a, b) => {
+      const ai = europassOrder.indexOf(a.dataset.cvTitle);
+      const bi = europassOrder.indexOf(b.dataset.cvTitle);
+      return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
+    });
+  };
+  const renderSectionOrderControls = () => {
+    const ids = orderedSections().map((section) => section.dataset.cvSection);
+    ids.forEach((id, index) => {
+      const row = sectionOrderRows.find((candidate) => candidate.dataset.cvOrderItem === id);
+      if (!row) return;
+      sectionOrderList.appendChild(row);
+      row.querySelector('[data-cv-move="up"]').disabled = index === 0;
+      row.querySelector('[data-cv-move="down"]').disabled = index === ids.length - 1;
+    });
+  };
+  const saveSectionOrder = (ids) => {
+    customSectionIds = [...ids];
+    try {
+      window.localStorage.setItem(sectionOrderStorageKey, JSON.stringify(customSectionIds));
+    } catch (_error) {
+      // Keep the current in-memory selection if browser storage is unavailable.
+    }
+    render();
+  };
+  let draggedSectionId = null;
+  const clearDraggedSection = () => {
+    draggedSectionId = null;
+    sectionOrderRows.forEach((row) => row.classList.remove("is-dragging"));
+  };
+  sectionOrderRows.forEach((row) => {
+    const id = row.dataset.cvOrderItem;
+    for (const direction of ["up", "down"]) {
+      row.querySelector(`[data-cv-move="${direction}"]`).addEventListener("click", () => {
+        const ids = orderedSections().map((section) => section.dataset.cvSection);
+        const current = ids.indexOf(id);
+        const next = current + (direction === "up" ? -1 : 1);
+        if (current < 0 || next < 0 || next >= ids.length) return;
+        [ids[current], ids[next]] = [ids[next], ids[current]];
+        saveSectionOrder(ids);
       });
+    }
+    row.addEventListener("dragstart", (event) => {
+      draggedSectionId = id;
+      row.classList.add("is-dragging");
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", id);
+    });
+    row.addEventListener("dragover", (event) => {
+      if (!draggedSectionId || draggedSectionId === id) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    });
+    row.addEventListener("drop", (event) => {
+      if (!draggedSectionId || draggedSectionId === id) return;
+      event.preventDefault();
+      const ids = orderedSections().map((section) => section.dataset.cvSection);
+      const from = ids.indexOf(draggedSectionId);
+      if (from < 0) return clearDraggedSection();
+      ids.splice(from, 1);
+      const bounds = row.getBoundingClientRect();
+      const after = event.clientY > bounds.top + bounds.height / 2;
+      ids.splice(ids.indexOf(id) + (after ? 1 : 0), 0, draggedSectionId);
+      clearDraggedSection();
+      saveSectionOrder(ids);
+    });
+    row.addEventListener("dragend", clearDraggedSection);
+  });
   const europassGroup = (section) => ({
     "Languages": "PERSONAL SKILLS",
     "Research": "ADDITIONAL INFORMATION"
@@ -463,6 +546,7 @@
     const order = controls.order.value;
     root.dataset.cvTemplate = controls.template.value;
     syncSectionOrder();
+    renderSectionOrderControls();
     updateSectionTitles();
     root.dataset.cvFont = controls.font.value;
     root.dataset.cvDensity = controls.density.value;
@@ -593,6 +677,8 @@
 
   resetButton.addEventListener("click", () => {
     controls.order.value = "sections";
+    customSectionIds = null;
+    try { window.localStorage.removeItem(sectionOrderStorageKey); } catch (_error) { /* Storage disabled. */ }
     controls.template.value = "personal";
     controls.font.value = "site";
     controls.paper.value = "a4";

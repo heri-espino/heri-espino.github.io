@@ -12,6 +12,8 @@ User-selected options (client-side and independent of Jekyll):
 - Grouped by existing YAML section order (default).
 - Global chronological order, newest/oldest first, with source section labels.
 - Show/hide any CV section for both preview and print.
+- Expand/collapse every section's reading view with native `details`/`summary` headings (all open without JavaScript).
+- Arrange grouped sections by dragging or keyboard-accessible Up/Down buttons; save this order locally in the browser. The print/paper preview reflects the order but always includes entries from collapsed sections.
 - Personal navy single-column print design or Harvard-inspired classic single-column design.
 - Template-default, Arial, Georgia, Times New Roman or Garamond-family typography.
 - A4 or US Letter and balanced/compact spacing.
@@ -20,7 +22,7 @@ User-selected options (client-side and independent of Jekyll):
 **Harvard-inspired** means an independent conservative academic style. It
 is neither official nor endorsed by Harvard University.
 
-Chronology uses the *start* date of a range (e.g., an Aug 2023--Dec 2027
+Chronology uses the *start* date of a range (e.g., an Aug 2023--Dec 2026
 expected degree sorts as Aug 2023). Month/year values have month precision;
 unknown dates are last. Undated Technical Skills and Languages remain at
 the end of the chronological view. No JavaScript means the YAML grouped view
@@ -41,8 +43,10 @@ to this public repository: the original CV includes a phone number and
 contains private-source formatting material. The web CV continues to use
 public contact links only.
 
-Education was reconciled to the uploaded source: Data Science expected
-Dec 2027, GPA 9.6/10; Actuarial Science expected Dec 2026. The Mathematics
+Education was originally reconciled to the uploaded source: Data Science expected
+Dec 2027, GPA 9.6/10; Actuarial Science expected Dec 2026.
+On 2026-11-09, the owner explicitly corrected **both** expected degree
+completion dates to December 2026; `_data/cv.yml` is authoritative. The Mathematics
 Learning Center role title was updated, and the AbaQuant entry was added
 using URLs already stated in the uploaded CV. Legacy URLs for verified
 migrated public GitHub repositories point to the heri-espino account.
@@ -134,8 +138,10 @@ prints the raw URLs for records with explicit resource links. Unverified
 records remain plain text until a verified link is supplied.
 
 Check contrast for custom user-selected colors and mobile behavior. Institutional
-icons remain generic category pictograms, not official brands. Settings are
-ephemeral to the current page and are reset by Reset options. Print settings
+icons remain generic category pictograms, not official brands. Template, inclusion and print settings are
+ephemeral to the current page and are reset by Reset options. The custom
+section order alone is stored in `localStorage` (`cv-section-order-v1`)
+and is also cleared by Reset options. Print settings
 never modify the content YAML or private uploaded XeLaTeX sources.
 
 ## Granular PDF / print customization
@@ -1139,3 +1145,26 @@ Regression: source checks verify button position, uniqueness, sticky CSS and ver
 - The CV's semibold `cv-keyword` treatment is no longer a global term highlighter. Emphasize only the **complete initial label before the colon** in the `cv-highlights` descriptions; emphasize each case-folded label **once across the source CV** and leave all technical-skills values in normal weight. Thus `Stochastic geometry:` remains intact and `PyTorch:` receives at most one bold label, even when it appears in several course descriptions.
 - The script processes the original source CV, and timeline/paper/print preview clone that DOM. Do not duplicate highlighting or change original prose. No-JS reading remains plain text. Playwright and style-contract tests guard this behavior.
 
+
+## Section disclosures and reordering (2026-11-09)
+
+All YAML sections render inside an open `<details class="cv-details">`
+wrapper; no-JavaScript visitors see the entire CV. The heading is a
+keyboard-activatable `<summary>`. Collapsing a section affects only the
+reading view. Switching to Paper preview temporarily opens every section
+and restores reading disclosure state when returning; native printing
+includes all included entries regardless of open/closed state.
+
+The **Sections: include and reorder** panel contains the existing include
+checkbox plus drag-and-drop and Up/Down buttons for every section.
+`assets/js/cv-customize.js` changes DOM presentation order only,
+without mutating `_data/cv.yml`. A validated browser-local key stores the
+section IDs across reloads. Reset clears the key. On the Europass style,
+the built-in European sequence remains the default until a custom order is
+chosen. Global chronological mode remains an independent record-level
+sort, not a section-level sort.
+
+Regression coverage: `test/visual/interactions.spec.js` verifies that
+every section has a disclosure, both degree dates, that hidden reading
+content remains in the paper preview, reorder persistence and Reset.
+`test/style_contract.js` guards the corresponding source/JS/CSS contracts.
