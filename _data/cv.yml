@@ -82,6 +82,199 @@ cv:
           - "Geospatial listings: verified Google Maps and Waze presence."
           - "Web development: created the business's websites."
 
+    Submitted Manuscripts:
+      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
+        role: "First Author"
+        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
+        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
+        date: Jun 2026
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
+          - { label: Track submission, url: "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430" }
+        highlights:
+          - "Stochastic geometry: proved unit-region factorization under Euclidean similarity."
+          - "Poisson geometry: derived invariant empty-region graph formulas."
+          - "Simulation validation: checked β-skeleton and γ-graph equivariance."
+      - name: Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension
+        role: "First Author"
+        subtitle: "Stepping–Stone diversion neighborhoods in Euclidean spaces"
+        organization: "Elsevier · Computational Geometry · Under Revision"
+        date: Aug 2026
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
+          - { label: SSRN, url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746" }
+          - { label: Validation DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
+        highlights:
+          - "Geometric analysis: reduced Stepping–Stone volume to a 1D integral."
+          - "Numerical integration: validated higher-dimensional volume constants."
+      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
+        role: "Author"
+        date: Oct 2026
+        organization: "Springer Nature · SN Computer Science · Under Review"
+        links:
+          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
+          - { label: Zenodo · Reproducibility, url: "https://zenodo.org/records/23432463" }
+        highlights:
+          - "Mechanistic interpretability: tested CNN activation-patching additivity."
+          - "Experimental design: isolated logit additivity from metric-induced effects."
+      - name: "When Does Posterior Integration Change Option Values? Evidence from WTI Average Price Options"
+        role: "Author · Submitted Manuscript"
+        subtitle: "When Does Posterior Integration Change Option Values?"
+        organization: "Wiley · The Journal of Futures Markets · Submitted"
+        organization_url: "https://onlinelibrary.wiley.com/journal/10969934"
+        date: "2026"
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
+          - { label: Manuscript PDF, url: "https://heri-espino.github.io/papers/when-does-posterior-integration-change-option-values.pdf" }
+          - { label: Supporting Information, url: "https://heri-espino.github.io/papers/when-does-posterior-integration-change-option-values-supplement.pdf" }
+        highlights:
+          - "Bayesian option pricing: studied posterior integration in WTI Average Price Options."
+          - "Simulation: analyzed 10 million histories and a curvature–variance approximation."
+    Manuscripts:
+      - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
+        context: "Research working draft · not submitted"
+        role: "Author · Working Draft (Not Submitted)"
+        subtitle: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
+        date: "Oct 2026 — Present"
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/smoothness-integrated-trend-distances.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Trend_Distances.pdf" }
+          - { label: Related research code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Functional analysis: defined Hilbert distances between PLS trend families."
+          - "Spectral analysis: derived level/shape decompositions for unequal drifts."
+          - "Validation design: identified retrospective leakage risks in crop indices."
+      - name: "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"
+        role: "Author · Working Draft"
+        organization: "Universidad de las Américas Puebla"
+        date: "Oct 2026"
+        links:
+          - { label: Research draft, url: "https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf" }
+          - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Time-series validation: tracked forecast-loss minima through rolling origins."
+          - "Comparative experiments: tested pooled versus dynamic smoothness selection."
+      - name: "Smoothness-Indexed Penalized Trend Estimation in Python: Parameter-Search Coordinates, Numerical Backends, and Reproducible Comparisons"
+        role: "Coauthor · Working Draft"
+        organization: "Universidad de las Américas Puebla"
+        date: "Oct 2026"
+        links:
+          - { label: Research draft, url: "https://heri-espino.github.io/papers/smoothness-indexed-pls-python.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-PLS_Python.pdf" }
+          - { label: Code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Numerical methods: compared seven PLS backends at normalized smoothness."
+          - "Reproducible research: archived 80,640 runs and validated root finding."
+      - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
+        context: "Mathematical research lecture"
+        role: "Mathematical Research Lecture · Not Submitted"
+        date: "19 Oct 2026"
+        links:
+          - { label: Lecture record, url: "https://heri-espino.github.io/papers/componentwise-knn-isomap-lecture.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Componentwise_Isomap.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/ProximityGraphs-Isomap" }
+        highlights:
+          - "Mathematical exposition: derived graph geodesics, MDS and componentwise Isomap."
+          - "Method auditing: separated proposed Isomap optimization from implementation."
+      - name: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
+        context: "Mathematical research tutorial"
+        role: "Mathematical Research Tutorial · Not Submitted"
+        date: "Oct 2026"
+        links:
+          - { label: Tutorial record, url: "https://heri-espino.github.io/papers/maxcut-sdp-eva-clustering-tutorial.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf" }
+        highlights:
+          - "Convex optimization: explained Max-Cut SDP relaxations and low-rank EVA."
+          - "Experimental reproducibility: compared rounding methods on G-set instances."
+      - name: "Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization"
+        role: "Author · Research Notes (Not Submitted)"
+        context: "Handwritten mathematical research notebook"
+        date: "Oct 2026"
+        location: Puebla, Mexico
+        links:
+          - { label: Research notes, url: "https://heri-espino.github.io/papers/handwritten-trend-estimation-notes.html" }
+          - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
+        highlights:
+          - "Penalized least squares: explored finite-difference smoothness and bias–variance."
+          - "Optimization: differentiated smoothing operators and studied CV minima."
+      - name: Mathematical Notes on Random Variables as Vectors in L²
+        context: "Expository probability and Hilbert-space analysis"
+        role: "Mathematical notes"
+        date: Jun 2026 — Present
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/notes/random-variables-as-vectors.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/notes/espino_2026_random-variables-as-vectors.pdf" }
+        highlights:
+          - "Hilbert-space theory: expressed variance and regression via projections."
+          - "Probability theory: derived conditional expectation as an L² projection."
+      - name: Stepping-Stone Volume Validation
+        role: "Research Software Developer"
+        context: "Independent research software · numerical validation"
+        icon: github
+        icon_url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants"
+        date: "Jul 2026"
+        links:
+          - { label: DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
+          - { label: Project, url: "https://heri-espino.github.io/projects/stepping-stone-volume-constants.html" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants" }
+        highlights:
+          - "Numerical validation: checked Stepping–Stone volumes using Monte Carlo and quadrature."
+      - name: Student Engagement and Adaptation
+        role: "Study Lead"
+        date: Sep 2026
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
+        highlights:
+          - "Five-state cohort classification: tested nine definitions of engagement and adaptation."
+      - name: Instructor Grade Heterogeneity
+        role: "Study Lead"
+        date: Oct 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
+        highlights:
+          - "Kolmogorov–Smirnov distances: clustered instructors by grade distributions."
+      - name: Support Persistence After Incentives
+        role: "Study Lead"
+        date: Sep 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
+        highlights:
+          - "Conditional transition rates: measured later tutoring use by earlier visit count."
+      - name: Mathematics Support and Classroom-Relative Performance
+        role: "Study Lead"
+        date: Aug 2025
+        organization: "Universidad de las Américas Puebla · Internal research report"
+        links:
+          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
+        highlights:
+          - "PLM Wald tests: examined grade differences associated with mathematics-support use."
+      - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
+        context: "Latent financial-risk modeling"
+        role: "Research project"
+        organization: "Presented at XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
+        organization_url: "https://www.cimat.mx/"
+        date: Jan 2026 — Mar 2026
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
+        highlights:
+          - "Dynamic-factor modeling: extracted market risk from VIX, WTI, gold and DXY."
+          - "Financial econometrics: identified regime shifts in smoothed latent risk."
+
     Programming Experience:
       - name: AbaQuant — Financial Mathematics Python Library
         role: "Author & Lead Developer"
@@ -226,199 +419,6 @@ cv:
         location: "On Campus"
         highlights:
           - "Mathematical reasoning: solved undergraduate proof-based problems."
-
-    Research:
-      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
-        role: "First Author"
-        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
-        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
-        date: Jun 2026
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
-          - { label: Track submission, url: "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430" }
-        highlights:
-          - "Stochastic geometry: proved unit-region factorization under Euclidean similarity."
-          - "Poisson geometry: derived invariant empty-region graph formulas."
-          - "Simulation validation: checked β-skeleton and γ-graph equivariance."
-      - name: Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension
-        role: "First Author"
-        subtitle: "Stepping–Stone diversion neighborhoods in Euclidean spaces"
-        organization: "Elsevier · Computational Geometry · Under Revision"
-        date: Aug 2026
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
-          - { label: SSRN, url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746" }
-          - { label: Validation DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
-        highlights:
-          - "Geometric analysis: reduced Stepping–Stone volume to a 1D integral."
-          - "Numerical integration: validated higher-dimensional volume constants."
-      - name: Stepping-Stone Volume Validation
-        role: "Research Software Developer"
-        context: "Independent research software · numerical validation"
-        icon: github
-        icon_url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants"
-        date: "Jul 2026"
-        links:
-          - { label: DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
-          - { label: Project, url: "https://heri-espino.github.io/projects/stepping-stone-volume-constants.html" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants" }
-        highlights:
-          - "Numerical validation: checked Stepping–Stone volumes using Monte Carlo and quadrature."
-      - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
-        role: "Author"
-        date: Oct 2026
-        organization: "Springer Nature · SN Computer Science · Under Review"
-        links:
-          - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
-          - { label: Zenodo · Reproducibility, url: "https://zenodo.org/records/23432463" }
-        highlights:
-          - "Mechanistic interpretability: tested CNN activation-patching additivity."
-          - "Experimental design: isolated logit additivity from metric-induced effects."
-      - name: "When Does Posterior Integration Change Option Values? Evidence from WTI Average Price Options"
-        role: "Author · Submitted Manuscript"
-        subtitle: "When Does Posterior Integration Change Option Values?"
-        organization: "Wiley · The Journal of Futures Markets · Submitted"
-        organization_url: "https://onlinelibrary.wiley.com/journal/10969934"
-        date: "2026"
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
-          - { label: Manuscript PDF, url: "https://heri-espino.github.io/papers/when-does-posterior-integration-change-option-values.pdf" }
-          - { label: Supporting Information, url: "https://heri-espino.github.io/papers/when-does-posterior-integration-change-option-values-supplement.pdf" }
-        highlights:
-          - "Bayesian option pricing: studied posterior integration in WTI Average Price Options."
-          - "Simulation: analyzed 10 million histories and a curvature–variance approximation."
-      - name: Student Engagement and Adaptation
-        role: "Study Lead"
-        date: Sep 2026
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/student-engagement-adaptation.html" }
-        highlights:
-          - "Five-state cohort classification: tested nine definitions of engagement and adaptation."
-      - name: Instructor Grade Heterogeneity
-        role: "Study Lead"
-        date: Oct 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/course-grades-comparability.html" }
-        highlights:
-          - "Kolmogorov–Smirnov distances: clustered instructors by grade distributions."
-      - name: Support Persistence After Incentives
-        role: "Study Lead"
-        date: Sep 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/academic-support-persistence-incentive.html" }
-        highlights:
-          - "Conditional transition rates: measured later tutoring use by earlier visit count."
-      - name: Mathematics Support and Classroom-Relative Performance
-        role: "Study Lead"
-        date: Aug 2025
-        organization: "Universidad de las Américas Puebla · Internal research report"
-        links:
-          - { label: Research record, url: "https://heri-espino.github.io/papers/mathematics-support-classroom-performance.html" }
-        highlights:
-          - "PLM Wald tests: examined grade differences associated with mathematics-support use."
-      - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
-        context: "Latent financial-risk modeling"
-        role: "Research project"
-        organization: "Presented at XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
-        organization_url: "https://www.cimat.mx/"
-        date: Jan 2026 — Mar 2026
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/projects/latent-risk-us-market.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/projects/espino_2026_latent-risk-us-market.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/Estimation-of-latent-risk-in-the-U.S.-market-using-representative-variables" }
-        highlights:
-          - "Dynamic-factor modeling: extracted market risk from VIX, WTI, gold and DXY."
-          - "Financial econometrics: identified regime shifts in smoothed latent risk."
-    Research Drafts:
-      - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
-        context: "Research working draft · not submitted"
-        role: "Author · Working Draft (Not Submitted)"
-        subtitle: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
-        date: "Oct 2026 — Present"
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/smoothness-integrated-trend-distances.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Trend_Distances.pdf" }
-          - { label: Related research code, url: "https://github.com/heri-espino/Trend-Estimation" }
-        highlights:
-          - "Functional analysis: defined Hilbert distances between PLS trend families."
-          - "Spectral analysis: derived level/shape decompositions for unequal drifts."
-          - "Validation design: identified retrospective leakage risks in crop indices."
-      - name: "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation"
-        role: "Author · Working Draft"
-        organization: "Universidad de las Américas Puebla"
-        date: "Oct 2026"
-        links:
-          - { label: Research draft, url: "https://heri-espino.github.io/papers/dynamic-forecast-optimal-smoothness.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Forecast_Optimal_Smoothness.pdf" }
-          - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
-        highlights:
-          - "Time-series validation: tracked forecast-loss minima through rolling origins."
-          - "Comparative experiments: tested pooled versus dynamic smoothness selection."
-      - name: "Smoothness-Indexed Penalized Trend Estimation in Python: Parameter-Search Coordinates, Numerical Backends, and Reproducible Comparisons"
-        role: "Coauthor · Working Draft"
-        organization: "Universidad de las Américas Puebla"
-        date: "Oct 2026"
-        links:
-          - { label: Research draft, url: "https://heri-espino.github.io/papers/smoothness-indexed-pls-python.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-PLS_Python.pdf" }
-          - { label: Code, url: "https://github.com/heri-espino/Trend-Estimation" }
-        highlights:
-          - "Numerical methods: compared seven PLS backends at normalized smoothness."
-          - "Reproducible research: archived 80,640 runs and validated root finding."
-      - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
-        context: "Mathematical research lecture"
-        role: "Mathematical Research Lecture · Not Submitted"
-        date: "19 Oct 2026"
-        links:
-          - { label: Lecture record, url: "https://heri-espino.github.io/papers/componentwise-knn-isomap-lecture.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-Componentwise_Isomap.pdf" }
-          - { label: GitHub, url: "https://github.com/heri-espino/ProximityGraphs-Isomap" }
-        highlights:
-          - "Mathematical exposition: derived graph geodesics, MDS and componentwise Isomap."
-          - "Method auditing: separated proposed Isomap optimization from implementation."
-      - name: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
-        context: "Mathematical research tutorial"
-        role: "Mathematical Research Tutorial · Not Submitted"
-        date: "Oct 2026"
-        links:
-          - { label: Tutorial record, url: "https://heri-espino.github.io/papers/maxcut-sdp-eva-clustering-tutorial.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf" }
-        highlights:
-          - "Convex optimization: explained Max-Cut SDP relaxations and low-rank EVA."
-          - "Experimental reproducibility: compared rounding methods on G-set instances."
-      - name: "Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization"
-        role: "Author · Research Notes (Not Submitted)"
-        context: "Handwritten mathematical research notebook"
-        date: "Oct 2026"
-        location: Puebla, Mexico
-        links:
-          - { label: Research notes, url: "https://heri-espino.github.io/papers/handwritten-trend-estimation-notes.html" }
-          - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
-        highlights:
-          - "Penalized least squares: explored finite-difference smoothness and bias–variance."
-          - "Optimization: differentiated smoothing operators and studied CV minima."
-      - name: Mathematical Notes on Random Variables as Vectors in L²
-        context: "Expository probability and Hilbert-space analysis"
-        role: "Mathematical notes"
-        date: Jun 2026 — Present
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/notes/random-variables-as-vectors.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/notes/espino_2026_random-variables-as-vectors.pdf" }
-        highlights:
-          - "Hilbert-space theory: expressed variance and regression via projections."
-          - "Probability theory: derived conditional expectation as an L² projection."
 
     Published Articles & Technical Writing:
       - name: "AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo"
@@ -874,11 +874,3 @@ cv:
       - { name: German, values: A1 }
       - { name: French, values: A1 }
 
-    Volunteering:
-      - name: Water contamination analysis for Xalmimilulco
-        role: "Data Scientist"
-        context: "Community water-quality project · Xalmimilulco"
-        date: Jan 2026 — Present
-        location: Puebla, Mexico
-        highlights:
-          - "Community mapping: built geospatial water-risk dashboards for Xalmimilulco."
