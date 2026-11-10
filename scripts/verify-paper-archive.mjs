@@ -25,7 +25,18 @@ const pdfs = {
   "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
 };
 const expectedSubmitted = 4;
-const expectedDrafts = 12;
+const expectedDrafts = 6;
+const hiddenSlugs = new Set([
+  "smoothness-integrated-trend-distances",
+  "dynamic-forecast-optimal-smoothness",
+  "smoothness-indexed-pls-python",
+]);
+const hiddenRoutes = [
+  ["/projects/cnn-primitive-bases.html", "_pages/papers/privileged-template-priors-cnns.md"],
+  ["/papers/bayesian-parameter-uncertainty-wti.html", "_pages/papers/bayesian-parameter-uncertainty-wti.md"],
+  ["/projects/sp500-trend-comparison.html", "_pages/papers/guerrero-penalized-trend-estimation.md"],
+  ...[...hiddenSlugs].map((slug) => [`/papers/${slug}.html`, `_pages/papers/${slug}.md`]),
+];
 
 const site = path.resolve(process.argv[2] ?? "_site");
 const archivePath = path.join(site, "papers", "index.html");
@@ -91,7 +102,7 @@ if (actualSubmitted !== expectedSubmitted) {
   errors.push(`Expected ${expectedSubmitted} submitted cards, rendered ${actualSubmitted}`);
 }
 if (actualDrafts !== expectedDrafts) {
-  errors.push(`Expected ${expectedDrafts} working-draft cards after promoting JFM, rendered ${actualDrafts}`);
+  errors.push(`Expected ${expectedDrafts} visible working-draft cards after six archive exclusions, rendered ${actualDrafts}`);
 }
 if (!drafts.includes(`(${expectedDrafts})`)) {
   errors.push(`Working-drafts heading does not report (${expectedDrafts})`);
@@ -128,7 +139,11 @@ for (const slug of slugs) {
     }
   }
 
-  if (!archiveSection.includes(url)) {
+  if (hiddenSlugs.has(slug)) {
+    if (html.includes(`href="${url}"`)) {
+      errors.push(`Hidden source paper still appears in Papers archive: ${url}`);
+    }
+  } else if (!archiveSection.includes(url)) {
     errors.push(`Archive has not placed this entry in the correct submitted/draft section: ${url}`);
   }
   if (!fs.existsSync(pagePath)) {
@@ -141,8 +156,8 @@ for (const slug of slugs) {
       !page.includes(detailImage)) {
     errors.push(`Rendered detail page lacks the first-page preview: ${slug}`);
   }
-  if (!archiveSection.includes(cardImage)) {
-    errors.push(`Paper card lacks its figure-page screenshot: ${slug}`);
+  if (!hiddenSlugs.has(slug) && !archiveSection.includes(cardImage)) {
+    errors.push(`Visible paper card lacks its figure-page screenshot: ${slug}`);
   }
   if (isJfm) {
     const supplement = "when-does-posterior-integration-change-option-values-supplement.pdf";
@@ -191,9 +206,34 @@ for (const slug of slugs) {
   }
 }
 
+// The user hid six *listings*, not the underlying pages, PDFs or previews.
+for (const [url, source] of hiddenRoutes) {
+  const outputPage = path.join(site, url.replace(/^\//, ""));
+  if (!fs.existsSync(source) || !read(source).includes("hide_from_papers: true")) {
+    errors.push(`Hidden paper source/visibility flag missing: ${source}`);
+  }
+  if (!fs.existsSync(outputPage)) {
+    errors.push(`Hidden paper detail URL was deleted rather than merely unlisted: ${url}`);
+  }
+  if (html.includes(`href="${url}"`)) {
+    errors.push(`Hidden paper remains visible in Papers archive: ${url}`);
+  }
+}
+const homepage = path.join(site, "index.html");
+if (!fs.existsSync(homepage)) {
+  errors.push("Homepage missing while checking hidden Papers previews");
+} else {
+  const homeHTML = read(homepage);
+  for (const [url] of hiddenRoutes) {
+    if (homeHTML.includes(`href="${url}"`)) {
+      errors.push(`Hidden paper is still promoted in homepage Papers section: ${url}`);
+    }
+  }
+}
+
 if (errors.length) {
   console.error("Rendered Papers archive contract failed:");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} drafts, all six research PDFs and the exact Wiley JFM supplementary PDF present.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} visible drafts; six unlisted paper records and all PDFs preserved.`);
