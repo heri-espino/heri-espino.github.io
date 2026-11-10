@@ -2978,3 +2978,17 @@
     animation: none !important;
   }
 }
+
+
+/* A student organization record can link its heading and organization to
+   the same official directory. In paper/print, keep those clickable links
+   but omit the duplicate single-resource line and the web-only underline.
+   The original interactive reading view still exposes its resource link. */
+.cv-page .cv-preview-paper-body .cv-links.cv-paper-redundant-links {
+  display: none !important;
+}
+
+.cv-page .cv-preview-paper-body .cv-organization a[href*="/organizaciones-estudiantiles/"] {
+  color: inherit;
+  text-decoration: none;
+}

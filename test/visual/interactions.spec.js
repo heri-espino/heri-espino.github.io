@@ -478,6 +478,63 @@ test("CV Wiley JFM submission and Papers page expose both PDFs and their first-p
   ).toBeTruthy();
 });
 
+test("CV author locations, Wiley submission month and quantum paper links remain readable", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const submitted = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"]');
+  const springer = submitted.locator("[data-cv-record]").filter({
+    hasText: "When Do Activation-Patching Effects Add Up?",
+  });
+  const wiley = submitted.locator("[data-cv-record]").filter({
+    hasText: "When Does Posterior Integration Change Option Values?",
+  });
+  await expect(springer.locator(".cv-location")).toHaveText("Puebla, Mexico");
+  await expect(springer.locator(".cv-date")).toHaveText("Oct 2026");
+  await expect(wiley.locator(".cv-date")).toHaveText("Nov 2026");
+  await expect(wiley.locator(".cv-location")).toHaveText("Puebla, Mexico");
+
+  const talk = page.locator('#cv-sections [data-cv-section="academic-experience"] [data-cv-record]').filter({
+    hasText: "Asymptotic Characteristics of Proximity Graphs",
+  });
+  await expect(talk.locator(".cv-location")).toHaveText("Tlaxcala, Mexico");
+  await expect(talk.locator(".cv-date")).toHaveText("Oct 2026");
+
+  const directory = "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/";
+  const quantum = page.locator('#cv-sections [data-cv-section="leadership"] [data-cv-record]').filter({
+    hasText: "Quantum Computing Curriculum and Instruction",
+  });
+  await expect(quantum.locator(".cv-organization a")).toHaveAttribute("href", directory);
+  await expect(quantum.locator(".cv-links a")).toHaveAttribute("href", directory);
+  await expect(quantum.locator(".cv-links")).toBeVisible();
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const paper = page.locator(".cv-preview-paper-body [data-cv-record]").filter({
+    hasText: "Quantum Computing Curriculum and Instruction",
+  });
+  await expect(paper).toHaveCount(1);
+  await expect(paper.locator(".cv-organization a")).toHaveAttribute("href", directory);
+  await expect(paper.locator(".cv-links.cv-paper-redundant-links")).toBeHidden();
+  const printGeometry = await paper.evaluate((entry) => {
+    const link = entry.querySelector(".cv-organization a");
+    const rect = link.getBoundingClientRect();
+    const parent = entry.closest(".cv-preview-paper-body").getBoundingClientRect();
+    return {
+      underlined: getComputedStyle(link).textDecorationLine.includes("underline"),
+      fitsPaper: rect.right <= parent.right + 2 && rect.left >= parent.left - 2,
+      visibleText: link.textContent.trim(),
+    };
+  });
+  expect(printGeometry.underlined).toBe(false);
+  expect(printGeometry.fitsPaper).toBe(true);
+  expect(printGeometry.visibleText).toContain("Preety Good Quantum OE");
+
+  // The same paginated source is used for actual browser printing.
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "true");
+  await expect(paper.locator(".cv-links.cv-paper-redundant-links")).toBeHidden();
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+});
+
 test("CV Harvard paper preview preserves the organization/role and city/date corners", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await expect(page.locator("#cv-print")).toBeHidden();

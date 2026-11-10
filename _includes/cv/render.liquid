@@ -328,7 +328,7 @@
                       </p>
                     {% endif %}
                     {% if entry.links %}
-                      <p class="cv-links">
+                      <p class="cv-links{% if entry.paper_hide_redundant_links %} cv-paper-redundant-links{% endif %}">
                         {% for link in entry.links %}
                           <a href="{{ link.url | escape }}" target="_blank" rel="noopener noreferrer">{% if link.url contains 'zenodo.org' or link.url contains 'zenodo.' %}<img class="cv-zenodo-mark" src="https://about.zenodo.org/static/img/icons/zenodo-icon-blue.svg" alt="" width="14" height="14" aria-hidden="true" loading="lazy">{% endif %}{{ link.label | escape }}</a>
                         {% endfor %}

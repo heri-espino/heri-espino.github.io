@@ -1188,6 +1188,39 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Owner-confirmed November 2026 CV facts and paper-only duplicate-link handling.
+{
+  const cv = read("_data/cv.yml");
+  const renderer = read("_includes/cv/render.liquid");
+  const css = read("_sass/_cv.scss");
+  const springer = cv.split('      - name: "When Do Activation-Patching Effects Add Up?')[1]
+    ?.split('      - name: "When Does Posterior Integration Change Option Values?')[0] || "";
+  const wiley = cv.split('      - name: "When Does Posterior Integration Change Option Values?')[1]
+    ?.split('    Manuscripts:')[0] || "";
+  const smm = cv.split('      - name: "Asymptotic Characteristics of Proximity Graphs"')[1]
+    ?.split('      - name: "ProximityGraphs Python Library"')[0] || "";
+  const quantum = cv.split('      - name: "Quantum Computing Curriculum and Instruction"')[1]
+    ?.split('      - name: "C++ Algorithms and Complexity Instruction"')[0] || "";
+  const canonical = "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/";
+  if (!springer.includes('location: "Puebla, Mexico"') ||
+      !springer.includes("date: Oct 2026") ||
+      !wiley.includes('date: "Nov 2026"') ||
+      !wiley.includes('location: Puebla, Mexico') ||
+      !smm.includes('location: "Tlaxcala, Mexico"') ||
+      !smm.includes('date: "Oct 2026"')) {
+    failures.push("CV submission dates and Puebla/Tlaxcala locations must match owner corrections.");
+  }
+  if (!quantum.includes('organization_url: "' + canonical + '"') ||
+      !quantum.includes('url: "' + canonical + '"') ||
+      !quantum.includes("paper_hide_redundant_links: true") ||
+      quantum.includes("#:~:text=") ||
+      !renderer.includes("cv-paper-redundant-links") ||
+      !css.includes(".cv-preview-paper-body .cv-links.cv-paper-redundant-links") ||
+      !css.includes('.cv-organization a[href*="/organizaciones-estudiantiles/"]')) {
+    failures.push("Quantum organization link must remain clickable without a redundant resource or URL fragment in printed CV pages.");
+  }
+}
+
 // Verified institutional icons and citable ProximityGraphs software release.
 {
   const issuers = read("_data/credential_issuers.yml");
