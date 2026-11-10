@@ -96,3 +96,17 @@ For a comprehensive machine-readable bibliography use
 `/research-catalog.json`, not the curated `/papers/` listing.
 The public Papers page now shows four submitted manuscripts,
 one published technical article, and six working-draft items.
+
+
+## Research-notes consolidation (2026-11-10)
+
+The top-level Notes section was removed from navigation and homepage.
+The old `/notes/` URL now explains that mathematical notes appear
+among Papers → Working Drafts & Ongoing Research; existing note
+permalinks and PDFs remain intact. The existing random-variable/L²
+notes and new handwritten trend-estimation notebook are catalogued as
+`portfolio_type: paper` with an explicit Research Notes or draft
+label. Their research-note status does not imply journal submission.
+The 31-page original scanned trend notebook has not yet been
+publicly hosted; do not invent a PDF URL or mistake the separate
+Trend-Estimation GitHub repository for that original scan.
