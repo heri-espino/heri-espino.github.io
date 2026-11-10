@@ -295,7 +295,7 @@ if (exists("_pages/cv.md")) {
   // Only four submitted manuscripts; never reclassify reports, notebooks,
   // lectures or tutorials as journal submissions to fill the new category.
   const cvSource = read("_data/cv.yml");
-  const cvSectionHeads = [...cvSource.matchAll(/^    ([^:\\n]+):\\s*$/gm)].map((match) => match[1]);
+  const cvSectionHeads = [...cvSource.matchAll(/^    ([^:\n]+):\s*$/gm)].map((match) => match[1]);
   const profIndex = cvSectionHeads.indexOf("Professional Experience");
   if (cvSectionHeads[profIndex + 1] !== "Submitted Manuscripts" ||
       cvSectionHeads[profIndex + 2] !== "Manuscripts" ||
