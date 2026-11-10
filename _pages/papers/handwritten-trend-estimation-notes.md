@@ -28,7 +28,7 @@ contributions:
 
 **Stage:** Working research notes, not a submitted manuscript. The source is an uploaded **31-page handwritten Spanish-language PDF**, with substantive writing concentrated in the earlier pages and several blank closing pages. This page is an overview of the notebook, not a transcription, editorially verified proof, or substitute for the scanned original.
 
-**Original PDF:** The supplied handwritten scan is not yet hosted at a stable public URL on this website. It has deliberately **not** been linked to an unrelated PDF. The original is retained as the user's conversation upload pending repository asset transfer.
+**Original PDF:** The supplied handwritten scan is not yet hosted at a stable public URL on this website. It has deliberately **not** been linked to an unrelated PDF. The full original scan is pending publication; this thematic overview is not a substitute for the handwritten pages.
 
 ### Main topics in the notebook
 
