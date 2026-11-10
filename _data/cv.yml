@@ -115,6 +115,7 @@ cv:
         role: "Author"
         date: Oct 2026
         organization: "Springer Nature · SN Computer Science · Under Review"
+        location: "Puebla, Mexico"
         links:
           - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
@@ -127,7 +128,7 @@ cv:
         subtitle: "When Does Posterior Integration Change Option Values?"
         organization: "Wiley · The Journal of Futures Markets · Submitted"
         organization_url: "https://onlinelibrary.wiley.com/journal/10969934"
-        date: "2026"
+        date: "Nov 2026"
         location: Puebla, Mexico
         links:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
@@ -357,7 +358,7 @@ cv:
         role: "Contributed Talk"
         date: "Oct 2026"
         organization: "59th SMM National Congress · Sociedad Matemática Mexicana"
-        location: "Pre-recorded"
+        location: "Tlaxcala, Mexico"
         url: "https://www.smm.org.mx/congreso/areas/platicas#:~:text=Heriberto%20Espino%20Montelongo"
         links:
           - { label: "Official SMM listing · Talk 8744", url: "https://www.smm.org.mx/congreso/areas/platicas#:~:text=Heriberto%20Espino%20Montelongo" }
@@ -532,9 +533,10 @@ cv:
         role: "President"
         date: "Jan 2026 — Jun 2026"
         organization: "Preety Good Quantum OE · Universidad de las Américas Puebla"
-        organization_url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=Preety%20Good%20Quantum%20OE"
+        organization_url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/"
+        paper_hide_redundant_links: true
         links:
-          - { label: UDLAP student organizations, url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=Preety%20Good%20Quantum%20OE" }
+          - { label: UDLAP student organizations, url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/" }
         highlights:
           - "Student outreach: organized quantum-computing classes at UDLAP."
           - "Curriculum: introduced quantum circuits, QFT and Grover with Python workshops."
