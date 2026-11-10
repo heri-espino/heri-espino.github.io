@@ -649,8 +649,8 @@ if (exists("_pages/cv.md")) {
   // anonymous PDF files under one detail page and the Wiley publisher favicon.
   const jfmPage = read("_pages/papers/posterior-integration-volatility-wti-asian-options.md");
   const jfmLogo = read("_data/cv_organization_logos.yml");
-  if (!papersArchive.includes("or item.url == '/papers/posterior-integration-volatility-wti-asian-options.html'") ||
-      !papersArchive.includes("and item.url != '/papers/posterior-integration-volatility-wti-asian-options.html'") ||
+  if (!papersArchive.includes("item.label == 'Under Review' or item.label == 'Under Revision' or item.label == 'Submitted'") ||
+      !papersArchive.includes("item.label != 'Under Review' and item.label != 'Under Revision' and item.label != 'Submitted'") ||
       !jfmPage.includes('label: "Submitted"') ||
       !jfmPage.includes('status: "Submitted to The Journal of Futures Markets · Wiley"') ||
       !jfmPage.includes("secondary_pdf: /papers/when-does-posterior-integration-change-option-values-supplement.pdf") ||
