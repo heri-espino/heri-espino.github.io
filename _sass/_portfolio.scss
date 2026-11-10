@@ -1963,3 +1963,25 @@ body:has(.portfolio-hero) .portfolio-home-section .portfolio-more-teaser-card:fo
   padding-top: 1.55rem;
   border-top: 2px solid var(--global-theme-color);
 }
+
+/* A second first-page preview for a separately hosted supplement on the same
+   paper detail page. Keep intrinsic paper proportions and mobile width. */
+.portfolio-detail-content .portfolio-supplement-first-page {
+  max-width: 30rem;
+  margin: 0.85rem 0 1.25rem;
+}
+
+.portfolio-detail-content .portfolio-supplement-first-page img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--global-divider-color);
+}
+
+.portfolio-detail-content .portfolio-supplement-first-page figcaption {
+  margin-top: 0.4rem;
+  color: var(--global-text-color-light);
+  font-size: 0.81rem;
+  line-height: 1.45;
+}

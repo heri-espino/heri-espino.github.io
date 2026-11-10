@@ -8,8 +8,11 @@ nav_order: 2
 ---
 
 {% assign items = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
-{% assign submitted_papers = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
+{% assign existing_submissions = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
+{% assign wiley_submission = items | where: "url", "/papers/posterior-integration-volatility-wti-asian-options.html" %}
+{% assign submitted_papers = existing_submissions | concat: wiley_submission %}
 {% assign other_papers = items | where_exp: "item", "item.url != '/papers/unit-region-factorization.html' and item.url != '/papers/stepping-stone.html' and item.url != '/papers/activation-patching-effects-add-up.html'" %}
+{% assign other_papers = other_papers | where_exp: "item", "item.url != '/papers/posterior-integration-volatility-wti-asian-options.html'" %}
 {% assign published_articles = site.pages | where: "portfolio_type", "article" | sort: "importance" %}
 
 <p class="portfolio-section-intro papers-archive-intro">
@@ -52,7 +55,7 @@ nav_order: 2
       <div>
         <p class="portfolio-kicker">03 / In development</p>
         <h2 id="working-drafts-title">Working Drafts &amp; Ongoing Research <span class="papers-archive-count">({{ other_papers.size }})</span></h2>
-        <p>Unsubmitted manuscript drafts, mathematical lectures, tutorials, and ongoing research. The first six records are drawn from the uploaded PDFs; all statuses remain explicit.</p>
+        <p>Unsubmitted manuscript drafts, mathematical lectures, tutorials, and ongoing research. Selected records are drawn from the uploaded research PDFs; submitted papers appear in the section above. All statuses remain explicit.</p>
       </div>
     </div>
     <div class="portfolio-grid" data-portfolio-group data-view="list">

@@ -1168,3 +1168,62 @@ Regression coverage: `test/visual/interactions.spec.js` verifies that
 every section has a disclosure, both degree dates, that hidden reading
 content remains in the paper preview, reorder persistence and Reset.
 `test/style_contract.js` guards the corresponding source/JS/CSS contracts.
+
+
+## New Wiley submission: two PDFs under one paper page (2026-11-09)
+
+The owner supplied the anonymous main reviewer PDF (10 pages), its separately
+anonymized Supporting Information (3 pages), and the page-6 Figure 1 screenshot
+as the preferred Papers card preview. The submission is confirmed by the owner
+for **The Journal of Futures Markets** (Wiley). Mark it **Submitted** only:
+there is no evidence of editor acceptance, DOI or peer-review start.
+
+The existing WTI portfolio URL was updated in place:
+`/papers/posterior-integration-volatility-wti-asian-options.html`.
+It appears under **Submitted Manuscripts**, not Working Drafts. The new
+canonical manuscript title is *When Does Posterior Integration Change Option
+Values? Evidence from WTI Average Price Options*. This is a later manuscript
+than the earlier REMEF-oriented PDF that was previously linked at the same
+page; that earlier binary is preserved in Git as historical work.
+
+The website hosts the exact user-supplied files with these names:
+
+| Function | Public path | Pages / SHA-256 |
+| --- | --- | --- |
+| Main manuscript | `papers/when-does-posterior-integration-change-option-values.pdf` | 10; `5f5063654bc62c0aab51f3620e90ab9292214dd72cdae421c4bca0ebe3986043` |
+| Supporting Information | `papers/when-does-posterior-integration-change-option-values-supplement.pdf` | 3; `edf24cf45fbc5678911608f12b19069473d29455985b5a5c2e3fc323d5ca4111` |
+
+The exact PDFs were recovered from private GitHub Actions packaging run
+`41738924069` (artifact `13280636487`, source commit
+`66fe260a1bff6386354d02ef39a7c3683f850ed4`) and compared byte by
+byte to the two user uploads. No numerical experiments or paper compilation
+were rerun. A lightweight, scoped export workflow was used on the private
+research branch `chore/jfm-portfolio-export` to preserve just the anonymous
+PDFs and derive portable first-page WebP screenshots. Only these five binary
+assets were transferred to the public portfolio; identifying title-page
+and private LaTeX source material were **not** transferred.
+
+The card image, `assets/img/portfolio/jfm-posterior-integration-figure.webp`,
+shows **Figure 1 on page 6**, cropped from the exact manuscript PDF in the
+same composition as the supplied screenshot (not a stock illustration).
+The detail's `detail_image` is the **full first page of the main PDF**, at
+`assets/img/portfolio/jfm-posterior-integration-first-page.webp`.
+A second first-page image,
+`assets/img/portfolio/jfm-posterior-integration-supplement-first-page.webp`,
+is embedded inside the same paper page, linked to the full supplement.
+It has responsive CSS in `_sass/_portfolio.scss`.
+
+The CV `Research` entry now uses the exact manuscript title, links to one
+portfolio page and both PDFs, and displays the institution
+`Wiley · The Journal of Futures Markets · Submitted` with Wiley's official
+website favicon. The prior WTI draft CV entry was removed rather than
+duplicated. The resulting CV counts are **10 Research** and **6 Research Drafts**.
+The Papers counts are **4 Submitted** and **12 Working Drafts** (plus the
+separate published technical article).
+
+Run `node scripts/verify-paper-archive.mjs` after Jekyll to check that
+the two exact PDFs and three independent images made it to the final site,
+and verify browser rendering including desktop/mobile preview and PDF actions.
+Publicly linking anonymous reviewer files from an author's CV can affect
+double-blind anonymity; do not modify the reviewer PDFs or add identifying
+manuscript/title-page material to the downloadable pair.

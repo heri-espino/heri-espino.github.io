@@ -173,7 +173,7 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 - The `/papers/` archive puts all unsubmitted manuscripts, lectures and tutorials in the **Working Drafts & Ongoing Research** section below actual submitted manuscripts; it has **no separate Featured section**. The first item in the working-draft grid is *Smoothness-Integrated Trend Distances with Nonzero Difference Drift*. Its detail page is `_pages/papers/smoothness-integrated-trend-distances.md`.
 - The same trend-distance manuscript appears first in the CV Research section. Do not conflate its mathematical definitions and synthetic example with empirical change-point validation or a completed agricultural application. The PDF upload remains a chat attachment and is not a website asset: do not add a `pdf` link until a real public PDF is published.
 
-- Five uploaded manuscripts/learning documents (Oct 2026) and the earlier smoothness-distance draft are in the same **Working Drafts** grid, sorted by `importance`, never marked `featured: true`; the Submitted Manuscripts section remains above them. The two research-manuscript drafts and the blinded WTI draft have **unverified submission** and must never be silently reported as accepted/under review. The 53-slide Componentwise Isomap item is a **lecture** and the seven-page Max-Cut/EVA item is a **tutorial**, not submitted papers.
+- Five uploaded manuscripts/learning documents (Oct 2026) and the earlier smoothness-distance draft are in the same **Working Drafts** grid, sorted by `importance`, never marked `featured: true`; the Submitted Manuscripts section remains above them. The newer JFM WTI reviewer manuscript has an owner-confirmed **Submitted** status as of 2026-11-09; that is not equivalent to Under Review or acceptance. Other working drafts have unverified submission. The 53-slide Componentwise Isomap item is a **lecture** and the seven-page Max-Cut/EVA item is a **tutorial**, not submitted papers.
 - Their corresponding five entries appear just after the smoothness-distance first entry in the CV Research section. Keep the coauthor Daniela Cortés-Toto on the PLS Python manuscript; preserve anonymity of `remef_blinded_draft.pdf` in its public portfolio page. These five PDF binaries are not yet hosted; do not generate links to nonexistent PDF assets. Follow `docs/CV_HANDOFF.md`.
 
 - The CV organization-logo coverage audit is `docs/CV_LOGO_AUDIT.md` and its reproducible, dependency-free checker is `scripts/audit-cv-organization-logos.mjs` (`node scripts/audit-cv-organization-logos.mjs`). Colegio Loyola's owner-provided mark is stored locally as `assets/img/cv-organizations/colegio-loyola.webp`. BUAP uses sourced vector artwork; Actinver now uses the owner's uploaded square A-dot logo (`assets/img/cv-organizations/actinver.webp`), not the earlier Wikimedia wordmark. All source code for the five CV-only Python-library icons is local SVG. Remaining unmatched labels are generic noninstitutional placeholders, not schools or employers. For recognized institutions still on Google favicons, prefer properly sourced institutional identity assets before replacing them; never invent brand graphics.
@@ -183,8 +183,8 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 - Regression guard for the Papers archive: six October 2026 research uploads
   previously failed to publish due to literal `\\n` text between YAML
   front-matter keys. Jekyll can emit YAML warnings while returning a
-  successful overall build. The rendered archive must contain **3 Submitted**
-  plus **13 Working Drafts** (the original seven plus six uploads), and all
+  successful overall build. The rendered archive must contain **4 Submitted**
+  plus **12 Working Drafts** (the original seven plus six uploads), and all
   six `/papers/<slug>.html` pages must exist. The deploy workflow now runs
   `node scripts/verify-paper-archive.mjs` after Jekyll; do not remove or
   bypass this check. Preserve the user's figure card / first-page preview
@@ -194,17 +194,17 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 
 - Four-field CV event metadata contract: every event-based record has its canonical title, role/category, date, and real institution/organization **or** a non-institutional `context`. The CV template renders context without an organization logo. Static `Technical Skills` and `Languages` have different structures and should not receive fabricated dates. Descriptive bullets are optional and intentionally absent from some credentials; preserve previously requested omissions. Do not invent dates or journal affiliations. The affected unknowns are three active Python-library start dates and the issue date of the DataCamp introductory PyTorch credential. Four-field consistency is tested in `test/style_contract.js`; see `docs/CV_HANDOFF.md`.
 
-- The six 2026 working-draft/lecture/tutorial PDFs have now been uploaded to the public site and use the exact `papers/EspinoMontelongo-2026-Short_title.pdf` scheme (see `docs/CV_HANDOFF.md`). Preserve their PDF binary data, canonical links in both `_pages/papers/` and `_data/cv.yml`, figure-card thumbnails, and first-page detail previews. `scripts/verify-paper-archive.mjs` verifies built PDFs as well as the existing 3-submitted/13-draft count. Do not silently revert to old upload names or the earlier "PDF not hosted" assumption.
-- Caution: the public `EspinoMontelongo-2026-WTI_Asian_Options.pdf` identifies an author while the WTI document is a blinded draft. Publicity does not establish journal submission. Warn before reusing it in an anonymity-required review workflow.
+- The six 2026 working-draft/lecture/tutorial PDFs have now been uploaded to the public site and use the exact `papers/EspinoMontelongo-2026-Short_title.pdf` scheme (see `docs/CV_HANDOFF.md`). Preserve their PDF binary data, canonical links in both `_pages/papers/` and `_data/cv.yml`, figure-card thumbnails, and first-page detail previews. `scripts/verify-paper-archive.mjs` verifies built PDFs as well as the updated 4-submitted/12-draft count. Do not silently revert to old upload names or the earlier "PDF not hosted" assumption.
+- Caution: the public `EspinoMontelongo-2026-WTI_Asian_Options.pdf` identifies an author while the WTI document is a blinded draft. That historical PDF is not the newly submitted JFM reviewer manuscript; do not reuse its author-identifying version in anonymous review. The 2026-11-09 user-provided JFM submission is confirmed separately.
 
 - Harvard CV template: preserve the owner-requested four-corner **header only**: **organization + logo** left/top, **role/title** left/below; **city/state** right/top, **date** right/below. This style is scoped to `data-cv-template="harvard"` and applies to wide, paper preview and print. It must not turn the CV into two content columns, hide source links, add icons to job titles, or override the em-dash description setting. Unaffiliated research can show its factual `context` above the role, not a fabricated institution. Regression guard is in `test/style_contract.js`.
 
 - The CV settings-chevron is **name-anchored**, not viewport-fixed: positioned absolutely beside the CV header. A Print / Save PDF button now lives **inside the expanded Display/customization panel** at `#cv-print` (the owner explicitly reinstated a menu action); no extra floating print icon/left rail is permitted. Ctrl+P / Cmd+P still works. They scroll away with the header and must **not reserve a left rail/gutter** for the remainder of the document. Expanding the customization menu overlays a scrollable panel without shifting the icons or CV body. The header alone gets a compact inset. Keep them excluded from print. See `test/style_contract.js`.
 
-- CV research is separated into **Research** (9 records: 3 journal manuscripts, 4 internal research reports, 1 latent-risk project and 1 volume-validation software record) and **Research Drafts** (7 records: unsubmitted manuscripts, tutorial/lecture and mathematical notes). Source order is in `_data/cv.yml`; both sections must be available in settings and chronological/print views. Do not relabel a lecture or tutorial as a journal submission.
-- The three submitted manuscripts (not all first-authored) have user-confirmed CV and paper-page display dates: **Unit-Region Factorization — Jun 2026**, **Stepping–Stone — Aug 2026**, **When Do Activation-Patching Effects Add Up? — Oct 2026**. Do not attach `— Present` to submission-month dates. Preserve original review statuses pending direct evidence of changes. The SN Computer Science organizational line is **not** a hyperlink; remove only its `organization_url`, leaving portfolio/PDF/reproducibility links untouched.
+- CV research is separated into **Research** (10 records: 4 journal manuscripts, 4 internal research reports, 1 latent-risk project and 1 volume-validation software record) and **Research Drafts** (6 records: unsubmitted manuscripts, tutorial/lecture and mathematical notes). Source order is in `_data/cv.yml`; both sections must be available in settings and chronological/print views. Do not relabel a lecture or tutorial as a journal submission.
+- The three earlier submitted manuscripts (not all first-authored) have user-confirmed CV and paper-page display dates: **Unit-Region Factorization — Jun 2026**, **Stepping–Stone — Aug 2026**, **When Do Activation-Patching Effects Add Up? — Oct 2026**. Do not attach `— Present` to submission-month dates. Preserve original review statuses pending direct evidence of changes. The SN Computer Science organizational line is **not** a hyperlink; remove only its `organization_url`, leaving portfolio/PDF/reproducibility links untouched.
 
-- **AbaQuant published writing:** The La Catarina 26 Oct 2026 `AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo` article is coauthored by Heriberto Espino Montelongo and Owen Paredes Conde. It belongs in the Papers page's separate **Published Articles & Technical Writing** category (and matching CV section), not in Press & Media, Submitted Manuscripts or Working Drafts. Its page uses `portfolio_type: article` and the owner-supplied local AVIF screenshot. Keep the 3 submitted / 13 drafts counts and 1 published-article count in rendered-page checks. See `docs/CV_HANDOFF.md`.
+- **AbaQuant published writing:** The La Catarina 26 Oct 2026 `AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo` article is coauthored by Heriberto Espino Montelongo and Owen Paredes Conde. It belongs in the Papers page's separate **Published Articles & Technical Writing** category (and matching CV section), not in Press & Media, Submitted Manuscripts or Working Drafts. Its page uses `portfolio_type: article` and the owner-supplied local AVIF screenshot. Keep the 4 submitted / 12 drafts counts and 1 published-article count in rendered-page checks. See `docs/CV_HANDOFF.md`.
 
 - All archive search/sort/view menus are **collapsed by default** behind
   a native `<details>` chevron (`>`) at the top left of each archive.
@@ -266,3 +266,34 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 - **CV stale screenshot and Print menu visibility (2026-11-02):** Verified the current deployed `gh-pages` `cv/index.html` at source commit `687b710`: it has no old `cv-eyebrow` “Curriculum vitae”, contains the Print control, and renders all 13 individual-course descriptions in the Credentials section. The owner screenshot showed a previously loaded pre-deployment page. The functional discoverability defect was real: the button was below the scrollable 92-entry settings picker. Keep **exactly one** Print / Save PDF button as the first action immediately below the Display-menu heading, with `position:sticky` within `#cv-settings-panel` so it remains visible when the menu scrolls; do not reintroduce viewport-fixed controls. Add build-based `?v=` to the CV JavaScript URL to prevent old script asset reuse after a fresh navigation. Verify through browser tests (scroll the settings panel and inspect course highlights in A4 paper preview), not only static source scans. Remind users who kept old HTML tabs open to hard reload with Ctrl+Shift+R; a site edit cannot retroactively replace an already-open document without a reload.
 
 - **Native CV print must use real paper-preview pages (2026-11-02):** Regression discovered that the previous `@media print` stylesheet forced `#cv-paged-preview {display:none!important}` and `#cv-document {display:block!important}`, so the Print button printed the full-width source rather than the user's A4/Letter page preview. The fixed path sets `data-cv-printing=true`, builds **all** measured pages via `renderPagedPreview(true)` (also for Ctrl+P when reading mode is selected), rasterizes only SVG graphics **inside the printable pages**, and uses `@media print` to print `#cv-paged-preview` with `#cv-document` hidden. Every generated page but the last has `break-after:page`; the user's existing dynamic `@page` size/margins remain authoritative, without a second sheet-padding margin. `afterprint` restores prior density, disclosures, bitmap imagery and reading/paper screen mode. Native-beforeprint can run after media changes: `data-cv-print-measuring=true` enforces true physical-sheet dimensions during pagination even then. Browser tests must assert displayed print clones, source hidden, page breaks, and a real PDF generated for A4 and Letter. Do not regress to merely switching density on `#cv-document`. See `docs/CV_HANDOFF.md`.
+
+
+## JFM submitted manuscript and public evidence (2026-11-09)
+
+The user explicitly confirmed submission to Wiley's *The Journal of Futures Markets* of
+**When Does Posterior Integration Change Option Values? Evidence from WTI Average Price Options**.
+It is **Submitted**, not proven to be Under Review, accepted or published.
+Update the existing canonical paper URL
+`/papers/posterior-integration-volatility-wti-asian-options.html`, not a duplicate page.
+The paper moves into Submitted Manuscripts and the CV into Research (not Research Drafts);
+`_pages/papers.md`, `test/style_contract.js`, and
+`scripts/verify-paper-archive.mjs` reflect **4 submitted + 12 working drafts**.
+The Wiley brand mark is the official-domain favicon in
+`_data/cv_organization_logos.yml`; it appears only next to the organization line.
+
+The two anonymous PDFs are byte-for-byte identical to the owner-supplied files
+and private JFM package run `41738924069`, artifact `13280636487`.
+Their public website paths and SHA-256 are:
+
+- `papers/when-does-posterior-integration-change-option-values.pdf`
+  — `5f5063654bc62c0aab51f3620e90ab9292214dd72cdae421c4bca0ebe3986043`
+- `papers/when-does-posterior-integration-change-option-values-supplement.pdf`
+  — `edf24cf45fbc5678911608f12b19069473d29455985b5a5c2e3fc323d5ca4111`
+
+The cropped **Figure 1 from page 6** is the list-card image, whereas the complete
+first manuscript page is `detail_image`, and the complete first supplement page
+is displayed inside the paper detail body. Preserve both PDFs and all three
+independent binary previews in Git. The original older public WTI draft PDF is
+left untouched, but no longer used as the newly submitted manuscript.
+The reviewer files must stay anonymized; identifying title page, editable
+source ZIP and commercial market data are **never** exported.
