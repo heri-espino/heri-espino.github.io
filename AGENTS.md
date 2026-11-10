@@ -249,7 +249,7 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 
 - **Mathematics Learning Center research leadership (2026-10-29):** User-confirmed autonomy to frame institutional research questions, independently design analyses, explain findings to technical and nontechnical leaders, and propose improvements. The CV retains its five technical bullets and adds three short leadership/translation/decision-support bullets (maximum 87 characters). Do not claim student/instructor wrongdoing, causal effects of tutoring incentives, or implemented institutional changes. See `docs/CV_HANDOFF.md`.
 
-- **CV institutional/Zenodo updates (2026-10-30):** The UDLAP directory lists `Preety Good Quantum OE` (official spelling), Spring 2026, with the owner's public UDLAP email. The existing President role now links to the directory via a `#:~:text=` fragment that may scroll but cannot guarantee accordion expansion. Match the supplied navy-Q mark before generic UDLAP (`assets/img/cv-organizations/preety-good-quantum.webp`); do not confuse it with AbaQuant. AbaQuant's icon uses canonical `AbaQuant/AbaQuant/docs/_static/q_dark.png`. Zenodo links get a purely decorative official icon beside accessible labels; CIMAT is credited as *presentation venue*, not research employer. Trend Estimation begins May 2026 (original repo creation); AwesomeFigures October 2026; Docling Math September 2026; all Programming Experience entries are marked ongoing at owner's request; Marp is in Visualization & Documents. See `docs/CV_HANDOFF.md`, preserve historical logos and research classification boundaries.
+- **CV institutional/Zenodo updates (2026-10-30):** The UDLAP directory lists `Preety Good Quantum OE` (official spelling), Spring 2026, with the owner's public UDLAP email. The President role now links to the canonical directory **without** the `#:~:text=` fragment (updated 2026-11-10), to avoid malformed/redundant printed links; printed CV pages suppress the duplicate resource line but retain the clickable role and organization. The interactive CV still displays the resource link. Match the supplied navy-Q mark before generic UDLAP (`assets/img/cv-organizations/preety-good-quantum.webp`); do not confuse it with AbaQuant. AbaQuant's icon uses canonical `AbaQuant/AbaQuant/docs/_static/q_dark.png`. Zenodo links get a purely decorative official icon beside accessible labels; CIMAT is credited as *presentation venue*, not research employer. Trend Estimation begins May 2026 (original repo creation); AwesomeFigures October 2026; Docling Math September 2026; all Programming Experience entries are marked ongoing at owner's request; Marp is in Visualization & Documents. See `docs/CV_HANDOFF.md`, preserve historical logos and research classification boundaries.
 
 - **Author-supplied SSRN/tracker links (2026-10-30):** Stepping–Stone CV links its existing SSRN abstract 7634746 (also on the canonical paper page). Unit-Region links its Elsevier Author Hub tracking page in the CV and as a *secondary* `resource_url` on the paper page, preserving the primary PDF. This UUID-bearing tracker can be a private capability link: never treat it as a publication or as evidence of a new review decision; remove/revoke if the owner discovers it exposes nonpublic editorial material. See `docs/CV_HANDOFF.md`.
 
@@ -398,3 +398,27 @@ the old `v1` section IDs no longer exist. Reset clears `v2` and restores
 the new canonical YAML order. Europass retains its separate European
 section sequence until explicitly reordered; the underlying record fields,
 dates, PDF links and journal statuses must not change.
+
+
+## 2026-11-10 CV metadata and quantum print-link correction
+
+Latest owner-confirmed details (supersede older screenshot/archive entries):
+- Springer Nature · SN Computer Science submission (Activation-Patching):
+  **Oct 2026; Puebla, Mexico** (journal/review status unchanged).
+- Wiley · The Journal of Futures Markets submission (Posterior Integration):
+  **Nov 2026; Puebla, Mexico** (remain **Submitted**, not accepted).
+- SMM talk 8744, Asymptotic Characteristics of Proximity Graphs:
+  **Oct 2026; Tlaxcala, Mexico**. The recorded-video link and
+  prerecorded modality description remain unchanged.
+
+The Preety Good Quantum OE **official directory link** is normalized to
+`https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/`,
+no text-highlight fragment. This corrects a redundant/awkward hyperlink in
+paper preview without changing the organization name, logo, official
+directory destination, or clickable live reading links.
+A per-record `paper_hide_redundant_links: true` flag adds the
+`cv-paper-redundant-links` class on resource links, hidden **only**
+inside `.cv-preview-paper-body` for A4/Letter screen preview and print.
+The organization/title remain clickable, and the underlining on the
+printed organization label is suppressed. Preserve this behavior in
+`test/visual/interactions.spec.js` and `test/style_contract.js`.
