@@ -1344,3 +1344,34 @@ and 2026-11-09 Research / Research Drafts layouts when editing this version.
   `test/visual/interactions.spec.js` check section membership, display
   order, button geometry, browser persistence, keyboard disclosure
   animation, reduced-motion preference and print preview.
+
+
+## 2026-11-10: Springer/Wiley/SMM corrections and Quantum paper links
+
+New explicit owner corrections supersede any older CV screenshot or notes:
+Springer Nature · *SN Computer Science* activation-patching manuscript remains
+**Under Review, Oct 2026**, with **Puebla, Mexico** as its author location.
+Wiley · *The Journal of Futures Markets* posterior-integration paper remains
+**Submitted**, now dated **Nov 2026** (Puebla, Mexico).
+The 59th SMM talk *Asymptotic Characteristics of Proximity Graphs*, talk 8744,
+was at **Tlaxcala, Mexico**, not a location named "Pre-recorded"; its
+Oct 2026 date and recorded-talk URL stay intact. This is a CV metadata edit,
+not a new submission or revision claim.
+
+The Preety Good Quantum OE leadership entry had the same long
+`#:~:text=Preety%20Good%20Quantum%20OE` UDLAP link on its title, linked
+organization, and an additional resources line. That text-fragment form
+adds no permanent path and gives awkward PDF-preview wrapping and visual
+duplication. Both `organization_url` and the labeled resource link now use
+the stable directory root:
+`https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/`.
+
+The organization and title stay clickable. The resource link still appears
+in full-width interactive CV mode. A narrowly scoped YAML flag
+`paper_hide_redundant_links: true` causes the Liquid renderer to mark the
+single duplicate resource link; CSS hides it only in the generated
+`.cv-preview-paper-body` content used for the paper preview and real browser
+printing. The printed organization URL is not visually underlined, but the
+link remains active. All other organization, Zenodo and paper links retain
+their previous behavior. A browser test checks metadata, link targets,
+paper geometry, CSS visibility and the native print preparation sequence.
