@@ -380,6 +380,40 @@ test("CV section order can be changed, survives reload, and resets to source ord
   expect(await page.evaluate(() => localStorage.getItem("cv-section-order-v1"))).toBeNull();
 });
 
+test("CV Wiley JFM submission and Papers page expose both PDFs and their first-page previews", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const cvJfm = page.locator('#cv-sections [data-cv-section="research"] [data-cv-record]').filter({
+    hasText: "When Does Posterior Integration Change Option Values?",
+  });
+  await expect(cvJfm).toHaveCount(1);
+  await expect(cvJfm).toContainText("Wiley · The Journal of Futures Markets · Submitted");
+  await expect(cvJfm.locator(".cv-org-logo")).toHaveAttribute("src", /wiley\.com/);
+  await expect(cvJfm.locator(".cv-links a")).toHaveCount(3);
+
+  await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
+  const url = "/al-folio/papers/posterior-integration-volatility-wti-asian-options.html";
+  await expect(page.locator('#submitted-manuscripts a[href="' + url + '"]')).not.toHaveCount(0);
+  await expect(page.locator('#working-drafts a[href="' + url + '"]')).toHaveCount(0);
+  await expect(page.locator("#submitted-manuscripts .portfolio-card-image img")
+    .filter({ visible: true }).last()).toHaveAttribute("loading", "lazy");
+
+  await page.goto(url, { waitUntil: "networkidle" });
+  const detail = page.locator(".portfolio-detail");
+  await expect(detail.locator("h1")).toContainText("When Does Posterior Integration Change Option Values?");
+  await expect(detail.locator(".portfolio-detail-preview"))
+    .toHaveAttribute("src", /jfm-posterior-integration-first-page\.webp/);
+  await expect(detail.locator('a.portfolio-button[href$="when-does-posterior-integration-change-option-values.pdf"]'))
+    .toBeVisible();
+  await expect(detail.locator('a.portfolio-button[href$="when-does-posterior-integration-change-option-values-supplement.pdf"]'))
+    .toBeVisible();
+  const supplement = detail.locator(".portfolio-supplement-first-page img");
+  await expect(supplement).toBeVisible();
+  await expect(supplement).toHaveAttribute("src", /jfm-posterior-integration-supplement-first-page\.webp/);
+  const sourceImagesLoaded = await detail.locator(".portfolio-detail-preview, .portfolio-supplement-first-page img")
+    .evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0));
+  expect(sourceImagesLoaded).toBeTruthy();
+});
+
 test("CV Harvard paper preview preserves the organization/role and city/date corners", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await expect(page.locator("#cv-print")).toBeHidden();
