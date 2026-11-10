@@ -649,8 +649,8 @@ if (exists("_pages/cv.md")) {
   // anonymous PDF files under one detail page and the Wiley publisher favicon.
   const jfmPage = read("_pages/papers/posterior-integration-volatility-wti-asian-options.md");
   const jfmLogo = read("_data/cv_organization_logos.yml");
-  if (!papersArchive.includes("item.label == 'Under Review' or item.label == 'Under Revision' or item.label == 'Submitted'") ||
-      !papersArchive.includes("item.label != 'Under Review' and item.label != 'Under Revision' and item.label != 'Submitted'") ||
+  if (!papersArchive.includes('item.hide_from_papers != true') ||
+      !read("_pages/about.md").includes('item.hide_from_papers != true') ||
       !jfmPage.includes('label: "Submitted"') ||
       !jfmPage.includes('status: "Submitted to The Journal of Futures Markets · Wiley"') ||
       !jfmPage.includes("secondary_pdf: /papers/when-does-posterior-integration-change-option-values-supplement.pdf") ||
@@ -660,6 +660,32 @@ if (exists("_pages/cv.md")) {
       !jfmLogo.includes('match: "wiley"') ||
       !jfmLogo.includes("domain=wiley.com&sz=128")) {
     failures.push("Wiley JFM submission, icon, paired PDFs and both first-page previews must be indexed.");
+  }
+  // The owner unlisted six records from Papers and homepage previews only.
+  // Detail URLs, source files, PDFs, CV and scholarly metadata remain intact.
+  const hiddenPaperSources = [
+    "_pages/papers/privileged-template-priors-cnns.md",
+    "_pages/papers/bayesian-parameter-uncertainty-wti.md",
+    "_pages/papers/guerrero-penalized-trend-estimation.md",
+    "_pages/papers/smoothness-integrated-trend-distances.md",
+    "_pages/papers/dynamic-forecast-optimal-smoothness.md",
+    "_pages/papers/smoothness-indexed-pls-python.md",
+  ];
+  for (const sourcePath of hiddenPaperSources) {
+    const page = read(sourcePath);
+    if (!page.includes("hide_from_papers: true") ||
+        !page.includes("portfolio_type: paper") ||
+        !page.includes("permalink: ") ||
+        page.includes("published: false")) {
+      failures.push("Unlisted paper must keep its public detail URL and remain a source record: " + sourcePath);
+    }
+  }
+  const archiveCheck = read("scripts/verify-paper-archive.mjs");
+  if (!archiveCheck.includes("const expectedSubmitted = 4;") ||
+      !archiveCheck.includes("const expectedDrafts = 6;") ||
+      !archiveCheck.includes("hiddenRoutes") ||
+      !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
+    failures.push("Rendered Papers archive checks must preserve four submissions, six visible drafts and six hidden public detail pages.");
   }
   const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
   const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Published Articles & Technical Writing:")[0] || "";

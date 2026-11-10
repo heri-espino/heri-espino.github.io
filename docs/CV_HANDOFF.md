@@ -1227,3 +1227,34 @@ and verify browser rendering including desktop/mobile preview and PDF actions.
 Publicly linking anonymous reviewer files from an author's CV can affect
 double-blind anonymity; do not modify the reviewer PDFs or add identifying
 manuscript/title-page material to the downloadable pair.
+
+
+## Papers listing-only exclusions (2026-11-09)
+
+The owner requested removing six specific cards from the website's
+`/papers/` archive **without deleting the actual paper records, PDF files,
+images, or standalone page URLs**. The omitted cards are:
+Template Priors in Small CNNs (TMLR); Bayesian Parameter Uncertainty in
+WTI Average Price Option Valuation; Guerrero Penalized Trend Estimation
+(S&P 500 comparison); Smoothness-Integrated Trend Distances; Dynamic
+Forecast-Optimal Smoothness; and Smoothness-Indexed Penalized Trend
+Estimation in Python.
+
+Each underlying Markdown page remains under `_pages/papers/` with the
+same `portfolio_type: paper`, permalink, content, status and binaries.
+A new `hide_from_papers: true` front matter field controls visibility in
+`_pages/papers.md` and the homepage Papers previews (via `_pages/about.md`).
+Do not replace this with `published: false`, as that would destroy
+the public detail URL and break provenance, existing internal links and
+research-index queries. Search/sort results on the Papers page are
+populated only from the visible cards.
+
+Visible Papers counts after this change: **4 Submitted Manuscripts,
+1 Published Article, and 6 Working Drafts**. Preserve the Wiley
+Journal of Futures Markets submission and its two verified PDFs.
+`scripts/verify-paper-archive.mjs` checks that all six excluded links
+are absent from the archive/homepage but their individual generated pages
+remain accessible, while still validating original PDF and preview assets.
+No CV records were changed by this listing-only request. The separate
+research index and machine-readable catalog deliberately retain full
+research provenance.

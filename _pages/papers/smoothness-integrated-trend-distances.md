@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/smoothness-integrated-trend-distances.html
 portfolio_type: paper
+hide_from_papers: true
 pdf: /papers/EspinoMontelongo-2026-Trend_Distances.pdf
 importance: 1
 card_kind: Working draft

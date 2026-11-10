@@ -7,7 +7,8 @@ nav: true
 nav_order: 2
 ---
 
-{% assign items = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
+{% assign paper_records = site.pages | where: "portfolio_type", "paper" %}
+{% assign items = paper_records | where_exp: "item", "item.hide_from_papers != true" | sort: "importance" %}
 {% assign existing_submissions = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
 {% assign wiley_submission = items | where: "url", "/papers/posterior-integration-volatility-wti-asian-options.html" %}
 {% assign submitted_papers = existing_submissions | concat: wiley_submission %}

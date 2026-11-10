@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/bayesian-parameter-uncertainty-wti.html
 portfolio_type: paper
+hide_from_papers: true
 importance: 80
 card_kind: Working paper
 title: Bayesian Parameter Uncertainty in WTI Average Price Option Valuation

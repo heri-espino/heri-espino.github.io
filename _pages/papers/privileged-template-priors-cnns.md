@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /projects/cnn-primitive-bases.html
 portfolio_type: paper
+hide_from_papers: true
 importance: 70
 card_kind: Research paper
 title: "Template Priors in Small CNNs: Learning Dynamics and the Measurement Dependence of Causal Usefulness"

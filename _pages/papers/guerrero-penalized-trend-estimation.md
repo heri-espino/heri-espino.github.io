@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /projects/sp500-trend-comparison.html
 portfolio_type: paper
+hide_from_papers: true
 importance: 91
 card_kind: Software project
 title: A Reproducible Comparison of Trend Estimation Methods on S&P 500 Log Prices
