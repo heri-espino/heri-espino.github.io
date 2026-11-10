@@ -409,9 +409,13 @@ test("CV Wiley JFM submission and Papers page expose both PDFs and their first-p
   const supplement = detail.locator(".portfolio-supplement-first-page img");
   await expect(supplement).toBeVisible();
   await expect(supplement).toHaveAttribute("src", /jfm-posterior-integration-supplement-first-page\.webp/);
-  const sourceImagesLoaded = await detail.locator(".portfolio-detail-preview, .portfolio-supplement-first-page img")
-    .evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0));
-  expect(sourceImagesLoaded).toBeTruthy();
+  // The supplement is lazy-loaded and may be below the mobile viewport.
+  // Scroll to trigger its request, then wait for both images to decode.
+  await supplement.scrollIntoViewIfNeeded();
+  await expect.poll(async () =>
+    detail.locator(".portfolio-detail-preview, .portfolio-supplement-first-page img")
+      .evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0))
+  ).toBeTruthy();
 });
 
 test("CV Harvard paper preview preserves the organization/role and city/date corners", async ({ page }) => {
