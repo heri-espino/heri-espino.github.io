@@ -8,8 +8,11 @@ nav_order: 2
 ---
 
 {% assign items = site.pages | where: "portfolio_type", "paper" | sort: "importance" %}
-{% assign submitted_papers = items | where_exp: "item", "item.label == 'Under Review' or item.label == 'Under Revision' or item.label == 'Submitted'" %}
-{% assign other_papers = items | where_exp: "item", "item.label != 'Under Review' and item.label != 'Under Revision' and item.label != 'Submitted'" %}
+{% assign existing_submissions = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
+{% assign wiley_submission = items | where: "url", "/papers/posterior-integration-volatility-wti-asian-options.html" %}
+{% assign submitted_papers = existing_submissions | concat: wiley_submission %}
+{% assign other_papers = items | where_exp: "item", "item.url != '/papers/unit-region-factorization.html' and item.url != '/papers/stepping-stone.html' and item.url != '/papers/activation-patching-effects-add-up.html'" %}
+{% assign other_papers = other_papers | where_exp: "item", "item.url != '/papers/posterior-integration-volatility-wti-asian-options.html'" %}
 {% assign published_articles = site.pages | where: "portfolio_type", "article" | sort: "importance" %}
 
 <p class="portfolio-section-intro papers-archive-intro">
