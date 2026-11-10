@@ -279,6 +279,20 @@ cv:
         highlights:
           - "Mechanistic interpretability: tested CNN activation-patching additivity."
           - "Experimental design: isolated logit additivity from metric-induced effects."
+      - name: "When Does Posterior Integration Change Option Values? Evidence from WTI Average Price Options"
+        role: "Author · Submitted Manuscript"
+        subtitle: "When Does Posterior Integration Change Option Values?"
+        organization: "Wiley · The Journal of Futures Markets · Submitted"
+        organization_url: "https://onlinelibrary.wiley.com/journal/10969934"
+        date: "2026"
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
+          - { label: Manuscript PDF, url: "https://heri-espino.github.io/papers/when-does-posterior-integration-change-option-values.pdf" }
+          - { label: Supporting Information, url: "https://heri-espino.github.io/papers/when-does-posterior-integration-change-option-values-supplement.pdf" }
+        highlights:
+          - "Bayesian option pricing: studied posterior integration in WTI Average Price Options."
+          - "Simulation: analyzed 10 million histories and a curvature–variance approximation."
       - name: Student Engagement and Adaptation
         role: "Study Lead"
         date: Sep 2026
@@ -362,16 +376,6 @@ cv:
         highlights:
           - "Numerical methods: compared seven PLS backends at normalized smoothness."
           - "Reproducible research: archived 80,640 runs and validated root finding."
-      - name: "Posterior Integration and Volatility Inputs in WTI Asian Options"
-        context: "Blinded research manuscript draft"
-        role: "Blinded Research Manuscript Draft"
-        date: "2026"
-        links:
-          - { label: Research draft, url: "https://heri-espino.github.io/papers/posterior-integration-volatility-wti-asian-options.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/EspinoMontelongo-2026-WTI_Asian_Options.pdf" }
-        highlights:
-          - "Bayesian inference: isolated posterior integration in WTI Asian-option pricing."
-          - "Monte Carlo: simulated 10 million paths for WTI average-price options."
       - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
         context: "Mathematical research lecture"
         role: "Mathematical Research Lecture · Not Submitted"
