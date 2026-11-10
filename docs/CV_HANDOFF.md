@@ -1258,3 +1258,39 @@ remain accessible, while still validating original PDF and preview assets.
 No CV records were changed by this listing-only request. The separate
 research index and machine-readable catalog deliberately retain full
 research provenance.
+
+
+## 2026-11-10: move Notes into Research Drafts
+
+The owner uploaded a **31-page handwritten PDF** (`notes on trend
+estimation.pdf`) and asked to include it in **Research Drafts**,
+removing the Notes section from the public website.
+
+Implementation:
+- Add `_pages/papers/handwritten-trend-estimation-notes.md`
+  as an unsubmitted **Research Notes** record in Papers →
+  Working Drafts & Ongoing Research. The notebook discusses
+  penalized least squares, difference operators, the Guerrero
+  smoothness index, smoothing matrix derivatives, bias–variance,
+  cross-validation and local-minimum/root searches.
+- Add an entry under `_data/cv.yml` Research Drafts; do not
+  misclassify the handwritten pages as peer-reviewed results.
+- Reclassify the existing Random Variables as Vectors note as
+  `portfolio_type: paper`, keeping its original `/notes/...`
+  permalink and PDF. Both mathematical-note entries now appear
+  among research drafts; avoid losing the older page in the move.
+- Remove Notes from `_includes/header.liquid` and the homepage
+  `_pages/about.md` sections. Retain `/notes/` as a migration
+  notice, marked `nav: false`, not a second archive.
+- Keep six previously hidden paper records hidden. The target public
+  archive counts are **4 Submitted + 1 Published + 8 Draft/Notes**,
+  and the CV contains **10 Research + 7 Research Drafts**.
+
+**PDF attachment status:** The handwritten original is a ChatGPT
+conversation upload; it has not yet been transferred to GitHub.
+Because the upload is 31 scanned image pages, it cannot be replaced by
+an automatic text extraction. The detail page explicitly labels its
+coverage as a thematic overview and does **not** provide a fabricated
+PDF URL. Once the original PDF is added to the public repo, add its
+verified `pdf:` metadata and CV download link, and preserve
+the exact 31-page source independently of the overview.
