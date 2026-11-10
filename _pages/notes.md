@@ -3,8 +3,7 @@ layout: page
 title: Notes
 permalink: /notes/
 description: Mathematical notes in probability and related areas.
-nav: true
-nav_order: 4
+nav: false
 ---
 
 {% assign items = site.pages | where: "portfolio_type", "note" | sort: "importance" %}
