@@ -645,19 +645,39 @@ if (exists("_pages/cv.md")) {
     failures.push("Papers must show Submitted, Published Articles, then Working Drafts, each defaulting to list.");
   }
 
+  // A journal submission is not peer-review acceptance. Preserve both verified
+  // anonymous PDF files under one detail page and the Wiley publisher favicon.
+  const jfmPage = read("_pages/papers/posterior-integration-volatility-wti-asian-options.md");
+  const jfmLogo = read("_data/cv_organization_logos.yml");
+  if (!papersArchive.includes("or item.url == '/papers/posterior-integration-volatility-wti-asian-options.html'") ||
+      !papersArchive.includes("and item.url != '/papers/posterior-integration-volatility-wti-asian-options.html'") ||
+      !jfmPage.includes('label: "Submitted"') ||
+      !jfmPage.includes('status: "Submitted to The Journal of Futures Markets · Wiley"') ||
+      !jfmPage.includes("secondary_pdf: /papers/when-does-posterior-integration-change-option-values-supplement.pdf") ||
+      !jfmPage.includes("/assets/img/portfolio/jfm-posterior-integration-figure.webp") ||
+      !jfmPage.includes("/assets/img/portfolio/jfm-posterior-integration-first-page.webp") ||
+      !jfmPage.includes("/assets/img/portfolio/jfm-posterior-integration-supplement-first-page.webp") ||
+      !jfmLogo.includes('match: "wiley"') ||
+      !jfmLogo.includes("domain=wiley.com&sz=128")) {
+    failures.push("Wiley JFM submission, icon, paired PDFs and both first-page previews must be indexed.");
+  }
   const submittedResearchGroup = cvSources.split("    Research:")[1]?.split("    Research Drafts:")[0] || "";
   const researchDraftGroup = cvSources.split("    Research Drafts:")[1]?.split("    Published Articles & Technical Writing:")[0] || "";
   const researchGroup = submittedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 9 || draftCount !== 7) {
-    failures.push("CV must retain 9 Research records (including volume validation) and 7 drafts.");
+  if (researchCount !== 10 || draftCount !== 6) {
+    failures.push("CV must retain 10 Research records (including the submitted Wiley JFM manuscript) and 6 drafts.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||
       !submittedResearchGroup.includes("Springer Nature · SN Computer Science · Under Review") ||
-      researchDraftGroup.includes("Under Review")) {
-    failures.push("The three submitted manuscripts must remain in Research, never Research Drafts.");
+      researchDraftGroup.includes("Under Review") ||
+      !submittedResearchGroup.includes("Wiley · The Journal of Futures Markets · Submitted") ||
+      !submittedResearchGroup.includes("when-does-posterior-integration-change-option-values-supplement.pdf") ||
+      researchDraftGroup.includes("Posterior Integration and Volatility Inputs in WTI Asian Options")) {
+    failures.push("All four submitted manuscripts, including the Wiley JFM dual-PDF record, must remain in Research.");
+  }
   }
   if (!cvRenderer.includes("title == 'Research Drafts'") ||
       !cvScript.includes('"Research Drafts": "Research drafts and related materials"')) {
