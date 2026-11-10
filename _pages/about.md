@@ -61,7 +61,6 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign paper_records = site.pages | where: "portfolio_type", "paper" %}
 {% assign papers = paper_records | where_exp: "item", "item.hide_from_papers != true" | sort: "importance" %}
 {% assign projects = site.projects | sort: "importance" %}
-{% assign notes = site.pages | where: "portfolio_type", "note" | sort: "importance" %}
 {% assign portfolio_projects = projects | where: "portfolio_section", "projects" %}
 {% assign academic_projects = projects | where: "portfolio_section", "academic-projects" %}
 {% assign presentations = projects | where_exp: "project", "project.presentation_type == 'Poster' or project.presentation_type == 'Presentation'" | sort: "importance" %}
@@ -69,12 +68,10 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign featured_projects = portfolio_projects | slice: 0, 2 %}
 {% assign featured_academic_projects = academic_projects | slice: 0, 2 %}
 {% assign featured_presentations = presentations | slice: 0, 2 %}
-{% assign featured_notes = notes | slice: 0, 2 %}
 {% assign preview_papers = papers | slice: 2, 2 %}
 {% assign preview_projects = portfolio_projects | slice: 2, 2 %}
 {% assign preview_academic_projects = academic_projects | slice: 2, 2 %}
 {% assign preview_presentations = presentations | slice: 2, 2 %}
-{% assign preview_notes = notes | slice: 2, 2 %}
 
 {% if papers.size > featured_papers.size %}
 {% assign papers_eyebrow = "Selected papers" %}
@@ -124,18 +121,6 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 {% assign presentations_bottom_link = "Open posters & presentations archive" %}
 {% endif %}
 
-{% if notes.size > featured_notes.size %}
-{% assign notes_eyebrow = "Selected notes" %}
-{% assign notes_support = "Selected notes are shown here; see the full archive for all available mathematical materials." %}
-{% assign notes_top_link = "Browse all notes" %}
-{% assign notes_bottom_link = "Browse the complete notes archive" %}
-{% else %}
-{% assign notes_eyebrow = "Notes" %}
-{% assign notes_support = "All currently available mathematical notes are shown here and maintained in the notes archive." %}
-{% assign notes_top_link = "Open notes archive" %}
-{% assign notes_bottom_link = "Open notes archive" %}
-{% endif %}
-
 {% include portfolio/section.liquid id="papers" title="Papers" eyebrow=papers_eyebrow intro="Research in stochastic geometry and empty-region proximity graphs." support=papers_support top_link=papers_top_link bottom_link=papers_bottom_link items=featured_papers preview_items=preview_papers index_url="/papers/" card_archive_url="/papers/" %}
 {% include portfolio/section.liquid id="projects" title="Projects" eyebrow=projects_eyebrow intro="Research software for computational geometry, quantitative finance, interactive mathematics, and academic document processing." support=projects_support top_link=projects_top_link bottom_link=projects_bottom_link items=featured_projects preview_items=preview_projects index_url="/projects/" %}
 {% include portfolio/section.liquid id="academic-projects" title="Academic Projects" eyebrow=academic_projects_eyebrow intro="Course projects in actuarial modeling, quantitative finance, econometrics, and data analysis." support=academic_projects_support top_link=academic_projects_top_link bottom_link=academic_projects_bottom_link items=featured_academic_projects preview_items=preview_academic_projects index_url="/academic-projects/" additional_url="https://www.linkedin.com/in/heri-espino/" additional_link="View additional activity and awards on LinkedIn" %}
@@ -167,7 +152,6 @@ description: Academic portfolio of Heriberto Espino Montelongo.
   <a class="portfolio-archive-cta" href="{{ '/press/' | relative_url }}">Browse press coverage <span aria-hidden="true">→</span></a>
 </section>
 
-{% include portfolio/section.liquid id="notes" title="Notes" eyebrow=notes_eyebrow intro="Mathematical notes developed through independent study and research preparation." support=notes_support top_link=notes_top_link bottom_link=notes_bottom_link items=featured_notes preview_items=preview_notes index_url="/notes/" %}
 
 {% assign total_credentials = 0 %}
 {% for credential_group in site.data.credentials.groups %}
