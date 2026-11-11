@@ -25,7 +25,8 @@ const pdfs = {
   "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
 };
 const expectedSubmitted = 4;
-const expectedDrafts = 8;
+const expectedDrafts = 4;
+const expectedInternalResearch = 4;
 const hiddenSlugs = new Set([
   "smoothness-integrated-trend-distances",
   "dynamic-forecast-optimal-smoothness",
@@ -63,14 +64,17 @@ function countCards(markup) {
 }
 
 const submitted = section("submitted-manuscripts");
-const sectionIds = ["submitted-manuscripts", "published-technical-articles", "working-drafts"];
+const sectionIds = ["submitted-manuscripts", "published-technical-articles", "working-drafts", "internal-research-papers"];
 const sectionPositions = sectionIds.map((id) => html.indexOf('id="' + id + '"'));
 if (sectionPositions.some((position) => position < 0) ||
     sectionPositions[0] >= sectionPositions[1] ||
-    sectionPositions[1] >= sectionPositions[2]) {
-  errors.push("Papers sections must be ordered Submitted → Published Articles → Working Drafts");
+    sectionPositions[1] >= sectionPositions[2] ||
+    sectionPositions[2] >= sectionPositions[3]) {
+  errors.push("Papers sections must be ordered Submitted → Published Articles → Research Notes → Internal Research");
 }
 const drafts = section("working-drafts");
+const internalResearch = section("internal-research-papers");
+const actualInternalResearch = countCards(internalResearch);
 const actualSubmitted = countCards(submitted);
 const actualDrafts = countCards(drafts);
 const published = section("published-technical-articles");
@@ -102,10 +106,14 @@ if (actualSubmitted !== expectedSubmitted) {
   errors.push(`Expected ${expectedSubmitted} submitted cards, rendered ${actualSubmitted}`);
 }
 if (actualDrafts !== expectedDrafts) {
-  errors.push(`Expected ${expectedDrafts} visible working-draft cards after six archive exclusions, rendered ${actualDrafts}`);
+  errors.push(`Expected ${expectedDrafts} visible research-notes/lecture/tutorial cards, rendered ${actualDrafts}`);
 }
 if (!drafts.includes(`(${expectedDrafts})`)) {
-  errors.push(`Working-drafts heading does not report (${expectedDrafts})`);
+  errors.push(`Research-notes heading does not report (${expectedDrafts})`);
+}
+if (actualInternalResearch !== expectedInternalResearch ||
+    !internalResearch.includes(`(${expectedInternalResearch})`)) {
+  errors.push(`Expected ${expectedInternalResearch} internal research paper cards, rendered ${actualInternalResearch}`);
 }
 if (html.includes('id="featured-working-draft"')) {
   errors.push("The six research materials must be in Working Drafts, not a featured section");
@@ -207,7 +215,7 @@ for (const slug of slugs) {
 }
 
 // A separate Notes category was retired. Both mathematical note records
-// must now appear in Research Drafts, retaining the old random-variables URL.
+// must now appear in the dedicated Research Notes section, retaining the old URL.
 for (const [url, title] of [
   ["/papers/handwritten-trend-estimation-notes.html", "Handwritten Notes on Penalized Trend Estimation"],
   ["/notes/random-variables-as-vectors.html", "Random Variables as Vectors"],
@@ -215,6 +223,27 @@ for (const [url, title] of [
   const dest = path.join(site, url.replace(/^\//, ""));
   if (!drafts.includes(`href="${url}"`) || !fs.existsSync(dest) || !read(dest).includes(title)) {
     errors.push(`Research Notes record missing from visible working drafts or detail pages: ${url}`);
+  }
+}
+for (const url of [
+  "/papers/componentwise-knn-isomap-lecture.html",
+  "/papers/maxcut-sdp-eva-clustering-tutorial.html",
+]) {
+  if (!drafts.includes(`href="${url}"`) || internalResearch.includes(`href="${url}"`)) {
+    errors.push(`Mathematical lecture/tutorial must remain in Research Notes, not internal papers: ${url}`);
+  }
+}
+for (const url of [
+  "/papers/academic-support-persistence-incentive.html",
+  "/papers/mathematics-support-classroom-performance.html",
+  "/papers/course-grades-comparability.html",
+  "/papers/student-engagement-adaptation.html",
+]) {
+  const dest = path.join(site, url.replace(/^\//, ""));
+  if (!internalResearch.includes(`href="${url}"`) ||
+      drafts.includes(`href="${url}"`) ||
+      !fs.existsSync(dest)) {
+    errors.push(`Internal research paper is missing from its own section: ${url}`);
   }
 }
 const formerNotesArchive = path.join(site, "notes", "index.html");
@@ -258,4 +287,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} visible drafts (including two research notes); six unlisted paper records and all prior PDFs preserved.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} research notes/teaching drafts + ${actualInternalResearch} internal research papers; one published article and six unlisted paper records preserved.`);
