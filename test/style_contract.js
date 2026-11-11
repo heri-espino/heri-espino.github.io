@@ -681,18 +681,36 @@ if (exists("_pages/cv.md")) {
       !cvSources.includes("papers/handwritten-trend-estimation-notes.html")) {
     failures.push("Both mathematical research notes must remain in Manuscripts, without a Notes navbar/homepage section.");
   }
+  const groupedDocuments = [
+    ["_pages/papers/handwritten-trend-estimation-notes.md", "research_notes"],
+    ["_pages/notes/random-variables-as-vectors.md", "research_notes"],
+    ["_pages/papers/componentwise-knn-isomap-lecture.md", "research_notes"],
+    ["_pages/papers/maxcut-sdp-eva-clustering-tutorial.md", "research_notes"],
+    ["_pages/papers/academic-support-persistence-incentive.md", "internal_research"],
+    ["_pages/papers/mathematics-support-classroom-performance.md", "internal_research"],
+    ["_pages/papers/course-grades-comparability.md", "internal_research"],
+    ["_pages/papers/student-engagement-adaptation.md", "internal_research"],
+  ];
+  for (const [filename, group] of groupedDocuments) {
+    if (!read(filename).includes("archive_group: " + group)) {
+      failures.push("Papers archive grouping was changed without a document-type label: " + filename);
+    }
+  }
   const papersArchive = read("_pages/papers.md");
   if (!papersArchive.includes('data-collection-label="Papers" data-view="list"') ||
-      (papersArchive.match(/data-portfolio-group data-view="list"/g) || []).length !== 3 ||
+      (papersArchive.match(/data-portfolio-group data-view="list"/g) || []).length !== 4 ||
       !(
         papersArchive.indexOf('id="submitted-manuscripts"') <
         papersArchive.indexOf('id="published-technical-articles"') &&
         papersArchive.indexOf('id="published-technical-articles"') <
-        papersArchive.indexOf('id="working-drafts"')
+        papersArchive.indexOf('id="working-drafts"') &&
+        papersArchive.indexOf('id="working-drafts"') <
+        papersArchive.indexOf('id="internal-research-papers"')
       ) ||
       !papersArchive.includes("02 / Published writing") ||
-      !papersArchive.includes("03 / In development")) {
-    failures.push("Papers must show Submitted, Published Articles, then Working Drafts, each defaulting to list.");
+      !papersArchive.includes("03 / Working drafts and learning materials") ||
+      !papersArchive.includes("04 / Internal research")) {
+    failures.push("Papers must show Submitted, Published, Research Notes and Internal Research, each defaulting to list.");
   }
 
   // A journal submission is not peer-review acceptance. Preserve both verified
@@ -732,10 +750,11 @@ if (exists("_pages/cv.md")) {
   }
   const archiveCheck = read("scripts/verify-paper-archive.mjs");
   if (!archiveCheck.includes("const expectedSubmitted = 4;") ||
-      !archiveCheck.includes("const expectedDrafts = 8;") ||
+      !archiveCheck.includes("const expectedDrafts = 4;") ||
+      !archiveCheck.includes("const expectedInternalResearch = 4;") ||
       !archiveCheck.includes("hiddenRoutes") ||
       !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
-    failures.push("Rendered Papers archive checks must preserve four submissions, six visible drafts and six hidden public detail pages.");
+    failures.push("Rendered Papers archive checks must preserve four submissions, four research-note/teaching drafts, four internal research papers, and six hidden public detail pages.");
   }
   const submittedResearchGroup = cvSources.split("    Submitted Manuscripts:")[1]?.split("    Manuscripts:")[0] || "";
   const researchDraftGroup = cvSources.split("    Manuscripts:")[1]?.split("    Programming Experience:")[0] || "";
@@ -795,7 +814,7 @@ if (exists("_pages/cv.md")) {
       !papersArchive.includes('id="working-drafts"') ||
       !papersArchive.includes("include portfolio/card.liquid item=item") ||
       papersArchive.indexOf('id="submitted-manuscripts"') > papersArchive.indexOf('id="working-drafts"')) {
-    failures.push("Submitted manuscripts must precede the unified Working Drafts section, without a featured section or exclusion.");
+    failures.push("Submitted manuscripts must precede the notes and internal research sections, without featured promotion.");
   }
   const newResearchPages = [
     ["dynamic-forecast-optimal-smoothness", "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation", "Working Draft"],

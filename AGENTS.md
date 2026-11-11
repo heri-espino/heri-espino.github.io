@@ -422,3 +422,39 @@ inside `.cv-preview-paper-body` for A4/Letter screen preview and print.
 The organization/title remain clickable, and the underlining on the
 printed organization label is suppressed. Preserve this behavior in
 `test/visual/interactions.spec.js` and `test/style_contract.js`.
+
+
+
+## Papers archive subsection split (2026-11-11)
+
+The owner requested clear, distinct Papers archive sections. The live source
+`_pages/papers.md` now keeps **4 Submitted Manuscripts**, **1 Published
+Article**, **4 Research Notes, Lectures & Tutorials**, and **4 Internal
+Research Papers**, in that order. The original `#working-drafts` anchor
+continues to identify the notes/lecture/tutorial section, while the new
+`#internal-research-papers` is the separate internal working-paper section.
+The explicit `archive_group` front-matter values are `research_notes` and
+`internal_research`. Do not infer editorial status from those group keys.
+Keep individual descriptions, PDFs, author credits, manuscript stages and
+existing detail URLs intact.
+
+Notes/teaching group: handwritten penalized-trend notes, Random Variables as
+Vectors in L², the 53-slide Isomap lecture and 7-page Max-Cut/EVA tutorial.
+Internal research group: four pre-existing studies on incentive-linked
+mathematics support, support use and classroom-relative grades, instructor
+grading comparability, and longitudinal student engagement. All are
+unsubmitted unless and until the owner provides different evidence. Six
+previously unlisted records remain publicly addressable but excluded from the
+Papers listing. `scripts/verify-paper-archive.mjs` and
+`test/style_contract.js` enforce the group boundaries.
+
+**PDF still requires upload:** the owner reattached the original 31-page scan
+`notes on trend estimation(2).pdf` on 2026-11-11. The PDF was available in
+this chat's working container but this integration has no tool for transferring
+local file bytes to GitHub without an authenticated uploaded-file reference.
+The document is NOT yet available under `papers/` in Git. Do **not** add
+`pdf:` or a broken download link prematurely. Once the exact original file
+is committed to `papers/espino_2026_handwritten-trend-estimation-notes.pdf`,
+add its `pdf:` to the existing detail page, make its metadata explicit in the
+CV, and extend the archive's source/built hash checks. Do not replace the
+original with a low-fidelity reconstruction or declare it uploaded.

@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/handwritten-trend-estimation-notes.html
 portfolio_type: paper
+archive_group: research_notes
 importance: 65
 card_kind: "Research notes"
 title: "Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization"

@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /notes/random-variables-as-vectors.html
 portfolio_type: paper
+archive_group: research_notes
 importance: 1
 title: "Random Variables as Vectors: Geometry of L², Projections, Variance, and Bias"
 card_title: Random Variables as Vectors in L²
