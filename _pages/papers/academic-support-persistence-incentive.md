@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/academic-support-persistence-incentive.html
 portfolio_type: paper
+archive_group: internal_research
 importance: 30
 card_kind: Working paper
 title: "Beyond the Incentive Threshold: Academic Support Use and Persistence After a First-Year Participation Incentive"
