@@ -1,6 +1,38 @@
 const { test, expect } = require("@playwright/test");
 const { preparePage, stabilizeVisuals } = require("./helpers");
 
+test("Papers separates unsubmitted research notes from internal research studies", async ({ page }) => {
+  await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
+  const ids = ["submitted-manuscripts", "published-technical-articles", "working-drafts", "internal-research-papers"];
+  const sections = page.locator(".papers-archive > section[data-portfolio-section]");
+  await expect(sections).toHaveCount(4);
+  expect(await sections.evaluateAll((nodes) => nodes.map((n) => n.id))).toEqual(ids);
+  const drafts = page.locator("#working-drafts");
+  const internal = page.locator("#internal-research-papers");
+  await expect(drafts.locator(".portfolio-card")).toHaveCount(4);
+  await expect(internal.locator(".portfolio-card")).toHaveCount(4);
+  for (const href of [
+    "/al-folio/papers/handwritten-trend-estimation-notes.html",
+    "/al-folio/notes/random-variables-as-vectors.html",
+    "/al-folio/papers/componentwise-knn-isomap-lecture.html",
+    "/al-folio/papers/maxcut-sdp-eva-clustering-tutorial.html",
+  ]) {
+    await expect(drafts.locator(`a[href="${href}"]`).first()).toHaveCount(1);
+    await expect(internal.locator(`a[href="${href}"]`)).toHaveCount(0);
+  }
+  for (const href of [
+    "/al-folio/papers/academic-support-persistence-incentive.html",
+    "/al-folio/papers/mathematics-support-classroom-performance.html",
+    "/al-folio/papers/course-grades-comparability.html",
+    "/al-folio/papers/student-engagement-adaptation.html",
+  ]) {
+    await expect(internal.locator(`a[href="${href}"]`).first()).toHaveCount(1);
+    await expect(drafts.locator(`a[href="${href}"]`)).toHaveCount(0);
+  }
+  await expect(page.locator("#submitted-manuscripts .portfolio-card")).toHaveCount(4);
+  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(1);
+});
+
 test("publications Abs toggle opens and closes", async ({ page }) => {
   await preparePage(page, "light");
   await page.goto("/al-folio/publications/", { waitUntil: "networkidle" });
