@@ -2,6 +2,7 @@
 layout: portfolio-item
 permalink: /papers/componentwise-knn-isomap-lecture.html
 portfolio_type: paper
+archive_group: research_notes
 pdf: /papers/EspinoMontelongo-2026-Componentwise_Isomap.pdf
 importance: 5
 card_kind: "Mathematical lecture"
