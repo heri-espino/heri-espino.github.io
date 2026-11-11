@@ -1375,3 +1375,55 @@ printing. The printed organization URL is not visually underlined, but the
 link remains active. All other organization, Zenodo and paper links retain
 their previous behavior. A browser test checks metadata, link targets,
 paper geometry, CSS visibility and the native print preparation sequence.
+
+
+
+## 2026-11-11 — Papers archive taxonomy and original trend-notebook PDF
+
+**User request:** split the previously combined eight visible Papers
+archive records. The archive has these four default list groups, each with
+individual `data-portfolio-section` filters:
+
+1. Submitted Manuscripts (**4**, unchanged).
+2. Published Articles & Technical Writing (**1**, unchanged).
+3. Research Notes, Lectures & Tutorials (**4**): handwritten trend-estimation
+   notes; Random Variables as Vectors in L²; componentwise kNN-Isomap lecture;
+   Max-Cut / SDP / EVA tutorial. Group key `archive_group: research_notes`.
+4. Internal Research Papers (**4**): four UDLAP mathematics education studies
+   about the incentive-linked support threshold, support use versus academic
+   performance, instructor grade comparability, and first-year adaptation.
+   Group key `archive_group: internal_research`.
+
+The `#working-drafts` anchor is preserved for the third section and the new
+`#internal-research-papers` anchor identifies the fourth. Keep their
+per-record stage labels (notes, lecture, tutorial, working paper, research
+draft) and canonical detail URLs unchanged; neither group is journal
+submission or peer-review evidence. All six previously unlisted records
+remain accessible at their existing URLs but are not in the index. The
+`scripts/verify-paper-archive.mjs` rendered-output check asserts section
+ordering, counts 4/1/4/4 and the exact group memberships. The associated
+browser test checks both desktop and mobile list views.
+
+The user reattached **the original, 31-page scanned PDF**
+`notes on trend estimation(2).pdf` (exact SHA-256
+`b099f7819c23ab1c5c682bd0e9669332a8fdc1b23c6fe622211d14fadf6f674e`).
+A bit-for-bit duplicate for GitHub upload was staged as
+`espino_2026_handwritten-trend-estimation-notes.pdf`. The final five pages
+are blank. No OCR text was generated or claimed. **Outstanding blocker:** the
+GitHub connector has a binary-blob API but cannot consume this local file
+directly and the shell runtime cannot authenticate to GitHub; the separate
+Drive-upload route requires user connection. The original PDF has therefore
+NOT been pushed, and no public `pdf:` action was added to the existing
+notes page. The user's copy remains accessible in the conversation for a
+manual GitHub upload to `papers/`.
+
+Once the exact PDF arrives in Git, update
+`_pages/papers/handwritten-trend-estimation-notes.md` to include
+`pdf: /papers/espino_2026_handwritten-trend-estimation-notes.pdf`,
+replace the obsolete "Original PDF not yet hosted" paragraph with a direct
+document link, and add a PDF resource link to the corresponding
+`_data/cv.yml` Manuscripts record. Keep the original 31 pages and SHA-256
+unchanged. Extend source + `_site` PDF integrity validation and the
+Playwright detail-page download test; only then describe the PDF as
+published. Do not replace it with the abstract SVG image or a reconstructed
+lower-quality file.
