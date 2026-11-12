@@ -201,7 +201,7 @@ For visual work, start the Docker site and verify desktop/mobile, light/dark mod
 
 - The CV settings-chevron is **name-anchored on the far RIGHT**, not viewport-fixed: positioned absolutely beside the CV header. A Print / Save PDF button now lives **inside the expanded Display/customization panel** at `#cv-print` (the owner explicitly reinstated a menu action); no extra floating print icon/left rail is permitted. Ctrl+P / Cmd+P still works. They scroll away with the header and must **not reserve a left rail/gutter** for the remainder of the document. Expanding the customization menu overlays a scrollable panel without shifting the icons or CV body. The header alone gets **right** padding for the toggle. Keep them excluded from print. See `test/style_contract.js`.
 
-- **Current CV research structure (2026-11-10):** `Submitted Manuscripts` holds **4** journal submissions, followed by `Manuscripts` with **13** non-submitted drafts and related research records (seven earlier Research Drafts, four internal reports, one latent-risk project, one volume-validation software record). Each item retains its explicit actual stage/type; do **not** describe the lecture/tutorial/reports/software as submitted manuscripts. Both sections are located directly after Professional Experience in `_data/cv.yml`, before Programming Experience. The retired Volunteering entry is preserved only in `_data/cv_archived.yml`. All sections remain reorderable and printable. Prior Research / Research Drafts labels are historical.
+- **Current CV research structure (2026-11-12):** After `Professional Experience`, the CV has `Submitted Manuscripts` (**4 actual journal submissions**), `Completed Research` (**6 finished non-submitted outputs**) and `Working Drafts & Notes` (**7 unfinished working papers or independently labeled lecture/tutorial/notes**). All 13 prior non-submitted entries are preserved and retain original dates, descriptions, authorship, repositories and publication stages. Completed Research contains the four UDLAP mathematics-support study-lead reports, the completed latent-risk project and Zenodo-archived Stepping-Stone volume-validation software. The working section retains the three PLS drafts, Isomap lecture, Max-Cut tutorial, handwritten trend notebook and L² notes. Do **not** call completed internal research peer-reviewed publication, or claim a completed lecture/tutorial is an unfinished manuscript. The retired Volunteering item remains in `_data/cv_archived.yml`.
 - The three earlier submitted manuscripts (not all first-authored) have user-confirmed CV and paper-page display dates: **Unit-Region Factorization — Jun 2026**, **Stepping–Stone — Aug 2026**, **When Do Activation-Patching Effects Add Up? — Oct 2026**. Do not attach `— Present` to submission-month dates. Preserve original review statuses pending direct evidence of changes. The SN Computer Science organizational line is **not** a hyperlink; remove only its `organization_url`, leaving portfolio/PDF/reproducibility links untouched.
 
 - **AbaQuant published writing:** The La Catarina 26 Oct 2026 `AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo` article is coauthored by Heriberto Espino Montelongo and Owen Paredes Conde. It belongs in the Papers page's separate **Published Articles & Technical Writing** category (and matching CV section), not in Press & Media, Submitted Manuscripts or Working Drafts. Its page uses `portfolio_type: article` and the owner-supplied local AVIF screenshot. Keep the 4 submitted / 12 drafts counts and 1 published-article count in rendered-page checks. See `docs/CV_HANDOFF.md`.
@@ -458,3 +458,39 @@ is committed to `papers/espino_2026_handwritten-trend-estimation-notes.pdf`,
 add its `pdf:` to the existing detail page, make its metadata explicit in the
 CV, and extend the archive's source/built hash checks. Do not replace the
 original with a low-fidelity reconstruction or declare it uploaded.
+
+
+## Latest CV sections: Completed Research vs Working Drafts & Notes (2026-11-12)
+
+The owner explicitly replaced the broad `Manuscripts (13)` section with two
+accurate, independent, collapsible sections in this order, **immediately after
+Submitted Manuscripts (4)** and before Programming Experience:
+
+1. **Completed Research (6)**: Stepping-Stone Volume Validation (finished
+   software with a Zenodo DOI); Student Engagement and Adaptation; Instructor
+   Grade Heterogeneity; Support Persistence After Incentives; Mathematics
+   Support and Classroom-Relative Performance (four completed study-lead
+   internal reports); Estimation of Latent Risk in the U.S. Market Using
+   Representative Variables (completed project / CIMAT school presentation).
+2. **Working Drafts & Notes (7)**: the three distinct penalized trend
+   estimation drafts (trend distances, dynamic forecast smoothness and Python
+   backends), componentwise kNN-Isomap lecture, Max-Cut SDP/EVA tutorial,
+   handwritten trend-estimation notes and Random Variables as Vectors in L².
+
+The names describe **section grouping**, not new editorial claims. The four
+submitted journal manuscripts remain unchanged. Keep all per-item labels,
+PDFs, locations, dates, external URLs, numerical findings and ownership
+unchanged. Do not conflate the four internal studies with journal
+submissions. Keep the completed volume-validation software's archived
+Zenodo DOI; do not classify it as an ongoing draft. The tutorial and
+lecture remain educational outputs with their explicit Not Submitted roles.
+
+`_data/cv.yml` is the canonical order. The Liquid renderer must style
+both groups with the same full-width entry layout and academic metadata
+as the old combined group. The browser's Europass order and labels must
+include both independent groups, and paper preview/printing must show
+selected records irrespective of disclosure state. The section-reorder
+browser-local key is now `cv-section-order-v3` (old v2 IDs are intentionally
+ignored); Reset restores canonical source ordering and Modern Minimal.
+Update `test/style_contract.js` and `test/visual/interactions.spec.js`
+before further structural changes.

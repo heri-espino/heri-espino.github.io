@@ -1427,3 +1427,35 @@ unchanged. Extend source + `_site` PDF integrity validation and the
 Playwright detail-page download test; only then describe the PDF as
 published. Do not replace it with the abstract SVG image or a reconstructed
 lower-quality file.
+
+
+## 2026-11-12 — CV research-group split (authoritative)
+
+A recent correction supersedes the 2026-11-10 `Manuscripts (13)`
+section. The owner distinguishes **finished projects and reports** from
+**ongoing working drafts and mathematical notes**. The site now renders
+the following grouped, reorderable and printable sequence:
+
+- `Submitted Manuscripts (4)` — original journal submissions, unchanged.
+- `Completed Research (6)` — the four completed Mathematics Learning Center
+  study-lead internal reports (Student Engagement and Adaptation; Instructor
+  Grade Heterogeneity; Support Persistence After Incentives; Mathematics
+  Support and Classroom-Relative Performance), plus Stepping-Stone Volume
+  Validation (finished software, Zenodo DOI) and the latent U.S. market-risk
+  research project (presented at the CIMAT probability/statistics school).
+- `Working Drafts & Notes (7)` — Smoothness-Integrated Trend Distances,
+  Dynamic Forecast-Optimal Smoothness, Smoothness-Indexed PLS Python,
+  componentwise kNN-Isomap lecture, Max-Cut/EVA tutorial, handwritten trend
+  notes and Random Variables as Vectors in L².
+
+All 13 previous `Manuscripts` source records are retained without changing
+their item-level facts or status. These are **not** necessarily manuscripts
+in the journal-submission sense; lectures, tutorials, internal reports and
+software remain correctly named in their individual role/context fields.
+
+The section-order customization persists under a new key,
+`cv-section-order-v3`, instead of v2 to prevent a stale saved order from
+referring to the removed `manuscripts` ID. Reset returns Modern Minimal
+and the new source order. Browser and source tests check the 4+6+7 counts,
+all completed/draft membership, select/reorder controls, and rendering in
+print preview. Previous CV print WYSIWYG PR #56 was not modified.

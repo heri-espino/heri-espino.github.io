@@ -409,7 +409,7 @@ test("CV section order can be changed, survives reload, and resets to source ord
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-reset").click();
   await expect(sections.first()).toHaveAttribute("data-cv-section", originalIds[0]);
-  expect(await page.evaluate(() => localStorage.getItem("cv-section-order-v2"))).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem("cv-section-order-v3"))).toBeNull();
 });
 
 test("CV defaults to Modern Minimal with right-hand settings and the requested research order", async ({ page }) => {
@@ -422,16 +422,31 @@ test("CV defaults to Modern Minimal with right-hand settings and the requested r
     nodes.map((node) => node.dataset.cvSection));
   const professional = sections.indexOf("professional-experience");
   expect(professional).toBeGreaterThan(0);
-  expect(sections.slice(professional + 1, professional + 3)).toEqual([
-    "submitted-manuscripts", "manuscripts",
+  expect(sections.slice(professional + 1, professional + 4)).toEqual([
+    "submitted-manuscripts", "completed-research", "working-drafts-notes",
   ]);
+  expect(sections).not.toContain("manuscripts");
   expect(sections).not.toContain("research");
   expect(sections).not.toContain("research-drafts");
   expect(sections).not.toContain("volunteering");
 
-  await expect(page.locator('#cv-sections [data-cv-section="submitted-manuscripts"] [data-cv-record]')).toHaveCount(4);
-  await expect(page.locator('#cv-sections [data-cv-section="manuscripts"] [data-cv-record]')).toHaveCount(13);
+  const submitted = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"]');
+  const completed = page.locator('#cv-sections [data-cv-section="completed-research"]');
+  const working = page.locator('#cv-sections [data-cv-section="working-drafts-notes"]');
+  await expect(submitted.locator("[data-cv-record]")).toHaveCount(4);
+  await expect(completed.locator("[data-cv-record]")).toHaveCount(6);
+  await expect(working.locator("[data-cv-record]")).toHaveCount(7);
+  await expect(completed).toContainText("Student Engagement and Adaptation");
+  await expect(completed).toContainText("Stepping-Stone Volume Validation");
+  await expect(completed).toContainText("Estimation of Latent Risk");
+  await expect(working).toContainText("Smoothness-Integrated Trend Distances");
+  await expect(working).toContainText("Handwritten Notes on Penalized Trend Estimation");
+  await expect(working).toContainText("Mathematical Notes on Random Variables");
+  await expect(completed).not.toContainText("Smoothness-Integrated Trend Distances");
+  await expect(working).not.toContainText("Student Engagement and Adaptation");
   await expect(page.locator('[data-cv-order-item="volunteering"]')).toHaveCount(0);
+  await expect(page.locator('[data-cv-order-item="completed-research"]')).toHaveCount(1);
+  await expect(page.locator('[data-cv-order-item="working-drafts-notes"]')).toHaveCount(1);
 
   const geometry = await page.evaluate(() => {
     const header = document.querySelector("#cv-document .cv-intro").getBoundingClientRect();
@@ -448,6 +463,9 @@ test("CV defaults to Modern Minimal with right-hand settings and the requested r
   await page.locator("#cv-template").selectOption("harvard");
   await page.locator("#cv-reset").click();
   await expect(cv).toHaveAttribute("data-cv-template", "minimal");
+  await page.locator("#cv-preview").click();
+  await expect(page.locator("#cv-paged-preview")).toContainText("Stepping-Stone Volume Validation");
+  await expect(page.locator("#cv-paged-preview")).toContainText("Smoothness-Integrated Trend Distances");
 });
 
 test("CV sections animate on interaction but honor reduced-motion and keyboard input", async ({ page }) => {

@@ -254,7 +254,8 @@
     "Academic Experience": "Academic work experience",
     "Programming Experience": "Software development experience",
     "Submitted Manuscripts": "Submitted Manuscripts",
-    "Manuscripts": "Manuscripts",
+    "Completed Research": "Completed Research",
+    "Working Drafts & Notes": "Working Drafts & Notes",
     "Technical Skills": "Digital and technical skills",
     "Languages": "Language skills",
     "Credentials": "Certificates and credentials",
@@ -270,13 +271,13 @@
   const europassOrder = [
     "Professional Experience", "Programming Experience", "Academic Experience",
     "Education", "Credentials", "Schools",
-    "Languages", "Technical Skills", "Submitted Manuscripts", "Manuscripts",
+    "Languages", "Technical Skills", "Submitted Manuscripts", "Completed Research", "Working Drafts & Notes",
     "Published Articles & Technical Writing", "Selected Academic Projects",
     "Leadership", "Awards", "Selected Extracurricular Activities"
   ];
   // A custom order is a browser-local preference. Keep YAML untouched and
   // respect the Europass default sequence until the reader customizes it.
-  const sectionOrderStorageKey = "cv-section-order-v2";
+  const sectionOrderStorageKey = "cv-section-order-v3";
   const defaultSectionIds = sections.map((section) => section.dataset.cvSection);
   const sectionById = new Map(sections.map((section) => [section.dataset.cvSection, section]));
   let customSectionIds = null;

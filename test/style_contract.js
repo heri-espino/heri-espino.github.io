@@ -298,12 +298,15 @@ if (exists("_pages/cv.md")) {
   const cvSectionHeads = [...cvSource.matchAll(/^    (\S[^:\n]*):\s*$/gm)].map((match) => match[1]);
   const profIndex = cvSectionHeads.indexOf("Professional Experience");
   if (cvSectionHeads[profIndex + 1] !== "Submitted Manuscripts" ||
-      cvSectionHeads[profIndex + 2] !== "Manuscripts" ||
+      cvSectionHeads[profIndex + 2] !== "Completed Research" ||
+      cvSectionHeads[profIndex + 3] !== "Working Drafts & Notes" ||
+      cvSectionHeads.includes("Manuscripts") ||
       cvSectionHeads.includes("Research") ||
       cvSectionHeads.includes("Research Drafts") ||
       cvSectionHeads.includes("Volunteering") ||
-      !exists("_data/cv_archived.yml")) {
-    failures.push("CV must place Submitted Manuscripts and Manuscripts directly after Professional Experience and archive Volunteering.");
+      !exists("_data/cv_archived.yml") ||
+      !cvScript.includes('const sectionOrderStorageKey = "cv-section-order-v3";')) {
+    failures.push("CV must separate four submissions, completed research and working drafts after experience and archive Volunteering.");
   }
   if (!cvScript.includes("window.matchMedia(\"(prefers-reduced-motion: reduce)\")") ||
       !cvScript.includes('detail.animate(') ||
@@ -679,7 +682,7 @@ if (exists("_pages/cv.md")) {
       !randomVectors.includes("portfolio_type: paper") ||
       !cvSources.includes("Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization") ||
       !cvSources.includes("papers/handwritten-trend-estimation-notes.html")) {
-    failures.push("Both mathematical research notes must remain in Manuscripts, without a Notes navbar/homepage section.");
+    failures.push("Both mathematical research notes must remain in Working Drafts & Notes, without a Notes navbar/homepage section.");
   }
   const groupedDocuments = [
     ["_pages/papers/handwritten-trend-estimation-notes.md", "research_notes"],
@@ -756,13 +759,42 @@ if (exists("_pages/cv.md")) {
       !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
     failures.push("Rendered Papers archive checks must preserve four submissions, four research-note/teaching drafts, four internal research papers, and six hidden public detail pages.");
   }
-  const submittedResearchGroup = cvSources.split("    Submitted Manuscripts:")[1]?.split("    Manuscripts:")[0] || "";
-  const researchDraftGroup = cvSources.split("    Manuscripts:")[1]?.split("    Programming Experience:")[0] || "";
-  const researchGroup = submittedResearchGroup + researchDraftGroup;
+  const submittedResearchGroup = cvSources.split("    Submitted Manuscripts:")[1]?.split("    Completed Research:")[0] || "";
+  const completedResearchGroup = cvSources.split("    Completed Research:")[1]?.split("    Working Drafts & Notes:")[0] || "";
+  const researchDraftGroup = cvSources.split("    Working Drafts & Notes:")[1]?.split("    Programming Experience:")[0] || "";
+  const researchGroup = submittedResearchGroup + completedResearchGroup + researchDraftGroup;
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
+  const completedCount = [...completedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 4 || draftCount !== 13) {
-    failures.push("CV must retain four submitted manuscripts and thirteen manuscripts/related research records, including the trend-estimation notebook.");
+  if (researchCount !== 4 || completedCount !== 6 || draftCount !== 7) {
+    failures.push("CV must retain four submitted manuscripts, six completed research outputs and seven drafts/notes without deleting records.");
+  }
+  const completedTitles = [
+    "Stepping-Stone Volume Validation",
+    "Student Engagement and Adaptation",
+    "Instructor Grade Heterogeneity",
+    "Support Persistence After Incentives",
+    "Mathematics Support and Classroom-Relative Performance",
+    "Estimation of Latent Risk in the U.S. Market Using Representative Variables",
+  ];
+  const draftTitles = [
+    "Smoothness-Integrated Trend Distances with Nonzero Difference Drift",
+    "Dynamic Forecast-Optimal Smoothness for Penalized Trend Estimation",
+    "Smoothness-Indexed Penalized Trend Estimation in Python",
+    "Componentwise kNN-Isomap",
+    "From Max-Cut to Semidefinite Programming",
+    "Handwritten Notes on Penalized Trend Estimation",
+    "Mathematical Notes on Random Variables as Vectors",
+  ];
+  if (completedTitles.some((title) => !completedResearchGroup.includes("      - name: " + title) &&
+                                       !completedResearchGroup.includes('      - name: "' + title)) ||
+      draftTitles.some((title) => !researchDraftGroup.includes("      - name: " + title) &&
+                                   !researchDraftGroup.includes('      - name: "' + title)) ||
+      completedResearchGroup.includes("Working Draft") ||
+      !completedResearchGroup.includes("zenodo.21291269") ||
+      !completedResearchGroup.includes("projects/latent-risk-us-market.html") ||
+      researchDraftGroup.includes("role: \"Study Lead\"")) {
+    failures.push("Research records must retain the owner-requested completed versus working classification and their links.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
       !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||
@@ -773,11 +805,13 @@ if (exists("_pages/cv.md")) {
       researchDraftGroup.includes("Posterior Integration and Volatility Inputs in WTI Asian Options")) {
     failures.push("All four submitted manuscripts, including the Wiley JFM dual-PDF record, must remain in Submitted Manuscripts.");
   }
-  if (!cvRenderer.includes("title == 'Manuscripts'") ||
+  if (!cvRenderer.includes("title == 'Completed Research'") ||
+      !cvRenderer.includes("title == 'Working Drafts & Notes'") ||
       !cvRenderer.includes("title == 'Submitted Manuscripts'") ||
-      !cvScript.includes('"Manuscripts": "Manuscripts"') ||
+      !cvScript.includes('"Completed Research": "Completed Research"') ||
+      !cvScript.includes('"Working Drafts & Notes": "Working Drafts & Notes"') ||
       !cvScript.includes('"Submitted Manuscripts": "Submitted Manuscripts"')) {
-    failures.push("Submitted Manuscripts and Manuscripts must be independent printable research sections.");
+    failures.push("Submitted, completed and working research must remain separate printable and selectable CV sections.");
   }
   const manuscriptMonths = [
     { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
@@ -925,7 +959,7 @@ if (exists("_pages/cv.md")) {
   if (!researchDraftGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
       !researchDraftGroup.includes("Working Draft (Not Submitted)") ||
       !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
-    failures.push("The first Manuscripts entry must remain unsubmitted.");
+    failures.push("The first Working Drafts & Notes entry must remain unsubmitted.");
   }
   // Wide reading has one font/size, line-height and vertical gap between
   // title, organization, links, description, and successive highlights.
@@ -1215,7 +1249,7 @@ if (exists("_pages/cv.md")) {
   const springer = cv.split('      - name: "When Do Activation-Patching Effects Add Up?')[1]
     ?.split('      - name: "When Does Posterior Integration Change Option Values?')[0] || "";
   const wiley = cv.split('      - name: "When Does Posterior Integration Change Option Values?')[1]
-    ?.split('    Manuscripts:')[0] || "";
+    ?.split('    Completed Research:')[0] || "";
   const smm = cv.split('      - name: "Asymptotic Characteristics of Proximity Graphs"')[1]
     ?.split('      - name: "ProximityGraphs Python Library"')[0] || "";
   const quantum = cv.split('      - name: "Quantum Computing Curriculum and Instruction"')[1]
