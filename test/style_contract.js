@@ -231,6 +231,13 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
     failures.push("The CV preview must present separate numbered paper sheets.");
   }
+  if (cvScript.includes("--cv-print-top-balance") || cvScript.includes("let topBalance") ||
+      cvStyles.includes("padding-top: var(--cv-print-top-balance") ||
+      !cvStyles.includes(".cv-page .cv-preview-paper-body a:visited") ||
+      !cvStyles.includes("font-size: inherit !important;") ||
+      !cvStyles.includes("text-decoration: none !important;")) {
+    failures.push("CV paper preview and PDFs must top-align the name and preserve uniform, undecorated link typography.");
+  }
   if (!cvStyles.includes("width: var(--cv-paper-width);") ||
       !cvStyles.includes("min-width: var(--cv-paper-width);") ||
       !cvStyles.includes('.cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading') ||
