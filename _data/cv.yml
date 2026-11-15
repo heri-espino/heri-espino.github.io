@@ -107,7 +107,7 @@ cv:
           - { label: Portfolio, url: "https://heri-espino.github.io/papers/stepping-stone.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_stepping-stone-empty-regions.pdf" }
           - { label: SSRN, url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746" }
-          - { label: Validation DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
+          - { label: Zenodo · Validation, url: "https://doi.org/10.5281/zenodo.21291269", doi: "10.5281/zenodo.21291269" }
         highlights:
           - "Geometric analysis: reduced Stepping–Stone volume to a 1D integral."
           - "Numerical integration: validated higher-dimensional volume constants."
@@ -119,7 +119,7 @@ cv:
         links:
           - { label: Manuscript, url: "https://heri-espino.github.io/papers/activation-patching-effects-add-up.html" }
           - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_activation-patching-effects-add-up.pdf" }
-          - { label: Zenodo · Reproducibility, url: "https://zenodo.org/records/23432463" }
+          - { label: Zenodo · Reproducibility, url: "https://zenodo.org/records/23432463", doi: "10.5281/zenodo.23432463" }
         highlights:
           - "Mechanistic interpretability: tested CNN activation-patching additivity."
           - "Experimental design: isolated logit additivity from metric-induced effects."
@@ -145,7 +145,7 @@ cv:
         icon_url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants"
         date: "Jul 2026"
         links:
-          - { label: DOI, url: "https://doi.org/10.5281/zenodo.21291269" }
+          - { label: Zenodo · Validation, url: "https://doi.org/10.5281/zenodo.21291269", doi: "10.5281/zenodo.21291269" }
           - { label: Project, url: "https://heri-espino.github.io/projects/stepping-stone-volume-constants.html" }
           - { label: GitHub, url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants" }
         highlights:
@@ -198,8 +198,8 @@ cv:
           - "Financial econometrics: identified regime shifts in smoothed latent risk."
     Working Drafts & Notes:
       - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
-        context: "Research working draft · not submitted"
-        role: "Author · Working Draft (Not Submitted)"
+        context: "Research working draft"
+        role: "Author · Working Draft"
         subtitle: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
         date: "Oct 2026 — Present"
         location: Puebla, Mexico
@@ -235,7 +235,7 @@ cv:
           - "Reproducible research: archived 80,640 runs and validated root finding."
       - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
         context: "Mathematical research lecture"
-        role: "Mathematical Research Lecture · Not Submitted"
+        role: "Mathematical Research Lecture"
         date: "19 Oct 2026"
         links:
           - { label: Lecture record, url: "https://heri-espino.github.io/papers/componentwise-knn-isomap-lecture.html" }
@@ -246,7 +246,7 @@ cv:
           - "Method auditing: separated proposed Isomap optimization from implementation."
       - name: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
         context: "Mathematical research tutorial"
-        role: "Mathematical Research Tutorial · Not Submitted"
+        role: "Mathematical Research Tutorial"
         date: "Oct 2026"
         links:
           - { label: Tutorial record, url: "https://heri-espino.github.io/papers/maxcut-sdp-eva-clustering-tutorial.html" }
@@ -255,7 +255,7 @@ cv:
           - "Convex optimization: explained Max-Cut SDP relaxations and low-rank EVA."
           - "Experimental reproducibility: compared rounding methods on G-set instances."
       - name: "Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization"
-        role: "Author · Research Notes (Not Submitted)"
+        role: "Author · Research Notes"
         context: "Handwritten mathematical research notebook"
         date: "Oct 2026"
         location: Puebla, Mexico
@@ -287,7 +287,7 @@ cv:
         links:
           - { label: Documentation, url: "https://abaquant.github.io/AbaQuant/" }
           - { label: PyPI, url: "https://pypi.org/project/abaquant/" }
-          - { label: DOI, url: "https://zenodo.org/records/21347375" }
+          - { label: Zenodo · AbaQuant, url: "https://zenodo.org/records/21347375", doi: "10.5281/zenodo.21347375" }
         highlights:
           - "Quantitative finance: implemented fixed-income, portfolio-risk and Greeks APIs."
           - "Derivatives pricing: implemented Black–Scholes, Heston and Monte Carlo methods."
@@ -302,7 +302,7 @@ cv:
           - { label: Documentation, url: "https://proximitygraphs.github.io/ProximityGraphs/" }
           - { label: GitHub, url: "https://github.com/ProximityGraphs/ProximityGraphs" }
           - { label: PyPI, url: "https://pypi.org/project/proximitygraphs/" }
-          - { label: Zenodo · v0.1.0a2, url: "https://doi.org/10.5281/zenodo.21088183" }
+          - { label: Zenodo · v0.1.0a2, url: "https://doi.org/10.5281/zenodo.21088183", doi: "10.5281/zenodo.21088183" }
         highlights:
           - "Computational geometry: translated empty-region graph definitions into Python."
           - "Software architecture: modularized APIs and vectorized NumPy kernels."
