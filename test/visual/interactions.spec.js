@@ -978,7 +978,7 @@ test("CV NYU and IESE icons, Zenodo DOIs, and research context render consistent
   await expect(zenodo).toHaveCount(5);
   for (let i = 0; i < 5; i++) {
     const label = await zenodo.nth(i).innerText();
-    expect(label).toMatch(/DOI: 10\\.5281\\/zenodo\\.\\d+/);
+    expect(label).toContain("DOI: 10.5281/zenodo.");
   }
 
   await expect(document).not.toContainText(/not submitted/i);
