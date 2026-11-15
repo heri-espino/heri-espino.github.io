@@ -862,7 +862,7 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
   }
 });
 
-test("CV print balances top and bottom whitespace only for one-page selections", async ({ page }) => {
+test("CV paper preview and print start at the top and keep link typography consistent", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-print-options > summary").click();
@@ -870,53 +870,80 @@ test("CV print balances top and bottom whitespace only for one-page selections",
   await page.locator("#cv-entries-none").click();
   await page.locator("#cv-entry-options input[type=checkbox]").first().check();
 
-  // The default reading view must compute a print balance without displaying
-  // the offscreen measuring sheets or changing the reading density.
-  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "reading");
+  // A short selection previously received half its unused vertical height
+  // as extra top padding, leaving the owner's name far down the first page.
   for (const [size, paper] of [["small", "a4"], ["large", "letter"]]) {
     await page.locator("#cv-text-size").selectOption(size);
     await page.locator("#cv-paper").selectOption(paper);
-    const reading = await page.locator("#cv-page").evaluate((root) => ({
-      single: root.dataset.cvSinglePage,
-      offset: parseFloat(root.style.getPropertyValue("--cv-print-top-balance")),
-      density: root.dataset.cvDensity,
-      previewHidden: document.querySelector("#cv-paged-preview").hidden,
-    }));
-    expect(reading.single).toBe("true");
-    expect(reading.offset).toBeGreaterThan(0);
-    expect(reading.density).toBe("balanced");
-    expect(reading.previewHidden).toBe(true);
+    await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-single-page", "true");
+    await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-preview", "reading");
+    const offset = await page.locator("#cv-page").evaluate((root) =>
+      root.style.getPropertyValue("--cv-print-top-balance").trim());
+    expect(offset).toBe("");
 
     await page.locator("#cv-preview").click();
-    const balanced = await page.locator(".cv-preview-paper-body").first().evaluate((body) => {
-      const box = body.getBoundingClientRect();
-      const intro = body.querySelector(".cv-intro").getBoundingClientRect();
-      const content = body.querySelector(".cv-content").getBoundingClientRect();
-      return { top: intro.top - box.top, bottom: box.bottom - content.bottom, used: body.scrollHeight };
+    const preview = await page.locator(".cv-preview-paper-body").first().evaluate((body) => {
+      const name = body.querySelector(".cv-intro h1");
+      const intro = body.querySelector(".cv-intro");
+      const anchors = [...body.querySelectorAll("a")];
+      return {
+        name: name.textContent,
+        topGap: intro.getBoundingClientRect().top - body.getBoundingClientRect().top,
+        paddingTop: parseFloat(getComputedStyle(body).paddingTop) || 0,
+        links: anchors.map((a) => {
+          const own = getComputedStyle(a);
+          const parent = getComputedStyle(a.parentElement);
+          return {
+            decoration: own.textDecorationLine,
+            fontSize: own.fontSize,
+            parentSize: parent.fontSize,
+            fontFamily: own.fontFamily,
+            parentFamily: parent.fontFamily,
+            fontWeight: own.fontWeight,
+            parentWeight: parent.fontWeight,
+          };
+        }),
+      };
     });
-    expect(Math.abs(balanced.top - balanced.bottom)).toBeLessThan(14);
-    // Enter print media first: Chromium's media emulation may fire
-    // afterprint, clearing preview pages prepared before the switch.
+    expect(preview.name).toContain("Heriberto Espino Montelongo");
+    expect(Math.abs(preview.topGap)).toBeLessThan(2);
+    expect(preview.paddingTop).toBe(0);
+    expect(preview.links.length).toBeGreaterThan(1);
+    for (const link of preview.links) {
+      expect(link.decoration).toBe("none");
+      expect(link.fontSize).toBe(link.parentSize);
+      expect(link.fontFamily).toBe(link.parentFamily);
+      expect(link.fontWeight).toBe(link.parentWeight);
+    }
+
+    // Native PDF printing must keep the same name position and link styling.
     await page.emulateMedia({ media: "print" });
     await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
-    // Printed page keeps the same balanced top padding as its paper preview.
-    const printPadding = await page.locator("#cv-paged-preview .cv-preview-paper-body").first()
-      .evaluate((node) => parseFloat(getComputedStyle(node).paddingTop));
-    expect(printPadding).toBeGreaterThan(0);
     await expect(page.locator("#cv-document")).toBeHidden();
+    const printed = await page.locator("#cv-paged-preview .cv-preview-paper-body").first().evaluate((body) => ({
+      paddingTop: parseFloat(getComputedStyle(body).paddingTop) || 0,
+      links: [...body.querySelectorAll("a")].map((a) => ({
+        decoration: getComputedStyle(a).textDecorationLine,
+        fontSize: getComputedStyle(a).fontSize,
+        parentSize: getComputedStyle(a.parentElement).fontSize,
+      })),
+    }));
+    expect(printed.paddingTop).toBe(0);
+    expect(printed.links.length).toBeGreaterThan(1);
+    for (const link of printed.links) {
+      expect(link.decoration).toBe("none");
+      expect(link.fontSize).toBe(link.parentSize);
+    }
     await page.emulateMedia({ media: "screen" });
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
     await page.locator("#cv-preview").click();
   }
 
-  // A full CV requires multiple pages and must not receive added top padding
-  // or alter the user's equal physical @page margins.
+  // Longer CVs must also begin at the upper paper margin.
   await page.locator("#cv-entries-all").click();
   await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-single-page", "false");
-  const full = await page.locator("#cv-page").evaluate((root) => ({
-    offset: parseFloat(root.style.getPropertyValue("--cv-print-top-balance")),
-    margin: root.style.getPropertyValue("--cv-print-margin").trim(),
-  }));
-  expect(full.offset).toBe(0);
-  expect(full.margin).toBe("10mm");
+  await page.locator("#cv-preview").click();
+  const fullTopGap = await page.locator(".cv-preview-paper-body").first().evaluate((body) =>
+    body.querySelector(".cv-intro").getBoundingClientRect().top - body.getBoundingClientRect().top);
+  expect(Math.abs(fullTopGap)).toBeLessThan(2);
 });

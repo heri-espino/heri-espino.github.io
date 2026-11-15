@@ -2562,15 +2562,9 @@
   }
 }
 
-/* Single-sheet CVs use measured half of their unused vertical space above
-   the content, leaving the same amount below. For a long/multipage CV the
-   value is zero: retain the selected equal @page margins and browser-native
-   pagination. Never scale text or force page breaks to achieve centering. */
-@media print {
-  .cv-page[data-cv-single-page="true"] #cv-document {
-    padding-top: var(--cv-print-top-balance, 0px) !important;
-  }
-}
+/* Physical paper padding is the only top inset for every CV length.
+   Never vertically center a short one-page selection: the name starts at
+   the top of the printable area in both preview and the exported PDF. */
 
 /* Name-first hierarchy: the CV starts with the owner's name, not a redundant
    "Curriculum vitae" eyebrow. Preserve template typefaces and real text. */
@@ -2991,4 +2985,19 @@
 .cv-page .cv-preview-paper-body .cv-organization a[href*="/organizaciones-estudiantiles/"] {
   color: inherit;
   text-decoration: none;
+}
+
+/* Print-preview and real PDF hyperlinks must inherit the surrounding row's
+   type size and weight, rather than an anchor-specific browser/theme style.
+   Suppress decoration on every printed link, while preserving href targets.
+   Full-width reading links keep their existing interactive appearance. */
+.cv-page .cv-preview-paper-body a,
+.cv-page .cv-preview-paper-body a:link,
+.cv-page .cv-preview-paper-body a:visited {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-style: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  text-decoration: none !important;
 }

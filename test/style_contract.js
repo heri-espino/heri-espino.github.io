@@ -231,6 +231,13 @@ if (exists("_pages/cv.md")) {
   if (!cvRenderer.includes('id="cv-paged-preview"') || !cvScript.includes("renderPagedPreview") || !cvStyles.includes("cv-preview-sheet")) {
     failures.push("The CV preview must present separate numbered paper sheets.");
   }
+  if (cvScript.includes("--cv-print-top-balance") || cvScript.includes("let topBalance") ||
+      cvStyles.includes("padding-top: var(--cv-print-top-balance") ||
+      !cvStyles.includes(".cv-page .cv-preview-paper-body a:visited") ||
+      !cvStyles.includes("font-size: inherit !important;") ||
+      !cvStyles.includes("text-decoration: none !important;")) {
+    failures.push("CV paper preview and PDFs must top-align the name and preserve uniform, undecorated link typography.");
+  }
   if (!cvStyles.includes("width: var(--cv-paper-width);") ||
       !cvStyles.includes("min-width: var(--cv-paper-width);") ||
       !cvStyles.includes('.cv-page[data-cv-template="harvard"] .cv-preview-paper-body .cv-entry-heading') ||
@@ -1103,19 +1110,19 @@ if (exists("_pages/cv.md")) {
   }
 }
 
-// Preserve symmetric minimum print margins and auto-center only a CV that
-// fits on a single physical sheet, using measured available space.
+// Keep the owner's name top-aligned on every physical page. Single-page
+// selections may leave unused space BELOW the content, never above it.
 {
   const script = read("assets/js/cv-customize.js");
   const css = read("_sass/_cv.scss");
   if (!script.includes('root.dataset.cvSinglePage = pageNumber === 1') ||
-      !script.includes('topBalance = Math.floor(unusedHeight / 2)') ||
-      !script.includes('root.style.setProperty("--cv-print-top-balance"') ||
       !script.includes("root.dataset.cvDensity = viewDensity.paper;") ||
-      !css.includes('.cv-page[data-cv-single-page="true"] #cv-document') ||
-      !css.includes('padding-top: var(--cv-print-top-balance, 0px) !important;') ||
-      !script.includes('"; margin: " + chosenMargin + "; }"')) {
-    failures.push("CV vertical balance must center short selections and preserve equal @page margins.");
+      !script.includes('"; margin: " + chosenMargin + "; }"') ||
+      script.includes("topBalance = Math.floor") ||
+      script.includes('root.style.setProperty("--cv-print-top-balance"') ||
+      css.includes('padding-top: var(--cv-print-top-balance, 0px) !important;') ||
+      !css.includes(".cv-page .cv-preview-paper-body a:visited")) {
+    failures.push("CV print must top-align short selections at the selected physical paper margin.");
   }
 }
 

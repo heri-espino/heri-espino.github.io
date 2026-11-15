@@ -1459,3 +1459,16 @@ referring to the removed `manuscripts` ID. Reset returns Modern Minimal
 and the new source order. Browser and source tests check the 4+6+7 counts,
 all completed/draft membership, select/reorder controls, and rendering in
 print preview. Previous CV print WYSIWYG PR #56 was not modified.
+
+## 2026-11-14 — Printed CV: top-aligned name and matching links
+
+**User-reported regression:** a short selected CV in print/paper preview left a large blank area above the name. Some institution/resource hyperlinks acquired underlines or unexpectedly large type compared with surrounding text.
+
+**Cause:** `renderPagedPreview` added half the unused height to `.cv-preview-paper-body` as an inline `padding-top` for single-page selections. Separately, screen-only link rules did not guarantee the same inherited type size/decoration when the cloned paper body was printed.
+
+**Resolution:**
+- Deleted the single-page vertical-balancing calculation and old `--cv-print-top-balance` print override. The name starts directly after the selected paper padding (A4 and Letter); short selections leave remaining white space **below** the content.
+- Scoped a uniform anchor rule to `.cv-preview-paper-body`, covering paper preview and actual PDF print. Links inherit the typography of their parent text without underlines, while preserving semantic colored spans, link URLs and full-width reading appearance.
+- Replaced the old balance-positive browser test with assertions for no artificial top gap and for matching parent/anchor typography in both screen paper preview and print media. Updated `test/style_contract.js`.
+
+**Validation:** run `node test/style_contract.js` and the CV Playwright suite (`npm run test:visual -- --grep "CV paper preview and print start at the top"`). Check Chrome Print / Save PDF for one- and multipage selections using both A4 and US Letter, including clickable links. Avoid introducing top balance or an extra `@page` margin on top of physical sheet padding.

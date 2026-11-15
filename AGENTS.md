@@ -494,3 +494,9 @@ browser-local key is now `cv-section-order-v3` (old v2 IDs are intentionally
 ignored); Reset restores canonical source ordering and Modern Minimal.
 Update `test/style_contract.js` and `test/visual/interactions.spec.js`
 before further structural changes.
+
+## 2026-11-14 — CV print top alignment and link typography
+
+- Short one-page CV selections are **top aligned**, not vertically centered. Both `cv-preview-paper-body` and the generated PDF begin with the name at the selected paper padding. Leave unused space beneath the content; preserve the user's A4/Letter and page-margin choices. Do not reinstate `--cv-print-top-balance` or JS-computed top padding.
+- In printable paper bodies, every hyperlink inherits its enclosing row's font family, size, line height and weight, with no underline. The `href` remains intact and clickable; only the paper preview/PDF styles change, not the full-width reading view.
+- The regression test `test/visual/interactions.spec.js` covers A4/Letter, short selections and complete CVs in screen preview and print media. The static contract in `test/style_contract.js` prevents accidental restoration of vertical centering.
