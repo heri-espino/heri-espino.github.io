@@ -964,13 +964,20 @@ if (exists("_pages/cv.md")) {
     failures.push("Lecture/tutorial materials must not be mislabeled as submitted manuscripts.");
   }
   if (!researchDraftGroup.trimStart().startsWith('- name: "' + trendTitle + '"') ||
-      !researchDraftGroup.includes("Working Draft (Not Submitted)") ||
-      !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html")) {
-    failures.push("The first Working Drafts & Notes entry must remain unsubmitted.");
+      !researchDraftGroup.includes('role: "Author · Working Draft"') ||
+      !researchDraftGroup.includes("papers/smoothness-integrated-trend-distances.html") ||
+      /not submitted/i.test(cvSources)) {
+    failures.push("CV working drafts must keep their factual links without the repetitive Not Submitted label.");
   }
   // Wide reading has one font/size, line-height and vertical gap between
   // title, organization, links, description, and successive highlights.
   // The extra-compact print density, Harvard, and Europass remain untouched.
+  if (!cvStyles.includes("color: #4c5781;") ||
+      !cvStyles.includes(".cv-preview-paper-body .cv-context") ||
+      !cvStyles.includes("font-size: 8pt;") ||
+      cvStyles.includes("color: #737373 !important;")) {
+    failures.push("Research context must match the organization's secondary blue text in paper and print.");
+  }
   if (!cvStyles.includes("--cv-reading-row-gap: 0.24rem") ||
       !cvStyles.includes("--cv-reading-font-size: 0.96rem") ||
       !cvStyles.includes("--cv-reading-line-height: 1.36") ||
@@ -1234,9 +1241,20 @@ if (exists("_pages/cv.md")) {
   if (!source.includes('https://zenodo.org/records/23432463') ||
       !source.includes('https://doi.org/10.5281/zenodo.21291269') ||
       !renderer.includes('class="cv-zenodo-mark"') ||
+      !renderer.includes("if link.doi") ||
+      !renderer.includes("{{ link.doi | escape }}") ||
       !renderer.includes('zenodo-icon-blue.svg') ||
       !css.includes(".cv-zenodo-mark")) {
-    failures.push("Research Zenodo record and reproducibility icons must remain accessible.");
+    failures.push("Zenodo CV links must retain their source addresses and show the DOI.");
+  }
+  const zenodoLinks = source.split("\n").filter((line) =>
+    /url: "https:\/\/(?:zenodo\.org\/records\/|doi\.org\/10\.5281\/zenodo\.)/.test(line));
+  if (zenodoLinks.length !== 5 || zenodoLinks.some((line) => {
+    const record = line.match(/(?:zenodo\.org\/records\/|zenodo\.)(\d+)/);
+    const doi = line.match(/doi: "10\.5281\/zenodo\.(\d+)"/);
+    return !record || !doi || record[1] !== doi[1];
+  })) {
+    failures.push("All five Zenodo CV resources must display the DOI matching their linked record.");
   }
   if (!source.includes('Marp · Streamlit') ||
       !source.includes('date: May 2026 — Present') ||
@@ -1289,13 +1307,16 @@ if (exists("_pages/cv.md")) {
   const project = read("_projects/proximity-graphs.md");
   const proximity = cv.split("      - name: ProximityGraphs — Computational Geometry Python Library")[1]
     ?.split("      - name: Contributor — OpenAI Python SDK")[0] || "";
-  if (!issuers.includes('logo: "https://upload.wikimedia.org/wikipedia/commons/6/66/Nyu_stacked_color.svg"') ||
+  if (!issuers.includes('logo: "https://www.google.com/s2/favicons?domain=nyu.edu&sz=128"') ||
+      !issuers.includes('logo: "https://www.google.com/s2/favicons?domain=iese.edu&sz=128"') ||
       !issuers.includes('logo: "https://paiml.com/assets/img/logo.png"') ||
       !logoRules.includes('- match: "new york university"\\n  issuer_key: nyu'.replace("\\n", "\n")) ||
+      !logoRules.includes('- match: "iese business school"\\n  issuer_key: iese'.replace("\\n", "\n")) ||
       !logoRules.includes('- match: "pragmatic ai labs"\\n  issuer_key: pragmatic-ai'.replace("\\n", "\n")) ||
-      issuers.includes("https://commons.wikimedia.org/wiki/Special:FilePath/Nyu_short_color.svg") ||
+      issuers.includes("Nyu_stacked_color.svg") ||
+      issuers.includes("mbatube.com") ||
       issuers.includes("favicons?domain=paiml.com")) {
-    failures.push("NYU and Pragmatic AI Labs must use identified logos, not redirects or generic favicons.");
+    failures.push("NYU and IESE must use their institution-specific square marks; Pragmatic AI Labs keeps its official logo.");
   }
   for (const url of [
     "https://proximitygraphs.github.io/ProximityGraphs/",
