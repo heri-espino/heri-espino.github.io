@@ -1110,19 +1110,19 @@ if (exists("_pages/cv.md")) {
   }
 }
 
-// Preserve symmetric minimum print margins and auto-center only a CV that
-// fits on a single physical sheet, using measured available space.
+// Keep the owner's name top-aligned on every physical page. Single-page
+// selections may leave unused space BELOW the content, never above it.
 {
   const script = read("assets/js/cv-customize.js");
   const css = read("_sass/_cv.scss");
   if (!script.includes('root.dataset.cvSinglePage = pageNumber === 1') ||
-      !script.includes('topBalance = Math.floor(unusedHeight / 2)') ||
-      !script.includes('root.style.setProperty("--cv-print-top-balance"') ||
       !script.includes("root.dataset.cvDensity = viewDensity.paper;") ||
-      !css.includes('.cv-page[data-cv-single-page="true"] #cv-document') ||
-      !css.includes('padding-top: var(--cv-print-top-balance, 0px) !important;') ||
-      !script.includes('"; margin: " + chosenMargin + "; }"')) {
-    failures.push("CV vertical balance must center short selections and preserve equal @page margins.");
+      !script.includes('"; margin: " + chosenMargin + "; }"') ||
+      script.includes("topBalance = Math.floor") ||
+      script.includes('root.style.setProperty("--cv-print-top-balance"') ||
+      css.includes('padding-top: var(--cv-print-top-balance, 0px) !important;') ||
+      !css.includes(".cv-page .cv-preview-paper-body a:visited")) {
+    failures.push("CV print must top-align short selections at the selected physical paper margin.");
   }
 }
 
