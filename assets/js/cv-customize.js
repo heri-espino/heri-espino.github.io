@@ -399,8 +399,7 @@
 
   // The print engine owns actual page breaks. Build the same physical-sheet
   // measurement even in reading mode (offscreen), since Ctrl+P can start there.
-  // Only a CV that fits on ONE sheet receives a vertical centering offset;
-  // multipage CVs retain equal, fixed physical @page margins and native breaks.
+  // All pages start at the configured paper margin, even short one-page CVs.
   function renderPagedPreview(forPrinting = false) {
     // Real print must contain these *same* paginated pages, even if the
     // on-screen CV was left in full-width reading mode.
@@ -535,25 +534,11 @@
       }
     }
 
-    // Center a short, single-page selection inside the printable paper area.
-    // Balance each half of the *unused* height; never compress text or change
-    // the user-selected minimum @page margin. For longer documents the offset
-    // stays zero, preventing accidental new pages or fragmented flex columns.
-    let topBalance = 0;
-    if (pageNumber === 1 && !overlongBlocks) {
-      const bodyTop = page.body.getBoundingClientRect().top;
-      const contentBottom = page.content.getBoundingClientRect().bottom;
-      const unusedHeight = page.body.clientHeight - (contentBottom - bodyTop);
-      if (unusedHeight > 12) {
-        topBalance = Math.floor(unusedHeight / 2);
-        page.body.style.boxSizing = "border-box";
-        page.body.style.paddingTop = topBalance + "px";
-      }
-    }
+    // A one-page selection retains natural whitespace BELOW its contents.
+    // Do not add top padding to either the preview sheet or the print source.
     root.dataset.cvSinglePage = pageNumber === 1 && !overlongBlocks ? "true" : "false";
-    root.style.setProperty("--cv-print-top-balance", topBalance + "px");
 
-    // The on-screen sheet uses the same offset as the actual print document.
+    // Paper preview and browser print share the same top-aligned layout.
     // In reading mode the measuring sheets must never become visible.
     root.dataset.cvPaginated = showing ? "true" : "false";
     if (!showing) {
@@ -572,8 +557,7 @@
       (pageNumber === 1 ? "page" : "pages") + " (" +
       (controls.paper.value === "letter" ? "US Letter" : "A4") +
       "). Page breaks can differ in the browser's Print dialog." +
-      (overlongBlocks ? " Some long entries may span a printed page." : "") +
-      (topBalance ? " Short single-page selections are centered vertically." : "");
+      (overlongBlocks ? " Some long entries may span a printed page." : "");
   }
 
   const render = () => {
