@@ -81,6 +81,17 @@
         <input type="color" id="cv-custom-accent" value="#00104c" disabled aria-label="Choose a custom CV accent color">
       </label>
     </div>
+    <details class="cv-graduation-editor" id="cv-graduation-editor">
+      <summary>Edit expected graduation dates</summary>
+      <p class="cv-tools-help">Type any completion date or wording. The degree start dates stay unchanged. Saved in this browser only and included in paper preview and PDF; Reset options restores the published defaults.</p>
+      <div class="cv-graduation-fields">
+        {% for degree in cv.sections.Education %}
+          <label for="cv-graduation-{{ degree.subtitle | slugify }}">{{ degree.subtitle | escape }}
+            <input type="text" id="cv-graduation-{{ degree.subtitle | slugify }}" data-cv-graduation-input="{{ degree.subtitle | slugify }}" value="{{ degree.date | split: ' — ' | last | escape }}" autocomplete="off" spellcheck="false" aria-label="Expected graduation text for {{ degree.subtitle | escape }}">
+          </label>
+        {% endfor %}
+      </div>
+    </details>
     <details class="cv-section-picker">
       <summary>Sections: include and reorder</summary>
       <p class="cv-tools-help">Drag sections into position or use the arrow buttons. Your order is saved in this browser and applies to the grouped view and printed CV.</p>
@@ -237,6 +248,7 @@
                 class="{% if title == 'Education' or title == 'Professional Experience' or title == 'Submitted Manuscripts' or title == 'Completed Research' or title == 'Working Drafts & Notes' or title == 'Programming Experience' %}cv-entry{% else %}cv-compact-entry{% endif %}"
                 data-cv-record
                 data-cv-date="{{ entry.date | default: '' | escape }}"
+                {% if title == 'Education' %}data-cv-graduation-key="{{ entry.subtitle | slugify }}"{% endif %}
               >
                 <div class="cv-entry-heading">
                   <div>
