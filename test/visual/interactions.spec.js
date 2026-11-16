@@ -11,7 +11,11 @@ test("CV lists independent researcher first with five scientific libraries in re
   await expect(independent).toContainText("Independent Researcher");
   await expect(independent).toContainText("Scientific Software Developer");
   await expect(independent).toContainText("Aug 2024 — Present");
-  await expect(independent).toContainText("four journal submissions");
+  await expect(independent).toContainText("four journal submissions to Elsevier (2), Springer Nature, and Wiley");
+  await expect(independent).toContainText("In development: TrendEstimation (penalized least squares)");
+  await expect(independent).toContainText("Max-Cut/Max-k-Cut SDP");
+  await expect(independent).toContainText("PyPI and Zenodo DOI releases");
+  await expect(independent).toContainText("author-hosted interactive ProximityGraphs feature");
   for (const software of ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"]) {
     await expect(independent).toContainText(software);
   }
@@ -38,6 +42,8 @@ test("CV lists independent researcher first with five scientific libraries in re
   await expect(page.locator("#cv-document")).toBeHidden();
   await expect(paper).toContainText("Independent Researcher");
   await expect(paper).toContainText("TrendEstimation");
+  await expect(paper).toContainText("Max-Cut/Max-k-Cut SDP");
+  await expect(paper).toContainText("Elsevier (2), Springer Nature, and Wiley");
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
