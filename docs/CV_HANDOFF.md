@@ -1588,3 +1588,25 @@ All original source images remain the conversation uploads and previous reposito
 **Research CV:** The first Professional Experience entry in `_data/cv.yml` now has 8 ordinary escaped single-line highlight strings (each ≤80 chars) *identically* shown in reading, A4/Letter preview and Print/PDF. First bullet names **stochastic and computational geometry, ML interpretability and quantitative finance**; second says **four journal submissions** to Elsevier (2), Springer Nature and Wiley; third says **TrendEstimation's penalized least-squares statistics and Max-Cut/Max-k-Cut SDP are ongoing**. Remaining bullets retain truthful software, tools, writing, PyPI/Zenodo and research-coordination evidence. Earlier six dual `{label,detail,paper}` bullets are superseded; removed their conditionals/CSS, leaving all unrelated CV records unchanged. No submitted output is implied accepted or peer-reviewed, and archived DOI ≠ journal publication.
 
 **Verification:** `node test/style_contract.js`, `node scripts/audit-cv-organization-logos.mjs`, Jekyll build, `node scripts/verify-public-profile.mjs`, and Playwright `test/visual/interactions.spec.js` (especially independent-research and logo cases). Existing course-credential source check inconsistencies unrelated to this edit may remain.
+
+## 2026-11-16 — Handwritten trend notebook: PDF action and two independent previews
+
+The 31-page public PDF now exists at `notes/notes on trend estimation.pdf`
+(4,312,328-byte repository object). The original notes page
+`_pages/papers/handwritten-trend-estimation-notes.md` links directly
+to this file with `pdf:` and `pdf_new_tab: true`, rather than presenting
+the earlier upload-blocker notice. The same public PDF URL is listed in
+the CV research-notes record. The original file is not moved or modified.
+
+The *research archive card* has a first-page thumbnail at
+`assets/img/portfolio/handwritten-trend-first-page.webp`, reproducibly
+rendered from the public PDF by
+`python scripts/generate_handwritten_trend_preview.py`
+(requires PyMuPDF and Pillow). The *detail page*, independently, has
+`assets/img/portfolio/handwritten-trend-spectral-preview.webp`, a
+downscaled WebP of the owner's uploaded spectral-eigendecomposition
+screenshot. The two roles should never be reversed or conflated.
+The site continues to describe this as unsubmitted handwritten notes.
+
+The older 2026-11-10 / 2026-11-11 PDF-transfer blockers in this historical
+handoff are superseded by the actual file and links above.

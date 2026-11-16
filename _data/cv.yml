@@ -276,6 +276,7 @@ cv:
         location: Puebla, Mexico
         links:
           - { label: Research notes, url: "https://heri-espino.github.io/papers/handwritten-trend-estimation-notes.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/notes/notes%20on%20trend%20estimation.pdf" }
           - { label: Related code, url: "https://github.com/heri-espino/Trend-Estimation" }
         highlights:
           - "Penalized least squares: explored finite-difference smoothness and bias–variance."
