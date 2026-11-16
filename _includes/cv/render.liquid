@@ -92,6 +92,12 @@
         {% endfor %}
       </div>
     </details>
+    <details class="cv-profile-editor" id="cv-profile-editor">
+      <summary>Edit introductory description</summary>
+      <p class="cv-tools-help" id="cv-profile-help">Write any description. Changes appear immediately in the CV, paper preview, and PDF. Your text is saved only in this browser; Reset options restores the published default.</p>
+      <label for="cv-profile-text">Introductory description</label>
+      <textarea id="cv-profile-text" rows="6" aria-describedby="cv-profile-help" spellcheck="true">{{ cv.profile | escape }}</textarea>
+    </details>
     <details class="cv-section-picker">
       <summary>Sections: include and reorder</summary>
       <p class="cv-tools-help">Drag sections into position or use the arrow buttons. Your order is saved in this browser and applies to the grouped view and printed CV.</p>
