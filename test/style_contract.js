@@ -315,25 +315,14 @@ if (exists("_pages/cv.md")) {
         !independent.includes('date: "Aug 2024 — Present"') ||
         !independent.includes("https://heri-espino.github.io/papers/") ||
         !independent.includes("https://github.com/heri-espino") ||
-        !independent.includes("stochastic geometry") ||
-        !independent.includes("computational geometry") ||
-        !independent.includes("machine-learning interpretability") ||
-        !independent.includes("quantitative") ||
-        !independent.includes("finance. Statistical") ||
-        !independent.includes("Elsevier (two)") ||
-        !independent.includes("Springer Nature") ||
-        !independent.includes("Wiley journals") ||
-        !independent.includes("Statistical trend estimation and semidefinite") ||
-        !independent.includes("penalized least-squares trend smoothing") ||
-        !independent.includes("SDP formulations") ||
-        !independent.includes("solver-based workflows") ||
-        !independent.includes("open-source software") ||
-        !independent.includes("visual demonstrations") ||
-        !independent.includes("selected software releases on PyPI") ||
-        !independent.includes("Zenodo DOIs") ||
-        !independent.includes("Convened research meetings") ||
-        !independent.includes("technical reports and presentations") ||
-        !independent.includes("collaborators' feedback") ||
+        !independent.includes("Areas: Stochastic/computational geometry, ML interpretability, quant finance.") ||
+        !independent.includes("Submissions: Four journal manuscripts to Elsevier (2), Springer Nature, Wiley.") ||
+        !independent.includes("Ongoing: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP.") ||
+        !independent.includes("Software: Built AbaQuant; co-maintained ProximityGraphs and SDP workflows.") ||
+        !independent.includes("Tooling: Docling Math (PDF processing) and AwesomeFigures (visualization).") ||
+        !independent.includes("Writing: La Catarina publication and interactive ProximityGraphs author draft.") ||
+        !independent.includes("Reproducibility: Python, Git, tests, CI; selected PyPI and Zenodo DOI releases.") ||
+        !independent.includes("Coordination: Convened meetings, reports, presentations, progress and feedback.") ||
         packages.some((name) => !independent.includes(name)) ||
         packages.some((name) => !programRecords.includes("organization: " + (name === "TrendEstimation" ? "Trend Estimation" : name))) ||
         independent.includes("\n        organization:") ||
@@ -341,20 +330,16 @@ if (exists("_pages/cv.md")) {
         independent.includes("\n        context:")) {
       failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
     }
-    const expectedLabels = ["Mathematical research", "Scientific computing",
-      "Research software engineering", "Technical writing", "Reproducibility",
-      "Research coordination"];
-    const structured = [...independent.matchAll(/^          - label: "([^"]+)"[^]*?^            paper: "([^"]+)"$/gm)];
-    if (structured.length !== expectedLabels.length ||
-        structured.some((match, i) => match[1] !== expectedLabels[i] ||
-          (match[1] + ": " + match[2]).length > 94) ||
-        !cvRenderer.includes('class="cv-highlight-detailed"') ||
-        !cvRenderer.includes('class="cv-highlight-condensed"') ||
-        !cvRenderer.includes("{{ item.detail | escape }}") ||
-        !cvRenderer.includes("{{ item.paper | escape }}") ||
-        !cvStyles.includes(".cv-page .cv-preview-paper-body .cv-highlight-condensed") ||
-        !cvStyles.includes(".cv-page .cv-preview-paper-body .cv-highlight-detailed")) {
-      failures.push("The six detailed scientific-research categories need complete reading copy and <=94-character printable summaries.");
+    const bulletStrings = [...independent.matchAll(/^          - "([^"]+)"$/gm)].map((match) => match[1]);
+    const expectedLabels = ["Areas:", "Submissions:", "Ongoing:", "Software:", "Tooling:",
+      "Writing:", "Reproducibility:", "Coordination:"];
+    if (bulletStrings.length !== expectedLabels.length ||
+        bulletStrings.some((bullet, i) => !bullet.startsWith(expectedLabels[i]) || bullet.length > 80) ||
+        cvRenderer.includes("cv-highlight-detailed") ||
+        cvRenderer.includes("cv-highlight-condensed") ||
+        !cvRenderer.includes("<li>{{ item | escape }}</li>") ||
+        cvStyles.includes(".cv-highlight-condensed")) {
+      failures.push("Reading CV and printed CV must share eight distinct, <=80-character research bullets.");
     }
   }
   // Introductory research motivation must be substantive and printable:
