@@ -326,6 +326,26 @@ if (exists("_pages/cv.md")) {
       failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
     }
   }
+  // Free-text completion fields are per-degree browser preferences, not edits
+  // to published YAML dates or a date-picker restricted to calendar values.
+  if (!cvRenderer.includes('id="cv-graduation-editor"') ||
+      !cvRenderer.includes('data-cv-graduation-input="{{ degree.subtitle | slugify }}"') ||
+      !cvRenderer.includes('data-cv-graduation-key="{{ entry.subtitle | slugify }}"') ||
+      !cvRenderer.includes("degree.date | split: ' — ' | last | escape") ||
+      !cvScript.includes('const graduationStorageKey = "cv-graduation-text-v1";') ||
+      !cvScript.includes("graduationInputs.forEach((input) => input.addEventListener(\"input\"") ||
+      !cvScript.includes("span.textContent = input.value ?") ||
+      !cvScript.includes("graduationInputs.forEach((input) => { input.value = input.defaultValue; });") ||
+      !cvStyles.includes(".cv-graduation-fields input[type=\"text\"]")) {
+    failures.push("CV must allow separate free-text graduation edits, save them per browser, and reset print-safe values.");
+  }
+  // Edits affect display text only; both authentic enrollment start dates
+  // remain source-driven for sorting and research/application evidence.
+  const educationSource = read("_data/cv.yml").split("    Education:")[1]?.split("    Professional Experience:")[0] || "";
+  if (!educationSource.includes("date: Aug 2023 — Dec 2026 (expected)") ||
+      !educationSource.includes("date: Aug 2021 — Dec 2026 (expected)")) {
+    failures.push("The graduation text editor must not silently rewrite published degree dates.");
+  }
   // Only four submitted manuscripts; never reclassify reports, notebooks,
   // lectures or tutorials as journal submissions to fill the new category.
   const cvSource = read("_data/cv.yml");
