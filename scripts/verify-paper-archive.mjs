@@ -83,8 +83,12 @@ const articlePagePath = path.join(site, "articles", "abaquant-finanzas-matematic
 const articleImg = "assets/img/portfolio/abaquant-la-catarina-article.avif";
 const articleLink = "/articles/abaquant-finanzas-matematicas.html";
 const officialArticle = "https://lacatarina.udlap.mx/2026/10/abaquant-finanzas-matematicas-valuacion-y-gestion-del-riesgo/";
-if (actualPublished !== 1 || !published.includes(articleLink)) {
-  errors.push(`Expected 1 published technical article (AbaQuant), rendered ${actualPublished}`);
+const interactivePagePath = path.join(site, "articles", "the-empty-space-that-makes-a-network.html");
+const interactiveImage = "assets/img/portfolio/proximitygraphs-empty-space-compare.svg";
+const interactiveLink = "/articles/the-empty-space-that-makes-a-network.html";
+const authorPreview = "https://heri-espino.github.io/proximitygraphs-siam-figures/article.html";
+if (actualPublished !== 2 || !published.includes(articleLink) || !published.includes(interactiveLink)) {
+  errors.push(`Expected 2 technical writing entries (La Catarina publication and author-hosted interactive draft), rendered ${actualPublished}`);
 }
 if (!published.includes("/" + articleImg)) {
   errors.push("Published AbaQuant card lacks user-uploaded article image");
@@ -100,6 +104,28 @@ if (!fs.existsSync(articlePagePath)) {
       !detail.includes("Owen Paredes Conde")) {
     errors.push("AbaQuant detail page lost its original publication, coauthor or image preview");
   }
+}
+if (!published.includes("/" + interactiveImage)) {
+  errors.push("Interactive technical writing card lacks its original Gabriel/RNG comparison figure");
+}
+for (const imagePath of [path.resolve(interactiveImage), path.join(site, interactiveImage)]) {
+  if (!fs.existsSync(imagePath) || !read(imagePath).includes("<svg")) {
+    errors.push(`Original interactive technical writing SVG missing: ${imagePath}`);
+  }
+}
+if (!fs.existsSync(interactivePagePath)) {
+  errors.push(`Interactive feature detail page not rendered: ${interactivePagePath}`);
+} else {
+  const detail = read(interactivePagePath);
+  if (!detail.includes(authorPreview) ||
+      !detail.includes("Héctor Maravillo") ||
+      !detail.includes("/" + interactiveImage) ||
+      !detail.includes("not been submitted")) {
+    errors.push("Interactive feature detail must preserve authors, actual preview and unsubmitted editorial status");
+  }
+}
+if (!published.includes("Author-hosted preview")) {
+  errors.push("Interactive technical writing must not be mistaken for a published SIAM News article");
 }
 
 if (actualSubmitted !== expectedSubmitted) {
