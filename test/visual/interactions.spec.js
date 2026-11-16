@@ -1,6 +1,39 @@
 const { test, expect } = require("@playwright/test");
 const { preparePage, stabilizeVisuals } = require("./helpers");
 
+test("CV research profile connects mathematics, models and communication in print", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const header = page.locator("#cv-document .cv-intro");
+  const profile = header.locator(".cv-research-profile");
+  const expectedFragments = [
+    "formulating research questions",
+    "mathematical theory",
+    "computational implementation",
+    "statistical and optimization models",
+    "reproducible experiments",
+    "informed decisions",
+    "scientific writing, visualization, and presentations",
+  ];
+  await expect(profile).toHaveCount(1);
+  for (const fragment of expectedFragments) await expect(profile).toContainText(fragment);
+  expect(await profile.evaluate((node) => getComputedStyle(node).color))
+    .toBe(await header.evaluate((node) => getComputedStyle(node).color));
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const preview = page.locator("#cv-paged-preview .cv-intro .cv-research-profile");
+  await expect(preview).toHaveCount(1);
+  await expect(preview).toContainText("informed decisions");
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  const printed = page.locator("#cv-paged-preview .cv-intro .cv-research-profile");
+  await expect(printed).toHaveCount(1);
+  await expect(printed).toContainText("scientific writing, visualization, and presentations");
+  await expect(page.locator("#cv-document")).toBeHidden();
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+});
+
 test("CV lists independent researcher first with five scientific libraries in reading and print", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
 
