@@ -100,8 +100,12 @@ const cvSection = (name) => {
 };
 assert(cvSection("leadership").includes("IMEF Universitario Membership"), "IMEF must appear under Leadership");
 assert(!cvSection("selected-extracurricular-activities").includes("IMEF Universitario Membership"), "IMEF must not remain extracurricular");
-assert(cvRecord.includes('fa-brands fa-github cv-org-icon'), "Stepping-Stone context must show GitHub icon");
-assert(cvRecord.includes('GitHub repository for Stepping-Stone Volume Validation'), "Stepping-Stone icon must link to GitHub");
+// Independent research has source links, not a fictitious affiliation or
+// a redundant styled explanation row in the CV and its printable clone.
+assert(!cvRecord.includes('class="cv-context"'), "Standalone research context must not render in the CV");
+assert(!cvRecord.includes("Independent research software · numerical validation"), "Remove redundant Stepping-Stone explanation");
+assert(cvRecord.includes("Stepping-Stone Volume Validation"), "Keep independent research record");
+assert(cvRecord.includes('href="https://github.com/heri-espino/Stepping-Stone-Volume-Constants"'), "Stepping-Stone GitHub source link must survive context removal");
 assert(riskRecord.includes("Jan–Mar 2026"), "Latent-risk project date not synchronized");
 
 assert(cvRecord.includes("First Author · Published Technical Article"), "AbaQuant must indicate first author");
