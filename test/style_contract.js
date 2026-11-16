@@ -500,6 +500,23 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes('body:has(.cv-page) .back-to-top')) {
     failures.push("CV-specific CSS must also hide legacy back-to-top controls.");
   }
+  // The owner's current correction supersedes the old claim that this assistant
+  // merely translated someone else's slides. Keep three factual, print-safe
+  // bullets for complete Beamer materials, mathematics scope and revisions.
+  const academicAssistant = cvSource.split("      - name: Academic Assistant — Linear Algebra")[1]
+    ?.split("      - name: Analyst — Digital Marketing & Analytics")[0] || "";
+  const expectedAssistantBullets = [
+    "Slides: authored full-course LaTeX Beamer decks on systems of linear equations.",
+    "Topics: vector spaces, linear transformations, eigenvalues, and complex numbers.",
+    "Teaching: presented the slides, incorporated feedback, and revised materials.",
+  ];
+  const actualAssistantBullets = [...academicAssistant.matchAll(/^          - "([^"]+)"$/gm)]
+    .map((match) => match[1]);
+  if (actualAssistantBullets.length !== 3 ||
+      expectedAssistantBullets.some((bullet, i) => bullet !== actualAssistantBullets[i] || bullet.length > 80) ||
+      academicAssistant.includes("translated existing LaTeX slides")) {
+    failures.push("Linear Algebra assistant must have three concise original Beamer, mathematics and feedback bullets.");
+  }
   if (cvRenderer.includes("Academic Assistant in Matrix Theory Course") ||
       read("_data/cv.yml").includes("Academic Assistant in Matrix Theory Course")) {
     failures.push("The redundant Matrix Theory academic assistant entry must remain removed.");
