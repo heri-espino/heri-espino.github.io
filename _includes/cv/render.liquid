@@ -185,6 +185,9 @@
       {% endfor %}
       <a href="{{ cv.website }}" target="_blank" rel="noopener noreferrer">Portfolio</a>
     </nav>
+    {% if cv.profile %}
+      <p class="cv-research-profile">{{ cv.profile | escape }}</p>
+    {% endif %}
   </header>
   <section id="cv-timeline" class="cv-timeline" aria-label="Chronological CV" hidden>
     <h2>Chronological record</h2>
