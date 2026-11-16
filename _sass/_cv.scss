@@ -31,6 +31,32 @@
   text-underline-offset: 0.2em;
 }
 
+/* Concise research statement: ordinary document text, not muted metadata.
+   Keep it in both the full-width CV and the printable paper clones. */
+.cv-page .cv-research-profile {
+  max-width: 78ch;
+  margin: 0.65rem 0 0;
+  color: inherit;
+  font-size: 0.89rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.cv-page .cv-preview-paper-body .cv-research-profile {
+  max-width: none;
+  margin: 5pt 0 0;
+  color: inherit !important;
+  font-size: 7.7pt;
+  line-height: 1.23;
+}
+@media print {
+  .cv-page .cv-research-profile {
+    margin: 5pt 0 0;
+    color: inherit !important;
+    font-size: 7.7pt;
+    line-height: 1.23;
+  }
+}
+
 /* Respect the existing Show icons customization in all CV templates. */
 .cv-page[data-cv-show-icons="false"] .cv-zenodo-mark {
   display: none !important;
