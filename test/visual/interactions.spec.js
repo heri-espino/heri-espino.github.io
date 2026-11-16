@@ -30,7 +30,42 @@ test("Papers separates unsubmitted research notes from internal research studies
     await expect(drafts.locator(`a[href="${href}"]`)).toHaveCount(0);
   }
   await expect(page.locator("#submitted-manuscripts .portfolio-card")).toHaveCount(4);
-  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(1);
+  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(2);
+});
+
+test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQuant article", async ({ page }) => {
+  await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
+  const technical = page.locator("#published-technical-articles");
+  await expect(technical.locator(".portfolio-card")).toHaveCount(2);
+  const feature = technical.locator(".portfolio-card").filter({ hasText: "The Empty Space That Makes a Network" });
+  const aba = technical.locator(".portfolio-card").filter({ hasText: "AbaQuant" });
+  await expect(feature).toHaveCount(1);
+  await expect(aba).toHaveCount(1);
+  await expect(feature).toContainText("Author-hosted preview");
+  await expect(feature.locator(".portfolio-card-image img"))
+    .toHaveAttribute("src", new RegExp("proximitygraphs-empty-space-compare.svg"));
+  await feature.locator("h3 a").click();
+  await expect(page).toHaveURL((url) => url.pathname.endsWith("/articles/the-empty-space-that-makes-a-network.html"));
+  await expect(page.locator(".portfolio-detail")).toContainText("Héctor Maravillo");
+  await expect(page.locator(".portfolio-detail")).toContainText("has not been submitted");
+  await expect(page.locator('.portfolio-actions a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
+
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const section = page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]');
+  await expect(section.locator("[data-cv-record]")).toHaveCount(2);
+  const item = section.locator("[data-cv-record]").filter({ hasText: "The Empty Space That Makes a Network" });
+  await expect(item).toContainText("First Author · Interactive Technical Feature");
+  await expect(item).not.toContainText("Coauthored with Héctor Maravillo");
+  // The title is intentionally clickable too; count just the explicit resource link.
+  await expect(item.locator('.cv-links a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
+  await expect(section).not.toContainText("Published by SIAM News");
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const paperItem = page.locator("#cv-paged-preview [data-cv-record]")
+    .filter({ hasText: "The Empty Space That Makes a Network" });
+  await expect(paperItem).toHaveCount(1);
+  await expect(paperItem.locator('.cv-links a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
 });
 
 test("publications Abs toggle opens and closes", async ({ page }) => {
@@ -948,7 +983,7 @@ test("CV paper preview and print start at the top and keep link typography consi
   expect(Math.abs(fullTopGap)).toBeLessThan(2);
 });
 
-test("CV NYU and IESE icons, Zenodo DOIs, and research context render consistently", async ({ page }) => {
+test("CV NYU and IESE icons, Zenodo DOIs, and no redundant research context rows", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const root = page.locator("#cv-page");
   const document = page.locator("#cv-document");
@@ -981,35 +1016,38 @@ test("CV NYU and IESE icons, Zenodo DOIs, and research context render consistent
     expect(label).toContain("DOI: 10.5281/zenodo.");
   }
 
-  await expect(document).not.toContainText(/not submitted/i);
-  const lecture = document.locator(".cv-context").filter({ hasText: "Mathematical research lecture" });
-  await expect(lecture).toHaveCount(1);
-  expect(await lecture.evaluate((el) => getComputedStyle(el).color)).toBe("rgb(76, 87, 129)");
+  const redundantExplanations = [
+    "Independent research software · numerical validation",
+    "Latent financial-risk modeling",
+    "Research working draft",
+    "Mathematical research lecture",
+    "Mathematical research tutorial",
+    "Handwritten mathematical research notebook",
+    "Expository probability and Hilbert-space analysis",
+  ];
+  const assertCleanCV = async (locator) => {
+    await expect(locator.locator(".cv-context")).toHaveCount(0);
+    for (const explanation of redundantExplanations) {
+      await expect(locator).not.toContainText(explanation);
+    }
+    await expect(locator).not.toContainText(/not submitted/i);
+  };
+  await assertCleanCV(document);
+  // Removing the extra explanation must not remove the research entry or its links.
+  const volume = document.locator("[data-cv-record]").filter({ hasText: "Stepping-Stone Volume Validation" });
+  await expect(volume).toContainText("Research Software Developer");
+  await expect(volume.locator('a[href="https://github.com/heri-espino/Stepping-Stone-Volume-Constants"]')).toHaveCount(1);
 
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-preview").click();
   const paper = page.locator("#cv-paged-preview");
-  await expect(paper).not.toContainText(/not submitted/i);
-  const paperLecture = paper.locator(".cv-context").filter({ hasText: "Mathematical research lecture" });
-  await expect(paperLecture).toHaveCount(1);
-  const contextAppearance = await paperLecture.evaluate((el) => ({
-    color: getComputedStyle(el).color,
-    size: getComputedStyle(el).fontSize,
-  }));
-  expect(contextAppearance.color).toBe("rgb(76, 87, 129)");
-  expect(parseFloat(contextAppearance.size)).toBeGreaterThanOrEqual(10);
+  await assertCleanCV(paper);
   await expect(paper.locator(".cv-links a:has(.cv-zenodo-mark)")).toHaveCount(5);
 
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await expect(root).toHaveAttribute("data-cv-printing", "true");
-  const printed = await page.locator("#cv-paged-preview .cv-context")
-    .filter({ hasText: "Mathematical research lecture" }).evaluate((el) => ({
-      color: getComputedStyle(el).color,
-      size: getComputedStyle(el).fontSize,
-    }));
-  expect(printed.color).toBe("rgb(76, 87, 129)");
-  expect(parseFloat(printed.size)).toBeGreaterThanOrEqual(10);
+  await assertCleanCV(paper);
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });

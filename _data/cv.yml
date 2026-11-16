@@ -140,9 +140,6 @@ cv:
     Completed Research:
       - name: Stepping-Stone Volume Validation
         role: "Research Software Developer"
-        context: "Independent research software · numerical validation"
-        icon: github
-        icon_url: "https://github.com/heri-espino/Stepping-Stone-Volume-Constants"
         date: "Jul 2026"
         links:
           - { label: Zenodo · Validation, url: "https://doi.org/10.5281/zenodo.21291269", doi: "10.5281/zenodo.21291269" }
@@ -183,7 +180,6 @@ cv:
         highlights:
           - "PLM Wald tests: examined grade differences associated with mathematics-support use."
       - name: Estimation of Latent Risk in the U.S. Market Using Representative Variables
-        context: "Latent financial-risk modeling"
         role: "Research project"
         organization: "Presented at XXIV School of Probability and Statistics · Centro de Investigación en Matemáticas"
         organization_url: "https://www.cimat.mx/"
@@ -198,7 +194,6 @@ cv:
           - "Financial econometrics: identified regime shifts in smoothed latent risk."
     Working Drafts & Notes:
       - name: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
-        context: "Research working draft"
         role: "Author · Working Draft"
         subtitle: "Smoothness-Integrated Trend Distances with Nonzero Difference Drift"
         date: "Oct 2026 — Present"
@@ -234,7 +229,6 @@ cv:
           - "Numerical methods: compared seven PLS backends at normalized smoothness."
           - "Reproducible research: archived 80,640 runs and validated root finding."
       - name: "Componentwise kNN-Isomap: From Neighborhood Graphs to Constrained Manifold Embeddings"
-        context: "Mathematical research lecture"
         role: "Mathematical Research Lecture"
         date: "19 Oct 2026"
         links:
@@ -245,7 +239,6 @@ cv:
           - "Mathematical exposition: derived graph geodesics, MDS and componentwise Isomap."
           - "Method auditing: separated proposed Isomap optimization from implementation."
       - name: "From Max-Cut to Semidefinite Programming, EVA, and Clustering-Based Rounding"
-        context: "Mathematical research tutorial"
         role: "Mathematical Research Tutorial"
         date: "Oct 2026"
         links:
@@ -256,7 +249,6 @@ cv:
           - "Experimental reproducibility: compared rounding methods on G-set instances."
       - name: "Handwritten Notes on Penalized Trend Estimation and Smoothness Optimization"
         role: "Author · Research Notes"
-        context: "Handwritten mathematical research notebook"
         date: "Oct 2026"
         location: Puebla, Mexico
         links:
@@ -266,7 +258,6 @@ cv:
           - "Penalized least squares: explored finite-difference smoothness and bias–variance."
           - "Optimization: differentiated smoothing operators and studied CV minima."
       - name: Mathematical Notes on Random Variables as Vectors in L²
-        context: "Expository probability and Hilbert-space analysis"
         role: "Mathematical notes"
         date: Jun 2026 — Present
         location: Puebla, Mexico
@@ -423,6 +414,17 @@ cv:
           - "Mathematical reasoning: solved undergraduate proof-based problems."
 
     Published Articles & Technical Writing:
+      - name: "The Empty Space That Makes a Network"
+        role: "First Author · Interactive Technical Feature"
+        date: "Nov 2026"
+        links:
+          - { label: Interactive article, url: "https://heri-espino.github.io/proximitygraphs-siam-figures/article.html" }
+          - { label: Portfolio, url: "https://heri-espino.github.io/articles/the-empty-space-that-makes-a-network.html" }
+          - { label: Author PDF, url: "https://github.com/heri-espino/proximitygraphs-siam-figures/blob/main/article/output/proximitygraphs-siam-news-draft.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/proximitygraphs-siam-figures" }
+        highlights:
+          - "Computational geometry: explained empty-region graphs with four live constructions."
+          - "Network comparison: evaluated Gabriel and RNG rules on the same 25 sites."
       - name: "AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo"
         role: "First Author · Published Technical Article"
         organization: "La Catarina · Universidad de las Américas Puebla · IMEF Universitario"
