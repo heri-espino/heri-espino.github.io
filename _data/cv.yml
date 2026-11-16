@@ -45,11 +45,11 @@ cv:
           - { label: Research portfolio, url: "https://heri-espino.github.io/papers/" }
           - { label: Open-source projects, url: "https://github.com/heri-espino" }
         highlights:
-          - "Manuscripts: authored or coauthored four journal submissions in stochastic and computational geometry, CNN interpretability, and quantitative finance."
-          - "Numerical software: developed TrendEstimation for penalized least-squares smoothing and AbaQuant for financial mathematics."
-          - "Computational geometry: co-maintained ProximityGraphs, with selected Python releases on PyPI and numerical validation archived on Zenodo."
-          - "Research tooling: developed Docling Math for mathematical PDF extraction and AwesomeFigures for scientific visualization and LaTeX-ready figures."
-          - "Technical writing and reproducibility: authored a La Catarina article and an interactive ProximityGraphs feature; documented Python research with Git, tests, and LaTeX."
+          - "Manuscripts: authored or coauthored four journal submissions in geometry, ML, and finance."
+          - "Numerical software: developed TrendEstimation (PLS smoothing) and AbaQuant (financial math)."
+          - "Geometry software: co-maintained ProximityGraphs; selected PyPI and Zenodo releases."
+          - "Research tooling: built Docling Math (PDF extraction) and AwesomeFigures (scientific plots)."
+          - "Writing: authored a La Catarina article and interactive ProximityGraphs feature; used LaTeX."
       - name: Research Data Scientist — Mathematics Learning Center
         role: "Research Data Scientist"
         subtitle: "Mathematics Learning Center"
