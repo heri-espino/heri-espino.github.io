@@ -2051,34 +2051,6 @@
    on screen and in PDF; no special wide-wordmark layout is needed. */
 
 
-/* Research context is secondary metadata, not a faded annotation.
-   Match institutional rows' blue/indigo color and compact print type scale;
-   contexts remain non-institutional, so they never acquire a false logo. */
-.cv-page .cv-context {
-  margin: 0.08rem 0 0.12rem;
-  color: #4c5781;
-  font-size: 0.85rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-.cv-page[data-cv-density="latex"] .cv-context {
-  font-size: 0.75rem;
-  margin: 0.05rem 0 0.1rem;
-}
-@media screen {
-  .cv-page .cv-preview-paper-body .cv-context {
-    font-size: 8pt;
-  }
-}
-@media print {
-  .cv-page .cv-context {
-    font-size: 8pt;
-    color: #4c5781 !important;
-    font-weight: 500;
-    break-inside: avoid;
-  }
-}
-
 
 /* Harvard-inspired four-corner experience header.
    Left:  organization (logo included), role/title.
@@ -2113,14 +2085,6 @@
   margin: 0.12rem 0 0;
   font-weight: 680;
   line-height: 1.3;
-}
-
-/* For independent research records a factual context replaces the
-   missing institution, but it never inherits an institutional logo. */
-.cv-page[data-cv-template="harvard"] .cv-entry-heading > div:not(:has(.cv-organization)) > .cv-context {
-  order: -2;
-  margin: 0;
-  font-weight: 650;
 }
 
 .cv-page[data-cv-template="harvard"] .cv-entry-heading .cv-meta {
@@ -2510,15 +2474,15 @@
     gap: var(--cv-reading-row-gap);
   }
 
-  /* The title, organization, context, links and description share a size
+  /* The title, organization, links and description share a size
      and the selected template font family, including their anchors. */
-  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-entry-heading h3, .cv-organization, .cv-context, .cv-links, .cv-highlights, .cv-meta) {
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-entry-heading h3, .cv-organization, .cv-links, .cv-highlights, .cv-meta) {
     font-family: var(--cv-font-stack);
     font-size: var(--cv-reading-font-size);
     line-height: var(--cv-reading-line-height);
   }
 
-  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-entry-heading h3, .cv-organization, .cv-context, .cv-links) {
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-entry-heading h3, .cv-organization, .cv-links) {
     margin: 0;
   }
 
@@ -2529,7 +2493,7 @@
   .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) .cv-organization {
     font-weight: 600;
   }
-  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-links, .cv-context, .cv-highlights) {
+  .cv-page[data-cv-preview="reading"]:not([data-cv-density="latex"]):not([data-cv-template="harvard"]):not([data-cv-template="europass"]) :is(#cv-document, #cv-timeline) :is(.cv-entry, .cv-compact-entry) :is(.cv-links, .cv-highlights) {
     font-weight: 400;
   }
 
