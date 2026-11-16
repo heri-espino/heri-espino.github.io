@@ -43,7 +43,7 @@ nav_order: 2
       <div>
         <p class="portfolio-kicker">02 / Published writing</p>
         <h2 id="published-technical-articles-title">Published Articles &amp; Technical Writing <span class="papers-archive-count">({{ published_articles.size }})</span></h2>
-        <p>Authored technical writing published outside peer-reviewed research journals, listed separately from submitted manuscripts and working drafts.</p>
+        <p>Published articles and author-hosted interactive technical features. Each item identifies its own editorial status; an author-hosted SIAM News proposal is not an accepted or published SIAM article.</p>
       </div>
     </div>
     <div class="portfolio-grid" data-portfolio-group data-view="list">
