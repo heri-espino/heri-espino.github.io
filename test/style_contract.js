@@ -315,9 +315,12 @@ if (exists("_pages/cv.md")) {
         !independent.includes('date: "Aug 2024 — Present"') ||
         !independent.includes("https://heri-espino.github.io/papers/") ||
         !independent.includes("https://github.com/heri-espino") ||
-        !independent.includes("four journal submissions") ||
+        !independent.includes("four journal submissions to Elsevier (2), Springer Nature, and Wiley") ||
+        !independent.includes("In development: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP") ||
+        !independent.includes("PyPI and Zenodo DOI releases") ||
+        !independent.includes("author-hosted interactive ProximityGraphs feature") ||
         !independent.includes("La Catarina article") ||
-        !independent.includes("interactive ProximityGraphs feature") ||
+
         packages.some((name) => !independent.includes(name)) ||
         packages.some((name) => !programRecords.includes("organization: " + (name === "TrendEstimation" ? "Trend Estimation" : name))) ||
         independent.includes("\n        organization:") ||
