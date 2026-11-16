@@ -43,9 +43,9 @@ test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQ
   await expect(aba).toHaveCount(1);
   await expect(feature).toContainText("Author-hosted preview");
   await expect(feature.locator(".portfolio-card-image img"))
-    .toHaveAttribute("src", /proximitygraphs-empty-space-compare\\.svg/);
+    .toHaveAttribute("src", new RegExp("proximitygraphs-empty-space-compare.svg"));
   await feature.locator("h3 a").click();
-  await expect(page).toHaveURL(/articles\\/the-empty-space-that-makes-a-network\\.html/);
+  await expect(page).toHaveURL((url) => url.pathname.endsWith("/articles/the-empty-space-that-makes-a-network.html"));
   await expect(page.locator(".portfolio-detail")).toContainText("Héctor Maravillo");
   await expect(page.locator(".portfolio-detail")).toContainText("has not been submitted");
   await expect(page.locator('.portfolio-actions a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
