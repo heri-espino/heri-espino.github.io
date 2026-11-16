@@ -554,7 +554,7 @@ test("CV sections collapse independently while the paper preview retains their e
   await expect(details).not.toHaveAttribute("open", "");
 });
 
-test("Linear Algebra assistant lists Beamer course decks, topics and feedback in paper and print", async ({ page }) => {
+test("CV Linear Algebra assistant lists Beamer course decks, topics and feedback in paper and print", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const expected = [
     "Slides: authored full-course LaTeX Beamer decks on systems of linear equations.",
