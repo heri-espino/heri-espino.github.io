@@ -1598,3 +1598,15 @@ All original source images remain the conversation uploads and previous reposito
 **Semantics:** The source YAML profile remains unchanged and is shown for fresh browsers and for no-JavaScript rendering. Overrides live solely in the editor's current browser, persist after reload where localStorage works, and propagate into cloned paper preview and Ctrl+P/Save PDF. Neither the text nor the storage key is sent to GitHub or used in HTML attributes. Markup remains literal text; an empty editor intentionally leaves a blank description until Reset. This complements, but does not replace, the independent per-degree graduation-date editor.
 
 **Regression:** `test/visual/interactions.spec.js` includes `CV introductory description supports multiline edits, reload, print and reset`, checking default, live preview, newline preservation, paper/native print, reload, HTML safety, empty value and Reset. `test/style_contract.js` checks the Liquid input, textContent-only path and storage/print contract. Existing research experience, publications, CV section order, logos and PDF margins are unaffected.
+
+## 2026-11-16 — User-corrected Linear Algebra Academic Assistant contribution
+
+**Current owner instruction supersedes the 2026-11-12 historical note at line ~1133** asserting the user “only translated existing LaTeX presentations from English into Spanish.” The owner now specifies that they authored original **complete-course LaTeX Beamer presentations**, including systems of linear equations, vector spaces, linear transformations, eigenvalues and complex numbers; delivered the presentations, received feedback and incorporated revisions.
+
+**Exact CV bullets** in the existing `Academic Assistant — Linear Algebra` item in `_data/cv.yml`:
+
+- `Slides: authored full-course LaTeX Beamer decks on systems of linear equations.` (79 characters)
+- `Topics: vector spaces, linear transformations, eigenvalues, and complex numbers.` (80 characters)
+- `Teaching: presented the slides, incorporated feedback, and revised materials.` (77 characters)
+
+The user requested exactly **three** polished bullet points. Keep the affiliation `Universidad de las Américas Puebla`, location, and Jan–May 2023 dates unchanged. This is an Academic Assistant role and does not imply an appointment as course instructor. Bullets are short enough for the existing Europass A4/Letter PDF limits. The `test/style_contract.js` source guard and Playwright `Linear Algebra assistant lists Beamer course decks, topics and feedback in paper and print` enforce the three bullets in reading, paper preview and browser print. This update accompanies the independent browser-local editable research-profile editor in PR #77.
