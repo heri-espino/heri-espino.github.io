@@ -46,7 +46,7 @@ cv:
           - { label: Open-source projects, url: "https://github.com/heri-espino" }
         highlights:
           - "Manuscripts: authored or coauthored four journal submissions in geometry, ML, and finance."
-          - "Numerical software: developed TrendEstimation (PLS smoothing) and AbaQuant (financial math)."
+          - "Numerical software: built TrendEstimation (PLS) and AbaQuant (finance)."
           - "Geometry software: co-maintained ProximityGraphs; selected PyPI and Zenodo releases."
           - "Research tooling: built Docling Math (PDF extraction) and AwesomeFigures (scientific plots)."
           - "Writing: authored a La Catarina article and interactive ProximityGraphs feature; used LaTeX."
