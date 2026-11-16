@@ -51,6 +51,8 @@
   const noEntriesButton = document.getElementById("cv-entries-none");
   const toggles = Array.from(root.querySelectorAll("[data-cv-section-toggle]"));
   const sections = Array.from(root.querySelectorAll(".cv-content [data-cv-section]"));
+  const profileInput = document.getElementById("cv-profile-text");
+  const profileParagraph = sourceDocument?.querySelector(".cv-research-profile");
   const sectionOrderList = document.getElementById("cv-section-order-list");
   const sectionOrderRows = Array.from(sectionOrderList?.querySelectorAll("[data-cv-order-item]") || []);
 
@@ -73,6 +75,8 @@
     !entryOptions ||
     !allEntriesButton ||
     !noEntriesButton ||
+    !profileInput ||
+    !profileParagraph ||
     !sectionOrderList ||
     sectionOrderRows.length !== sections.length
   ) return;
@@ -162,6 +166,32 @@
       label: element.querySelector("h3")?.textContent.trim() || "Unnamed entry",
     }))
   );
+
+  // The public YAML description is the default. Only the current browser's
+  // optional override changes the live source DOM and its printable clones.
+  // Never interpret arbitrary user text as markup or change repository data.
+  const profileStorageKey = "cv-profile-text-v1";
+  try {
+    const savedProfile = window.localStorage.getItem(profileStorageKey);
+    if (savedProfile !== null && savedProfile.length <= 20000) profileInput.value = savedProfile;
+  } catch (_error) {
+    // Disabled storage does not prevent in-session editing and printing.
+  }
+  const syncProfile = () => {
+    profileParagraph.textContent = profileInput.value;
+  };
+  syncProfile();
+  const persistProfile = () => {
+    try {
+      if (profileInput.value === profileInput.defaultValue) {
+        window.localStorage.removeItem(profileStorageKey);
+      } else {
+        window.localStorage.setItem(profileStorageKey, profileInput.value);
+      }
+    } catch (_error) {
+      // The visible CV and printed copies remain editable without persistence.
+    }
+  };
 
   // Graduation completion text is an independent browser-local preference per
   // degree. Keep the canonical YAML start dates for timeline sorting, and write
@@ -694,6 +724,11 @@
     if (controls.template.value === "europass") controls.order.value = "sections";
     render();
   });
+  profileInput.addEventListener("input", () => {
+    syncProfile();
+    persistProfile();
+    render();
+  });
   graduationInputs.forEach((input) => input.addEventListener("input", () => {
     syncGraduationDates();
     persistGraduationDates();
@@ -749,6 +784,9 @@
     controls.order.value = "sections";
     customSectionIds = null;
     try { window.localStorage.removeItem(sectionOrderStorageKey); } catch (_error) { /* Storage disabled. */ }
+    profileInput.value = profileInput.defaultValue;
+    syncProfile();
+    try { window.localStorage.removeItem(profileStorageKey); } catch (_error) { /* Storage disabled. */ }
     graduationInputs.forEach((input) => { input.value = input.defaultValue; });
     syncGraduationDates();
     try { window.localStorage.removeItem(graduationStorageKey); } catch (_error) { /* Storage disabled. */ }

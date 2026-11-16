@@ -359,6 +359,24 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes("@media print")) {
     failures.push("The concise research motivation must appear as safe, consistent CV text in screen and PDF.");
   }
+  // Research-profile edits are local, arbitrary plain text and must survive
+  // reloading and paper/print cloning without modifying the YAML default.
+  if (!cvRenderer.includes('id="cv-profile-editor"') ||
+      !cvRenderer.includes('id="cv-profile-text"') ||
+      !cvRenderer.includes('rows="6"') ||
+      !cvRenderer.includes('<textarea id="cv-profile-text"') ||
+      !cvRenderer.includes('{{ cv.profile | escape }}</textarea>') ||
+      !cvScript.includes('const profileStorageKey = "cv-profile-text-v1";') ||
+      !cvScript.includes("window.localStorage.getItem(profileStorageKey)") ||
+      !cvScript.includes("profileParagraph.textContent = profileInput.value;") ||
+      !cvScript.includes('profileInput.addEventListener("input"') ||
+      !cvScript.includes("window.localStorage.setItem(profileStorageKey, profileInput.value)") ||
+      !cvScript.includes("profileInput.value = profileInput.defaultValue;") ||
+      !cvScript.includes("window.localStorage.removeItem(profileStorageKey)") ||
+      !cvStyles.includes(".cv-profile-editor textarea") ||
+      !cvStyles.includes("white-space: pre-wrap;")) {
+    failures.push("The profile editor must use textContent, persist browser-local multiline text, and reset without touching source YAML.");
+  }
   // Free-text completion fields are per-degree browser preferences, not edits
   // to published YAML dates or a date-picker restricted to calendar values.
   if (!cvRenderer.includes('id="cv-graduation-editor"') ||
@@ -481,6 +499,23 @@ if (exists("_pages/cv.md")) {
   if (!cvStyles.includes('body:has(.cv-page) #back-to-top') ||
       !cvStyles.includes('body:has(.cv-page) .back-to-top')) {
     failures.push("CV-specific CSS must also hide legacy back-to-top controls.");
+  }
+  // The owner's current correction supersedes the old claim that this assistant
+  // merely translated someone else's slides. Keep three factual, print-safe
+  // bullets for complete Beamer materials, mathematics scope and revisions.
+  const academicAssistant = cvSource.split("      - name: Academic Assistant — Linear Algebra")[1]
+    ?.split("      - name: Analyst — Digital Marketing & Analytics")[0] || "";
+  const expectedAssistantBullets = [
+    "Slides: authored full-course LaTeX Beamer decks on systems of linear equations.",
+    "Topics: vector spaces, linear transformations, eigenvalues, and complex numbers.",
+    "Teaching: presented the slides, incorporated feedback, and revised materials.",
+  ];
+  const actualAssistantBullets = [...academicAssistant.matchAll(/^          - "([^"]+)"$/gm)]
+    .map((match) => match[1]);
+  if (actualAssistantBullets.length !== 3 ||
+      expectedAssistantBullets.some((bullet, i) => bullet !== actualAssistantBullets[i] || bullet.length > 80) ||
+      academicAssistant.includes("translated existing LaTeX slides")) {
+    failures.push("Linear Algebra assistant must have three concise original Beamer, mathematics and feedback bullets.");
   }
   if (cvRenderer.includes("Academic Assistant in Matrix Theory Course") ||
       read("_data/cv.yml").includes("Academic Assistant in Matrix Theory Course")) {

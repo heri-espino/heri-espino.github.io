@@ -1588,3 +1588,25 @@ All original source images remain the conversation uploads and previous reposito
 **Research CV:** The first Professional Experience entry in `_data/cv.yml` now has 8 ordinary escaped single-line highlight strings (each ≤80 chars) *identically* shown in reading, A4/Letter preview and Print/PDF. First bullet names **stochastic and computational geometry, ML interpretability and quantitative finance**; second says **four journal submissions** to Elsevier (2), Springer Nature and Wiley; third says **TrendEstimation's penalized least-squares statistics and Max-Cut/Max-k-Cut SDP are ongoing**. Remaining bullets retain truthful software, tools, writing, PyPI/Zenodo and research-coordination evidence. Earlier six dual `{label,detail,paper}` bullets are superseded; removed their conditionals/CSS, leaving all unrelated CV records unchanged. No submitted output is implied accepted or peer-reviewed, and archived DOI ≠ journal publication.
 
 **Verification:** `node test/style_contract.js`, `node scripts/audit-cv-organization-logos.mjs`, Jekyll build, `node scripts/verify-public-profile.mjs`, and Playwright `test/visual/interactions.spec.js` (especially independent-research and logo cases). Existing course-credential source check inconsistencies unrelated to this edit may remain.
+
+## 2026-11-16 — Free-text research description editor under Customize CV
+
+**User request:** Allow editing the introductory research description that begins “I enjoy formulating research questions and pursuing them from mathematical theory to computational implementation …” in the same interface used to edit individual graduation dates. The input should support arbitrary prose, multiple lines, live preview, and print/PDF, without changing the public default for visitors.
+
+**Files:** `_includes/cv/render.liquid` adds a labeled `#cv-profile-text` multiline textarea inside a `#cv-profile-editor` disclosure immediately following the graduation-date editor. The initial textarea value comes from the **existing escaped** `cv.profile` YAML field. `assets/js/cv-customize.js` loads an optional browser-local `cv-profile-text-v1` override (accepts empty text; max 20,000 stored characters), writes only `.cv-research-profile.textContent`, calls `render()` on input, and removes the saved override in Reset options. `_sass/_cv.scss` styles the editor and uses `white-space: pre-wrap; overflow-wrap: anywhere;` for safe multiline display and pagination.
+
+**Semantics:** The source YAML profile remains unchanged and is shown for fresh browsers and for no-JavaScript rendering. Overrides live solely in the editor's current browser, persist after reload where localStorage works, and propagate into cloned paper preview and Ctrl+P/Save PDF. Neither the text nor the storage key is sent to GitHub or used in HTML attributes. Markup remains literal text; an empty editor intentionally leaves a blank description until Reset. This complements, but does not replace, the independent per-degree graduation-date editor.
+
+**Regression:** `test/visual/interactions.spec.js` includes `CV introductory description supports multiline edits, reload, print and reset`, checking default, live preview, newline preservation, paper/native print, reload, HTML safety, empty value and Reset. `test/style_contract.js` checks the Liquid input, textContent-only path and storage/print contract. Existing research experience, publications, CV section order, logos and PDF margins are unaffected.
+
+## 2026-11-16 — User-corrected Linear Algebra Academic Assistant contribution
+
+**Current owner instruction supersedes the 2026-11-12 historical note at line ~1133** asserting the user “only translated existing LaTeX presentations from English into Spanish.” The owner now specifies that they authored original **complete-course LaTeX Beamer presentations**, including systems of linear equations, vector spaces, linear transformations, eigenvalues and complex numbers; delivered the presentations, received feedback and incorporated revisions.
+
+**Exact CV bullets** in the existing `Academic Assistant — Linear Algebra` item in `_data/cv.yml`:
+
+- `Slides: authored full-course LaTeX Beamer decks on systems of linear equations.` (79 characters)
+- `Topics: vector spaces, linear transformations, eigenvalues, and complex numbers.` (80 characters)
+- `Teaching: presented the slides, incorporated feedback, and revised materials.` (77 characters)
+
+The user requested exactly **three** polished bullet points. Keep the affiliation `Universidad de las Américas Puebla`, location, and Jan–May 2023 dates unchanged. This is an Academic Assistant role and does not imply an appointment as course instructor. Bullets are short enough for the existing Europass A4/Letter PDF limits. The `test/style_contract.js` source guard and Playwright `CV Linear Algebra assistant lists Beamer course decks, topics and feedback in paper and print` enforce the three bullets in reading, paper preview and browser print. This update accompanies the independent browser-local editable research-profile editor in PR #77.

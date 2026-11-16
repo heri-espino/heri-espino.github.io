@@ -34,6 +34,60 @@ test("CV research profile connects mathematics, models and communication in prin
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
 
+test("CV introductory description supports multiline edits, reload, print and reset", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+
+  const profile = page.locator("#cv-document .cv-research-profile");
+  const published = await profile.textContent();
+  await expect(profile).toContainText("formulating research questions");
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-profile-editor > summary").click();
+  const input = page.locator("#cv-profile-text");
+  await expect(input).toHaveValue(published);
+
+  // Arbitrary multiline copy is literal text, not markup.
+  const custom = "I study stochastic geometry and mathematical models.\n\nI implement algorithms and present results.";
+  await input.fill(custom);
+  await expect(profile).toHaveText(custom);
+  await expect.poll(async () => profile.evaluate((node) => getComputedStyle(node).whiteSpace))
+    .toBe("pre-wrap");
+  expect(await page.evaluate(() => localStorage.getItem("cv-profile-text-v1"))).toBe(custom);
+
+  await page.locator("#cv-preview").click();
+  const paper = page.locator("#cv-paged-preview .cv-intro .cv-research-profile");
+  await expect(paper).toHaveCount(1);
+  await expect(paper).toHaveText(custom);
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(page.locator("#cv-document")).toBeHidden();
+  await expect(page.locator("#cv-paged-preview .cv-intro .cv-research-profile")).toHaveText(custom);
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+
+  await page.reload({ waitUntil: "networkidle" });
+  await expect(profile).toHaveText(custom);
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-profile-editor > summary").click();
+  await expect(input).toHaveValue(custom);
+
+  // Untrusted input cannot create elements or execute event handlers.
+  const html = "<img src=x onerror=alert(1)>\n<i>plain text</i>";
+  await input.fill(html);
+  await expect(profile).toHaveText(html);
+  await expect(profile.locator("img, i")).toHaveCount(0);
+
+  // A blank override intentionally hides the description until reset.
+  await input.fill("");
+  await expect(profile).toHaveText("");
+  expect(await page.evaluate(() => localStorage.getItem("cv-profile-text-v1"))).toBe("");
+
+  await page.locator("#cv-reset").click();
+  await expect(input).toHaveValue(published);
+  await expect(profile).toHaveText(published);
+  expect(await page.evaluate(() => localStorage.getItem("cv-profile-text-v1"))).toBeNull();
+});
+
 test("CV uses the same eight concise research bullets in reading, paper and print", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const professional = page.locator('#cv-document [data-cv-section="professional-experience"]');
@@ -498,6 +552,36 @@ test("CV sections collapse independently while the paper preview retains their e
   await expect(page.locator("#cv-paged-preview")).toContainText("Data Science");
   await page.locator("#cv-preview").click();
   await expect(details).not.toHaveAttribute("open", "");
+});
+
+test("CV Linear Algebra assistant lists Beamer course decks, topics and feedback in paper and print", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const expected = [
+    "Slides: authored full-course LaTeX Beamer decks on systems of linear equations.",
+    "Topics: vector spaces, linear transformations, eigenvalues, and complex numbers.",
+    "Teaching: presented the slides, incorporated feedback, and revised materials.",
+  ];
+  const assistant = page.locator('#cv-document [data-cv-section="professional-experience"] [data-cv-record]')
+    .filter({ hasText: "Linear Algebra Course" });
+  await expect(assistant).toHaveCount(1);
+  await expect(assistant.locator(".cv-highlights li")).toHaveText(expected);
+  await expect(assistant).not.toContainText("translated existing LaTeX slides");
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const paperAssistant = page.locator("#cv-paged-preview [data-cv-record]")
+    .filter({ hasText: "Linear Algebra Course" });
+  await expect(paperAssistant).toHaveCount(1);
+  await expect(paperAssistant.locator(".cv-highlights li")).toHaveText(expected);
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(page.locator("#cv-document")).toBeHidden();
+  await expect(page.locator("#cv-paged-preview [data-cv-record]")
+    .filter({ hasText: "Linear Algebra Course" }).locator(".cv-highlights li"))
+    .toHaveText(expected);
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
 
 test("CV graduation text can be independently edited, printed, remembered and reset", async ({ page }) => {

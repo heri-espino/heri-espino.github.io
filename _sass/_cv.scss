@@ -334,13 +334,42 @@
 
 /* Editable graduation wording belongs to the controls, never to the PDF
    layout. The two independent text values update the existing date spans. */
-.cv-graduation-editor {
+.cv-graduation-editor,
+.cv-profile-editor {
   margin-top: 0.9rem;
 }
-.cv-graduation-editor summary {
+.cv-graduation-editor summary,
+.cv-profile-editor summary {
   width: fit-content;
   font-weight: 650;
   cursor: pointer;
+}
+.cv-profile-editor label {
+  display: block;
+  margin: 0.5rem 0 0.3rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+.cv-profile-editor textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 7rem;
+  box-sizing: border-box;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.35rem;
+  padding: 0.55rem;
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.4;
+  resize: vertical;
+}
+.cv-page .cv-research-profile {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .cv-graduation-fields {
   display: grid;

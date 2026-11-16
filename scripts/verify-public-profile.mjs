@@ -80,7 +80,9 @@ for (const removed of [
 }
 for (const required of [
   "Dockerized Airflow ETL into PostgreSQL for arbitrary tickers",
-  "translated existing LaTeX slides from English into Spanish",
+  "Slides: authored full-course LaTeX Beamer decks on systems of linear equations.",
+  "Topics: vector spaces, linear transformations, eigenvalues, and complex numbers.",
+  "Teaching: presented the slides, incorporated feedback, and revised materials.",
   "Jan 2026 — Mar 2026",
   "one of 10 UDLAP representatives in both 2024 and 2025",
   "https://maa.org/news/results-of-the-85th-william-lowell-putnam-mathematical-competition/",
