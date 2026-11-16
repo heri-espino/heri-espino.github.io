@@ -348,16 +348,15 @@ The Papers archive shows 4 submitted, 1 published technical article
 and **8 visible working-draft/research-note entries** (up from 6).
 The old six paper listing exclusions remain in force.
 
-**Binary provenance blocker:** The owner uploaded a 31-page scanned PDF
-in ChatGPT. The manuscript text is *not machine-extractable* and the
-original PDF has **not** been transferred into the GitHub repository.
-No public `pdf:` or CV PDF hyperlink is included until the original
-bytes are uploaded. Never substitute a different trend-estimation
-paper or claim the original has been hosted. The new detail page is
-an explicitly characterized notebook overview with thematic summaries
-grounded in the visible handwritten pages (1–26); pages 27–31
-are blank. Use the user's original upload when completing PDF asset
-transfer, with checksum and an actual repository-backed URL.
+**PDF availability (updated 2026-11-16):** The owner has committed the
+handwritten scan to `notes/notes on trend estimation.pdf` (4,312,328 bytes
+on the verified repository listing). The note detail page uses that
+public PDF path and the CV links to it. The card thumbnail is generated
+from **page 1 of this same PDF** using
+`scripts/generate_handwritten_trend_preview.py`; the detail preview is
+the user's separate spectral-eigendecomposition screenshot. Keep those
+preview images distinct. The notebook is still unsubmitted research
+notes, not a peer-reviewed article. Earlier PDF-upload blockers are superseded.
 The `_pages/notes.md` migration route remains to avoid breaking prior
 links, but should not be re-added to top navigation.
 
@@ -448,16 +447,11 @@ previously unlisted records remain publicly addressable but excluded from the
 Papers listing. `scripts/verify-paper-archive.mjs` and
 `test/style_contract.js` enforce the group boundaries.
 
-**PDF still requires upload:** the owner reattached the original 31-page scan
-`notes on trend estimation(2).pdf` on 2026-11-11. The PDF was available in
-this chat's working container but this integration has no tool for transferring
-local file bytes to GitHub without an authenticated uploaded-file reference.
-The document is NOT yet available under `papers/` in Git. Do **not** add
-`pdf:` or a broken download link prematurely. Once the exact original file
-is committed to `papers/espino_2026_handwritten-trend-estimation-notes.pdf`,
-add its `pdf:` to the existing detail page, make its metadata explicit in the
-CV, and extend the archive's source/built hash checks. Do not replace the
-original with a low-fidelity reconstruction or declare it uploaded.
+**PDF upload update (2026-11-16):** The handwritten PDF is now present
+in Git under `notes/notes on trend estimation.pdf`. The detail page
+points directly to it, the CV has a PDF link, and both thumbnail
+and detail preview are separate notebook-derived images. This supersedes
+the 2026-11-11 upload blocker; preserve the existing PDF bytes.
 
 
 ## Latest CV sections: Completed Research vs Working Drafts & Notes (2026-11-12)

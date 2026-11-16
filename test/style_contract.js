@@ -818,6 +818,21 @@ if (exists("_pages/cv.md")) {
   const siteHeader = read("_includes/header.liquid");
   const handwritten = read("_pages/papers/handwritten-trend-estimation-notes.md");
   const randomVectors = read("_pages/notes/random-variables-as-vectors.md");
+  // The published notebook has its own page-one thumbnail, its own spectral
+  // detail preview, and an actual public PDF (not a placeholder or another paper).
+  if (!handwritten.includes("image: /assets/img/portfolio/handwritten-trend-first-page.webp") ||
+      !handwritten.includes("detail_image: /assets/img/portfolio/handwritten-trend-spectral-preview.webp") ||
+      !handwritten.includes("pdf: /notes/notes%20on%20trend%20estimation.pdf") ||
+      !handwritten.includes("pdf_new_tab: true") ||
+      !exists("assets/img/portfolio/handwritten-trend-first-page.webp") ||
+      !exists("assets/img/portfolio/handwritten-trend-spectral-preview.webp") ||
+      !exists("notes/notes on trend estimation.pdf") ||
+      fs.statSync(path.join(root, "notes/notes on trend estimation.pdf")).size < 1_000_000 ||
+      !read("_layouts/portfolio-item.liquid").includes('page.pdf_new_tab')) {
+    failures.push("Handwritten trend notes must use distinct PDF first-page / spectral previews and a valid PDF action.");
+  }
+
+
   if (siteHeader.includes("Notes|/notes/") ||
       homePage.includes('id="notes" title="Notes"') ||
       homePage.includes('assign featured_notes') ||

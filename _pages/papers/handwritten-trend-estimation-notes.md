@@ -14,10 +14,12 @@ authors: "Heriberto Espino Montelongo"
 summary: "A 31-page handwritten research notebook on penalized least-squares trend smoothing: finite-difference penalties, Guerrero's smoothness coordinate, linear smoothing operators, bias–variance and uncertainty, derivatives of regularized estimators, and optimization of cross-validation criteria."
 framing: "Exploratory derivations rather than a completed or independently verified manuscript. The notebook develops first- and second-derivative calculations, local-minimum searches, stationary-point checks and candidate-selection ideas for smoothness tuning. It does not establish a universal or empirically validated optimization procedure."
 tags: ["penalized least squares", "trend estimation", "Guerrero smoothness", "numerical optimization", "cross-validation", "handwritten notes"]
-image: /assets/img/portfolio/trendestimation-preview.svg
-image_alt: "Abstract mathematical trend-estimation illustration; not a scan of the uploaded notebook"
-detail_image: /assets/img/portfolio/trendestimation-preview.svg
-detail_image_alt: "Conceptual trend-estimation illustration; original handwritten PDF is separate"
+image: /assets/img/portfolio/handwritten-trend-first-page.webp
+image_alt: "First page of the 31-page handwritten trend-estimation notebook"
+detail_image: /assets/img/portfolio/handwritten-trend-spectral-preview.webp
+detail_image_alt: "Handwritten eigendecomposition and spectral expression for the penalized trend smoother"
+pdf: /notes/notes%20on%20trend%20estimation.pdf
+pdf_new_tab: true
 github: https://github.com/heri-espino/Trend-Estimation
 contributions:
   - "Writes the penalized least-squares trend estimate as a linear smoother and studies finite-difference penalty orders."
@@ -29,7 +31,7 @@ contributions:
 
 **Stage:** Working research notes, not a submitted manuscript. The source is an uploaded **31-page handwritten Spanish-language PDF**, with substantive writing concentrated in the earlier pages and several blank closing pages. This page is an overview of the notebook, not a transcription, editorially verified proof, or substitute for the scanned original.
 
-**Original PDF:** The supplied handwritten scan is not yet hosted at a stable public URL on this website. It has deliberately **not** been linked to an unrelated PDF. The full original scan is pending publication; this thematic overview is not a substitute for the handwritten pages.
+**Original PDF:** The full handwritten scan is publicly available using the **Open PDF** button. The document is hosted at the original `/notes/notes%20on%20trend%20estimation.pdf` path; this thematic overview is not a transcription or substitute for the handwritten pages.
 
 ### Main topics in the notebook
 
