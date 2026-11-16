@@ -423,6 +423,18 @@ cv:
           - "Mathematical reasoning: solved undergraduate proof-based problems."
 
     Published Articles & Technical Writing:
+      - name: "The Empty Space That Makes a Network"
+        role: "First Author · Interactive Technical Feature"
+        context: "Coauthored with Héctor Maravillo · proposed SIAM News feature"
+        date: "Nov 2026"
+        links:
+          - { label: Interactive article, url: "https://heri-espino.github.io/proximitygraphs-siam-figures/article.html" }
+          - { label: Portfolio, url: "https://heri-espino.github.io/articles/the-empty-space-that-makes-a-network.html" }
+          - { label: Author PDF, url: "https://github.com/heri-espino/proximitygraphs-siam-figures/blob/main/article/output/proximitygraphs-siam-news-draft.pdf" }
+          - { label: GitHub, url: "https://github.com/heri-espino/proximitygraphs-siam-figures" }
+        highlights:
+          - "Computational geometry: explained empty-region graphs with four live constructions."
+          - "Network comparison: evaluated Gabriel and RNG rules on the same 25 sites."
       - name: "AbaQuant. Finanzas matemáticas, valuación y gestión del riesgo"
         role: "First Author · Published Technical Article"
         organization: "La Catarina · Universidad de las Américas Puebla · IMEF Universitario"
