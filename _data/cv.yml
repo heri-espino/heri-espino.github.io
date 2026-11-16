@@ -51,11 +51,47 @@ cv:
           - { label: Research portfolio, url: "https://heri-espino.github.io/papers/" }
           - { label: Open-source projects, url: "https://github.com/heri-espino" }
         highlights:
-          - "Manuscripts: four journal submissions to Elsevier (2), Springer Nature, and Wiley."
-          - "In development: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP."
-          - "Software: built AbaQuant; co-maintained ProximityGraphs with PyPI and Zenodo DOI releases."
-          - "Research tooling: built Docling Math (PDF extraction) and AwesomeFigures (scientific plots)."
-          - "Writing: La Catarina article and author-hosted interactive ProximityGraphs feature."
+          - label: "Mathematical research"
+            detail: >-
+              Authored and coauthored four manuscripts submitted to Elsevier (two),
+              Springer Nature, and Wiley journals, spanning stochastic geometry,
+              computational geometry, machine-learning interpretability, and quantitative
+              finance. Statistical trend estimation and semidefinite optimization remain
+              active research directions, not submitted papers.
+            paper: "Four submissions: Elsevier (2), Springer, Wiley; stochastic geometry."
+          - label: "Scientific computing"
+            detail: >-
+              Developed TrendEstimation for penalized least-squares trend smoothing,
+              numerical methods, and model selection; led development of AbaQuant for
+              financial mathematics and co-maintained ProximityGraphs for computational
+              geometry. Implemented experimental Max-Cut/Max-k-Cut SDP formulations,
+              solver-based workflows, and rounding methods.
+            paper: "TrendEstimation (PLS), AbaQuant, ProximityGraphs; Max-Cut SDP."
+          - label: "Research software engineering"
+            detail: >-
+              Developed Docling Math for mathematical PDF extraction and literature
+              processing, and AwesomeFigures for reproducible, publication-ready
+              scientific visualization and LaTeX-compatible figures.
+            paper: "Docling Math (PDFs) and AwesomeFigures (visualization)."
+          - label: "Technical writing"
+            detail: >-
+              Authored and coauthored technical articles on financial mathematics and
+              interactive computational geometry: a published La Catarina article and an
+              author-hosted ProximityGraphs feature draft with open-source software and
+              visual demonstrations.
+            paper: "La Catarina article and interactive ProximityGraphs author draft."
+          - label: "Reproducibility"
+            detail: >-
+              Built version-controlled Python research workflows with numerical
+              validation, automated tests, continuous integration, documentation, and
+              selected software releases on PyPI and archives with Zenodo DOIs.
+            paper: "Python, Git, tests, CI and documentation; selected PyPI and Zenodo DOIs."
+          - label: "Research coordination"
+            detail: >-
+              Convened research meetings, prepared technical reports and presentations,
+              communicated analytical progress and proposed decisions, and incorporated
+              collaborators' feedback into methods, experiments, and documentation.
+            paper: "Convened meetings, wrote reports, presented and incorporated feedback."
       - name: Research Data Scientist — Mathematics Learning Center
         role: "Research Data Scientist"
         subtitle: "Mathematics Learning Center"
