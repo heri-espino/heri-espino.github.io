@@ -1527,3 +1527,33 @@ print preview. Previous CV print WYSIWYG PR #56 was not modified.
 **Duplication boundary:** Experience summarizes responsibilities; Programming Experience retains separate releases, coauthor roles, source links and package statuses; Submitted Manuscripts and Technical Writing retain detailed records and verified editorial stages. Do not falsely claim Docling Math, AwesomeFigures or TrendEstimation are all already on PyPI/Zenodo. No fake affiliation or new decorative standalone explanation line.
 
 **Regression:** `node test/style_contract.js`; `bundle exec jekyll build` and `node scripts/verify-public-profile.mjs`; Playwright `test/visual/interactions.spec.js --grep "CV lists independent researcher first"` (desktop/mobile). Browser validation also checks paper preview and native print.
+
+## 2026-11-15 — Graduation-date text editor for Data Science and Actuarial Science
+
+**Owner request:** When the expected graduation month/year varies (e.g., June 2027 versus December 2027), allow freely typed date wording directly in the public CV editor, instead of hardcoded date choices. Both degrees can have different completion dates.
+
+**Implementation:** Under `Customize CV`, the new `Edit expected graduation dates` disclosure uses two labeled single-line text inputs generated from `cv.sections.Education`. Their initial values are the substrings after the en dash-separated start-date range in `_data/cv.yml`. For each degree, `assets/js/cv-customize.js` updates only the `.cv-date` **textContent** of the source education record, preserving its trusted `data-cv-date` and first-year/semester for sorting. The chronological view and printed pages clone those updated records. Example: `Aug 2023 — Jun 2027 (expected)` and `Aug 2021 — Dec 2027`. Any user-provided text is displayed literally, never evaluated as HTML.
+
+**Scope and persistence:** Custom graduation texts are stored only in the current browser's `cv-graduation-text-v1` key. They survive reload, do not change public site YAML or the CV for other visitors, and are included in paper preview and browser Print / Save PDF. If local storage is disabled, edits still work for the session. Empty completion text leaves the enrollment date alone. `Reset options` removes overrides and restores source defaults. Edit `_data/cv.yml` explicitly only when the author wants to change globally published default values.
+
+**Regression:** New Playwright test checks independently edited completions, no source-start-date mutation, paper/PDF/chronological propagation, reload, HTML escaping via textContent, and Reset. `test/style_contract.js` guards the two data-driven fields, browser persistence, and unchanged canonical YAML dates. No changes to printing CSS, actual degree status, academic records, manuscripts, or other CV entries.
+
+## 2026-11-15 — Journal submission labels, ongoing statistical PLS and Max-k-Cut SDP
+
+**Owner clarification:** The independent-research experience should communicate ongoing work on **TrendEstimation**, statistical **penalized least squares (PLS)**, and **Max-Cut/Max-k-Cut semidefinite programming (SDP)** as **in development**, separately from submitted manuscripts and DOI-archived software outputs. The earlier shorthand "Numerical software: built TrendEstimation (PLS)" was ambiguous about completion and about the meaning of PLS; this has been replaced with the full term **penalized least squares**.
+
+**Current five-bullet Professional Experience synopsis in `_data/cv.yml`:** four genuine journal submissions to Elsevier (two), Springer Nature (one), Wiley (one); current TrendEstimation statistical smoothing and Max-Cut/Max-k-Cut SDP research in development; AbaQuant and jointly maintained ProximityGraphs scientific software with PyPI releases and Zenodo DOIs; Docling Math and AwesomeFigures tools; published La Catarina writing and author-hosted interactive ProximityGraphs technical feature. The source links and detailed entries remain the authoritative records.
+
+**Editorial safeguard:** Preserve distinct Submitted Manuscripts states (Elsevier Discrete Applied Mathematics — Under Review; Elsevier Computational Geometry — Under Revision; Springer Nature SN Computer Science — Under Review; Wiley Journal of Futures Markets — Submitted). Neither Zenodo archival DOI nor PyPI distribution implies peer review. No manuscript is submitted by this CV change. Max-Cut tutorial and TrendEstimation papers stay in their existing working-draft/lecture/tutorial categories. Preserve the separate graduation-date text editor work in PR #74.
+
+**Tests:** `test/style_contract.js` checks journal names and in-development wording; `test/visual/interactions.spec.js` checks the actual CV and print pages. All professional-experience highlights stay at or under the repository's 94-character paper limit.
+
+## 2026-11-15 — Brief first-person research profile at top of CV
+
+**Instruction:** Add a short, technically grounded paragraph near the beginning describing the author's interest in deep mathematics, research-question formation, development of statistical and optimization models, implementing and validating algorithms, decision-making, scientific ideas, written/presentation communication and visualization.
+
+**Text** in `_data/cv.yml` under `cv.profile`: “I enjoy formulating research questions and pursuing them from mathematical theory to computational implementation: deriving results, developing statistical and optimization models, and validating them through reproducible experiments. I value translating technical ideas into informed decisions and communicating them clearly through scientific writing, visualization, and presentations.”
+
+**Implementation:** `_includes/cv/render.liquid` prints escaped `cv.profile` in `.cv-research-profile` **after the contact block and before Education**. It is not the site `page.description`, whose `.post-description` is intentionally omitted by the paper clone in `assets/js/cv-customize.js`. Unlike the original generic description, the new paragraph survives paper preview and browser PDF. CSS in `_sass/_cv.scss` uses ordinary inherited text color (not faded gray), a comfortable screen size and compact 7.7pt paper/print size.
+
+**Regression:** Browser test `CV research profile connects mathematics, models and communication in print` checks exact thematic fragments in reading/preview/print and shared body color. Static style contract requires source text, safe Liquid escaping and scoped print styles. The standalone Independent Researcher entry and original four submitted manuscripts remain separate; the profile does not imply acceptance or publication.

@@ -1,6 +1,39 @@
 const { test, expect } = require("@playwright/test");
 const { preparePage, stabilizeVisuals } = require("./helpers");
 
+test("CV research profile connects mathematics, models and communication in print", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const header = page.locator("#cv-document .cv-intro");
+  const profile = header.locator(".cv-research-profile");
+  const expectedFragments = [
+    "formulating research questions",
+    "mathematical theory",
+    "computational implementation",
+    "statistical and optimization models",
+    "reproducible experiments",
+    "informed decisions",
+    "scientific writing, visualization, and presentations",
+  ];
+  await expect(profile).toHaveCount(1);
+  for (const fragment of expectedFragments) await expect(profile).toContainText(fragment);
+  expect(await profile.evaluate((node) => getComputedStyle(node).color))
+    .toBe(await header.evaluate((node) => getComputedStyle(node).color));
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const preview = page.locator("#cv-paged-preview .cv-intro .cv-research-profile");
+  await expect(preview).toHaveCount(1);
+  await expect(preview).toContainText("informed decisions");
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  const printed = page.locator("#cv-paged-preview .cv-intro .cv-research-profile");
+  await expect(printed).toHaveCount(1);
+  await expect(printed).toContainText("scientific writing, visualization, and presentations");
+  await expect(page.locator("#cv-document")).toBeHidden();
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+});
+
 test("CV lists independent researcher first with five scientific libraries in reading and print", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
 
@@ -11,7 +44,11 @@ test("CV lists independent researcher first with five scientific libraries in re
   await expect(independent).toContainText("Independent Researcher");
   await expect(independent).toContainText("Scientific Software Developer");
   await expect(independent).toContainText("Aug 2024 — Present");
-  await expect(independent).toContainText("four journal submissions");
+  await expect(independent).toContainText("four journal submissions to Elsevier (2), Springer Nature, and Wiley");
+  await expect(independent).toContainText("In development: TrendEstimation (penalized least squares)");
+  await expect(independent).toContainText("Max-Cut/Max-k-Cut SDP");
+  await expect(independent).toContainText("PyPI and Zenodo DOI releases");
+  await expect(independent).toContainText("author-hosted interactive ProximityGraphs feature");
   for (const software of ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"]) {
     await expect(independent).toContainText(software);
   }
@@ -38,6 +75,8 @@ test("CV lists independent researcher first with five scientific libraries in re
   await expect(page.locator("#cv-document")).toBeHidden();
   await expect(paper).toContainText("Independent Researcher");
   await expect(paper).toContainText("TrendEstimation");
+  await expect(paper).toContainText("Max-Cut/Max-k-Cut SDP");
+  await expect(paper).toContainText("Elsevier (2), Springer Nature, and Wiley");
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
@@ -464,6 +503,68 @@ test("CV sections collapse independently while the paper preview retains their e
   await expect(page.locator("#cv-paged-preview")).toContainText("Data Science");
   await page.locator("#cv-preview").click();
   await expect(details).not.toHaveAttribute("open", "");
+});
+
+test("CV graduation text can be independently edited, printed, remembered and reset", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-graduation-editor > summary").click();
+
+  const dataScience = page.locator("#cv-graduation-data-science");
+  const actuarial = page.locator("#cv-graduation-actuarial-science");
+  await expect(dataScience).toHaveValue("Dec 2026 (expected)");
+  await expect(actuarial).toHaveValue("Dec 2026 (expected)");
+
+  // Plain text is intentional: there is no calendar widget or date parser.
+  await dataScience.fill("Jun 2027 (expected)");
+  await actuarial.fill("December 2027 — coursework complete");
+  const education = page.locator('#cv-document [data-cv-section="education"]');
+  await expect(education.locator(".cv-date")).toHaveText([
+    "Aug 2023 — Jun 2027 (expected)",
+    "Aug 2021 — December 2027 — coursework complete",
+  ]);
+  await expect(education.locator("[data-cv-graduation-key]").first())
+    .toHaveAttribute("data-cv-date", "Aug 2023 — Dec 2026 (expected)");
+
+  await page.locator("#cv-preview").click();
+  const paper = page.locator("#cv-paged-preview");
+  await expect(paper).toContainText("Aug 2023 — Jun 2027 (expected)");
+  await expect(paper).toContainText("Aug 2021 — December 2027 — coursework complete");
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(page.locator("#cv-document")).toBeHidden();
+  await expect(paper).toContainText("Aug 2023 — Jun 2027 (expected)");
+  await expect(paper).toContainText("Aug 2021 — December 2027 — coursework complete");
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+
+  await page.reload({ waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-graduation-editor > summary").click();
+  await expect(dataScience).toHaveValue("Jun 2027 (expected)");
+  await expect(actuarial).toHaveValue("December 2027 — coursework complete");
+  await expect(education).toContainText("Jun 2027 (expected)");
+  await expect(education).toContainText("December 2027 — coursework complete");
+
+  // Chronological mode clones the same edited source instead of restoring YAML.
+  await page.locator("#cv-order").selectOption("newest");
+  await expect(page.locator("#cv-timeline")).toContainText("Jun 2027 (expected)");
+  await expect(page.locator("#cv-timeline")).toContainText("December 2027 — coursework complete");
+
+  // User-entered markup is literal text, never executed or inserted as HTML.
+  await actuarial.fill("<img src=x onerror=alert(1)>");
+  await expect(education).toContainText("<img src=x onerror=alert(1)>");
+  await expect(education.locator(".cv-date img")).toHaveCount(0);
+
+  await page.locator("#cv-reset").click();
+  await expect(dataScience).toHaveValue("Dec 2026 (expected)");
+  await expect(actuarial).toHaveValue("Dec 2026 (expected)");
+  await expect(education.locator(".cv-date")).toHaveText([
+    "Aug 2023 — Dec 2026 (expected)",
+    "Aug 2021 — Dec 2026 (expected)",
+  ]);
+  expect(await page.evaluate(() => localStorage.getItem("cv-graduation-text-v1"))).toBeNull();
 });
 
 test("CV section order can be changed, survives reload, and resets to source order", async ({ page }) => {

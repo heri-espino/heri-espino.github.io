@@ -2,6 +2,12 @@ cv:
   name: Heriberto Espino Montelongo
   email: heriberto.espinomo@udlap.mx
   website: https://heri-espino.github.io
+  profile: >-
+    I enjoy formulating research questions and pursuing them from mathematical theory
+    to computational implementation: deriving results, developing statistical and
+    optimization models, and validating them through reproducible experiments.
+    I value translating technical ideas into informed decisions and communicating
+    them clearly through scientific writing, visualization, and presentations.
   social_networks:
     - { network: LinkedIn, username: heri-espino, url: "https://www.linkedin.com/in/heri-espino/" }
     - { network: GitHub, username: heri-espino, url: "https://github.com/heri-espino" }
@@ -45,11 +51,11 @@ cv:
           - { label: Research portfolio, url: "https://heri-espino.github.io/papers/" }
           - { label: Open-source projects, url: "https://github.com/heri-espino" }
         highlights:
-          - "Manuscripts: authored or coauthored four journal submissions in geometry, ML, and finance."
-          - "Numerical software: built TrendEstimation (PLS) and AbaQuant (finance)."
-          - "Geometry software: co-maintained ProximityGraphs; selected PyPI and Zenodo releases."
+          - "Manuscripts: four journal submissions to Elsevier (2), Springer Nature, and Wiley."
+          - "In development: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP."
+          - "Software: built AbaQuant; co-maintained ProximityGraphs with PyPI and Zenodo DOI releases."
           - "Research tooling: built Docling Math (PDF extraction) and AwesomeFigures (scientific plots)."
-          - "Writing: authored a La Catarina article and interactive ProximityGraphs feature; used LaTeX."
+          - "Writing: La Catarina article and author-hosted interactive ProximityGraphs feature."
       - name: Research Data Scientist — Mathematics Learning Center
         role: "Research Data Scientist"
         subtitle: "Mathematics Learning Center"

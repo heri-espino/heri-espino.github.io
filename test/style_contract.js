@@ -315,9 +315,12 @@ if (exists("_pages/cv.md")) {
         !independent.includes('date: "Aug 2024 — Present"') ||
         !independent.includes("https://heri-espino.github.io/papers/") ||
         !independent.includes("https://github.com/heri-espino") ||
-        !independent.includes("four journal submissions") ||
+        !independent.includes("four journal submissions to Elsevier (2), Springer Nature, and Wiley") ||
+        !independent.includes("In development: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP") ||
+        !independent.includes("PyPI and Zenodo DOI releases") ||
+        !independent.includes("author-hosted interactive ProximityGraphs feature") ||
         !independent.includes("La Catarina article") ||
-        !independent.includes("interactive ProximityGraphs feature") ||
+
         packages.some((name) => !independent.includes(name)) ||
         packages.some((name) => !programRecords.includes("organization: " + (name === "TrendEstimation" ? "Trend Estimation" : name))) ||
         independent.includes("\n        organization:") ||
@@ -325,6 +328,43 @@ if (exists("_pages/cv.md")) {
         independent.includes("\n        context:")) {
       failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
     }
+  }
+  // Introductory research motivation must be substantive and printable:
+  // the generic site post-description is intentionally removed from paper pages,
+  // but the CV's separate source-backed research profile must survive cloning.
+  const cvContent = read("_data/cv.yml");
+  if (!cvContent.includes("profile: >-") ||
+      !cvContent.includes("mathematical theory") ||
+      !cvContent.includes("statistical and") ||
+      !cvContent.includes("optimization models") ||
+      !cvContent.includes("reproducible experiments") ||
+      !cvContent.includes("informed decisions") ||
+      !cvContent.includes("scientific writing, visualization, and presentations") ||
+      !cvRenderer.includes('<p class="cv-research-profile">{{ cv.profile | escape }}</p>') ||
+      !cvStyles.includes(".cv-page .cv-research-profile") ||
+      !cvStyles.includes(".cv-page .cv-preview-paper-body .cv-research-profile") ||
+      !cvStyles.includes("@media print")) {
+    failures.push("The concise research motivation must appear as safe, consistent CV text in screen and PDF.");
+  }
+  // Free-text completion fields are per-degree browser preferences, not edits
+  // to published YAML dates or a date-picker restricted to calendar values.
+  if (!cvRenderer.includes('id="cv-graduation-editor"') ||
+      !cvRenderer.includes('data-cv-graduation-input="{{ degree.subtitle | slugify }}"') ||
+      !cvRenderer.includes('data-cv-graduation-key="{{ entry.subtitle | slugify }}"') ||
+      !cvRenderer.includes("degree.date | split: ' — ' | last | escape") ||
+      !cvScript.includes('const graduationStorageKey = "cv-graduation-text-v1";') ||
+      !cvScript.includes("graduationInputs.forEach((input) => input.addEventListener(\"input\"") ||
+      !cvScript.includes("span.textContent = input.value ?") ||
+      !cvScript.includes("graduationInputs.forEach((input) => { input.value = input.defaultValue; });") ||
+      !cvStyles.includes(".cv-graduation-fields input[type=\"text\"]")) {
+    failures.push("CV must allow separate free-text graduation edits, save them per browser, and reset print-safe values.");
+  }
+  // Edits affect display text only; both authentic enrollment start dates
+  // remain source-driven for sorting and research/application evidence.
+  const educationSource = read("_data/cv.yml").split("    Education:")[1]?.split("    Professional Experience:")[0] || "";
+  if (!educationSource.includes("date: Aug 2023 — Dec 2026 (expected)") ||
+      !educationSource.includes("date: Aug 2021 — Dec 2026 (expected)")) {
+    failures.push("The graduation text editor must not silently rewrite published degree dates.");
   }
   // Only four submitted manuscripts; never reclassify reports, notebooks,
   // lectures or tutorials as journal submissions to fill the new category.

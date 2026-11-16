@@ -31,6 +31,32 @@
   text-underline-offset: 0.2em;
 }
 
+/* Concise research statement: ordinary document text, not muted metadata.
+   Keep it in both the full-width CV and the printable paper clones. */
+.cv-page .cv-research-profile {
+  max-width: 78ch;
+  margin: 0.65rem 0 0;
+  color: inherit;
+  font-size: 0.89rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.cv-page .cv-preview-paper-body .cv-research-profile {
+  max-width: none;
+  margin: 5pt 0 0;
+  color: inherit !important;
+  font-size: 7.7pt;
+  line-height: 1.23;
+}
+@media print {
+  .cv-page .cv-research-profile {
+    margin: 5pt 0 0;
+    color: inherit !important;
+    font-size: 7.7pt;
+    line-height: 1.23;
+  }
+}
+
 /* Respect the existing Show icons customization in all CV templates. */
 .cv-page[data-cv-show-icons="false"] .cv-zenodo-mark {
   display: none !important;
@@ -304,6 +330,41 @@
   background: var(--global-bg-color);
   font: inherit;
   font-size: 0.86rem;
+}
+
+/* Editable graduation wording belongs to the controls, never to the PDF
+   layout. The two independent text values update the existing date spans. */
+.cv-graduation-editor {
+  margin-top: 0.9rem;
+}
+.cv-graduation-editor summary {
+  width: fit-content;
+  font-weight: 650;
+  cursor: pointer;
+}
+.cv-graduation-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.75rem;
+  margin: 0.6rem 0;
+}
+.cv-graduation-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+.cv-graduation-fields input[type="text"] {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.35rem;
+  padding: 0.5rem 0.45rem;
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+  font: inherit;
+  font-weight: 400;
 }
 
 .cv-section-picker {

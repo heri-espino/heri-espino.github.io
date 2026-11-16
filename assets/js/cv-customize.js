@@ -163,6 +163,53 @@
     }))
   );
 
+  // Graduation completion text is an independent browser-local preference per
+  // degree. Keep the canonical YAML start dates for timeline sorting, and write
+  // only to textContent so arbitrary user input is never interpreted as HTML.
+  const graduationStorageKey = "cv-graduation-text-v1";
+  const graduationInputs = Array.from(root.querySelectorAll("[data-cv-graduation-input]"));
+  const graduationRecords = new Map(
+    Array.from(sourceDocument.querySelectorAll('[data-cv-section="education"] [data-cv-graduation-key]'))
+      .map((entry) => [entry.dataset.cvGraduationKey, entry])
+  );
+  const syncGraduationDates = () => {
+    for (const input of graduationInputs) {
+      const record = graduationRecords.get(input.dataset.cvGraduationInput);
+      const span = record?.querySelector(".cv-date");
+      if (!span) continue;
+      const canonicalDate = record.dataset.cvDate || "";
+      const separator = canonicalDate.indexOf(" — ");
+      const startDate = separator < 0 ? canonicalDate : canonicalDate.slice(0, separator);
+      span.textContent = input.value ? startDate + " — " + input.value : startDate;
+    }
+  };
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(graduationStorageKey) || "null");
+    if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+      for (const input of graduationInputs) {
+        const stored = saved[input.dataset.cvGraduationInput];
+        if (typeof stored === "string" && stored.length <= 300) input.value = stored;
+      }
+    }
+  } catch (_error) {
+    // Private browsing or disabled storage should not disable the editor.
+  }
+  syncGraduationDates();
+  const persistGraduationDates = () => {
+    const values = Object.fromEntries(graduationInputs.map((input) => [
+      input.dataset.cvGraduationInput, input.value,
+    ]));
+    try {
+      if (graduationInputs.every((input) => input.value === input.defaultValue)) {
+        window.localStorage.removeItem(graduationStorageKey);
+      } else {
+        window.localStorage.setItem(graduationStorageKey, JSON.stringify(values));
+      }
+    } catch (_error) {
+      // The live edited CV and printed PDF still work without storage.
+    }
+  };
+
   // Build checkboxes from existing Jekyll-rendered entries; do not duplicate data.
   // Checkbox changes affect both grouped and chronological views.
   const entryControls = new Map();
@@ -647,6 +694,11 @@
     if (controls.template.value === "europass") controls.order.value = "sections";
     render();
   });
+  graduationInputs.forEach((input) => input.addEventListener("input", () => {
+    syncGraduationDates();
+    persistGraduationDates();
+    render();
+  }));
   toggles.forEach((toggle) => toggle.addEventListener("change", render));
   printToggles.forEach((toggle) => toggle.addEventListener("change", render));
   entrySearch.addEventListener("input", () => {
@@ -697,6 +749,9 @@
     controls.order.value = "sections";
     customSectionIds = null;
     try { window.localStorage.removeItem(sectionOrderStorageKey); } catch (_error) { /* Storage disabled. */ }
+    graduationInputs.forEach((input) => { input.value = input.defaultValue; });
+    syncGraduationDates();
+    try { window.localStorage.removeItem(graduationStorageKey); } catch (_error) { /* Storage disabled. */ }
     controls.template.value = "minimal";
     controls.font.value = "site";
     controls.paper.value = "a4";
