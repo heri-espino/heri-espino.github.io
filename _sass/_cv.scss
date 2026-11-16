@@ -2051,22 +2051,30 @@
    on screen and in PDF; no special wide-wordmark layout is needed. */
 
 
-/* Four-field CV metadata: title, role/category, date, and organization or
-   factual research context. Context is not an institution, so no icon. */
+/* Research context is secondary metadata, not a faded annotation.
+   Match institutional rows' blue/indigo color and compact print type scale;
+   contexts remain non-institutional, so they never acquire a false logo. */
 .cv-page .cv-context {
   margin: 0.08rem 0 0.12rem;
-  color: #70798b;
-  font-size: 0.76rem;
+  color: #4c5781;
+  font-size: 0.85rem;
+  font-weight: 500;
   line-height: 1.2;
 }
 .cv-page[data-cv-density="latex"] .cv-context {
-  font-size: 0.73rem;
+  font-size: 0.75rem;
   margin: 0.05rem 0 0.1rem;
+}
+@media screen {
+  .cv-page .cv-preview-paper-body .cv-context {
+    font-size: 8pt;
+  }
 }
 @media print {
   .cv-page .cv-context {
-    font-size: 6.8pt;
-    color: #737373 !important;
+    font-size: 8pt;
+    color: #4c5781 !important;
+    font-weight: 500;
     break-inside: avoid;
   }
 }

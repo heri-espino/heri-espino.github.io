@@ -103,3 +103,13 @@ are historical snapshots, not current tallies.
 The prior `nyu` issuer image used a Wikimedia Commons `Special:FilePath` redirected link. It now references the direct high-quality [NYU stacked-color SVG](https://commons.wikimedia.org/wiki/File:Nyu_stacked_color.svg) from NYU's 2016 brand identity artwork: `https://upload.wikimedia.org/wikipedia/commons/6/66/Nyu_stacked_color.svg`. The stacked form is suitable for a square, narrow CV icon without cropping a wide wordmark. NYU's own branding guidance retains the complete torch-and-name lockup.
 
 The `pragmatic-ai` issuer image no longer uses Google's generic favicon. It now uses the [Pragmatic AI Labs official logo image](https://paiml.com/assets/img/logo.png) served from its website. Both issuer keys drive the CV organization icon and the Credentials page; accessible initial/fallback text remains if a remote asset fails. Images are not represented as an institutional endorsement or as user-authored art. The source is an official publisher for Pragmatic AI Labs and a source-attributed Wikimedia vector of NYU branding. Remote availability should be periodically verified.
+
+## 2026-11-15 — NYU and IESE compact-icon source correction
+
+The previous NYU icon was a directly hotlinked stacked-color SVG; the IESE icon was an MBATube-hosted JPEG. Both were fragile for 16px CV marks and printed output (unavailable remote assets, SVG-to-canvas printing complications, or legibility at small sizes).
+
+The current issuer mapping uses the **official institutions' domains** through Google's favicon proxy, requested at 128 pixels:
+- `https://www.google.com/s2/favicons?domain=nyu.edu&sz=128`
+- `https://www.google.com/s2/favicons?domain=iese.edu&sz=128`
+
+These are institutional website favicons, **not** a claim that the full horizontal wordmarks have been embedded. Preserve the connected credential/CV issuer mappings and the visible fallback icon if network loading fails. A local, institution-authorized square logo can supersede a favicon later. Earlier source histories in this document describe superseded decisions.

@@ -947,3 +947,69 @@ test("CV paper preview and print start at the top and keep link typography consi
     body.querySelector(".cv-intro").getBoundingClientRect().top - body.getBoundingClientRect().top);
   expect(Math.abs(fullTopGap)).toBeLessThan(2);
 });
+
+test("CV NYU and IESE icons, Zenodo DOIs, and research context render consistently", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const root = page.locator("#cv-page");
+  const document = page.locator("#cv-document");
+
+  // Institutional marks come from the corresponding official-domain favicons,
+  // not a stale third-party IESE JPEG or an SVG that can fail in print.
+  for (const [organization, domain] of [
+    ["New York University", "nyu.edu"],
+    ["IESE Business School", "iese.edu"],
+  ]) {
+    const record = document.locator('[data-cv-section="credentials"] [data-cv-record]')
+      .filter({ hasText: organization });
+    await expect(record).toHaveCount(1);
+    const logo = record.locator(".cv-org-logo");
+    await expect(logo).toHaveAttribute("src", new RegExp("domain=" + domain.replace(".", "\\.") + "&sz=128"));
+    // A blocked third-party image must leave the existing institution fallback.
+    const visibleIdentity = await record.evaluate((element) => {
+      const logo = element.querySelector(".cv-org-logo");
+      const fallback = element.querySelector(".cv-org-icon");
+      return (logo && getComputedStyle(logo).display !== "none") ||
+        (fallback && getComputedStyle(fallback).display !== "none");
+    });
+    expect(visibleIdentity).toBeTruthy();
+  }
+
+  const zenodo = document.locator(".cv-links a:has(.cv-zenodo-mark)");
+  await expect(zenodo).toHaveCount(5);
+  for (let i = 0; i < 5; i++) {
+    const label = await zenodo.nth(i).innerText();
+    expect(label).toContain("DOI: 10.5281/zenodo.");
+  }
+
+  await expect(document).not.toContainText(/not submitted/i);
+  const lecture = document.locator(".cv-context").filter({ hasText: "Mathematical research lecture" });
+  await expect(lecture).toHaveCount(1);
+  expect(await lecture.evaluate((el) => getComputedStyle(el).color)).toBe("rgb(76, 87, 129)");
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const paper = page.locator("#cv-paged-preview");
+  await expect(paper).not.toContainText(/not submitted/i);
+  const paperLecture = paper.locator(".cv-context").filter({ hasText: "Mathematical research lecture" });
+  await expect(paperLecture).toHaveCount(1);
+  const contextAppearance = await paperLecture.evaluate((el) => ({
+    color: getComputedStyle(el).color,
+    size: getComputedStyle(el).fontSize,
+  }));
+  expect(contextAppearance.color).toBe("rgb(76, 87, 129)");
+  expect(parseFloat(contextAppearance.size)).toBeGreaterThanOrEqual(10);
+  await expect(paper.locator(".cv-links a:has(.cv-zenodo-mark)")).toHaveCount(5);
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(root).toHaveAttribute("data-cv-printing", "true");
+  const printed = await page.locator("#cv-paged-preview .cv-context")
+    .filter({ hasText: "Mathematical research lecture" }).evaluate((el) => ({
+      color: getComputedStyle(el).color,
+      size: getComputedStyle(el).fontSize,
+    }));
+  expect(printed.color).toBe("rgb(76, 87, 129)");
+  expect(parseFloat(printed.size)).toBeGreaterThanOrEqual(10);
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+});

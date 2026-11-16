@@ -1472,3 +1472,18 @@ print preview. Previous CV print WYSIWYG PR #56 was not modified.
 - Replaced the old balance-positive browser test with assertions for no artificial top gap and for matching parent/anchor typography in both screen paper preview and print media. Updated `test/style_contract.js`.
 
 **Validation:** run `node test/style_contract.js` and the CV Playwright suite (`npm run test:visual -- --grep "CV paper preview and print start at the top"`). Check Chrome Print / Save PDF for one- and multipage selections using both A4 and US Letter, including clickable links. Avoid introducing top balance or an extra `@page` margin on top of physical sheet padding.
+
+## 2026-11-15 — CV institutional icons, DOI labels, typographic consistency
+
+**User request**: repair the NYU and IESE icons, show a DOI whenever a Zenodo resource appears, stop rendering faded research-context rows such as "Mathematical research lecture", and remove the repetitive "Not Submitted" wording from CV entries.
+
+**Implementation**:
+- The two CV/credential icon sources now use square favicons from `nyu.edu` and `iese.edu` through the existing Google S2 favicon proxy. This removes the cross-origin SVG and stale MBATube JPEG risks, while preserving issuer matching and the existing accessible fallback symbol.
+- Five Zenodo resource links in `_data/cv.yml` carry `doi: "10.5281/zenodo.<record>"`. The Liquid renderer shows `<original label> · DOI: <identifier>` within the same anchor, with no new, potentially broken destination. Both reading mode and cloned paper/print pages inherit that text.
+- `_data/cv.yml` no longer displays "Not Submitted" in CV roles or the research-working-draft context. Research categories remain "Working Draft", "Research Lecture", "Research Tutorial", and "Research Notes"; the original `_pages/papers/` stage wording is not changed and no acceptance is implied.
+- CSS `.cv-context` now uses indigo `#4c5781` (matching secondary organization metadata) instead of `#70798b`/`#737373`; paper/print uses readable 8pt text, rather than 6.8pt faded gray.
+- `test/style_contract.js` asserts issuer mapping, five DOI/source-ID matches, the renderer's DOI binding, absence of "Not Submitted" in CV data, and context styles. The CV Playwright suite checks both issuer images/fallbacks, DOI display, labels, and paper/print colors.
+
+**Citation caution**: Zenodo records `21291269`, `21347375`, and `21088183` have previously documented DOI references; record `23432463` could not be independently opened during this change. The string `10.5281/zenodo.23432463` is derived from Zenodo's published standard record-ID DOI convention. Confirm it against the public record before formal scholarly citation; the site remains a record link rather than a claim of journal publication.
+
+**Regression commands:** `node scripts/audit-cv-organization-logos.mjs`, `node test/style_contract.js`, and `npx playwright test --config test/visual/playwright.config.js test/visual/interactions.spec.js --grep "CV NYU and IESE"`. Run a Jekyll build and review Chrome's printed PDF. Note that unrelated existing credential-date/description contract failures should be handled independently rather than by altering verified user data.
