@@ -329,6 +329,23 @@ if (exists("_pages/cv.md")) {
       failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
     }
   }
+  // Introductory research motivation must be substantive and printable:
+  // the generic site post-description is intentionally removed from paper pages,
+  // but the CV's separate source-backed research profile must survive cloning.
+  const cvContent = read("_data/cv.yml");
+  if (!cvContent.includes("profile: >-") ||
+      !cvContent.includes("mathematical theory") ||
+      !cvContent.includes("statistical and") ||
+      !cvContent.includes("optimization models") ||
+      !cvContent.includes("reproducible experiments") ||
+      !cvContent.includes("informed decisions") ||
+      !cvContent.includes("scientific writing, visualization, and presentations") ||
+      !cvRenderer.includes('<p class="cv-research-profile">{{ cv.profile | escape }}</p>') ||
+      !cvStyles.includes(".cv-page .cv-research-profile") ||
+      !cvStyles.includes(".cv-page .cv-preview-paper-body .cv-research-profile") ||
+      !cvStyles.includes("@media print")) {
+    failures.push("The concise research motivation must appear as safe, consistent CV text in screen and PDF.");
+  }
   // Free-text completion fields are per-degree browser preferences, not edits
   // to published YAML dates or a date-picker restricted to calendar values.
   if (!cvRenderer.includes('id="cv-graduation-editor"') ||
