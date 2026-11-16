@@ -19,7 +19,7 @@ nav_order: 2
 {% assign published_articles = site.pages | where: "portfolio_type", "article" | sort: "importance" %}
 
 <p class="portfolio-section-intro papers-archive-intro">
-  Research outputs are separated by publication stage and document type: submitted manuscripts, published writing, research notes and teaching materials, and internal research papers. Lecture/tutorial materials are not journal submissions.
+  Research outputs are separated by publication stage and document type: submitted manuscripts, published articles and author-hosted technical writing, research notes and teaching materials, and internal research papers. Interactive author previews are not SIAM publications or journal submissions.
 </p>
 
 <div class="papers-archive" data-portfolio-archive data-collection-label="Papers" data-view="list">
@@ -41,7 +41,7 @@ nav_order: 2
   <section class="papers-archive-section papers-archive-section--secondary" id="published-technical-articles" data-portfolio-section aria-labelledby="published-technical-articles-title">
     <div class="papers-archive-heading">
       <div>
-        <p class="portfolio-kicker">02 / Published writing</p>
+        <p class="portfolio-kicker">02 / Technical writing</p>
         <h2 id="published-technical-articles-title">Published Articles &amp; Technical Writing <span class="papers-archive-count">({{ published_articles.size }})</span></h2>
         <p>Published articles and author-hosted interactive technical features. Each item identifies its own editorial status; an author-hosted SIAM News proposal is not an accepted or published SIAM article.</p>
       </div>
