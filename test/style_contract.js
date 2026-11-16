@@ -359,6 +359,24 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes("@media print")) {
     failures.push("The concise research motivation must appear as safe, consistent CV text in screen and PDF.");
   }
+  // Research-profile edits are local, arbitrary plain text and must survive
+  // reloading and paper/print cloning without modifying the YAML default.
+  if (!cvRenderer.includes('id="cv-profile-editor"') ||
+      !cvRenderer.includes('id="cv-profile-text"') ||
+      !cvRenderer.includes('rows="6"') ||
+      !cvRenderer.includes('<textarea id="cv-profile-text"') ||
+      !cvRenderer.includes('{{ cv.profile | escape }}</textarea>') ||
+      !cvScript.includes('const profileStorageKey = "cv-profile-text-v1";') ||
+      !cvScript.includes("window.localStorage.getItem(profileStorageKey)") ||
+      !cvScript.includes("profileParagraph.textContent = profileInput.value;") ||
+      !cvScript.includes('profileInput.addEventListener("input"') ||
+      !cvScript.includes("window.localStorage.setItem(profileStorageKey, profileInput.value)") ||
+      !cvScript.includes("profileInput.value = profileInput.defaultValue;") ||
+      !cvScript.includes("window.localStorage.removeItem(profileStorageKey)") ||
+      !cvStyles.includes(".cv-profile-editor textarea") ||
+      !cvStyles.includes("white-space: pre-wrap;")) {
+    failures.push("The profile editor must use textContent, persist browser-local multiline text, and reset without touching source YAML.");
+  }
   // Free-text completion fields are per-degree browser preferences, not edits
   // to published YAML dates or a date-picker restricted to calendar values.
   if (!cvRenderer.includes('id="cv-graduation-editor"') ||
