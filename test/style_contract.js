@@ -324,8 +324,10 @@ if (exists("_pages/cv.md")) {
         !independent.includes("Wiley journals") ||
         !independent.includes("Statistical trend estimation and semidefinite") ||
         !independent.includes("penalized least-squares trend smoothing") ||
-        !independent.includes("SDP formulations, solver-based workflows") ||
-        !independent.includes("open-source software and visual demonstrations") ||
+        !independent.includes("SDP formulations") ||
+        !independent.includes("solver-based workflows") ||
+        !independent.includes("open-source software") ||
+        !independent.includes("visual demonstrations") ||
         !independent.includes("selected software releases on PyPI") ||
         !independent.includes("Zenodo DOIs") ||
         !independent.includes("Convened research meetings") ||
@@ -341,7 +343,7 @@ if (exists("_pages/cv.md")) {
     const expectedLabels = ["Mathematical research", "Scientific computing",
       "Research software engineering", "Technical writing", "Reproducibility",
       "Research coordination"];
-    const structured = [...independent.matchAll(/^          - label: "([^"]+)"[\\s\\S]*?^            paper: "([^"]+)"$/gm)];
+    const structured = [...independent.matchAll(/^          - label: "([^"]+)"[^]*?^            paper: "([^"]+)"$/gm)];
     if (structured.length !== expectedLabels.length ||
         structured.some((match, i) => match[1] !== expectedLabels[i] ||
           (match[1] + ": " + match[2]).length > 94) ||
