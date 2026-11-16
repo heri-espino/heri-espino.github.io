@@ -2,6 +2,12 @@ cv:
   name: Heriberto Espino Montelongo
   email: heriberto.espinomo@udlap.mx
   website: https://heri-espino.github.io
+  profile: >-
+    I enjoy formulating research questions and pursuing them from mathematical theory
+    to computational implementation: deriving results, developing statistical and
+    optimization models, and validating them through reproducible experiments.
+    I value translating technical ideas into informed decisions and communicating
+    them clearly through scientific writing, visualization, and presentations.
   social_networks:
     - { network: LinkedIn, username: heri-espino, url: "https://www.linkedin.com/in/heri-espino/" }
     - { network: GitHub, username: heri-espino, url: "https://github.com/heri-espino" }
