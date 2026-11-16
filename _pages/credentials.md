@@ -90,7 +90,11 @@ nav: false
           <div class="credentials-logo-wrap" aria-hidden="true">
             <span class="credentials-logo-fallback">{{ issuer.initials | default: '?' }}</span>
             {% if issuer.logo %}
-              <img class="credentials-logo" src="{{ issuer.logo }}" alt="" loading="lazy" width="64" height="64" data-credential-logo>
+              {% assign issuer_logo_url = issuer.logo %}
+              {% if issuer.logo contains '/assets/' %}
+                {% assign issuer_logo_url = issuer.logo | relative_url %}
+              {% endif %}
+              <img class="credentials-logo" src="{{ issuer_logo_url | escape }}" alt="" loading="lazy" width="64" height="64" data-credential-logo>
             {% endif %}
           </div>
           <div class="credentials-entry-content">

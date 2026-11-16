@@ -315,25 +315,14 @@ if (exists("_pages/cv.md")) {
         !independent.includes('date: "Aug 2024 — Present"') ||
         !independent.includes("https://heri-espino.github.io/papers/") ||
         !independent.includes("https://github.com/heri-espino") ||
-        !independent.includes("stochastic geometry") ||
-        !independent.includes("computational geometry") ||
-        !independent.includes("machine-learning interpretability") ||
-        !independent.includes("quantitative") ||
-        !independent.includes("finance. Statistical") ||
-        !independent.includes("Elsevier (two)") ||
-        !independent.includes("Springer Nature") ||
-        !independent.includes("Wiley journals") ||
-        !independent.includes("Statistical trend estimation and semidefinite") ||
-        !independent.includes("penalized least-squares trend smoothing") ||
-        !independent.includes("SDP formulations") ||
-        !independent.includes("solver-based workflows") ||
-        !independent.includes("open-source software") ||
-        !independent.includes("visual demonstrations") ||
-        !independent.includes("selected software releases on PyPI") ||
-        !independent.includes("Zenodo DOIs") ||
-        !independent.includes("Convened research meetings") ||
-        !independent.includes("technical reports and presentations") ||
-        !independent.includes("collaborators' feedback") ||
+        !independent.includes("Areas: Stochastic/computational geometry, ML interpretability, quant finance.") ||
+        !independent.includes("Submissions: Four journal manuscripts to Elsevier (2), Springer Nature, Wiley.") ||
+        !independent.includes("Ongoing: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP.") ||
+        !independent.includes("Software: Built AbaQuant; co-maintained ProximityGraphs and SDP workflows.") ||
+        !independent.includes("Tooling: Docling Math (PDF processing) and AwesomeFigures (visualization).") ||
+        !independent.includes("Writing: La Catarina publication and interactive ProximityGraphs author draft.") ||
+        !independent.includes("Reproducibility: Python, Git, tests, CI; selected PyPI and Zenodo DOI releases.") ||
+        !independent.includes("Coordination: Convened meetings, reports, presentations, progress and feedback.") ||
         packages.some((name) => !independent.includes(name)) ||
         packages.some((name) => !programRecords.includes("organization: " + (name === "TrendEstimation" ? "Trend Estimation" : name))) ||
         independent.includes("\n        organization:") ||
@@ -341,20 +330,16 @@ if (exists("_pages/cv.md")) {
         independent.includes("\n        context:")) {
       failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
     }
-    const expectedLabels = ["Mathematical research", "Scientific computing",
-      "Research software engineering", "Technical writing", "Reproducibility",
-      "Research coordination"];
-    const structured = [...independent.matchAll(/^          - label: "([^"]+)"[^]*?^            paper: "([^"]+)"$/gm)];
-    if (structured.length !== expectedLabels.length ||
-        structured.some((match, i) => match[1] !== expectedLabels[i] ||
-          (match[1] + ": " + match[2]).length > 94) ||
-        !cvRenderer.includes('class="cv-highlight-detailed"') ||
-        !cvRenderer.includes('class="cv-highlight-condensed"') ||
-        !cvRenderer.includes("{{ item.detail | escape }}") ||
-        !cvRenderer.includes("{{ item.paper | escape }}") ||
-        !cvStyles.includes(".cv-page .cv-preview-paper-body .cv-highlight-condensed") ||
-        !cvStyles.includes(".cv-page .cv-preview-paper-body .cv-highlight-detailed")) {
-      failures.push("The six detailed scientific-research categories need complete reading copy and <=94-character printable summaries.");
+    const bulletStrings = [...independent.matchAll(/^          - "([^"]+)"$/gm)].map((match) => match[1]);
+    const expectedLabels = ["Areas:", "Submissions:", "Ongoing:", "Software:", "Tooling:",
+      "Writing:", "Reproducibility:", "Coordination:"];
+    if (bulletStrings.length !== expectedLabels.length ||
+        bulletStrings.some((bullet, i) => !bullet.startsWith(expectedLabels[i]) || bullet.length > 80) ||
+        cvRenderer.includes("cv-highlight-detailed") ||
+        cvRenderer.includes("cv-highlight-condensed") ||
+        !cvRenderer.includes("<li>{{ item | escape }}</li>") ||
+        cvStyles.includes(".cv-highlight-condensed")) {
+      failures.push("Reading CV and printed CV must share eight distinct, <=80-character research bullets.");
     }
   }
   // Introductory research motivation must be substantive and printable:
@@ -503,7 +488,7 @@ if (exists("_pages/cv.md")) {
   }
   const logoSource = read("_data/cv_organization_logos.yml");
   for (const file of [
-    "udlap-academic.webp", "udlap-orange.webp", "paletas-loreto.webp",
+    "udlap-academic.webp", "udlap-orange.webp", "paletas-loreto-owner.webp",
     "maa-putnam.webp", "fira.webp", "kaxa-nuk.webp"
   ]) {
     const path = "assets/img/cv-organizations/" + file;
@@ -1425,16 +1410,32 @@ if (exists("_pages/cv.md")) {
   const project = read("_projects/proximity-graphs.md");
   const proximity = cv.split("      - name: ProximityGraphs — Computational Geometry Python Library")[1]
     ?.split("      - name: Contributor — OpenAI Python SDK")[0] || "";
-  if (!issuers.includes('logo: "https://www.google.com/s2/favicons?domain=nyu.edu&sz=128"') ||
-      !issuers.includes('logo: "https://www.google.com/s2/favicons?domain=iese.edu&sz=128"') ||
+  const ownerMarks = {
+    "paletas-loreto-owner.webp": "logo: \"/assets/img/cv-organizations/paletas-loreto-owner.webp\"",
+    "nyu-torch-owner.webp": "logo: \"/assets/img/cv-organizations/nyu-torch-owner.webp\"",
+    "iese-shield-owner.webp": "logo: \"/assets/img/cv-organizations/iese-shield-owner.webp\"",
+  };
+  for (const [filename, mapping] of Object.entries(ownerMarks)) {
+    const asset = "assets/img/cv-organizations/" + filename;
+    if (!fs.existsSync(asset) ||
+        fs.readFileSync(asset).toString("ascii", 0, 4) !== "RIFF" ||
+        fs.readFileSync(asset).toString("ascii", 8, 12) !== "WEBP" ||
+        (!issuers.includes(mapping) && !logoRules.includes(mapping))) {
+      failures.push("Owner-supplied institutional or Paletas logo missing/invalid: " + asset);
+    }
+  }
+  const credentialsTemplate = read("_pages/credentials.md");
+  if (!issuers.includes('logo: "/assets/img/cv-organizations/nyu-torch-owner.webp"') ||
+      !issuers.includes('logo: "/assets/img/cv-organizations/iese-shield-owner.webp"') ||
+      !logoRules.includes('- match: "paletas loreto"\\n  logo: "/assets/img/cv-organizations/paletas-loreto-owner.webp"'.replace("\\n","\n")) ||
       !issuers.includes('logo: "https://paiml.com/assets/img/logo.png"') ||
       !logoRules.includes('- match: "new york university"\\n  issuer_key: nyu'.replace("\\n", "\n")) ||
       !logoRules.includes('- match: "iese business school"\\n  issuer_key: iese'.replace("\\n", "\n")) ||
-      !logoRules.includes('- match: "pragmatic ai labs"\\n  issuer_key: pragmatic-ai'.replace("\\n", "\n")) ||
-      issuers.includes("Nyu_stacked_color.svg") ||
-      issuers.includes("mbatube.com") ||
-      issuers.includes("favicons?domain=paiml.com")) {
-    failures.push("NYU and IESE must use their institution-specific square marks; Pragmatic AI Labs keeps its official logo.");
+      !credentialsTemplate.includes("issuer.logo | relative_url") ||
+      !credentialsTemplate.includes("issuer_logo_url | escape") ||
+      issuers.includes("favicons?domain=nyu.edu") ||
+      issuers.includes("favicons?domain=iese.edu")) {
+    failures.push("Owner-supplied Paletas, NYU and IESE marks must resolve locally in CV and Credentials.");
   }
   for (const url of [
     "https://proximitygraphs.github.io/ProximityGraphs/",

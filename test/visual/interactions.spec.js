@@ -34,74 +34,44 @@ test("CV research profile connects mathematics, models and communication in prin
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
 
-test("CV lists independent researcher first with five scientific libraries in reading and print", async ({ page }) => {
+test("CV uses the same eight concise research bullets in reading, paper and print", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-
   const professional = page.locator('#cv-document [data-cv-section="professional-experience"]');
   const experiences = professional.locator("[data-cv-record]");
   await expect(experiences).toHaveCount(5);
   const independent = experiences.first();
   await expect(independent).toContainText("Independent Researcher");
   await expect(independent).toContainText("Scientific Software Developer");
-  await expect(independent).toContainText("Aug 2024 — Present");
-  const detailed = independent.locator(".cv-highlight-detailed");
-  const condensed = independent.locator(".cv-highlight-condensed");
-  await expect(independent.locator(".cv-highlights li")).toHaveCount(6);
-  await expect(detailed).toHaveCount(6);
-  await expect(condensed).toHaveCount(6);
-  await expect(independent.locator(".cv-highlight-condensed:visible")).toHaveCount(0);
-  for (const label of ["Mathematical research", "Scientific computing",
-    "Research software engineering", "Technical writing", "Reproducibility",
-    "Research coordination"]) {
-    await expect(detailed.filter({ hasText: label })).toHaveCount(1);
-  }
-  for (const phrase of ["stochastic geometry", "computational geometry",
-    "machine-learning interpretability", "quantitative finance",
-    "Elsevier (two)", "Springer Nature", "Wiley journals",
-    "penalized least-squares trend smoothing", "SDP formulations",
-    "solver-based workflows", "Docling Math", "AwesomeFigures",
-    "published La Catarina article", "Zenodo DOIs", "Convened research meetings",
-    "technical reports and presentations", "collaborators' feedback"]) {
-    await expect(independent).toContainText(phrase);
-  }
-  for (const software of ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"]) {
-    await expect(independent).toContainText(software);
-  }
+  const expected = [
+    "Areas: Stochastic/computational geometry, ML interpretability, quant finance.",
+    "Submissions: Four journal manuscripts to Elsevier (2), Springer Nature, Wiley.",
+    "Ongoing: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP.",
+    "Software: Built AbaQuant; co-maintained ProximityGraphs and SDP workflows.",
+    "Tooling: Docling Math (PDF processing) and AwesomeFigures (visualization).",
+    "Writing: La Catarina publication and interactive ProximityGraphs author draft.",
+    "Reproducibility: Python, Git, tests, CI; selected PyPI and Zenodo DOI releases.",
+    "Coordination: Convened meetings, reports, presentations, progress and feedback.",
+  ];
+  const researchBullets = independent.locator(".cv-highlights li");
+  await expect(researchBullets).toHaveText(expected);
+  await expect(independent.locator(".cv-highlight-detailed, .cv-highlight-condensed")).toHaveCount(0);
   await expect(independent.locator(".cv-organization")).toHaveCount(0);
   await expect(independent.locator('.cv-links a[href="https://heri-espino.github.io/papers/"]')).toHaveCount(1);
   await expect(independent.locator('.cv-links a[href="https://github.com/heri-espino"]')).toHaveCount(1);
-
-  // The existing five full software entries remain separate from this synthesis.
   const softwareRecords = page.locator('#cv-document [data-cv-section="programming-experience"] [data-cv-record]');
   for (const name of ["AbaQuant", "ProximityGraphs", "Trend Estimation", "AwesomeFigures", "Docling Math"]) {
     await expect(softwareRecords.filter({ hasText: name }).first()).toHaveCount(1);
   }
-
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-preview").click();
   const paper = page.locator("#cv-paged-preview");
   const paperEntry = paper.locator("[data-cv-record]").filter({ hasText: "Independent Researcher" }).first();
-  await expect(paperEntry.locator(".cv-highlights li")).toHaveCount(6);
-  await expect(paperEntry.locator(".cv-highlight-condensed:visible")).toHaveCount(6);
-  await expect(paperEntry.locator(".cv-highlight-detailed:visible")).toHaveCount(0);
-  await expect(paperEntry.locator(".cv-highlight-condensed")).toContainText([
-    "Mathematical research: Four submissions",
-    "Scientific computing: TrendEstimation",
-    "Research software engineering: Docling Math",
-    "Technical writing: La Catarina",
-    "Reproducibility: Python, Git",
-    "Research coordination: Convened meetings",
-  ]);
-
+  await expect(paperEntry.locator(".cv-highlights li")).toHaveText(expected);
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await expect(page.locator("#cv-document")).toBeHidden();
   const printEntry = paper.locator("[data-cv-record]").filter({ hasText: "Independent Researcher" }).first();
-  await expect(printEntry.locator(".cv-highlight-condensed:visible")).toHaveCount(6);
-  await expect(printEntry.locator(".cv-highlight-detailed:visible")).toHaveCount(0);
-  await expect(printEntry.locator(".cv-highlight-condensed").nth(0)).toContainText("stochastic geometry");
-  await expect(printEntry.locator(".cv-highlight-condensed").nth(1)).toContainText("Max-Cut SDP");
-  await expect(printEntry.locator(".cv-highlight-condensed").nth(4)).toContainText("Zenodo DOIs");
+  await expect(printEntry.locator(".cv-highlights li")).toHaveText(expected);
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
@@ -1155,26 +1125,33 @@ test("CV NYU and IESE icons, Zenodo DOIs, and no redundant research context rows
   const root = page.locator("#cv-page");
   const document = page.locator("#cv-document");
 
-  // Institutional marks come from the corresponding official-domain favicons,
-  // not a stale third-party IESE JPEG or an SVG that can fail in print.
-  for (const [organization, domain] of [
-    ["New York University", "nyu.edu"],
-    ["IESE Business School", "iese.edu"],
-  ]) {
-    const record = document.locator('[data-cv-section="credentials"] [data-cv-record]')
-      .filter({ hasText: organization });
+  // Local owner-provided marks must render at physical paper size and
+  // keep readable institution fallbacks if a logo ever fails.
+  const organizations = [
+    ["New York University", "nyu-torch-owner.webp"],
+    ["IESE Business School", "iese-shield-owner.webp"],
+    ["Paletas Loreto", "paletas-loreto-owner.webp"],
+  ];
+  for (const [organization, filename] of organizations) {
+    const record = document.locator("[data-cv-record]").filter({ hasText: organization }).first();
     await expect(record).toHaveCount(1);
     const logo = record.locator(".cv-org-logo");
-    await expect(logo).toHaveAttribute("src", new RegExp("domain=" + domain.replace(".", "\\.") + "&sz=128"));
-    // A blocked third-party image must leave the existing institution fallback.
-    const visibleIdentity = await record.evaluate((element) => {
-      const logo = element.querySelector(".cv-org-logo");
-      const fallback = element.querySelector(".cv-org-icon");
-      return (logo && getComputedStyle(logo).display !== "none") ||
-        (fallback && getComputedStyle(fallback).display !== "none");
-    });
-    expect(visibleIdentity).toBeTruthy();
+    await expect(logo).toHaveAttribute("src", new RegExp("assets/img/cv-organizations/" + filename));
+    await expect.poll(async () => logo.evaluate((img) => img.complete && img.naturalWidth > 0)).toBe(true);
+    const fallback = record.locator(".cv-org-icon").first();
+    await expect(fallback).toHaveCount(1);
   }
+  // Credentials also consume the same two local issuer assets with correct
+  // site.baseurl-relative paths, not broken absolute-root URLs.
+  await page.goto("/al-folio/credentials/", { waitUntil: "networkidle" });
+  for (const [issuer, filename] of organizations.slice(0, 2)) {
+    const record = page.locator("[data-credential-entry]").filter({ hasText: issuer }).first();
+    await expect(record).toHaveCount(1);
+    const image = record.locator("img.credentials-logo");
+    await expect(image).toHaveAttribute("src", new RegExp("/al-folio/assets/img/cv-organizations/" + filename));
+    await expect.poll(async () => image.evaluate((img) => img.complete && img.naturalWidth > 0)).toBe(true);
+  }
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
 
   const zenodo = document.locator(".cv-links a:has(.cv-zenodo-mark)");
   await expect(zenodo).toHaveCount(5);

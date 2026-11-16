@@ -87,7 +87,7 @@
 - match: "coppel"
   logo: "https://www.google.com/s2/favicons?domain=coppel.com&sz=128"
 - match: "paletas loreto"
-  logo: "/assets/img/cv-organizations/paletas-loreto.webp"
+  logo: "/assets/img/cv-organizations/paletas-loreto-owner.webp"
 - match: "fideicomisos instituidos en relación con la agricultura"
   logo: "/assets/img/cv-organizations/fira.webp"
 - match: "kaxa nuk"

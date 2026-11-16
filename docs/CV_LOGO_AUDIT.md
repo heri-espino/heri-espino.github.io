@@ -113,3 +113,15 @@ The current issuer mapping uses the **official institutions' domains** through G
 - `https://www.google.com/s2/favicons?domain=iese.edu&sz=128`
 
 These are institutional website favicons, **not** a claim that the full horizontal wordmarks have been embedded. Preserve the connected credential/CV issuer mappings and the visible fallback icon if network loading fails. A local, institution-authorized square logo can supersede a favicon later. Earlier source histories in this document describe superseded decisions.
+
+## 2026-11-16 — User-provided compact Paletas Loreto, NYU and IESE image sources
+
+The owner explicitly supplied three raster source images for CV logo replacement, superseding the former Paletas Loreto stored image and Google favicon proxy entries for NYU and IESE. The following local WebP assets are optimized from those supplied image pixels at 144×144 for compact rendering and reliable PDF export:
+
+| Organization | User-image source | New local file | Editing |
+|---|---|---|---|
+| Paletas Loreto | `image(20261116-073609).png` | `paletas-loreto-owner.webp` | Complete square green background and lettering preserved |
+| New York University | `image(20261116-073624).png` | `nyu-torch-owner.webp` | Crop the original purple torch square, removing outer checkerboard border and tiny text underneath |
+| IESE Business School | `image(20261116-073659).png` | `iese-shield-owner.webp` | Preserve red shield, remove white background and excess margins |
+
+All three live in `assets/img/cv-organizations/`. Do not generate institutional marks from text or unrelated logos; they are user-provided images and not endorsements. Old local assets remain intact. Paletas is connected via `_data/cv_organization_logos.yml`; NYU and IESE connect via `_data/credential_issuers.yml`, reused by CV and credentials. Local URL conversion with `relative_url` now serves both publishing base paths. Asset and browser checks validate WebP signatures, actual image load and source-matched site paths.
