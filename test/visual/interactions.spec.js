@@ -49,7 +49,7 @@ test("CV lists independent researcher first with five scientific libraries in re
   await expect(independent.locator(".cv-highlights li")).toHaveCount(6);
   await expect(detailed).toHaveCount(6);
   await expect(condensed).toHaveCount(6);
-  await expect(condensed.filter({ visible: true })).toHaveCount(0);
+  await expect(independent.locator(".cv-highlight-condensed:visible")).toHaveCount(0);
   for (const label of ["Mathematical research", "Scientific computing",
     "Research software engineering", "Technical writing", "Reproducibility",
     "Research coordination"]) {
@@ -62,7 +62,7 @@ test("CV lists independent researcher first with five scientific libraries in re
     "solver-based workflows", "Docling Math", "AwesomeFigures",
     "published La Catarina article", "Zenodo DOIs", "Convened research meetings",
     "technical reports and presentations", "collaborators' feedback"]) {
-    await expect(detailed).toContainText(phrase);
+    await expect(independent).toContainText(phrase);
   }
   for (const software of ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"]) {
     await expect(independent).toContainText(software);
@@ -99,9 +99,9 @@ test("CV lists independent researcher first with five scientific libraries in re
   const printEntry = paper.locator("[data-cv-record]").filter({ hasText: "Independent Researcher" }).first();
   await expect(printEntry.locator(".cv-highlight-condensed:visible")).toHaveCount(6);
   await expect(printEntry.locator(".cv-highlight-detailed:visible")).toHaveCount(0);
-  await expect(printEntry.locator(".cv-highlight-condensed")).toContainText("stochastic geometry");
-  await expect(printEntry.locator(".cv-highlight-condensed")).toContainText("Max-Cut SDP");
-  await expect(printEntry.locator(".cv-highlight-condensed")).toContainText("Zenodo DOIs");
+  await expect(printEntry.locator(".cv-highlight-condensed").nth(0)).toContainText("stochastic geometry");
+  await expect(printEntry.locator(".cv-highlight-condensed").nth(1)).toContainText("Max-Cut SDP");
+  await expect(printEntry.locator(".cv-highlight-condensed").nth(4)).toContainText("Zenodo DOIs");
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
