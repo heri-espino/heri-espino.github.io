@@ -44,15 +44,29 @@ test("CV lists independent researcher first with five scientific libraries in re
   await expect(independent).toContainText("Independent Researcher");
   await expect(independent).toContainText("Scientific Software Developer");
   await expect(independent).toContainText("Aug 2024 — Present");
-  await expect(independent).toContainText("four journal submissions to Elsevier (2), Springer Nature, and Wiley");
-  await expect(independent).toContainText("In development: TrendEstimation (penalized least squares)");
-  await expect(independent).toContainText("Max-Cut/Max-k-Cut SDP");
-  await expect(independent).toContainText("PyPI and Zenodo DOI releases");
-  await expect(independent).toContainText("author-hosted interactive ProximityGraphs feature");
+  const detailed = independent.locator(".cv-highlight-detailed");
+  const condensed = independent.locator(".cv-highlight-condensed");
+  await expect(independent.locator(".cv-highlights li")).toHaveCount(6);
+  await expect(detailed).toHaveCount(6);
+  await expect(condensed).toHaveCount(6);
+  await expect(condensed.filter({ visible: true })).toHaveCount(0);
+  for (const label of ["Mathematical research", "Scientific computing",
+    "Research software engineering", "Technical writing", "Reproducibility",
+    "Research coordination"]) {
+    await expect(detailed.filter({ hasText: label })).toHaveCount(1);
+  }
+  for (const phrase of ["stochastic geometry", "computational geometry",
+    "machine-learning interpretability", "quantitative finance",
+    "Elsevier (two)", "Springer Nature", "Wiley journals",
+    "penalized least-squares trend smoothing", "SDP formulations",
+    "solver-based workflows", "Docling Math", "AwesomeFigures",
+    "published La Catarina article", "Zenodo DOIs", "Convened research meetings",
+    "technical reports and presentations", "collaborators' feedback"]) {
+    await expect(detailed).toContainText(phrase);
+  }
   for (const software of ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"]) {
     await expect(independent).toContainText(software);
   }
-  await expect(independent.locator(".cv-highlights li")).toHaveCount(5);
   await expect(independent.locator(".cv-organization")).toHaveCount(0);
   await expect(independent.locator('.cv-links a[href="https://heri-espino.github.io/papers/"]')).toHaveCount(1);
   await expect(independent.locator('.cv-links a[href="https://github.com/heri-espino"]')).toHaveCount(1);
@@ -66,17 +80,28 @@ test("CV lists independent researcher first with five scientific libraries in re
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-preview").click();
   const paper = page.locator("#cv-paged-preview");
-  await expect(paper).toContainText("Independent Researcher");
-  await expect(paper).toContainText("AwesomeFigures");
-  await expect(paper).toContainText("Docling Math");
+  const paperEntry = paper.locator("[data-cv-record]").filter({ hasText: "Independent Researcher" }).first();
+  await expect(paperEntry.locator(".cv-highlights li")).toHaveCount(6);
+  await expect(paperEntry.locator(".cv-highlight-condensed:visible")).toHaveCount(6);
+  await expect(paperEntry.locator(".cv-highlight-detailed:visible")).toHaveCount(0);
+  await expect(paperEntry.locator(".cv-highlight-condensed")).toContainText([
+    "Mathematical research: Four submissions",
+    "Scientific computing: TrendEstimation",
+    "Research software engineering: Docling Math",
+    "Technical writing: La Catarina",
+    "Reproducibility: Python, Git",
+    "Research coordination: Convened meetings",
+  ]);
 
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await expect(page.locator("#cv-document")).toBeHidden();
-  await expect(paper).toContainText("Independent Researcher");
-  await expect(paper).toContainText("TrendEstimation");
-  await expect(paper).toContainText("Max-Cut/Max-k-Cut SDP");
-  await expect(paper).toContainText("Elsevier (2), Springer Nature, and Wiley");
+  const printEntry = paper.locator("[data-cv-record]").filter({ hasText: "Independent Researcher" }).first();
+  await expect(printEntry.locator(".cv-highlight-condensed:visible")).toHaveCount(6);
+  await expect(printEntry.locator(".cv-highlight-detailed:visible")).toHaveCount(0);
+  await expect(printEntry.locator(".cv-highlight-condensed")).toContainText("stochastic geometry");
+  await expect(printEntry.locator(".cv-highlight-condensed")).toContainText("Max-Cut SDP");
+  await expect(printEntry.locator(".cv-highlight-condensed")).toContainText("Zenodo DOIs");
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
