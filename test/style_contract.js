@@ -488,7 +488,7 @@ if (exists("_pages/cv.md")) {
   }
   const logoSource = read("_data/cv_organization_logos.yml");
   for (const file of [
-    "udlap-academic.webp", "udlap-orange.webp", "paletas-loreto.webp",
+    "udlap-academic.webp", "udlap-orange.webp", "paletas-loreto-owner.webp",
     "maa-putnam.webp", "fira.webp", "kaxa-nuk.webp"
   ]) {
     const path = "assets/img/cv-organizations/" + file;
