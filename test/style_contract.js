@@ -637,6 +637,27 @@ if (exists("_pages/cv.md")) {
       abaCvSection.includes("Technical writing: coauthored an AbaQuant article with Owen Paredes Conde.")) {
     failures.push("AbaQuant image asset and separate CV technical-writing entry are required.");
   }
+  const interactiveArticle = read("_pages/articles/the-empty-space-that-makes-a-network.md");
+  const interactiveFigure = "assets/img/portfolio/proximitygraphs-empty-space-compare.svg";
+  const interactiveUrl = "https://heri-espino.github.io/proximitygraphs-siam-figures/article.html";
+  if (!interactiveArticle.includes("portfolio_type: article") ||
+      !interactiveArticle.includes("importance: 2") ||
+      !interactiveArticle.includes("Heriberto Espino-Montelongo and Héctor Maravillo") ||
+      !interactiveArticle.includes("Proposed SIAM News feature") ||
+      !interactiveArticle.includes("not been submitted") ||
+      !interactiveArticle.includes("image: /" + interactiveFigure) ||
+      !interactiveArticle.includes(interactiveUrl) ||
+      !interactiveArticle.includes("github:") ||
+      !exists(interactiveFigure) ||
+      !fs.readFileSync(path.join(root, interactiveFigure), "utf8").includes("<svg") ||
+      !abaCvSection.includes('role: "First Author · Interactive Technical Feature"') ||
+      !abaCvSection.includes("Coauthored with Héctor Maravillo") ||
+      !abaCvSection.includes("articles/the-empty-space-that-makes-a-network.html") ||
+      !abaCvSection.includes(interactiveUrl) ||
+      !abaArchive.includes("02 / Technical writing") ||
+      !abaArchive.includes("author-hosted interactive technical features")) {
+    failures.push("ProximityGraphs author-hosted technical feature must appear beside La Catarina on CV/Papers without claiming SIAM publication.");
+  }
   if (!cvScript.includes("const emphasizedLabels = new Set()") ||
       !cvScript.includes('root.querySelectorAll("#cv-document .cv-highlights li")') ||
       !cvScript.includes('emphasized.textContent = label + ":"') ||
