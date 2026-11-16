@@ -1,6 +1,47 @@
 const { test, expect } = require("@playwright/test");
 const { preparePage, stabilizeVisuals } = require("./helpers");
 
+test("CV lists independent researcher first with five scientific libraries in reading and print", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+
+  const professional = page.locator('#cv-document [data-cv-section="professional-experience"]');
+  const experiences = professional.locator("[data-cv-record]");
+  await expect(experiences).toHaveCount(5);
+  const independent = experiences.first();
+  await expect(independent).toContainText("Independent Researcher");
+  await expect(independent).toContainText("Scientific Software Developer");
+  await expect(independent).toContainText("Aug 2024 — Present");
+  await expect(independent).toContainText("four journal submissions");
+  for (const software of ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"]) {
+    await expect(independent).toContainText(software);
+  }
+  await expect(independent.locator(".cv-highlights li")).toHaveCount(5);
+  await expect(independent.locator(".cv-organization")).toHaveCount(0);
+  await expect(independent.locator('.cv-links a[href="https://heri-espino.github.io/papers/"]')).toHaveCount(1);
+  await expect(independent.locator('.cv-links a[href="https://github.com/heri-espino"]')).toHaveCount(1);
+
+  // The existing five full software entries remain separate from this synthesis.
+  const softwareRecords = page.locator('#cv-document [data-cv-section="programming-experience"] [data-cv-record]');
+  for (const name of ["AbaQuant", "ProximityGraphs", "Trend Estimation", "AwesomeFigures", "Docling Math"]) {
+    await expect(softwareRecords.filter({ hasText: name }).first()).toHaveCount(1);
+  }
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const paper = page.locator("#cv-paged-preview");
+  await expect(paper).toContainText("Independent Researcher");
+  await expect(paper).toContainText("AwesomeFigures");
+  await expect(paper).toContainText("Docling Math");
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(page.locator("#cv-document")).toBeHidden();
+  await expect(paper).toContainText("Independent Researcher");
+  await expect(paper).toContainText("TrendEstimation");
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+});
+
 test("Papers separates unsubmitted research notes from internal research studies", async ({ page }) => {
   await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
   const ids = ["submitted-manuscripts", "published-technical-articles", "working-drafts", "internal-research-papers"];

@@ -299,6 +299,33 @@ if (exists("_pages/cv.md")) {
       !cvScript.includes('chevron.classList.toggle("fa-chevron-right", open)')) {
     failures.push("Modern Minimal must be the initial and reset view, with a right-side toggle.");
   }
+  // Independent scientific research is a genuine source-linked role, not a
+  // fabricated university appointment. Keep the five library names in the
+  // professional summary and their individually attributed software records.
+  {
+    const experienceSource = read("_data/cv.yml");
+    const professional = experienceSource.split("    Professional Experience:")[1]?.split("    Submitted Manuscripts:")[0] || "";
+    const firstRole = "      - name: Independent Researcher & Scientific Software Developer";
+    const independent = professional.split(firstRole)[1]?.split("\n      - name: ")[0] || "";
+    const packages = ["TrendEstimation", "AbaQuant", "ProximityGraphs", "Docling Math", "AwesomeFigures"];
+    const programRecords = experienceSource.split("    Programming Experience:")[1]?.split("    Academic Experience:")[0] || "";
+    if (!professional.trimStart().startsWith(firstRole.trim()) ||
+        !independent.includes('role: "Independent Researcher"') ||
+        !independent.includes('subtitle: "Scientific Software Developer"') ||
+        !independent.includes('date: "Aug 2024 — Present"') ||
+        !independent.includes("https://heri-espino.github.io/papers/") ||
+        !independent.includes("https://github.com/heri-espino") ||
+        !independent.includes("four journal submissions") ||
+        !independent.includes("La Catarina article") ||
+        !independent.includes("interactive ProximityGraphs feature") ||
+        packages.some((name) => !independent.includes(name)) ||
+        packages.some((name) => !programRecords.includes("organization: " + (name === "TrendEstimation" ? "Trend Estimation" : name))) ||
+        independent.includes("\n        organization:") ||
+        independent.includes("\n        institution:") ||
+        independent.includes("\n        context:")) {
+      failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
+    }
+  }
   // Only four submitted manuscripts; never reclassify reports, notebooks,
   // lectures or tutorials as journal submissions to fill the new category.
   const cvSource = read("_data/cv.yml");

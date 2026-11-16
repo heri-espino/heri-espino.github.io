@@ -1510,3 +1510,20 @@ print preview. Previous CV print WYSIWYG PR #56 was not modified.
 **Correction:** Remove all eight standalone `context:` rows from `_data/cv.yml` and the unused GitHub-only icon fields for Stepping-Stone validation. Remove the shared `entry.context` template and the dead `.cv-context` rules (normal reading, Harvard, LaTeX, A4/Letter paper previews and physical print). Existing names, roles, dates, highlights, working-draft categories, links and external record pages remain intact. The separate ProximityGraphs article detail still lists Héctor Maravillo as coauthor and correctly identifies its unsubmitted editorial stage.
 
 **Invariant:** Do not invent an employer/institution for independent work. The factual CV metadata contract now accepts three core fields (title, role, date) plus either a real institution or an explicit source link for independent research. Browser tests assert the explanatory rows are absent in reading, paper preview and print, while the source repository link and DOI resources survive. Earlier historical handoff instructions requiring `cv-context` rendering or styling are superseded.
+
+## 2026-11-15 — Independent research and complete scientific-software portfolio under Experience
+
+**User instruction:** Add independent-research experience to the CV, including four journal submissions, five software projects (AbaQuant, ProximityGraphs, TrendEstimation, AwesomeFigures, Docling Math) and technical writing. The prior recommendation was to **synthesize** these in Professional Experience while **retaining full individual software entries** in Programming Experience.
+
+**Data:** Inserted `Independent Researcher & Scientific Software Developer` as the **first** `Professional Experience` record in `_data/cv.yml`. The visible title uses `role: "Independent Researcher"` and `subtitle: "Scientific Software Developer"` (the renderer joins them without repeating the full YAML name). The **Aug 2024 — Present** date uses the already-documented AbaQuant August 2024 start as the earliest supported scientific-software activity, not an unverified date of university employment. No organization/institution/context is added to independent work; links lead to the real Papers archive and GitHub account.
+
+**Five bullets:**
+1. Four genuinely submitted, not necessarily accepted, journal manuscripts across stochastic/computational geometry, CNN interpretability and quantitative finance.
+2. TrendEstimation numerical PLS smoothing and AbaQuant financial mathematics.
+3. Co-maintained ProximityGraphs with only selected PyPI releases and Zenodo validation archives.
+4. Docling Math mathematical PDF extraction and AwesomeFigures scientific visualization and LaTeX-ready graphics.
+5. Technical writing: published La Catarina AbaQuant article versus an author-hosted interactive ProximityGraphs feature, plus reproducible Python/Git/LaTeX workflows.
+
+**Duplication boundary:** Experience summarizes responsibilities; Programming Experience retains separate releases, coauthor roles, source links and package statuses; Submitted Manuscripts and Technical Writing retain detailed records and verified editorial stages. Do not falsely claim Docling Math, AwesomeFigures or TrendEstimation are all already on PyPI/Zenodo. No fake affiliation or new decorative standalone explanation line.
+
+**Regression:** `node test/style_contract.js`; `bundle exec jekyll build` and `node scripts/verify-public-profile.mjs`; Playwright `test/visual/interactions.spec.js --grep "CV lists independent researcher first"` (desktop/mobile). Browser validation also checks paper preview and native print.

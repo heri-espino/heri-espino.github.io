@@ -36,6 +36,20 @@ cv:
           - "Coursework: stochastic processes, measure theory, ruin theory, derivatives and risk."
 
     Professional Experience:
+      - name: Independent Researcher & Scientific Software Developer
+        role: "Independent Researcher"
+        subtitle: "Scientific Software Developer"
+        date: "Aug 2024 — Present"
+        location: "Puebla, Mexico"
+        links:
+          - { label: Research portfolio, url: "https://heri-espino.github.io/papers/" }
+          - { label: Open-source projects, url: "https://github.com/heri-espino" }
+        highlights:
+          - "Manuscripts: authored or coauthored four journal submissions in geometry, ML, and finance."
+          - "Numerical software: built TrendEstimation (PLS) and AbaQuant (finance)."
+          - "Geometry software: co-maintained ProximityGraphs; selected PyPI and Zenodo releases."
+          - "Research tooling: built Docling Math (PDF extraction) and AwesomeFigures (scientific plots)."
+          - "Writing: authored a La Catarina article and interactive ProximityGraphs feature; used LaTeX."
       - name: Research Data Scientist — Mathematics Learning Center
         role: "Research Data Scientist"
         subtitle: "Mathematics Learning Center"
