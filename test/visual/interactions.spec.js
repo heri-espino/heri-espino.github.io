@@ -30,7 +30,41 @@ test("Papers separates unsubmitted research notes from internal research studies
     await expect(drafts.locator(`a[href="${href}"]`)).toHaveCount(0);
   }
   await expect(page.locator("#submitted-manuscripts .portfolio-card")).toHaveCount(4);
-  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(1);
+  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(2);
+});
+
+test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQuant article", async ({ page }) => {
+  await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
+  const technical = page.locator("#published-technical-articles");
+  await expect(technical.locator(".portfolio-card")).toHaveCount(2);
+  const feature = technical.locator(".portfolio-card").filter({ hasText: "The Empty Space That Makes a Network" });
+  const aba = technical.locator(".portfolio-card").filter({ hasText: "AbaQuant" });
+  await expect(feature).toHaveCount(1);
+  await expect(aba).toHaveCount(1);
+  await expect(feature).toContainText("Author-hosted preview");
+  await expect(feature.locator(".portfolio-card-image img"))
+    .toHaveAttribute("src", /proximitygraphs-empty-space-compare\\.svg/);
+  await feature.locator("h3 a").click();
+  await expect(page).toHaveURL(/articles\\/the-empty-space-that-makes-a-network\\.html/);
+  await expect(page.locator(".portfolio-detail")).toContainText("Héctor Maravillo");
+  await expect(page.locator(".portfolio-detail")).toContainText("has not been submitted");
+  await expect(page.locator('.portfolio-actions a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
+
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const section = page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]');
+  await expect(section.locator("[data-cv-record]")).toHaveCount(2);
+  const item = section.locator("[data-cv-record]").filter({ hasText: "The Empty Space That Makes a Network" });
+  await expect(item).toContainText("First Author · Interactive Technical Feature");
+  await expect(item).toContainText("Héctor Maravillo");
+  await expect(item.locator('a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
+  await expect(section).not.toContainText("Published by SIAM News");
+
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  const paperItem = page.locator("#cv-paged-preview [data-cv-record]")
+    .filter({ hasText: "The Empty Space That Makes a Network" });
+  await expect(paperItem).toHaveCount(1);
+  await expect(paperItem.locator('a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
 });
 
 test("publications Abs toggle opens and closes", async ({ page }) => {
