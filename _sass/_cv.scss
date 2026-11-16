@@ -145,6 +145,27 @@
   margin-top: 0.35rem;
 }
 
+/* The independent-research entry has detailed screen copy and separately
+   edited one-line paper summaries. Both are semantic text, never clipped or
+   synthesized from CSS pseudo-content; existing list marker controls remain. */
+.cv-page .cv-highlight-condensed {
+  display: none;
+}
+.cv-page .cv-preview-paper-body .cv-highlight-detailed {
+  display: none;
+}
+.cv-page .cv-preview-paper-body .cv-highlight-condensed {
+  display: inline;
+}
+@media print {
+  .cv-page .cv-highlight-detailed {
+    display: none;
+  }
+  .cv-page .cv-highlight-condensed {
+    display: inline;
+  }
+}
+
 .cv-compact-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

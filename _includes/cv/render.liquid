@@ -349,7 +349,14 @@
                 {% if entry.highlights %}
                   <ul class="cv-highlights">
                     {% for item in entry.highlights %}
-                      <li>{{ item }}</li>
+                      <li>
+                        {% if item.label and item.detail and item.paper %}
+                          <span class="cv-highlight-detailed"><strong>{{ item.label | escape }}:</strong> {{ item.detail | escape }}</span>
+                          <span class="cv-highlight-condensed"><strong>{{ item.label | escape }}:</strong> {{ item.paper | escape }}</span>
+                        {% else %}
+                          {{ item }}
+                        {% endif %}
+                      </li>
                     {% endfor %}
                   </ul>
                 {% endif %}
