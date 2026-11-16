@@ -1410,16 +1410,32 @@ if (exists("_pages/cv.md")) {
   const project = read("_projects/proximity-graphs.md");
   const proximity = cv.split("      - name: ProximityGraphs — Computational Geometry Python Library")[1]
     ?.split("      - name: Contributor — OpenAI Python SDK")[0] || "";
-  if (!issuers.includes('logo: "https://www.google.com/s2/favicons?domain=nyu.edu&sz=128"') ||
-      !issuers.includes('logo: "https://www.google.com/s2/favicons?domain=iese.edu&sz=128"') ||
+  const ownerMarks = {
+    "paletas-loreto-owner.webp": "logo: \"/assets/img/cv-organizations/paletas-loreto-owner.webp\"",
+    "nyu-torch-owner.webp": "logo: \"/assets/img/cv-organizations/nyu-torch-owner.webp\"",
+    "iese-shield-owner.webp": "logo: \"/assets/img/cv-organizations/iese-shield-owner.webp\"",
+  };
+  for (const [filename, mapping] of Object.entries(ownerMarks)) {
+    const asset = "assets/img/cv-organizations/" + filename;
+    if (!fs.existsSync(asset) ||
+        fs.readFileSync(asset).toString("ascii", 0, 4) !== "RIFF" ||
+        fs.readFileSync(asset).toString("ascii", 8, 12) !== "WEBP" ||
+        (!issuers.includes(mapping) && !logoRules.includes(mapping))) {
+      failures.push("Owner-supplied institutional or Paletas logo missing/invalid: " + asset);
+    }
+  }
+  const credentialsTemplate = read("_pages/credentials.md");
+  if (!issuers.includes('logo: "/assets/img/cv-organizations/nyu-torch-owner.webp"') ||
+      !issuers.includes('logo: "/assets/img/cv-organizations/iese-shield-owner.webp"') ||
+      !logoRules.includes('- match: "paletas loreto"\\n  logo: "/assets/img/cv-organizations/paletas-loreto-owner.webp"'.replace("\\n","\n")) ||
       !issuers.includes('logo: "https://paiml.com/assets/img/logo.png"') ||
       !logoRules.includes('- match: "new york university"\\n  issuer_key: nyu'.replace("\\n", "\n")) ||
       !logoRules.includes('- match: "iese business school"\\n  issuer_key: iese'.replace("\\n", "\n")) ||
-      !logoRules.includes('- match: "pragmatic ai labs"\\n  issuer_key: pragmatic-ai'.replace("\\n", "\n")) ||
-      issuers.includes("Nyu_stacked_color.svg") ||
-      issuers.includes("mbatube.com") ||
-      issuers.includes("favicons?domain=paiml.com")) {
-    failures.push("NYU and IESE must use their institution-specific square marks; Pragmatic AI Labs keeps its official logo.");
+      !credentialsTemplate.includes("issuer.logo | relative_url") ||
+      !credentialsTemplate.includes("issuer_logo_url | escape") ||
+      issuers.includes("favicons?domain=nyu.edu") ||
+      issuers.includes("favicons?domain=iese.edu")) {
+    failures.push("Owner-supplied Paletas, NYU and IESE marks must resolve locally in CV and Credentials.");
   }
   for (const url of [
     "https://proximitygraphs.github.io/ProximityGraphs/",
