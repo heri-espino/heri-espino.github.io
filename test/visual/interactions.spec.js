@@ -56,7 +56,8 @@ test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQ
   const item = section.locator("[data-cv-record]").filter({ hasText: "The Empty Space That Makes a Network" });
   await expect(item).toContainText("First Author · Interactive Technical Feature");
   await expect(item).not.toContainText("Coauthored with Héctor Maravillo");
-  await expect(item.locator('a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
+  // The title is intentionally clickable too; count just the explicit resource link.
+  await expect(item.locator('.cv-links a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
   await expect(section).not.toContainText("Published by SIAM News");
 
   await page.locator("#cv-panel-toggle").click();
@@ -64,7 +65,7 @@ test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQ
   const paperItem = page.locator("#cv-paged-preview [data-cv-record]")
     .filter({ hasText: "The Empty Space That Makes a Network" });
   await expect(paperItem).toHaveCount(1);
-  await expect(paperItem.locator('a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
+  await expect(paperItem.locator('.cv-links a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
 });
 
 test("publications Abs toggle opens and closes", async ({ page }) => {
