@@ -495,9 +495,10 @@ if (exists("_pages/cv.md")) {
   }
   const cvSources = read("_data/cv.yml");
 
-  // Four core facts on event-based CV entries: canonical title,
-  // role/category, date and institution OR explicitly labeled research context.
-  // Skills/languages are taxonomies, not dated career events.
+  // Event entries require a title, role and date. Affiliated entries name the
+  // genuine institution; independent research instead supplies a source link,
+  // without manufacturing an employer or a decorative explanation row.
+  // Skills and languages are taxonomies, not dated career events.
   const metadataEntries = [];
   let metadataSection = "";
   let currentEntry = null;
@@ -519,7 +520,8 @@ if (exists("_pages/cv.md")) {
         name: entryMatch[2],
         role: false,
         date: false,
-        affiliationOrContext: false,
+        affiliation: false,
+        sourceLink: false,
       };
       metadataEntries.push(currentEntry);
       continue;
@@ -527,22 +529,23 @@ if (exists("_pages/cv.md")) {
     if (!currentEntry) continue;
     if (/^        role:/.test(line)) currentEntry.role = true;
     if (/^        date:/.test(line)) currentEntry.date = true;
-    if (/^        (organization|institution|context):/.test(line)) {
-      currentEntry.affiliationOrContext = true;
-    }
+    if (/^        (organization|institution):/.test(line)) currentEntry.affiliation = true;
+    if (/^        (links|url):/.test(line)) currentEntry.sourceLink = true;
   }
   if (metadataEntries.length < 80) {
     failures.push("Too few event-based CV entries were checked for four-field metadata.");
   }
   for (const entry of metadataEntries) {
-    if (!entry.name || !entry.role || !entry.date || !entry.affiliationOrContext) {
-      failures.push("CV core metadata missing: " + entry.section + " / " + entry.name);
+    if (!entry.name || !entry.role || !entry.date || (!entry.affiliation && !entry.sourceLink)) {
+      failures.push("CV core metadata or independent research source missing: " + entry.section + " / " + entry.name);
     }
   }
-  if (!cvRenderer.includes("entry.context") ||
-      !cvRenderer.includes('class="cv-context"') ||
+  if (cvSources.includes("        context:") ||
+      cvRenderer.includes("entry.context") ||
+      cvRenderer.includes('class="cv-context"') ||
+      cvStyles.includes(".cv-context") ||
       !cvRenderer.includes("{{ entry.name | escape }}")) {
-    failures.push("CV must visibly render research context and full Python library titles.");
+    failures.push("CV must omit standalone explanatory research rows while retaining real names and sources.");
   }
   const metadataExceptions = [
     "date: \"Date not recorded\"",
@@ -651,7 +654,7 @@ if (exists("_pages/cv.md")) {
       !exists(interactiveFigure) ||
       !fs.readFileSync(path.join(root, interactiveFigure), "utf8").includes("<svg") ||
       !abaCvSection.includes('role: "First Author · Interactive Technical Feature"') ||
-      !abaCvSection.includes("Coauthored with Héctor Maravillo") ||
+      !interactiveArticle.includes("Coauthored the original interactive feature with Héctor Maravillo") ||
       !abaCvSection.includes("articles/the-empty-space-that-makes-a-network.html") ||
       !abaCvSection.includes(interactiveUrl) ||
       !abaArchive.includes("02 / Technical writing") ||
@@ -993,11 +996,10 @@ if (exists("_pages/cv.md")) {
   // Wide reading has one font/size, line-height and vertical gap between
   // title, organization, links, description, and successive highlights.
   // The extra-compact print density, Harvard, and Europass remain untouched.
-  if (!cvStyles.includes("color: #4c5781;") ||
-      !cvStyles.includes(".cv-preview-paper-body .cv-context") ||
-      !cvStyles.includes("font-size: 8pt;") ||
-      cvStyles.includes("color: #737373 !important;")) {
-    failures.push("Research context must match the organization's secondary blue text in paper and print.");
+  if (cvStyles.includes(".cv-context") ||
+      cvRenderer.includes("entry.context") ||
+      cvSources.includes("        context:")) {
+    failures.push("No separate research-context rows should appear in screen or print CV layouts.");
   }
   if (!cvStyles.includes("--cv-reading-row-gap: 0.24rem") ||
       !cvStyles.includes("--cv-reading-font-size: 0.96rem") ||
