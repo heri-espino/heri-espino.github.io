@@ -2,7 +2,7 @@
 layout: page
 title: Papers
 permalink: /papers/
-description: Research manuscripts, working drafts, and published technical articles by Heriberto Espino Montelongo.
+description: Research manuscripts, working drafts, published articles, and author-hosted technical writing by Heriberto Espino Montelongo.
 nav: true
 nav_order: 2
 ---
