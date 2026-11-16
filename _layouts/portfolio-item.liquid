@@ -28,7 +28,7 @@ layout: default
             <span aria-hidden="true">↗</span></a
           >
         {% elsif page.pdf %}
-          <a class="portfolio-button portfolio-button-primary" href="{{ page.pdf | relative_url }}">
+          <a class="portfolio-button portfolio-button-primary" href="{{ page.pdf | relative_url }}"{% if page.pdf_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>
             Open PDF
             <span aria-hidden="true">↗</span></a
           >

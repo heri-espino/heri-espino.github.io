@@ -1610,3 +1610,25 @@ All original source images remain the conversation uploads and previous reposito
 - `Teaching: presented the slides, incorporated feedback, and revised materials.` (77 characters)
 
 The user requested exactly **three** polished bullet points. Keep the affiliation `Universidad de las Américas Puebla`, location, and Jan–May 2023 dates unchanged. This is an Academic Assistant role and does not imply an appointment as course instructor. Bullets are short enough for the existing Europass A4/Letter PDF limits. The `test/style_contract.js` source guard and Playwright `CV Linear Algebra assistant lists Beamer course decks, topics and feedback in paper and print` enforce the three bullets in reading, paper preview and browser print. This update accompanies the independent browser-local editable research-profile editor in PR #77.
+
+## 2026-11-16 — Handwritten trend notebook: PDF action and two independent previews
+
+The 31-page public PDF now exists at `notes/notes on trend estimation.pdf`
+(4,312,328-byte repository object). The original notes page
+`_pages/papers/handwritten-trend-estimation-notes.md` links directly
+to this file with `pdf:` and `pdf_new_tab: true`, rather than presenting
+the earlier upload-blocker notice. The same public PDF URL is listed in
+the CV research-notes record. The original file is not moved or modified.
+
+The *research archive card* has a first-page thumbnail at
+`assets/img/portfolio/handwritten-trend-first-page.webp`, reproducibly
+rendered from the public PDF by
+`python scripts/generate_handwritten_trend_preview.py`
+(requires PyMuPDF and Pillow). The *detail page*, independently, has
+`assets/img/portfolio/handwritten-trend-spectral-preview.webp`, a
+downscaled WebP of the owner's uploaded spectral-eigendecomposition
+screenshot. The two roles should never be reversed or conflated.
+The site continues to describe this as unsubmitted handwritten notes.
+
+The older 2026-11-10 / 2026-11-11 PDF-transfer blockers in this historical
+handoff are superseded by the actual file and links above.
