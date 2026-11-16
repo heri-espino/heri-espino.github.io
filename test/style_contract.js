@@ -318,7 +318,8 @@ if (exists("_pages/cv.md")) {
         !independent.includes("stochastic geometry") ||
         !independent.includes("computational geometry") ||
         !independent.includes("machine-learning interpretability") ||
-        !independent.includes("quantitative finance") ||
+        !independent.includes("quantitative") ||
+        !independent.includes("finance. Statistical") ||
         !independent.includes("Elsevier (two)") ||
         !independent.includes("Springer Nature") ||
         !independent.includes("Wiley journals") ||
