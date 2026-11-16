@@ -251,6 +251,28 @@ for (const [url, title] of [
     errors.push(`Research Notes record missing from visible working drafts or detail pages: ${url}`);
   }
 }
+// Preserve the notebook's three distinct public assets and its PDF button.
+// This asserts the built archive/detail HTML and published static PDF, not just YAML.
+const trendNotebookDetails = path.join(site, "papers/handwritten-trend-estimation-notes.html");
+const trendNotebookPdf = path.join(site, "notes/notes on trend estimation.pdf");
+if (!drafts.includes("handwritten-trend-first-page.webp")) {
+  errors.push("Handwritten trend-estimation card must use the PDF's first-page thumbnail.");
+}
+if (!fs.existsSync(trendNotebookPdf) || fs.statSync(trendNotebookPdf).size < 1_000_000) {
+  errors.push("Full handwritten trend-estimation PDF must be copied into the public site.");
+}
+if (!fs.existsSync(trendNotebookDetails)) {
+  errors.push("Handwritten trend-estimation detail page is missing.");
+} else {
+  const details = read(trendNotebookDetails);
+  if (!details.includes("handwritten-trend-spectral-preview.webp") ||
+      !details.includes("notes%20on%20trend%20estimation.pdf") ||
+      !details.includes('target="_blank"') ||
+      !details.includes("Open PDF")) {
+    errors.push("Notebook detail page must show the spectral preview and a new-tab PDF button.");
+  }
+}
+
 for (const url of [
   "/papers/componentwise-knn-isomap-lecture.html",
   "/papers/maxcut-sdp-eva-clustering-tutorial.html",
