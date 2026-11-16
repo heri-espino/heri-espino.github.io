@@ -1547,3 +1547,13 @@ print preview. Previous CV print WYSIWYG PR #56 was not modified.
 **Editorial safeguard:** Preserve distinct Submitted Manuscripts states (Elsevier Discrete Applied Mathematics — Under Review; Elsevier Computational Geometry — Under Revision; Springer Nature SN Computer Science — Under Review; Wiley Journal of Futures Markets — Submitted). Neither Zenodo archival DOI nor PyPI distribution implies peer review. No manuscript is submitted by this CV change. Max-Cut tutorial and TrendEstimation papers stay in their existing working-draft/lecture/tutorial categories. Preserve the separate graduation-date text editor work in PR #74.
 
 **Tests:** `test/style_contract.js` checks journal names and in-development wording; `test/visual/interactions.spec.js` checks the actual CV and print pages. All professional-experience highlights stay at or under the repository's 94-character paper limit.
+
+## 2026-11-15 — Brief first-person research profile at top of CV
+
+**Instruction:** Add a short, technically grounded paragraph near the beginning describing the author's interest in deep mathematics, research-question formation, development of statistical and optimization models, implementing and validating algorithms, decision-making, scientific ideas, written/presentation communication and visualization.
+
+**Text** in `_data/cv.yml` under `cv.profile`: “I enjoy formulating research questions and pursuing them from mathematical theory to computational implementation: deriving results, developing statistical and optimization models, and validating them through reproducible experiments. I value translating technical ideas into informed decisions and communicating them clearly through scientific writing, visualization, and presentations.”
+
+**Implementation:** `_includes/cv/render.liquid` prints escaped `cv.profile` in `.cv-research-profile` **after the contact block and before Education**. It is not the site `page.description`, whose `.post-description` is intentionally omitted by the paper clone in `assets/js/cv-customize.js`. Unlike the original generic description, the new paragraph survives paper preview and browser PDF. CSS in `_sass/_cv.scss` uses ordinary inherited text color (not faded gray), a comfortable screen size and compact 7.7pt paper/print size.
+
+**Regression:** Browser test `CV research profile connects mathematics, models and communication in print` checks exact thematic fragments in reading/preview/print and shared body color. Static style contract requires source text, safe Liquid escaping and scoped print styles. The standalone Independent Researcher entry and original four submitted manuscripts remain separate; the profile does not imply acceptance or publication.
