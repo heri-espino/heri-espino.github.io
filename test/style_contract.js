@@ -738,7 +738,7 @@ if (exists("_pages/cv.md")) {
         papersArchive.indexOf('id="working-drafts"') <
         papersArchive.indexOf('id="internal-research-papers"')
       ) ||
-      !papersArchive.includes("02 / Published writing") ||
+      !papersArchive.includes("02 / Technical writing") ||
       !papersArchive.includes("03 / Working drafts and learning materials") ||
       !papersArchive.includes("04 / Internal research")) {
     failures.push("Papers must show Submitted, Published, Research Notes and Internal Research, each defaulting to list.");
