@@ -55,7 +55,7 @@ test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQ
   await expect(section.locator("[data-cv-record]")).toHaveCount(2);
   const item = section.locator("[data-cv-record]").filter({ hasText: "The Empty Space That Makes a Network" });
   await expect(item).toContainText("First Author · Interactive Technical Feature");
-  await expect(item).toContainText("Héctor Maravillo");
+  await expect(item).not.toContainText("Coauthored with Héctor Maravillo");
   await expect(item.locator('a[href="https://heri-espino.github.io/proximitygraphs-siam-figures/article.html"]')).toHaveCount(1);
   await expect(section).not.toContainText("Published by SIAM News");
 
@@ -982,7 +982,7 @@ test("CV paper preview and print start at the top and keep link typography consi
   expect(Math.abs(fullTopGap)).toBeLessThan(2);
 });
 
-test("CV NYU and IESE icons, Zenodo DOIs, and research context render consistently", async ({ page }) => {
+test("CV NYU and IESE icons, Zenodo DOIs, and no redundant research context rows", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const root = page.locator("#cv-page");
   const document = page.locator("#cv-document");
@@ -1015,35 +1015,38 @@ test("CV NYU and IESE icons, Zenodo DOIs, and research context render consistent
     expect(label).toContain("DOI: 10.5281/zenodo.");
   }
 
-  await expect(document).not.toContainText(/not submitted/i);
-  const lecture = document.locator(".cv-context").filter({ hasText: "Mathematical research lecture" });
-  await expect(lecture).toHaveCount(1);
-  expect(await lecture.evaluate((el) => getComputedStyle(el).color)).toBe("rgb(76, 87, 129)");
+  const redundantExplanations = [
+    "Independent research software · numerical validation",
+    "Latent financial-risk modeling",
+    "Research working draft",
+    "Mathematical research lecture",
+    "Mathematical research tutorial",
+    "Handwritten mathematical research notebook",
+    "Expository probability and Hilbert-space analysis",
+  ];
+  const assertCleanCV = async (locator) => {
+    await expect(locator.locator(".cv-context")).toHaveCount(0);
+    for (const explanation of redundantExplanations) {
+      await expect(locator).not.toContainText(explanation);
+    }
+    await expect(locator).not.toContainText(/not submitted/i);
+  };
+  await assertCleanCV(document);
+  // Removing the extra explanation must not remove the research entry or its links.
+  const volume = document.locator("[data-cv-record]").filter({ hasText: "Stepping-Stone Volume Validation" });
+  await expect(volume).toContainText("Research Software Developer");
+  await expect(volume.locator('a[href="https://github.com/heri-espino/Stepping-Stone-Volume-Constants"]')).toHaveCount(1);
 
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-preview").click();
   const paper = page.locator("#cv-paged-preview");
-  await expect(paper).not.toContainText(/not submitted/i);
-  const paperLecture = paper.locator(".cv-context").filter({ hasText: "Mathematical research lecture" });
-  await expect(paperLecture).toHaveCount(1);
-  const contextAppearance = await paperLecture.evaluate((el) => ({
-    color: getComputedStyle(el).color,
-    size: getComputedStyle(el).fontSize,
-  }));
-  expect(contextAppearance.color).toBe("rgb(76, 87, 129)");
-  expect(parseFloat(contextAppearance.size)).toBeGreaterThanOrEqual(10);
+  await assertCleanCV(paper);
   await expect(paper.locator(".cv-links a:has(.cv-zenodo-mark)")).toHaveCount(5);
 
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await expect(root).toHaveAttribute("data-cv-printing", "true");
-  const printed = await page.locator("#cv-paged-preview .cv-context")
-    .filter({ hasText: "Mathematical research lecture" }).evaluate((el) => ({
-      color: getComputedStyle(el).color,
-      size: getComputedStyle(el).fontSize,
-    }));
-  expect(printed.color).toBe("rgb(76, 87, 129)");
-  expect(parseFloat(printed.size)).toBeGreaterThanOrEqual(10);
+  await assertCleanCV(paper);
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
