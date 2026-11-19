@@ -562,10 +562,10 @@ cv:
         role: "President"
         date: "Jan 2026 — Jun 2026"
         organization: "Preety Good Quantum OE · Universidad de las Américas Puebla"
-        organization_url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/"
+        organization_url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=heriberto.espinomo%40udlap.mx"
         paper_hide_redundant_links: true
         links:
-          - { label: UDLAP student organizations, url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/" }
+          - { label: UDLAP student organizations, url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=heriberto.espinomo%40udlap.mx" }
         highlights:
           - "Student outreach: organized quantum-computing classes at UDLAP."
           - "Curriculum: introduced quantum circuits, QFT and Grover with Python workshops."
@@ -573,6 +573,7 @@ cv:
         role: "Vice-President"
         date: "Jan 2025 — Jun 2026"
         organization: "Bitwise Competitive Programming · Universidad de las Américas Puebla"
+        organization_url: "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/#:~:text=Bitwise%20Competitive%20Programming"
         highlights:
           - "Peer instruction: designed C++ algorithms and complexity problem sets."
       - name: "How to Control Global Outbreaks of Infectious Diseases"
