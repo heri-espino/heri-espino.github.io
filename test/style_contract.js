@@ -557,10 +557,10 @@ if (exists("_pages/cv.md")) {
       !logoSource.includes('https://raw.githubusercontent.com/AbaQuant/AbaQuant/main/docs/_static/q_dark.png')) {
     failures.push("AbaQuant must use its official repository icon.");
   }
-  if (!exists("assets/img/cv-organizations/preety-good-quantum.webp") ||
+  if (!exists("assets/img/cv-organizations/preety-good-quantum-cat.webp") ||
       !logoSource.includes('- match: "preety good quantum oe"') ||
-      !logoSource.includes('logo: "/assets/img/cv-organizations/preety-good-quantum.webp"')) {
-    failures.push("The official UDLAP student-organization mark must use the supplied image.");
+      !logoSource.includes('logo: "/assets/img/cv-organizations/preety-good-quantum-cat.webp"')) {
+    failures.push("The quantum organization must use the owner-approved cat icon.");
   }
   const libraryAssets = {
     "proximitygraphs": "proximitygraphs.svg",
@@ -1433,6 +1433,7 @@ if (exists("_pages/cv.md")) {
   const quantum = cv.split('      - name: "Quantum Computing Curriculum and Instruction"')[1]
     ?.split('      - name: "C++ Algorithms and Complexity Instruction"')[0] || "";
   const canonical = "https://www.udlap.mx/vidaestudiantil/organizaciones-estudiantiles/";
+  const contactTarget = canonical + "#:~:text=heriberto.espinomo%40udlap.mx";
   if (!springer.includes('location: "Puebla, Mexico"') ||
       !springer.includes("date: Oct 2026") ||
       !wiley.includes('date: "Nov 2026"') ||
@@ -1441,14 +1442,13 @@ if (exists("_pages/cv.md")) {
       !smm.includes('date: "Oct 2026"')) {
     failures.push("CV submission dates and Puebla/Tlaxcala locations must match owner corrections.");
   }
-  if (!quantum.includes('organization_url: "' + canonical + '"') ||
-      !quantum.includes('url: "' + canonical + '"') ||
+  if (!quantum.includes('organization_url: "' + contactTarget + '"') ||
+      !quantum.includes('url: "' + contactTarget + '"') ||
       !quantum.includes("paper_hide_redundant_links: true") ||
-      quantum.includes("#:~:text=") ||
       !renderer.includes("cv-paper-redundant-links") ||
       !css.includes(".cv-preview-paper-body .cv-links.cv-paper-redundant-links") ||
       !css.includes('.cv-organization a[href*="/organizaciones-estudiantiles/"]')) {
-    failures.push("Quantum organization link must remain clickable without a redundant resource or URL fragment in printed CV pages.");
+    failures.push("Quantum organization link must target its listed UDLAP contact and hide redundant print links.");
   }
 }
 
