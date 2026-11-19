@@ -1279,3 +1279,58 @@ test("CV NYU and IESE icons, Zenodo DOIs, and no redundant research context rows
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
+
+
+test("CV print geometry has tight margins and matched compact preview typography", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-page-margin").selectOption("latex");
+  await page.locator("#cv-preview").click();
+  await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-density", "latex");
+
+  const metric = () => page.locator("#cv-paged-preview .cv-preview-page").first().evaluate((first) => {
+    const sheet = first.querySelector(".cv-preview-sheet");
+    const body = first.querySelector(".cv-preview-paper-body");
+    const heading = body.querySelector(".cv-entry h3, .cv-compact-entry h3");
+    const description = body.querySelector(".cv-highlights");
+    const list = body.querySelector(".cv-entry-list");
+    const computed = (element) => getComputedStyle(element);
+    return {
+      sheetPadding: parseFloat(computed(sheet).paddingTop),
+      textSize: parseFloat(computed(sheet).fontSize),
+      headingSize: parseFloat(computed(heading).fontSize),
+      descriptionSize: parseFloat(computed(description).fontSize),
+      descriptionLineHeight: parseFloat(computed(description).lineHeight),
+      listGap: parseFloat(computed(list).rowGap),
+      bodyTop: body.getBoundingClientRect().top,
+      firstTop: first.getBoundingClientRect().top,
+    };
+  });
+
+  const preview = await metric();
+  // Seven physical millimetres in a 96-dpi preview, not a second paper margin.
+  expect(preview.sheetPadding).toBeGreaterThan(25);
+  expect(preview.sheetPadding).toBeLessThan(28);
+
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  const printed = await metric();
+  // @page provides the paper padding; the HTML sheet must not add it again.
+  expect(printed.sheetPadding).toBe(0);
+  for (const key of ["textSize", "headingSize", "descriptionSize", "descriptionLineHeight", "listGap"]) {
+    expect(Math.abs(printed[key] - preview[key]), key + " changed between paper measurement and printing").toBeLessThan(0.8);
+  }
+  const topOffsets = await page.locator("#cv-page").evaluate((root) => {
+    const ancestorMain = root.closest("main");
+    const px = (node, prop) => parseFloat(getComputedStyle(node)[prop]) || 0;
+    return {
+      rootMargin: px(root, "marginTop"),
+      rootPadding: px(root, "paddingTop"),
+      mainMargin: ancestorMain ? px(ancestorMain, "marginTop") : 0,
+      mainPadding: ancestorMain ? px(ancestorMain, "paddingTop") : 0,
+    };
+  });
+  Object.entries(topOffsets).forEach(([name, value]) => expect(value, name).toBe(0));
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+});
