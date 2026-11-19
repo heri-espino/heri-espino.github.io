@@ -2690,11 +2690,12 @@
 }
 
 
-/* PRINT = PAPER PREVIEW, not full-width CV:
-   Paper preview is generated from the same records, same physical A4/Letter
-   width and selected margin. Force its exact page divisions in the PDF while
-   preserving searchable text/links and native vector typography. The preview
-   numbering, border, shadows and screen gutters are not printed. */
+/* PRINT = CONTINUOUS CV FLOW in the paper-preview typography:
+   Screen preview estimates sheet breaks, but Chrome's PDF layout has slightly
+   different font/layout metrics. Hard breaks after estimated sheets caused
+   nearly empty physical PDF pages when an entry overflowed a printed sheet.
+   Keep the preview's records and styles, but print one continuous wrapper and
+   let the browser paginate at the selected @page size and margins. */
 @media print {
   .cv-page[data-cv-printing="true"] #cv-document {
     display: none !important;
@@ -2717,9 +2718,16 @@
     margin: 0 !important;
     padding: 0 !important;
   }
-  .cv-page[data-cv-printing="true"] .cv-preview-page:not(:last-child) {
-    break-after: page;
-    page-break-after: always;
+  /* Allow native fragmentation of the full printable CV. There is no forced
+     page break between the estimated on-screen preview sheets. */
+  .cv-page[data-cv-printing="true"] .cv-preview-page,
+  .cv-page[data-cv-printing="true"] .cv-preview-sheet {
+    break-before: auto !important;
+    break-after: auto !important;
+    break-inside: auto !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    page-break-inside: auto !important;
   }
   .cv-page[data-cv-printing="true"] .cv-preview-page-number {
     display: none !important;
