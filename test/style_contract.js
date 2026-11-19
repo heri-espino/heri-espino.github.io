@@ -1249,6 +1249,21 @@ if (exists("_pages/cv.md")) {
   }
 }
 
+// Regression: compact page geometry must be measured at the same font and
+// spacing as the printed clone. The old mismatch stranded large blank areas.
+{
+  const js = read("assets/js/cv-customize.js");
+  const css = read("_sass/_cv.scss");
+  if (!js.includes('const pageMargins = { latex: "7mm", narrow: "5mm", standard: "10mm", wide: "15mm" };') ||
+      !css.includes('body:has(.cv-page) main') ||
+      !css.includes('.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-highlights {') ||
+      !css.includes('.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-entry-list {') ||
+      !css.includes('font-size: 6.5pt !important;') ||
+      !css.includes('margin: 7mm;')) {
+    failures.push("CV printed margins and preview-measurement typography must stay synchronized.");
+  }
+}
+
 // The native PDF must print the page-by-page PREVIEW itself. Previously
 // CSS forcibly hid #cv-paged-preview and printed #cv-document at full width.
 // This regression guard is intentionally independent of default preview mode.
