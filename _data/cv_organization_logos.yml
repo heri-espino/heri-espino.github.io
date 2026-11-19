@@ -1,7 +1,7 @@
-# Verified UDLAP student organization mark (user-provided image).
+# Custom UDLAP student organization mark (user-approved quantum-cat artwork, November 2026).
 # Match first so the broader UDLAP rule does not override the student group's identity.
 - match: "preety good quantum oe"
-  logo: "/assets/img/cv-organizations/preety-good-quantum.webp"
+  logo: "/assets/img/cv-organizations/preety-good-quantum-cat.webp"
 # User-provided Bitwise Competitive Programming logo; must precede UDLAP fallback.
 - match: "bitwise competitive programming"
   logo: "/assets/img/cv-organizations/bitwise-competitive-programming.svg"

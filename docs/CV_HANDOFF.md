@@ -1632,3 +1632,16 @@ The site continues to describe this as unsubmitted handwritten notes.
 
 The older 2026-11-10 / 2026-11-11 PDF-transfer blockers in this historical
 handoff are superseded by the actual file and links above.
+
+## CV leadership logo update — 2026-11-19
+
+At the owner's request, the Preety Good Quantum OE entry now uses an original,
+Cheshire/Schrödinger-inspired quantum-cat illustration (superposed cat, state
+ket, and atom-like orbit), approved in chat. Its transparent WebP is stored at
+`assets/img/cv-organizations/preety-good-quantum-cat.webp`, optimized to
+96 × 96 for the small organization icon. The logo mapping is
+`_data/cv_organization_logos.yml`; the older navy-Q logo is retained for
+provenance. The official UDLAP spelling `Preety Good Quantum OE` is kept in
+`_data/cv.yml`. Related direct UDLAP text-fragment links and the Bitwise
+logo remain in PR #80. The new logo is a custom mark, not an institutional
+endorsement. Validate in the browser and browser-generated PDF after build.
