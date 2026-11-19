@@ -2,6 +2,9 @@
 # Match first so the broader UDLAP rule does not override the student group's identity.
 - match: "preety good quantum oe"
   logo: "/assets/img/cv-organizations/preety-good-quantum.webp"
+# User-provided Bitwise Competitive Programming logo; must precede UDLAP fallback.
+- match: "bitwise competitive programming"
+  logo: "/assets/img/cv-organizations/bitwise-competitive-programming.svg"
 # CV-only name matching. Put specific names before broad matches.
 # Official student division: use its own website favicon rather than the parent IMEF identity.
 - match: "imef universitario"
