@@ -1645,3 +1645,37 @@ provenance. The official UDLAP spelling `Preety Good Quantum OE` is kept in
 `_data/cv.yml`. Related direct UDLAP text-fragment links and the Bitwise
 logo remain in PR #80. The new logo is a custom mark, not an institutional
 endorsement. Validate in the browser and browser-generated PDF after build.
+
+
+## CV physical print margins and page packing — 2026-11-19
+
+**User report:** the browser-generated six-page A4 CV left excessive top and
+bottom whitespace. The supplied PDF was inspected without uploading it to the
+public repository. On page 1 the top of visible text was roughly 38.5 mm from
+the physical edge; on later pages it was about 13.4 mm. Pages 4 and 5 left
+roughly 75 and 71 mm below their last text, respectively. The final page is
+naturally short and cannot be filled unless the preceding page breaks change.
+
+**Fix:** `assets/js/cv-customize.js` now offers 7 mm default (LaTeX), 5 mm
+narrow, 10 mm standard and 15 mm wide physical margins (both A4 and Letter).
+`_sass/_cv.scss` resets top offsets on the site's print-only main/CV wrappers
+and aligns the `data-cv-density="latex"` paper preview typography, line
+heights, entry gaps, and section spacing to the compact **printed** metrics.
+Previously the browser screen preview was measured at approximately 9 pt with
+9 pt entry gaps, while the PDF used 6.5 pt highlights and substantially
+smaller gaps. `renderPagedPreview` thus broke pages prematurely. Keeping
+measurement and print consistent should allow more entries per page without
+splitting records. The saved PDF remains real, selectable text with hyperlinks.
+
+**Controls:** Users can still select all four margin presets, either paper
+size, the text-size presets, and their preferred template. The reading-mode CV
+retains its existing typography. Native print and the Print menu both use the
+same paginated source. The short last sheet may still contain blank space, as
+nothing is vertically centered or stretched.
+
+**Regression:** `test/style_contract.js` checks the new margin map and
+shared compact measurements; `test/visual/interactions.spec.js` compares
+the paper preview's computed font/gap geometry with the print-media clone,
+asserts no double sheet padding, and checks that print-only outer wrappers
+have zero top offset. Run the CV Playwright suite and inspect a real saved A4
+and Letter PDF, checking page one and page counts.

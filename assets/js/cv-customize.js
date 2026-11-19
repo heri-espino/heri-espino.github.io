@@ -273,7 +273,7 @@
 
   // Only whitelisted values can alter @page. Never insert arbitrary user strings into CSS.
   const pageSizes = { a4: "A4", letter: "letter" };
-  const pageMargins = { latex: "10mm", narrow: "8mm", standard: "13mm", wide: "19mm" };
+  const pageMargins = { latex: "7mm", narrow: "5mm", standard: "10mm", wide: "15mm" };
   const paletteColors = {
     velvet: "#00166c",
     sapphire: "#123b63",
