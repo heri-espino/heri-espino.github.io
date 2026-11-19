@@ -544,7 +544,7 @@
 @media print {
   @page {
     size: A4;
-    margin: 13mm;
+    margin: 7mm;
   }
 
   body:has(.cv-page) {
@@ -3062,4 +3062,123 @@
   font-weight: inherit !important;
   line-height: inherit !important;
   text-decoration: none !important;
+}
+
+
+/* Compact PDF geometry (2026-11-19).
+   The uploaded A4 PDF showed a first-page offset and large blank lower areas.
+   The first-page offset comes from the site's screen-layout ancestors; strip
+   those offsets only when printing the CV, never on other site pages. */
+@media print {
+  body:has(.cv-page),
+  body:has(.cv-page) main,
+  body:has(.cv-page) .post.cv-page,
+  .cv-page[data-cv-printing="true"] .cv-workspace,
+  .cv-page[data-cv-printing="true"] .cv-preview-column {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  body:has(.cv-page) main {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* The paginator measures .cv-preview-paper-body in SCREEN media, then prints
+   the SAME cloned DOM in PRINT media. The old screen page used 9pt text and 9pt
+   entry gaps while the PDF shrank highlights to 6.5pt, producing prematurely
+   broken pages with large unused bottoms. Match LaTeX-compact metrics across
+   both media so scrollHeight / clientHeight is measured at the printed size.
+   Scoped to paper clones: full-width reading CV is not changed. */
+.cv-page[data-cv-density="latex"] .cv-preview-sheet {
+  font-size: 7.3pt;
+  line-height: 1.15;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-intro {
+  margin-bottom: 3pt;
+  padding-bottom: 4pt;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-content,
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-entry-list {
+  margin-top: 3pt;
+  gap: 3pt;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-section {
+  margin-bottom: 4pt;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-section > h2 {
+  margin-bottom: 2.5pt;
+  padding-bottom: 2pt;
+  font-size: 10pt !important;
+  break-after: avoid;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-entry,
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-compact-entry {
+  padding-bottom: 2pt;
+  break-inside: avoid;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-entry h3,
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-compact-entry h3 {
+  font-size: 7.6pt !important;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-meta,
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-organization,
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-links {
+  font-size: 6.8pt !important;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-highlights {
+  margin: 1pt 0 2pt;
+  font-size: 6.5pt !important;
+  line-height: 7.6pt;
+}
+
+.cv-page[data-cv-density="latex"] .cv-preview-paper-body .cv-skills > div {
+  padding: 1.2pt 0;
+  font-size: 7pt;
+}
+
+/* Honor the existing paper text-size selections in BOTH measurement and PDF. */
+.cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-preview-sheet {
+  font-size: 6.7pt;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-preview-sheet {
+  font-size: 9pt;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-preview-paper-body .cv-entry h3,
+.cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-preview-paper-body .cv-compact-entry h3 {
+  font-size: 7pt !important;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-preview-paper-body .cv-entry h3,
+.cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-preview-paper-body .cv-compact-entry h3 {
+  font-size: 9.3pt !important;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-text-size="small"] .cv-preview-paper-body .cv-highlights {
+  font-size: 6pt !important;
+  line-height: 7.2pt;
+}
+
+.cv-page[data-cv-density="latex"][data-cv-text-size="large"] .cv-preview-paper-body .cv-highlights {
+  font-size: 8pt !important;
+  line-height: 9.8pt;
+}
+
+/* Paper previews remain physical A4/Letter width even on a narrow viewport;
+   viewport-relative padding caused a separate mobile-only measurement drift. */
+@media screen and (max-width: 590px) {
+  .cv-page[data-cv-preview="paper"] .cv-preview-sheet {
+    padding: var(--cv-print-margin, 7mm);
+  }
 }
