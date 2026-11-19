@@ -474,12 +474,14 @@
     return !toggle || toggle.checked;
   };
 
-  // The print engine owns actual page breaks. Build the same physical-sheet
-  // measurement even in reading mode (offscreen), since Ctrl+P can start there.
-  // All pages start at the configured paper margin, even short one-page CVs.
+  // Screen Paper preview uses fixed-height approximate sheets. Printing uses
+  // the SAME selected records, paper density and typography, but lets the
+  // browser paginate a continuous flow. Never combine measured screen breaks
+  // with CSS forced breaks: tiny layout differences created nearly empty
+  // physical pages in the owner's November 2026 PDF.
   function renderPagedPreview(forPrinting = false) {
-    // Real print must contain these *same* paginated pages, even if the
-    // on-screen CV was left in full-width reading mode.
+    // Native print receives the entire selection even when the on-screen
+    // CV is left in full-width reading mode. Only screen preview is paginated.
     const showing = forPrinting || root.dataset.cvPreview === "paper";
     const screenDensity = root.dataset.cvDensity;
     if (!showing) {
@@ -585,14 +587,16 @@
       return { section, list };
     };
 
-    // Normal offscreen measurement only needs to distinguish one sheet from two.
-    // Actual printing, like Paper preview, MUST include the entire CV.
+    // Offscreen and on-screen preview paginate into estimated paper sheets.
+    // Native printing emits ONE full-flow container and delegates all physical
+    // page breaks to the browser; an entry cannot be stranded between a
+    // browser overflow and an extra JavaScript-inserted page break.
     groupLoop: for (const group of groups) {
       let block = startGroup(group, false);
       for (const original of group.items) {
         const entry = cloneForPreview(original);
         block.list.appendChild(entry);
-        if (page.body.scrollHeight <= page.body.clientHeight + 2) continue;
+        if (forPrinting || page.body.scrollHeight <= page.body.clientHeight + 2) continue;
 
         // Do not strand a section heading by itself at a page boundary.
         entry.remove();
@@ -613,7 +617,9 @@
 
     // A one-page selection retains natural whitespace BELOW its contents.
     // Do not add top padding to either the preview sheet or the print source.
-    root.dataset.cvSinglePage = pageNumber === 1 && !overlongBlocks ? "true" : "false";
+    const fitsOneSheet = page.body.scrollHeight <= page.body.clientHeight + 2;
+    root.dataset.cvSinglePage = pageNumber === 1 && !overlongBlocks && (!forPrinting || fitsOneSheet)
+      ? "true" : "false";
 
     // Paper preview and browser print share the same top-aligned layout.
     // In reading mode the measuring sheets must never become visible.
