@@ -1071,7 +1071,7 @@ test("CV emphasizes full unique labels, never repetitive software tokens", async
   await expect(preview.locator(".cv-keyword", { hasText: "PyTorch:" })).toHaveCount(1);
 });
 
-test("CV native Print uses A4 and Letter paper preview pages instead of the wide source", async ({ page }, testInfo) => {
+test("CV native Print uses continuous A4 and Letter content with browser pagination", async ({ page }, testInfo) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
   for (const [paper, template] of [["a4", "personal"], ["letter", "harvard"]]) {
@@ -1092,6 +1092,7 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
         sourceDisplay: getComputedStyle(source).display,
         previewDisplay: getComputedStyle(preview).display,
         pages: pages.length,
+        nativeBreaks: getComputedStyle(pages[0]).breakAfter === "auto",
         allSections: pages.map((el) => el.textContent).join(" ").toLowerCase().includes("programming experience"),
         noPageLabels: pages.every((el) =>
           getComputedStyle(el.querySelector(".cv-preview-page-number")).display === "none"),
@@ -1101,7 +1102,8 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
     expect(geometry.printing).toBe("true");
     expect(geometry.sourceDisplay).toBe("none");
     expect(geometry.previewDisplay).not.toBe("none");
-    expect(geometry.pages).toBeGreaterThan(1);
+    expect(geometry.pages).toBe(1);
+    expect(geometry.nativeBreaks).toBe(true);
     expect(geometry.noPageLabels).toBe(true);
     expect(geometry.sized).toBe(true);
     expect(geometry.allSections).toBe(true);
@@ -1116,6 +1118,30 @@ test("CV native Print uses A4 and Letter paper preview pages instead of the wide
     await expect(page.locator("#cv-page")).toHaveAttribute("data-cv-printing", "false");
     await expect(page.locator("#cv-paged-preview .cv-preview-page")).toHaveCount(0);
   }
+});
+
+test("CV A4 PDF never strands a single record on an extra physical page", async ({ page }, testInfo) => {
+  if (testInfo.project.name !== "desktop") return;
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-template").selectOption("minimal");
+  await page.locator("#cv-paper").selectOption("a4");
+  await page.locator("#cv-page-margin").selectOption("latex");
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  const flow = page.locator("#cv-paged-preview .cv-preview-page");
+  await expect(flow).toHaveCount(1);
+  await expect(flow).toContainText("Unit-Region Factorization");
+  await expect(flow).toContainText("When Does Posterior Integration Change Option Values?");
+  await expect(flow).toContainText("GitHub: From Zero to Pull Request");
+  const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true });
+  const physicalPages = (pdf.toString("latin1").match(/\/Type\s*\/Page\b/g) || []).length;
+  // The owner's old A4 PDF needed six physical sheets because sheets two
+  // and five were almost empty. Natural pagination must use fewer sheets.
+  expect(physicalPages).toBeGreaterThanOrEqual(3);
+  expect(physicalPages).toBeLessThan(6);
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
 
 test("CV paper preview and print start at the top and keep link typography consistent", async ({ page }) => {

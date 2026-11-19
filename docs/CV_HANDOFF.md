@@ -1679,3 +1679,36 @@ the paper preview's computed font/gap geometry with the print-media clone,
 asserts no double sheet padding, and checks that print-only outer wrappers
 have zero top offset. Run the CV Playwright suite and inspect a real saved A4
 and Letter PDF, checking page one and page counts.
+
+
+## CV sparse-pages regression and native continuous print — 2026-11-19
+
+**Owner-provided A4 PDF after the tighter-margin change:** six pages with
+**physical pages 2 and 5 nearly empty** (page 2 contains only the final Wiley
+manuscript entry; page 5 contains only the Google Cloud specialization).
+PyMuPDF bounding-box inspection of the actual uploaded PDF found page-2 text
+extents at 19–65 pt and page-5 extents at 19–48 pt of 842 pt paper height.
+
+**Root cause:** `renderPagedPreview(true)` created multiple fixed-height
+*estimated* screen sheets while print CSS forced
+`break-after: page` between the clones. Differences between preview and
+Chromium's printed line metrics caused one record to spill onto a second
+*physical* sheet, followed by a forced break to the next estimated sheet.
+This is **double pagination**, not a margin problem.
+
+**Fix:** keep the numbered paper-preview sheets in screen mode, but in native
+print emit **one continuous, cloned, fully selected paper-style document**.
+The browser alone decides physical A4/Letter breaks; remove explicit print
+page-break rules on cloned preview containers while keeping
+`break-inside: avoid` for individual entries. Content/ordering/links/images
+and the selected paper typography/margins are unchanged. Paper preview
+remains an approximation: do **not** promise identical on-screen page
+boundaries. `data-cv-single-page` still reflects actual content height.
+
+**Regression:** the CV Playwright suite checks that printing uses exactly
+one cloned flow, that its computed `break-after` is `auto`, and that a
+default A4 PDF uses fewer than six physical pages (rather than leaving two
+mostly blank sheets). The tests still verify PDF text and all selected
+records are present in the printable DOM. Never restore the old forced
+page break after screen-estimated sheets; verify browser-generated PDF
+page density whenever print CSS or sizing changes.
