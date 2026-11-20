@@ -584,66 +584,113 @@ test("CV Linear Algebra assistant lists Beamer course decks, topics and feedback
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
 
-test("CV graduation text can be independently edited, printed, remembered and reset", async ({ page }) => {
+test("CV start and graduation dates can be independently edited, printed, remembered and reset", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-graduation-editor > summary").click();
 
-  const dataScience = page.locator("#cv-graduation-data-science");
-  const actuarial = page.locator("#cv-graduation-actuarial-science");
-  await expect(dataScience).toHaveValue("Dec 2026 (expected)");
-  await expect(actuarial).toHaveValue("Dec 2026 (expected)");
+  const dataScienceStart = page.locator("#cv-graduation-start-data-science");
+  const actuarialStart = page.locator("#cv-graduation-start-actuarial-science");
+  const dataScienceEnd = page.locator("#cv-graduation-data-science");
+  const actuarialEnd = page.locator("#cv-graduation-actuarial-science");
+  await expect(dataScienceStart).toHaveValue("Aug 2023");
+  await expect(actuarialStart).toHaveValue("Aug 2021");
+  await expect(dataScienceEnd).toHaveValue("Dec 2026 (expected)");
+  await expect(actuarialEnd).toHaveValue("Dec 2026 (expected)");
+  await expect(page.locator(".cv-graduation-degree")).toHaveCount(2);
 
-  // Plain text is intentional: there is no calendar widget or date parser.
-  await dataScience.fill("Jun 2027 (expected)");
-  await actuarial.fill("December 2027 — coursework complete");
+  // Both dates are arbitrary literal text rather than normalized date widgets.
+  await dataScienceStart.fill("Sep 2022");
+  await actuarialStart.fill("Feb 2021");
+  await dataScienceEnd.fill("Jun 2027 (expected)");
+  await actuarialEnd.fill("December 2027 — coursework complete");
   const education = page.locator('#cv-document [data-cv-section="education"]');
   await expect(education.locator(".cv-date")).toHaveText([
-    "Aug 2023 — Jun 2027 (expected)",
-    "Aug 2021 — December 2027 — coursework complete",
+    "Sep 2022 — Jun 2027 (expected)",
+    "Feb 2021 — December 2027 — coursework complete",
   ]);
+  // Changes are presentation-only: original data-cv-date is retained for sorting.
   await expect(education.locator("[data-cv-graduation-key]").first())
     .toHaveAttribute("data-cv-date", "Aug 2023 — Dec 2026 (expected)");
 
   await page.locator("#cv-preview").click();
   const paper = page.locator("#cv-paged-preview");
-  await expect(paper).toContainText("Aug 2023 — Jun 2027 (expected)");
-  await expect(paper).toContainText("Aug 2021 — December 2027 — coursework complete");
+  await expect(paper).toContainText("Sep 2022 — Jun 2027 (expected)");
+  await expect(paper).toContainText("Feb 2021 — December 2027 — coursework complete");
 
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await expect(page.locator("#cv-document")).toBeHidden();
-  await expect(paper).toContainText("Aug 2023 — Jun 2027 (expected)");
-  await expect(paper).toContainText("Aug 2021 — December 2027 — coursework complete");
+  await expect(paper).toContainText("Sep 2022 — Jun 2027 (expected)");
+  await expect(paper).toContainText("Feb 2021 — December 2027 — coursework complete");
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 
   await page.reload({ waitUntil: "networkidle" });
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-graduation-editor > summary").click();
-  await expect(dataScience).toHaveValue("Jun 2027 (expected)");
-  await expect(actuarial).toHaveValue("December 2027 — coursework complete");
-  await expect(education).toContainText("Jun 2027 (expected)");
-  await expect(education).toContainText("December 2027 — coursework complete");
+  await expect(dataScienceStart).toHaveValue("Sep 2022");
+  await expect(actuarialStart).toHaveValue("Feb 2021");
+  await expect(dataScienceEnd).toHaveValue("Jun 2027 (expected)");
+  await expect(actuarialEnd).toHaveValue("December 2027 — coursework complete");
+  await expect(education).toContainText("Sep 2022 — Jun 2027 (expected)");
+  await expect(education).toContainText("Feb 2021 — December 2027 — coursework complete");
+  const savedStarts = await page.evaluate(() => JSON.parse(localStorage.getItem("cv-graduation-start-text-v1")));
+  expect(savedStarts).toEqual({ "data-science": "Sep 2022", "actuarial-science": "Feb 2021" });
 
-  // Chronological mode clones the same edited source instead of restoring YAML.
+  // Chronological mode must clone the same live degree text.
   await page.locator("#cv-order").selectOption("newest");
-  await expect(page.locator("#cv-timeline")).toContainText("Jun 2027 (expected)");
-  await expect(page.locator("#cv-timeline")).toContainText("December 2027 — coursework complete");
+  await expect(page.locator("#cv-timeline")).toContainText("Sep 2022 — Jun 2027 (expected)");
+  await expect(page.locator("#cv-timeline")).toContainText("Feb 2021 — December 2027 — coursework complete");
 
-  // User-entered markup is literal text, never executed or inserted as HTML.
-  await actuarial.fill("<img src=x onerror=alert(1)>");
+  // Both start and end inputs are literal text, never interpreted as markup.
+  await actuarialStart.fill("<img src=x onerror=alert(1)>");
+  await actuarialEnd.fill("<svg onload=alert(1)>");
   await expect(education).toContainText("<img src=x onerror=alert(1)>");
-  await expect(education.locator(".cv-date img")).toHaveCount(0);
+  await expect(education).toContainText("<svg onload=alert(1)>");
+  await expect(education.locator(".cv-date img, .cv-date svg")).toHaveCount(0);
+
+  // Clearing either side must not leave an orphan separator.
+  await actuarialStart.fill("");
+  await actuarialEnd.fill("Dec 2028");
+  await expect(education.locator(".cv-date").nth(1)).toHaveText("Dec 2028");
+  await actuarialStart.fill("Feb 2021");
+  await actuarialEnd.fill("");
+  await expect(education.locator(".cv-date").nth(1)).toHaveText("Feb 2021");
 
   await page.locator("#cv-reset").click();
-  await expect(dataScience).toHaveValue("Dec 2026 (expected)");
-  await expect(actuarial).toHaveValue("Dec 2026 (expected)");
+  await expect(dataScienceStart).toHaveValue("Aug 2023");
+  await expect(actuarialStart).toHaveValue("Aug 2021");
+  await expect(dataScienceEnd).toHaveValue("Dec 2026 (expected)");
+  await expect(actuarialEnd).toHaveValue("Dec 2026 (expected)");
   await expect(education.locator(".cv-date")).toHaveText([
     "Aug 2023 — Dec 2026 (expected)",
     "Aug 2021 — Dec 2026 (expected)",
   ]);
   expect(await page.evaluate(() => localStorage.getItem("cv-graduation-text-v1"))).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem("cv-graduation-start-text-v1"))).toBeNull();
+});
+
+test("CV keeps legacy saved graduation text after adding editable start dates", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  await page.evaluate(() => localStorage.setItem("cv-graduation-text-v1", JSON.stringify({
+    "data-science": "Jun 2027 (expected)",
+    "actuarial-science": "Dec 2026 (expected)",
+  })));
+  await page.reload({ waitUntil: "networkidle" });
+  const education = page.locator('#cv-document [data-cv-section="education"]');
+  await expect(education.locator(".cv-date")).toHaveText([
+    "Aug 2023 — Jun 2027 (expected)",
+    "Aug 2021 — Dec 2026 (expected)",
+  ]);
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-graduation-editor > summary").click();
+  await expect(page.locator("#cv-graduation-start-data-science")).toHaveValue("Aug 2023");
+  await expect(page.locator("#cv-graduation-data-science")).toHaveValue("Jun 2027 (expected)");
+  await page.locator("#cv-graduation-start-data-science").fill("Jan 2024");
+  await expect(education.locator(".cv-date").first()).toHaveText("Jan 2024 — Jun 2027 (expected)");
+  const storedEnd = await page.evaluate(() => JSON.parse(localStorage.getItem("cv-graduation-text-v1")));
+  expect(storedEnd["data-science"]).toBe("Jun 2027 (expected)");
 });
 
 test("CV section order can be changed, survives reload, and resets to source order", async ({ page }) => {
