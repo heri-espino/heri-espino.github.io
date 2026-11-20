@@ -377,18 +377,29 @@ if (exists("_pages/cv.md")) {
       !cvStyles.includes("white-space: pre-wrap;")) {
     failures.push("The profile editor must use textContent, persist browser-local multiline text, and reset without touching source YAML.");
   }
-  // Free-text completion fields are per-degree browser preferences, not edits
-  // to published YAML dates or a date-picker restricted to calendar values.
+  // Free-text enrollment and graduation fields are per-degree preferences.
+  // Browser changes do not alter the published YAML or original sort keys.
+  // Preserve old cv-graduation-text-v1 completion overrides when upgrading.
   if (!cvRenderer.includes('id="cv-graduation-editor"') ||
+      !cvRenderer.includes('<fieldset class="cv-graduation-degree">') ||
+      !cvRenderer.includes('data-cv-graduation-start-input="{{ degree.subtitle | slugify }}"') ||
       !cvRenderer.includes('data-cv-graduation-input="{{ degree.subtitle | slugify }}"') ||
       !cvRenderer.includes('data-cv-graduation-key="{{ entry.subtitle | slugify }}"') ||
+      !cvRenderer.includes("degree.date | split: ' — ' | first | escape") ||
       !cvRenderer.includes("degree.date | split: ' — ' | last | escape") ||
       !cvScript.includes('const graduationStorageKey = "cv-graduation-text-v1";') ||
-      !cvScript.includes("graduationInputs.forEach((input) => input.addEventListener(\"input\"") ||
-      !cvScript.includes("span.textContent = input.value ?") ||
+      !cvScript.includes('const graduationStartStorageKey = "cv-graduation-start-text-v1";') ||
+      !cvScript.includes('restoreDegreeDates(graduationInputs, graduationStorageKey, "cvGraduationInput")') ||
+      !cvScript.includes('restoreDegreeDates(graduationStartInputs, graduationStartStorageKey, "cvGraduationStartInput")') ||
+      !cvScript.includes('graduationInputs.forEach((input) => input.addEventListener("input", onDegreeDateInput))') ||
+      !cvScript.includes('graduationStartInputs.forEach((input) => input.addEventListener("input", onDegreeDateInput))') ||
+      !cvScript.includes('span.textContent = [startDate, input.value].filter(') ||
       !cvScript.includes("graduationInputs.forEach((input) => { input.value = input.defaultValue; });") ||
-      !cvStyles.includes(".cv-graduation-fields input[type=\"text\"]")) {
-    failures.push("CV must allow separate free-text graduation edits, save them per browser, and reset print-safe values.");
+      !cvScript.includes("graduationStartInputs.forEach((input) => { input.value = input.defaultValue; });") ||
+      !cvScript.includes("window.localStorage.removeItem(graduationStartStorageKey)") ||
+      !cvStyles.includes(".cv-graduation-fields input[type=\"text\"]") ||
+      !cvStyles.includes(".cv-graduation-date-pair {")) {
+    failures.push("The CV must edit both degree dates, retain legacy completion preferences, and reset browser-local values safely.");
   }
   // Edits affect display text only; both authentic enrollment start dates
   // remain source-driven for sorting and research/application evidence.

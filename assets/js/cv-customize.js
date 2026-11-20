@@ -193,11 +193,18 @@
     }
   };
 
-  // Graduation completion text is an independent browser-local preference per
-  // degree. Keep the canonical YAML start dates for timeline sorting, and write
-  // only to textContent so arbitrary user input is never interpreted as HTML.
+  // Both degree dates are independently editable in the current browser.
+  // Reuse the original graduation key so older saved completion overrides
+  // survive upgrades. Start-date edits use a separate browser-local key.
+  // Underlying data-cv-date is the unmodified published YAML date, retained
+  // for chronological sorting; only textContent changes in the rendered CV.
   const graduationStorageKey = "cv-graduation-text-v1";
+  const graduationStartStorageKey = "cv-graduation-start-text-v1";
   const graduationInputs = Array.from(root.querySelectorAll("[data-cv-graduation-input]"));
+  const graduationStartInputs = Array.from(root.querySelectorAll("[data-cv-graduation-start-input]"));
+  const graduationStartFields = new Map(
+    graduationStartInputs.map((input) => [input.dataset.cvGraduationStartInput, input])
+  );
   const graduationRecords = new Map(
     Array.from(sourceDocument.querySelectorAll('[data-cv-section="education"] [data-cv-graduation-key]'))
       .map((entry) => [entry.dataset.cvGraduationKey, entry])
@@ -207,34 +214,39 @@
       const record = graduationRecords.get(input.dataset.cvGraduationInput);
       const span = record?.querySelector(".cv-date");
       if (!span) continue;
-      const canonicalDate = record.dataset.cvDate || "";
-      const separator = canonicalDate.indexOf(" — ");
-      const startDate = separator < 0 ? canonicalDate : canonicalDate.slice(0, separator);
-      span.textContent = input.value ? startDate + " — " + input.value : startDate;
+      const startDate = graduationStartFields.get(input.dataset.cvGraduationInput)?.value || "";
+      span.textContent = [startDate, input.value].filter((value) => value.length > 0).join(" — ");
     }
   };
-  try {
-    const saved = JSON.parse(window.localStorage.getItem(graduationStorageKey) || "null");
-    if (saved && typeof saved === "object" && !Array.isArray(saved)) {
-      for (const input of graduationInputs) {
-        const stored = saved[input.dataset.cvGraduationInput];
-        if (typeof stored === "string" && stored.length <= 300) input.value = stored;
+  const restoreDegreeDates = (inputs, storageKey, datasetKey) => {
+    try {
+      const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null");
+      if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+        for (const input of inputs) {
+          const stored = saved[input.dataset[datasetKey]];
+          if (typeof stored === "string" && stored.length <= 300) input.value = stored;
+        }
       }
+    } catch (_error) {
+      // Private browsing, invalid old values, or disabled storage must not
+      // interfere with editing, the published defaults or PDF printing.
     }
-  } catch (_error) {
-    // Private browsing or disabled storage should not disable the editor.
-  }
+  };
+  restoreDegreeDates(graduationInputs, graduationStorageKey, "cvGraduationInput");
+  restoreDegreeDates(graduationStartInputs, graduationStartStorageKey, "cvGraduationStartInput");
   syncGraduationDates();
   const persistGraduationDates = () => {
-    const values = Object.fromEntries(graduationInputs.map((input) => [
-      input.dataset.cvGraduationInput, input.value,
-    ]));
-    try {
-      if (graduationInputs.every((input) => input.value === input.defaultValue)) {
-        window.localStorage.removeItem(graduationStorageKey);
+    const saveFields = (inputs, storageKey, datasetKey) => {
+      if (inputs.every((input) => input.value === input.defaultValue)) {
+        window.localStorage.removeItem(storageKey);
       } else {
-        window.localStorage.setItem(graduationStorageKey, JSON.stringify(values));
+        const values = Object.fromEntries(inputs.map((input) => [input.dataset[datasetKey], input.value]));
+        window.localStorage.setItem(storageKey, JSON.stringify(values));
       }
+    };
+    try {
+      saveFields(graduationInputs, graduationStorageKey, "cvGraduationInput");
+      saveFields(graduationStartInputs, graduationStartStorageKey, "cvGraduationStartInput");
     } catch (_error) {
       // The live edited CV and printed PDF still work without storage.
     }
@@ -735,11 +747,13 @@
     persistProfile();
     render();
   });
-  graduationInputs.forEach((input) => input.addEventListener("input", () => {
+  const onDegreeDateInput = () => {
     syncGraduationDates();
     persistGraduationDates();
     render();
-  }));
+  };
+  graduationInputs.forEach((input) => input.addEventListener("input", onDegreeDateInput));
+  graduationStartInputs.forEach((input) => input.addEventListener("input", onDegreeDateInput));
   toggles.forEach((toggle) => toggle.addEventListener("change", render));
   printToggles.forEach((toggle) => toggle.addEventListener("change", render));
   entrySearch.addEventListener("input", () => {
@@ -794,8 +808,12 @@
     syncProfile();
     try { window.localStorage.removeItem(profileStorageKey); } catch (_error) { /* Storage disabled. */ }
     graduationInputs.forEach((input) => { input.value = input.defaultValue; });
+    graduationStartInputs.forEach((input) => { input.value = input.defaultValue; });
     syncGraduationDates();
-    try { window.localStorage.removeItem(graduationStorageKey); } catch (_error) { /* Storage disabled. */ }
+    try {
+      window.localStorage.removeItem(graduationStorageKey);
+      window.localStorage.removeItem(graduationStartStorageKey);
+    } catch (_error) { /* Storage disabled. */ }
     controls.template.value = "minimal";
     controls.font.value = "site";
     controls.paper.value = "a4";

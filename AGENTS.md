@@ -573,3 +573,26 @@ The owner has **explicitly corrected and superseded** the older handoff's assert
 - **CV print whitespace correction (2026-11-19):** A user-provided six-page A4 PDF showed a page-1 top offset of about 38.5 mm and underfilled middle pages. The paginator measured paper clones at larger screen fonts and gaps than the compact PDF used, so pages broke early. For CV-only printing, reset outer main/post top offsets, offer tighter margin presets (7/5/10/15 mm for latex/narrow/standard/wide), and keep LaTeX-density paper measurement typography exactly matched to the PDF. Preserve the real selectable text, hyperlinks, whole-entry pagination and A4/Letter controls. See `docs/CV_HANDOFF.md` and regression checks.
 
 - **CV native print pagination correction (2026-11-19; supersedes prior forced-break advice):** The owner's latest PDF contained two nearly empty physical pages because screen-approximate `renderPagedPreview` page breaks were FORCED again inside browser print. Never force `break-after:page` on `.cv-preview-page`. Build all selected records as ONE continuous print clone with `renderPagedPreview(true)` and let Chromium paginate naturally using `@page` margins. The on-screen Paper preview remains approximate, not authoritative for actual physical breaks. Preserve all CV content, entry integrity, template and A4/Letter controls, links, SVG rasterization, screen pagination, and restoration. See `docs/CV_HANDOFF.md` and Playwright PDF page-count regression.
+
+
+## 2026-11-20 — Edit both education dates in the existing CV panel
+
+- The existing `#cv-graduation-editor` disclosure now edits **both** a degree's
+  start date and expected graduation text for Data Science and Actuarial Science.
+  It remains data-driven from `cv.sections.Education`; each degree has an
+  accessible `fieldset`/legend and two labeled plain-text inputs. Do not add
+  a second button or mutate `_data/cv.yml` for browser-local preferences.
+- The original completion input IDs and `cv-graduation-text-v1` localStorage
+  key are preserved for backward compatibility. New independent start-date
+  fields use `data-cv-graduation-start-input` and
+  `cv-graduation-start-text-v1`. Older saved graduation dates must load with
+  the published start dates unless the user explicitly edits those starts.
+- `syncGraduationDates()` writes only existing education `.cv-date.textContent`,
+  joining nonempty values with ` — ` and never parsing user input as HTML.
+  Published `data-cv-date` remains unchanged for the chronological sort.
+  Grouped CV, chronology, screen paper preview, and native PDF clone the
+  edited source. Browser reload restores both independent overrides, and
+  **Reset options** clears both keys and restores both canonical fields.
+- See `docs/CV_HANDOFF.md`, `test/style_contract.js` and the Playwright
+  graduation-date editing and legacy-key regression tests. The 2026-11-15
+  note describing immutable start dates has been superseded.

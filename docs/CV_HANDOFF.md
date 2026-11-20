@@ -1712,3 +1712,46 @@ mostly blank sheets). The tests still verify PDF text and all selected
 records are present in the printable DOM. Never restore the old forced
 page break after screen-estimated sheets; verify browser-generated PDF
 page density whenever print CSS or sizing changes.
+
+
+## Editable start and graduation dates in the same CV panel — 2026-11-20
+
+**Request:** Extend the existing `Edit expected graduation dates` disclosure,
+rather than create another button, to allow independently changing the
+*beginning* and *end* of the education dates for Data Science and Actuarial
+Science.
+
+**Interface:** `_includes/cv/render.liquid` now labels the disclosure
+`Edit degree start and graduation dates`. For each `Education` record,
+it renders a `fieldset` with the degree name, a free-text **Start date**
+populated from the first half of its source date, and the existing free-text
+**Expected graduation** populated from the last half. The original end-field
+IDs and `data-cv-graduation-input` attributes remain stable. The paired fields
+are grouped by `_sass/_cv.scss` solely inside the settings panel, not on
+printed pages. This supersedes the earlier instruction to leave starts fixed.
+
+**State and compatibility:** The existing browser-local
+`cv-graduation-text-v1` map is read/written unchanged for completion dates.
+Start-date changes use a **separate** `cv-graduation-start-text-v1` map keyed
+by `degree.subtitle | slugify`. Therefore previously stored graduation
+wording is preserved even when no start-date preferences exist. Neither key
+is uploaded to GitHub or changes the publicly displayed defaults for other
+visitors. Empty values are permitted; display strings join only nonempty
+parts with an em dash. Both Reset options and per-field restoration use
+the original Jekyll-rendered `defaultValue`.
+
+**Render/security contract:** `assets/js/cv-customize.js` updates only
+`.cv-date.textContent` inside the original two education records. Untrusted
+text stays literal even when it contains markup. `data-cv-date` retains the
+canonical source for chronological sorting; edited text is cloned for
+chronological display, paper preview and browser Print/Save PDF. The
+no-JavaScript CV continues to show canonical YAML dates, which remain
+`Aug 2023 — Dec 2026 (expected)` and
+`Aug 2021 — Dec 2026 (expected)` until explicitly changed globally.
+
+**Tests:** `test/style_contract.js` guards start/end inputs, browser keys,
+legacy completion restoration, print-safe text rendering, and reset behavior.
+`test/visual/interactions.spec.js` checks independent editing of all four
+fields, print/timeline propagation, persistence after reload, legacy key
+compatibility, XSS-safe literal text, empty sides, and reset. These tests
+do not change actual education facts or PDF pagination.

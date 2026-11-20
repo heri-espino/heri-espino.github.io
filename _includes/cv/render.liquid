@@ -82,13 +82,21 @@
       </label>
     </div>
     <details class="cv-graduation-editor" id="cv-graduation-editor">
-      <summary>Edit expected graduation dates</summary>
-      <p class="cv-tools-help">Type any completion date or wording. The degree start dates stay unchanged. Saved in this browser only and included in paper preview and PDF; Reset options restores the published defaults.</p>
+      <summary>Edit degree start and graduation dates</summary>
+      <p class="cv-tools-help">Edit both dates for each degree. Changes appear immediately in the CV, paper preview, and PDF, and are saved only in this browser. Reset options restores the published defaults.</p>
       <div class="cv-graduation-fields">
         {% for degree in cv.sections.Education %}
-          <label for="cv-graduation-{{ degree.subtitle | slugify }}">{{ degree.subtitle | escape }}
-            <input type="text" id="cv-graduation-{{ degree.subtitle | slugify }}" data-cv-graduation-input="{{ degree.subtitle | slugify }}" value="{{ degree.date | split: ' — ' | last | escape }}" autocomplete="off" spellcheck="false" aria-label="Expected graduation text for {{ degree.subtitle | escape }}">
-          </label>
+          <fieldset class="cv-graduation-degree">
+            <legend>{{ degree.subtitle | escape }}</legend>
+            <div class="cv-graduation-date-pair">
+              <label for="cv-graduation-start-{{ degree.subtitle | slugify }}">Start date
+                <input type="text" id="cv-graduation-start-{{ degree.subtitle | slugify }}" data-cv-graduation-start-input="{{ degree.subtitle | slugify }}" value="{{ degree.date | split: ' — ' | first | escape }}" autocomplete="off" spellcheck="false" aria-label="Start date for {{ degree.subtitle | escape }}">
+              </label>
+              <label for="cv-graduation-{{ degree.subtitle | slugify }}">Expected graduation
+                <input type="text" id="cv-graduation-{{ degree.subtitle | slugify }}" data-cv-graduation-input="{{ degree.subtitle | slugify }}" value="{{ degree.date | split: ' — ' | last | escape }}" autocomplete="off" spellcheck="false" aria-label="Expected graduation for {{ degree.subtitle | escape }}">
+              </label>
+            </div>
+          </fieldset>
         {% endfor %}
       </div>
     </details>
