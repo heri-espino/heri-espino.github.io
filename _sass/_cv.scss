@@ -332,8 +332,8 @@
   font-size: 0.86rem;
 }
 
-/* Editable graduation wording belongs to the controls, never to the PDF
-   layout. The two independent text values update the existing date spans. */
+/* Degree start and completion wording belongs to the controls, never to
+   print layout or YAML. Four independent text fields edit the two date spans. */
 .cv-graduation-editor,
 .cv-profile-editor {
   margin-top: 0.9rem;
@@ -373,9 +373,27 @@
 }
 .cv-graduation-fields {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
   margin: 0.6rem 0;
+}
+.cv-graduation-degree {
+  min-width: 0;
+  margin: 0;
+  padding: 0.6rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.35rem;
+}
+.cv-graduation-degree legend {
+  padding: 0 0.25rem;
+  color: var(--global-text-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.cv-graduation-date-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
 }
 .cv-graduation-fields label {
   display: flex;
