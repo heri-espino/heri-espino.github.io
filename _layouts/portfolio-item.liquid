@@ -105,7 +105,9 @@ layout: default
   "url": {{ page.url | absolute_url | jsonify }},
   "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
   "description": {{ page.summary | strip_html | jsonify }},
-  "creativeWorkStatus": {{ page.label | jsonify }},
+  "creativeWorkStatus": {{ page.label | jsonify }},{% if page.doi %}
+  "identifier": {{ page.doi | jsonify }},
+  "sameAs": {{ page.doi | prepend: 'https://doi.org/' | jsonify }},{% endif %}
   "additionalProperty": {
     "@type": "PropertyValue",
     "name": "Research or editorial stage",
