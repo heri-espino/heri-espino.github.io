@@ -24,7 +24,8 @@ const pdfs = {
   "componentwise-knn-isomap-lecture": "EspinoMontelongo-2026-Componentwise_Isomap.pdf",
   "maxcut-sdp-eva-clustering-tutorial": "EspinoMontelongo-2026-MaxCut_SDP_EVA.pdf",
 };
-const expectedSubmitted = 4;
+const expectedSubmitted = 3;
+const expectedPublished = 3;
 const expectedDrafts = 4;
 const expectedInternalResearch = 4;
 const hiddenSlugs = new Set([
@@ -87,8 +88,22 @@ const interactivePagePath = path.join(site, "articles", "the-empty-space-that-ma
 const interactiveImage = "assets/img/portfolio/proximitygraphs-empty-space-compare.svg";
 const interactiveLink = "/articles/the-empty-space-that-makes-a-network.html";
 const authorPreview = "https://heri-espino.github.io/proximitygraphs-siam-figures/article.html";
-if (actualPublished !== 2 || !published.includes(articleLink) || !published.includes(interactiveLink)) {
-  errors.push(`Expected 2 technical writing entries (La Catarina publication and author-hosted interactive draft), rendered ${actualPublished}`);
+const steppingStoneLink = "/papers/stepping-stone.html";
+const steppingStoneDoi = "10.1016/j.comgeo.2026.102287";
+if (actualPublished !== expectedPublished ||
+    !published.includes(articleLink) ||
+    !published.includes(interactiveLink) ||
+    !published.includes(steppingStoneLink)) {
+  errors.push(`Expected ${expectedPublished} published/writing entries (Elsevier journal, La Catarina article, author-hosted draft), rendered ${actualPublished}`);
+}
+if (submitted.includes(steppingStoneLink) || !published.includes("Peer-reviewed journal article")) {
+  errors.push("Published Elsevier Stepping-Stone article must not be listed as a pending submission");
+}
+const steppingStonePath = path.join(site, "papers", "stepping-stone.html");
+if (!fs.existsSync(steppingStonePath) ||
+    !read(steppingStonePath).includes(steppingStoneDoi) ||
+    !read(steppingStonePath).includes("https://www.sciencedirect.com/science/article/pii/S0925772126000453")) {
+  errors.push("Stepping-Stone journal detail must include publisher link and official DOI");
 }
 if (!published.includes("/" + articleImg)) {
   errors.push("Published AbaQuant card lacks user-uploaded article image");
@@ -335,4 +350,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualDrafts} research notes/teaching drafts + ${actualInternalResearch} internal research papers; one published article and six unlisted paper records preserved.`);
+console.log(`Rendered Papers archive passed: ${actualSubmitted} submitted + ${actualPublished} published/writing + ${actualDrafts} research notes/teaching drafts + ${actualInternalResearch} internal research papers; six unlisted paper records preserved.`);
