@@ -177,7 +177,7 @@ test("Elsevier Stepping-Stone journal publication has correct DOI and appears on
   await expect(journalCard).toContainText("Peer-reviewed journal article");
   await expect(submitted).not.toContainText("Stepping-Stone Diversion Neighborhoods");
   await journalCard.locator("h3 a").click();
-  await expect(page).toHaveURL(/\\/papers\\/stepping-stone\\.html$/);
+  await expect(page).toHaveURL((url) => url.pathname.endsWith("/papers/stepping-stone.html"));
   await expect(page.locator(".portfolio-detail")).toContainText(doi);
   await expect(page.locator('.portfolio-actions a[href="' + journalUrl + '"]')).toHaveCount(1);
   await expect(page.locator('.portfolio-actions a[href="' + doiUrl + '"]')).toHaveCount(1);
