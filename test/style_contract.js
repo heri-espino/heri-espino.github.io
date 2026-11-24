@@ -1012,7 +1012,7 @@ if (exists("_pages/cv.md")) {
   ];
   if (!publishedCvRecords.includes("date: Nov 2026") ||
       !steppingStoneSource.includes('display_date: "Nov 2026"') ||
-      !!manuscriptResearchGroup.includes("Geometry and Volume of Stepping-Stone Diversion Neighborhoods") ||
+      !manuscriptResearchGroup.includes("Geometry and Volume of Stepping-Stone Diversion Neighborhoods") ||
       !abaArchive.includes('journal_publications = items | where: "publication_stage", "published"')) {
     failures.push("The published Elsevier journal record must appear exactly once, under Manuscripts with the Nov 2026 online-publication date.");
   }
