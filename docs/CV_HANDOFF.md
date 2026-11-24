@@ -1799,3 +1799,49 @@ no duplicate submission entry, and intact internal study/notes archives.
 correct source grouping, DOI URLs, stage, author credit, and the CV's
 printable/paper-preview output. Existing unrelated CI failure baselines
 must be distinguished from regressions introduced by this change.
+
+
+## Return published Stepping-Stone to combined CV Manuscripts section — 2026-11-24
+
+**Correction requested by owner after the publication update:** The journal
+paper was correctly marked **Published**, but moving it from its original
+CV section into technical writing disrupted the desired CV layout. Keep the
+article grouped with the other journal manuscripts and rename the
+`Submitted Manuscripts` CV heading to **`Manuscripts`** instead.
+
+**Implementation:** In `_data/cv.yml`, the four CV Manuscripts entries are
+(1) Unit-Region Factorization (Elsevier, Under Review), (2) Geometry and
+Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of
+Arbitrary Dimension (Elsevier, **Published**), (3) Activation-Patching CNNs
+(Springer Nature, Under Review), (4) Posterior Integration WTI Average Price
+Options (Wiley, Submitted). The published record retains its November 2026
+display month, first-author role, exact ScienceDirect link, DOI
+`10.1016/j.comgeo.2026.102287`, site portfolio, author PDF, SSRN and
+numerical-validation Zenodo DOI `10.5281/zenodo.21291269`, and both
+existing research highlights. `Published Articles & Technical Writing`
+still contains precisely its two original unrelated technical entries;
+the journal paper is not duplicated there.
+
+**Display and personalization:** The Liquid CV renderer still uses
+full-detail `cv-entry` layout for journal manuscripts and now keys that
+format to `Manuscripts`. JS changes its Europass label and positioning
+rules accordingly. Old browser `cv-section-order-v3` arrays stored with
+`submitted-manuscripts` are normalized to `manuscripts` at load; all
+other saved section-order choices and CV/PDF controls are preserved. The
+published DOI and Zenodo link remain clickable in reading, timeline, paper
+preview and native print. No date, author, or link metadata was invented.
+
+**Important boundary:** The **Papers archive** retains its separate
+Published Journal/Technical Writing section with the Elsevier paper (three
+archive cards) and three submitted manuscripts. Its article detail page,
+DOI, JSON-LD metadata, SSRN and validation reproducibility materials remain
+unchanged. A shared `Manuscripts` section is a **CV layout preference**,
+not a reversal of the Elsevier publication decision.
+
+**Regression checks:** `test/style_contract.js` ensures four distinct CV
+manuscripts including the published paper and exact journal/Zenodo DOI
+links. `test/visual/interactions.spec.js` verifies four CV entries, two
+technical-writing entries, published status, links, presence in paper preview
+and print, and migration of the old stored section order. Do not conflate
+CV record counts with Papers archive counts. This note supersedes the CV
+relocation prescribed in the previous November 24 publication handoff.
