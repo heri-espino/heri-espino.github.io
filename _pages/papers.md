@@ -9,14 +9,16 @@ nav_order: 2
 
 {% assign paper_records = site.pages | where: "portfolio_type", "paper" %}
 {% assign items = paper_records | where_exp: "item", "item.hide_from_papers != true" | sort: "importance" %}
-{% assign existing_submissions = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/stepping-stone.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
+{% assign existing_submissions = items | where_exp: "item", "item.url == '/papers/unit-region-factorization.html' or item.url == '/papers/activation-patching-effects-add-up.html'" %}
 {% assign wiley_submission = items | where: "url", "/papers/posterior-integration-volatility-wti-asian-options.html" %}
 {% assign submitted_papers = existing_submissions | concat: wiley_submission %}
 {% assign other_papers = items | where_exp: "item", "item.url != '/papers/unit-region-factorization.html' and item.url != '/papers/stepping-stone.html' and item.url != '/papers/activation-patching-effects-add-up.html'" %}
 {% assign other_papers = other_papers | where_exp: "item", "item.url != '/papers/posterior-integration-volatility-wti-asian-options.html'" %}
 {% assign notebook_and_lecture_drafts = other_papers | where: "archive_group", "research_notes" %}
 {% assign internal_research_papers = other_papers | where: "archive_group", "internal_research" %}
-{% assign published_articles = site.pages | where: "portfolio_type", "article" | sort: "importance" %}
+{% assign journal_publications = items | where: "publication_stage", "published" %}
+{% assign technical_articles = site.pages | where: "portfolio_type", "article" | sort: "importance" %}
+{% assign published_articles = journal_publications | concat: technical_articles %}
 
 <p class="portfolio-section-intro papers-archive-intro">
   Research outputs are separated by publication stage and document type: submitted manuscripts, published articles and author-hosted technical writing, research notes and teaching materials, and internal research papers. Interactive author previews are not SIAM publications or journal submissions.
@@ -28,7 +30,7 @@ nav_order: 2
       <div>
         <p class="portfolio-kicker">01 / Submitted</p>
         <h2 id="submitted-manuscripts-title">Submitted Manuscripts <span class="papers-archive-count">({{ submitted_papers.size }})</span></h2>
-        <p>Manuscripts sent to journals for peer review or currently undergoing revision.</p>
+        <p>Submitted manuscripts awaiting editorial decisions or undergoing peer review. Published journal articles are listed separately below.</p>
       </div>
     </div>
     <div class="portfolio-grid" data-portfolio-group data-view="list">
@@ -41,9 +43,9 @@ nav_order: 2
   <section class="papers-archive-section papers-archive-section--secondary" id="published-technical-articles" data-portfolio-section aria-labelledby="published-technical-articles-title">
     <div class="papers-archive-heading">
       <div>
-        <p class="portfolio-kicker">02 / Technical writing</p>
+        <p class="portfolio-kicker">02 / Publications</p>
         <h2 id="published-technical-articles-title">Published Articles &amp; Technical Writing <span class="papers-archive-count">({{ published_articles.size }})</span></h2>
-        <p>Published articles and author-hosted interactive technical features. Each item identifies its own editorial status; an author-hosted SIAM News proposal is not an accepted or published SIAM article.</p>
+        <p>Peer-reviewed journal publications, published technical articles, and clearly labeled author-hosted features. An author-hosted SIAM News proposal is not an accepted or published SIAM article.</p>
       </div>
     </div>
     <div class="portfolio-grid" data-portfolio-group data-view="list">
