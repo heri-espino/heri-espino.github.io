@@ -162,7 +162,7 @@ test("Papers separates unsubmitted research notes from internal research studies
   await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(3);
 });
 
-test("Elsevier Stepping-Stone journal publication has correct DOI and appears only in published works", async ({ page }) => {
+test("Elsevier journal publication remains in CV Manuscripts with DOI and Zenodo links", async ({ page }) => {
   const doi = "10.1016/j.comgeo.2026.102287";
   const doiUrl = "https://doi.org/" + doi;
   const journalUrl = "https://www.sciencedirect.com/science/article/pii/S0925772126000453";
@@ -184,7 +184,7 @@ test("Elsevier Stepping-Stone journal publication has correct DOI and appears on
   await expect(page.locator(".portfolio-detail")).toContainText("Héctor Maravillo");
 
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-  const source = page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]');
+  const source = page.locator('#cv-document [data-cv-section="manuscripts"]');
   const cvJournal = source.locator("[data-cv-record]").filter({
     hasText: "Stepping–Stone diversion neighborhoods",
   });
@@ -193,14 +193,19 @@ test("Elsevier Stepping-Stone journal publication has correct DOI and appears on
   await expect(cvJournal).toContainText(doi);
   await expect(cvJournal.locator('.cv-links a[href="' + journalUrl + '"]')).toHaveCount(1);
   await expect(cvJournal.locator('.cv-links a[href="' + doiUrl + '"]')).toHaveCount(1);
-  await expect(page.locator('#cv-document [data-cv-section="submitted-manuscripts"]'))
+  await expect(cvJournal.locator('.cv-links a[href="https://doi.org/10.5281/zenodo.21291269"]')).toHaveCount(1);
+  await expect(cvJournal.locator('.cv-links a[href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746"]')).toHaveCount(1);
+  await expect(source.locator("[data-cv-record]")).toHaveCount(4);
+  await expect(page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]'))
     .not.toContainText("Stepping–Stone diversion neighborhoods");
   await page.locator("#cv-panel-toggle").click();
   await page.locator("#cv-preview").click();
   await expect(page.locator("#cv-paged-preview")).toContainText(doi);
+  await expect(page.locator("#cv-paged-preview")).toContainText("10.5281/zenodo.21291269");
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await expect(page.locator("#cv-paged-preview")).toContainText(doi);
+  await expect(page.locator("#cv-paged-preview")).toContainText("10.5281/zenodo.21291269");
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
@@ -224,7 +229,7 @@ test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQ
 
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const section = page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]');
-  await expect(section.locator("[data-cv-record]")).toHaveCount(3);
+  await expect(section.locator("[data-cv-record]")).toHaveCount(2);
   const item = section.locator("[data-cv-record]").filter({ hasText: "The Empty Space That Makes a Network" });
   await expect(item).toContainText("First Author · Interactive Technical Feature");
   await expect(item).not.toContainText("Coauthored with Héctor Maravillo");
@@ -736,6 +741,23 @@ test("CV keeps legacy saved graduation text after adding editable start dates", 
   expect(storedEnd["data-science"]).toBe("Jun 2027 (expected)");
 });
 
+test("CV preserves legacy saved manuscript-section order after renaming", async ({ page }) => {
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const original = await page.locator("#cv-sections > .cv-section")
+    .evaluateAll((nodes) => nodes.map((element) => element.dataset.cvSection));
+  expect(original).toContain("manuscripts");
+  const reversed = [...original].reverse();
+  const legacy = reversed.map((id) => id === "manuscripts" ? "submitted-manuscripts" : id);
+  await page.evaluate((ids) => localStorage.setItem("cv-section-order-v3", JSON.stringify(ids)), legacy);
+  await page.reload({ waitUntil: "networkidle" });
+  const restored = await page.locator("#cv-sections > .cv-section")
+    .evaluateAll((nodes) => nodes.map((element) => element.dataset.cvSection));
+  expect(restored).toEqual(reversed);
+  expect(restored).not.toContain("submitted-manuscripts");
+  const manuscripts = page.locator('#cv-sections [data-cv-section="manuscripts"]');
+  await expect(manuscripts.locator("[data-cv-record]")).toHaveCount(4);
+});
+
 test("CV section order can be changed, survives reload, and resets to source order", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const sections = page.locator("#cv-sections > .cv-section");
@@ -769,17 +791,17 @@ test("CV defaults to Modern Minimal with right-hand settings and the requested r
   const professional = sections.indexOf("professional-experience");
   expect(professional).toBeGreaterThan(0);
   expect(sections.slice(professional + 1, professional + 4)).toEqual([
-    "submitted-manuscripts", "completed-research", "working-drafts-notes",
+    "manuscripts", "completed-research", "working-drafts-notes",
   ]);
-  expect(sections).not.toContain("manuscripts");
+  expect(sections).not.toContain("submitted-manuscripts");
   expect(sections).not.toContain("research");
   expect(sections).not.toContain("research-drafts");
   expect(sections).not.toContain("volunteering");
 
-  const submitted = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"]');
+  const submitted = page.locator('#cv-sections [data-cv-section="manuscripts"]');
   const completed = page.locator('#cv-sections [data-cv-section="completed-research"]');
   const working = page.locator('#cv-sections [data-cv-section="working-drafts-notes"]');
-  await expect(submitted.locator("[data-cv-record]")).toHaveCount(3);
+  await expect(submitted.locator("[data-cv-record]")).toHaveCount(4);
   await expect(completed.locator("[data-cv-record]")).toHaveCount(6);
   await expect(working.locator("[data-cv-record]")).toHaveCount(7);
   await expect(completed).toContainText("Student Engagement and Adaptation");
@@ -817,7 +839,7 @@ test("CV defaults to Modern Minimal with right-hand settings and the requested r
 test("CV sections animate on interaction but honor reduced-motion and keyboard input", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-  const details = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"] > details');
+  const details = page.locator('#cv-sections [data-cv-section="manuscripts"] > details');
   const summary = details.locator("summary");
   await expect(details).toHaveAttribute("open", "");
   const activeAnimations = await summary.evaluate((element) => {
@@ -838,7 +860,7 @@ test("CV sections animate on interaction but honor reduced-motion and keyboard i
 
 test("CV Wiley JFM submission and Papers page expose both PDFs and their first-page previews", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-  const cvJfm = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"] [data-cv-record]').filter({
+  const cvJfm = page.locator('#cv-sections [data-cv-section="manuscripts"] [data-cv-record]').filter({
     hasText: "When Does Posterior Integration Change Option Values?",
   });
   await expect(cvJfm).toHaveCount(1);
@@ -876,7 +898,7 @@ test("CV Wiley JFM submission and Papers page expose both PDFs and their first-p
 
 test("CV author locations, Wiley submission month and quantum paper links remain readable", async ({ page }) => {
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
-  const submitted = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"]');
+  const submitted = page.locator('#cv-sections [data-cv-section="manuscripts"]');
   const springer = submitted.locator("[data-cv-record]").filter({
     hasText: "When Do Activation-Patching Effects Add Up?",
   });
@@ -973,7 +995,7 @@ test("CV Europass uses EU section sequence and truthful language layout", async 
     nodes.map((node) => node.dataset.cvTitle));
   expect(sections.indexOf("Professional Experience")).toBeLessThan(sections.indexOf("Education"));
   expect(sections.indexOf("Education")).toBeLessThan(sections.indexOf("Languages"));
-  expect(sections.indexOf("Languages")).toBeLessThan(sections.indexOf("Submitted Manuscripts"));
+  expect(sections.indexOf("Languages")).toBeLessThan(sections.indexOf("Manuscripts"));
   await expect(page.locator("#cv-sections .cv-europass-language-table")).toBeVisible();
   await expect(page.locator("#cv-sections .cv-europass-mother-tongue")).toContainText("Spanish");
 
