@@ -1010,7 +1010,7 @@ if (exists("_pages/cv.md")) {
     { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
     { name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs", month: "Oct 2026", page: "_pages/papers/activation-patching-effects-add-up.md" }
   ];
-  if (!publishedCvRecords.includes("date: Nov 2026") ||
+  if (!manuscriptCvRecords.includes("date: Nov 2026") ||
       !steppingStoneSource.includes('display_date: "Nov 2026"') ||
       !manuscriptResearchGroup.includes("Geometry and Volume of Stepping-Stone Diversion Neighborhoods") ||
       !abaArchive.includes('journal_publications = items | where: "publication_stage", "published"')) {
