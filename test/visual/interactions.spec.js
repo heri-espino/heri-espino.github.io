@@ -98,7 +98,7 @@ test("CV uses the same eight concise research bullets in reading, paper and prin
   await expect(independent).toContainText("Scientific Software Developer");
   const expected = [
     "Areas: Stochastic/computational geometry, ML interpretability, quant finance.",
-    "Submissions: Four journal manuscripts to Elsevier (2), Springer Nature, Wiley.",
+    "Publication: Elsevier Computational Geometry; three other journal submissions.",
     "Ongoing: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP.",
     "Software: Built AbaQuant; co-maintained ProximityGraphs and SDP workflows.",
     "Tooling: Docling Math (PDF processing) and AwesomeFigures (visualization).",
@@ -158,14 +158,57 @@ test("Papers separates unsubmitted research notes from internal research studies
     await expect(internal.locator(`a[href="${href}"]`).first()).toHaveCount(1);
     await expect(drafts.locator(`a[href="${href}"]`)).toHaveCount(0);
   }
-  await expect(page.locator("#submitted-manuscripts .portfolio-card")).toHaveCount(4);
-  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(2);
+  await expect(page.locator("#submitted-manuscripts .portfolio-card")).toHaveCount(3);
+  await expect(page.locator("#published-technical-articles .portfolio-card")).toHaveCount(3);
+});
+
+test("Elsevier Stepping-Stone journal publication has correct DOI and appears only in published works", async ({ page }) => {
+  const doi = "10.1016/j.comgeo.2026.102287";
+  const doiUrl = "https://doi.org/" + doi;
+  const journalUrl = "https://www.sciencedirect.com/science/article/pii/S0925772126000453";
+  await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
+  const submitted = page.locator("#submitted-manuscripts");
+  const published = page.locator("#published-technical-articles");
+  const journalCard = published.locator(".portfolio-card").filter({
+    hasText: "Geometry and Volume of Stepping-Stone Diversion Neighborhoods",
+  });
+  await expect(journalCard).toHaveCount(1);
+  await expect(journalCard).toContainText("Published");
+  await expect(journalCard).toContainText("Peer-reviewed journal article");
+  await expect(submitted).not.toContainText("Stepping-Stone Diversion Neighborhoods");
+  await journalCard.locator("h3 a").click();
+  await expect(page).toHaveURL(/\\/papers\\/stepping-stone\\.html$/);
+  await expect(page.locator(".portfolio-detail")).toContainText(doi);
+  await expect(page.locator('.portfolio-actions a[href="' + journalUrl + '"]')).toHaveCount(1);
+  await expect(page.locator('.portfolio-actions a[href="' + doiUrl + '"]')).toHaveCount(1);
+  await expect(page.locator(".portfolio-detail")).toContainText("Héctor Maravillo");
+
+  await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
+  const source = page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]');
+  const cvJournal = source.locator("[data-cv-record]").filter({
+    hasText: "Stepping–Stone diversion neighborhoods",
+  });
+  await expect(cvJournal).toHaveCount(1);
+  await expect(cvJournal).toContainText("Published");
+  await expect(cvJournal).toContainText(doi);
+  await expect(cvJournal.locator('.cv-links a[href="' + journalUrl + '"]')).toHaveCount(1);
+  await expect(cvJournal.locator('.cv-links a[href="' + doiUrl + '"]')).toHaveCount(1);
+  await expect(page.locator('#cv-document [data-cv-section="submitted-manuscripts"]'))
+    .not.toContainText("Stepping–Stone diversion neighborhoods");
+  await page.locator("#cv-panel-toggle").click();
+  await page.locator("#cv-preview").click();
+  await expect(page.locator("#cv-paged-preview")).toContainText(doi);
+  await page.emulateMedia({ media: "print" });
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+  await expect(page.locator("#cv-paged-preview")).toContainText(doi);
+  await page.emulateMedia({ media: "screen" });
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
 });
 
 test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQuant article", async ({ page }) => {
   await page.goto("/al-folio/papers/", { waitUntil: "networkidle" });
   const technical = page.locator("#published-technical-articles");
-  await expect(technical.locator(".portfolio-card")).toHaveCount(2);
+  await expect(technical.locator(".portfolio-card")).toHaveCount(3);
   const feature = technical.locator(".portfolio-card").filter({ hasText: "The Empty Space That Makes a Network" });
   const aba = technical.locator(".portfolio-card").filter({ hasText: "AbaQuant" });
   await expect(feature).toHaveCount(1);
@@ -181,7 +224,7 @@ test("Papers and CV list the ProximityGraphs author-hosted feature with the AbaQ
 
   await page.goto("/al-folio/cv/", { waitUntil: "networkidle" });
   const section = page.locator('#cv-document [data-cv-section="published-articles-technical-writing"]');
-  await expect(section.locator("[data-cv-record]")).toHaveCount(2);
+  await expect(section.locator("[data-cv-record]")).toHaveCount(3);
   const item = section.locator("[data-cv-record]").filter({ hasText: "The Empty Space That Makes a Network" });
   await expect(item).toContainText("First Author · Interactive Technical Feature");
   await expect(item).not.toContainText("Coauthored with Héctor Maravillo");
@@ -736,7 +779,7 @@ test("CV defaults to Modern Minimal with right-hand settings and the requested r
   const submitted = page.locator('#cv-sections [data-cv-section="submitted-manuscripts"]');
   const completed = page.locator('#cv-sections [data-cv-section="completed-research"]');
   const working = page.locator('#cv-sections [data-cv-section="working-drafts-notes"]');
-  await expect(submitted.locator("[data-cv-record]")).toHaveCount(4);
+  await expect(submitted.locator("[data-cv-record]")).toHaveCount(3);
   await expect(completed.locator("[data-cv-record]")).toHaveCount(6);
   await expect(working.locator("[data-cv-record]")).toHaveCount(7);
   await expect(completed).toContainText("Student Engagement and Adaptation");
