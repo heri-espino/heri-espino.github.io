@@ -75,7 +75,7 @@ description: Academic portfolio of Heriberto Espino Montelongo.
 
 {% if papers.size > featured_papers.size %}
 {% assign papers_eyebrow = "Selected papers" %}
-{% assign papers_support = "Selected manuscripts under review and research projects; see the full archive for all paper records and materials." %}
+{% assign papers_support = "Selected published research and manuscripts under review; see the full archive for all papers and source materials." %}
 {% assign papers_top_link = "Browse all papers" %}
 {% assign papers_bottom_link = "Browse the complete papers archive" %}
 {% else %}
