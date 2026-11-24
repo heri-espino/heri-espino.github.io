@@ -802,6 +802,9 @@ test("CV defaults to Modern Minimal with right-hand settings and the requested r
   const completed = page.locator('#cv-sections [data-cv-section="completed-research"]');
   const working = page.locator('#cv-sections [data-cv-section="working-drafts-notes"]');
   await expect(submitted.locator("[data-cv-record]")).toHaveCount(4);
+  const manuscriptOrder = await submitted.locator("[data-cv-record] .cv-entry-name").allTextContents();
+  expect(manuscriptOrder[0]).toContain("Stepping–Stone diversion neighborhoods");
+  expect(manuscriptOrder[1]).toContain("Unit-Region Factorization");
   await expect(completed.locator("[data-cv-record]")).toHaveCount(6);
   await expect(working.locator("[data-cv-record]")).toHaveCount(7);
   await expect(completed).toContainText("Student Engagement and Adaptation");
