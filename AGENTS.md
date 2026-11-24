@@ -613,3 +613,10 @@ The owner has **explicitly corrected and superseded** the older handoff's assert
 - The CV's `Published Articles & Technical Writing` section continues with its **two unrelated technical-writing entries**. Crucially, **the separate `/papers/` archive is unchanged**: the Elsevier article remains under its Published section rather than becoming a pending submission. Status and CV grouping are separate axes, not synonyms.
 - Update all data-driven CV section references in `_data/cv.yml`, `_includes/cv/render.liquid`, `assets/js/cv-customize.js`, CV source/browser tests and handoff. The new canonical CV section slug is `manuscripts`. Browser-local `cv-section-order-v3` arrays containing the old `submitted-manuscripts` slug are mapped in memory to `manuscripts`, preserving user-specified order. Do not reset saved filters or user PDF settings.
 - Future agents: do **not** move a published record out of the CV Manuscripts section merely because it was published; the owner explicitly wants mixed peer-reviewed stages in that CV grouping. Do not misrepresent the three pending works as published.
+
+
+## 2026-11-24 — Manuscript display order (latest CV instruction)
+
+- The owner explicitly requests **Stepping-Stone first, then Unit-Region Factorization** in the CV `Manuscripts` section. The actual YAML order in `_data/cv.yml` is (1) published Stepping-Stone, (2) Unit-Region Factorization, (3) Activation-Patching, (4) Wiley WTI options. This supersedes the immediately preceding note's order, not its section name or published status.
+- Preserve each full entry and its journal DOI, Zenodo validation DOI, preprint, PDFs, and links. The separate Papers archive uses its own stage-based organization and must remain unchanged. Browser chronological sorting remains user-selectable; the default grouped CV follows YAML order.
+- Keep a source-order invariant in `test/style_contract.js` and a displayed-order check in `test/visual/interactions.spec.js`.

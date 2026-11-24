@@ -987,6 +987,13 @@ if (exists("_pages/cv.md")) {
       researchDraftGroup.includes("Posterior Integration and Volatility Inputs in WTI Asian Options")) {
     failures.push("CV Manuscripts must preserve the pending Elsevier, Springer, and Wiley records alongside the published Elsevier article.");
   }
+  const manuscriptTitlesInOrder = manuscriptResearchGroup.split("\n")
+    .filter((line) => line.startsWith("      - name: "))
+    .map((line) => line.trim().replace("- name: ", "").replaceAll('"', ""));
+  if (!manuscriptTitlesInOrder[0]?.startsWith("Geometry and Volume of Stepping-Stone") ||
+      !manuscriptTitlesInOrder[1]?.startsWith("Unit-Region Factorization")) {
+    failures.push("Published Stepping-Stone must appear before Unit-Region Factorization in CV Manuscripts.");
+  }
   const steppingStoneInManuscripts = [...manuscriptResearchGroup.matchAll(
     /^      - name: Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension$/gm
   )].length;

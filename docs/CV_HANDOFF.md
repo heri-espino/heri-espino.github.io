@@ -1845,3 +1845,8 @@ technical-writing entries, published status, links, presence in paper preview
 and print, and migration of the old stored section order. Do not conflate
 CV record counts with Papers archive counts. This note supersedes the CV
 relocation prescribed in the previous November 24 publication handoff.
+
+
+## CV Manuscripts reorder — 2026-11-24
+
+The owner requested one more layout adjustment after PR #85: **put the published Stepping-Stone journal paper before Unit-Region Factorization**, with all other records in the existing `Manuscripts` section unchanged. This is a pure reorder of two complete YAML blocks in `_data/cv.yml`, not a new source record, status change, link change, or Papers archive reclassification. The intended default grouped order is: (1) Stepping-Stone (Elsevier, Published; DOI `10.1016/j.comgeo.2026.102287`; Zenodo `10.5281/zenodo.21291269`), (2) Unit-Region Factorization (Elsevier, Under Review), (3) activation-patching CNNs (Springer, Under Review), (4) WTI Average Price Options (Wiley, Submitted). The user-selectable chronological CV view may order records differently by date; the normal grouped view must follow the explicit YAML order. Source-contract and Playwright regression assertions enforce the first two positions.

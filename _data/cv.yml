@@ -108,20 +108,6 @@ cv:
           - "Web development: created the business's websites."
 
     Manuscripts:
-      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
-        role: "First Author"
-        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
-        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
-        date: Jun 2026
-        location: Puebla, Mexico
-        links:
-          - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
-          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
-          - { label: Track submission, url: "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430" }
-        highlights:
-          - "Stochastic geometry: proved unit-region factorization under Euclidean similarity."
-          - "Poisson geometry: derived invariant empty-region graph formulas."
-          - "Simulation validation: checked β-skeleton and γ-graph equivariance."
       - name: Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension
         role: "First Author · Peer-Reviewed Journal Article"
         subtitle: "Stepping–Stone diversion neighborhoods in Euclidean spaces"
@@ -138,6 +124,20 @@ cv:
         highlights:
           - "Geometric analysis: reduced Stepping–Stone volume to a 1D integral."
           - "Numerical integration: validated higher-dimensional volume constants."
+      - name: Unit-Region Factorization for Empty-Region Proximity Graphs
+        role: "First Author"
+        subtitle: "Unit-Region Factorization for Empty-Region Proximity Graphs"
+        organization: "Elsevier · Discrete Applied Mathematics · Under Review"
+        date: Jun 2026
+        location: Puebla, Mexico
+        links:
+          - { label: Portfolio, url: "https://heri-espino.github.io/papers/unit-region-factorization.html" }
+          - { label: PDF, url: "https://heri-espino.github.io/papers/espino_2026_unit-region-factorization.pdf" }
+          - { label: Track submission, url: "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430" }
+        highlights:
+          - "Stochastic geometry: proved unit-region factorization under Euclidean similarity."
+          - "Poisson geometry: derived invariant empty-region graph formulas."
+          - "Simulation validation: checked β-skeleton and γ-graph equivariance."
       - name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs"
         role: "Author"
         date: Oct 2026
