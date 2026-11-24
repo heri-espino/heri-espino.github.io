@@ -342,7 +342,7 @@
     "Professional Experience": "Work experience",
     "Academic Experience": "Academic work experience",
     "Programming Experience": "Software development experience",
-    "Submitted Manuscripts": "Submitted Manuscripts",
+    "Manuscripts": "Manuscripts",
     "Completed Research": "Completed Research",
     "Working Drafts & Notes": "Working Drafts & Notes",
     "Technical Skills": "Digital and technical skills",
@@ -360,7 +360,7 @@
   const europassOrder = [
     "Professional Experience", "Programming Experience", "Academic Experience",
     "Education", "Credentials", "Schools",
-    "Languages", "Technical Skills", "Submitted Manuscripts", "Completed Research", "Working Drafts & Notes",
+    "Languages", "Technical Skills", "Manuscripts", "Completed Research", "Working Drafts & Notes",
     "Published Articles & Technical Writing", "Selected Academic Projects",
     "Leadership", "Awards", "Selected Extracurricular Activities"
   ];
@@ -372,9 +372,15 @@
   let customSectionIds = null;
   try {
     const saved = JSON.parse(window.localStorage.getItem(sectionOrderStorageKey) || "null");
-    if (Array.isArray(saved) && saved.length === defaultSectionIds.length &&
-        new Set(saved).size === saved.length && saved.every((id) => sectionById.has(id))) {
-      customSectionIds = saved;
+    // Rename the old browser-only section ID without discarding the user's
+    // customized ordering or introducing a duplicate section.
+    const normalized = Array.isArray(saved)
+      ? saved.map((id) => id === "submitted-manuscripts" ? "manuscripts" : id)
+      : null;
+    if (normalized && normalized.length === defaultSectionIds.length &&
+        new Set(normalized).size === normalized.length &&
+        normalized.every((id) => sectionById.has(id))) {
+      customSectionIds = normalized;
     }
   } catch (_error) {
     // Storage can be disabled; reordering still works during this visit.
@@ -452,7 +458,7 @@
   });
   const europassGroup = (section) => ({
     "Languages": "PERSONAL SKILLS",
-    "Submitted Manuscripts": "ADDITIONAL INFORMATION"
+    "Manuscripts": "ADDITIONAL INFORMATION"
   })[section.dataset.cvTitle] || "";
   const syncSectionOrder = () => {
     sectionContainer.querySelectorAll(":scope > .cv-europass-group-heading").forEach((heading) => heading.remove());
