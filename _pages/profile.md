@@ -72,9 +72,17 @@ My Mathematics Learning Center work includes statistical investigation of univer
 - {{ topic }}
 {% endfor %}
 
+### Published peer-reviewed journal articles
+
+{% for item in research_papers %}
+{% if item.publication_stage == 'published' %}
+- [**{{ item.title }}**]({{ item.url | relative_url }}) — **{{ item.label }}**{% if item.status %} ({{ item.status }}){% endif %}{% if item.doi %}; [DOI: {{ item.doi }}](https://doi.org/{{ item.doi }}){% endif %}{% if item.authors %}; authors: {{ item.authors }}{% endif %}.
+{% endif %}
+{% endfor %}
+
 ### Submitted manuscripts
 
-The following list is generated from individual manuscript records; the statuses below describe review stages, **not accepted publications**.
+The following entries are still awaiting editorial decisions; their review stages are not published-article claims.
 
 {% for item in research_papers %}
 {% assign stage = item.label | downcase %}
@@ -125,4 +133,4 @@ Selected competition results, training, volunteering, certificates, and addition
 - [ResearchGate]({{ site.data.socials.researchgate_profile_url }})
 - [SSRN]({{ site.data.socials.ssrn_author_url }})
 
-**Source policy:** Research status and authorship come from the linked detail pages; professional dates, degree schedules, and affiliations come from the public CV. In particular, *under review*, *under revision*, *working draft*, and *published technical writing* are distinct. This page is not evidence of acceptance, a completed degree, or an unverified award.
+**Source policy:** Research status and authorship come from the linked detail pages; professional dates, degree schedules, and affiliations come from the public CV. In particular, *published peer-reviewed journal articles*, *under review*, *under revision*, *working drafts*, and *published technical writing* are distinct. Only a publisher-linked final article is described as published; this page does not establish a completed degree or unverified award.
