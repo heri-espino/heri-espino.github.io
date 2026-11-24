@@ -1755,3 +1755,47 @@ legacy completion restoration, print-safe text rendering, and reset behavior.
 fields, print/timeline propagation, persistence after reload, legacy key
 compatibility, XSS-safe literal text, empty sides, and reset. These tests
 do not change actual education facts or PDF pagination.
+
+
+## Elsevier Stepping-Stone journal publication and DOI — 2026-11-24
+
+**New authoritative owner evidence:** The Stepping-Stone journal paper is **published**, not "Under Revision". The supplied final publisher record is
+`https://www.sciencedirect.com/science/article/pii/S0925772126000453`,
+DOI `10.1016/j.comgeo.2026.102287`, in Elsevier's *Computational Geometry*.
+The first author is Heriberto Espino-Montelongo and the coauthor is Héctor
+Maravillo. The DOI suffix identifies the published article as 102287. At
+the time of this change, the official Elsevier page could not be fetched
+in the browsing environment, so **do not invent volume, issue or a precise
+publication day**. The CV's `Nov 2026` is the month when the owner reported
+the published online article; the original August 2026 manuscript
+submission date remains historical provenance in earlier handoff entries.
+
+**CV:** `_data/cv.yml` now lists the original journal record under
+`Published Articles & Technical Writing`, ahead of the author-hosted draft
+and La Catarina technical article. The entry is first-authored,
+`Elsevier · Computational Geometry · Published`, has a direct ScienceDirect
+publisher link, and shows a distinct **DOI: 10.1016/j.comgeo.2026.102287**
+link in the browser and printed PDF. Preserve the author-manuscript PDF,
+SSRN preprint, portfolio detail page, Zenodo validation DOI, and the two
+existing technical highlights. Its previous record is not duplicated
+under `Submitted Manuscripts`. The independent-research summary notes
+one peer-reviewed Elsevier publication and **three other submissions**;
+the remaining journal submission statuses are unchanged.
+
+**Paper page and archive:** `_pages/papers/stepping-stone.md` retains its
+existing permalink and `portfolio_type: paper` while adding
+`publication_stage: published`, journal/DOI metadata and links to the
+authoritative final publisher version. In `_pages/papers.md` the submitted
+filter excludes the now-published paper; the published section combines
+published journal papers with the two preexisting
+`portfolio_type: article` records. Do not change the author-hosted SIAM
+feature's explicitly unpublished editorial stage. The published paper has
+its own card label and DOI metadata in the scholarly JSON-LD layout.
+
+**Tests:** `scripts/verify-paper-archive.mjs` asserts **3 submitted + 3
+published/writing cards**, presence of the Elsevier journal card and DOI,
+no duplicate submission entry, and intact internal study/notes archives.
+`test/style_contract.js` and `test/visual/interactions.spec.js` check
+correct source grouping, DOI URLs, stage, author credit, and the CV's
+printable/paper-preview output. Existing unrelated CI failure baselines
+must be distinguished from regressions introduced by this change.

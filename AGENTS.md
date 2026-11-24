@@ -596,3 +596,12 @@ The owner has **explicitly corrected and superseded** the older handoff's assert
 - See `docs/CV_HANDOFF.md`, `test/style_contract.js` and the Playwright
   graduation-date editing and legacy-key regression tests. The 2026-11-15
   note describing immutable start dates has been superseded.
+
+
+## 2026-11-24 — Elsevier Stepping-Stone paper published (supersedes earlier Under Revision notes)
+
+- The owner provided the **published** Elsevier ScienceDirect article URL `https://www.sciencedirect.com/science/article/pii/S0925772126000453` and official DOI `10.1016/j.comgeo.2026.102287` for **Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension**, coauthored by Heriberto Espino-Montelongo (first author) and Héctor Maravillo. This explicitly supersedes all previous "Under Revision"/"Under Review" status instructions for this **one paper only**.
+- Move the existing CV record from `Submitted Manuscripts` to `Published Articles & Technical Writing`, dated **Nov 2026** to reflect the online-publication announcement. Give it the true journal-paper role, Elsevier Computational Geometry status, DOI link and direct ScienceDirect link. Preserve existing portfolio URL, author manuscript PDF, SSRN preprint, Zenodo validation DOI, research highlights and authorship. Three other journal submissions remain pending; the independent research experience summary must reflect **one published Elsevier journal article plus three other submissions**.
+- The canonical page `_pages/papers/stepping-stone.md` remains `portfolio_type: paper`, now with `publication_stage: published`, `label: Published`, `card_kind: Peer-reviewed journal article`, DOI and publisher link. The Papers archive includes this journal paper in its published section alongside the two technical-writing entries, keeping the section's existing anchor and all earlier article URLs. Counts: three submitted, three published/writing items, four notes/lectures/tutorials, four internal research.
+- Do not infer a final volume/issue or exact day from the DOI. Journal online publication in 2026 may be assigned to a later 2027 issue; the user-provided publisher link and DOI are authoritative. Do not remove the preprint or numerical-validation resources, or promote unrelated manuscripts.
+- Update source/Playwright, archive-verification, and structured-metadata contracts with this reclassification; see `docs/CV_HANDOFF.md`.

@@ -316,7 +316,7 @@ if (exists("_pages/cv.md")) {
         !independent.includes("https://heri-espino.github.io/papers/") ||
         !independent.includes("https://github.com/heri-espino") ||
         !independent.includes("Areas: Stochastic/computational geometry, ML interpretability, quant finance.") ||
-        !independent.includes("Submissions: Four journal manuscripts to Elsevier (2), Springer Nature, Wiley.") ||
+        !independent.includes("Publication: Elsevier Computational Geometry; three other journal submissions.") ||
         !independent.includes("Ongoing: TrendEstimation (penalized least squares) and Max-Cut/Max-k-Cut SDP.") ||
         !independent.includes("Software: Built AbaQuant; co-maintained ProximityGraphs and SDP workflows.") ||
         !independent.includes("Tooling: Docling Math (PDF processing) and AwesomeFigures (visualization).") ||
@@ -328,10 +328,10 @@ if (exists("_pages/cv.md")) {
         independent.includes("\n        organization:") ||
         independent.includes("\n        institution:") ||
         independent.includes("\n        context:")) {
-      failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
+      failures.push("Independent research must lead Professional Experience, credit five software libraries, one journal publication and three pending submissions.");
     }
     const bulletStrings = [...independent.matchAll(/^          - "([^"]+)"$/gm)].map((match) => match[1]);
-    const expectedLabels = ["Areas:", "Submissions:", "Ongoing:", "Software:", "Tooling:",
+    const expectedLabels = ["Areas:", "Publication:", "Ongoing:", "Software:", "Tooling:",
       "Writing:", "Reproducibility:", "Coordination:"];
     if (bulletStrings.length !== expectedLabels.length ||
         bulletStrings.some((bullet, i) => !bullet.startsWith(expectedLabels[i]) || bullet.length > 80) ||
@@ -408,7 +408,8 @@ if (exists("_pages/cv.md")) {
       !educationSource.includes("date: Aug 2021 — Dec 2026 (expected)")) {
     failures.push("The graduation text editor must not silently rewrite published degree dates.");
   }
-  // Only four submitted manuscripts; never reclassify reports, notebooks,
+  // Three manuscripts remain under editorial consideration; the Elsevier journal
+  // article is now explicitly published, not a pending submission.
   // lectures or tutorials as journal submissions to fill the new category.
   const cvSource = read("_data/cv.yml");
   const cvSectionHeads = [...cvSource.matchAll(/^    (\S[^:\n]*):\s*$/gm)].map((match) => match[1]);
@@ -691,10 +692,16 @@ if (exists("_pages/cv.md")) {
   if (!creds || cvSources.includes("    Online Courses:") || cvCredentialCount !== expectedCredentialCount) {
     failures.push("Credentials must mirror the website's curated specialization and independent-course lists.");
   }
+  const steppingStoneSource = read("_pages/papers/stepping-stone.md");
+  const publishedCvRecords = cvSources.split("    Published Articles & Technical Writing:")[1]?.split("    Selected Academic Projects:")[0] || "";
   if (!cvSources.includes('Elsevier · Discrete Applied Mathematics · Under Review') ||
-      !cvSources.includes('Elsevier · Computational Geometry · Under Revision') ||
-      !read("_pages/papers/stepping-stone.md").includes("label: Under Revision")) {
-    failures.push("Elsevier manuscript statuses in the CV must match their current paper records.");
+      !publishedCvRecords.includes('Elsevier · Computational Geometry · Published') ||
+      !publishedCvRecords.includes('10.1016/j.comgeo.2026.102287') ||
+      !publishedCvRecords.includes('https://www.sciencedirect.com/science/article/pii/S0925772126000453') ||
+      !steppingStoneSource.includes("label: Published") ||
+      !steppingStoneSource.includes("publication_stage: published") ||
+      !steppingStoneSource.includes('doi: "10.1016/j.comgeo.2026.102287"')) {
+    failures.push("Elsevier Stepping-Stone publication must be in the published CV section with its journal DOI.");
   }
   // Owner's November 2026 request supersedes the earlier preference to
   // leave standalone-course descriptions blank. Each course now has one
@@ -746,7 +753,7 @@ if (exists("_pages/cv.md")) {
     failures.push("Coauthored AbaQuant publication should be moved out of Press & Media, not duplicated there.");
   }
   if (!abaArchive.includes('id="published-technical-articles"') ||
-      !abaArchive.includes('published_articles = site.pages | where: "portfolio_type", "article"') ||
+      !abaArchive.includes('published_articles = journal_publications | concat: technical_articles') ||
       !abaArchive.includes("for item in published_articles")) {
     failures.push("Papers archive must have an independent published technical writing section.");
   }
@@ -783,8 +790,8 @@ if (exists("_pages/cv.md")) {
       !interactiveArticle.includes("Coauthored the original interactive feature with Héctor Maravillo") ||
       !abaCvSection.includes("articles/the-empty-space-that-makes-a-network.html") ||
       !abaCvSection.includes(interactiveUrl) ||
-      !abaArchive.includes("02 / Technical writing") ||
-      !abaArchive.includes("author-hosted interactive technical features")) {
+      !abaArchive.includes("02 / Publications") ||
+      !abaArchive.includes("clearly labeled author-hosted features")) {
     failures.push("ProximityGraphs author-hosted technical feature must appear beside La Catarina on CV/Papers without claiming SIAM publication.");
   }
   if (!cvScript.includes("const emphasizedLabels = new Set()") ||
@@ -882,7 +889,7 @@ if (exists("_pages/cv.md")) {
         papersArchive.indexOf('id="working-drafts"') <
         papersArchive.indexOf('id="internal-research-papers"')
       ) ||
-      !papersArchive.includes("02 / Technical writing") ||
+      !papersArchive.includes("02 / Publications") ||
       !papersArchive.includes("03 / Working drafts and learning materials") ||
       !papersArchive.includes("04 / Internal research")) {
     failures.push("Papers must show Submitted, Published, Research Notes and Internal Research, each defaulting to list.");
@@ -924,12 +931,13 @@ if (exists("_pages/cv.md")) {
     }
   }
   const archiveCheck = read("scripts/verify-paper-archive.mjs");
-  if (!archiveCheck.includes("const expectedSubmitted = 4;") ||
+  if (!archiveCheck.includes("const expectedSubmitted = 3;") ||
+      !archiveCheck.includes("const expectedPublished = 3;") ||
       !archiveCheck.includes("const expectedDrafts = 4;") ||
       !archiveCheck.includes("const expectedInternalResearch = 4;") ||
       !archiveCheck.includes("hiddenRoutes") ||
       !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
-    failures.push("Rendered Papers archive checks must preserve four submissions, four research-note/teaching drafts, four internal research papers, and six hidden public detail pages.");
+    failures.push("Rendered Papers archive checks must preserve three pending submissions, three published/writing records, four research notes, four internal studies and six hidden detail pages.");
   }
   const submittedResearchGroup = cvSources.split("    Submitted Manuscripts:")[1]?.split("    Completed Research:")[0] || "";
   const completedResearchGroup = cvSources.split("    Completed Research:")[1]?.split("    Working Drafts & Notes:")[0] || "";
@@ -938,8 +946,8 @@ if (exists("_pages/cv.md")) {
   const researchCount = [...submittedResearchGroup.matchAll(/^      - name: /gm)].length;
   const completedCount = [...completedResearchGroup.matchAll(/^      - name: /gm)].length;
   const draftCount = [...researchDraftGroup.matchAll(/^      - name: /gm)].length;
-  if (researchCount !== 4 || completedCount !== 6 || draftCount !== 7) {
-    failures.push("CV must retain four submitted manuscripts, six completed research outputs and seven drafts/notes without deleting records.");
+  if (researchCount !== 3 || completedCount !== 6 || draftCount !== 7) {
+    failures.push("CV must retain three pending manuscripts, one Elsevier journal publication, six completed research outputs and seven drafts/notes.");
   }
   const completedTitles = [
     "Stepping-Stone Volume Validation",
@@ -969,13 +977,12 @@ if (exists("_pages/cv.md")) {
     failures.push("Research records must retain the owner-requested completed versus working classification and their links.");
   }
   if (!submittedResearchGroup.includes("Elsevier · Discrete Applied Mathematics · Under Review") ||
-      !submittedResearchGroup.includes("Elsevier · Computational Geometry · Under Revision") ||
       !submittedResearchGroup.includes("Springer Nature · SN Computer Science · Under Review") ||
       researchDraftGroup.includes("Under Review") ||
       !submittedResearchGroup.includes("Wiley · The Journal of Futures Markets · Submitted") ||
       !submittedResearchGroup.includes("when-does-posterior-integration-change-option-values-supplement.pdf") ||
       researchDraftGroup.includes("Posterior Integration and Volatility Inputs in WTI Asian Options")) {
-    failures.push("All four submitted manuscripts, including the Wiley JFM dual-PDF record, must remain in Submitted Manuscripts.");
+    failures.push("Three pending manuscripts, including the Wiley JFM dual-PDF record, must remain submitted; the published Elsevier paper must move to publications.");
   }
   if (!cvRenderer.includes("title == 'Completed Research'") ||
       !cvRenderer.includes("title == 'Working Drafts & Notes'") ||
@@ -987,9 +994,14 @@ if (exists("_pages/cv.md")) {
   }
   const manuscriptMonths = [
     { name: "Unit-Region Factorization for Empty-Region Proximity Graphs", month: "Jun 2026", page: "_pages/papers/unit-region-factorization.md" },
-    { name: "Geometry and Volume of Stepping-Stone Diversion Neighborhoods in Euclidean Spaces of Arbitrary Dimension", month: "Aug 2026", page: "_pages/papers/stepping-stone.md" },
     { name: "When Do Activation-Patching Effects Add Up? Evidence from Controlled CNNs", month: "Oct 2026", page: "_pages/papers/activation-patching-effects-add-up.md" }
   ];
+  if (!publishedCvRecords.includes("date: Nov 2026") ||
+      !steppingStoneSource.includes('display_date: "Nov 2026"') ||
+      submittedResearchGroup.includes("Geometry and Volume of Stepping-Stone Diversion Neighborhoods") ||
+      !abaArchive.includes('journal_publications = items | where: "publication_stage", "published"')) {
+    failures.push("The published journal article must have a visible November 2026 CV record, not a second pending-submission listing.");
+  }
   for (const { name, month, page } of manuscriptMonths) {
     const positionUnquoted = submittedResearchGroup.indexOf("      - name: " + name);
     const positionQuoted = submittedResearchGroup.indexOf('      - name: "' + name + '"');
@@ -1388,7 +1400,8 @@ if (exists("_pages/cv.md")) {
   const ssrnUrl = "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746";
   const trackerUrl = "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430";
   if (!cv.includes('label: SSRN, url: "' + ssrnUrl + '"') ||
-      !steppingStone.includes('external_url: ' + ssrnUrl)) {
+      !steppingStone.includes('[SSRN preprint](' + ssrnUrl + ')') ||
+      !steppingStone.includes('secondary_pdf: /papers/espino_2026_stepping-stone-empty-regions.pdf')) {
     failures.push("Stepping-Stone SSRN preprint link must appear in both CV and paper page.");
   }
   if (!cv.includes('label: Track submission, url: "' + trackerUrl + '"') ||
