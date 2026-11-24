@@ -328,10 +328,10 @@ if (exists("_pages/cv.md")) {
         independent.includes("\n        organization:") ||
         independent.includes("\n        institution:") ||
         independent.includes("\n        context:")) {
-      failures.push("Independent research must lead Professional Experience, credit five existing libraries and four submissions, and use genuine links without inventing employment.");
+      failures.push("Independent research must lead Professional Experience, credit five software libraries, one journal publication and three pending submissions.");
     }
     const bulletStrings = [...independent.matchAll(/^          - "([^"]+)"$/gm)].map((match) => match[1]);
-    const expectedLabels = ["Areas:", "Submissions:", "Ongoing:", "Software:", "Tooling:",
+    const expectedLabels = ["Areas:", "Publication:", "Ongoing:", "Software:", "Tooling:",
       "Writing:", "Reproducibility:", "Coordination:"];
     if (bulletStrings.length !== expectedLabels.length ||
         bulletStrings.some((bullet, i) => !bullet.startsWith(expectedLabels[i]) || bullet.length > 80) ||
@@ -790,8 +790,8 @@ if (exists("_pages/cv.md")) {
       !interactiveArticle.includes("Coauthored the original interactive feature with Héctor Maravillo") ||
       !abaCvSection.includes("articles/the-empty-space-that-makes-a-network.html") ||
       !abaCvSection.includes(interactiveUrl) ||
-      !abaArchive.includes("02 / Technical writing") ||
-      !abaArchive.includes("author-hosted interactive technical features")) {
+      !abaArchive.includes("02 / Publications") ||
+      !abaArchive.includes("clearly labeled author-hosted features")) {
     failures.push("ProximityGraphs author-hosted technical feature must appear beside La Catarina on CV/Papers without claiming SIAM publication.");
   }
   if (!cvScript.includes("const emphasizedLabels = new Set()") ||
@@ -889,7 +889,7 @@ if (exists("_pages/cv.md")) {
         papersArchive.indexOf('id="working-drafts"') <
         papersArchive.indexOf('id="internal-research-papers"')
       ) ||
-      !papersArchive.includes("02 / Technical writing") ||
+      !papersArchive.includes("02 / Publications") ||
       !papersArchive.includes("03 / Working drafts and learning materials") ||
       !papersArchive.includes("04 / Internal research")) {
     failures.push("Papers must show Submitted, Published, Research Notes and Internal Research, each defaulting to list.");
@@ -937,7 +937,7 @@ if (exists("_pages/cv.md")) {
       !archiveCheck.includes("const expectedInternalResearch = 4;") ||
       !archiveCheck.includes("hiddenRoutes") ||
       !archiveCheck.includes("Hidden paper detail URL was deleted rather than merely unlisted")) {
-    failures.push("Rendered Papers archive checks must preserve four submissions, four research-note/teaching drafts, four internal research papers, and six hidden public detail pages.");
+    failures.push("Rendered Papers archive checks must preserve three pending submissions, three published/writing records, four research notes, four internal studies and six hidden detail pages.");
   }
   const submittedResearchGroup = cvSources.split("    Submitted Manuscripts:")[1]?.split("    Completed Research:")[0] || "";
   const completedResearchGroup = cvSources.split("    Completed Research:")[1]?.split("    Working Drafts & Notes:")[0] || "";
@@ -1400,7 +1400,8 @@ if (exists("_pages/cv.md")) {
   const ssrnUrl = "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7634746";
   const trackerUrl = "https://track.authorhub.elsevier.com/?uuid=35e367b9-c1b6-4c73-870c-4252cebfb430";
   if (!cv.includes('label: SSRN, url: "' + ssrnUrl + '"') ||
-      !steppingStone.includes('external_url: ' + ssrnUrl)) {
+      !steppingStone.includes('[SSRN preprint](' + ssrnUrl + ')') ||
+      !steppingStone.includes('secondary_pdf: /papers/espino_2026_stepping-stone-empty-regions.pdf')) {
     failures.push("Stepping-Stone SSRN preprint link must appear in both CV and paper page.");
   }
   if (!cv.includes('label: Track submission, url: "' + trackerUrl + '"') ||
